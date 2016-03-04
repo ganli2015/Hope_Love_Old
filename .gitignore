@@ -50,3 +50,10 @@ Temporary Items
 *.tlog
 *.obj
 *.lib
+*.exp
+*.ilk
+*.exp
+*.ipch
+*.ipch
+*.exp
+*.ilk

@@ -149,6 +149,8 @@
     <ClInclude Include="InOut.h" />
     <ClInclude Include="DataArray.h" />
     <ClInclude Include="MultilayerNetwork.h" />
+    <ClInclude Include="MultilayerNetworkTrainImp.h" />
+    <ClInclude Include="MultiNet_Simple.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="NetworkPolicy.h" />
     <ClInclude Include="Neuron.h" />
@@ -166,6 +168,8 @@
     <ClCompile Include="iDataArray.cpp" />
     <ClCompile Include="iNeuron.cpp" />
     <ClCompile Include="MultilayerNetwork.cpp" />
+    <ClCompile Include="MultilayerNetworkTrainImp.cpp" />
+    <ClCompile Include="MultiNet_Simple.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="NetworkPolicy.cpp" />
     <ClCompile Include="Neuron.cpp" />

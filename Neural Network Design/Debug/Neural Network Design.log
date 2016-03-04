@@ -1,11 +1,11 @@
-﻿生成启动时间为 2016/3/3 22:48:32。
+﻿生成启动时间为 2016/3/5 1:24:25。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\Neural Network Design.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Neural Network Design.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt TransferFunctions.cpp
-         TransferFunctions.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Neural Network Design.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt MultilayerNetwork.cpp
+         MultilayerNetwork.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.exe" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Neural Network Design.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.lib" /MACHINE:X86 Debug\ADALINE.obj
          Debug\CompetitiveNetwork.obj
@@ -14,6 +14,8 @@
          Debug\iDataArray.obj
          Debug\iNeuron.obj
          Debug\MultilayerNetwork.obj
+         Debug\MultilayerNetworkTrainImp.obj
+         Debug\MultiNet_Simple.obj
          Debug\Network.obj
          Debug\NetworkPolicy.obj
          Debug\Neuron.obj
@@ -39,4 +41,4 @@
 
 生成成功。
 
-已用时间 00:00:01.46
+已用时间 00:00:01.68

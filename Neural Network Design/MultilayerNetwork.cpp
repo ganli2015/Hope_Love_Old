@@ -3,6 +3,7 @@
 #include "iNeuron.h"
 #include "DataArray.h"
 #include "Errors.h"
+#include "MultiNet_Simple.h"
 
 #include "../Mathmatic/Vector.h"
 #include "../Mathmatic/iMatrix.h"
@@ -25,6 +26,7 @@ namespace NeuralNetwork
 	TrainResult MultilayerNetwork::Training()
 	{
 		TrainResult result=Success;
+		shared_ptr<MultilayerNetworkTrainImp> trainImp(new MultiNet_Simple());
 
 		int iteration(0);//max iteration number
 		vector<double> prev_errors;
@@ -33,7 +35,7 @@ namespace NeuralNetwork
 		{
 			mytrain.SetNeuronState(false);
 			mytrain.ClearDeviations();
-			mytrain=for_each(_mydata.begin(),_mydata.end(),mytrain);
+			trainImp->Train(_mydata,mytrain);
 
 			vector<double> cur_errors=mytrain.GetSampleDeviations();
 			if(!prev_errors.empty())
@@ -61,27 +63,34 @@ namespace NeuralNetwork
 
 	void train_MultiNetwork::operator()( shared_ptr<typename Network::MyData> mydata )
 	{
-		shared_ptr<iDataArray> proto=mydata->proto;
-		shared_ptr<iDataArray> expec=mydata->expec;
-		//shared_ptr<iDataArray> tmpoutput=ForwardPropagation(proto,_myNeurons);
-
-		vector<shared_ptr<iDataArray>> n; //Transformed data derived by each neuron BEFORE using transfer function.
-		vector<shared_ptr<iDataArray>> a; //Actual input data BEFORE transformed.
-		shared_ptr<iDataArray> actualOut;
-		ComputeActualOutAndIntermediateData(proto,actualOut,n,a);
-
-		shared_ptr<iDataArray> ee=expec->Subtract(actualOut);
-		_deviations.push_back(ee->Norm());
-
-		if(ee->AllZero())//if the error array is zeroes
-			return;
+// 		shared_ptr<iDataArray> proto=mydata->proto;
+// 		shared_ptr<iDataArray> expec=mydata->expec;
+// 		//shared_ptr<iDataArray> tmpoutput=ForwardPropagation(proto,_myNeurons);
+// 
+// 		vector<shared_ptr<iDataArray>> n; //Transformed data derived by each neuron BEFORE using transfer function.
+// 		vector<shared_ptr<iDataArray>> a; //Actual input data BEFORE transformed.
+// 		shared_ptr<iDataArray> actualOut;
+// 		ComputeActualOutAndIntermediateData(proto,actualOut,n,a);
+// 
+// 		shared_ptr<iDataArray> ee=expec->Subtract(actualOut);
+// 		_deviations.push_back(ee->Norm());
+// 
+// 		if(ee->AllZero())//if the error array is zeroes
+// 			return;
 		
-		BackwardPropagation(ee,n,a);
+		//ComputeDeltaNeuronByBackwardPropagation(ee,n,a);
+
+		vector<Math::Matrix> deltaMat;
+		vector<Math::Vector> deltaBias;
+		ComputeDeltaNeuron(mydata,deltaMat,deltaBias);
+
+		AdjustNeuron(deltaMat,deltaBias,_myNeurons);
 	}
 
-	void train_MultiNetwork::BackwardPropagation(const shared_ptr<iDataArray> ee,
+	void train_MultiNetwork::ComputeDeltaNeuronByBackwardPropagation(const shared_ptr<iDataArray> ee,
 		const vector<shared_ptr<iDataArray>>& n, 
-		const vector<shared_ptr<iDataArray>>& a )
+		const vector<shared_ptr<iDataArray>>& a ,
+		vector<Math::Matrix>& deltaMats,vector<Math::Vector>& deltaBiases)
 	{
 		DataArray e=*dynamic_pointer_cast<DataArray>(ee);
 
@@ -101,23 +110,47 @@ namespace NeuralNetwork
 			shared_ptr<iDataArray> s_m(new DataArray(tmpNeu->GetOutputDimension()));//s_m, the (m)th sensitivity
 
 			ComputeSensitivity(neo_backward,myFun,e,n_m,s_m,s_m_next,mat_next);
-			AdjustNeuron(s_m,a_m_prev,tmpNeu);
+			Matrix deltaMat(a_m_prev->Dimension(),s_m->Dimension());
+			Vector deltaBias(s_m->Dimension());
+			ComputeDeltaNeuron(s_m,a_m_prev,deltaMat,deltaBias);
+
+			//AdjustNeuron(s_m,a_m_prev,tmpNeu);
+
+			deltaMats.push_back(deltaMat);
+			deltaBiases.push_back(deltaBias);
 
 			neuron_changed=true;
 		}
+
+		reverse(deltaMats.begin(),deltaMats.end());
+		reverse(deltaBiases.begin(),deltaBiases.end());
 	}
 
-	void train_MultiNetwork::AdjustNeuron(const shared_ptr<iDataArray> s_m,
-		const shared_ptr<iDataArray> a_m_prev,
-		shared_ptr<iNeuron> tmpNeu)
+// 	void train_MultiNetwork::AdjustNeuron(const shared_ptr<iDataArray> s_m,
+// 		const shared_ptr<iDataArray> a_m_prev,
+// 		shared_ptr<iNeuron> tmpNeu)
+// 	{
+// 		assert(tmpNeu->GetOutputDimension()==s_m->Dimension());
+// 		for (int n=0;n<tmpNeu->GetOutputDimension();++n)
+// 		{
+// 			Math::Vector newColumn=tmpNeu->Get_jthColumn(n)-_learningRate*s_m->Get_ithVal(n)*(a_m_prev->GetArray());//W_m_j_new=W_m_j_old-alpha*s_m_j*a_m-1
+// 			tmpNeu->Set_jthColumn(n,newColumn);
+// 			double newbias=tmpNeu->GetBias().Get_ithVal(n)-_learningRate*s_m->Get_ithVal(n);//b_m_new=b_m_old-alpha*s_m
+// 			tmpNeu->Set_jthBias(n,newbias);
+// 		}
+// 	}
+
+	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<iDataArray> s_m,
+		const shared_ptr<iDataArray> a_m_prev, 
+		Matrix& deltaMat,
+		Vector& deltaBias )
 	{
-		assert(tmpNeu->GetOutputDimension()==s_m->Dimension());
-		for (int n=0;n<tmpNeu->GetOutputDimension();++n)
+		for (unsigned int n=0;n<s_m->Dimension();++n)
 		{
-			Math::Vector newColumn=tmpNeu->Get_jthColumn(n)-_learningRate*s_m->Get_ithVal(n)*(a_m_prev->GetArray());//W_m_j_new=W_m_j_old-alpha*s_m_j*a_m-1
-			tmpNeu->Set_jthColumn(n,newColumn);
-			double newbias=tmpNeu->GetBias().Get_ithVal(n)-_learningRate*s_m->Get_ithVal(n);//b_m_new=b_m_old-alpha*s_m
-			tmpNeu->Set_jthBias(n,newbias);
+			Math::Vector deltaColumn=-_learningRate*s_m->Get_ithVal(n)*(a_m_prev->GetArray());//W_m_j_new=W_m_j_old-alpha*s_m_j*a_m-1
+			deltaMat.Set_jthColumn(n,deltaColumn);
+			double deltaB=-_learningRate*s_m->Get_ithVal(n);//b_m_new=b_m_old-alpha*s_m
+			deltaBias.Set_ithVal(n,deltaB);
 		}
 	}
 
@@ -144,7 +177,7 @@ namespace NeuralNetwork
 		{
 			assert(s_m_next!=NULL);
 			assert(n_m->Dimension()==tmpNeu->GetOutputDimension());
-			for (int i=0;i<tmpNeu->GetOutputDimension();++i)
+			for (unsigned int i=0;i<tmpNeu->GetOutputDimension();++i)
 			{
 				double D1_i=myFun->D1(n_m->Get_ithVal(i));
 				Vector w_i=mat_next->nthRow(i);
@@ -174,6 +207,43 @@ namespace NeuralNetwork
 		assert(n.size()==_myNeurons.size() && a.size()==_myNeurons.size());
 
 		actualOut=tmpoutput;
+	}
+
+	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<typename Network::MyData> mydata,vector<Matrix>& deltaMat,vector<Vector>& deltaBias )
+	{
+		shared_ptr<iDataArray> proto=mydata->proto;
+		shared_ptr<iDataArray> expec=mydata->expec;
+		//shared_ptr<iDataArray> tmpoutput=ForwardPropagation(proto,_myNeurons);
+
+		vector<shared_ptr<iDataArray>> n; //Transformed data derived by each neuron BEFORE using transfer function.
+		vector<shared_ptr<iDataArray>> a; //Actual input data BEFORE transformed.
+		shared_ptr<iDataArray> actualOut;
+		ComputeActualOutAndIntermediateData(proto,actualOut,n,a);
+
+		shared_ptr<iDataArray> ee=expec->Subtract(actualOut);
+		_deviations.push_back(ee->Norm());
+
+		if(ee->AllZero())//if the error array is zeroes
+			return;
+
+		ComputeDeltaNeuronByBackwardPropagation(ee,n,a,deltaMat,deltaBias);
+	}
+
+	void train_MultiNetwork::AdjustNeuron(const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias, MyNeurons& neurons)
+	{
+		for (unsigned int i=0;i<neurons.size();++i)
+		{
+			shared_ptr<iNeuron> tmpNeu=neurons[i];
+			Matrix deltaM=deltaMat[i];
+			Vector deltaB=deltaBias[i];
+			for (unsigned int j=0;j<tmpNeu->GetOutputDimension();++j)
+			{
+				Math::Vector newColumn=tmpNeu->Get_jthColumn(j)+deltaM.nthColumn(j);//W_m_j_new=W_m_j_old-alpha*s_m_j*a_m-1
+				tmpNeu->Set_jthColumn(j,newColumn);
+				double newbias=tmpNeu->GetBias().Get_ithVal(j)+deltaB.Get_ithVal(j);//b_m_new=b_m_old-alpha*s_m
+				tmpNeu->Set_jthBias(j,newbias);
+			}
+		}
 	}
 
 }

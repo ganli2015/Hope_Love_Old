@@ -62,6 +62,12 @@
     <ClInclude Include="TestClass.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="MultilayerNetworkTrainImp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiNet_Simple.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -111,6 +117,12 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="MultilayerNetworkTrainImp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiNet_Simple.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -38,8 +38,8 @@ namespace NeuralNetwork
 		virtual Math::Vector GetBias() const =0;
 		virtual void SetElem(const int row,const int col, const double val)=0;
 
-		virtual int GetInputDimension()=0;
-		virtual int GetOutputDimension()=0;
+		virtual unsigned int GetInputDimension()=0;
+		virtual unsigned int GetOutputDimension()=0;
 
 		virtual TransferFunction::fun_type GetFunType() const =0;
 		virtual bool SameType(const std::shared_ptr<iNeuron> neo) const =0;

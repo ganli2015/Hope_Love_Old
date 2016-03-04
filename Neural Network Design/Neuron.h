@@ -46,8 +46,8 @@ namespace NeuralNetwork
 
 		virtual shared_ptr<iDataArray> Process(const shared_ptr<iDataArray> val) const;
 
-		virtual int GetInputDimension();
-		virtual int GetOutputDimension();
+		virtual unsigned int GetInputDimension();
+		virtual unsigned int GetOutputDimension();
 
 		virtual void Set_jthColumn(int n, const Math::Vector vec);
 		virtual Math::Vector Get_jthColumn(int n) const;

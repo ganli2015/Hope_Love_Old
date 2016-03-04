@@ -141,5 +141,20 @@ namespace Math
 		return sqrt(sqSum/vec1.size());
 	}
 
+	bool _MATHMATICINOUT SameVec( const vector<double>& vec1,const vector<double>& vec2 )
+	{
+		if(vec1.size()!=vec2.size()) return false;
+
+		for (unsigned int i=0;i<vec1.size();++i)
+		{
+			if(DoubleCompare(vec1[i],vec2[i])!=0)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
 

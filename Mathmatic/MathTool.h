@@ -28,6 +28,8 @@ namespace Math
 
 	double _MATHMATICINOUT ComputeDeviation(const vector<double>& vec1,const vector<double>& vec2);
 
+	bool _MATHMATICINOUT SameVec(const vector<double>& vec1,const vector<double>& vec2);
+
 	template<class T>
 	double MeanValue(const vector<T>& vec)
 	{

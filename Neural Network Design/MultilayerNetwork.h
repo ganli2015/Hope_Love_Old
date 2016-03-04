@@ -5,6 +5,7 @@
 namespace Math
 {
 	class Matrix;
+	class Vector;
 }
 
 namespace NeuralNetwork
@@ -40,7 +41,6 @@ namespace NeuralNetwork
 	};
 
 
-	//Object Function:
 	class iDataArray;
 	class DataArray;
 	class train_MultiNetwork
@@ -52,7 +52,7 @@ namespace NeuralNetwork
 		
 		vector<double> _deviations;
 	public:
-		train_MultiNetwork(const MyNeurons myNeuron,const double learnrate):
+		train_MultiNetwork(const MyNeurons& myNeuron,const double learnrate):
 		  _myNeurons(myNeuron),_learningRate(learnrate),
 			  neuron_changed(false){}
 
@@ -67,6 +67,7 @@ namespace NeuralNetwork
 
 		void operator()(shared_ptr<typename Network::MyData>  mydata);
 
+		void ComputeDeltaNeuron(const shared_ptr<typename Network::MyData> mydata,vector<Math::Matrix>& deltaMat,vector<Math::Vector>& deltaBias);
 	private:
 		void ComputeActualOutAndIntermediateData(const shared_ptr<iDataArray> proto,
 			shared_ptr<iDataArray>& actualOut, 
@@ -76,9 +77,20 @@ namespace NeuralNetwork
 			const shared_ptr<TransferFunction::fun> myFun,
 			const DataArray& e, 
 			const shared_ptr<iDataArray> n_m, 
-			shared_ptr<iDataArray> s_m, shared_ptr<iDataArray>& s_m_next, shared_ptr<Math::Matrix>& mat_next);
-		void train_MultiNetwork::AdjustNeuron(const shared_ptr<iDataArray> s_m, const shared_ptr<iDataArray> a_m_prev, shared_ptr<iNeuron> tmpNeu);
-		void train_MultiNetwork::BackwardPropagation(const shared_ptr<iDataArray> ee, const vector<shared_ptr<iDataArray>>& n, const vector<shared_ptr<iDataArray>>& a );
+			shared_ptr<iDataArray> s_m, shared_ptr<iDataArray>& s_m_next, shared_ptr<Math::Matrix>& mat_next);	
+		void train_MultiNetwork::ComputeDeltaNeuronByBackwardPropagation(
+			const shared_ptr<iDataArray> ee,
+			const vector<shared_ptr<iDataArray>>& n, 
+			const vector<shared_ptr<iDataArray>>& a,
+			vector<Math::Matrix>& deltaMat,vector<Math::Vector>& deltaBias);
+		void ComputeDeltaNeuron(const shared_ptr<iDataArray> s_m,
+			const shared_ptr<iDataArray> a_m_prev,
+			Math::Matrix& deltaMat,
+			Math::Vector& deltaBias);
+		void AdjustNeuron(const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias, MyNeurons& neurons);
+
+		//void train_MultiNetwork::AdjustNeuron(const shared_ptr<iDataArray> s_m, const shared_ptr<iDataArray> a_m_prev, shared_ptr<iNeuron> tmpNeu);
+
 	};
 
 

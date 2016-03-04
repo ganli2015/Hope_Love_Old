@@ -313,7 +313,8 @@ namespace NeuralNetwork
 		shared_ptr<iDataArray> p2=ToDataArray(pp2,4);
 		shared_ptr<iDataArray> t2=ToDataArray(tt2,4);
 
-		shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,4)));
+		//shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,4)));
+		shared_ptr<iNeuron> W1(new Neuron(4,4));
 		W1->SetFun(CreateTransferFunction(Purelin));
 		
 
@@ -331,6 +332,13 @@ namespace NeuralNetwork
 		shared_ptr<iDataArray> p3=ToDataArray(pp3,4);
 
 		shared_ptr<iDataArray> o3=multilayerNetwork.GetResult(p3);
+
+		vector<double> o3Expect;
+		o3Expect.push_back(0.00000000000000000);
+		o3Expect.push_back(0.33333447557466112);
+		o3Expect.push_back(2.0000026939557554);
+		o3Expect.push_back(2.6666674856128672);
+		Check(SameVec(o3->GetVector(),o3Expect));
 
 		//{0,1,2,3}
 		ConcoleDisplay(o3->GetVector());
