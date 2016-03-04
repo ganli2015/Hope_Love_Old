@@ -1,0 +1,27 @@
+﻿生成启动时间为 2015/5/16 0:22:27。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommonTools\CommonTools.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Release\CommonTools.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         所有输出均为最新。
+         所有输出均为最新。
+       Link:
+         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommonTools.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib" /MACHINE:X86 /DLL Release\CommonCompareFunction.obj
+         Release\CommonDeleteFunction.obj
+         Release\CommonFindFunction.obj
+         Release\CommonTranslateFunction.obj
+         Release\IOFunction.obj
+         Release\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\Mathmatic.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.exp
+         CommonTools.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.dll;#2" /manifest Release\CommonTools.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\CommonTools.unsuccessfulbuild”。
+         正在对“Release\CommonTools.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\CommonTools\CommonTools.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.95

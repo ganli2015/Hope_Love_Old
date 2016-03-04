@@ -1,0 +1,24 @@
+﻿生成启动时间为 2016/3/3 21:34:50。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”在节点 4 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\LearningAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         所有输出均为最新。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.lib" /MACHINE:X86 /DLL Debug\GrammarLearning.obj
+         Debug\Stdafx.obj
+         Debug\Test.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib"
+         LearningAlgorithm.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.dll
+       FinalizeBuildStatus:
+         正在删除文件“Debug\LearningAlgorithm.unsuccessfulbuild”。
+         正在对“Debug\LearningAlgorithm.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.10

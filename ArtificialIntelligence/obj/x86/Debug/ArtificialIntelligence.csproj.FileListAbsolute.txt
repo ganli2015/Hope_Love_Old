@@ -1,0 +1,9 @@
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligence.Properties.Resources.resources
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Debug\ArtificialIntelligence.dll
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Debug\ArtificialIntelligence.pdb
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligence.dll
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligence.pdb
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligence.Hope_Love.resources

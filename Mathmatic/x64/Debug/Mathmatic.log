@@ -1,0 +1,52 @@
+﻿生成启动时间为 2015/1/6 22:35:35。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”在节点 2 上(build 个目标)。
+     1>PrepareForBuild:
+         正在创建目录“E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\”。
+       InitializeBuildStatus:
+         正在创建“x64\Debug\Mathmatic.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         D:\Visual Studio 2010\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"x64\Debug\Mathmatic.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         D:\Visual Studio 2010\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Od /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\Mathmatic.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt iMatrix.cpp MathTool.cpp Vector.cpp
+         Vector.cpp
+     1>Vector.cpp(13): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+     1>Vector.cpp(83): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+         MathTool.cpp
+         iMatrix.cpp
+     1>iMatrix.cpp(12): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+     1>iMatrix.cpp(12): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+     1>iMatrix.cpp(24): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"x64\Debug\Mathmatic.dll.embed.manifest.res" x64\Debug\Mathmatic_manifest.rc 
+       Link:
+         D:\Visual Studio 2010\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"x64\Debug\Mathmatic.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.lib" /MACHINE:X64 /DLL x64\Debug\Mathmatic.dll.embed.manifest.res
+         x64\Debug\iMatrix.obj
+         x64\Debug\MathTool.obj
+         x64\Debug\Stdafx.obj
+         x64\Debug\Vector.obj
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.exp
+         Mathmatic.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"x64\Debug\Mathmatic.dll.embed.manifest" /manifest x64\Debug\Mathmatic.dll.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"x64\Debug\Mathmatic.dll.embed.manifest.res" x64\Debug\Mathmatic_manifest.rc 
+       LinkEmbedManifest:
+         D:\Visual Studio 2010\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"x64\Debug\Mathmatic.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.lib" /MACHINE:X64 /DLL x64\Debug\Mathmatic.dll.embed.manifest.res
+         x64\Debug\iMatrix.obj
+         x64\Debug\MathTool.obj
+         x64\Debug\Stdafx.obj
+         x64\Debug\Vector.obj
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.exp
+         Mathmatic.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.dll
+       PostBuildEvent:
+         copy  "E:\Artificial Intelligence\Project\Hope_Love\x64\Debug\Mathmatic.dll" "E:\Artificial Intelligence\Project\Hope_Love\test\Debug\"
+         :VCEnd
+         已复制         1 个文件。
+       FinalizeBuildStatus:
+         正在删除文件“x64\Debug\Mathmatic.unsuccessfulbuild”。
+         正在对“x64\Debug\Mathmatic.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:08.55

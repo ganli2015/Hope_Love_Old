@@ -1,0 +1,27 @@
+﻿生成启动时间为 2016/3/3 21:34:53。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 4 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         所有输出均为最新。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\CommandList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.lib" /MACHINE:X86 /DLL Debug\Command.obj
+         Debug\SpeakCommand.obj
+         Debug\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionList.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\SentenceAnalysisAlgorithm.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.exp
+         CommandList.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.dll.manifest" /manifest Debug\CommandList.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Debug\CommandList.unsuccessfulbuild”。
+         正在对“Debug\CommandList.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.45

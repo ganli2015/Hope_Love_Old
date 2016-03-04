@@ -1,0 +1,20 @@
+﻿生成启动时间为 2016/3/3 22:38:16。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\DataCollection.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\Hope_Love /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\DataCollection.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Character.cpp ChineseCharacters.cpp DataBase.cpp GrammaPattern.cpp GrammardSentence.cpp PrepositionCollection.cpp Punctures.cpp Sentence.cpp StructuredSentence.cpp WordColletction.cpp WordSearchAlgorithm.cpp
+         WordSearchAlgorithm.cpp
+         WordColletction.cpp
+         StructuredSentence.cpp
+         Sentence.cpp
+         Punctures.cpp
+         PrepositionCollection.cpp
+         GrammardSentence.cpp
+         GrammaPattern.cpp
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:03.80

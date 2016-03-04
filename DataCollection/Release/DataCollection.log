@@ -1,0 +1,45 @@
+﻿生成启动时间为 2015/5/16 0:22:28。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 3 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Release\DataCollection.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\DataCollection.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Character.cpp ChineseCharacters.cpp DataBase.cpp GrammaPattern.cpp PrepositionCollection.cpp Punctures.cpp Sentence.cpp WordColletction.cpp DataBaseProcessorTool.cpp Word.cpp WordSearchAlgorithm.cpp
+         Character.cpp
+         ChineseCharacters.cpp
+         DataBase.cpp
+         GrammaPattern.cpp
+         PrepositionCollection.cpp
+         Punctures.cpp
+         Sentence.cpp
+         WordColletction.cpp
+         DataBaseProcessorTool.cpp
+         Word.cpp
+         WordSearchAlgorithm.cpp
+         正在生成代码...
+       Link:
+         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\DataCollection.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib" /MACHINE:X86 /DLL Release\Character.obj
+         Release\ChineseCharacters.obj
+         Release\DataBase.obj
+         Release\GrammaPattern.obj
+         Release\PrepositionCollection.obj
+         Release\Punctures.obj
+         Release\Sentence.obj
+         Release\Stdafx.obj
+         Release\WordColletction.obj
+         Release\DataBaseProcessorTool.obj
+         Release\Word.obj
+         Release\WordSearchAlgorithm.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.exp
+         DataCollection.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.dll;#2" /manifest Release\DataCollection.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\DataCollection.unsuccessfulbuild”。
+         正在对“Release\DataCollection.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:09.48

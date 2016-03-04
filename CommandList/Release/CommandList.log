@@ -1,0 +1,26 @@
+﻿生成启动时间为 2015/5/16 0:22:51。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Release\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\CommandList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt SpeakCommand.cpp
+         SpeakCommand.cpp
+       Link:
+         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommandList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib" /MACHINE:X86 /DLL Release\Command.obj
+         Release\SpeakCommand.obj
+         Release\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\DataWrapperCPP.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\SentenceAnalysisAlgorithm.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.exp
+         CommandList.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll;#2" /manifest Release\CommandList.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\CommandList.unsuccessfulbuild”。
+         正在对“Release\CommandList.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.13

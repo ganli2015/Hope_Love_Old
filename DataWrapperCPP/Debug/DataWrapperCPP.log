@@ -1,0 +1,30 @@
+﻿生成启动时间为 2016/3/2 23:05:16。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCPP\DataWrapperCPP.vcxproj”在节点 3 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Debug\DataWrapperCPP.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Debug\DataWrapperCPP.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\DataWrapperCPP.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\DataWrapperCPP.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt DataWrapper.cpp
+         DataWrapper.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\DataWrapperCPP.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.lib" /MACHINE:X86 /DLL Debug\DataWrapper.obj
+         Debug\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.exp
+         DataWrapperCPP.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCPP.dll.manifest" /manifest Debug\DataWrapperCPP.dll.intermediate.manifest
+       _CopyFilesMarkedCopyLocal:
+         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Debug\Interactor.dll”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\Interactor.dll”。
+         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Debug\Interactor.pdb”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\Interactor.pdb”。
+       FinalizeBuildStatus:
+         正在删除文件“Debug\DataWrapperCPP.unsuccessfulbuild”。
+         正在对“Debug\DataWrapperCPP.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCPP\DataWrapperCPP.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:02.37

@@ -1,0 +1,18 @@
+﻿生成启动时间为 2015/5/16 0:22:15。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionList\ReactionList.vcxproj”在节点 3 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Release\ReactionList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         所有输出均为最新。
+       Link:
+         所有输出均为最新。
+         ReactionList.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.dll
+       FinalizeBuildStatus:
+         正在删除文件“Release\ReactionList.unsuccessfulbuild”。
+         正在对“Release\ReactionList.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionList\ReactionList.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.08
