@@ -63,6 +63,9 @@ namespace NeuralNetwork
 		virtual int GetOutputDimension() const =0;
 		virtual int GetInputDimension() const =0;
 
+		int GetInteationCount() const { return _curInteationCount; }
+		void SetInteationCount(int val) { _curInteationCount = val; }
+
 		//ÔÝ²»Êä³ö_mydata
 		void Write(const string filename) const;
 		void Read(const string filename);
@@ -80,6 +83,7 @@ namespace NeuralNetwork
 		std::map<int,shared_ptr<iNeuron>> _neurons;
 		bool hasTrained;
 		int _maxiter;
+		int _curInteationCount;
 		double _tol;
 
 	};

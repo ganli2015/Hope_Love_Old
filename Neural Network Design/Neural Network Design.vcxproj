@@ -26,7 +26,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CLRSupport>false</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
@@ -92,7 +92,7 @@
       </AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(CodeAnalysisInputAssembly)" "$(SolutionDir)test\Debug\"</Command>
+      <Command>Copy "$(TargetPath)" "$(SolutionDir)StartForm\bin\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,6 +150,7 @@
     <ClInclude Include="DataArray.h" />
     <ClInclude Include="MultilayerNetwork.h" />
     <ClInclude Include="MultilayerNetworkTrainImp.h" />
+    <ClInclude Include="MultiNet_MOBP.h" />
     <ClInclude Include="MultiNet_Simple.h" />
     <ClInclude Include="Network.h" />
     <ClInclude Include="NetworkPolicy.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="iNeuron.cpp" />
     <ClCompile Include="MultilayerNetwork.cpp" />
     <ClCompile Include="MultilayerNetworkTrainImp.cpp" />
+    <ClCompile Include="MultiNet_MOBP.cpp" />
     <ClCompile Include="MultiNet_Simple.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="NetworkPolicy.cpp" />

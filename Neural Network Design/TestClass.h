@@ -4,6 +4,7 @@
 namespace NeuralNetwork
 {
 	class iDataArray;
+	class MultilayerNetwork;
 	class TestClass
 	{
 	public:
@@ -19,6 +20,8 @@ namespace NeuralNetwork
 		static void RunTest_CompetitiveNetwork();
 
 		static void RunTest_Connectivity();
+
+		static void RunTest_MOBP();
 
 		static double ComputeDeviation(const shared_ptr<iDataArray> array1,const shared_ptr<iDataArray> array2);
 

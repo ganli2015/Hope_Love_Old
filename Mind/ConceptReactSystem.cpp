@@ -20,6 +20,8 @@
 #include "../Neural Network Design/ADALINE.h"
 #include "../Neural Network Design/Errors.h"
 
+#include <numeric>
+
 #define _ReadFile
 
 using namespace Math;
@@ -146,8 +148,8 @@ namespace Mind
 			shared_ptr<iDataArray> expect=ToDataArray(dataInfos[i].expect);
 			multiNetwork->SetMyData(proto,expect);
 		}
-		multiNetwork->SetLearningRate(0.03);
-		multiNetwork->SetMaxIterationCount(200);
+		multiNetwork->SetLearningRate(0.1);
+		multiNetwork->SetMaxIterationCount(100);
 
 		TrainResult result=	multiNetwork->Training();
 
@@ -158,6 +160,7 @@ namespace Mind
 			{
 				residuals.push_back(ComputeStandardDeviation(dataInfos[i],multiNetwork));
 			}
+			double objFun=accumulate(residuals.begin(),residuals.end(),0.);
 		}
 
 		_network=multiNetwork;

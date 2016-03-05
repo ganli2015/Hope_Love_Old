@@ -156,5 +156,31 @@ namespace Math
 		return true;
 	}
 
+	Matrix _MATHMATICINOUT ComputeMeanMatrix( const vector<Matrix>& mats )
+	{
+		Check(!mats.empty());
+
+		Matrix sum(mats[0].Rows(),mats[0].Columns());
+		for (unsigned int i=0;i<mats.size();++i)
+		{
+			sum+=mats[i];
+		}
+
+		return sum/mats.size();
+	}
+
+	Vector _MATHMATICINOUT ComputeMeanVector( const vector<Vector>& vecs )
+	{
+		Check(!vecs.empty());
+
+		Vector sum(vecs[0].Dimension());
+		for (unsigned int i=0;i<vecs.size();++i)
+		{
+			sum+=vecs[i];
+		}
+
+		return sum/vecs.size();
+	}
+
 }
 

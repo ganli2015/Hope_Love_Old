@@ -69,7 +69,7 @@ namespace Math
 		assert_less(i,_d);_r[i]=val;
 	}
 
-	double Math::Vector::Get_ithVal(unsigned int i )
+	double Math::Vector::Get_ithVal(unsigned int i ) const
 	{
 		assert_less(i,_d);return _r[i];
 	}
@@ -150,6 +150,18 @@ namespace Math
 		return true;
 	}
 
+	Vector& Vector::operator+=( const Vector& right )
+	{
+		Check(Dimension()==right.Dimension());
+
+		for (unsigned int i=0;i<Dimension();++i)
+		{
+			_r[i]+=right.Get_ithVal(i);
+		}
+
+		return *this;
+	}
+
 
 
 	Vector operator+(const Vector& left,const Vector& right) 
@@ -201,5 +213,20 @@ namespace Math
 	{
 		return vec*val;
 	}
+
+
+	Vector operator/( const Vector& left,const double& right )
+	{
+		Check(DoubleCompare(right,0)!=0);
+
+		Vector res(left);
+		for (unsigned int i=0;i<res.Dimension();++i)
+		{
+			res.Set_ithVal(i,res.Get_ithVal(i)/right);
+		}
+
+		return res;
+	}
+
 }
 

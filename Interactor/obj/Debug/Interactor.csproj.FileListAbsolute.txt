@@ -2,4 +2,3 @@ E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Debug\Interactor.dll
 E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Debug\Interactor.pdb
 E:\Artificial Intelligence\Project\Hope_Love\Interactor\obj\Debug\Interactor.dll
 E:\Artificial Intelligence\Project\Hope_Love\Interactor\obj\Debug\Interactor.pdb
-E:\Artificial Intelligence\Project\Hope_Love\Interactor\obj\Debug\Interactor.csprojResolveAssemblyReference.cache

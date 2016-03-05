@@ -43,7 +43,7 @@ namespace Math
 		bool IsOrthogonoality(const Vector& vec,double tol=1e-6);
 
 		void Set_ithVal(unsigned int i,double val);
-		double Get_ithVal(unsigned int i);
+		double Get_ithVal(unsigned int i) const;
 
 		double Dot(const Vector& val) const;
 
@@ -55,14 +55,13 @@ namespace Math
 
 		double& operator[]( unsigned int i);
 
-
 		const double operator[]( unsigned int i) const;
-
 
 		Vector& operator=(const Vector& vec);
 
-		
+		Vector& operator+=(const Vector& right);
 
+		_MATHMATICINOUT friend Vector operator/(const Vector& left,const double& right);
 		
 	};
 

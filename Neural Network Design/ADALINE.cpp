@@ -57,7 +57,7 @@ namespace NeuralNetwork
 
 		//Wi_new=Wi_old+2*alpha*Ei*P
 		//b_new=b_old+2*alpha*Ei
-		for (int n=0;n<_myneuron->GetOutputDimension();++n)
+		for (unsigned int n=0;n<_myneuron->GetOutputDimension();++n)
 		{
 			Math::Vector newColumn=_myneuron->Get_jthColumn(n)+2*_learningRate*e[n]*(proto->GetArray());
 			_myneuron->Set_jthColumn(n,newColumn);

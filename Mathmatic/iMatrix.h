@@ -53,7 +53,13 @@ namespace Math
 
 		Matrix& operator=(const Matrix& mat);
 		
+		Matrix& operator+=(const Matrix& right);
 
+		_MATHMATICINOUT friend Matrix operator+(const Matrix& left,const Matrix& right);
+
+		_MATHMATICINOUT friend Matrix operator/(const Matrix& left,const double& right);
+
+		_MATHMATICINOUT friend Matrix operator*(const Matrix& left,const double& right);
 	};
 
 	_MATHMATICINOUT Vector  operator*(const Matrix& mat,const Vector& vec);

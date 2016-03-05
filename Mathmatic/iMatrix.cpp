@@ -137,6 +137,65 @@ namespace Math
 		return (size_t)_i;
 	}
 
+	Matrix operator+( const Matrix& left,const Matrix& right )
+	{
+		Check(left.Rows()==right.Rows());
+		Check(left.Columns()==right.Columns());
+
+		Matrix res(left.Rows(),left.Columns());
+
+		for (unsigned int i=0;i<left.Columns();++i)
+		{
+			Vector resColumn=left.nthColumn(i)+right.nthColumn(i);
+			res.Set_jthColumn(i,resColumn);
+		}
+
+		return res;
+	}
+
+	Matrix& Matrix::operator+=( const Matrix& right )
+	{
+		Check(Rows()==right.Rows());
+		Check(Columns()==right.Columns());
+
+		for (unsigned int i=0;i<Columns();++i)
+		{
+			Vector resColumn=nthColumn(i)+right.nthColumn(i);
+			Set_jthColumn(i,resColumn);
+		}
+
+		return *this;
+	}
+
+	Matrix operator*( const Matrix& left,const double& right )
+	{
+		Matrix res(left);
+		for (unsigned int i=0;i<res.Columns();++i)
+		{
+			Vector newCol=res.nthColumn(i)*right;
+			res.Set_jthColumn(i,newCol);
+		}
+
+		return res;
+	}
+
+
+	Matrix operator/( const Matrix& left,const double& right )
+	{
+		Check(DoubleCompare(right,0)!=0);
+
+		Matrix res(left);
+		for (unsigned int i=0;i<res.Columns();++i)
+		{
+			Vector newCol=res.nthColumn(i)/right;
+			res.Set_jthColumn(i,newCol);
+		}
+
+		return res;
+	}
+
 }
+
+
 
 

@@ -17,6 +17,8 @@ namespace NeuralNetwork
 
 	void MultiNet_Simple::Train( const vector<shared_ptr<Network::MyData>> mydata,train_MultiNetwork& myTrain )
 	{
+		myTrain.SetNeuronState(false);
+		myTrain.ClearDeviations();
 		myTrain=for_each(mydata.begin(),mydata.end(),myTrain);
 	}
 

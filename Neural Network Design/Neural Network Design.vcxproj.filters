@@ -68,6 +68,9 @@
     <ClInclude Include="MultiNet_Simple.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MultiNet_MOBP.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -122,6 +125,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MultiNet_Simple.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiNet_MOBP.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

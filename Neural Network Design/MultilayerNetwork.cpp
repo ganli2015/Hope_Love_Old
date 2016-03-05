@@ -3,7 +3,9 @@
 #include "iNeuron.h"
 #include "DataArray.h"
 #include "Errors.h"
+
 #include "MultiNet_Simple.h"
+#include "MultiNet_MOBP.h"
 
 #include "../Mathmatic/Vector.h"
 #include "../Mathmatic/iMatrix.h"
@@ -14,7 +16,7 @@ namespace NeuralNetwork
 
 	MultilayerNetwork::MultilayerNetwork( const int i, const int j ):_learningRate(0.1),_i(i),_j(j)
 	{
-
+		SetTrainImp(shared_ptr<MultilayerNetworkTrainImp>(new MultiNet_MOBP()));
 	}
 
 
@@ -26,16 +28,13 @@ namespace NeuralNetwork
 	TrainResult MultilayerNetwork::Training()
 	{
 		TrainResult result=Success;
-		shared_ptr<MultilayerNetworkTrainImp> trainImp(new MultiNet_Simple());
 
 		int iteration(0);//max iteration number
 		vector<double> prev_errors;
 		train_MultiNetwork mytrain(_neurons,_learningRate);
 		do 
 		{
-			mytrain.SetNeuronState(false);
-			mytrain.ClearDeviations();
-			trainImp->Train(_mydata,mytrain);
+			_trainImp->Train(_mydata,mytrain);
 
 			vector<double> cur_errors=mytrain.GetSampleDeviations();
 			if(!prev_errors.empty())
@@ -55,13 +54,14 @@ namespace NeuralNetwork
 			}
 		} while (mytrain.NeuronChanged());//If the neuron is changed after one iteration, process the proto patterns again to make sure that all errors are zero!
 
+		_curInteationCount=iteration;
 		_neurons=mytrain.GetResult();
 		hasTrained=true;
 		return result;
 	}
 
 
-	void train_MultiNetwork::operator()( shared_ptr<typename Network::MyData> mydata )
+	void train_MultiNetwork::operator()(const shared_ptr<typename Network::MyData> mydata )
 	{
 // 		shared_ptr<iDataArray> proto=mydata->proto;
 // 		shared_ptr<iDataArray> expec=mydata->expec;
@@ -84,23 +84,31 @@ namespace NeuralNetwork
 		vector<Math::Vector> deltaBias;
 		ComputeDeltaNeuron(mydata,deltaMat,deltaBias);
 
-		AdjustNeuron(deltaMat,deltaBias,_myNeurons);
+		if(deltaBias.empty() || deltaMat.empty())
+		{
+			SetNeuronState(false);
+		}
+		else
+		{
+			SetNeuronState(true);
+			AdjustNeuron(deltaMat,deltaBias,_myNeurons);
+		}
 	}
 
 	void train_MultiNetwork::ComputeDeltaNeuronByBackwardPropagation(const shared_ptr<iDataArray> ee,
 		const vector<shared_ptr<iDataArray>>& n, 
 		const vector<shared_ptr<iDataArray>>& a ,
-		vector<Math::Matrix>& deltaMats,vector<Math::Vector>& deltaBiases)
+		vector<Math::Matrix>& deltaMats,vector<Math::Vector>& deltaBiases) const
 	{
 		DataArray e=*dynamic_pointer_cast<DataArray>(ee);
 
 		//Backward Propagation
-		MyNeurons::reverse_iterator neo_backward=_myNeurons.rbegin();
+		MyNeurons::const_reverse_iterator neo_backward=_myNeurons.crbegin();
 		vector<shared_ptr<iDataArray>>::const_reverse_iterator n_it=n.rbegin(),
 			a_it=a.rbegin();
 		shared_ptr<iDataArray> s_m_next;//s_m+1, the (m+1)th sensitivity
 		shared_ptr<Matrix> mat_next;//W_m+1, the (m+1)th matrix
-		for (;neo_backward!=_myNeurons.rend(),n_it!=n.rend(),a_it!=a.rend()
+		for (;neo_backward!=_myNeurons.crend(),n_it!=n.rend(),a_it!=a.rend()
 			;++neo_backward,++n_it,++a_it)
 		{
 			shared_ptr<iNeuron> tmpNeu=neo_backward->second;
@@ -119,7 +127,6 @@ namespace NeuralNetwork
 			deltaMats.push_back(deltaMat);
 			deltaBiases.push_back(deltaBias);
 
-			neuron_changed=true;
 		}
 
 		reverse(deltaMats.begin(),deltaMats.end());
@@ -143,7 +150,7 @@ namespace NeuralNetwork
 	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<iDataArray> s_m,
 		const shared_ptr<iDataArray> a_m_prev, 
 		Matrix& deltaMat,
-		Vector& deltaBias )
+		Vector& deltaBias ) const
 	{
 		for (unsigned int n=0;n<s_m->Dimension();++n)
 		{
@@ -154,13 +161,13 @@ namespace NeuralNetwork
 		}
 	}
 
-	void train_MultiNetwork::ComputeSensitivity(const MyNeurons::reverse_iterator& neo_backward,
+	void train_MultiNetwork::ComputeSensitivity(const MyNeurons::const_reverse_iterator& neo_backward,
 		const shared_ptr<TransferFunction::fun> myFun,
 		const DataArray& e,
 		const shared_ptr<iDataArray> n_m,
 		shared_ptr<iDataArray> s_m,
 		shared_ptr<iDataArray>& s_m_next,
-		shared_ptr<Matrix>& mat_next)
+		shared_ptr<Matrix>& mat_next) const
 	{
 		shared_ptr<iNeuron> tmpNeu=neo_backward->second;
 		if(neo_backward==_myNeurons.rbegin())
@@ -211,6 +218,9 @@ namespace NeuralNetwork
 
 	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<typename Network::MyData> mydata,vector<Matrix>& deltaMat,vector<Vector>& deltaBias )
 	{
+		deltaMat.clear();
+		deltaBias.clear();
+
 		shared_ptr<iDataArray> proto=mydata->proto;
 		shared_ptr<iDataArray> expec=mydata->expec;
 		//shared_ptr<iDataArray> tmpoutput=ForwardPropagation(proto,_myNeurons);
@@ -231,6 +241,9 @@ namespace NeuralNetwork
 
 	void train_MultiNetwork::AdjustNeuron(const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias, MyNeurons& neurons)
 	{
+		Check(deltaMat.size()==neurons.size());
+		Check(deltaBias.size()==deltaBias.size());
+
 		for (unsigned int i=0;i<neurons.size();++i)
 		{
 			shared_ptr<iNeuron> tmpNeu=neurons[i];
@@ -244,6 +257,11 @@ namespace NeuralNetwork
 				tmpNeu->Set_jthBias(j,newbias);
 			}
 		}
+	}
+
+	void train_MultiNetwork::AdjustNeuron( const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias )
+	{
+		AdjustNeuron(deltaMat,deltaBias,_myNeurons);
 	}
 
 }

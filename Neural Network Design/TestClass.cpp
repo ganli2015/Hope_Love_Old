@@ -10,11 +10,14 @@
 #include "CompetitiveNetwork.h"
 #include "Neuron_compet.h"
 
+#include "MultiNet_MOBP.h"
+
 #include "../Mathmatic/Vector.h"
 #include "../Mathmatic/iMatrix.h"
 #include "../Mathmatic/MathTool.h"
 
 #include "../CommonTools/IOFunction.h"
+#include "../CommonTools/CommonStringFunction.h"
 
 using namespace Math;
 using namespace NeuralNetwork::TransferFunction;
@@ -59,7 +62,8 @@ namespace NeuralNetwork
 // 		RunTest_ADALINENetwork();
 // 		RunTest_MultiNetwork();
 // 		RunTest_CompetitiveNetwork();
-		RunTest_Connectivity();
+//		RunTest_Connectivity();
+		RunTest_MOBP();
 	}
 
 	void TestClass::RunTest_PerceptronNetwork()
@@ -338,7 +342,15 @@ namespace NeuralNetwork
 		o3Expect.push_back(0.33333447557466112);
 		o3Expect.push_back(2.0000026939557554);
 		o3Expect.push_back(2.6666674856128672);
-		Check(SameVec(o3->GetVector(),o3Expect));
+		try
+		{
+			Check(SameVec(o3->GetVector(),o3Expect));
+		}
+		catch(...)
+		{
+			double deviation=Math::ComputeDeviation(o3Expect,o3->GetVector());
+			throw;
+		}
 
 		//{0,1,2,3}
 		ConcoleDisplay(o3->GetVector());
@@ -347,6 +359,45 @@ namespace NeuralNetwork
 	double TestClass::ComputeDeviation( const shared_ptr<iDataArray> array1,const shared_ptr<iDataArray> array2 )
 	{
 		return Math::ComputeDeviation(array1->GetVector(),array2->GetVector());
+	}
+
+	void TestClass::RunTest_MOBP( )
+	{
+		double pp1[4]={1,2,0,0},
+			tt1[4]={0,1,2,0},
+			pp2[4]={0,1,2,0},
+			tt2[4]={0,0,1,2};
+
+		shared_ptr<iDataArray> p1=ToDataArray(pp1,4);
+		shared_ptr<iDataArray> t1=ToDataArray(tt1,4);
+		shared_ptr<iDataArray> p2=ToDataArray(pp2,4);
+		shared_ptr<iDataArray> t2=ToDataArray(tt2,4);
+
+		MultilayerNetwork multilayerNetwork(4,4);
+		multilayerNetwork.SetMyData(p1,t1);
+		multilayerNetwork.SetMyData(p2,t2);
+
+		for (double j=0;j<1;j+=0.1)
+		{
+			multilayerNetwork.SetLearningRate(j);
+			cout<<j<<endl;
+
+			for (double i=0;i<1;i+=0.1)
+			{
+				shared_ptr<MultiNet_MOBP> trainImp(new MultiNet_MOBP());
+				trainImp->SetMomentumCoefficient(i);
+				multilayerNetwork.SetTrainImp(trainImp);
+
+				shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,4)));
+				W1->SetFun(CreateTransferFunction(Purelin));
+				multilayerNetwork.SetMyNeuron(0,W1);
+
+				multilayerNetwork.Training();
+
+				cout<<ToString(i)<<" "<<multilayerNetwork.GetInteationCount()<<endl;
+
+			}
+		}
 	}
 
 }
