@@ -62,8 +62,8 @@ namespace NeuralNetwork
 // 		RunTest_ADALINENetwork();
 // 		RunTest_MultiNetwork();
 // 		RunTest_CompetitiveNetwork();
-//		RunTest_Connectivity();
-		RunTest_MOBP();
+		RunTest_Connectivity();
+//		RunTest_MOBP();
 	}
 
 	void TestClass::RunTest_PerceptronNetwork()

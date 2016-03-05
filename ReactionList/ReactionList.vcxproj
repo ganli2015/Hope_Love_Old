@@ -110,6 +110,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <CallingConvention>StdCall</CallingConvention>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,6 +155,9 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
+      <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj">
       <Project>{2d055626-ad7e-4938-b59e-fe1b8851aa32}</Project>
     </ProjectReference>

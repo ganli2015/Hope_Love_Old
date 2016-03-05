@@ -112,6 +112,11 @@ namespace DataCollection
 		return _structured[i].GetIntensity(i_word,j_word);
 	}
 
+	std::string Sentence::GetString() const
+	{
+		return _rawSentence.GetString();
+	}
+
 
 	RawSentence::RawSentence()
 	{
@@ -137,6 +142,11 @@ namespace DataCollection
 	std::vector<shared_ptr<Character>> RawSentence::GetRawSentence() const
 	{
 		return _raw;
+	}
+
+	std::string RawSentence::GetString() const
+	{
+		return DataBaseProcessorTool::ConvertCharacterToString(_raw);
 	}
 
 

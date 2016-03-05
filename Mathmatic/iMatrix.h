@@ -55,6 +55,8 @@ namespace Math
 		
 		Matrix& operator+=(const Matrix& right);
 
+		Matrix Negate() const ;
+
 		_MATHMATICINOUT friend Matrix operator+(const Matrix& left,const Matrix& right);
 
 		_MATHMATICINOUT friend Matrix operator/(const Matrix& left,const double& right);

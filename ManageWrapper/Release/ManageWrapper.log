@@ -1,18 +1,15 @@
-﻿生成启动时间为 2015/5/16 0:22:52。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/3/5 23:57:59。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Release\ManageWrapper.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        GenerateTargetFrameworkMonikerAttribute:
        正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
        ClCompile:
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\ManageWrapper.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /FU"E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt Stdafx.cpp /clr:nostdlib 
-         Stdafx.cpp
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\ManageWrapper.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /FU"E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt ManageWrapper.cpp /clr:nostdlib 
-         ManageWrapper.cpp
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt "C:\Users\dell\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
-         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+         所有输出均为最新。
+         所有输出均为最新。
+         所有输出均为最新。
        Link:
-         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\ManageWrapper.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Release\ManageWrapper.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\ManageWrapper.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Release\ManageWrapper.obj
          Release\Stdafx.obj
          "Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib"
@@ -23,9 +20,6 @@
          ManageWrapper.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.dll
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\ManageWrapper.dll;#2" /manifest Release\ManageWrapper.dll.intermediate.manifest
-       _CopyFilesMarkedCopyLocal:
-         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.dll”复制到“E:\Artificial Intelligence\Project\Hope_Love\Release\DataWrapperCS.dll”。
-         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.pdb”复制到“E:\Artificial Intelligence\Project\Hope_Love\Release\DataWrapperCS.pdb”。
        FinalizeBuildStatus:
          正在删除文件“Release\ManageWrapper.unsuccessfulbuild”。
          正在对“Release\ManageWrapper.lastbuildstate”执行 Touch 任务。
@@ -33,4 +27,4 @@
 
 生成成功。
 
-已用时间 00:00:02.02
+已用时间 00:00:00.53

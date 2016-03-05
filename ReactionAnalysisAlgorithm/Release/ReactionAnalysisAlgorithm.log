@@ -1,13 +1,34 @@
-﻿生成启动时间为 2015/5/16 0:22:15。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/3/5 23:57:50。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Release\ReactionAnalysisAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Release\ReactionAnalysisAlgorithm.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\ReactionAnalysisAlgorithm.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\ReactionAnalysisAlgorithm.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ChainAnalyzer.cpp ChainGenerator.cpp ExtractConceptChains.cpp GrammarPatternSelector.cpp ReactionParser.cpp SentenceGenerator.cpp
+         ChainAnalyzer.cpp
+         ChainGenerator.cpp
+         ExtractConceptChains.cpp
+         GrammarPatternSelector.cpp
+         ReactionParser.cpp
+         SentenceGenerator.cpp
+         正在生成代码...
        Link:
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\ReactionAnalysisAlgorithm.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.lib" /MACHINE:X86 /DLL Release\ChainAnalyzer.obj
+         Release\ChainGenerator.obj
+         Release\ExtractConceptChains.obj
+         Release\GrammarPatternSelector.obj
+         Release\ReactionParser.obj
+         Release\SentenceGenerator.obj
+         Release\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\Mathmatic.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.exp
          ReactionAnalysisAlgorithm.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.dll;#2" /manifest Release\ReactionAnalysisAlgorithm.dll.intermediate.manifest
        FinalizeBuildStatus:
          正在删除文件“Release\ReactionAnalysisAlgorithm.unsuccessfulbuild”。
          正在对“Release\ReactionAnalysisAlgorithm.lastbuildstate”执行 Touch 任务。
@@ -15,4 +36,4 @@
 
 生成成功。
 
-已用时间 00:00:00.10
+已用时间 00:00:05.99

@@ -1,6 +1,6 @@
 Base Chain: 
 自己 也 好感 对方 
-Confidence: 0.998154
+Confidence: 0.88336
 HyperChains: 
 我 也 喜欢 你 
 Level: 0.75
@@ -40,179 +40,25 @@ Level: 0.25
 Level: 0
 
 Base Chain: 
-大 好感 干干 
-Confidence: 0.81457
+干干 程度 也 好感 
+Confidence: 0.53014
 HyperChains: 
-喜欢 干干 
+干干 深深 也 喜欢 
 Level: 0.5
-强 喜欢 干干 
-Level: 0.666667
-喜欢 干干 
+干干 非常 也 喜欢 
 Level: 0.5
-大 喜欢 干干 
-Level: 0.333333
-爱 干干 
-Level: 1
-强 爱 干干 
-Level: 1
-爱 干干 
-Level: 1
-大 爱 干干 
-Level: 0.666667
-强 好感 干干 
-Level: 0.333333
-大 好感 干干 
-Level: 0
-
-Base Chain: 
-自己 好感 干干 
-Confidence: 0.76048
-HyperChains: 
-我 喜欢 干干 
-Level: 0.666667
-人家 喜欢 干干 
-Level: 0.666667
-自己 喜欢 干干 
-Level: 0.333333
-我 爱 干干 
-Level: 1
-人家 爱 干干 
-Level: 1
-自己 爱 干干 
-Level: 0.666667
-我 好感 干干 
-Level: 0.333333
-人家 好感 干干 
-Level: 0.333333
-自己 好感 干干 
-Level: 0
-
-Base Chain: 
-大 好感 干干 
-Confidence: 1
-HyperChains: 
-喜欢 干干 
-Level: 0.5
-强 喜欢 干干 
-Level: 0.666667
-喜欢 干干 
-Level: 0.5
-大 喜欢 干干 
-Level: 0.333333
-爱 干干 
-Level: 1
-强 爱 干干 
-Level: 1
-爱 干干 
-Level: 1
-大 爱 干干 
-Level: 0.666667
-强 好感 干干 
-Level: 0.333333
-大 好感 干干 
-Level: 0
-
-Base Chain: 
-干干 程度 也 
-Confidence: 0.746174
-HyperChains: 
-干干 深深 也 
-Level: 0.333333
-干干 非常 也 
-Level: 0.333333
-干干 程度 也 
-Level: 0
-
-Base Chain: 
-大 程度 好感 干干 
-Confidence: 1
-HyperChains: 
-深深 喜欢 干干 
-Level: 0.666667
-强 深深 喜欢 干干 
-Level: 0.75
-深深 喜欢 干干 
-Level: 0.666667
-大 深深 喜欢 干干 
-Level: 0.5
-非常 喜欢 干干 
-Level: 0.666667
-强 非常 喜欢 干干 
-Level: 0.75
-非常 喜欢 干干 
-Level: 0.666667
-大 非常 喜欢 干干 
-Level: 0.5
-强 程度 喜欢 干干 
-Level: 0.5
-大 程度 喜欢 干干 
+干干 程度 也 喜欢 
 Level: 0.25
-爱 干干 
-Level: 1
-强 爱 干干 
-Level: 1
-深深 爱 干干 
-Level: 1
-强 深深 爱 干干 
-Level: 1
-爱 干干 
-Level: 1
-大 爱 干干 
-Level: 0.666667
-深深 爱 干干 
-Level: 1
-大 深深 爱 干干 
+干干 深深 也 爱 
 Level: 0.75
-爱 干干 
-Level: 1
-强 爱 干干 
-Level: 1
-非常 爱 干干 
-Level: 1
-强 非常 爱 干干 
-Level: 1
-爱 干干 
-Level: 1
-大 爱 干干 
-Level: 0.666667
-非常 爱 干干 
-Level: 1
-大 非常 爱 干干 
+干干 非常 也 爱 
 Level: 0.75
-爱 干干 
-Level: 1
-强 爱 干干 
-Level: 1
-程度 爱 干干 
-Level: 0.666667
-强 程度 爱 干干 
-Level: 0.75
-爱 干干 
-Level: 1
-大 爱 干干 
-Level: 0.666667
-程度 爱 干干 
-Level: 0.666667
-大 程度 爱 干干 
+干干 程度 也 爱 
 Level: 0.5
-深深 好感 干干 
-Level: 0.333333
-强 深深 好感 干干 
-Level: 0.5
-深深 好感 干干 
-Level: 0.333333
-大 深深 好感 干干 
+干干 深深 也 好感 
 Level: 0.25
-非常 好感 干干 
-Level: 0.333333
-强 非常 好感 干干 
-Level: 0.5
-非常 好感 干干 
-Level: 0.333333
-大 非常 好感 干干 
+干干 非常 也 好感 
 Level: 0.25
-强 程度 好感 干干 
-Level: 0.25
-大 程度 好感 干干 
+干干 程度 也 好感 
 Level: 0
 

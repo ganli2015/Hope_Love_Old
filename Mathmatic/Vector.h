@@ -53,6 +53,8 @@ namespace Math
 
 		bool Same(const Vector& v ,const double tol=1e-6) const ;
 
+		Vector Negate() const ;
+
 		double& operator[]( unsigned int i);
 
 		const double operator[]( unsigned int i) const;

@@ -9,7 +9,8 @@ namespace DataCollection
 
 class _REACTIONLISTINOUT SpeakReaction:public Reaction
 {
-	vector<shared_ptr<DataCollection::Sentence>> _sentence;
+	vector<shared_ptr<DataCollection::Sentence>> _sentence_input;
+	vector<shared_ptr<DataCollection::Sentence>> _sentence_output;
 
 public:
 	SpeakReaction(void);
@@ -18,5 +19,7 @@ public:
 	SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence);
 
 	virtual void React();
+
+	shared_ptr<DataCollection::Sentence> GetReactSentence() const;
 };
 

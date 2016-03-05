@@ -32,6 +32,9 @@
     <ClInclude Include="ExtractConceptChains.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SentenceGenerator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -50,6 +53,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ExtractConceptChains.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SentenceGenerator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

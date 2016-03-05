@@ -33,6 +33,7 @@ namespace ArtificialIntelligenceUI
         }
         public void UpdateUI()
         {
+            textBox_Output.Text = _datawrapper.outputsentence;
             return;
         }
 

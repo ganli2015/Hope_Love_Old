@@ -1,13 +1,25 @@
-﻿生成启动时间为 2015/5/16 0:22:15。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionList\ReactionList.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/3/5 23:57:56。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionList\ReactionList.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Release\ReactionList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\ReactionList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\ReactionList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Reaction.cpp SpeakCommand.cpp
+         Reaction.cpp
+         SpeakCommand.cpp
+         正在生成代码...
        Link:
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\ReactionList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.lib" /MACHINE:X86 /DLL Release\Reaction.obj
+         Release\SpeakCommand.obj
+         Release\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionAnalysisAlgorithm.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.exp
          ReactionList.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.dll;#2" /manifest Release\ReactionList.dll.intermediate.manifest
        FinalizeBuildStatus:
          正在删除文件“Release\ReactionList.unsuccessfulbuild”。
          正在对“Release\ReactionList.lastbuildstate”执行 Touch 任务。
@@ -15,4 +27,4 @@
 
 生成成功。
 
-已用时间 00:00:00.08
+已用时间 00:00:01.40

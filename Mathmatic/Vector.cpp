@@ -162,6 +162,17 @@ namespace Math
 		return *this;
 	}
 
+	Math::Vector Vector::Negate() const
+	{
+		Vector res(Dimension());
+		for (unsigned int i=0;i<Dimension();++i)
+		{
+			res[i]=-_r[i];
+		}
+
+		return res;
+	}
+
 
 
 	Vector operator+(const Vector& left,const Vector& right) 

@@ -34,6 +34,10 @@ namespace Math
 
 	Vector _MATHMATICINOUT ComputeMeanVector(const vector<Vector>& vecs);
 
+	vector<Matrix> _MATHMATICINOUT ComputeNegateMatrix(const vector<Matrix>& mats);
+
+	vector<Vector> _MATHMATICINOUT ComputeNegateVector(const vector<Vector>& vecs);
+
 	template<class T>
 	double MeanValue(const vector<T>& vec)
 	{

@@ -73,15 +73,21 @@ namespace NeuralNetwork
 		vector<double> GetSampleDeviations() const {return _deviations;}
 		void ClearDeviations() {_deviations.clear();}
 
+		double GetLearningRate() const { return _learningRate; }
+		void SetLearningRate(double val) { _learningRate = val; }
+
 		void operator()(const shared_ptr<typename Network::MyData>  mydata);
 
-		void ComputeDeltaNeuron(const shared_ptr<typename Network::MyData> mydata,vector<Math::Matrix>& deltaMat,vector<Math::Vector>& deltaBias);
+		void ComputeDeltaNeuron(const shared_ptr<typename Network::MyData> mydata,
+			vector<Math::Matrix>& deltaMat,
+			vector<Math::Vector>& deltaBias,
+			shared_ptr<iDataArray>& error) const;
 		void AdjustNeuron(const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias);
 	private:
 		void ComputeActualOutAndIntermediateData(const shared_ptr<iDataArray> proto,
 			shared_ptr<iDataArray>& actualOut, 
 			vector<shared_ptr<iDataArray>>& n, //Transformed data derived by each neuron BEFORE using transfer function.
-			vector<shared_ptr<iDataArray>>& a );//Actual input data BEFORE transformed.
+			vector<shared_ptr<iDataArray>>& a ) const;//Actual input data BEFORE transformed.
 		void train_MultiNetwork::ComputeSensitivity(const MyNeurons::const_reverse_iterator& neo_backward, 
 			const shared_ptr<TransferFunction::fun> myFun,
 			const DataArray& e, 

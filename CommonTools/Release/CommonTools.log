@@ -1,14 +1,24 @@
-﻿生成启动时间为 2015/5/16 0:22:27。
+﻿生成启动时间为 2016/3/5 23:57:34。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommonTools\CommonTools.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Release\CommonTools.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Release\CommonTools.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\CommonTools.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\CommonTools.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt CommonCompareFunction.cpp CommonDeleteFunction.cpp CommonFindFunction.cpp CommonStringFunction.cpp CommonTranslateFunction.cpp IOFunction.cpp
+         CommonCompareFunction.cpp
+         CommonDeleteFunction.cpp
+         CommonFindFunction.cpp
+         CommonStringFunction.cpp
+         CommonTranslateFunction.cpp
+         IOFunction.cpp
+         正在生成代码...
        Link:
-         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommonTools.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib" /MACHINE:X86 /DLL Release\CommonCompareFunction.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommonTools.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib" /MACHINE:X86 /DLL Release\CommonCompareFunction.obj
          Release\CommonDeleteFunction.obj
          Release\CommonFindFunction.obj
+         Release\CommonStringFunction.obj
          Release\CommonTranslateFunction.obj
          Release\IOFunction.obj
          Release\Stdafx.obj
@@ -24,4 +34,4 @@
 
 生成成功。
 
-已用时间 00:00:00.95
+已用时间 00:00:02.68

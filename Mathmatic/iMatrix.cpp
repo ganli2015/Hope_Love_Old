@@ -167,6 +167,18 @@ namespace Math
 		return *this;
 	}
 
+	Matrix Matrix::Negate() const
+	{
+		Matrix res(Rows(),Columns());
+
+		for (unsigned int i=0;i<Columns();++i)
+		{
+			res.Set_jthColumn(i,_m[i].Negate());
+		}
+
+		return res;
+	}
+
 	Matrix operator*( const Matrix& left,const double& right )
 	{
 		Matrix res(left);

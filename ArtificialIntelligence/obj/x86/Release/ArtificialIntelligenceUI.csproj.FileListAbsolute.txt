@@ -1,8 +1,5 @@
-E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ResolveAssemblyReference.cache
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligenceUI.Hope_Love.resources
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligence.Properties.Resources.resources
-E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\GenerateResource.read.1.tlog
-E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\GenerateResource.write.1.tlog
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Release\ArtificialIntelligence.dll
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Release\ArtificialIntelligence.pdb
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Release\DataWrapperCS.dll
@@ -13,3 +10,5 @@ E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Release\
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Release\ManageWrapper.pdb
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligence.dll
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligence.pdb
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligenceUI.csprojResolveAssemblyReference.cache
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Release\ArtificialIntelligenceUI.csproj.GenerateResource.Cache

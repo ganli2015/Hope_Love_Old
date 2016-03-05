@@ -1,28 +1,35 @@
-﻿生成启动时间为 2015/5/16 0:22:38。
+﻿生成启动时间为 2016/3/5 23:57:49。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 3 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Release\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Release\Mind.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
          所有输出均为最新。
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\Mind.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Cerebrum.cpp Concept.cpp ConceptSet.cpp FilePath.cpp GrammaSet.cpp GrammaTree.cpp
-         Cerebrum.cpp
-         Concept.cpp
-         ConceptSet.cpp
-         FilePath.cpp
-         GrammaSet.cpp
-         GrammaTree.cpp
-         正在生成代码...
+         所有输出均为最新。
        Link:
-         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.lib" /MACHINE:X86 /DLL Release\Cerebrum.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.lib" /MACHINE:X86 /DLL Release\BaseConcept.obj
+         Release\Cerebrum.obj
+         Release\CommonFunction.obj
          Release\Concept.obj
+         Release\ConceptChain.obj
+         Release\ConceptEdge.obj
+         Release\ConceptInteractTable.obj
+         Release\ConceptInteractTableContainer.obj
+         Release\ConceptLevelTable.obj
+         Release\ConceptReactSystem.obj
          Release\ConceptSet.obj
+         Release\ConceptSetInitializer.obj
+         Release\FindConnectConcept.obj
          Release\FilePath.obj
          Release\GrammaSet.obj
          Release\GrammaTree.obj
          Release\Stdafx.obj
+         Release\Test.obj
+         Release\TestClass.obj
+         Release\Test_ConceptSet.obj
          "E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\Mathmatic.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.lib"
             正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.exp
          Mind.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.dll
        Manifest:
@@ -34,4 +41,4 @@
 
 生成成功。
 
-已用时间 00:00:05.46
+已用时间 00:00:00.90

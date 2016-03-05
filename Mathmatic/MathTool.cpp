@@ -182,5 +182,31 @@ namespace Math
 		return sum/vecs.size();
 	}
 
+	vector<Matrix> _MATHMATICINOUT ComputeNegateMatrix( const vector<Matrix>& mats )
+	{
+		vector<Matrix> res;
+		res.reserve(mats.size());
+
+		for (unsigned int i=0;i<mats.size();++i)
+		{
+			res.push_back(mats[i].Negate());
+		}
+
+		return res;
+	}
+
+	vector<Vector> _MATHMATICINOUT ComputeNegateVector( const vector<Vector>& vecs )
+	{
+		vector<Vector> res;
+		res.reserve(vecs.size());
+
+		for (unsigned int i=0;i<vecs.size();++i)
+		{
+			res.push_back(vecs[i].Negate());
+		}
+
+		return res;
+	}
+
 }
 

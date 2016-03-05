@@ -1,16 +1,22 @@
-﻿生成启动时间为 2015/5/16 0:22:51。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2016/3/5 23:57:57。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Release\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\CommandList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt SpeakCommand.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\CommandList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\CommandList.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Command.cpp SpeakCommand.cpp
+         Command.cpp
          SpeakCommand.cpp
+         正在生成代码...
        Link:
-         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommandList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib" /MACHINE:X86 /DLL Release\Command.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\CommandList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib" /MACHINE:X86 /DLL Release\Command.obj
          Release\SpeakCommand.obj
          Release\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\DataCollection.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\DataWrapperCPP.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Release\ReactionList.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\SentenceAnalysisAlgorithm.lib"
             正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.exp
          CommandList.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Release\CommandList.dll
@@ -23,4 +29,4 @@
 
 生成成功。
 
-已用时间 00:00:01.13
+已用时间 00:00:01.48

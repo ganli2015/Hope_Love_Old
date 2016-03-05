@@ -148,7 +148,7 @@ namespace NeuralNetwork
 
 		double logsig::operator()( double x)
 		{
-			return 1/(1+pow(e,-x));
+			return 1./(1+pow(e,-x));
 		}
 
 		double logsig::D1( double val ) const

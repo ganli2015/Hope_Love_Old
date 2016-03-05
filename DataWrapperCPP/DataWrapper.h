@@ -20,7 +20,8 @@ namespace DataWrapperCPP
 		DataWrapper(void);
 		~DataWrapper(void);
 
-		void Add(std::string asentence);
+		void AddInputSentence(std::string asentence);
+		void AddOutputSentence(std::string asentence);
 		std::string GetNewSentence();
 		std::string GetInputSentence();
 	};

@@ -1,9 +1,10 @@
-﻿生成启动时间为 2016/3/5 12:44:03。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”在节点 2 上(build 个目标)。
-     1>InitializeBuildStatus:
+﻿生成启动时间为 2016/3/5 23:41:08。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Debug\Neural Network Design.lastbuildstate”。
+       InitializeBuildStatus:
          正在创建“Debug\Neural Network Design.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         所有输出均为最新。
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Neural Network Design.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
          Stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Neural Network Design.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ADALINE.cpp CompetitiveNetwork.cpp DataArray.cpp Errors.cpp iDataArray.cpp iNeuron.cpp MultilayerNetwork.cpp MultilayerNetworkTrainImp.cpp MultiNet_MOBP.cpp MultiNet_Simple.cpp Network.cpp NetworkPolicy.cpp Neuron.cpp Neuron_compet.cpp Perceptron.cpp Test.cpp TestClass.cpp TransferFunctions.cpp
@@ -48,7 +49,6 @@
          Debug\TransferFunctions.obj
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
-         LINK : 没有找到 E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.dll 或上一个增量链接没有生成它；正在执行完全链接
             正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.exp
          Neural Network Design.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.dll
        Manifest:
@@ -60,8 +60,8 @@
        FinalizeBuildStatus:
          正在删除文件“Debug\Neural Network Design.unsuccessfulbuild”。
          正在对“Debug\Neural Network Design.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”(build 个目标)的操作。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”(rebuild 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:11.16
+已用时间 00:00:14.23

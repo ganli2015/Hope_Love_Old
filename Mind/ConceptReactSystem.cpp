@@ -148,8 +148,8 @@ namespace Mind
 			shared_ptr<iDataArray> expect=ToDataArray(dataInfos[i].expect);
 			multiNetwork->SetMyData(proto,expect);
 		}
-		multiNetwork->SetLearningRate(0.1);
-		multiNetwork->SetMaxIterationCount(100);
+		multiNetwork->SetLearningRate(0.9);
+		multiNetwork->SetMaxIterationCount(200);
 
 		TrainResult result=	multiNetwork->Training();
 

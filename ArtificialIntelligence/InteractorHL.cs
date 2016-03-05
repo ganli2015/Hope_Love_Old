@@ -44,6 +44,7 @@ namespace Interactor
 //             _manageclass.inputsentence = "我是谁";
 //             _manageclass.TransportDataFromCStoCPP();
             _manageclass.UpdateCommand();
+            NotifyObserver();
         }
     }
 }

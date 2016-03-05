@@ -30,7 +30,7 @@ void ManageWrapper::ManageClass::TransportDataFromCStoCPP()
 	
 	char* pchString=static_cast<char*>(pString.ToPointer());
 	string astring(pchString);
-	_datawrappercpp->Add(astring);
+	_datawrappercpp->AddInputSentence(astring);
 }
 
 void ManageWrapper::ManageClass::UpdateCommand()

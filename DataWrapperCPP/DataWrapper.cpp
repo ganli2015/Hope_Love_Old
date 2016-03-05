@@ -20,7 +20,7 @@ DataWrapperCPP::DataWrapper::~DataWrapper(void)
 {
 }
 
-void DataWrapperCPP::DataWrapper::Add( string asentence )
+void DataWrapperCPP::DataWrapper::AddInputSentence( string asentence )
 {
 	_inputsentences.push_back(asentence);
 }
@@ -40,4 +40,9 @@ std::string DataWrapperCPP::DataWrapper::GetInputSentence()
 		return string("");
 	else
 		return _inputsentences[_inputsentences.size()-1];
+}
+
+void DataWrapperCPP::DataWrapper::AddOutputSentence( std::string asentence )
+{
+	_outputsentences.push_back(asentence);
 }

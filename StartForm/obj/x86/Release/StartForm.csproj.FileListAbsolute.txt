@@ -1,7 +1,4 @@
-E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\ResolveAssemblyReference.cache
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\StartForm.MainForm.resources
-E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\GenerateResource.read.1.tlog
-E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\GenerateResource.write.1.tlog
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Release\StartForm.exe
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Release\StartForm.pdb
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Release\ArtificialIntelligence.dll
@@ -14,3 +11,5 @@ E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Release\Interactor.pd
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Release\ManageWrapper.pdb
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\StartForm.exe
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\StartForm.pdb
+E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\StartForm.csprojResolveAssemblyReference.cache
+E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Release\StartForm.csproj.GenerateResource.Cache

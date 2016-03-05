@@ -3,8 +3,10 @@
 #include "GrammarPatternSelector.h"
 #include "ChainGenerator.h"
 #include "ChainAnalyzer.h"
+#include "SentenceGenerator.h"
 
 #include "../DataCollection/GrammaPattern.h"
+#include "../DataCollection/Sentence.h"
 
 #include "../Mind/Concept.h"
 #include "../Mind/ConceptChain.h"
@@ -23,7 +25,7 @@ ReactionParser::~ReactionParser(void)
 {
 }
 
-ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence):_sentence(sentence)
+ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence):_sentence_input(sentence)
 {
 
 }
@@ -49,6 +51,9 @@ void ReactionParser::Execute()
 	DisplayHyperChains(hyperChains);
 #endif // _DEBUG
 
+	SentenceGenerator sentenceGenerator;
+	sentenceGenerator.Generate(hyperChains);
+	_sentence_output.push_back(sentenceGenerator.GetSentence());
 }
 
 void ReactionParser::DisplayReactChains( const vector<ConceptChainProperty>& chains ) const
@@ -81,4 +86,14 @@ void ReactionParser::DisplayHyperChains( const vector<shared_ptr<Mind::ConceptCh
 	}
 
 	cout<<endl;
+}
+
+shared_ptr<DataCollection::Sentence> ReactionParser::GetReactSentence() const
+{
+	if(_sentence_output.empty())
+	{
+		return NULL;
+	}
+
+	return _sentence_output.back();
 }

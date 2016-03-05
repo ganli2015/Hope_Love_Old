@@ -1,5 +1,5 @@
-﻿生成启动时间为 2016/3/5 10:13:26。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCPP\DataWrapperCPP.vcxproj”在节点 3 上(rebuild 个目标)。
+﻿生成启动时间为 2016/3/5 23:41:19。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCPP\DataWrapperCPP.vcxproj”在节点 4 上(rebuild 个目标)。
      1>_PrepareForClean:
          正在删除文件“Debug\DataWrapperCPP.lastbuildstate”。
        InitializeBuildStatus:
@@ -27,4 +27,4 @@
 
 生成成功。
 
-已用时间 00:00:04.36
+已用时间 00:00:01.59

@@ -1,34 +1,50 @@
-﻿生成启动时间为 2015/5/16 0:22:29。
+﻿生成启动时间为 2016/3/5 23:57:37。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Neural Network Design\Neural Network Design.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Release\Neural Network Design.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         D:\Visual Studio 2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\Neural Network Design.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ADALINE.cpp CompetitiveNetwork.cpp DataArray.cpp MultilayerNetwork.cpp Neuron.cpp Neuron_compet.cpp Perceptron.cpp TransferFunctions.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\Neural Network Design.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
+         Stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\Neural Network Design.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ADALINE.cpp CompetitiveNetwork.cpp DataArray.cpp Errors.cpp iDataArray.cpp iNeuron.cpp MultilayerNetwork.cpp MultilayerNetworkTrainImp.cpp MultiNet_MOBP.cpp MultiNet_Simple.cpp Network.cpp NetworkPolicy.cpp Neuron.cpp Neuron_compet.cpp Perceptron.cpp Test.cpp TestClass.cpp TransferFunctions.cpp
          ADALINE.cpp
          CompetitiveNetwork.cpp
          DataArray.cpp
+         Errors.cpp
+         iDataArray.cpp
+         iNeuron.cpp
          MultilayerNetwork.cpp
+         MultilayerNetworkTrainImp.cpp
+         MultiNet_MOBP.cpp
+         MultiNet_Simple.cpp
+         Network.cpp
+         NetworkPolicy.cpp
          Neuron.cpp
          Neuron_compet.cpp
          Perceptron.cpp
+         Test.cpp
+         TestClass.cpp
          TransferFunctions.cpp
          正在生成代码...
-     1>e:\artificial intelligence\project\hope_love\neural network design\competitivenetwork.cpp(86): warning C4715: “NeuralNetwork::find_nonzero_index”: 不是所有的控件路径都返回值
        Link:
-         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Neural Network Design.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.lib" /MACHINE:X86 /DLL Release\ADALINE.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Neural Network Design.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Neural Network Design.lib" /MACHINE:X86 /DLL Release\ADALINE.obj
          Release\CompetitiveNetwork.obj
          Release\DataArray.obj
          Release\Errors.obj
          Release\iDataArray.obj
          Release\iNeuron.obj
          Release\MultilayerNetwork.obj
+         Release\MultilayerNetworkTrainImp.obj
+         Release\MultiNet_MOBP.obj
+         Release\MultiNet_Simple.obj
          Release\Network.obj
          Release\NetworkPolicy.obj
          Release\Neuron.obj
          Release\Neuron_compet.obj
          Release\Perceptron.obj
          Release\Stdafx.obj
+         Release\Test.obj
+         Release\TestClass.obj
          Release\TransferFunctions.obj
          "E:\Artificial Intelligence\Project\Hope_Love\Release\CommonTools.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Release\Mathmatic.lib"
@@ -43,4 +59,4 @@
 
 生成成功。
 
-已用时间 00:00:08.44
+已用时间 00:00:11.88

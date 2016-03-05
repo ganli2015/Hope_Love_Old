@@ -19,6 +19,7 @@ namespace DataCollection
 		RawSentence(std::string val);
 
 		std::vector<shared_ptr<Character>> GetRawSentence() const;
+		std::string GetString() const;
 
 	};
 
@@ -47,6 +48,8 @@ namespace DataCollection
 		~Sentence(void);
 		Sentence(std::vector<shared_ptr<Character>> val);
 		Sentence(std::string val);
+
+		string GetString() const;
 
 		std::vector<shared_ptr<Character>> GetRawSentence() const;
 

@@ -36,7 +36,7 @@ namespace NeuralNetwork
 		{
 			_trainImp->Train(_mydata,mytrain);
 
-			vector<double> cur_errors=mytrain.GetSampleDeviations();
+			vector<double> cur_errors=_trainImp->GetSampleDeviations();
 			if(!prev_errors.empty())
 			{
 				if(ErrorConverge(prev_errors,cur_errors,_tol))
@@ -82,7 +82,9 @@ namespace NeuralNetwork
 
 		vector<Math::Matrix> deltaMat;
 		vector<Math::Vector> deltaBias;
-		ComputeDeltaNeuron(mydata,deltaMat,deltaBias);
+		shared_ptr<iDataArray> error;
+		ComputeDeltaNeuron(mydata,deltaMat,deltaBias,error);
+		_deviations.push_back(error->Norm());
 
 		if(deltaBias.empty() || deltaMat.empty())
 		{
@@ -200,10 +202,10 @@ namespace NeuralNetwork
 	void train_MultiNetwork::ComputeActualOutAndIntermediateData(const shared_ptr<iDataArray> proto,
 		shared_ptr<iDataArray>& actualOut,
 		vector<shared_ptr<iDataArray>>& n,
-		vector<shared_ptr<iDataArray>>& a)
+		vector<shared_ptr<iDataArray>>& a) const
 	{
 		shared_ptr<iDataArray> tmpoutput=proto; //a temp output data After using transfer function.
-		MyNeurons::iterator neo_forward=_myNeurons.begin();
+		MyNeurons::const_iterator neo_forward=_myNeurons.begin();
 		for (;neo_forward!=_myNeurons.end();++neo_forward)
 		{
 			a.push_back(tmpoutput);
@@ -216,7 +218,9 @@ namespace NeuralNetwork
 		actualOut=tmpoutput;
 	}
 
-	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<typename Network::MyData> mydata,vector<Matrix>& deltaMat,vector<Vector>& deltaBias )
+	void train_MultiNetwork::ComputeDeltaNeuron( const shared_ptr<typename Network::MyData> mydata,
+		vector<Matrix>& deltaMat,vector<Vector>& deltaBias,
+		shared_ptr<iDataArray>& error ) const
 	{
 		deltaMat.clear();
 		deltaBias.clear();
@@ -230,19 +234,18 @@ namespace NeuralNetwork
 		shared_ptr<iDataArray> actualOut;
 		ComputeActualOutAndIntermediateData(proto,actualOut,n,a);
 
-		shared_ptr<iDataArray> ee=expec->Subtract(actualOut);
-		_deviations.push_back(ee->Norm());
+		error=expec->Subtract(actualOut);
 
-		if(ee->AllZero())//if the error array is zeroes
+		if(error->AllZero())//if the error array is zeroes
 			return;
 
-		ComputeDeltaNeuronByBackwardPropagation(ee,n,a,deltaMat,deltaBias);
+		ComputeDeltaNeuronByBackwardPropagation(error,n,a,deltaMat,deltaBias);
 	}
 
 	void train_MultiNetwork::AdjustNeuron(const vector<Math::Matrix>& deltaMat,const vector<Math::Vector>& deltaBias, MyNeurons& neurons)
 	{
 		Check(deltaMat.size()==neurons.size());
-		Check(deltaBias.size()==deltaBias.size());
+		Check(deltaBias.size()==neurons.size());
 
 		for (unsigned int i=0;i<neurons.size();++i)
 		{

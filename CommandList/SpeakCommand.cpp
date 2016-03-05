@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "SpeakCommand.h"
 
+#include "../DataCollection/Sentence.h"
+
 #include "../DataWrapperCPP/DataWrapper.h"
 
 #include "../ReactionList/SpeakCommand.h"
@@ -28,6 +30,9 @@ void SpeakCommand::Update()
 	shared_ptr<SentenceParser> sentenceParser(new SentenceParser(sentence));
 	sentenceParser->Execute();
 
-	shared_ptr<Reaction> reaction(new SpeakReaction(sentenceParser->GetParsedSentence()));
+	shared_ptr<SpeakReaction> reaction(new SpeakReaction(sentenceParser->GetParsedSentence()));
 	reaction->React();
+	string reactStr=reaction->GetReactSentence()->GetString();
+
+	_datawrapper->AddOutputSentence(reactStr);
 }
