@@ -13,3 +13,5 @@ E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Debug\StartForm.e
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Debug\StartForm.pdb
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Debug\StartForm.csprojResolveAssemblyReference.cache
 E:\Artificial Intelligence\Project\Hope_Love\StartForm\obj\x86\Debug\StartForm.csproj.GenerateResource.Cache
+E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Debug\GlobalInterface.dll
+E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Debug\GlobalInterface.pdb

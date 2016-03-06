@@ -639,12 +639,28 @@ namespace Mind
 
 	shared_ptr<Concept> ConceptSet::GetConceptPtr( const shared_ptr<DataCollection::Word> word ) const
 	{
-		return GetConceptRef(word)->Copy();
+		shared_ptr<Concept> ref=GetConceptRef(word);
+		if(ref==NULL)
+		{
+			return NULL;
+		}
+		else
+		{
+			return ref->Copy();
+		}
 	}
 
 	shared_ptr<Concept> ConceptSet::GetConceptPtr( const Identity identity ) const
 	{
-		return GetConceptRef(identity)->Copy();
+		shared_ptr<Concept> ref=GetConceptRef(identity);
+		if(ref==NULL)
+		{
+			return NULL;
+		}
+		else
+		{
+			return ref->Copy();
+		}
 	}
 
 }

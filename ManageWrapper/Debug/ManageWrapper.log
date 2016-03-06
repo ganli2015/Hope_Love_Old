@@ -1,7 +1,7 @@
-﻿生成启动时间为 2016/3/5 23:42:24。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 4 上(build 个目标)。
+﻿生成启动时间为 2016/3/6 23:10:16。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Debug\ManageWrapper.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Debug\ManageWrapper.unsuccessfulbuild”执行 Touch 任务。
        GenerateTargetFrameworkMonikerAttribute:
        正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
        ClCompile:
@@ -9,7 +9,7 @@
          所有输出均为最新。
          所有输出均为最新。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\ManageWrapper.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\ManageWrapper.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\ManageWrapper.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\Manager_HopeLove.obj
          Debug\Stdafx.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.lib"
@@ -20,6 +20,9 @@
          ManageWrapper.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll;#2" /manifest Debug\ManageWrapper.dll.intermediate.manifest
+       _CopyFilesMarkedCopyLocal:
+         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.dll”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCS.dll”。
+         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.pdb”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCS.pdb”。
        FinalizeBuildStatus:
          正在删除文件“Debug\ManageWrapper.unsuccessfulbuild”。
          正在对“Debug\ManageWrapper.lastbuildstate”执行 Touch 任务。
@@ -27,4 +30,4 @@
 
 生成成功。
 
-已用时间 00:00:00.57
+已用时间 00:00:07.98

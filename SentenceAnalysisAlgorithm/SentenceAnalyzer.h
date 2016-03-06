@@ -18,7 +18,7 @@ class _SENTENCEANALYSISALGORITHMINOUT SentenceAnalyzer
 public:
 	SentenceAnalyzer(void);
 	~SentenceAnalyzer(void);
-	SentenceAnalyzer(std::string sen);
+	SentenceAnalyzer(const std::string sen);
 
 	void Analyze();
 

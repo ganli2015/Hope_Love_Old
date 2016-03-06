@@ -1,31 +1,12 @@
-﻿生成启动时间为 2016/3/5 23:40:58。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”在节点 2 上(rebuild 个目标)。
-     1>_PrepareForClean:
-         正在删除文件“Debug\Mathmatic.lastbuildstate”。
-       InitializeBuildStatus:
+﻿生成启动时间为 2016/3/6 11:28:41。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
          正在创建“Debug\Mathmatic.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Mathmatic.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
-         Stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mathmatic.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt FindSequence.cpp iMatrix.cpp MathTool.cpp Rand.cpp Test.cpp TestClass.cpp Vector.cpp
-         Vector.cpp
-         TestClass.cpp
-         Test.cpp
-         Rand.cpp
-         MathTool.cpp
-         iMatrix.cpp
-         FindSequence.cpp
-         正在生成代码...
+         所有输出均为最新。
+         所有输出均为最新。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib" /MACHINE:X86 /DLL Debug\FindSequence.obj
-         Debug\iMatrix.obj
-         Debug\MathTool.obj
-         Debug\Rand.obj
-         Debug\Stdafx.obj
-         Debug\Test.obj
-         Debug\TestClass.obj
-         Debug\Vector.obj
-            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.exp
+         所有输出均为最新。
          Mathmatic.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll
        PostBuildEvent:
          copy  "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll" "E:\Artificial Intelligence\Project\Hope_Love\test\Debug\"
@@ -34,8 +15,8 @@
        FinalizeBuildStatus:
          正在删除文件“Debug\Mathmatic.unsuccessfulbuild”。
          正在对“Debug\Mathmatic.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”(rebuild 个目标)的操作。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”(build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:05.88
+已用时间 00:00:00.71

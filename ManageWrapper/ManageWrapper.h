@@ -9,7 +9,7 @@ using namespace System::Runtime::InteropServices;
 
 namespace DataWrapperCPP
 {
-	class DataWrapper;
+	class DataWrapper_Sentence;
 }
 
 namespace DataCollection
@@ -21,7 +21,7 @@ namespace ManageWrapper
 {
 	public ref class ManageClass: public DataWrapperCS::DataWrapper
 	{
-		DataWrapperCPP::DataWrapper* _datawrappercpp;
+		DataWrapperCPP::DataWrapper_Sentence* _datawrappercpp;
 		DataCollection::DataBase* _database;
 	public:
 		ManageClass();

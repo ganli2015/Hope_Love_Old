@@ -19,7 +19,7 @@ SpeakCommand::~SpeakCommand(void)
 {
 }
 
-SpeakCommand::SpeakCommand(DataWrapperCPP::DataWrapper* datawrapper)
+SpeakCommand::SpeakCommand(DataWrapperCPP::DataWrapper_Sentence* datawrapper)
 {
 	_datawrapper=datawrapper;
 }
@@ -30,7 +30,10 @@ void SpeakCommand::Update()
 	shared_ptr<SentenceParser> sentenceParser(new SentenceParser(sentence));
 	sentenceParser->Execute();
 
-	shared_ptr<SpeakReaction> reaction(new SpeakReaction(sentenceParser->GetParsedSentence()));
+	vector<shared_ptr<DataCollection::Sentence>> parsedSentence=sentenceParser->GetParsedSentence();
+	_datawrapper->AddParsedInputSentence(parsedSentence);
+
+	shared_ptr<SpeakReaction> reaction(new SpeakReaction());
 	reaction->React();
 	string reactStr=reaction->GetReactSentence()->GetString();
 

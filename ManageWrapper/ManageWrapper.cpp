@@ -11,7 +11,7 @@
 
 
 using namespace std;
-ManageWrapper::ManageClass::ManageClass():_datawrappercpp(new DataWrapperCPP::DataWrapper()),
+ManageWrapper::ManageClass::ManageClass():_datawrappercpp(new DataWrapperCPP::DataWrapper_Sentence()),
 	_database(DataCollection::DataBase::GetInstance())
 {
 	Mind::Cerebrum::Instance();
@@ -48,7 +48,7 @@ void ManageWrapper::ManageClass::UpdateUI()
 
 void ManageWrapper::ManageClass::TransportDataFromCPPtoCS()
 {
-	string newsen=_datawrappercpp->GetNewSentence();
+	string newsen=_datawrappercpp->GetNewOutSentence();
 	String^ anew=gcnew String(newsen.c_str());
 	this->outputsentence=anew;
 }

@@ -4,13 +4,12 @@
 
 namespace DataWrapperCPP
 {
-	class DataWrapper;
+	class DataWrapper_Sentence;
 }
 
 class _COMMANDINOUT Command
 {
 protected:
-	DataWrapperCPP::DataWrapper* _datawrapper;
 public:
 	Command(void);
 	virtual ~Command(void);

@@ -12,3 +12,5 @@ E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debu
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligence.pdb
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligenceUI.csprojResolveAssemblyReference.cache
 E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\obj\x86\Debug\ArtificialIntelligenceUI.csproj.GenerateResource.Cache
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Debug\GlobalInterface.dll
+E:\Artificial Intelligence\Project\Hope_Love\ArtificialIntelligence\bin\Debug\GlobalInterface.pdb

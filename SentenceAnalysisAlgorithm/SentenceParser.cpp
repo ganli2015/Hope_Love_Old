@@ -12,7 +12,7 @@ SentenceParser::SentenceParser(void)
 {
 }
 
-SentenceParser::SentenceParser(std::string sen):_sentence(sen)
+SentenceParser::SentenceParser(const std::string sen):_sentence(sen)
 {
 
 }

@@ -13,7 +13,7 @@ class _SENTENCEANALYSISALGORITHMINOUT SentenceParser
 public:
 	SentenceParser(void);
 	~SentenceParser(void);
-	SentenceParser(std::string sen);
+	SentenceParser(const std::string sen);
 
 	void Execute();
 	vector<shared_ptr<DataCollection::Sentence>> GetParsedSentence() const {return _parsedSentence;}

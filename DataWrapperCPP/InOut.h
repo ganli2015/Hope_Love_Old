@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+using std::tr1::shared_ptr;
 
 #ifdef DATAWRAPPERAPI
 #define _DATAWRAPPERINOUT _declspec(dllexport)
