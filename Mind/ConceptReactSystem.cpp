@@ -6,6 +6,9 @@
 #include "ConceptChain.h"
 #include "FilePath.h"
 #include "Cerebrum.h"
+#include "CommonFunction.h"
+#include "ConceptReactImp.h"
+#include "ConceptReactImp_1234.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 
@@ -103,27 +106,6 @@ namespace Mind
 		return shared_ptr<ConceptChain>(new ConceptChain(conceptVec));
 	}
 
-
-	shared_ptr<NeuralNetwork::iDataArray> ConceptReactSystem::ToDataArray( const shared_ptr<ConceptChain> chain ) const
-	{
-		//初始化，所有元素等于0
-		shared_ptr<iDataArray> res(new DataArray(_conceptSet->BaseConceptCount()));
-
-		vector<shared_ptr<Concept>> conceptSequence=chain->GetConceptVec();
-		for (unsigned int i=0;i<conceptSequence.size();++i)
-		{
-			shared_ptr<BaseConcept> base=dynamic_pointer_cast<BaseConcept>(conceptSequence[i]);
-			if(base==NULL)
-			{
-				throw runtime_error("Error in ToDataArray");
-			}
-
-			res->Set_ithVal(base->GetBaseId(),i+1);
-		}
-
-		return res;
-	}
-
 	void ConceptReactSystem::Train( const vector<DataInfo>& dataInfos )
 	{
 		if(dataInfos.empty()) return;
@@ -144,8 +126,8 @@ namespace Mind
 
 		for (unsigned int i=0;i<dataInfos.size();++i)
 		{
-			shared_ptr<iDataArray> proto=ToDataArray(dataInfos[i].input);
-			shared_ptr<iDataArray> expect=ToDataArray(dataInfos[i].expect);
+			shared_ptr<iDataArray> proto=CommonFunction::ToDataArray(dataInfos[i].input,_conceptSet);
+			shared_ptr<iDataArray> expect=CommonFunction::ToDataArray(dataInfos[i].expect,_conceptSet);
 			multiNetwork->SetMyData(proto,expect);
 		}
 		multiNetwork->SetLearningRate(0.9);
@@ -190,74 +172,15 @@ namespace Mind
 
 	double ConceptReactSystem::ComputeStandardDeviation(const DataInfo& data,shared_ptr<Network> network)
 	{
-		shared_ptr<iDataArray> output=network->GetResult(ToDataArray(data.input));
-		shared_ptr<iDataArray> residual=output->Subtract(ToDataArray(data.expect));
+		shared_ptr<iDataArray> output=network->GetResult(CommonFunction::ToDataArray(data.input,_conceptSet));
+		shared_ptr<iDataArray> residual=output->Subtract(CommonFunction::ToDataArray(data.expect,_conceptSet));
 		return residual->Norm();
 	}
 
 	vector<ConceptChainProperty> ConceptReactSystem::React( const shared_ptr<ConceptChain> chain )
 	{
-		if(_network==NULL) return vector<ConceptChainProperty>();
-
-		shared_ptr<iDataArray> input=ToDataArray(chain);
-		shared_ptr<iDataArray> output=_network->GetResult(input);
-
-		vector<vector<ConceptInfo>> conceptInfoSequence=ExtractConceptInfoSequence(output);
-		//获得所有Concept序列的排列组合，每个组合的元素个数是相同的！
-		vector<vector<ConceptInfo>> chainCombinations=GetAllCombinations<ConceptInfo>::Get(conceptInfoSequence);
-		GenerateChainProperties generateResult;
-		generateResult=for_each(chainCombinations.begin(),chainCombinations.end(),generateResult);
-
-		vector<ConceptChainProperty> res= generateResult.GetResult();
-		//NormalizeConfidence(res);
-
-		return res;
-	}
-
-	vector<ConceptReactSystem::ConceptInfo> ConceptReactSystem::ExtractConceptInfo( const shared_ptr<iDataArray> array, const double upVal,const double lowVal )
-	{
-		vector<ConceptInfo> res;
-
-		for (unsigned int i=0;i<array->Dimension();++i)
-		{
-			double component=array->Get_ithVal(i);
-			if(component>upVal || component<=lowVal) continue;//不考虑超出界限的成分。
-
-			//根据array的编号来获得Concept，因为array的第i个成分对应于id等于i的BaseConcept。
-			shared_ptr<Concept> base=_conceptSet->GetBaseConcept(i);
-
-			ConceptInfo info;
-			info.concept=base;
-			info.arrayComponent=component;
-			res.push_back(info);
-		}
-
-		return res;
-	}
-
-	vector<vector<ConceptReactSystem::ConceptInfo>> ConceptReactSystem::ExtractConceptInfoSequence( const shared_ptr<iDataArray> array )
-	{
-		vector<vector<ConceptInfo>> conceptInfoSequence;
-		//依次获得1、2、3、4...所对应的Concept以及数值，如果有个序号没有所对应的Concept，那么迭代终止。
-		//这样保证了这个Concept序列是和自然数对应的。
-		int seqIndex=1;
-		while(true)
-		{
-			double validRegion=0.5;
-			double upVal=seqIndex+validRegion;
-			double lowVal=seqIndex-validRegion;
-
-			vector<ConceptInfo> conceptInfos=ExtractConceptInfo(array,upVal,lowVal);
-			if(conceptInfos.empty())
-			{
-				break;
-			}
-
-			conceptInfoSequence.push_back(conceptInfos);
-			++seqIndex;
-		}
-
-		return conceptInfoSequence;
+		shared_ptr<ConceptReactImp> reactImp(new ConceptReactImp_1234(_network,_conceptSet));
+		return reactImp->Perform(chain);
 	}
 
 	void ConceptReactSystem::NormalizeConfidence( vector<ConceptChainProperty>& vec )
@@ -276,21 +199,6 @@ namespace Mind
 		}
 	}
 
-	void ConceptReactSystem::GenerateChainProperties::operator()( const vector<ConceptInfo>& combination )
-	{
-		vector<shared_ptr<Concept>> conceptVec;
-		conceptVec.reserve(combination.size());
-		double variance=0.0;
-		for (unsigned int i=0;i<combination.size();++i)
-		{
-			conceptVec.push_back(combination[i].concept);
-			variance+=pow(combination[i].arrayComponent-(i+1),2);
-		}
-
-		ConceptChainProperty property;
-		property.chain=shared_ptr<ConceptChain>(new ConceptChain(conceptVec));
-		property.confidence=exp(-variance);
-		_result.push_back(property);
-	}
+	
 
 }

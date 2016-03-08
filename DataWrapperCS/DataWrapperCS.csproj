@@ -49,10 +49,6 @@
       <Project>{B35D6007-1C1B-48A3-A6A8-B9438366537A}</Project>
       <Name>GlobalInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interactor\Interactor.csproj">
-      <Project>{14CAEA45-0B21-4F74-A7CD-05F01F35F4F1}</Project>
-      <Name>Interactor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

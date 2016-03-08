@@ -1,7 +1,7 @@
 E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.dll
 E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\DataWrapperCS.pdb
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\Interactor.dll
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\Interactor.pdb
 E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Release\DataWrapperCS.dll
 E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Release\DataWrapperCS.pdb
 E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Release\DataWrapperCS.csprojResolveAssemblyReference.cache
+E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\GlobalInterface.dll
+E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Release\GlobalInterface.pdb

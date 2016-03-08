@@ -74,6 +74,15 @@
     <ClInclude Include="Test_ConceptSet.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptReactImp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConceptReactImp_1234.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConceptReactImp_1212.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -135,6 +144,15 @@
     </ClCompile>
     <ClCompile Include="Test_ConceptSet.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptReactImp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptReactImp_1234.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptReactImp_1212.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

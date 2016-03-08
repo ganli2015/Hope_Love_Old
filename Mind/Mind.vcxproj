@@ -150,6 +150,9 @@
     <ClInclude Include="ConceptInteractTable.h" />
     <ClInclude Include="ConceptInteractTableContainer.h" />
     <ClInclude Include="ConceptLevelTable.h" />
+    <ClInclude Include="ConceptReactImp.h" />
+    <ClInclude Include="ConceptReactImp_1212.h" />
+    <ClInclude Include="ConceptReactImp_1234.h" />
     <ClInclude Include="ConceptReactSystem.h" />
     <ClInclude Include="ConceptSet.h" />
     <ClInclude Include="ConceptSetInitializer.h" />
@@ -172,6 +175,9 @@
     <ClCompile Include="ConceptInteractTable.cpp" />
     <ClCompile Include="ConceptInteractTableContainer.cpp" />
     <ClCompile Include="ConceptLevelTable.cpp" />
+    <ClCompile Include="ConceptReactImp.cpp" />
+    <ClCompile Include="ConceptReactImp_1212.cpp" />
+    <ClCompile Include="ConceptReactImp_1234.cpp" />
     <ClCompile Include="ConceptReactSystem.cpp" />
     <ClCompile Include="ConceptSet.cpp" />
     <ClCompile Include="ConceptSetInitializer.cpp" />

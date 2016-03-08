@@ -1,7 +1,7 @@
-﻿生成启动时间为 2016/3/6 23:10:16。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2016/3/8 23:02:02。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 3 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\ManageWrapper.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\ManageWrapper.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        GenerateTargetFrameworkMonikerAttribute:
        正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
        ClCompile:
@@ -20,9 +20,6 @@
          ManageWrapper.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll;#2" /manifest Debug\ManageWrapper.dll.intermediate.manifest
-       _CopyFilesMarkedCopyLocal:
-         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.dll”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCS.dll”。
-         正在将文件从“E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.pdb”复制到“E:\Artificial Intelligence\Project\Hope_Love\Debug\DataWrapperCS.pdb”。
        FinalizeBuildStatus:
          正在删除文件“Debug\ManageWrapper.unsuccessfulbuild”。
          正在对“Debug\ManageWrapper.lastbuildstate”执行 Touch 任务。
@@ -30,4 +27,4 @@
 
 生成成功。
 
-已用时间 00:00:07.98
+已用时间 00:00:00.51

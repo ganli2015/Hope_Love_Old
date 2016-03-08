@@ -1,10 +1,11 @@
-﻿生成启动时间为 2016/3/5 23:57:49。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/3/7 21:58:40。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Release\Mind.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Release\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\Mind.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ConceptSet.cpp
+         ConceptSet.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Release\Mind.lib" /MACHINE:X86 /DLL Release\BaseConcept.obj
          Release\Cerebrum.obj
@@ -41,4 +42,4 @@
 
 生成成功。
 
-已用时间 00:00:00.90
+已用时间 00:00:06.48

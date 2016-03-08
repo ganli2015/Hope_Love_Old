@@ -2,3 +2,4 @@ E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\bin\Debug\GlobalInt
 E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\bin\Debug\GlobalInterface.pdb
 E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\obj\Debug\GlobalInterface.dll
 E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\obj\Debug\GlobalInterface.pdb
+E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\obj\Debug\GlobalInterface.csprojResolveAssemblyReference.cache

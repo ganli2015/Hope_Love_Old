@@ -1,0 +1,32 @@
+input chain: 
+自己 好感 对方 
+output chains: 
+自己 也 好感 对方 
+0.88336
+
+input chain: 
+自己 好感 莫莫 
+output chains: 
+大 好感 干干 
+0.790231
+自己 好感 干干 
+0.737505
+
+input chain: 
+大 好感 莫莫 
+output chains: 
+大 好感 干干 
+1
+
+input chain: 
+大 程度 好感 对方 
+output chains: 
+干干 程度 也 好感 
+0.53014
+
+input chain: 
+大 程度 好感 莫莫 
+output chains: 
+大 程度 好感 干干 
+1
+

@@ -1,14 +1,10 @@
-﻿生成启动时间为 2016/3/6 23:06:55。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2016/3/8 23:02:01。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 3 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\CommandList.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Command.cpp SpeakCommand.cpp
-         SpeakCommand.cpp
-         正在生成代码...
-         正在跳过...(未检测到相关更改)
-         Command.cpp
+         所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\CommandList.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommandList.lib" /MACHINE:X86 /DLL Debug\Command.obj
          Debug\SpeakCommand.obj
@@ -28,4 +24,4 @@
 
 生成成功。
 
-已用时间 00:00:01.23
+已用时间 00:00:00.56

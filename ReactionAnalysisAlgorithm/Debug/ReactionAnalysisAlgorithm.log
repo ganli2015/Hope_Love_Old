@@ -1,12 +1,22 @@
-﻿生成启动时间为 2016/3/6 11:28:43。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 2 上(build 个目标)。
+﻿生成启动时间为 2016/3/8 23:02:00。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 3 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\ReactionAnalysisAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
          所有输出均为最新。
        Link:
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.lib" /MACHINE:X86 /DLL Debug\ChainAnalyzer.obj
+         Debug\ChainGenerator.obj
+         Debug\ExtractConceptChains.obj
+         Debug\GrammarPatternSelector.obj
+         Debug\ReactionParser.obj
+         Debug\SentenceGenerator.obj
+         Debug\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.exp
          ReactionAnalysisAlgorithm.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll
        PostBuildEvent:
          Copy "E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll" "E:\Artificial Intelligence\Project\Hope_Love\StartForm\bin\Debug\"
@@ -19,4 +29,4 @@
 
 生成成功。
 
-已用时间 00:00:00.56
+已用时间 00:00:00.97

@@ -6,6 +6,11 @@ namespace DataCollection
 	class Word;
 }
 
+namespace NeuralNetwork
+{
+	class iDataArray;
+}
+
 namespace Mind
 {
 	struct Identity
@@ -28,9 +33,11 @@ namespace Mind
 		vector<Edge_Info> edge_infos;
 	};
 
+
 	class Concept;
 	class ConceptInteractTable;
 	class ConceptChain;
+	class ConceptSet;
 
 	namespace CommonFunction
 	{
@@ -48,6 +55,9 @@ namespace Mind
 		void AppendToInteractTable(const vector<shared_ptr<Concept>>& from,const vector<shared_ptr<Concept>>& to,shared_ptr<ConceptInteractTable> table);
 	
 		void _MINDINOUT WriteConcepts(const vector<shared_ptr<Concept>>& vec,ofstream& out);
+
+		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<ConceptChain> chain, const ConceptSet* conceptSet);
+
 	}
 }
 

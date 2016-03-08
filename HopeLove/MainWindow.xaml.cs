@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using GlobalInterface;
 using DataWrapperCS;
 using DataWrapper = GlobalInterface.DataWrapper;
+using System.IO;
 
 namespace HopeLove
 {
@@ -63,6 +64,11 @@ namespace HopeLove
             TextBox inputBox = CreateInputBox();
             stackPanel_Global.Children.Add(inputBox);
             inputBox.Focus();
+
+            if (!Directory.Exists("DebugInfo"))
+            {
+                Directory.CreateDirectory("DebugInfo");
+            }
 
             ManageWrapper.Manager_HopeLove manager=new ManageWrapper.Manager_HopeLove();
             Register(manager);

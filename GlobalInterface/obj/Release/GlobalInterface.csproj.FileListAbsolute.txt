@@ -1,0 +1,4 @@
+E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\bin\Release\GlobalInterface.dll
+E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\bin\Release\GlobalInterface.pdb
+E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\obj\Release\GlobalInterface.dll
+E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\obj\Release\GlobalInterface.pdb

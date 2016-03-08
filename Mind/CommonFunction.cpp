@@ -2,6 +2,10 @@
 #include "CommonFunction.h"
 #include "Concept.h"
 #include "ConceptInteractTable.h"
+#include "ConceptSet.h"
+#include "ConceptChain.h"
+#include "Cerebrum.h"
+#include "BaseConcept.h"
 
 #include <fstream>
 #include <sstream>
@@ -11,7 +15,11 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
+#include "../Neural Network Design/DataArray.h"
+
 using namespace DataCollection;
+using namespace Math;
+using namespace NeuralNetwork;
 
 namespace Mind
 {
@@ -173,6 +181,24 @@ namespace Mind
 		}
 
 		
+		shared_ptr<NeuralNetwork::iDataArray> ToDataArray( const shared_ptr<ConceptChain> chain , const ConceptSet* conceptSet)
+		{
+			//初始化，所有元素等于0
+			shared_ptr<iDataArray> res(new DataArray(conceptSet->BaseConceptCount()));
 
+			vector<shared_ptr<Concept>> conceptSequence=chain->GetConceptVec();
+			for (unsigned int i=0;i<conceptSequence.size();++i)
+			{
+				shared_ptr<BaseConcept> base=dynamic_pointer_cast<BaseConcept>(conceptSequence[i]);
+				if(base==NULL)
+				{
+					throw runtime_error("Error in ToDataArray");
+				}
+
+				res->Set_ithVal(base->GetBaseId(),i+1);
+			}
+
+			return res;
+		}
 	}
 }
