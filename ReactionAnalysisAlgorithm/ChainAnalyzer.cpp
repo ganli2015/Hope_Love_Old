@@ -31,6 +31,8 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 		ConceptChainProperty property=baseChains[i];
 		vector<shared_ptr<ConceptChain>> hyperChains;
 		ComputeHyperChains(property.chain,hyperChains);
+		if(hyperChains.empty()) continue;
+
 		vector<double> levels;
 		ComputeHyperChainLevels(hyperChains,baseChains[i].chain,levels);
 		vector<HyperChainInfo> hyperInfos=AssembleHyperChainInfo(hyperChains,levels,property.confidence);
@@ -100,7 +102,15 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<Concept>>& hyperChain,cons
 	}
 
 	//对allPairs提取所有的Concept Chain。
-	vector<shared_ptr<ConceptChain>> chains=ExtractConceptChains::Extract(allPairs);
+	vector<shared_ptr<ConceptChain>> chains;
+	try
+	{
+		chains=ExtractConceptChains::Extract(allPairs);
+	}
+	catch(...)
+	{
+		throw;
+	}
 	for (unsigned int i=0;i<chains.size();++i)
 	{
 		if(baseChain->IsSubSequenceOf(chains[i]))

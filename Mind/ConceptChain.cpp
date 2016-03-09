@@ -133,5 +133,18 @@ namespace Mind
 		return false;
 	}
 
+	bool ConceptChain::Contain( const shared_ptr<Concept> concept ) const
+	{
+		for (list<shared_ptr<Concept>>::const_iterator it=_chain.begin();it!=_chain.end();++it)
+		{
+			if(concept->Same(*it))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }
 

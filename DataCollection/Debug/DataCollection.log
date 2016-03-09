@@ -1,27 +1,10 @@
-﻿生成启动时间为 2016/3/5 23:41:08。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 3 上(rebuild 个目标)。
-     1>_PrepareForClean:
-         正在删除文件“Debug\DataCollection.lastbuildstate”。
-       InitializeBuildStatus:
+﻿生成启动时间为 2016/3/9 21:25:28。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
          正在创建“Debug\DataCollection.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\Hope_Love /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\DataCollection.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
-         Stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\Hope_Love /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\DataCollection.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Character.cpp ChineseCharacters.cpp DataBase.cpp GrammaPattern.cpp GrammardSentence.cpp PrepositionCollection.cpp Punctures.cpp Sentence.cpp StructuredSentence.cpp WordColletction.cpp DataBaseProcessorTool.cpp Word.cpp WordSearchAlgorithm.cpp
-         WordSearchAlgorithm.cpp
-         Word.cpp
-         DataBaseProcessorTool.cpp
-         WordColletction.cpp
-         StructuredSentence.cpp
-         Sentence.cpp
-         Punctures.cpp
-         PrepositionCollection.cpp
-         GrammardSentence.cpp
-         GrammaPattern.cpp
-         DataBase.cpp
-         ChineseCharacters.cpp
-         Character.cpp
-         正在生成代码...
+         所有输出均为最新。
+         所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\DataCollection.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib" /MACHINE:X86 /DLL Debug\Character.obj
          Debug\ChineseCharacters.obj
@@ -38,15 +21,14 @@
          Debug\Word.obj
          Debug\WordSearchAlgorithm.obj
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib"
-            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.exp
          DataCollection.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.dll
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.dll.manifest" /manifest Debug\DataCollection.dll.intermediate.manifest
        FinalizeBuildStatus:
          正在删除文件“Debug\DataCollection.unsuccessfulbuild”。
          正在对“Debug\DataCollection.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”(rebuild 个目标)的操作。
+     1>已完成生成项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”(build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:10.93
+已用时间 00:00:01.12

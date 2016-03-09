@@ -5,14 +5,20 @@ HyperChain:
 人家 也 爱 你 
 Grammar pattern count: 175
 HyperChain: 
-爱 干干 
-Grammar pattern count: 15
+我 也 爱 干干 
+Grammar pattern count: 175
 HyperChain: 
-强 爱 干干 
-Grammar pattern count: 15
+人家 也 爱 干干 
+Grammar pattern count: 175
 HyperChain: 
-爱 干干 
-Grammar pattern count: 15
+我 爱 你 
+Grammar pattern count: 110
+HyperChain: 
+人家 爱 你 
+Grammar pattern count: 110
+HyperChain: 
+也 爱 你 
+Grammar pattern count: 69
 HyperChain: 
 我 爱 干干 
 Grammar pattern count: 110
@@ -20,62 +26,23 @@ HyperChain:
 人家 爱 干干 
 Grammar pattern count: 110
 HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-强 爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-干干 深深 也 爱 
-Grammar pattern count: 158
-HyperChain: 
-干干 非常 也 爱 
-Grammar pattern count: 158
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-强 爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-深深 爱 干干 
+也 爱 干干 
 Grammar pattern count: 69
 HyperChain: 
-强 深深 爱 干干 
+我 爱 你 
+Grammar pattern count: 110
+HyperChain: 
+人家 爱 你 
+Grammar pattern count: 110
+HyperChain: 
+也 爱 你 
 Grammar pattern count: 69
 HyperChain: 
-爱 干干 
-Grammar pattern count: 15
+我 爱 干干 
+Grammar pattern count: 110
 HyperChain: 
-深深 爱 干干 
+人家 爱 干干 
+Grammar pattern count: 110
+HyperChain: 
+也 爱 干干 
 Grammar pattern count: 69
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-强 爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-非常 爱 干干 
-Grammar pattern count: 69
-HyperChain: 
-强 非常 爱 干干 
-Grammar pattern count: 69
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-非常 爱 干干 
-Grammar pattern count: 69
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-强 爱 干干 
-Grammar pattern count: 15
-HyperChain: 
-爱 干干 
-Grammar pattern count: 15

@@ -38,6 +38,8 @@ namespace Math
 
 	vector<Vector> _MATHMATICINOUT ComputeNegateVector(const vector<Vector>& vecs);
 
+	double _MATHMATICINOUT Round(const double& val);
+
 	template<class T>
 	double MeanValue(const vector<T>& vec)
 	{

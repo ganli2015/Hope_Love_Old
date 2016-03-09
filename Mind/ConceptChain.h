@@ -25,6 +25,7 @@ namespace Mind
 		void Append(const shared_ptr<ConceptChain> chain);
 		shared_ptr<ConceptChain> Copy() const;
 		bool Same(const shared_ptr<ConceptChain> chain) const;
+		bool Contain(const shared_ptr<Concept> concept) const;
 
 		//判断<me>是否是parentChain的连续子序列。
 		bool IsPartChainOf(const shared_ptr<ConceptChain> parentChain);

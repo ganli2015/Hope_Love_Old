@@ -34,6 +34,11 @@ namespace Mind
 
 	protected:
 
+		vector<vector<ConceptReactImp::ConceptInfo>> ExtractConceptInfoSequence(const shared_ptr<NeuralNetwork::iDataArray> array);
+		//找出array中小于等于upVal同时大于等于lowVal的数值，并且根据该数值的序号查找相应的Concept
+		vector<ConceptReactImp::ConceptInfo> ExtractConceptInfo(const shared_ptr<NeuralNetwork::iDataArray> array,
+			const double upVal,const double lowVal);
+
 		class GenerateChainProperties
 		{
 			vector<ConceptChainProperty> _result;

@@ -5,6 +5,8 @@
 
 #include "../CommandList/SpeakCommand.h"
 
+#include "../Mind/Cerebrum.h"
+
 #include <string>
 
 using namespace std;
@@ -13,6 +15,7 @@ namespace ManageWrapper
 {
 	Manager_HopeLove::Manager_HopeLove(void):_datawrappercpp(new DataWrapperCPP::DataWrapper_Sentence)
 	{
+		Mind::Cerebrum::Instance();
 	}
 
 	void Manager_HopeLove::ConnectUI( UIForm^ form )

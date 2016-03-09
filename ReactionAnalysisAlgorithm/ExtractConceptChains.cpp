@@ -10,21 +10,29 @@ using namespace Mind;
 // map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_forwardTable;
 // map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_backwardTable;
 
+int ExtractConceptChains::_recursiveCount=0;
+const int ExtractConceptChains::_recursiveMaxCount=100;
+
 vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Extract( const vector<ConceptPair>& pairs )
 {
+	vector<ConceptPair> pairs_copy=pairs;
+	RemoveBadPairs(pairs_copy);
+
 	vector<shared_ptr<ConceptChain>> res;
 
-	for (unsigned int i=0;i<pairs.size();++i)
+	for (unsigned int i=0;i<pairs_copy.size();++i)
 	{
+		_recursiveCount=0;
 		shared_ptr<ConceptChain> relatedChain_Back(new ConceptChain());
-		relatedChain_Back->Push_Back(pairs[i].first);
+		relatedChain_Back->Push_Back(pairs_copy[i].first);
 		vector<shared_ptr<ConceptChain>> backChains;
-		Recursive_Search(Backward,pairs[i].first,pairs,relatedChain_Back,backChains);
+		Recursive_Search(Backward,pairs_copy[i].first,pairs_copy,relatedChain_Back,backChains);
 
+		_recursiveCount=0;
 		shared_ptr<ConceptChain> relatedChain_Forward(new ConceptChain());
-		relatedChain_Forward->Push_Back(pairs[i].second);
+		relatedChain_Forward->Push_Back(pairs_copy[i].second);
 		vector<shared_ptr<ConceptChain>> forwardChains;
-		Recursive_Search(Forward,pairs[i].second,pairs,relatedChain_Forward,forwardChains);
+		Recursive_Search(Forward,pairs_copy[i].second,pairs_copy,relatedChain_Forward,forwardChains);
 
 		//合并，遍历所有组合方式。
 		vector<shared_ptr<ConceptChain>> curChains=Merge(backChains,forwardChains);
@@ -44,6 +52,8 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	// 	{
 	// 		return;
 	// 	}
+	_recursiveCount++;
+	Check(_recursiveCount<=_recursiveMaxCount);
 
 	if(relatedChain==NULL)
 	{
@@ -72,7 +82,7 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	{
 		//对<relatedChains>补充，建立包含forwardConcepts[i]的Chains。
 		shared_ptr<ConceptChain> newRelatedChains=AppendToChains(adjConcepts[i],relatedChain,dir);
-		if(newRelatedChains->Front()==newRelatedChains->Back())//如果这是个闭环，那么就无需递归下去，但是这个闭环会被保留下来。
+		if(relatedChain->Contain(adjConcepts[i]))//如果这是个闭环，那么就无需递归下去，但是这个闭环会被保留下来。
 		{
 			curChains.push_back(newRelatedChains);
 		}
@@ -98,7 +108,7 @@ vector<shared_ptr<Mind::Concept>> ExtractConceptChains::GetForwardAdjConcepts(co
 	vector<shared_ptr<Mind::Concept>> res;
 	for (unsigned int i=0;i<pairs.size();++i)
 	{
-		if(concept==pairs[i].first)
+		if(concept->Same(pairs[i].first))
 		{
 			res.push_back(pairs[i].second);
 		}
@@ -181,6 +191,59 @@ vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Merge( const vector
 	}
 
 	return res;
+}
+
+void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
+{
+	//去掉含有相同Concept的pair
+	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
+	{
+		if(it->first->Same(it->second))
+		{
+			it=pairs.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
+
+	class SameConceptPair
+	{
+		const ConceptPair _val;
+	public:
+		SameConceptPair(const ConceptPair& val):_val(val){}
+		~SameConceptPair(){}
+
+		bool operator()(const ConceptPair& right)
+		{
+			if(!_val.first->Same(right.first))
+			{
+				return false;
+			}
+			if(!_val.second->Same(right.second))
+			{
+				return false;
+			}
+
+			return true;
+		}
+	};
+
+	//去掉相同的pair
+	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
+	{
+		vector<ConceptPair>::iterator findIt=find_if(it+1,pairs.end(),SameConceptPair(*it));
+		if(findIt!=pairs.end())
+		{
+			it=pairs.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 // void ExtractConceptChains::ClearTable()

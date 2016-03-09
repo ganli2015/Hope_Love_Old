@@ -1,13 +1,24 @@
-﻿生成启动时间为 2016/3/6 11:28:42。
+﻿生成启动时间为 2016/3/9 21:25:25。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommonTools\CommonTools.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\CommonTools.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\CommonTools.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt CommonCompareFunction.cpp
+         CommonCompareFunction.cpp
        Link:
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\CommonTools.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib" /MACHINE:X86 /DLL Debug\CommonCompareFunction.obj
+         Debug\CommonDeleteFunction.obj
+         Debug\CommonFindFunction.obj
+         Debug\CommonStringFunction.obj
+         Debug\CommonTranslateFunction.obj
+         Debug\IOFunction.obj
+         Debug\Stdafx.obj
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.exp
          CommonTools.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.dll.manifest" /manifest Debug\CommonTools.dll.intermediate.manifest
        FinalizeBuildStatus:
          正在删除文件“Debug\CommonTools.unsuccessfulbuild”。
          正在对“Debug\CommonTools.lastbuildstate”执行 Touch 任务。
@@ -15,4 +26,4 @@
 
 生成成功。
 
-已用时间 00:00:00.24
+已用时间 00:00:02.94

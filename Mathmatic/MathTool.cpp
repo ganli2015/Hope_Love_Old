@@ -208,5 +208,10 @@ namespace Math
 		return res;
 	}
 
+	double _MATHMATICINOUT Round( const double& val )
+	{
+		return (val> 0.0) ? floor(val+ 0.5) : ceil(val- 0.5);
+	}
+
 }
 

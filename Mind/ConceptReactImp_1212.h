@@ -4,6 +4,7 @@
 namespace NeuralNetwork
 {
 	class Network;
+	class iDataArray;
 }
 
 namespace Mind
@@ -20,7 +21,8 @@ namespace Mind
 		virtual vector<ConceptChainProperty> Perform(const shared_ptr<ConceptChain> chain);
 
 	private:
-
+		vector<shared_ptr<NeuralNetwork::iDataArray>> SplitTo1212(const shared_ptr<NeuralNetwork::iDataArray> input) const;
+		void ConceptReactImp_1212::ResetArrayComponent(vector<vector<ConceptInfo>>& infoSequence);
 	};
 }
 

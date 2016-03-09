@@ -9,6 +9,7 @@
 #include "CommonFunction.h"
 #include "ConceptReactImp.h"
 #include "ConceptReactImp_1234.h"
+#include "ConceptReactImp_1212.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 
@@ -25,7 +26,7 @@
 
 #include <numeric>
 
-#define _ReadFile
+//#define _ReadFile
 
 using namespace Math;
 using namespace NeuralNetwork;
@@ -179,7 +180,7 @@ namespace Mind
 
 	vector<ConceptChainProperty> ConceptReactSystem::React( const shared_ptr<ConceptChain> chain )
 	{
-		shared_ptr<ConceptReactImp> reactImp(new ConceptReactImp_1234(_network,_conceptSet));
+		shared_ptr<ConceptReactImp> reactImp(new ConceptReactImp_1212(_network,_conceptSet));
 		return reactImp->Perform(chain);
 	}
 

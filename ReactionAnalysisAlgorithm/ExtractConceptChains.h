@@ -17,6 +17,8 @@ class ExtractConceptChains
 		Backward
 	};
 
+	static int _recursiveCount;
+	const static int _recursiveMaxCount;
 	// 	static map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> _forwardTable;
 	// 	static map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> _backwardTable;
 public:
@@ -38,6 +40,7 @@ private:
 	static bool HasSearched(const shared_ptr<Mind::Concept> concept,const SearchDir dir,vector<shared_ptr<Mind::ConceptChain>>& chains);
 	static vector<shared_ptr<Mind::ConceptChain>> Merge(const vector<shared_ptr<Mind::ConceptChain>>& backChains,
 		const vector<shared_ptr<Mind::ConceptChain>>& forwardChains);
+	static void RemoveBadPairs(vector<ConceptPair>& pairs);
 };
 
 
