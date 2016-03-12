@@ -4,6 +4,7 @@
 namespace DataCollection
 {
 	class Word;
+	class GrammarPattern;
 }
 
 namespace NeuralNetwork
@@ -58,6 +59,17 @@ namespace Mind
 
 		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<ConceptChain> chain, const ConceptSet* conceptSet);
 
+		double _MINDINOUT ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern);
+
+		class _MINDINOUT SameConcept
+		{
+			shared_ptr<Concept> _me;
+		public:
+			SameConcept(const shared_ptr<Concept> val):_me(val){}
+			~SameConcept(){}
+
+			bool operator()(const shared_ptr<Concept> val);
+		};
 	}
 }
 

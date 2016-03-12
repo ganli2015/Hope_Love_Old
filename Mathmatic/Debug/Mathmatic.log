@@ -1,28 +1,21 @@
-﻿生成启动时间为 2016/3/9 21:25:17。
+﻿生成启动时间为 2016/3/12 23:31:21。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mathmatic\Mathmatic.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\Mathmatic.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mathmatic.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt MathTool.cpp Rand.cpp TestClass.cpp Vector.cpp iMatrix.cpp
-         MathTool.cpp
-         正在生成代码...
-         正在编译...
-         iMatrix.cpp
-         Vector.cpp
-         TestClass.cpp
-         Rand.cpp
-         正在生成代码...
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mathmatic.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt MyInt.cpp
+         MyInt.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib" /MACHINE:X86 /DLL Debug\FindSequence.obj
          Debug\iMatrix.obj
          Debug\MathTool.obj
+         Debug\MyInt.obj
          Debug\Rand.obj
          Debug\Stdafx.obj
          Debug\Test.obj
          Debug\TestClass.obj
          Debug\Vector.obj
-            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.exp
          Mathmatic.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll
        PostBuildEvent:
          copy  "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.dll" "E:\Artificial Intelligence\Project\Hope_Love\test\Debug\"
@@ -35,4 +28,4 @@
 
 生成成功。
 
-已用时间 00:00:07.64
+已用时间 00:00:03.00

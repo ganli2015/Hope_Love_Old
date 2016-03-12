@@ -131,3 +131,12 @@ shared_ptr<DataCollection::Sentence> SentenceGenerator::ChainToSentence( const s
 
 	return shared_ptr<Sentence>(new Sentence(sen));
 }
+
+// void SentenceGenerator::SearchPossibleSentenceCombination(const SentenceInfo& centerSentence,
+// 	const vector<SentenceInfo>& otherSentence)
+// {
+// 	for (unsigned int i=0;i<otherSentence.size();++i)
+// 	{
+// 
+// 	}
+// }

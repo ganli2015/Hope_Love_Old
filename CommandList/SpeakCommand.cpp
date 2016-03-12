@@ -27,6 +27,8 @@ SpeakCommand::SpeakCommand(DataWrapperCPP::DataWrapper_Sentence* datawrapper)
 void SpeakCommand::Update()
 {
 	string sentence=_datawrapper->GetInputSentence();
+	if(sentence=="") return;
+
 	shared_ptr<SentenceParser> sentenceParser(new SentenceParser(sentence));
 	sentenceParser->Execute();
 

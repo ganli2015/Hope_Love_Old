@@ -158,6 +158,7 @@
     <ClInclude Include="ConceptSetInitializer.h" />
     <ClInclude Include="FindConnectConcept.h" />
     <ClInclude Include="FilePath.h" />
+    <ClInclude Include="GrammarLocal.h" />
     <ClInclude Include="GrammaSet.h" />
     <ClInclude Include="GrammaTree.h" />
     <ClInclude Include="InOut.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="ConceptSetInitializer.cpp" />
     <ClCompile Include="FindConnectConcept.cpp" />
     <ClCompile Include="FilePath.cpp" />
+    <ClCompile Include="GrammarLocal.cpp" />
     <ClCompile Include="GrammaSet.cpp" />
     <ClCompile Include="GrammaTree.cpp" />
     <ClCompile Include="Stdafx.cpp">

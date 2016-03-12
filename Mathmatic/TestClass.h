@@ -9,6 +9,6 @@ public:
 
 	static void TestRand();
 	static void TestMath();
-
+	static void TestMyInt();
 };
 

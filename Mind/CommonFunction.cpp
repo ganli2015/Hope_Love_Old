@@ -14,6 +14,7 @@
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/GrammaPattern.h"
 
 #include "../Neural Network Design/DataArray.h"
 
@@ -200,5 +201,52 @@ namespace Mind
 
 			return res;
 		}
+
+		double ComputeP_GrammarLocalAnalysis( const DataCollection::GrammarPattern& pattern )
+		{
+			Cerebrum* brain=Cerebrum::Instance();
+
+			vector<PartOfSpeech> poses=pattern.GetPattern();
+			if(poses.size()<=1) return 0.;
+
+			double res=1.;
+			for (unsigned int i=0;i<poses.size()-1;++i)
+			{
+				PartOfSpeech cur=poses[i];
+				if(i==0)
+				{
+					double forP=brain->GetP_Forward(cur,poses[i+1]);
+					res*=forP;
+				}
+				else if(i==poses.size()-1)
+				{
+					double backP=brain->GetP_Backward(cur,poses[i-1]);
+					res*=backP;
+				}
+				else
+				{
+					double forP=brain->GetP_Forward(cur,poses[i+1]);
+					//double backP=brain->GetP_Backward(cur,poses[i-1]);
+					res*=forP;
+					//res*=backP;					
+				}
+			}
+
+			return res;
+		}
+
+
+		bool SameConcept::operator()( const shared_ptr<Concept> val )
+		{
+			if(val->Same(_me))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }

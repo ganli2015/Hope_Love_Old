@@ -14,7 +14,7 @@ namespace Mind
 {
 	class Concept;
 	class ConceptSet;
-	class GrammaSet;
+	class GrammarSet;
 	class ConceptInteractTableContainer;
 	class ConceptReactSystem;
 	class ConceptChain;
@@ -26,7 +26,7 @@ namespace Mind
 		static Cerebrum* _instance;
 		
 		ConceptSet* _conceptset;
-		GrammaSet* _grammaset;
+		GrammarSet* _grammaset;
 		ConceptInteractTableContainer* _conceptInteractTableContainer;
 		ConceptReactSystem* _conceptReactSystem;
 
@@ -74,6 +74,10 @@ namespace Mind
 		int GetFreqencyofPattern(const DataCollection::GrammarPattern& pattern) const;
 		void IncreasePatternFreqency(const DataCollection::GrammarPattern& pattern);
 		vector<DataCollection::GrammarPattern> GrammarPatternSortByFrequency() const ;
+		//获得me的后一个词性是forward的概率.
+		double GetP_Forward(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& forward) const;
+		//获得me的前一个词性是backward的概率.
+		double GetP_Backward(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward) const;
 
 		//Concept Interact Table Related Functions
 		void BuildConceptInteractTable(const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept);

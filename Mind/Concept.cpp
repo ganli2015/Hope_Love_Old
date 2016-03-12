@@ -67,6 +67,8 @@ namespace Mind
 
 	void Concept::AddForwardConcept( const shared_ptr<Concept> concept,const double sensitivity/*=1*/ )
 	{
+		Check(concept->GetPartOfSpeech()==Noun ||concept->GetPartOfSpeech()==_partofspeech);
+
 		ConceptEdge edge(concept,sensitivity);
 		_forward.push_back(edge);
 	}

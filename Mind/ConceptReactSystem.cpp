@@ -26,7 +26,6 @@
 
 #include <numeric>
 
-//#define _ReadFile
 
 using namespace Math;
 using namespace NeuralNetwork;
@@ -43,10 +42,10 @@ namespace Mind
 
 	void ConceptReactSystem::Initialize()
 	{
-#ifdef _ReadFile
-		InitNetworkFromFile();
-#else
+#ifdef _Train_Initial_React_Network
 		BasicTrainNetwork();
+#else
+		InitNetworkFromFile();
 #endif // _ReadFile
 	}
 

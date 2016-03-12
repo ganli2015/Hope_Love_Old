@@ -34,4 +34,3 @@ void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, v
 void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
 vector<vector<shared_ptr<DataCollection::Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<DataCollection::Word>> words);
 void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<DataCollection::Word>>>& combination, vector<shared_ptr<DataCollection::Word>>& optimal);
-void AddGrammarPatternsToMind(const vector<DataCollection::GrammarPattern>& patterns);

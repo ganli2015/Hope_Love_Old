@@ -23,3 +23,7 @@ using namespace std;
 #else
 #define _MINDINOUT _declspec(dllimport)
 #endif
+
+
+//#define _Extract_Initial_Grammar_Pattern
+//#define _Train_Initial_React_Network

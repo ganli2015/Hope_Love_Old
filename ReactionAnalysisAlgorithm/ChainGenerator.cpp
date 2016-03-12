@@ -82,7 +82,7 @@ void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Min
 		vector<shared_ptr<Concept>> vec=chains[i]->GetConceptVec();
 		for (unsigned int j=0;j<vec.size();++j)
 		{
-			if(find(vec.begin()+j+1,vec.end(),vec[j])!=vec.end())
+			if(find_if(vec.begin()+j+1,vec.end(),CommonFunction::SameConcept(vec[j]))!=vec.end())
 			{
 				throw runtime_error("DuplicatedConceptInChains!");
 			}

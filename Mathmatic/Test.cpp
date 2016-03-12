@@ -7,8 +7,8 @@
 
 int __cdecl main()
 {
-	TestClass::TestRand();
-
+	//TestClass::TestRand();
+	TestClass::TestMyInt();
 	system("Pause");
 
 	return 0;

@@ -4,6 +4,7 @@
 #include "FindSequence.h"
 #include "Vector.h"
 #include "iMatrix.h"
+#include "MyInt.h"
 
 #include <windows.h>
 #include <iterator>
@@ -143,4 +144,18 @@ void TestClass::TestMath()
 	bool match=IsMatch("了的","的空间发生了的就分是了的金佛山");
 	int matchCount=MatchCount("了的","的空间发生了的就分是了的金的请哦呜为IE青浦区的快捷方式佛山");
 	int matchCount2=MatchCount("的金的请哦呜","的空间发生了的就分是了的金的请哦呜为IE青浦区的快捷方式佛山");
+}
+
+void TestClass::TestMyInt()
+{
+	MyInt init(80);
+// 	for (int i=0;i<300;++i)
+// 	{
+// 		++init;
+// 		cout<<init.GetDouble()<<" "<<init.GetInt()<<endl;
+// 	}
+
+//	MyInt newInt=init+300;
+	init+=300;
+	int newIntInt=init.GetInt();
 }

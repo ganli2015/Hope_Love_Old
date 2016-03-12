@@ -38,6 +38,9 @@
     <ClInclude Include="TestClass.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="MyInt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -63,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="MyInt.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
-﻿生成启动时间为 2016/3/10 0:00:57。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 4 上(build 个目标)。
+﻿生成启动时间为 2016/3/12 22:44:38。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
@@ -24,4 +24,4 @@
 
 生成成功。
 
-已用时间 00:00:02.40
+已用时间 00:00:01.52

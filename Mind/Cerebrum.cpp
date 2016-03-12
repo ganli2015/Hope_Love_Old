@@ -16,7 +16,7 @@ namespace Mind
 	Cerebrum* Cerebrum::_instance=NULL;
 	Cerebrum::Cerebrum(void):
 	_conceptset(new ConceptSet),
-		_grammaset(new GrammaSet),
+		_grammaset(new GrammarSet),
 		_conceptInteractTableContainer(new ConceptInteractTableContainer)	
 	{
 		_conceptReactSystem=(new ConceptReactSystem(_conceptset));
@@ -185,6 +185,16 @@ namespace Mind
 	vector<shared_ptr<Concept>> Cerebrum::SearchBackwardConcepts( const shared_ptr<Concept> concept ) const
 	{
 		return _conceptset->SearchBackwardConcepts(concept);
+	}
+
+	double Cerebrum::GetP_Forward( const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& forward ) const
+	{
+		return _grammaset->GetP_Forward(me,forward);
+	}
+
+	double Cerebrum::GetP_Backward( const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward ) const
+	{
+		return _grammaset->GetP_Backward(me,backward);
 	}
 
 }

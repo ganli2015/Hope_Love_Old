@@ -10,6 +10,7 @@
 #include "../DataCollection/DataBaseProcessorTool.h"
 
 #include "../Mind/Cerebrum.h"
+#include "../Mind/CommonFunction.h"
 
 #include <functional>
 
@@ -217,7 +218,8 @@ void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combina
 {
 	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
 
-	int maxPatternFreq(-1);
+	//目标值，等于GrammarPattern的总频率乘以其局域的概率值.
+	double maxValueFun(-1);
 	for (unsigned int i=0;i<combination.size();++i)
 	{
 		GrammarPattern pattern=DataBaseProcessorTool::ConvertToPattern(combination[i]);
@@ -229,18 +231,17 @@ void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combina
 		{
 			freq_sum+=brain->GetFreqencyofPattern(matchedPattern[j]);
 		}
-		if(freq_sum>maxPatternFreq)
+
+		double value=freq_sum*Mind::CommonFunction::ComputeP_GrammarLocalAnalysis(pattern);
+
+		if(value>maxValueFun)
 		{
-			maxPatternFreq=freq_sum;
+			maxValueFun=value;
 			optimal=combination[i];
 		}
 	}
 }
 
-void AddGrammarPatternsToMind( const vector<GrammarPattern>& patterns )
-{
-
-}
 
 bool GrammarAnalyzer::Analyze()
 {

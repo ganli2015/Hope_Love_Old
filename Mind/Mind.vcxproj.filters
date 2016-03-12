@@ -83,6 +83,9 @@
     <ClInclude Include="ConceptReactImp_1212.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GrammarLocal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -152,6 +155,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConceptReactImp_1212.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GrammarLocal.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
