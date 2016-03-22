@@ -27,3 +27,4 @@ using namespace std;
 
 //#define _Extract_Initial_Grammar_Pattern
 //#define _Train_Initial_React_Network
+#define _CheckInitialConceptData

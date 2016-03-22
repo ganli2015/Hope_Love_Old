@@ -1,13 +1,13 @@
-﻿生成启动时间为 2016/3/12 23:31:24。
+﻿生成启动时间为 2016/3/22 21:26:33。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Debug\ReactionAnalysisAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Debug\ReactionAnalysisAlgorithm.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\ReactionAnalysisAlgorithm.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt SentenceGenerator.cpp
-         SentenceGenerator.cpp
+         所有输出均为最新。
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.lib" /MACHINE:X86 /DLL Debug\ChainAnalyzer.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.lib" /MACHINE:X86 /DLL Debug\AskAboutUnknownWords.obj
+         Debug\ChainAnalyzer.obj
          Debug\ChainGenerator.obj
          Debug\ExtractConceptChains.obj
          Debug\GrammarPatternSelector.obj
@@ -17,6 +17,7 @@
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib"
+            正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.exp
          ReactionAnalysisAlgorithm.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll
        PostBuildEvent:
          Copy "E:\Artificial Intelligence\Project\Hope_Love\Debug\ReactionAnalysisAlgorithm.dll" "E:\Artificial Intelligence\Project\Hope_Love\HopeLove\bin\Debug\"
@@ -29,4 +30,4 @@
 
 生成成功。
 
-已用时间 00:00:02.65
+已用时间 00:00:04.43

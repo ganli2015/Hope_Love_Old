@@ -139,6 +139,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AskAboutUnknownWords.h" />
     <ClInclude Include="ChainAnalyzer.h" />
     <ClInclude Include="ChainGenerator.h" />
     <ClInclude Include="ExtractConceptChains.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AskAboutUnknownWords.cpp" />
     <ClCompile Include="ChainAnalyzer.cpp" />
     <ClCompile Include="ChainGenerator.cpp" />
     <ClCompile Include="ExtractConceptChains.cpp" />

@@ -1,10 +1,15 @@
-﻿生成启动时间为 2016/3/12 22:44:30。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/3/22 21:26:33。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\LearningAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\LearningAlgorithm.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt GrammarLearning.cpp Test.cpp
+         GrammarLearning.cpp
+         正在生成代码...
+         正在编译...
+         Test.cpp
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.dll" /INCREMENTAL /NOLOGO /MANIFEST:NO /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\LearningAlgorithm.lib" /MACHINE:X86 /DLL Debug\GrammarLearning.obj
          Debug\Stdafx.obj
@@ -21,4 +26,4 @@
 
 生成成功。
 
-已用时间 00:00:02.44
+已用时间 00:00:05.38

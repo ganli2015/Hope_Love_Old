@@ -5,6 +5,7 @@ namespace DataCollection
 {
 	class Word;
 	class GrammarPattern;
+	enum PartOfSpeech;
 }
 
 namespace NeuralNetwork
@@ -60,6 +61,9 @@ namespace Mind
 		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<ConceptChain> chain, const ConceptSet* conceptSet);
 
 		double _MINDINOUT ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern);
+
+		//计算<curPos>的置信度，假设其相邻两个词性是<forwardPos>和<backwardPos>.
+		double _MINDINOUT ComputeP_GrammarLocal(const DataCollection::PartOfSpeech& curPos,const DataCollection::PartOfSpeech& forwardPos,const DataCollection::PartOfSpeech& backwardPos);
 
 		class _MINDINOUT SameConcept
 		{

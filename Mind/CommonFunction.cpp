@@ -209,30 +209,29 @@ namespace Mind
 			vector<PartOfSpeech> poses=pattern.GetPattern();
 			if(poses.size()<=1) return 0.;
 
-			double res=1.;
-			for (unsigned int i=0;i<poses.size()-1;++i)
+			double res=0.;
+			for (unsigned int i=0;i<poses.size();++i)
 			{
-				PartOfSpeech cur=poses[i];
-				if(i==0)
+				PartOfSpeech curPos=poses[i];
+				if(i==0)//第一个词性只考虑与第二个词性之间的置信度.
 				{
-					double forP=brain->GetP_Forward(cur,poses[i+1]);
-					res*=forP;
+					double p_cur_for=brain->GetP_Forward(curPos,poses[i+1]);
+					double p_for_cur=brain->GetP_Backward(poses[i+1],curPos);
+					res+=p_for_cur*p_cur_for;
 				}
-				else if(i==poses.size()-1)
+				else if(i==poses.size()-1)//最后一个词性只考虑与倒数第二个之间的置信度.
 				{
-					double backP=brain->GetP_Backward(cur,poses[i-1]);
-					res*=backP;
+					double p_cur_back=brain->GetP_Backward(curPos,poses[i-1]);
+					double p_back_cur=brain->GetP_Forward(poses[i-1],curPos);
+					res+=p_back_cur*p_cur_back;
 				}
 				else
 				{
-					double forP=brain->GetP_Forward(cur,poses[i+1]);
-					//double backP=brain->GetP_Backward(cur,poses[i-1]);
-					res*=forP;
-					//res*=backP;					
+					res+=ComputeP_GrammarLocal(curPos,poses[i+1],poses[i-1]);
 				}
 			}
 
-			return res;
+			return res/poses.size();
 		}
 
 
@@ -246,6 +245,19 @@ namespace Mind
 			{
 				return false;
 			}
+		}
+
+		double _MINDINOUT ComputeP_GrammarLocal( const PartOfSpeech& curPos,const PartOfSpeech& forwardPos,const PartOfSpeech& backwardPos )
+		{
+			Cerebrum* brain=Cerebrum::Instance();
+
+			double p_cur_for=brain->GetP_Forward(curPos,forwardPos);
+			double p_cur_back=brain->GetP_Backward(curPos,backwardPos);
+			double p_for_cur=brain->GetP_Backward(forwardPos,curPos);
+			double p_back_cur=brain->GetP_Forward(backwardPos,curPos);
+
+
+			return (p_cur_for*p_for_cur+p_cur_back*p_back_cur)/2;
 		}
 
 	}

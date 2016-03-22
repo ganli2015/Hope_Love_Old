@@ -35,7 +35,7 @@ void SpeakCommand::Update()
 	vector<shared_ptr<DataCollection::Sentence>> parsedSentence=sentenceParser->GetParsedSentence();
 	_datawrapper->AddParsedInputSentence(parsedSentence);
 
-	shared_ptr<SpeakReaction> reaction(new SpeakReaction());
+	shared_ptr<SpeakReaction> reaction(new SpeakReaction(parsedSentence));
 	reaction->React();
 	string reactStr=reaction->GetReactSentence()->GetString();
 

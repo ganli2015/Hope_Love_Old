@@ -78,6 +78,8 @@ namespace Mind
 		shared_ptr<ConceptInteractTable> GetDeepInteractTable(const shared_ptr<Concept> from,const shared_ptr<Concept> to);
 
 		int BaseConceptCount() const {return _baseConceptset.size();}
+
+		void OutputConceptData() const;
 	private:
 		void Initialize();
 
@@ -94,6 +96,7 @@ namespace Mind
 
 		vector<Concept> BreadthFirstSearch(const Identity identity) ;
 
+		void OutputNonBaseConcept() const;
 	};
 
 	

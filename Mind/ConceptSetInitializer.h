@@ -10,8 +10,6 @@ namespace DataCollection
 
 namespace Mind
 {
-#define _CheckInitialConceptData
-
 	class ConceptSet;
 	struct Identity;
 	struct Connection_Info;
@@ -42,9 +40,15 @@ namespace Mind
 		//初始化ConceptSet时使用
 		static vector<Word_ID> InputWordFromFile( string filename );
 
-		static void CheckConceptString(const vector<Word_ID>& wholeConcepts,ofstream& out);
-		static void CheckConceptConnection(const vector<Connection_Info>& connectionInfos, const vector<Word_ID>& wholeConcepts, ofstream& out);
-		static void CheckBaseConcept(const vector<Word_ID>& base,const vector<Word_ID>& wholeConcepts,ofstream& out);
+		//检查wholeConcepts里是否有重复的单词（相同字符串同时ID也相同的单词）.
+		static void CheckNonBaseConceptString(const vector<Word_ID>& wholeConcepts,ofstream& out);
+		//检查connectionInfos里所有涉及的Concept是否存在于wholeConcepts中.
+		static void CheckConceptConnection(const vector<Connection_Info>& connectionInfos,
+			const vector<Word_ID>& wholeConcepts, 
+			const vector<Word_ID>& baseConcepts,
+			ofstream& out);
+		//检查base里是否有重复的单词，检查在nonBaseConcepts里是否有base里的单词.
+		static void CheckBaseConcept(const vector<Word_ID>& base,const vector<Word_ID>& nonBaseConcepts,ofstream& out);
 
 		static bool ExistDuplicatedIDAndPOS(const Word_ID word_id,const int index,const vector<Word_ID>& list,Word_ID& duplicated);
 		static void OutputWordID(const Word_ID w_i,std::ofstream& out);

@@ -7,7 +7,7 @@ namespace Mind
 	{
 		//return "E:\\Artificial Intelligence\\Project\\Hope_Love\\Mind\\HopeLove\\";
 		//return "..\\Mind\\HopeLove\\";
-		return "..\\..\\..\\Mind\\HopeLove\\";
+		return "HopeLoveData\\";
 	}
 }
 

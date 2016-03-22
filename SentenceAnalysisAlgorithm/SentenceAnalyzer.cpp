@@ -91,17 +91,7 @@ void SentenceAnalyzer::Analyze()
 #endif
 
 	//统计不认识的词语
-	for (unsigned int i=0;i<subSentences.size();++i)
-	{
-		vector<shared_ptr<Word>> words=subSentences[i]->GetGrammard(0);
-		for (unsigned int j=0;j<words.size();++j)
-		{
-			if(!brain->IsInMind(words[j]))
-			{
-				_unknownWords.push_back(words[j]);
-			}
-		}
-	}
+	_unknownWords=CountUnknownWords(subSentences);
 
 	_analyzedSentences=subSentences;
 }
@@ -162,5 +152,23 @@ void SentenceAnalyzer::Cout_WordRelations()
 	cout<<endl;
 }
 
+vector<shared_ptr<DataCollection::Word>> SentenceAnalyzer::CountUnknownWords( const vector<shared_ptr<Sentence>>& sentences ) const
+{
+	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
 
+	vector<shared_ptr<DataCollection::Word>> res;
 
+	for (unsigned int i=0;i<sentences.size();++i)
+	{
+		vector<shared_ptr<Word>> words=sentences[i]->GetGrammard(0);
+		for (unsigned int j=0;j<words.size();++j)
+		{
+			if(!brain->IsInMind(words[j]))
+			{
+				res.push_back(words[j]);
+			}
+		}
+	}
+
+	return res;
+}

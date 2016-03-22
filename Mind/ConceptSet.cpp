@@ -663,5 +663,15 @@ namespace Mind
 		}
 	}
 
+	void ConceptSet::OutputConceptData() const
+	{
+
+	}
+
+	void ConceptSet::OutputNonBaseConcept() const
+	{
+
+	}
+
 }
 

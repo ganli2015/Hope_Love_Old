@@ -157,8 +157,8 @@ namespace Mind
 		vector<Word_ID> base_word_ids=InputWordFromFile(GetHopeLoveMindPath()+BaseConceptsStringFilename);
 		vector<Word_ID> whole_word_ids=base_word_ids;whole_word_ids.insert(whole_word_ids.end(),nonBase_word_ids.begin(),nonBase_word_ids.end());
 
-		CheckConceptString(nonBase_word_ids,out);
-		CheckConceptConnection(connectionInfos,whole_word_ids,out);
+		CheckNonBaseConceptString(nonBase_word_ids,out);
+		CheckConceptConnection(connectionInfos,whole_word_ids,base_word_ids,out);
 		CheckBaseConcept(base_word_ids,nonBase_word_ids,out);
 	}
 
@@ -204,7 +204,7 @@ namespace Mind
 		cout<<identity.id<<" "<<identity.str<<" ";
 	}
 
-	void ConceptSetInitializer::CheckConceptString(const vector<Word_ID>& wholeConcepts, ofstream& out )
+	void ConceptSetInitializer::CheckNonBaseConceptString(const vector<Word_ID>& wholeConcepts, ofstream& out )
 	{
 		for (unsigned int i=0;i<wholeConcepts.size();++i)
 		{
@@ -223,7 +223,7 @@ namespace Mind
 		}
 	}
 
-	void ConceptSetInitializer::CheckConceptConnection(const vector<Connection_Info>& connectionInfos, const vector<Word_ID>& wholeConcepts, ofstream& out )
+	void ConceptSetInitializer::CheckConceptConnection(const vector<Connection_Info>& connectionInfos, const vector<Word_ID>& wholeConcepts,const vector<Word_ID>& baseConcepts, ofstream& out )
 	{
 		//检查ConceptConnection里的concept是否存在于读取的word_id中。
 		for (unsigned int i=0;i<connectionInfos.size();++i)
@@ -237,6 +237,18 @@ namespace Mind
 				throw runtime_error("CheckInitialConceptData");
 			}
 
+			//确保<me>不在base concepts中.
+			if(IdentityExist(connectionInfos[i].me,baseConcepts))
+			{
+				cout<<"NonBase concept exists in base concepts!"<<endl;
+
+				OutputIdentity(connectionInfos[i].me,out);
+
+				throw runtime_error("CheckInitialConceptData");
+			}
+
+
+			//检查Edge
 			for (unsigned int j=0;j<connectionInfos[i].edge_infos.size();++j)
 			{
 				if(!IdentityExist(connectionInfos[i].edge_infos[j].to,wholeConcepts))
@@ -248,6 +260,7 @@ namespace Mind
 					throw runtime_error("CheckInitialConceptData");
 				}
 
+				//检查Modification
 				for (unsigned int k=0;k<connectionInfos[i].edge_infos[j].modifications.size();++k)
 				{
 					if(!IdentityExist(connectionInfos[i].edge_infos[j].modifications[k],wholeConcepts))
@@ -288,7 +301,6 @@ namespace Mind
 
 				Word_ID cur=base[i];
 				OutputWordID(cur,out);
-				OutputWordID(duplicated,out);
 				cout<<endl;
 
 				throw runtime_error("CheckInitialConceptData");

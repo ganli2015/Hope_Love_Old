@@ -4,6 +4,7 @@
 namespace DataCollection
 {
 	class Sentence;
+	class Word;
 }
 
 namespace Mind
@@ -26,6 +27,10 @@ public:
 	void Execute();
 	shared_ptr<DataCollection::Sentence> GetReactSentence() const;
 private:
+	vector<shared_ptr<DataCollection::Sentence>> GenerateByConceptChainAnalysis() const;
+
+	vector<shared_ptr<DataCollection::Word>> CountUnknownWords(const vector<shared_ptr<DataCollection::Sentence>>& sentences) const;
+
 	void DisplayChain( const shared_ptr<Mind::ConceptChain>& chain ) const;
 	void DisplayReactChains( const vector<Mind::ConceptChainProperty>& chains ) const;
 	void DisplayHyperChains( const vector<shared_ptr<Mind::ConceptChain>>& chains ) const;
