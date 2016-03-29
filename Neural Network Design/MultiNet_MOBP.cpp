@@ -196,7 +196,7 @@ namespace NeuralNetwork
 		const double& momentumCoefficient,
 		vector<Math::Matrix>& filteredDeltaMat, vector<Math::Vector>& filteredDeltaBias )
 	{
-		Check(curDeltaMat.size()==curDeltaBias.size()==prevDeltaBias.size()==prevDeltaMat.size());
+		Check(curDeltaMat.size()==curDeltaBias.size() && prevDeltaBias.size()==prevDeltaMat.size() && curDeltaBias.size()==prevDeltaBias.size());
 
 		filteredDeltaMat.clear();
 		filteredDeltaBias.clear();

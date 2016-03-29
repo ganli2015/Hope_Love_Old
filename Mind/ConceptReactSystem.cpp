@@ -111,18 +111,22 @@ namespace Mind
 		if(dataInfos.empty()) return;
 
 		int dimension=_conceptSet->BaseConceptCount();
-		shared_ptr<iNeuron> neu=InitNeuron(dimension);
+//		int interDim=30;
+		shared_ptr<iNeuron> neu1=InitNeuron(dimension,dimension);
+//		shared_ptr<iNeuron> neu2=InitNeuron(interDim,dimension);
+
+// 		int interDim=50;
+// 		shared_ptr<iNeuron> neu1(new Neuron(dimension,interDim));
+// 		neu1->SetBias(Vector(interDim,0));
+// 		shared_ptr<TransferFunction::fun> fun_logsig(new TransferFunction::purelin);
+// 		neu1->SetFun(fun_logsig);
+// 		shared_ptr<iNeuron> neu2(new Neuron(interDim,dimension));
+// 		neu2->SetBias(Vector(dimension,0));
+// 		neu2->SetFun(fun_logsig);
 
 		shared_ptr<MultilayerNetwork> multiNetwork(new MultilayerNetwork(dimension,dimension));
-		multiNetwork->SetMyNeuron(0,neu);
-
-// 		shared_ptr<ADALINE> multiNetwork(new ADALINE(dimension,dimension));
-// 		multiNetwork->SetMyNeuron(neu);
-
-// 		shared_ptr<iNeuron> neu2=InitNeuron(dimension);
-// 		shared_ptr<TransferFunction::purelin> fun_purelin(new TransferFunction::purelin);
-// 		neu2->SetFun(fun_purelin);
-// 		multiNetwork->SetMyNeuron(1,neu2);
+		multiNetwork->SetMyNeuron(0,neu1);
+//		multiNetwork->SetMyNeuron(1,neu2);
 
 		for (unsigned int i=0;i<dataInfos.size();++i)
 		{
@@ -148,11 +152,11 @@ namespace Mind
 		_network=multiNetwork;
 	}
 
-	shared_ptr<iNeuron> ConceptReactSystem::InitNeuron(const int dimension)
+	shared_ptr<iNeuron> ConceptReactSystem::InitNeuron(const int i,const int j)
 	{
 		double randDouble=Rand::GetRandDecimal();
 
-		shared_ptr<iNeuron> neu(new Neuron(dimension,dimension));
+		shared_ptr<iNeuron> neu(new Neuron(CreateRandomMatrix(i,j)));
 		//对随机的行列初始化随机的数值。
 // 		int initElemCount=dimension*dimension/4;
 // 		for (int i=0;i<initElemCount;++i)
@@ -162,10 +166,8 @@ namespace Mind
 // 			neu->SetElem(randRow,randCol,Rand::GetRandDecimal());
 // 		}
 
-		neu->SetBias(Vector(dimension,0));
-
-		shared_ptr<TransferFunction::fun> fun_logsig(new TransferFunction::purelin);
-		neu->SetFun(fun_logsig);
+		shared_ptr<TransferFunction::fun> transferFun(new TransferFunction::purelin);
+		neu->SetFun(transferFun);
 
 		return neu;
 	}

@@ -131,8 +131,8 @@ namespace NeuralNetwork
 
 		}
 
-		reverse(deltaMats.begin(),deltaMats.end());
-		reverse(deltaBiases.begin(),deltaBiases.end());
+		Reverse(deltaMats);
+		Reverse(deltaBiases);
 	}
 
 // 	void train_MultiNetwork::AdjustNeuron(const shared_ptr<iDataArray> s_m,

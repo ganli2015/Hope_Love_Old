@@ -1,7 +1,7 @@
-﻿生成启动时间为 2016/3/22 21:26:33。
+﻿生成启动时间为 2016/3/28 22:40:42。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\ReactionAnalysisAlgorithm.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\ReactionAnalysisAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
          所有输出均为最新。
@@ -30,4 +30,4 @@
 
 生成成功。
 
-已用时间 00:00:04.43
+已用时间 00:00:01.33

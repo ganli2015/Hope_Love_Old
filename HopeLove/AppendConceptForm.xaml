@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="25,0,0,50" Name="textBlock1" Text="New Concept" Width="80" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="12,20,0,0" Name="textBox_NewConcept" VerticalAlignment="Top" Width="120" TextChanged="textBox_NewConcept_TextChanged" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,20,0,0" Name="textBox_NewID" VerticalAlignment="Top" Width="29" Text="" DataContext="{Binding}" TextChanged="textBox_NewConcept_TextChanged" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,0,0,30" Name="textBox_NewID" VerticalAlignment="Bottom" Width="29" Text="" DataContext="{Binding}" TextChanged="textBox_NewConcept_TextChanged" />
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="157,0,0,0" Name="textBlock2" Text="ID" VerticalAlignment="Top" />
         <TextBlock Grid.Row="1" Height="54" HorizontalAlignment="Left" Margin="15,12,0,0" Name="textBlock_NewConceptInfo" Text="" VerticalAlignment="Top" Width="316" TextWrapping="Wrap" />
         <TextBlock HorizontalAlignment="Left" Margin="25,6,0,167" Name="textBlock3" Text="toConcept" Width="80" Grid.Row="2" />
@@ -19,13 +19,15 @@
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="157,6,0,0" Name="textBlock4" Text="ID" VerticalAlignment="Top" Grid.Row="2" />
         <TextBlock HorizontalAlignment="Left" Margin="25,53,0,120" Name="textBlock5" Text="Modification" Width="80" Grid.Row="2" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="12,73,0,0" Name="textBox_Mod1" VerticalAlignment="Top" Width="120" Grid.Row="2" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,73,0,0" Name="textBox2" VerticalAlignment="Top" Width="29" Grid.Row="2" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,73,0,0" Name="textBox_Mod1ID" VerticalAlignment="Top" Width="29" Grid.Row="2" />
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="157,53,0,0" Name="textBlock_Mod1ID" Text="ID" VerticalAlignment="Top" Grid.Row="2" />
         <TextBlock HorizontalAlignment="Left" Margin="25,99,0,74" Name="textBlock_Mod2" Text="Modification" Width="80" Grid.Row="2" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,119,0,0" Name="textBox3" VerticalAlignment="Top" Width="120" Grid.Row="2" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,119,0,0" Name="textBox4" VerticalAlignment="Top" Width="29" Grid.Row="2" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,119,0,0" Name="textBox_Mod2" VerticalAlignment="Top" Width="120" Grid.Row="2" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="149,119,0,0" Name="textBox_Mod2ID" VerticalAlignment="Top" Width="29" Grid.Row="2" />
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="157,99,0,0" Name="textBlock_Mod2ID" Text="ID" VerticalAlignment="Top" Grid.Row="2" />
         <Button Content="Append" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="240,152,0,0" Name="button_Append" VerticalAlignment="Top" Width="75" Click="button_Append_Click" />
-        <CheckBox Content="Base Concept" Height="16" HorizontalAlignment="Left" Margin="197,23,0,0" Name="checkBox_IsBase" VerticalAlignment="Top" Width="96" />
+        <CheckBox Content="Base Concept" Height="16" HorizontalAlignment="Left" Margin="240,23,0,0" Name="checkBox_IsBase" VerticalAlignment="Top" Width="96" />
+        <TextBox DataContext="{Binding}" Height="23" HorizontalAlignment="Left" Margin="195,0,0,30" Name="textBox_POS" Text="" VerticalAlignment="Bottom" Width="29" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="203,0,0,0" Name="textBlock6" Text="POS" VerticalAlignment="Top" />
     </Grid>
 </Window>

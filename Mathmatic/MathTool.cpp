@@ -213,5 +213,29 @@ namespace Math
 		return (val> 0.0) ? floor(val+ 0.5) : ceil(val- 0.5);
 	}
 
+	void _MATHMATICINOUT Reverse( vector<Matrix>& mats )
+	{
+		vector<Matrix> copy=mats;
+		mats.clear();
+		mats.reserve(copy.size());
+
+		for (vector<Matrix>::reverse_iterator it=copy.rbegin();it!=copy.rend();++it)
+		{
+			mats.push_back(*it);
+		}
+	}
+
+	void _MATHMATICINOUT Reverse(vector<Math::Vector>& vecs)
+	{
+		vector<Vector> copy=vecs;
+		vecs.clear();
+		vecs.reserve(copy.size());
+
+		for (vector<Vector>::reverse_iterator it=copy.rbegin();it!=copy.rend();++it)
+		{
+			vecs.push_back(*it);
+		}
+	}
+
 }
 

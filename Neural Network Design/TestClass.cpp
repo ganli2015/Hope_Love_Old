@@ -318,12 +318,16 @@ namespace NeuralNetwork
 		shared_ptr<iDataArray> t2=ToDataArray(tt2,4);
 
 		//shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,4)));
-		shared_ptr<iNeuron> W1(new Neuron(4,4));
+		int interDim=2;
+		shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,interDim)));
 		W1->SetFun(CreateTransferFunction(Purelin));
-		
+		shared_ptr<iNeuron> W2(new Neuron(CreateRandomMatrix(interDim,4)));
+		W2->SetFun(CreateTransferFunction(Purelin));
 
 		MultilayerNetwork multilayerNetwork(4,4);
 		multilayerNetwork.SetMyNeuron(0,W1);
+		multilayerNetwork.SetMyNeuron(1,W2);
+
 		multilayerNetwork.SetMyData(p1,t1);
 		multilayerNetwork.SetMyData(p2,t2);
 		multilayerNetwork.SetLearningRate(0.15);

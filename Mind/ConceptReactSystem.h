@@ -49,7 +49,7 @@ namespace Mind
 		shared_ptr<ConceptChain> ParseChain(const string str) const;
 
 		void Train(const vector<DataInfo>& dataInfos);
-		shared_ptr<NeuralNetwork::iNeuron> ConceptReactSystem::InitNeuron(const int dimension);
+		shared_ptr<NeuralNetwork::iNeuron> ConceptReactSystem::InitNeuron(const int i,const int j);
 		double ConceptReactSystem::ComputeStandardDeviation(const DataInfo& data,shared_ptr<NeuralNetwork::Network> network);
 
 		void NormalizeConfidence(vector<ConceptChainProperty>& vec);

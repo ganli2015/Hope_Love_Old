@@ -40,6 +40,10 @@ namespace Math
 
 	double _MATHMATICINOUT Round(const double& val);
 
+	void _MATHMATICINOUT Reverse(vector<Math::Matrix>& mats);
+
+	void _MATHMATICINOUT Reverse(vector<Math::Vector>& vecs);
+
 	template<class T>
 	double MeanValue(const vector<T>& vec)
 	{

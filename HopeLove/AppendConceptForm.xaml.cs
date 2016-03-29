@@ -189,7 +189,17 @@ namespace HopeLove
             Word_ID exist2 = _nonBaseConcepts.Find(wi => wi.WeakSame(w_i));
             if (exist1!=null || exist2!=null)
             {
-                textBlock_NewConceptInfo.Text = "Exist";
+                string message="Exist";
+                Connection_Info con_info=SearchConnectionInfo(w_i);
+                if(con_info!=null)//输入连接信息
+                {
+                    message+=": "+con_info.ToString();
+                }
+                if (exist1 != null)
+                {
+                    message += ": Base.";
+                }
+                textBlock_NewConceptInfo.Text = message;
             }
             else
             {
@@ -205,6 +215,16 @@ namespace HopeLove
                 return -1;
             }
             return res;
+        }
+
+        private PartOfSpeech GetTextBoxPOS(TextBox block)
+        {
+            int res;
+            if (!int.TryParse(block.Text, out res))
+            {
+                return PartOfSpeech.Unknown;
+            }
+            return (PartOfSpeech)res;
         }
 
         private bool WordInList(Word_ID w_i, List<Word_ID> wiList)
@@ -239,28 +259,174 @@ namespace HopeLove
 
         private void button_Append_Click(object sender, RoutedEventArgs e)
         {
-            //检查新的Concept是否已经存在
+            Word_ID newWord = GetNewConcept();
+            Word_ID toWord = GetToConcept();
+            List<Word_ID> mods = GetConnectionConcepts();
+
+            try
+            {
+                CheckWordNoEmpty(newWord);
+                CheckWordNoEmptyWeak(toWord);
+                CheckWordExisted(newWord);
+                CheckWordID(newWord);
+                CheckPOSUnique(newWord);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            if (checkBox_IsBase.IsChecked==true)
+            {
+                WriteBaseFile(newWord);
+            }
+            else
+            {
+                WriteNonBaseFile(newWord);
+                WriteConnnectionFile(newWord, toWord, mods);
+            }
+
+            Init();
+        }
+
+        private Word_ID GetNewConcept()
+        {
             Word_ID newWord = new Word_ID();
             newWord.word = textBox_NewConcept.Text;
             newWord.id = GetTextBoxId(textBox_NewID);
-            if (newWord.id == -1)
+            newWord.pos = GetTextBoxPOS(textBox_POS);
+
+            return newWord;
+        }
+
+        private Word_ID GetToConcept()
+        {
+            Word_ID newWord = new Word_ID();
+            newWord.word = textBox_toConcept.Text;
+            newWord.id = GetTextBoxId(textBox_toConceptID);
+
+            return newWord;
+        }
+
+        private List<Word_ID> GetConnectionConcepts()
+        {
+            Word_ID edgeWord1 = new Word_ID();
+            edgeWord1.word = textBox_Mod1.Text;
+            edgeWord1.id = GetTextBoxId(textBox_Mod1ID);
+
+            Word_ID edgeWord2 = new Word_ID();
+            edgeWord2.word = textBox_Mod2.Text;
+            edgeWord2.id = GetTextBoxId(textBox_Mod2ID);
+
+            List<Word_ID> res = new List<Word_ID>();
+            if(edgeWord1.id>=0)
+                res.Add(edgeWord1);
+            if (edgeWord2.id >= 0)
+                res.Add(edgeWord2);
+
+            return res;
+        }
+
+        private void CheckWordNoEmpty(Word_ID w_i)
+        {
+            if (w_i.id == -1 || w_i.pos == PartOfSpeech.Unknown || w_i.word=="")
             {
-                MessageBox.Show("ID error!");
-                return;
+                throw new ApplicationException("Invalid Word");
             }
-            if (WordInList(newWord, _baseConcepts) || WordInList(newWord, _nonBaseConcepts))
+        }
+
+        private void CheckWordNoEmptyWeak(Word_ID w_i)
+        {
+            if (w_i.id == -1 || w_i.word == "")
             {
-                MessageBox.Show("The concept already exists!");
+                throw new ApplicationException("Invalid Word");
+            }
+        }
+
+        private void WriteNonBaseFile(Word_ID newWord)
+        {
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, Encoding.Default);
+            sw.Write("\r\n" + newWord.ToString());
+            sw.Flush();
+            sw.Close();
+        }
+
+        private void WriteBaseFile(Word_ID newWord)
+        {
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + BaseConceptsStringFilename, true, Encoding.Default);
+            sw.Write("\r\n" + newWord.ToString());
+            sw.Flush();
+            sw.Close();
+        }
+
+        private void WriteConnnectionFile(Word_ID newWord,Word_ID toWord, List<Word_ID> mods)
+        {
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + ConceptConnections_InitialFilename, true, Encoding.Default);
+
+            string modStr="";
+            mods.ForEach(m=>
+            {
+                if(modStr!="")
+                {
+                    modStr+=" ";
+                }
+                modStr += m.ToWeakString();
+            });
+
+            string outStr = "\r\n" + newWord.ToWeakString() + " to " + toWord.ToWeakString();
+            if (modStr != "")
+            {
+                outStr+=" "+modStr;
             }
 
+            sw.Write(outStr);
+            sw.Flush();
+            sw.Close();
+        }
+
+        private void CheckWordExisted(Word_ID newWord)
+        {
+            //检查新的Concept是否已经存在                      
+            if (WordInList(newWord, _baseConcepts) || WordInList(newWord, _nonBaseConcepts))
+            {
+                throw new ApplicationException("The concept already exists!");
+            }
+        }
+
+        private void CheckWordID(Word_ID newWord)
+        {
             //检查ID是否现有的最大ID加1.
             int maxID_base = MaxID(newWord.word, _baseConcepts);
             int maxID_nonbase = MaxID(newWord.word, _nonBaseConcepts);
             int maxID = maxID_base > maxID_nonbase ? maxID_base : maxID_nonbase;
-            if ( newWord.id!=maxID+1)
+            if (newWord.id != maxID + 1)
             {
-                MessageBox.Show("The concept ID is not continuous!");
+                throw new ApplicationException("The concept ID is not continuous!");
             }
+        }
+
+        private void CheckPOSUnique(Word_ID newWord)
+        {
+            List<Word_ID> wordNonBase = SearchWordOfSameStr(newWord.word, _nonBaseConcepts);
+            List<Word_ID> wordBase = SearchWordOfSameStr(newWord.word, _baseConcepts);
+            Word_ID samePos_NonBase = wordNonBase.Find(w => w.pos == newWord.pos); 
+            Word_ID samePos_Base = wordBase.Find(w => w.pos == newWord.pos);
+
+            if (samePos_Base != null || samePos_NonBase != null)
+            {
+                throw new ApplicationException("The POS is not unique!");
+            }
+        }
+
+        private Connection_Info SearchConnectionInfo(Word_ID w_i)
+        {
+            return _connectionInfos.Find(con => con.me.WeakSame(w_i));
+        }
+
+        private List<Word_ID> SearchWordOfSameStr(string str, List<Word_ID> list)
+        {
+            return list.FindAll(w_i => w_i.word == str);
         }
     }
 
@@ -298,6 +464,22 @@ namespace HopeLove
         {
             return word == w_i.word && id == w_i.id ;
         }
+
+        override public string ToString()
+        {
+            string res = "";
+            res += id + " " + word+" "+(int)pos ;
+
+            return res;
+        }
+
+        public string ToWeakString()
+        {
+            string res = "";
+            res += id + " " + word ;
+
+            return res;
+        }
     }
 
     class Edge_Info
@@ -310,5 +492,22 @@ namespace HopeLove
     {
         public Word_ID me = new Word_ID();
         public List<Edge_Info> edge_infos = new List<Edge_Info>();
+
+        override public string ToString()
+        {
+            string res = "";
+            res += me.ToString()+" " ;
+            edge_infos.ForEach(edgeInfo =>
+            {
+                res+="to "+edgeInfo.to.ToString()+" ";
+                edgeInfo.mods.ForEach(mod =>
+                {
+                    res += mod.ToString() + " ";
+                });
+            });
+
+            return res;
+        }
+
     }
 }

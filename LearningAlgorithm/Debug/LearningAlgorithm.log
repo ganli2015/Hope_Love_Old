@@ -1,5 +1,5 @@
-﻿生成启动时间为 2016/3/22 21:26:33。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”在节点 4 上(build 个目标)。
+﻿生成启动时间为 2016/3/28 21:45:54。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\LearningAlgorithm\LearningAlgorithm.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\LearningAlgorithm.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
@@ -26,4 +26,4 @@
 
 生成成功。
 
-已用时间 00:00:05.38
+已用时间 00:00:03.38

@@ -1,11 +1,11 @@
-﻿生成启动时间为 2016/3/22 21:32:45。
+﻿生成启动时间为 2016/3/28 22:47:43。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\Mind.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ConceptSetInitializer.cpp
-         ConceptSetInitializer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt ConceptReactSystem.cpp
+         ConceptReactSystem.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib" /MACHINE:X86 /DLL Debug\BaseConcept.obj
          Debug\Cerebrum.obj
@@ -49,4 +49,4 @@
 
 生成成功。
 
-已用时间 00:00:02.70
+已用时间 00:00:02.60
