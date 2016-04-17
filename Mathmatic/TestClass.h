@@ -7,8 +7,14 @@ public:
 	TestClass(void);
 	~TestClass(void);
 
+	static void RunTest();
+
+private:
 	static void TestRand();
-	static void TestMath();
+
+	static void TestMatrix();
+	static void TestSubSequence();
+
 	static void TestMyInt();
 };
 

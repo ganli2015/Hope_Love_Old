@@ -179,6 +179,45 @@ namespace Math
 		return res;
 	}
 
+	void Matrix::Set_jthColumn( int n, const double val[],const int length )
+	{
+		Vector vec(Tovector(val,length));
+		this->Set_jthColumn(n,vec);
+	}
+
+	void Matrix::Set_ithRow( int n, Vector vec )
+	{
+		for (unsigned int i=0;i<vec.Dimension();++i)
+		{
+			this->SetElem(n,i,vec[i]);
+		}
+	}
+
+	void Matrix::Set_ithRow( int n, const double val[] ,const int length)
+	{
+		vector<double> vec=Tovector(val,length);
+		for (unsigned int i=0;i<vec.size();++i)
+		{
+			this->SetElem(n,i,vec[i]);
+		}
+	}
+
+	Matrix operator*( const Matrix& left,const Matrix& right )
+	{
+		Matrix res(left.Rows(),right.Columns());
+		for (unsigned int i=0;i<left.Rows();++i)
+		{
+			for (unsigned int j=0;j<right.Columns();++j)
+			{
+				Vector row=left.nthRow(i);
+				double elem=row*right.nthColumn(j);
+				res.SetElem(i,j,elem);
+			}		
+		}
+
+		return res;
+	}
+
 	Matrix operator*( const Matrix& left,const double& right )
 	{
 		Matrix res(left);

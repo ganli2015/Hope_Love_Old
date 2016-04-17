@@ -30,6 +30,8 @@ namespace Math
 
 	bool _MATHMATICINOUT SameVec(const vector<double>& vec1,const vector<double>& vec2);
 
+	bool _MATHMATICINOUT SameVec(const vector<int>& vec1,const vector<int>& vec2);
+
 	Matrix _MATHMATICINOUT ComputeMeanMatrix(const vector<Matrix>& mats);
 
 	Vector _MATHMATICINOUT ComputeMeanVector(const vector<Vector>& vecs);

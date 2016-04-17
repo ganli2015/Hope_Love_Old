@@ -73,6 +73,11 @@ namespace NeuralNetwork
 		return shared_ptr<iDataArray>(new DataArray(*this-*right));
 	}
 
+	bool DataArray::Same( const std::shared_ptr<iDataArray> val )
+	{
+		return GetArray().Same(val->GetArray());
+	}
+
 
 
 	NeuralNetwork::DataArray NeuralNetwork::operator-( const DataArray& left, const DataArray& right )

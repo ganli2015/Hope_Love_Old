@@ -58,6 +58,8 @@ namespace NeuralNetwork
 
 		//Read only
 		double operator[](unsigned int i) const;
+
+		virtual bool Same(const std::shared_ptr<iDataArray> val);
 	};
 
 	DataArray operator-(const DataArray& left, const DataArray& right);

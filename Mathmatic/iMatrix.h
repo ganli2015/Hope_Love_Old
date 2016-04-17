@@ -47,6 +47,12 @@ namespace Math
 
 		void Set_jthColumn(int n, Vector vec);
 
+		void Set_jthColumn(int n, const double val[],const int length);
+
+		void Set_ithRow(int n, Vector vec);
+
+		void Set_ithRow(int n, const double val[],const int length);
+
 		Vector Multiply(const Vector& right) const;
 
 		bool Same(const Matrix& mat,const double tol=1e-6) const ;
@@ -62,6 +68,8 @@ namespace Math
 		_MATHMATICINOUT friend Matrix operator/(const Matrix& left,const double& right);
 
 		_MATHMATICINOUT friend Matrix operator*(const Matrix& left,const double& right);
+
+		_MATHMATICINOUT friend Matrix operator*(const Matrix& left,const Matrix& right);
 	};
 
 	_MATHMATICINOUT Vector  operator*(const Matrix& mat,const Vector& vec);

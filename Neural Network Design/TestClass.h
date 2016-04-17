@@ -21,7 +21,8 @@ namespace NeuralNetwork
 
 		static void RunTest_Connectivity();
 
-		static void RunTest_MOBP();
+		static void TestClass::RunTest_MOBP();
+		static void RunTest_MOBP_SearchingParameter();
 
 		static double ComputeDeviation(const shared_ptr<iDataArray> array1,const shared_ptr<iDataArray> array2);
 

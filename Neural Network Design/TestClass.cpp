@@ -36,34 +36,13 @@ namespace NeuralNetwork
 
 	void TestClass::RunTest()
 	{
-		Vector vec1(GenerateContinuousNumber(1,5));
-		Vector vec2(GenerateContinuousNumber(2,6));
-		Vector vec3(GenerateContinuousNumber(3,7));
-		vector<Vector> matvec;
-		matvec.push_back(vec1);
-		matvec.push_back(vec2);
-		matvec.push_back(vec3);
-
-		Matrix mat(matvec);
-		//1 2 3
-		//2 3 4
-		//3 4 5
-		//4 5 6
-		//5 6 7
-
-		shared_ptr<DataArray> array(new DataArray(vec1*0.1));
-		//(0.1,0.2,0.3,0.4,0.5)
-		Neuron neuron(mat,5);
-		neuron.SetFun(shared_ptr<logsig>(new logsig));
-
-		shared_ptr<iDataArray> array2(neuron.Process(array));
-
 // 		RunTest_PerceptronNetwork();
 // 		RunTest_ADALINENetwork();
-// 		RunTest_MultiNetwork();
+ 		RunTest_MultiNetwork();
 // 		RunTest_CompetitiveNetwork();
-		RunTest_Connectivity();
-//		RunTest_MOBP();
+//		RunTest_Connectivity();
+		RunTest_MOBP();
+//		RunTest_MOBP_SearchingParameter();
 	}
 
 	void TestClass::RunTest_PerceptronNetwork()
@@ -253,6 +232,8 @@ namespace NeuralNetwork
 		multilayerNetwork.SetLearningRate(0.8);
 
 		shared_ptr<iDataArray> res=multilayerNetwork.GetResult(p1);
+
+		Check(res->Same(t1));
 	}
 
 	void TestClass::RunTest_CompetitiveNetwork()
@@ -365,7 +346,7 @@ namespace NeuralNetwork
 		return Math::ComputeDeviation(array1->GetVector(),array2->GetVector());
 	}
 
-	void TestClass::RunTest_MOBP( )
+	void TestClass::RunTest_MOBP_SearchingParameter( )
 	{
 		double pp1[4]={1,2,0,0},
 			tt1[4]={0,1,2,0},
@@ -401,8 +382,36 @@ namespace NeuralNetwork
 				cout<<ToString(i)<<" "<<multilayerNetwork.GetInteationCount()<<endl;
 
 			}
-		}
+		}	
 	}
 
+	void TestClass::RunTest_MOBP()
+	{
+		double pp1[4]={1,2,0,0},
+			tt1[4]={0,1,2,0},
+			pp2[4]={0,1,2,0},
+			tt2[4]={0,0,1,2};
+
+		shared_ptr<iDataArray> p1=ToDataArray(pp1,4);
+		shared_ptr<iDataArray> t1=ToDataArray(tt1,4);
+		shared_ptr<iDataArray> p2=ToDataArray(pp2,4);
+		shared_ptr<iDataArray> t2=ToDataArray(tt2,4);
+
+		MultilayerNetwork multilayerNetwork(4,4);
+		multilayerNetwork.SetMyData(p1,t1);
+		multilayerNetwork.SetMyData(p2,t2);
+
+		shared_ptr<MultiNet_MOBP> trainImp(new MultiNet_MOBP());
+		multilayerNetwork.SetTrainImp(trainImp);
+
+		shared_ptr<iNeuron> W1(new Neuron(CreateRandomMatrix(4,4)));
+		W1->SetFun(CreateTransferFunction(Purelin));
+		multilayerNetwork.SetMyNeuron(0,W1);
+
+		multilayerNetwork.Training();
+
+		Check(t1->Same(multilayerNetwork.GetResult(p1)));
+		Check(t2->Same(multilayerNetwork.GetResult(p2)));
+	}
 }
 

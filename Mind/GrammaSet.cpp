@@ -441,7 +441,7 @@ namespace Mind
 
 	void GrammarSet::ExtractGrammarPatternFromInitialFile() const
 	{
-		vector<Sen_Gra> samples=InputGraSamples("DebugInfo//str_sample.txt");
+		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
 
 		std::vector<std::vector<int>> allcommon_seqs=FindAllCommonSequences(samples);
 
@@ -452,7 +452,7 @@ namespace Mind
 
 	void GrammarSet::ExtractGrammarLocalDistribution()
 	{
-		vector<Sen_Gra> samples=InputGraSamples("DebugInfo//str_sample.txt");
+		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
 
 		map<PartOfSpeech,GrammarLocal> grammarLocalTable;
 		for (int i=0;i<num_speech;++i)

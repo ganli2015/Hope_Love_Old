@@ -34,6 +34,8 @@ namespace NeuralNetwork
 		virtual bool AllZero()=0;
 
 		virtual std::shared_ptr<iDataArray> Subtract(const std::shared_ptr<iDataArray> val)=0;
+
+		virtual bool Same(const std::shared_ptr<iDataArray> val)=0;
 	};
 
 }

@@ -1,0 +1,21 @@
+﻿<Window x:Class="HopeLove.CommonWordTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CommonWordTable" Height="440" Width="583">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="276*" />
+            <RowDefinition Height="23*" />
+            <RowDefinition Height="102*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="176*" />
+            <ColumnDefinition Width="385*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Height="274" HorizontalAlignment="Left" Name="listBox_CommonWord" VerticalAlignment="Top" Width="176" SelectionChanged="listBox_CommonWord_SelectionChanged" GotFocus="listBox_CommonWord_GotFocus" />
+        <TextBlock Grid.Column="1" Height="130" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock_Meaning" Text="" VerticalAlignment="Top" Width="379" TextWrapping="Wrap" />
+        <TextBox Height="23" HorizontalAlignment="Left" Name="textBox_Search" VerticalAlignment="Top" Width="120" Grid.Row="1" KeyDown="textBox_Search_KeyDown" />
+        <Button Content="Search" Height="23" HorizontalAlignment="Right" Name="button_Search" VerticalAlignment="Top" Width="58" Click="button_Search_Click" Grid.Row="1" />
+        <ListBox Grid.Row="2" Height="100" HorizontalAlignment="Left" Margin="0,2,0,0" Name="listBox_Search" VerticalAlignment="Top" Width="176" SelectionChanged="listBox_Search_SelectionChanged" GotFocus="listBox_Search_GotFocus" />
+    </Grid>
+</Window>

@@ -18,3 +18,5 @@ E:\Artificial Intelligence\Project\Hope_Love\HopeLove\bin\Debug\ManageWrapper.dl
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\bin\Debug\ManageWrapper.pdb
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Debug\AppendConceptForm.baml
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Debug\AppendConceptForm.g.cs
+E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Debug\CommonWordTable.baml
+E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Debug\CommonWordTable.g.cs

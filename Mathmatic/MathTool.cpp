@@ -65,7 +65,7 @@ namespace Math
 		return res;
 	}
 
-	vector<double> Tovector( const double* val , const int n)
+	vector<double> Tovector( const double val[], const int n)
 	{
 		int size=n;
 		vector<double> vec;
@@ -74,7 +74,6 @@ namespace Math
 		{
 			vec.push_back(val[i]);
 		}
-		assert(vec.size()==n);
 		return vec;
 	}
 
@@ -148,6 +147,21 @@ namespace Math
 		for (unsigned int i=0;i<vec1.size();++i)
 		{
 			if(DoubleCompare(vec1[i],vec2[i])!=0)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	bool _MATHMATICINOUT SameVec( const vector<int>& vec1,const vector<int>& vec2 )
+	{
+		if(vec1.size()!=vec2.size()) return false;
+
+		for (unsigned int i=0;i<vec1.size();++i)
+		{
+			if(vec1[i]!=vec2[i])
 			{
 				return false;
 			}

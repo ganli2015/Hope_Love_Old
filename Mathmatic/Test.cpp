@@ -5,10 +5,12 @@
 
 #include <windows.h>
 
+
 int __cdecl main()
 {
+	TestClass::RunTest();
 	//TestClass::TestRand();
-	TestClass::TestMyInt();
+	//TestClass::TestMyInt();
 	system("Pause");
 
 	return 0;

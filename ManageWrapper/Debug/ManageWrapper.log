@@ -1,12 +1,13 @@
-﻿生成启动时间为 2016/3/28 22:40:44。
+﻿生成启动时间为 2016/4/16 16:45:58。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\ManageWrapper\ManageWrapper.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\ManageWrapper.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\ManageWrapper.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        GenerateTargetFrameworkMonikerAttribute:
        正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\ManageWrapper.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /FU"E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.dll" /FU"E:\Artificial Intelligence\Project\Hope_Love\GlobalInterface\bin\Debug\GlobalInterface.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt Manager_HopeLove.cpp /clr:nostdlib 
+         Manager_HopeLove.cpp
          所有输出均为最新。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\ManageWrapper.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\ManageWrapper.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\Manager_HopeLove.obj
@@ -27,4 +28,4 @@
 
 生成成功。
 
-已用时间 00:00:00.74
+已用时间 00:00:02.27

@@ -31,6 +31,7 @@ namespace Mind
 		ConceptReactSystem* _conceptReactSystem;
 
 		Cerebrum(void);
+		~Cerebrum();
 	public:
 		static Cerebrum* Instance();
 
@@ -86,6 +87,8 @@ namespace Mind
 
 		//Concept React System Functions
 		vector<ConceptChainProperty> React(const shared_ptr<ConceptChain> chain);
+
+		
 	};
 }
 

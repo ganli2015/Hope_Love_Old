@@ -81,7 +81,7 @@ namespace Mind
 
 		Train(dataInfos);
 
-		_network->Write(GetHopeLoveMindPath()+"network.txt");
+		_network->Write(GetHopeLoveMindPath()+ConceptReactorNetworkFilename);
 	}
 
 	shared_ptr<ConceptChain> ConceptReactSystem::ParseChain( const string str ) const

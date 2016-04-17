@@ -1,0 +1,186 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5740,        177]
+NotebookOptionsPosition[      4971,        148]
+NotebookOutlinePosition[      5313,        163]
+CellTagsIndexPosition[      5270,        160]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RandMat", "[", 
+   RowBox[{"i_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"RandomReal", "[", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "10"}], "}"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"m", ",", "i"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "j"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6697764571522045`*^9, 3.669776461208212*^9}, {
+  3.6697765132665033`*^9, 3.669776559224184*^9}, {3.6697766119366765`*^9, 
+  3.6697766151346817`*^9}, {3.669776650671544*^9, 3.6697766524343476`*^9}, {
+  3.6697770028648233`*^9, 3.669777004534026*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"m1", "=", 
+   RowBox[{"RandMat", "[", 
+    RowBox[{"2", ",", "3"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"m2", "=", 
+   RowBox[{"RandMat", "[", 
+    RowBox[{"3", ",", "4"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6697765617669888`*^9, 3.6697765792546186`*^9}, 
+   3.669776769873354*^9, {3.669776907735856*^9, 3.669776918047475*^9}, {
+   3.669776982475588*^9, 3.669777030804473*^9}, {3.6697801809233418`*^9, 
+   3.669780183815507*^9}, {3.669780606676694*^9, 3.669780608673808*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"res", "=", 
+   RowBox[{"m1", ".", "m2"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6697770431752944`*^9, 3.669777052862911*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<D:\\\\m1.txt\>\"", ",", "m1", ",", "\"\<Table\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<D:\\\\m2.txt\>\"", ",", "m2", ",", "\"\<Table\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<D:\\\\res.txt\>\"", ",", "res", ",", "\"\<Table\>\""}], "]"}],
+   ";"}]}], "Input",
+ CellChangeTimes->{{3.669777132423051*^9, 3.669777173998124*^9}, {
+  3.6697772351034317`*^9, 3.6697772485506554`*^9}}],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 3}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{Inherited, 5}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RandIntString", "[", "length_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{
+     RowBox[{"res", "=", "\"\<\>\""}], ";", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"res", "=", 
+        RowBox[{"res", "<>", 
+         RowBox[{"ToString", "[", 
+          RowBox[{"RandomInteger", "[", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "9"}], "}"}], "]"}], "]"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "length"}], "}"}]}], "]"}], ";", "res"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.669781374641813*^9, 3.6697814337241917`*^9}, {
+  3.6697814714923525`*^9, 3.669781524442381*^9}, {3.6697816289933605`*^9, 
+  3.6697816467673774`*^9}, {3.6697817161283445`*^9, 3.669781761765955*^9}, {
+  3.6697817919116793`*^9, 3.6697817940207996`*^9}, {3.669781835271159*^9, 
+  3.6697818362252135`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"LongestCommonSequence", "[", 
+  RowBox[{"\"\<126378932\>\"", ",", "\"\<2953383\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.6697808876657653`*^9, 3.6697808933130884`*^9}, {
+  3.6697809613999825`*^9, 3.6697810004532166`*^9}, {3.669781086089114*^9, 
+  3.6697811015800004`*^9}}],
+
+Cell[BoxData["\"\<2383\>\""], "Input",
+ CellChangeTimes->{{3.669781712610143*^9, 3.6697817138502145`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"seq1", "=", 
+  RowBox[{"RandIntString", "[", "10", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"seq2", "=", 
+  RowBox[{"RandIntString", "[", "20", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.669781656501934*^9, 3.669781675076997*^9}, {
+  3.6697818494959726`*^9, 3.6697818708511944`*^9}}],
+
+Cell[BoxData["\<\"7890971037\"\>"], "Output",
+ CellChangeTimes->{{3.669781851133066*^9, 3.669781872540291*^9}}],
+
+Cell[BoxData["\<\"68773897105973000952\"\>"], "Output",
+ CellChangeTimes->{{3.669781851133066*^9, 3.669781872543291*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LongestCommonSequence", "[", 
+  RowBox[{"seq1", ",", "seq2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.669781861052634*^9, 3.6697818672709894`*^9}}],
+
+Cell[BoxData["\<\"7890970\"\>"], "Output",
+ CellChangeTimes->{3.6697818748634233`*^9}]
+}, Open  ]]
+},
+WindowSize->{767, 577},
+WindowMargins->{{Automatic, 39}, {-73, Automatic}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 642, 16, 31, "Input"],
+Cell[1203, 38, 549, 12, 52, "Input"],
+Cell[1755, 52, 163, 4, 31, "Input"],
+Cell[1921, 58, 563, 14, 72, "Input"],
+Cell[2487, 74, 271, 9, 10, "Text"],
+Cell[2761, 85, 913, 23, 72, "Input"],
+Cell[3677, 110, 301, 5, 31, "Input"],
+Cell[3981, 117, 106, 1, 31, InheritFromParent],
+Cell[CellGroupData[{
+Cell[4112, 122, 308, 6, 52, "Input"],
+Cell[4423, 130, 111, 1, 31, "Output"],
+Cell[4537, 133, 121, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4695, 139, 171, 3, 31, "Input"],
+Cell[4869, 144, 86, 1, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

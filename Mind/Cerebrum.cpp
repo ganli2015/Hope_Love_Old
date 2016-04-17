@@ -22,6 +22,14 @@ namespace Mind
 		_conceptReactSystem=(new ConceptReactSystem(_conceptset));
 	}
 
+	Cerebrum::~Cerebrum()
+	{
+		delete _conceptReactSystem;
+		delete _conceptInteractTableContainer;
+		delete _grammaset;
+		delete _conceptset;
+	}
+
 	Cerebrum* Cerebrum::Instance()
 	{
 		if(_instance==NULL)

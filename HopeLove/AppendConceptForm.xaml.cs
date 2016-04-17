@@ -24,16 +24,20 @@ namespace HopeLove
         List<Word_ID> _nonBaseConcepts = new List<Word_ID>();
         List<Word_ID> _baseConcepts = new List<Word_ID>();
         List<Connection_Info> _connectionInfos = new List<Connection_Info>();
-
+        CommonWordTable _commonWordTable;
 
         const string NonBaseConceptString_InitialFilename = "NonBaseConceptString_Initial.txt";
         const string ConceptConnections_InitialFilename = "ConceptConnections_Initial.txt";
         const string BaseConceptsStringFilename = "BaseConceptsString.txt";
         const string HopeLoveMindPath = "HopeLoveData\\";
 
+        Encoding MyEncoding = null;
+
         public AppendConceptForm()
         {
             InitializeComponent();
+
+            MyEncoding = Encoding.Default;
 
             Init();
         }
@@ -43,12 +47,23 @@ namespace HopeLove
             _baseConcepts = InputWordFromFile(HopeLoveMindPath + BaseConceptsStringFilename);
             _nonBaseConcepts = InputWordFromFile(HopeLoveMindPath + NonBaseConceptString_InitialFilename);
             _connectionInfos = InputConnectionFromFile(HopeLoveMindPath + ConceptConnections_InitialFilename);
+
+//             StreamWriter sw = new StreamWriter(HopeLoveMindPath + "1.txt",false,MyEncoding);
+//             _nonBaseConcepts.ForEach(w_i =>
+//             {
+//                 Connection_Info con = SearchConnectionInfo(w_i);
+//                 if (con != null)
+//                 {
+//                     sw.Write(w_i.ToString() + "\r\n");
+//                 }
+//             });
+//             sw.Flush();
         }
 
         private List<Word_ID> InputWordFromFile(string filename)
         {
             List<Word_ID> res = new List<Word_ID>();
-            StreamReader sr = new StreamReader(filename,Encoding.Default);
+            StreamReader sr = new StreamReader(filename,MyEncoding);
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
@@ -97,7 +112,7 @@ namespace HopeLove
         private List<Connection_Info> InputConnectionFromFile(string filename)
         {
             List<Connection_Info> res = new List<Connection_Info>();
-            StreamReader sr = new StreamReader(filename, Encoding.Default);
+            StreamReader sr = new StreamReader(filename, MyEncoding);
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
@@ -266,10 +281,18 @@ namespace HopeLove
             try
             {
                 CheckWordNoEmpty(newWord);
-                CheckWordNoEmptyWeak(toWord);
+                if (checkBox_IsBase.IsChecked==false)
+                {
+                    CheckWordNoEmptyWeak(toWord);
+                }
+                else
+                {
+                    CheckHasNoConnections(newWord);
+                }
                 CheckWordExisted(newWord);
                 CheckWordID(newWord);
                 CheckPOSUnique(newWord);
+                CheckPos_Me_To(newWord, toWord);
             }
             catch (System.Exception ex)
             {
@@ -346,7 +369,7 @@ namespace HopeLove
 
         private void WriteNonBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, Encoding.Default);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -354,7 +377,7 @@ namespace HopeLove
 
         private void WriteBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + BaseConceptsStringFilename, true, Encoding.Default);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + BaseConceptsStringFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -362,7 +385,7 @@ namespace HopeLove
 
         private void WriteConnnectionFile(Word_ID newWord,Word_ID toWord, List<Word_ID> mods)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + ConceptConnections_InitialFilename, true, Encoding.Default);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + ConceptConnections_InitialFilename, true, MyEncoding);
 
             string modStr="";
             mods.ForEach(m=>
@@ -419,6 +442,27 @@ namespace HopeLove
             }
         }
 
+        private void CheckHasNoConnections(Word_ID newWord)
+        {
+            Connection_Info info=_connectionInfos.Find(c => c.me.WeakSame(newWord));
+            if (info != null)
+            {
+                throw new ApplicationException("It has some connections!");
+            }
+        }
+
+        private void CheckPos_Me_To(Word_ID newWord, Word_ID toWord)
+        {
+            Word_ID toWordSearch = SearchWordOfSameWordID_inTotalWord(toWord);
+            if (toWordSearch != null)
+            {
+                if (toWordSearch.pos != newWord.pos && toWordSearch.pos != PartOfSpeech.Noun)
+                {
+                    throw new ApplicationException("The POS between new word and to word is not matched!!");
+                }
+            }
+        }
+
         private Connection_Info SearchConnectionInfo(Word_ID w_i)
         {
             return _connectionInfos.Find(con => con.me.WeakSame(w_i));
@@ -427,6 +471,48 @@ namespace HopeLove
         private List<Word_ID> SearchWordOfSameStr(string str, List<Word_ID> list)
         {
             return list.FindAll(w_i => w_i.word == str);
+        }
+
+        private Word_ID SearchWordOfSameWordID_inTotalWord(Word_ID w_i)
+        {
+            Word_ID bRes=_baseConcepts.Find(bc => bc.WeakSame(w_i));
+            Word_ID nbRes = _nonBaseConcepts.Find(nbc => nbc.WeakSame(w_i));
+
+            if (bRes != null)
+            {
+                return bRes;
+            }
+            else if (nbRes != null)
+            {
+                return nbRes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void button_CallWordTable_Click(object sender, RoutedEventArgs e)
+        {
+            if (_commonWordTable == null)
+            {
+                _commonWordTable = new CommonWordTable(GetWordWithConnection());
+            }
+
+            _commonWordTable.Left = this.Left + this.Width + 10;
+            _commonWordTable.Owner = this;
+            _commonWordTable.Show();
+        }
+
+        private List<string> GetWordWithConnection()
+        {
+            List<string> res=new List<string>();
+            _connectionInfos.ForEach(c =>
+            {
+                res.Add(c.me.word);
+            });
+
+            return res;
         }
     }
 
