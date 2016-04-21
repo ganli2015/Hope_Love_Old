@@ -7,16 +7,23 @@ namespace DataCollection
 	class Sentence;
 }
 
+namespace Mind
+{
+	class ConceptInteractTable;
+}
+
 class _REACTIONLISTINOUT SpeakReaction:public Reaction
 {
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_input;
+	shared_ptr<Mind::ConceptInteractTable> _interactTable;
+
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_output;
 
 public:
 	SpeakReaction(void);
 	~SpeakReaction(void);
 
-	SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence);
+	SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable);
 
 	virtual void React();
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "InOut.h"
-#include "ConceptChain.h"
+#include "../MindElement/ConceptChain.h"
 
 namespace NeuralNetwork
 {

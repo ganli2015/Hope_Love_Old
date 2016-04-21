@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "FindConnectConcept.h"
-#include "Concept.h"
+#include "../MindElement/Concept.h"
 
 #include "../DataCollection/Word.h"
 

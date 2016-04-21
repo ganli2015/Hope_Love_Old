@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "ConceptSet.h"
-#include "BaseConcept.h"
+#include "../MindElement/BaseConcept.h"
 #include "CommonFunction.h"
-#include "ConceptInteractTable.h"
+#include "../MindElement/ConceptInteractTable.h"
 #include "ConceptSetInitializer.h"
 #include "FindConnectConcept.h"
 #include <fstream>

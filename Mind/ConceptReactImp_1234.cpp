@@ -1,10 +1,10 @@
 #include "StdAfx.h"
 #include "ConceptReactImp_1234.h"
-#include "Concept.h"
+#include "../MindElement/Concept.h"
 #include "ConceptSet.h"
-#include "ConceptChain.h"
+#include "../MindElement/ConceptChain.h"
 #include "Cerebrum.h"
-#include "BaseConcept.h"
+#include "../MindElement/BaseConcept.h"
 #include "CommonFunction.h"
 
 #include "../Mathmatic/FindSequence.h"

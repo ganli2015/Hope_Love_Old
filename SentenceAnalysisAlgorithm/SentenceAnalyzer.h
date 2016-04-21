@@ -27,7 +27,6 @@ public:
 private:
 	void Cout_GrammardSentence(const shared_ptr<DataCollection::Sentence> grammard);
 	void Cout_WordConnectionIntensity(const shared_ptr<DataCollection::Sentence> sentence);
-	void Cout_WordRelations();
 
 	vector<shared_ptr<DataCollection::Word>> CountUnknownWords(const vector<shared_ptr<DataCollection::Sentence>>& sentences) const;
 };

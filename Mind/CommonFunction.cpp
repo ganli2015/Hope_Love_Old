@@ -1,11 +1,11 @@
 #include "StdAfx.h"
 #include "CommonFunction.h"
-#include "Concept.h"
-#include "ConceptInteractTable.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptInteractTable.h"
 #include "ConceptSet.h"
-#include "ConceptChain.h"
+#include "../MindElement/ConceptChain.h"
 #include "Cerebrum.h"
-#include "BaseConcept.h"
+#include "../MindElement/BaseConcept.h"
 
 #include <fstream>
 #include <sstream>
@@ -116,72 +116,6 @@ namespace Mind
 			return me;
 		}
 
-		bool IsSameConcept( const shared_ptr<Concept> left,const shared_ptr<Concept> right )
-		{
-			if(left->GetString()==right->GetString() && left->GetId()==right->GetId())
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		int IndexOf( const vector<shared_ptr<Concept>>& concepts,const shared_ptr<Concept> concept )
-		{
-			class IsSameWith
-			{
-				shared_ptr<Concept> _val;
-			public:
-				IsSameWith(const shared_ptr<Concept> val):_val(val){};
-				~IsSameWith(){}
-
-				bool operator()(const shared_ptr<Concept> val)
-				{
-					if(CommonFunction::IsSameConcept(_val,val))
-					{
-						return true;
-					}
-					else
-						return false;
-				}
-			};
-
-			vector<shared_ptr<Concept>>::const_iterator iter=find_if(concepts.begin(),concepts.end(),IsSameWith(concept));
-			if(iter==concepts.end())
-			{
-				return -1;
-			}
-			else
-			{
-				return distance(concepts.begin(),iter);
-			}
-		}
-
-		void AppendToInteractTable( const vector<shared_ptr<Concept>>& from,const vector<shared_ptr<Concept>>& to,shared_ptr<ConceptInteractTable> table )
-		{
-			if(table==NULL) return;
-
-			for (unsigned int i=0;i<from.size();++i)
-			{
-				for (unsigned int j=0;j<to.size();++j)
-				{
-					table->Add(from[i],to[j]);
-				}
-			}
-		}
-
-		void WriteConcepts(const vector<shared_ptr<Concept>>& vec,ofstream& out )
-		{
-			for (unsigned int j=0;j<vec.size();++j)
-			{
-				out<<vec[j]->GetString()<<" ";
-			}
-			out<<endl;
-		}
-
-		
 		shared_ptr<NeuralNetwork::iDataArray> ToDataArray( const shared_ptr<ConceptChain> chain , const ConceptSet* conceptSet)
 		{
 			//初始化，所有元素等于0
@@ -232,19 +166,6 @@ namespace Mind
 			}
 
 			return res/poses.size();
-		}
-
-
-		bool SameConcept::operator()( const shared_ptr<Concept> val )
-		{
-			if(val->Same(_me))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
 		}
 
 		double _MINDINOUT ComputeP_GrammarLocal( const PartOfSpeech& curPos,const PartOfSpeech& forwardPos,const PartOfSpeech& backwardPos )

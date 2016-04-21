@@ -1,7 +1,8 @@
 #include "StdAfx.h"
 #include "GrammaSet.h"
 #include "FilePath.h"
-#include "GrammarLocal.h"
+
+#include "../MindElement/GrammarLocal.h"
 
 #include "../DataCollection/DataBaseProcessorTool.h"
 #include "../DataCollection/Word.h"
@@ -18,8 +19,6 @@ using namespace Math;
 
 namespace Mind
 {
-	const int GrammarSet::num_speech=12;
-
 	GrammarSet::GrammarSet(void)
 	{
 		Initialize();

@@ -4,7 +4,6 @@
 #include "WordSegmentator.h"
 #include "GrammarAnalyzer.h"
 #include "StructureAnalyzer.h"
-#include "WordRelationTableBuilder.h"
 
 #include "../CommonTools/CommonTranslateFunction.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
@@ -13,7 +12,7 @@
 #include "../DataCollection/Word.h"
 
 #include "../Mind/Cerebrum.h"
-#include "../Mind/Concept.h"
+#include "../MindElement/Concept.h"
 
 #include <iostream>
 
@@ -80,16 +79,6 @@ void SentenceAnalyzer::Analyze()
 	}
 #endif
 
-	for (unsigned int i=0;i<subSentences.size();++i)
-	{
-		WordRelationTableBuilder wordRelationTableBuilder(subSentences[i]);
-		wordRelationTableBuilder.Build();
-	}
-
-#ifdef _DEBUG //测试WordRelationTableBuilder
-	Cout_WordRelations();
-#endif
-
 	//统计不认识的词语
 	_unknownWords=CountUnknownWords(subSentences);
 
@@ -129,24 +118,6 @@ void SentenceAnalyzer::Cout_WordConnectionIntensity( const shared_ptr<DataCollec
 			}
 			cout<<endl;
 		}
-	}
-
-	cout<<endl;
-}
-
-void SentenceAnalyzer::Cout_WordRelations()
-{
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
-	vector<pair<shared_ptr<Mind::Concept>,shared_ptr<Mind::Concept>>> relations=brain->GetAllInteractPairs();
-
-	cout<<"Test Word Relations"<<endl;
-
-	for (unsigned int i=0;i<relations.size();++i)
-	{
-		cout<<relations[i].first->GetString();
-		cout<<" ";
-		cout<<relations[i].second->GetString();
-		cout<<endl;
 	}
 
 	cout<<endl;

@@ -10,19 +10,21 @@ namespace DataCollection
 namespace Mind
 {
 	class ConceptChain;
+	class ConceptInteractTable;
 	struct ConceptChainProperty;
 }
 
 class _REACTIONANALYSISALGORITHMINOUT ReactionParser
 {
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_input;
+	shared_ptr<Mind::ConceptInteractTable> _interactTable;
 
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_output;
 
 public:
 	ReactionParser(void);
 	~ReactionParser(void);
-	ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence);
+	ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable);
 
 	void Execute();
 	shared_ptr<DataCollection::Sentence> GetReactSentence() const;

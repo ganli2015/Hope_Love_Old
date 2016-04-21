@@ -1,10 +1,17 @@
-﻿生成启动时间为 2016/4/16 16:06:37。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/4/21 21:36:34。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\DataCollection\DataCollection.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\DataCollection.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\Hope_Love /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\DataCollection.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt DataBaseProcessorTool.cpp GrammaPattern.cpp GrammardSentence.cpp Sentence.cpp
+         DataBaseProcessorTool.cpp
+         正在生成代码...
+         正在编译...
+         Sentence.cpp
+         GrammardSentence.cpp
+         GrammaPattern.cpp
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\DataCollection.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib" /MACHINE:X86 /DLL Debug\Character.obj
          Debug\ChineseCharacters.obj
@@ -31,4 +38,4 @@
 
 生成成功。
 
-已用时间 00:00:00.73
+已用时间 00:00:07.84

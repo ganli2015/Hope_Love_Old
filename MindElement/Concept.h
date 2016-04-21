@@ -15,7 +15,7 @@ namespace Mind
 	class BaseConcept;
 	class ConceptLevelTable;
 
-	class  _MINDINOUT Concept
+	class  _MINDELEMENTINOUT Concept
 	{
 	public:
 		enum Color

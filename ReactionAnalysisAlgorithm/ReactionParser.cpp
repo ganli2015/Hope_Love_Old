@@ -9,8 +9,8 @@
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/Sentence.h"
 
-#include "../Mind/Concept.h"
-#include "../Mind/ConceptChain.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptChain.h"
 #include "../Mind/Cerebrum.h"
 
 #include <iostream>
@@ -27,7 +27,7 @@ ReactionParser::~ReactionParser(void)
 {
 }
 
-ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence):_sentence_input(sentence)
+ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
 {
 
 }
@@ -117,7 +117,7 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	vector<shared_ptr<DataCollection::Sentence>> res;
 
 	ChainGenerator chainGenerator;
-	chainGenerator.Generate();
+	chainGenerator.Generate(_interactTable);
 	vector<Mind::ConceptChainProperty> reactChains=chainGenerator.GetReactChains();
 
 #ifdef _DEBUG

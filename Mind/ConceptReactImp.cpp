@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "ConceptReactImp.h"
 #include "ConceptSet.h"
-#include "ConceptChain.h"
-#include "BaseConcept.h"
+#include "../MindElement/ConceptChain.h"
+#include "../MindElement/BaseConcept.h"
 
 #include "../Neural Network Design/DataArray.h"
 

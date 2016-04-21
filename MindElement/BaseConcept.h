@@ -4,7 +4,7 @@
 
 namespace Mind
 {
-	class _MINDINOUT BaseConcept : public Concept
+	class _MINDELEMENTINOUT BaseConcept : public Concept
 	{
 		//表示BaseConcept的唯一识别的id。
 		int _baseId;

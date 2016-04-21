@@ -81,9 +81,9 @@ namespace Mind
 		double GetP_Backward(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward) const;
 
 		//Concept Interact Table Related Functions
-		void BuildConceptInteractTable(const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept);
-		std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> GetAllInteractPairs() const;
-		void ClearConceptInteractTable();
+// 		void BuildConceptInteractTable(const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept);
+// 		std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> GetAllInteractPairs() const;
+// 		void ClearConceptInteractTable();
 
 		//Concept React System Functions
 		vector<ConceptChainProperty> React(const shared_ptr<ConceptChain> chain);

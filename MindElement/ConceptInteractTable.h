@@ -7,7 +7,7 @@ namespace Mind
 
 	//Concept相互作用的列表。该相互作用与ConceptEdge不同，后者是存在于ConceptSet里的原型的连接，
 	//是一个已经有较牢固关系的连接。前者则是临时的连接，通常是在遇见新的知识新的语句的时候建立的。
-	class ConceptInteractTable
+	class _MINDELEMENTINOUT ConceptInteractTable
 	{
 		vector<shared_ptr<Concept>> _concepts;
 		multimap<int,int> _interactIndex;

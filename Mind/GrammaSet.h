@@ -24,8 +24,6 @@ namespace Mind
 
 	class GrammarSet
 	{
-	public:
-		const static int num_speech;
 	private:
 		struct Sen_Gra
 		{

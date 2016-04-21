@@ -14,14 +14,14 @@ SpeakReaction::~SpeakReaction(void)
 {
 }
 
-SpeakReaction::SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence):_sentence_input(sentence)
+SpeakReaction::SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
 {
 
 }
 
 void SpeakReaction::React()
 {
-	ReactionParser reactionParser(_sentence_input);
+	ReactionParser reactionParser(_sentence_input,_interactTable);
 	reactionParser.Execute();
 	_sentence_output.push_back(reactionParser.GetReactSentence());
 }

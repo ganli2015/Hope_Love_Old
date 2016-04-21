@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "GrammarLocal.h"
-#include "GrammaSet.h"
+
+#include "../DataCollection/GrammaPattern.h"
 
 using namespace DataCollection;
 using namespace Math;
@@ -16,7 +17,7 @@ namespace Mind
 
 	GrammarLocal::GrammarLocal( const PartOfSpeech myPos ) :_pos(myPos)
 	{
-		for (int i=0;i<GrammarSet::num_speech;++i)
+		for (int i=0;i<DataCollection::num_speech;++i)
 		{
 			_forward[PartOfSpeech(i)]=MyInt();
 			_backward[PartOfSpeech(i)]=MyInt();

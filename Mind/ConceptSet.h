@@ -1,6 +1,6 @@
 #pragma once
 #include "InOut.h"
-#include "Concept.h"
+#include "../MindElement/Concept.h"
 #include "CommonFunction.h"
 
 namespace DataCollection

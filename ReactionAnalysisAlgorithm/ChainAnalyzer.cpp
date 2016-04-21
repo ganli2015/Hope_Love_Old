@@ -6,10 +6,10 @@
 #include "../Mathmatic/FindSequence.h"
 
 #include "../Mind/Cerebrum.h"
-#include "../Mind/Concept.h"
-#include "../Mind/ConceptChain.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptChain.h"
 #include "../Mind/CommonFunction.h"
-#include "../Mind/ConceptLevelTable.h"
+#include "../MindElement/ConceptLevelTable.h"
 
 using namespace Mind;
 using namespace Math;

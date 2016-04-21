@@ -7,7 +7,7 @@ namespace Mind
 	class BaseConcept;
 
 	//表示某个Concept与其BaseConcept之间的距离
-	class _MINDINOUT ConceptLevelTable
+	class _MINDELEMENTINOUT ConceptLevelTable
 	{
 	private:
 		struct LevelInfo

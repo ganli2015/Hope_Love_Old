@@ -7,6 +7,7 @@ namespace Mind
 	class ConceptChain;
 	class Cerebrum;
 	struct ConceptChainProperty;
+	class ConceptInteractTable;
 }
 
 class ChainGenerator
@@ -20,7 +21,7 @@ public:
 	ChainGenerator(void);
 	~ChainGenerator(void);
 
-	void Generate() ;
+	void Generate(const shared_ptr<Mind::ConceptInteractTable> interactTable) ;
 	vector<Mind::ConceptChainProperty> GetReactChains() const {return _reactChains;};
 
 private:

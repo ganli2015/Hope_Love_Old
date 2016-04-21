@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/4/16 16:44:54。
+﻿生成启动时间为 2016/4/21 22:50:36。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
@@ -16,15 +16,9 @@
          ConceptReactImp_1234.cpp
          ConceptReactImp_1212.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib" /MACHINE:X86 /DLL Debug\BaseConcept.obj
-         Debug\Cerebrum.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib" /MACHINE:X86 /DLL Debug\Cerebrum.obj
          Debug\CommonFunction.obj
-         Debug\Concept.obj
-         Debug\ConceptChain.obj
-         Debug\ConceptEdge.obj
-         Debug\ConceptInteractTable.obj
          Debug\ConceptInteractTableContainer.obj
-         Debug\ConceptLevelTable.obj
          Debug\ConceptReactImp.obj
          Debug\ConceptReactImp_1212.obj
          Debug\ConceptReactImp_1234.obj
@@ -33,7 +27,6 @@
          Debug\ConceptSetInitializer.obj
          Debug\FindConnectConcept.obj
          Debug\FilePath.obj
-         Debug\GrammarLocal.obj
          Debug\GrammaSet.obj
          Debug\GrammaTree.obj
          Debug\Stdafx.obj
@@ -43,6 +36,7 @@
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\CommonTools.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\DataCollection.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Mathmatic.lib"
+         "E:\Artificial Intelligence\Project\Hope_Love\Debug\MindElement.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.lib"
             正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.exp
          Mind.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll
@@ -59,4 +53,4 @@
 
 生成成功。
 
-已用时间 00:00:04.94
+已用时间 00:00:06.98

@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #include "Cerebrum.h"
-#include "Concept.h"
+#include "../MindElement/Concept.h"
 #include "Cerebrum.h"
 #include "../DataCollection/GrammaPattern.h"
 

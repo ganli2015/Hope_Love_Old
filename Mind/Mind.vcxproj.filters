@@ -20,9 +20,6 @@
     <ClInclude Include="InOut.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Concept.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ConceptSet.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -38,13 +35,7 @@
     <ClInclude Include="FilePath.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ConceptEdge.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="CommonFunction.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ConceptInteractTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ConceptInteractTableContainer.h">
@@ -53,19 +44,10 @@
     <ClInclude Include="ConceptSetInitializer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="BaseConcept.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ConceptChain.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ConceptReactSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FindConnectConcept.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ConceptLevelTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TestClass.h">
@@ -83,15 +65,9 @@
     <ClInclude Include="ConceptReactImp_1212.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GrammarLocal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Concept.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Cerebrum.cpp">
@@ -106,16 +82,10 @@
     <ClCompile Include="FilePath.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptEdge.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CommonFunction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConceptSet.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ConceptInteractTable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConceptInteractTableContainer.cpp">
@@ -127,19 +97,10 @@
     <ClCompile Include="Test.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="BaseConcept.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ConceptChain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptReactSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="FindConnectConcept.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ConceptLevelTable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TestClass.cpp">
@@ -155,9 +116,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConceptReactImp_1212.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GrammarLocal.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -141,15 +141,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseConcept.h" />
     <ClInclude Include="Cerebrum.h" />
     <ClInclude Include="CommonFunction.h" />
-    <ClInclude Include="Concept.h" />
-    <ClInclude Include="ConceptChain.h" />
-    <ClInclude Include="ConceptEdge.h" />
-    <ClInclude Include="ConceptInteractTable.h" />
     <ClInclude Include="ConceptInteractTableContainer.h" />
-    <ClInclude Include="ConceptLevelTable.h" />
     <ClInclude Include="ConceptReactImp.h" />
     <ClInclude Include="ConceptReactImp_1212.h" />
     <ClInclude Include="ConceptReactImp_1234.h" />
@@ -158,7 +152,6 @@
     <ClInclude Include="ConceptSetInitializer.h" />
     <ClInclude Include="FindConnectConcept.h" />
     <ClInclude Include="FilePath.h" />
-    <ClInclude Include="GrammarLocal.h" />
     <ClInclude Include="GrammaSet.h" />
     <ClInclude Include="GrammaTree.h" />
     <ClInclude Include="InOut.h" />
@@ -167,15 +160,9 @@
     <ClInclude Include="Test_ConceptSet.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseConcept.cpp" />
     <ClCompile Include="Cerebrum.cpp" />
     <ClCompile Include="CommonFunction.cpp" />
-    <ClCompile Include="Concept.cpp" />
-    <ClCompile Include="ConceptChain.cpp" />
-    <ClCompile Include="ConceptEdge.cpp" />
-    <ClCompile Include="ConceptInteractTable.cpp" />
     <ClCompile Include="ConceptInteractTableContainer.cpp" />
-    <ClCompile Include="ConceptLevelTable.cpp" />
     <ClCompile Include="ConceptReactImp.cpp" />
     <ClCompile Include="ConceptReactImp_1212.cpp" />
     <ClCompile Include="ConceptReactImp_1234.cpp" />
@@ -184,7 +171,6 @@
     <ClCompile Include="ConceptSetInitializer.cpp" />
     <ClCompile Include="FindConnectConcept.cpp" />
     <ClCompile Include="FilePath.cpp" />
-    <ClCompile Include="GrammarLocal.cpp" />
     <ClCompile Include="GrammaSet.cpp" />
     <ClCompile Include="GrammaTree.cpp" />
     <ClCompile Include="Stdafx.cpp">
@@ -211,6 +197,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
       <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MindElement\MindElement.vcxproj">
+      <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Neural Network Design\Neural Network Design.vcxproj">
       <Project>{0f9d9851-7103-4ca2-977f-266020313baf}</Project>

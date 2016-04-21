@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "ConceptInteractTableContainer.h"
-#include "ConceptInteractTable.h"
+#include "../MindElement/ConceptInteractTable.h"
 
 namespace Mind
 {

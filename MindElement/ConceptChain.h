@@ -5,7 +5,7 @@
 
 namespace Mind
 {
-	class _MINDINOUT ConceptChain
+	class _MINDELEMENTINOUT ConceptChain
 	{
 		typedef std::list<shared_ptr<Concept>> Sequence;
 

@@ -174,6 +174,9 @@
     <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
       <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\MindElement\MindElement.vcxproj">
+      <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Mind\Mind.vcxproj">
       <Project>{b4e0ed6d-cac1-4881-bee1-c154ba5c7df4}</Project>
     </ProjectReference>

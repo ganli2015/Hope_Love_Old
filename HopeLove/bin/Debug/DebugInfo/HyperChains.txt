@@ -63,130 +63,186 @@ Level: 0.25
 Level: 0
 
 Base Chain: 
-自己 也 好感 对方 
+自己 好感 对方 
 Confidence: 1
 HyperChains: 
-我 也 喜欢 你 
-Level: 0.75
-人家 也 喜欢 你 
-Level: 0.75
-自己 也 喜欢 你 
-Level: 0.5
-我 也 爱 你 
+我 喜欢 你 
 Level: 1
-人家 也 爱 你 
+人家 喜欢 你 
 Level: 1
-自己 也 爱 你 
-Level: 0.75
-我 也 好感 你 
-Level: 0.5
-人家 也 好感 你 
-Level: 0.5
-自己 也 好感 你 
-Level: 0.25
-我 也 喜欢 对方 
-Level: 0.5
-人家 也 喜欢 对方 
-Level: 0.5
-自己 也 喜欢 对方 
-Level: 0.25
-我 也 爱 对方 
-Level: 0.75
-人家 也 爱 对方 
-Level: 0.75
-自己 也 爱 对方 
-Level: 0.5
-我 也 好感 对方 
-Level: 0.25
-人家 也 好感 对方 
-Level: 0.25
-自己 也 好感 对方 
+自己 喜欢 你 
+Level: 0.666667
+我 爱 你 
+Level: 1.33333
+人家 爱 你 
+Level: 1.33333
+自己 爱 你 
+Level: 1
+我 好感 你 
+Level: 0.666667
+人家 好感 你 
+Level: 0.666667
+自己 好感 你 
+Level: 0.333333
+我 喜欢 对方 
+Level: 0.666667
+人家 喜欢 对方 
+Level: 0.666667
+自己 喜欢 对方 
+Level: 0.333333
+我 爱 对方 
+Level: 1
+人家 爱 对方 
+Level: 1
+自己 爱 对方 
+Level: 0.666667
+我 好感 对方 
+Level: 0.333333
+人家 好感 对方 
+Level: 0.333333
+自己 好感 对方 
 Level: 0
 
 Base Chain: 
-自己 也 好感 干干 
+也 好感 对方 
 Confidence: 1
 HyperChains: 
-我 也 喜欢 干干 
-Level: 0.5
-人家 也 喜欢 干干 
-Level: 0.5
-自己 也 喜欢 干干 
-Level: 0.25
-我 也 爱 干干 
-Level: 0.75
-人家 也 爱 干干 
-Level: 0.75
-自己 也 爱 干干 
-Level: 0.5
-我 也 好感 干干 
-Level: 0.25
-人家 也 好感 干干 
-Level: 0.25
-自己 也 好感 干干 
+也 喜欢 你 
+Level: 0.666667
+也 爱 你 
+Level: 1
+也 好感 你 
+Level: 0.333333
+也 喜欢 对方 
+Level: 0.333333
+也 爱 对方 
+Level: 0.666667
+也 好感 对方 
 Level: 0
 
 Base Chain: 
-自己 也 好感 对方 
+自己 好感 干干 
 Confidence: 1
 HyperChains: 
-我 也 喜欢 你 
-Level: 0.75
-人家 也 喜欢 你 
-Level: 0.75
-自己 也 喜欢 你 
-Level: 0.5
-我 也 爱 你 
+我 喜欢 干干 
+Level: 0.666667
+人家 喜欢 干干 
+Level: 0.666667
+自己 喜欢 干干 
+Level: 0.333333
+我 爱 干干 
 Level: 1
-人家 也 爱 你 
+人家 爱 干干 
 Level: 1
-自己 也 爱 你 
-Level: 0.75
-我 也 好感 你 
-Level: 0.5
-人家 也 好感 你 
-Level: 0.5
-自己 也 好感 你 
-Level: 0.25
-我 也 喜欢 对方 
-Level: 0.5
-人家 也 喜欢 对方 
-Level: 0.5
-自己 也 喜欢 对方 
-Level: 0.25
-我 也 爱 对方 
-Level: 0.75
-人家 也 爱 对方 
-Level: 0.75
-自己 也 爱 对方 
-Level: 0.5
-我 也 好感 对方 
-Level: 0.25
-人家 也 好感 对方 
-Level: 0.25
-自己 也 好感 对方 
+自己 爱 干干 
+Level: 0.666667
+我 好感 干干 
+Level: 0.333333
+人家 好感 干干 
+Level: 0.333333
+自己 好感 干干 
 Level: 0
 
 Base Chain: 
-自己 也 好感 干干 
+也 好感 干干 
 Confidence: 1
 HyperChains: 
-我 也 喜欢 干干 
-Level: 0.5
-人家 也 喜欢 干干 
-Level: 0.5
-自己 也 喜欢 干干 
-Level: 0.25
-我 也 爱 干干 
-Level: 0.75
-人家 也 爱 干干 
-Level: 0.75
-自己 也 爱 干干 
-Level: 0.5
-我 也 好感 干干 
-Level: 0.25
-人家 也 好感 干干 
-Level: 0.25
-自己 也 好感 干干 
+也 喜欢 干干 
+Level: 0.333333
+也 爱 干干 
+Level: 0.666667
+也 好感 干干 
+Level: 0
+
+Base Chain: 
+自己 好感 对方 
+Confidence: 1
+HyperChains: 
+我 喜欢 你 
+Level: 1
+人家 喜欢 你 
+Level: 1
+自己 喜欢 你 
+Level: 0.666667
+我 爱 你 
+Level: 1.33333
+人家 爱 你 
+Level: 1.33333
+自己 爱 你 
+Level: 1
+我 好感 你 
+Level: 0.666667
+人家 好感 你 
+Level: 0.666667
+自己 好感 你 
+Level: 0.333333
+我 喜欢 对方 
+Level: 0.666667
+人家 喜欢 对方 
+Level: 0.666667
+自己 喜欢 对方 
+Level: 0.333333
+我 爱 对方 
+Level: 1
+人家 爱 对方 
+Level: 1
+自己 爱 对方 
+Level: 0.666667
+我 好感 对方 
+Level: 0.333333
+人家 好感 对方 
+Level: 0.333333
+自己 好感 对方 
+Level: 0
+
+Base Chain: 
+也 好感 对方 
+Confidence: 1
+HyperChains: 
+也 喜欢 你 
+Level: 0.666667
+也 爱 你 
+Level: 1
+也 好感 你 
+Level: 0.333333
+也 喜欢 对方 
+Level: 0.333333
+也 爱 对方 
+Level: 0.666667
+也 好感 对方 
+Level: 0
+
+Base Chain: 
+自己 好感 干干 
+Confidence: 1
+HyperChains: 
+我 喜欢 干干 
+Level: 0.666667
+人家 喜欢 干干 
+Level: 0.666667
+自己 喜欢 干干 
+Level: 0.333333
+我 爱 干干 
+Level: 1
+人家 爱 干干 
+Level: 1
+自己 爱 干干 
+Level: 0.666667
+我 好感 干干 
+Level: 0.333333
+人家 好感 干干 
+Level: 0.333333
+自己 好感 干干 
+Level: 0
+
+Base Chain: 
+也 好感 干干 
+Confidence: 1
+HyperChains: 
+也 喜欢 干干 
+Level: 0.333333
+也 爱 干干 
+Level: 0.666667
+也 好感 干干 
 Level: 0
 

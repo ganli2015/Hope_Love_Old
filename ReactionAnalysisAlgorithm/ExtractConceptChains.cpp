@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "ExtractConceptChains.h"
 
-#include "../Mind/Concept.h"
-#include "../Mind/ConceptChain.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptChain.h"
 #include "../Mind/CommonFunction.h"
 
 using namespace Mind;

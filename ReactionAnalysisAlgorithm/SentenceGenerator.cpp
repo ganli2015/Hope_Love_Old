@@ -2,8 +2,8 @@
 #include "SentenceGenerator.h"
 
 #include "../Mind/Cerebrum.h"
-#include "../Mind/Concept.h"
-#include "../Mind/ConceptChain.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptChain.h"
 
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/Rand.h"

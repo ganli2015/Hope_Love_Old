@@ -3,8 +3,9 @@
 #include "ExtractConceptChains.h"
 
 #include "../Mind/Cerebrum.h"
-#include "../Mind/Concept.h"
-#include "../Mind/ConceptChain.h"
+#include "../MindElement/Concept.h"
+#include "../MindElement/ConceptChain.h"
+#include "../MindElement/ConceptInteractTable.h"
 #include "../Mind/CommonFunction.h"
 
 #include "../Mathmatic/Rand.h"
@@ -22,9 +23,9 @@ ChainGenerator::~ChainGenerator(void)
 {
 }
 
-void ChainGenerator::Generate()
+void ChainGenerator::Generate(const shared_ptr<Mind::ConceptInteractTable> interactTable)
 {
-	vector<ConceptPair> allPairs=_brain->GetAllInteractPairs();
+	vector<ConceptPair> allPairs=interactTable->GetAllRelations();
 	vector<shared_ptr<ConceptChain>> allChains=ExtractConceptChains::Extract(allPairs);
 	RemoveSameChain(allChains);
 

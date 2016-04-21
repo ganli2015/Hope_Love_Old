@@ -6,10 +6,17 @@ namespace DataCollection
 	class Sentence;
 }
 
+namespace Mind
+{
+	class ConceptInteractTable;
+}
+
 class _SENTENCEANALYSISALGORITHMINOUT SentenceParser
 {
 	std::string _sentence;
 	vector<shared_ptr<DataCollection::Sentence>> _parsedSentence;
+
+	shared_ptr<Mind::ConceptInteractTable> _conceptTable;
 public:
 	SentenceParser(void);
 	~SentenceParser(void);
@@ -17,5 +24,8 @@ public:
 
 	void Execute();
 	vector<shared_ptr<DataCollection::Sentence>> GetParsedSentence() const {return _parsedSentence;}
+	shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const {return _conceptTable;}
+private:
+	void Cout_WordRelations();
 };
 

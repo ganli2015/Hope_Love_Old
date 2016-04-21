@@ -7,7 +7,7 @@
 namespace Mind
 {
 	//储存某个词性的局部特征.
-	class GrammarLocal
+	class _MINDELEMENTINOUT GrammarLocal
 	{
 		DataCollection::PartOfSpeech _pos;//me的词性
 		map<DataCollection::PartOfSpeech,Math::MyInt> _forward;//该词性后面一个词语的词性分布

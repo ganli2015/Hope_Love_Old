@@ -117,23 +117,23 @@ namespace Mind
 		return _conceptset->MakeConnection(from,to);
 	}
 
-	std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> Cerebrum::GetAllInteractPairs() const
-	{
-		std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> res;
-		if(_conceptInteractTableContainer==NULL)
-		{
-			return res;
-		}
-		else
-		{
-			return _conceptInteractTableContainer->GetAllInteractPairs();
-		}
-	}
+// 	std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> Cerebrum::GetAllInteractPairs() const
+// 	{
+// 		std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> res;
+// 		if(_conceptInteractTableContainer==NULL)
+// 		{
+// 			return res;
+// 		}
+// 		else
+// 		{
+// 			return _conceptInteractTableContainer->GetAllInteractPairs();
+// 		}
+// 	}
 
-	void Cerebrum::ClearConceptInteractTable()
-	{
-		_conceptInteractTableContainer=new ConceptInteractTableContainer;
-	}
+// 	void Cerebrum::ClearConceptInteractTable()
+// 	{
+// 		_conceptInteractTableContainer=new ConceptInteractTableContainer;
+// 	}
 
 	vector<DataCollection::GrammarPattern> Cerebrum::GrammarPatternSortByFrequency() const
 	{
@@ -165,20 +165,20 @@ namespace Mind
 		return _conceptset->GetConceptPtr(identity);
 	}
 
-	void Cerebrum::BuildConceptInteractTable( const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept )
-	{
-		if(fromConcept==NULL || toConcept==NULL)
-		{
-			return ;
-		}
-
-		shared_ptr<ConceptInteractTable> conceptTable=_conceptset->GetDeepInteractTable(fromConcept,toConcept);
-		if(_conceptInteractTableContainer==NULL)
-		{
-			_conceptInteractTableContainer=new ConceptInteractTableContainer;
-		}
-		_conceptInteractTableContainer->Add(conceptTable,fromConcept,toConcept);
-	}
+// 	void Cerebrum::BuildConceptInteractTable( const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept )
+// 	{
+// 		if(fromConcept==NULL || toConcept==NULL)
+// 		{
+// 			return ;
+// 		}
+// 
+// 		shared_ptr<ConceptInteractTable> conceptTable=_conceptset->GetDeepInteractTable(fromConcept,toConcept);
+// 		if(_conceptInteractTableContainer==NULL)
+// 		{
+// 			_conceptInteractTableContainer=new ConceptInteractTableContainer;
+// 		}
+// 		_conceptInteractTableContainer->Add(conceptTable,fromConcept,toConcept);
+// 	}
 
 	vector<ConceptChainProperty> Cerebrum::React( const shared_ptr<ConceptChain> chain )
 	{
