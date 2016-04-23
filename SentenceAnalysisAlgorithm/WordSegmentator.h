@@ -1,25 +1,30 @@
 #pragma once
 #include "InOut.h"
 #include "../DataCollection/Character.h"
-
+#include "map"
 
 namespace DataCollection
 {
 	class Word;
 	class Sentence;
+	class SegmentedSentence;
 }
 
 class WordSegmentator
 {
     shared_ptr<DataCollection::Sentence> _unsegmented;
-	//std::vector<shared_ptr<DataCollection::Word>> _segmented;
+
+	//分词后的句子，key储存子句子，value是该子句子对应的多个分词句子.
+	multimap<string,shared_ptr<DataCollection::SegmentedSentence>> _segmented;
 public:
-	WordSegmentator(void);
+	//sentence的标点符号必须是已经是puncture类
+	WordSegmentator(shared_ptr<DataCollection::Sentence> sentence);
 	~WordSegmentator(void);
 
-	//void SetUnsegementedSentence(shared_ptr<DataCollection::Sentence> sen) {_unsegmented=sen;}
 
-	bool Segment(shared_ptr<DataCollection::Sentence> sentence);
+	bool Segment();
+
+	vector<shared_ptr<DataCollection::SegmentedSentence>> GetAllSegementedSentence() const;
 
 private:
 
@@ -30,8 +35,10 @@ private:
 		int index;
 	};
 
+	void SegmentSubsentence(const string subsentence);
 
 	std::vector<DataCollection::Character> GetRawSentence(shared_ptr<DataCollection::Sentence> sentence) const ;
+	std::vector<DataCollection::Character> ConvertStringToCharacter(const string str) const ;
 	WordSegmentator::CharacterProperty GenerateCharacterProperty(const DataCollection::Character& chara,const int myIndex,const vector<DataCollection::Character>& raw_noPunc);
 };
 void SegmentMannersAccordingToUandA(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& segmented);

@@ -11,6 +11,8 @@ using namespace std::tr1;
 using namespace std;
 
 #include "../CommonTools/CommonDeleteFunction.h"
+#include "../CommonTools/assertions.h"
+
 
 #ifdef SENTENCEANALYSISALGORITHMAPI
 #define _SENTENCEANALYSISALGORITHMINOUT _declspec(dllexport)

@@ -6,6 +6,8 @@ namespace LogicSystem
 {
 	class _LOGICSYSTEMINOUT CompositeExpression : public Expression
 	{
+		vector<shared_ptr<Expression>> _expres;
+
 	public:
 		CompositeExpression(void);
 		~CompositeExpression(void);

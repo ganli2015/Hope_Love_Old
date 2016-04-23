@@ -82,6 +82,7 @@
     <ClInclude Include="Expression.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
+    <ClInclude Include="SingleExpression.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="TestClass.h" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClCompile Include="CompositeExpression.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="SingleExpression.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -102,6 +104,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">
       <Project>{e3ce7562-e989-4069-ad9f-fd7d45b1dc46}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SentenceAnalysisAlgorithm\SentenceAnalysisAlgorithm.vcxproj">
+      <Project>{347b0dc1-09b3-43e1-8ed4-43a85a3dcc7f}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -75,16 +75,19 @@ WordRep GetWordRep(shared_ptr<Word> word)
 
 int CheckUnknownWords(const vector<shared_ptr<Word>>& words)
 {
+	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+
 	int count(0);
 	for (unsigned int i=0;i<words.size();++i)
 	{
-		if(words[i]->Type()==Unknown)
+		if(!brain->IsInMind(words[i]))
 		{
 			count++;
 		}
 	}
 	return count;
 }
+
 
 int CheckAmbiguousWords(const vector<WordRep>& words)
 {
@@ -258,12 +261,20 @@ void GrammarAnalyzer::OptimizePOSofWords()
 	bool containAmbiguousWord(false);
 
 	vector<vector<shared_ptr<Word>>> candidates;//存入所有的可能性，再选择最优的。
-	for (unsigned int i=0;i<_raw_sen->Count_Segmented();++i)
+
+	for (unsigned int i=0;i<_segments.size();++i)
 	{
-		vector<shared_ptr<Word>> segmented=_raw_sen->GetSegmented(i);
+		vector<shared_ptr<Word>> segmented=_segments[i]->Get();
 		pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> sen_punc =DataBaseProcessorTool::TrimEndPunctures(segmented);
 		vector<shared_ptr<Word>> segmented_withNoPunc=sen_punc.first;
 		vector<shared_ptr<Word>> punc=sen_punc.second;
+
+		//Get all kinds of part of speech of each word
+		vector<WordRep> segmente_allRep(segmented_withNoPunc.size());
+		for (unsigned int j=0;j<segmented_withNoPunc.size();++j)
+		{
+			segmente_allRep[j]=GetWordRep(segmented_withNoPunc[j]);
+		}
 
 		int count_unknown=CheckUnknownWords(segmented_withNoPunc);
 		if(count_unknown>0)
@@ -272,15 +283,9 @@ void GrammarAnalyzer::OptimizePOSofWords()
 		}
 		if(count_unknown>unknown_ambiguous_Limit)
 		{
-			continue;
+			return;
 		}
 
-		//Get all kinds of part of speech of each word
-		vector<WordRep> segmente_allRep(segmented_withNoPunc.size());
-		for (unsigned int j=0;j<segmented_withNoPunc.size();++j)
-		{
-			segmente_allRep[j]=GetWordRep(segmented_withNoPunc[j]);
-		}
 		int count_ambiguous=CheckAmbiguousWords(segmente_allRep);
 		if(count_ambiguous>0)
 		{
@@ -288,7 +293,7 @@ void GrammarAnalyzer::OptimizePOSofWords()
 		}
 		if(count_ambiguous+count_unknown>unknown_ambiguous_Limit)
 		{
-			continue;
+			return;
 		}
 
 		//Get all combinations according to  POS of each word.
@@ -305,7 +310,6 @@ void GrammarAnalyzer::OptimizePOSofWords()
 				vector<vector<shared_ptr<Word>>> spannedCombination=SpanUnknownAndAmbiguousToEveryPOS(possi_Combine[j]);//Let the unknown word span over every POS.
 				SelectOptimalGrammarPattern(spannedCombination,optimal);
 			}
-
 		}
 		else
 		{
@@ -316,10 +320,12 @@ void GrammarAnalyzer::OptimizePOSofWords()
 		candidates.push_back(optimal);
 		//_raw_sen->AddGrammard(optimal);
 	}
+	
 
 	vector<shared_ptr<Word>> mostOptimal;
 	SelectOptimalGrammarPattern(candidates,mostOptimal);
-	_raw_sen->AddGrammard(mostOptimal);
+	//当前只处理只有一个间断标点的短句子.
+	_raw_sen->SetGrammard(mostOptimal);
 }
 
 
@@ -328,11 +334,14 @@ void GrammarAnalyzer::BuildGrammarAssociationOfWords()
 {
 	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
 
-	for (unsigned int i=0;i<_raw_sen->Count_Grammard();++i)
+	vector<shared_ptr<Word>> grammard=_raw_sen->GetGrammard();
+	if(grammard.empty())
 	{
-		vector<shared_ptr<Word>> grammard=_raw_sen->GetGrammard(i);
-		GrammarPattern pattern=DataBaseProcessorTool::ConvertToPattern(grammard);
-		vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
-		_raw_sen->BuildGrammarAssociation(i,matchedPattern);
+		return;
 	}
+
+	GrammarPattern pattern=DataBaseProcessorTool::ConvertToPattern(grammard);
+	vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
+	_raw_sen->BuildGrammarAssociation(matchedPattern);
 }
+

@@ -7,12 +7,14 @@
 
 #include "../Mind/Cerebrum.h"
 
+#include "../Mathmatic/FindSequence.h"
+
 using namespace std;
 using namespace DataCollection;
 
 
 
-WordSegmentator::WordSegmentator(void):_unsegmented(NULL)
+WordSegmentator::WordSegmentator(shared_ptr<DataCollection::Sentence> sentence):_unsegmented(sentence)
 {
 }
 
@@ -174,13 +176,23 @@ void SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vecto
 
 }
 
-bool WordSegmentator::Segment( shared_ptr<DataCollection::Sentence> sentence )
+bool WordSegmentator::Segment(  )
 {
-	vector<Character> raw=GetRawSentence(sentence);
+	for (unsigned int i=0;i<_unsegmented->Count_SubSentence();++i)
+	{
+		SegmentSubsentence(_unsegmented->GetSubSentence(i));
+	}
+
+ 	return true;
+}
+
+void WordSegmentator::SegmentSubsentence( const string subsentence )
+{
+	vector<Character> raw=ConvertStringToCharacter(subsentence);
 	pair<vector<Character>,vector<Character>> sen_punc =DataBaseProcessorTool::TrimEndPunctures(raw);
 	vector<Character> raw_noPunc=sen_punc.first;
 	vector<Character> punc=sen_punc.second;
-	
+
 	vector<CharacterProperty> vec_characterProperty;
 	//find the candidate word of each character
 	for (unsigned int i=0;i<raw_noPunc.size();++i)
@@ -190,7 +202,7 @@ bool WordSegmentator::Segment( shared_ptr<DataCollection::Sentence> sentence )
 
 		vec_characterProperty.push_back(characterProperty);
 	}
-	
+
 	//pick the longest candidate word of each character to compose the sentence
 	unsigned int index(0);
 	vector<shared_ptr<Word>> initial_segmented;
@@ -201,7 +213,7 @@ bool WordSegmentator::Segment( shared_ptr<DataCollection::Sentence> sentence )
 		initial_segmented.push_back(shared_ptr<Word>(new Word(candidate)));
 		index+=step;
 	}
-    
+
 	vector<vector<shared_ptr<Word>>> segmented;
 	SegmentMannersAccordingToUandA(initial_segmented,segmented);
 
@@ -210,10 +222,9 @@ bool WordSegmentator::Segment( shared_ptr<DataCollection::Sentence> sentence )
 	{
 		vector<shared_ptr<Word>> seg_withPunc=segmented[i];
 		seg_withPunc.insert(seg_withPunc.end(),punc_words.begin(),punc_words.end());
-		sentence->AddSegmented(seg_withPunc);
+		
+		_segmented.insert(make_pair(subsentence,shared_ptr<SegmentedSentence>(new SegmentedSentence(seg_withPunc))));
 	}
-
- 	return true;
 }
 
 WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(const Character& chara,const int myIndex,const vector<Character>& raw_noPunc)
@@ -255,6 +266,60 @@ std::vector<Character> WordSegmentator::GetRawSentence( shared_ptr<DataCollectio
 	for (unsigned int i=0;i<raw.size();++i)
 	{
 		res.push_back(*raw[i]);
+	}
+
+	return res;
+}
+
+std::vector<DataCollection::Character> WordSegmentator::ConvertStringToCharacter( const string str ) const
+{
+	vector<shared_ptr<Character>> ptrCharas=DataBaseProcessorTool::ConvertStringToCharacter(str);
+	vector<Character> res;
+	res.reserve(ptrCharas.size());
+	for (unsigned int i=0;i<ptrCharas.size();++i)
+	{
+		res.push_back(*ptrCharas[i]);
+	}
+
+	return res;
+}
+
+vector<shared_ptr<DataCollection::SegmentedSentence>> WordSegmentator::GetAllSegementedSentence() const
+{
+	//每个元素表示一个子句子对应的所有分词方式.
+	vector<vector<shared_ptr<SegmentedSentence>>> subSentenSeg; 
+	for (unsigned int i=0;i<_unsegmented->Count_SubSentence();++i)
+	{
+		string subStr=_unsegmented->GetSubSentence(i);
+		multimap<string,shared_ptr<SegmentedSentence>>::const_iterator beg=_segmented.lower_bound(subStr);
+		multimap<string,shared_ptr<SegmentedSentence>>::const_iterator end=_segmented.upper_bound(subStr);
+
+		vector<shared_ptr<SegmentedSentence>> allSeg;
+		while(beg!=end)
+		{
+			allSeg.push_back(beg->second);
+			beg++;
+		}
+
+		subSentenSeg.push_back(allSeg);
+	}
+
+	//每个元素表示完整句子的分词序列.
+	vector<vector<shared_ptr<SegmentedSentence>>> segSequence= Math::GetAllCombinations<shared_ptr<SegmentedSentence>>::Get(subSentenSeg);
+	//把<segSequence>的每个元素组合成一个完整的句子.
+	vector<shared_ptr<SegmentedSentence>> res;
+	res.reserve(segSequence.size());
+	for (unsigned int i=0;i<segSequence.size();++i)
+	{
+		vector<shared_ptr<Word>> wholeWords;
+		vector<shared_ptr<SegmentedSentence>> oneSequence=segSequence[i];
+		for (unsigned int j=0;j<oneSequence.size();++j)
+		{
+			vector<shared_ptr<Word>> oneSeqWords=oneSequence[j]->Get();
+			wholeWords.insert(wholeWords.end(),oneSeqWords.begin(),oneSeqWords.end());
+		}
+
+		res.push_back(shared_ptr<SegmentedSentence>(new SegmentedSentence(wholeWords)));
 	}
 
 	return res;

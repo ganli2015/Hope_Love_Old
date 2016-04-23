@@ -36,12 +36,9 @@ void SentenceParser::Execute()
 
 	_parsedSentence=sentenceAnalyzer->GetAnalyzedSentences();
 
-	for (unsigned int i=0;i<_parsedSentence.size();++i)
-	{
-		WordRelationTableBuilder wordRelationTableBuilder(_parsedSentence[i]);
-		wordRelationTableBuilder.Build();
-		_conceptTable->Absorb(wordRelationTableBuilder.GetInteractTable());
-	}
+	WordRelationTableBuilder wordRelationTableBuilder(_parsedSentence);
+	wordRelationTableBuilder.Build();
+	_conceptTable->Absorb(wordRelationTableBuilder.GetInteractTable());
 
 #ifdef _DEBUG //≤‚ ‘WordRelationTableBuilder
 	Cout_WordRelations();

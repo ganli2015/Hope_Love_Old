@@ -8,7 +8,6 @@ namespace LogicSystem
 	public:
 		Expression(void);
 		~Expression(void);
-		Expression(const string val);
 
 
 	};

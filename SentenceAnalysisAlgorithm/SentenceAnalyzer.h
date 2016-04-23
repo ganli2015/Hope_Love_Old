@@ -12,7 +12,7 @@ class Punctuator;
 class _SENTENCEANALYSISALGORITHMINOUT SentenceAnalyzer
 {
 	std::string _rawSentenceString;
-	vector<shared_ptr<DataCollection::Sentence>> _analyzedSentences;
+	shared_ptr<DataCollection::Sentence> _analyzedSentences;
 	
 	vector<shared_ptr<DataCollection::Word>> _unknownWords;
 public:
@@ -23,11 +23,11 @@ public:
 	void Analyze();
 
 	vector<shared_ptr<DataCollection::Word>> GetUnknownWords() const {return _unknownWords;};
-	vector<shared_ptr<DataCollection::Sentence>> GetAnalyzedSentences() const {return _analyzedSentences;}
+	shared_ptr<DataCollection::Sentence> GetAnalyzedSentences() const {return _analyzedSentences;}
 private:
 	void Cout_GrammardSentence(const shared_ptr<DataCollection::Sentence> grammard);
 	void Cout_WordConnectionIntensity(const shared_ptr<DataCollection::Sentence> sentence);
 
-	vector<shared_ptr<DataCollection::Word>> CountUnknownWords(const vector<shared_ptr<DataCollection::Sentence>>& sentences) const;
+	vector<shared_ptr<DataCollection::Word>> CountUnknownWords(const shared_ptr<DataCollection::Sentence>& sentences) const;
 };
 

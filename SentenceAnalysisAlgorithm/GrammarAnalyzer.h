@@ -5,6 +5,7 @@
 namespace DataCollection
 {
 	class Sentence;
+	class SegmentedSentence;
 	class Word;
 	class GrammarPattern;
 }
@@ -12,17 +13,22 @@ namespace DataCollection
 class  GrammarAnalyzer
 {
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
+	vector<shared_ptr<DataCollection::SegmentedSentence>> _segments;
+
 public:
 	GrammarAnalyzer(void);
 	~GrammarAnalyzer(void);
 	GrammarAnalyzer( shared_ptr<DataCollection::Sentence> sen);
 
+	//当前只处理只有一个间断标点的短句子.
 	bool Analyze();
-	shared_ptr<DataCollection::Sentence> GetResult() const {return _raw_sen;}
+	//添加分词方式.
+	void AddSegment(const shared_ptr<DataCollection::SegmentedSentence> sentence) {_segments.push_back(sentence);}
 
 private:
 	void OptimizePOSofWords();
 	void BuildGrammarAssociationOfWords();
+
 };
 
 class WordRep;

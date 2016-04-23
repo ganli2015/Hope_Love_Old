@@ -61,9 +61,8 @@ void DataWrapperCPP::DataWrapper_Sentence::AddOutputSentence( std::string asente
 	_outputsentences.push_back(sen);
 }
 
-void DataWrapperCPP::DataWrapper_Sentence::AddParsedInputSentence( const vector<shared_ptr<DataCollection::Sentence>>& parsedSentence )
+void DataWrapperCPP::DataWrapper_Sentence::AddParsedInputSentence( const shared_ptr<DataCollection::Sentence>& parsedSentence )
 {
-	if(parsedSentence.empty()) return;
 	if(_inputsentences.empty()) return;
 
 	class FindInputInfo
@@ -86,11 +85,11 @@ void DataWrapperCPP::DataWrapper_Sentence::AddParsedInputSentence( const vector<
 	};
 
 
-	string rawStr=parsedSentence[0]->GetString();
+	string rawStr=parsedSentence->GetString();
 	InputSenInfo lastInfo=_inputsentences.back();
 	if(lastInfo.sentence_str==rawStr)//先判断最后一个是不是要找的
 	{
-		lastInfo.parsed.insert(lastInfo.parsed.end(),parsedSentence.begin(),parsedSentence.end());
+		lastInfo.parsed=parsedSentence;
 		_inputsentences.back()=lastInfo;
 	}
 	else
@@ -103,7 +102,7 @@ void DataWrapperCPP::DataWrapper_Sentence::AddParsedInputSentence( const vector<
 		}
 		else
 		{
-			it->parsed.insert(it->parsed.end(),parsedSentence.begin(),parsedSentence.end());
+			it->parsed=parsedSentence;
 		}
 	}
 }

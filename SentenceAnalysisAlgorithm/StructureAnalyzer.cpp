@@ -22,25 +22,23 @@ StructureAnalyzer::~StructureAnalyzer(void)
 
 bool StructureAnalyzer::Analyze()
 {
-	for (unsigned int i=0;i<_raw_sen->Count_Grammard();++i)
+	vector<vector<int>> tri_matrix;//三角矩阵，记录两两word的语法模式的总频率，不包含与自身的频率，所以是个上三角矩阵。
+	for (unsigned int j=0;j<_raw_sen->GrammarWordCount();++j)
 	{
-		vector<vector<int>> tri_matrix;//三角矩阵，记录两两word的语法模式的总频率，不包含与自身的频率，所以是个上三角矩阵。
-		for (unsigned int j=0;j<_raw_sen->GrammarWordCount(i);++j)
+		vector<vector<int>> associatedIndexes;
+		vector<GrammarPattern> associatedPatterns;
+		_raw_sen->GetAssociationInfo(j,associatedIndexes,associatedPatterns);
+		vector<int> freqRow;
+		for (unsigned int k=j+1;k<_raw_sen->GrammarWordCount();++k)
 		{
-			vector<vector<int>> associatedIndexes;
-			vector<GrammarPattern> associatedPatterns;
-			_raw_sen->GetAssociationInfo(i,j,associatedIndexes,associatedPatterns);
-			vector<int> freqRow;
-			for (unsigned int k=j+1;k<_raw_sen->GrammarWordCount(i);++k)
-			{
-				int totalFreq=TotalPatternFrequency(j,k,associatedIndexes,associatedPatterns);
-				freqRow.push_back(totalFreq);
-			}
-			tri_matrix.push_back(freqRow);
+			int totalFreq=TotalPatternFrequency(j,k,associatedIndexes,associatedPatterns);
+			freqRow.push_back(totalFreq);
 		}
-		vector<vector<double>> normalizedMatrix=NormalizeFreqMatrix(tri_matrix);
-		SetEachWordIntenstiy(i,normalizedMatrix);
+		tri_matrix.push_back(freqRow);
 	}
+	vector<vector<double>> normalizedMatrix=NormalizeFreqMatrix(tri_matrix);
+	SetEachWordIntenstiy(normalizedMatrix);
+
 	return true;
 }
 
@@ -91,13 +89,13 @@ vector<vector<double>> StructureAnalyzer::NormalizeFreqMatrix( const vector<vect
 	return res;
 }
 
-void StructureAnalyzer::SetEachWordIntenstiy(const int ith_gra, const vector<vector<double>>& triangleMatrix )
+void StructureAnalyzer::SetEachWordIntenstiy( const vector<vector<double>>& triangleMatrix )
 {
 	for (unsigned int i=0;i<triangleMatrix.size();++i)
 	{
 		for (unsigned int j=0;j<triangleMatrix[i].size();++j)
 		{
-			_raw_sen->SetWordIntensity(ith_gra,i,i+j+1,triangleMatrix[i][j]);
+			_raw_sen->SetWordIntensity(i,i+j+1,triangleMatrix[i][j]);
 		}
 	}
 }

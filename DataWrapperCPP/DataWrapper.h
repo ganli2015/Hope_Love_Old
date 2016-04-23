@@ -16,7 +16,7 @@ namespace DataWrapperCPP
 		struct InputSenInfo
 		{
 			std::string sentence_str;
-			std::vector<shared_ptr<DataCollection::Sentence>> parsed;
+			std::shared_ptr<DataCollection::Sentence> parsed;
 		};
 
 		std::vector<InputSenInfo> _inputsentences;
@@ -30,7 +30,7 @@ namespace DataWrapperCPP
 		void AddOutputSentence(std::string asentence);
 		std::string GetNewOutSentence();
 		std::string GetInputSentence();
-		void AddParsedInputSentence(const std::vector<shared_ptr<DataCollection::Sentence>>& parsedSentence);
+		void AddParsedInputSentence(const shared_ptr<DataCollection::Sentence>& parsedSentence);
 	};
 }
 

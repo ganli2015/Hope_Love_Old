@@ -16,9 +16,8 @@ Punctuator::~Punctuator(void)
 {
 }
 
-bool Punctuator::Punctuate( std::vector<shared_ptr<DataCollection::Sentence>>& punctuated )
+bool Punctuator::Punctuate( shared_ptr<DataCollection::Sentence>& punctuated )
 {
-	punctuated.clear();
 	vector<shared_ptr<Character>> unpun=_unpunctuated->GetRawSentence();
 
 	if(unpun.empty())
@@ -31,8 +30,7 @@ bool Punctuator::Punctuate( std::vector<shared_ptr<DataCollection::Sentence>>& p
 		if(chara_it==unpun.end()) //if there is no punctuation in the end
 		{
 			vector<shared_ptr<Character>> aSen(sen_it,chara_it);
-			shared_ptr<Sentence> pun(new Sentence(aSen));
-			punctuated.push_back(pun);
+			punctuated->AddSubSentence(aSen);
 			break;
 		}
 
@@ -43,8 +41,7 @@ bool Punctuator::Punctuate( std::vector<shared_ptr<DataCollection::Sentence>>& p
 			if(chara_it==unpun.end())
 			{
 				vector<shared_ptr<Character>> aSen(sen_it,chara_it);
-				shared_ptr<Sentence> pun(new Sentence(aSen));
-				punctuated.push_back(pun);
+				punctuated->AddSubSentence(aSen);
 				break;
 			}
 			else if(DataBaseProcessorTool::IsPuncEndofSentence(*chara_it)||DataBaseProcessorTool::IsPuncRightside(*chara_it))
@@ -52,8 +49,7 @@ bool Punctuator::Punctuate( std::vector<shared_ptr<DataCollection::Sentence>>& p
 			else 
 			{
 				vector<shared_ptr<Character>> aSen(sen_it,chara_it);
-				shared_ptr<Sentence> pun(new Sentence(aSen));
-				punctuated.push_back(pun);
+				punctuated->AddSubSentence(aSen);
 				sen_it=chara_it;
 				break;
 			}

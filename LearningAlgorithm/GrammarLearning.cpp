@@ -23,7 +23,7 @@ void GrammarLearning::AdjustGrammarPatternFrequency( const shared_ptr<DataCollec
 {
 	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
 
-	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sentence->GetGrammard(0));
+	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sentence->GetGrammard());
 	vector<GrammarPattern> matchedPatterns=brain->ContainSubsequence(DataBaseProcessorTool::ConvertToPattern(words));
 
 	class IncreaseFrequency

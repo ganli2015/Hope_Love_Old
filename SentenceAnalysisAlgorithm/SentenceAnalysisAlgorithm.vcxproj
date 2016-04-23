@@ -151,6 +151,7 @@
     <ClInclude Include="SentenceParser.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StructureAnalyzer.h" />
+    <ClInclude Include="TestClass.h" />
     <ClInclude Include="WordRelationTableBuilder.h" />
     <ClInclude Include="WordSegmentator.h" />
   </ItemGroup>
@@ -168,6 +169,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StructureAnalyzer.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="WordRelationTableBuilder.cpp" />
     <ClCompile Include="WordSegmentator.cpp" />
   </ItemGroup>

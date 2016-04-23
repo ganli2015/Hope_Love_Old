@@ -24,127 +24,175 @@ namespace DataCollection
 		
 	}
 
-	Sentence::Sentence(std::vector<shared_ptr<Character>> val):_rawSentence(val)
+	Sentence::Sentence(std::vector<shared_ptr<Character>> val):_raw(val)
 	{
 
 	}
 
-	Sentence::Sentence(std::string str):_rawSentence(str)
+	Sentence::Sentence(std::string str)
 	{
-		
+		_raw=DataBaseProcessorTool::ConvertStringToCharacter(str);
 	}
 
 	std::vector<shared_ptr<Character>> Sentence::GetRawSentence() const
 	{
-		return _rawSentence.GetRawSentence();
+		return _raw;
 	}
 
-	void Sentence::AddSegmented( const std::vector<shared_ptr<DataCollection::Word>> vec )
+	void Sentence::SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec )
 	{
-		_segmented.push_back(SegmentedSentence(vec));
+		_grammard=shared_ptr<GrammardSentence>(new GrammardSentence(vec));
+		_structured=shared_ptr<StructuredSentence>(new StructuredSentence(vec));
 	}
 
-	void Sentence::AddGrammard( const std::vector<shared_ptr<DataCollection::Word>> vec )
+	std::vector<shared_ptr<Word>> Sentence::GetGrammard(  ) const
 	{
-		_grammard.push_back(GrammardSentence(vec));
-		_structured.push_back(StructuredSentence(vec));
-	}
-
-	vector<shared_ptr<Word>> Sentence::GetSegmented( const unsigned int i ) const
-	{
-		if(i>_segmented.size())
+		if(_grammard==NULL)
 		{
-			throw out_of_range("");
+			return vector<shared_ptr<Word>>();
 		}
-		return _segmented[i].Get();
-	}
-
-	std::vector<shared_ptr<Word>> Sentence::GetGrammard( const unsigned int i ) const
-	{
-		if(_grammard.empty())
+		else
 		{
-			throw runtime_error("No Grammared!!");
+			return _grammard->Get();
 		}
+	}
 
-		if(i>_grammard.size())
+	void Sentence::BuildGrammarAssociation( const vector<GrammarPattern>& patterns )
+	{
+		if(_grammard!=NULL)
 		{
-			throw out_of_range("");
+			_grammard->BuildGrammarAssociation(patterns);
+
 		}
-		return _grammard[i].Get();
-	}
-
-	void Sentence::BuildGrammarAssociation(const int i, const vector<GrammarPattern>& patterns )
-	{
-		_grammard[i].BuildGrammarAssociation(patterns);
-	}
-
-	void Sentence::GetAssociationInfo( const int i_thGra,const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns )
-	{
-		_grammard[i_thGra].GetAssociationInfo(i_thWord,associatedIndexes,associatedPatterns);
-	}
-
-	unsigned int Sentence::GrammarWordCount( const unsigned int i )
-	{
-		if(i>=_grammard.size())
+		else
 		{
-			throw out_of_range("i is out of the range!!");
+			return ;
 		}
-		return _grammard[i].WordCount();
 	}
 
-	void Sentence::SetWordIntensity( const unsigned int i,const unsigned int i_word,const unsigned int j_word,double intensity )
+	void Sentence::GetAssociationInfo( const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns )
 	{
-		if(i>=_structured.size())
+		if(_grammard!=NULL)
 		{
-			throw out_of_range("i is out of the range!!");
-		}
+			_grammard->GetAssociationInfo(i_thWord,associatedIndexes,associatedPatterns);
 
-		_structured[i].SetIntensity(i_word,j_word,intensity);
+		}
+		else
+		{
+			return ;
+		}
 	}
 
-	double Sentence::GetWordIntensity( const unsigned int i,const unsigned int i_word,const unsigned int j_word )
+	unsigned int Sentence::GrammarWordCount()
 	{
-		if(i>=_structured.size())
+		if(_grammard!=NULL)
 		{
-			throw out_of_range("i is out of the range!!");
-		}
+			return _grammard->WordCount();
 
-		return _structured[i].GetIntensity(i_word,j_word);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	void Sentence::SetWordIntensity( const unsigned int i_word,const unsigned int j_word,double intensity )
+	{
+		if(_structured!=NULL)
+		{
+			_structured->SetIntensity(i_word,j_word,intensity);
+		}
+		else
+		{
+			return ;
+		}
+	}
+
+	double Sentence::GetWordIntensity( const unsigned int i_word,const unsigned int j_word )
+	{
+		if(_structured!=NULL)
+		{
+			return _structured->GetIntensity(i_word,j_word);
+		}
+		else
+		{
+			return -1;
+		}
 	}
 
 	std::string Sentence::GetString() const
 	{
-		return _rawSentence.GetString();
+		return DataBaseProcessorTool::ConvertCharacterToString(_raw);
+	}
+
+	void Sentence::AddSubSentence( const std::vector<shared_ptr<DataCollection::Character>> vec )
+	{
+		shared_ptr<SubSentence> subsentence(new SubSentence(vec));
+		SubSentenceInfo subInfo(DataBaseProcessorTool::ConvertCharacterToString(vec),subsentence);
+
+		_subInfos.push_back(subInfo);
+	}
+
+	void Sentence::AddSubSentence( const string str )
+	{
+		shared_ptr<SubSentence> subsentence(new SubSentence(str));
+		SubSentenceInfo subInfo(str,subsentence);
+
+		_subInfos.push_back(subInfo);
+	}
+
+	size_t Sentence::Count_SubSentence() const
+	{
+		return _subInfos.size();
+	}
+
+	std::string Sentence::GetSubSentence( const unsigned int i ) const
+	{
+		return _subInfos[i].GetSentence()->GetString();
+	}
+
+	bool Sentence::SearchSubInfo( const string str,int& infoIndex ) const
+	{
+		for (unsigned int i=0;i<_subInfos.size();++i)
+		{
+			if(_subInfos[i].GetString()==str)
+			{
+				infoIndex=i;
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
-	RawSentence::RawSentence()
+	SubSentence::SubSentence()
 	{
 
 	}
 
-	RawSentence::~RawSentence()
+	SubSentence::~SubSentence()
 	{
 
 	}
 
-	RawSentence::RawSentence(std::vector<shared_ptr<Character>> vec)
+	SubSentence::SubSentence(std::vector<shared_ptr<Character>> vec)
 	{
 		_raw=vec;
 	}
 
-	RawSentence::RawSentence(std::string str)
+	SubSentence::SubSentence(std::string str)
 	{
 		std::vector<shared_ptr<Character>> val=DataBaseProcessorTool::ConvertStringToCharacter(str);
 		_raw=val;
 	}
 
-	std::vector<shared_ptr<Character>> RawSentence::GetRawSentence() const
+	std::vector<shared_ptr<Character>> SubSentence::GetRawSentence() const
 	{
 		return _raw;
 	}
 
-	std::string RawSentence::GetString() const
+	std::string SubSentence::GetString() const
 	{
 		return DataBaseProcessorTool::ConvertCharacterToString(_raw);
 	}
@@ -171,9 +219,6 @@ namespace DataCollection
 	{
 		return _seg;
 	}
-
-
-	
 
 }
 

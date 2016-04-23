@@ -265,5 +265,16 @@ namespace DataCollection
 		return left.IsSameWith(right);
 	}
 
+	std::string DataBaseProcessorTool::ConvertWordsToString( const vector<shared_ptr<Word>> words )
+	{
+		string res="";
+		for (unsigned int i=0;i<words.size();++i)
+		{
+			res+=words[i]->GetString();
+		}
+
+		return res;
+	}
+
 }
 

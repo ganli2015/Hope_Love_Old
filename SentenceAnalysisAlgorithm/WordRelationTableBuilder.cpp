@@ -27,16 +27,14 @@ bool WordRelationTableBuilder::Build()
 
 	double intensity_lowerlimit=1./10;
 
-	int grammarIndex=0;
-	
-	for (unsigned int i=0;i<_raw_sen->GrammarWordCount(grammarIndex);++i)//暂时只考虑第一个语法句子
+	for (unsigned int i=0;i<_raw_sen->GrammarWordCount();++i)//暂时只考虑第一个语法句子
 	{
-		for (unsigned int j=i+1;j<_raw_sen->GrammarWordCount(grammarIndex);++j)
+		for (unsigned int j=i+1;j<_raw_sen->GrammarWordCount();++j)
 		{
-			double intensity=_raw_sen->GetWordIntensity(grammarIndex,i,j);
+			double intensity=_raw_sen->GetWordIntensity(i,j);
 			if(intensity>intensity_lowerlimit)
 			{
-				vector<shared_ptr<Word>> words=_raw_sen->GetGrammard(grammarIndex);
+				vector<shared_ptr<Word>> words=_raw_sen->GetGrammard();
 				shared_ptr<ConceptInteractTable> tmpTable=BuildConceptInteractTable(words[i],words[j]);
 				_table->Absorb(tmpTable);
 			}

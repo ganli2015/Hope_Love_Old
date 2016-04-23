@@ -141,6 +141,19 @@ namespace Mind
 			Cerebrum* brain=Cerebrum::Instance();
 
 			vector<PartOfSpeech> poses=pattern.GetPattern();
+			//È¥³ý±êµã
+			for (vector<PartOfSpeech>::iterator it=poses.begin();it!=poses.end();)
+			{
+				if(*it==Puncture)
+				{
+					it=poses.erase(it);
+				}
+				else
+				{
+					++it;
+				}
+			}
+
 			if(poses.size()<=1) return 0.;
 
 			double res=0.;

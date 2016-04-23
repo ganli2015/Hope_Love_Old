@@ -30,6 +30,7 @@ namespace DataCollection
 		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("£º"))));
 		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("£»"))));
 		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("¡­¡­"))));
+		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("£¬"))));
 
 		_punctures.insert(_punctures.begin(),_puncRightside.begin(),_puncRightside.end());
 		_punctures.insert(_punctures.begin(),_puncEndofSentence.begin(),_puncEndofSentence.end());

@@ -7,11 +7,6 @@ namespace LogicSystem
 	{
 	}
 
-	Expression::Expression( const string val )
-	{
-
-	}
-
 
 	Expression::~Expression(void)
 	{

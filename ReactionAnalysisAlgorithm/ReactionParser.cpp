@@ -99,9 +99,14 @@ vector<shared_ptr<DataCollection::Word>> ReactionParser::CountUnknownWords( cons
 
 	for (unsigned int i=0;i<sentences.size();++i)
 	{
-		vector<shared_ptr<Word>> words=sentences[i]->GetGrammard(0);
+		vector<shared_ptr<Word>> words=sentences[i]->GetGrammard();
 		for (unsigned int j=0;j<words.size();++j)
 		{
+			if(words[j]->Type()==Puncture)
+			{
+				continue;
+			}
+
 			if(!brain->IsInMind(words[j]))
 			{
 				res.push_back(words[j]);

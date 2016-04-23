@@ -69,7 +69,9 @@ namespace Mind
 		vector<shared_ptr<Concept>> SearchBackwardConcepts(const shared_ptr<Concept> concept) const;
 
 		//Grammar Related Functions
+		//搜索<pattern>所包含的子pattern.
 		std::vector<DataCollection::GrammarPattern> ContainSubsequence(const DataCollection::GrammarPattern& pattern) const;
+		//搜索包含<pattern>的pattern.
 		std::vector<DataCollection::GrammarPattern> ContainedSubsequence(const DataCollection::GrammarPattern& pattern) const;
 		int CountOfSubsequence(const DataCollection::GrammarPattern& pattern) const;
 		int GetFreqencyofPattern(const DataCollection::GrammarPattern& pattern) const;

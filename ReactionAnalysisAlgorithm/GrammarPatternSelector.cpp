@@ -27,7 +27,7 @@ DataCollection::GrammarPattern GrammarPatternSelector::SelectReactPattern( const
 {
 	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
 
-	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sen->GetGrammard(0));
+	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sen->GetGrammard());
 	vector<GrammarPattern> matchedPatterns=brain->ContainSubsequence(DataBaseProcessorTool::ConvertToPattern(words));
 	//找到所有包含<matchedPatterns>的patterns
 	vector<GrammarPattern> totalParentPatterns=GetParentPatterns(matchedPatterns);

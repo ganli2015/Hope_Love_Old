@@ -32,6 +32,9 @@
     <ClInclude Include="TestClass.h">
       <Filter>Test</Filter>
     </ClInclude>
+    <ClInclude Include="SingleExpression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -51,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp">
       <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleExpression.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
