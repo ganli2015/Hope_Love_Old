@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "CompositeExpression.h"
 
+#include "../MindElement/ConceptInteractTable.h"
+
 namespace LogicSystem
 {
 	CompositeExpression::CompositeExpression(void)
@@ -20,6 +22,11 @@ namespace LogicSystem
 	void CompositeExpression::AddExpression( const string expre )
 	{
 
+	}
+
+	shared_ptr<Mind::ConceptInteractTable> CompositeExpression::GetInteractTable() const
+	{
+		return NULL;
 	}
 
 }

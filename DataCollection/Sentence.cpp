@@ -62,7 +62,6 @@ namespace DataCollection
 		if(_grammard!=NULL)
 		{
 			_grammard->BuildGrammarAssociation(patterns);
-
 		}
 		else
 		{

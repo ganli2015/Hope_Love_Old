@@ -208,13 +208,16 @@ namespace Mind
 		int index=FindPatternIndex(pattern);
 		if(index==-1)
 		{
-			throw runtime_error("Error in IncreasePatternFreqency");
-			return;
+			GrammarPattern copy=pattern;
+			AddGrammarPattern(copy);
 		}
-
-		GrammarAttribute g_a=_patterns[index];
-		g_a.frequency++;
-		_patterns[index]=g_a;
+		else
+		{
+			GrammarAttribute g_a=_patterns[index];
+			g_a.frequency++;
+			_patterns[index]=g_a;
+		}
+		
 	}
 
 	void GrammarSet::AddPatternToTree( const DataCollection::GrammarPattern& pattern )
@@ -347,11 +350,6 @@ namespace Mind
 		while(!in.eof())
 		{
 			Sen_Gra sample;
-
-			//read string
-			string str;
-			in>>str;
-			sample.str=str;
 
 			int count;
 			in>>count;

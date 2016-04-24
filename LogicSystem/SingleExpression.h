@@ -15,10 +15,12 @@ namespace LogicSystem
 
 	public:
 		SingleExpression(void);
-		~SingleExpression(void);
+		virtual ~SingleExpression(void);
 
 		SingleExpression(const string val);
 		SingleExpression(const shared_ptr<DataCollection::Sentence> val);
+
+		virtual shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const;
 	};
 }
 

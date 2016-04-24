@@ -10,6 +10,10 @@ namespace LogicSystem
 		~TestClass(void);
 
 		static void RunTest();
+
+	private:
+		static void Test_Expression();
+		static void Test_Logic_Determine();
 	};
 }
 

@@ -1,11 +1,13 @@
 input chain: 
-莫莫 好感 对方 
-output chains: 
-干干 好感 对方 
-1
 自己 好感 对方 
+output chains: 
+自己 也 好感 对方 
 1
-也 好感 对方 
+
+input chain: 
+自己 好感 莫莫 
+output chains: 
+自己 也 好感 干干 
 1
 
 input chain: 
@@ -17,6 +19,14 @@ output chains:
 1
 
 input chain: 
+大 好感 莫莫 
+output chains: 
+自己 好感 干干 
+1
+也 好感 干干 
+1
+
+input chain: 
 大 程度 好感 对方 
 output chains: 
 自己 好感 对方 
@@ -25,8 +35,10 @@ output chains:
 1
 
 input chain: 
-自己 好感 对方 
+大 程度 好感 莫莫 
 output chains: 
-自己 也 好感 对方 
+自己 好感 干干 
+1
+也 好感 干干 
 1
 

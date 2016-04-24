@@ -27,7 +27,6 @@ namespace Mind
 	private:
 		struct Sen_Gra
 		{
-			string str;
 			vector<int> gra;
 		};
 
@@ -51,6 +50,7 @@ namespace Mind
 		std::vector<DataCollection::GrammarPattern> ContainSubsequence(const DataCollection::GrammarPattern& pattern) const;
 		//找出所有包含<pattern>的GrammarPattern
 		std::vector<DataCollection::GrammarPattern> ContainedSubsequence(const DataCollection::GrammarPattern& pattern) const;
+		//Return the count of patterns in GrammarSet that is the sub pattern of <pattern>
 		int CountOfSubsequence(const DataCollection::GrammarPattern& pattern) const;
 		int GetFreqencyofPattern(const DataCollection::GrammarPattern& pattern) const;
 		//会改变pattern的ID

@@ -10,10 +10,12 @@ namespace LogicSystem
 
 	public:
 		CompositeExpression(void);
-		~CompositeExpression(void);
+		virtual ~CompositeExpression(void);
 
 		void AddExpression(const shared_ptr<Expression> expre);
 		void AddExpression(const string expre);
+
+		virtual shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const ;
 	};
 }
 

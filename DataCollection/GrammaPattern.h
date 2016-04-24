@@ -17,10 +17,9 @@ namespace DataCollection
 		~GrammarPattern(void);
 		GrammarPattern(const std::vector<PartOfSpeech>& val);
 
+		//Set ID of <me>.Only the GrammarPattern that is recorded in GrammarSet has a valid ID, otherwise the ID is -1.
 		void SetID(const int id){_id=id;}
 		int GetID() const {return _id;};
-// 		void SetUsage(const int val) {_usage=val;}
-// 		int GetUsage () const {return _usage;}
 		unsigned int Size() const {return _pattern.size();}
 		std::vector<PartOfSpeech> GetPattern() const;
 		PartOfSpeech Get_ithElem(const unsigned int i) const {assert(i>=0 && i<_pattern.size()); return (PartOfSpeech)_pattern[i];}

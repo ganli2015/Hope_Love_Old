@@ -59,10 +59,7 @@ namespace DataCollection
 		shared_ptr<GrammardSentence> _grammard;
 		shared_ptr<StructuredSentence> _structured;
 
-// 		std::vector<RawSentence> _punctured;//被标点符号分开的子句子.
-// 		std::vector<SegmentedSentence> _segmented;// several ways of segmentation.
-// 		std::vector<GrammardSentence> _grammard;
-// 		vector<StructuredSentence> _structured;
+
 	public:
 		Sentence(void);
 		~Sentence(void);
@@ -84,6 +81,7 @@ namespace DataCollection
 		//获得子句子subsentence中的第i_thWord个word的语法匹配信息，associatedIndexes是语法模式匹配的序号集合，associatedPatterns是相应的模式，两者vector一一对应。		
 		void GetAssociationInfo(const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns);
 		unsigned int GrammarWordCount();
+		bool StructureAnalyzed() const {return _structured->Analyzed();}
 
 		//设定子句子subsentence中的第i_word个word和第j_word个word的intensity。
 		void SetWordIntensity(const unsigned int i_word,const unsigned int j_word,double intensity);

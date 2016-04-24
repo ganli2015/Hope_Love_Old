@@ -2,8 +2,11 @@
 #include "SingleExpression.h"
 
 #include "../SentenceAnalysisAlgorithm/SentenceAnalyzer.h"
+#include "../SentenceAnalysisAlgorithm/WordRelationTableBuilder.h"
 
 #include "../DataCollection/Sentence.h"
+
+#include "../MindElement/ConceptInteractTable.h"
 
 using namespace DataCollection;
 
@@ -23,20 +26,31 @@ namespace LogicSystem
 
 	SingleExpression::SingleExpression(const shared_ptr<DataCollection::Sentence> val)
 	{
-// 		if(val->Count_Grammard()==0)
-// 		{
-// 			SentenceAnalyzer sentenceAnalyzer(val->GetString());
-// 			sentenceAnalyzer.Analyze();
-// 			_sen=sentenceAnalyzer.GetAnalyzedSentences();
-// 		}
-// 		else
-// 		{
-// 			_sen.pu
-// 		}
+		if(!val->StructureAnalyzed())
+		{
+			SentenceAnalyzer sentenceAnalyzer(val->GetString());
+			sentenceAnalyzer.Analyze();
+			_sen=sentenceAnalyzer.GetAnalyzedSentences();
+		}
+		else
+		{
+			_sen=val;
+		}
 	}
 
 	SingleExpression::~SingleExpression(void)
 	{
 	}
+
+	shared_ptr<Mind::ConceptInteractTable> SingleExpression::GetInteractTable() const
+	{
+		if(_sen==NULL) return NULL;
+		if(!_sen->StructureAnalyzed()) return NULL;
+
+		WordRelationTableBuilder builder(_sen);
+		builder.Build();
+		return builder.GetInteractTable();
+	}
+
 }
 

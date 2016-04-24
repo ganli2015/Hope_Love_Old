@@ -12,7 +12,7 @@ namespace Mind
 	class ConceptInteractTable;
 }
 
-class WordRelationTableBuilder
+class _SENTENCEANALYSISALGORITHMINOUT WordRelationTableBuilder
 {
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
 

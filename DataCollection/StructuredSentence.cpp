@@ -5,7 +5,7 @@
 
 namespace DataCollection
 {
-	StructuredSentence::StructuredSentence(void)
+	StructuredSentence::StructuredSentence(void):_analyzed(false)
 	{
 	}
 
@@ -14,7 +14,7 @@ namespace DataCollection
 	{
 	}
 
-	StructuredSentence::StructuredSentence( const std::vector<shared_ptr<DataCollection::Word>>& vec):_sen(vec)
+	StructuredSentence::StructuredSentence( const std::vector<shared_ptr<DataCollection::Word>>& vec):_sen(vec),_analyzed(false)
 	{
 		InitializeMatrix();
 	}
@@ -38,6 +38,8 @@ namespace DataCollection
 		}
 		_intensityMatrix[i][j]=intensity;
 		_intensityMatrix[j][i]=intensity;
+
+		_analyzed=true;
 	}
 
 	double StructuredSentence::GetIntensity( const unsigned int i,const unsigned int j )

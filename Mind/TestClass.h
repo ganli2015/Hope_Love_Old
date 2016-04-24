@@ -3,6 +3,8 @@
 
 namespace Mind
 {
+	class ConceptInteractTable;
+
 	class TestClass
 	{
 	public:
@@ -12,10 +14,11 @@ namespace Mind
 		static void RunTest();
 
 	private:
-		static void Test_Network();
-		static void Test_Subsequence();
-		static void Test_GetIndexOfMatchedPattern();
+		static void Test_ConceptDeepInteraction();
+
 		static void Test_BuildGrammarAssociation();
+
+		static bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<ConceptInteractTable> table);
 	};
 }
 
