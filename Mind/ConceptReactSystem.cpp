@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "ConceptReactSystem.h"
-#include "../MindElement/Concept.h"
 #include "../MindElement/BaseConcept.h"
 #include "ConceptSet.h"
 #include "../MindElement/ConceptChain.h"
@@ -23,6 +22,8 @@
 #include "../Neural Network Design/MultilayerNetwork.h"
 #include "../Neural Network Design/ADALINE.h"
 #include "../Neural Network Design/Errors.h"
+
+#include "../MindInterface/iConcept.h"
 
 #include <numeric>
 
@@ -86,7 +87,7 @@ namespace Mind
 
 	shared_ptr<ConceptChain> ConceptReactSystem::ParseChain( const string str ) const
 	{
-		vector<shared_ptr<Concept>> conceptVec;
+		vector<shared_ptr<iConcept>> conceptVec;
 		//解析为多个Identity
 		vector<string> conceptStr=CommonTool::SplitString(str,conceptTag);
 		for (unsigned int i=0;i<conceptStr.size();++i)
@@ -99,7 +100,7 @@ namespace Mind
 				throw logic_error("Error in ParseChain");
 			}
 
-			shared_ptr<Concept> concept=_conceptSet->GetConceptPtr(CommonFunction::TransformToIdentity(split[0],split[1]));
+			shared_ptr<iConcept> concept=_conceptSet->GetConceptPtr(CommonFunction::TransformToIdentity(split[0],split[1]));
 			conceptVec.push_back(concept);
 		}
 

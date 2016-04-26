@@ -4,7 +4,7 @@
 namespace Mind
 {
 	class ConceptInteractTable;
-	class Concept;
+	class iConcept;
 
 	//存放ConceptInteractTable的类，作为对Concept连接的临时记忆体
 	class ConceptInteractTableContainer
@@ -13,7 +13,7 @@ namespace Mind
 		struct TableInfo  
 		{
 			shared_ptr<ConceptInteractTable> table;
-			pair<shared_ptr<Concept>,shared_ptr<Concept>> protoPair;//<table>所对应的两个相互作用的concept
+			pair<shared_ptr<iConcept>,shared_ptr<iConcept>> protoPair;//<table>所对应的两个相互作用的concept
 		};
 
 		vector<TableInfo> _tableInfos;
@@ -21,8 +21,8 @@ namespace Mind
 		ConceptInteractTableContainer(void);
 		~ConceptInteractTableContainer(void);
 
-		void Add(const shared_ptr<ConceptInteractTable> table,const shared_ptr<Concept> from, const shared_ptr<Concept> to);
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> GetAllInteractPairs() const;
+		void Add(const shared_ptr<ConceptInteractTable> table,const shared_ptr<iConcept> from, const shared_ptr<iConcept> to);
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> GetAllInteractPairs() const;
 	};
 
 }

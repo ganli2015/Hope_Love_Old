@@ -5,16 +5,17 @@
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/FindSequence.h"
 
-#include "../Mind/Cerebrum.h"
-#include "../MindElement/Concept.h"
+#include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iConcept.h"
 #include "../MindElement/ConceptChain.h"
+#include "../MindElement/ConceptInteractTable.h"
 #include "../Mind/CommonFunction.h"
 #include "../MindElement/ConceptLevelTable.h"
 
 using namespace Mind;
 using namespace Math;
 
-ChainAnalyzer::ChainAnalyzer(void):_brain(Cerebrum::Instance())
+ChainAnalyzer::ChainAnalyzer(void):_brain(iCerebrum::Instance())
 {
 }
 
@@ -52,19 +53,19 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 
 void ChainAnalyzer::ComputeHyperChains( const shared_ptr<ConceptChain> baseChain,vector<shared_ptr<ConceptChain>>& hyperChains )
 {
-	vector<shared_ptr<Concept>> conceptSequence=baseChain->GetConceptVec();
+	vector<shared_ptr<iConcept>> conceptSequence=baseChain->GetConceptVec();
 
-	vector<vector<shared_ptr<Concept>>> backwardConceptSequence;//存放所有backward concept的容器，第i个元素表示conceptSequence的第i个concept的所有backward concept。
+	vector<vector<shared_ptr<iConcept>>> backwardConceptSequence;//存放所有backward concept的容器，第i个元素表示conceptSequence的第i个concept的所有backward concept。
 	backwardConceptSequence.reserve(conceptSequence.size());
 	for (unsigned int i=0;i<conceptSequence.size();++i)
 	{
-		vector<shared_ptr<Concept>> backConcepts=_brain->SearchBackwardConcepts(conceptSequence[i]);
+		vector<shared_ptr<iConcept>> backConcepts=_brain->SearchBackwardConcepts(conceptSequence[i]);
 		backConcepts.push_back(conceptSequence[i]);
 		backwardConceptSequence.push_back(backConcepts);
 	}
 
 	//所有backward concept的可能组合序列
-	vector<vector<shared_ptr<Concept>>> combinations=Math::GetAllCombinations<shared_ptr<Concept>>::Get(backwardConceptSequence);
+	vector<vector<shared_ptr<iConcept>>> combinations=Math::GetAllCombinations<shared_ptr<iConcept>>::Get(backwardConceptSequence);
 	for (unsigned int i=0;i<combinations.size();++i)
 	{
 		vector<shared_ptr<ConceptChain>> properCombi=ComputeProperCombination(combinations[i],baseChain);
@@ -72,11 +73,11 @@ void ChainAnalyzer::ComputeHyperChains( const shared_ptr<ConceptChain> baseChain
 	}
 }
 
-vector<shared_ptr<ConceptChain>> ChainAnalyzer::ComputeProperCombination( const vector<shared_ptr<Mind::Concept>>& combination,const shared_ptr<Mind::ConceptChain> baseChain ) const
+vector<shared_ptr<ConceptChain>> ChainAnalyzer::ComputeProperCombination( const vector<shared_ptr<Mind::iConcept>>& combination,const shared_ptr<Mind::ConceptChain> baseChain ) const
 {
 	vector<shared_ptr<ConceptChain>> res;
 
-	vector<vector<shared_ptr<Concept>>> subSequences=GetAllSubSequence<shared_ptr<Concept>>::Get(combination);
+	vector<vector<shared_ptr<iConcept>>> subSequences=GetAllSubSequence<shared_ptr<iConcept>>::Get(combination);
 	for (unsigned int i=0;i<subSequences.size();++i)
 	{
 		if(CoverBase(subSequences[i],baseChain))
@@ -88,16 +89,16 @@ vector<shared_ptr<ConceptChain>> ChainAnalyzer::ComputeProperCombination( const 
 	return res;
 }
 
-bool ChainAnalyzer::CoverBase(const vector<shared_ptr<Concept>>& hyperChain,const shared_ptr<ConceptChain>& baseChain) const
+bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,const shared_ptr<ConceptChain>& baseChain) const
 {
-	typedef pair<shared_ptr<Mind::Concept>,shared_ptr<Mind::Concept>> ConceptPair;
+	typedef pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>> ConceptPair;
 
 	//计算两两Concept之间的相互作用，得到所有相互作用对。
 	vector<ConceptPair> allPairs;
 	for (unsigned int i=0;i<hyperChain.size()-1;++i)
 	{
-		vector<ConceptPair> basePairs;
-		hyperChain[i]->DeepInteractWith(hyperChain[i+1],basePairs);
+		shared_ptr<ConceptInteractTable> interactTable=hyperChain[i]->DeepInteractWith(hyperChain[i+1]);
+		vector<ConceptPair> basePairs=interactTable->GetAllRelations();
 		allPairs.insert(allPairs.end(),basePairs.begin(),basePairs.end());
 	}
 
@@ -121,7 +122,7 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<Concept>>& hyperChain,cons
 	return false;
 }
 
-int ChainAnalyzer::OverlappedCount( const int startIndex,const vector<shared_ptr<Concept>>& checkChain,const vector<shared_ptr<Concept>>& testChain ) const
+int ChainAnalyzer::OverlappedCount( const int startIndex,const vector<shared_ptr<iConcept>>& checkChain,const vector<shared_ptr<iConcept>>& testChain ) const
 {
 	int count=0;
 	for (unsigned int i=startIndex;i<checkChain.size();++i)
@@ -176,8 +177,8 @@ void ChainAnalyzer::ComputeHyperChainLevels( const vector<shared_ptr<ConceptChai
 
 double ChainAnalyzer::ComputeHyperChainMeanLevel( const shared_ptr<Mind::ConceptChain> hyperChain,const shared_ptr<Mind::ConceptChain> baseChain )
 {
-	vector<shared_ptr<Concept>> hyperConcepts=hyperChain->GetConceptVec();
-	vector<shared_ptr<Concept>> baseConcepts=baseChain->GetConceptVec();
+	vector<shared_ptr<iConcept>> hyperConcepts=hyperChain->GetConceptVec();
+	vector<shared_ptr<iConcept>> baseConcepts=baseChain->GetConceptVec();
 	vector<int> levels;
 	for (unsigned int i=0;i<hyperConcepts.size();++i)
 	{

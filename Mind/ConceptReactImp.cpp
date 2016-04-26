@@ -23,7 +23,7 @@ namespace Mind
 
 	void ConceptReactImp::GenerateChainProperties::operator()( const vector<ConceptInfo>& combination )
 	{
-		vector<shared_ptr<Concept>> conceptVec;
+		vector<shared_ptr<iConcept>> conceptVec;
 		conceptVec.reserve(combination.size());
 		double variance=0.0;
 		for (unsigned int i=0;i<combination.size();++i)

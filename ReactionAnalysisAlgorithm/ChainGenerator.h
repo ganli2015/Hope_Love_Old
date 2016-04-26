@@ -3,18 +3,18 @@
 
 namespace Mind
 {
-	class Concept;
+	class iConcept;
 	class ConceptChain;
-	class Cerebrum;
+	class iCerebrum;
 	struct ConceptChainProperty;
 	class ConceptInteractTable;
 }
 
 class ChainGenerator
 {
-	typedef pair<shared_ptr<Mind::Concept>,shared_ptr<Mind::Concept>> ConceptPair;
+	typedef pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>> ConceptPair;
 
-	Mind::Cerebrum* _brain;
+	Mind::iCerebrum* _brain;
 
 	vector<Mind::ConceptChainProperty> _reactChains;
 public:

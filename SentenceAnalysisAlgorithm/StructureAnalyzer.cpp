@@ -6,7 +6,7 @@
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 using namespace DataCollection;
 
@@ -49,7 +49,7 @@ int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int wo
 		throw logic_error("Error in TotalPatternFrequency");
 	}
 
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	int totalFreq(0);
 	for (unsigned int i=0;i<word1_assoIndexes.size();++i)

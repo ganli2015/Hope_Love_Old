@@ -7,7 +7,7 @@
 
 #include "../Mathmatic/Rand.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include <time.h>
 #include <iostream>
@@ -25,7 +25,7 @@ GrammarPatternSelector::~GrammarPatternSelector(void)
 
 DataCollection::GrammarPattern GrammarPatternSelector::SelectReactPattern( const shared_ptr<DataCollection::Sentence> sen )
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sen->GetGrammard());
 	vector<GrammarPattern> matchedPatterns=brain->ContainSubsequence(DataBaseProcessorTool::ConvertToPattern(words));
@@ -58,7 +58,7 @@ DataCollection::GrammarPattern GrammarPatternSelector::SelectReactPattern( const
 
 vector<DataCollection::GrammarPattern> GrammarPatternSelector::GetParentPatterns( const vector<DataCollection::GrammarPattern>& patterns )
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	class NotInVector
 	{
@@ -95,11 +95,11 @@ vector<double> GrammarPatternSelector::GetPatternFrequency( const vector<DataCol
 {
 	class QueryFrequency
 	{
-		Mind::Cerebrum* _brain;
+		Mind::iCerebrum* _brain;
 	public:
 		QueryFrequency()
 		{
-			_brain=Mind::Cerebrum::Instance();
+			_brain=Mind::iCerebrum::Instance();
 		}
 		~QueryFrequency(){}
 

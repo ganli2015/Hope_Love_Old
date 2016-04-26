@@ -7,7 +7,7 @@
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/Concept.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include "../DataCollection/GrammaPattern.h"
 
@@ -27,7 +27,7 @@ namespace LogicSystem
 
 	void TestClass::RunTest()
 	{
-		Cerebrum* brain=Cerebrum::Instance();
+		iCerebrum* brain=iCerebrum::Instance();
 
 		Test_Expression();
 		Test_Logic_Determine();
@@ -35,7 +35,7 @@ namespace LogicSystem
 
 	void TestClass::Test_Expression()
 	{
-		Cerebrum* brain=Cerebrum::Instance();
+		iCerebrum* brain=iCerebrum::Instance();
 		vector<PartOfSpeech> pos;
 		pos.push_back(Numeral);
 		pos.push_back(Adjective);
@@ -50,7 +50,7 @@ namespace LogicSystem
 
 		shared_ptr<SingleExpression> expre(new SingleExpression("二大于一。"));
 		shared_ptr<ConceptInteractTable> table=expre->GetInteractTable();
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> relations=table->GetAllRelations();
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
 	}
 
 	void TestClass::Test_Logic_Determine()

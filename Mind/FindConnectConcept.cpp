@@ -15,31 +15,31 @@ namespace Mind
 	{
 	}
 
-	vector<shared_ptr<Concept>> FindConnectConcept::FindForward( const shared_ptr<Concept> concept )
+	vector<shared_ptr<iConcept>> FindConnectConcept::FindForward( const shared_ptr<iConcept> concept )
 	{
 		_existedIdentity.clear();
 
 		_initialConcept=concept;
-		vector<shared_ptr<Concept>> res;
+		vector<shared_ptr<iConcept>> res;
 		Record(concept);
 		Recursive_Find(concept,Forward,res);
 
 		return res;
 	}
 
-	vector<shared_ptr<Concept>> FindConnectConcept::FindBackward( const shared_ptr<Concept> concept )
+	vector<shared_ptr<iConcept>> FindConnectConcept::FindBackward( const shared_ptr<iConcept> concept )
 	{
 		_existedIdentity.clear();
 
 		_initialConcept=concept;
-		vector<shared_ptr<Concept>> res;
+		vector<shared_ptr<iConcept>> res;
 		Record(concept);
 		Recursive_Find(concept,Backward,res);
 
 		return res;
 	}
 
-	bool FindConnectConcept::ConceptExist( const shared_ptr<Concept> concept ) const
+	bool FindConnectConcept::ConceptExist( const shared_ptr<iConcept> concept ) const
 	{
 		Identity identity;
 		identity.str=concept->GetString();
@@ -63,7 +63,7 @@ namespace Mind
 		return false;
 	}
 
-	void FindConnectConcept::Record( const shared_ptr<Concept> concept )
+	void FindConnectConcept::Record( const shared_ptr<iConcept> concept )
 	{
 		string str=concept->GetString();
 		int id=concept->GetId();
@@ -71,7 +71,7 @@ namespace Mind
 		_existedIdentity.insert(make_pair(str,id));
 	}
 
-	void FindConnectConcept::Recursive_Find( const shared_ptr<Concept> concept,const SearchDir dir, vector<shared_ptr<Concept>>& connectConcepts )
+	void FindConnectConcept::Recursive_Find( const shared_ptr<iConcept> concept,const SearchDir dir, vector<shared_ptr<iConcept>>& connectConcepts )
 	{	
 		if(!ConceptExist(concept))
 		{
@@ -79,7 +79,7 @@ namespace Mind
 			Record(concept);
 		}
 
-		vector<shared_ptr<Concept>> adjConcepts;
+		vector<shared_ptr<iConcept>> adjConcepts;
 		if(dir==Forward)
 		{
 			adjConcepts=concept->GetForwardConcepts();

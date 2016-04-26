@@ -155,12 +155,12 @@ namespace Mind
 		return _conceptset->MaxLength_WordWithHead(headChara);
 	}
 
-	shared_ptr<Concept> Cerebrum::GetConcept( const shared_ptr<DataCollection::Word> word )
+	shared_ptr<iConcept> Cerebrum::GetConcept( const shared_ptr<DataCollection::Word> word )
 	{
 		return _conceptset->GetConceptPtr(word);
 	}
 
-	shared_ptr<Concept> Cerebrum::GetConcept( const Identity identity )
+	shared_ptr<iConcept> Cerebrum::GetConcept( const Identity identity )
 	{
 		return _conceptset->GetConceptPtr(identity);
 	}
@@ -185,12 +185,12 @@ namespace Mind
 		return _conceptReactSystem->React(chain);
 	}
 
-	vector<shared_ptr<Concept>> Cerebrum::SearchForwardConcepts( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> Cerebrum::SearchForwardConcepts( const shared_ptr<iConcept> concept ) const
 	{
 		return _conceptset->SearchForwardConcepts(concept);
 	}
 
-	vector<shared_ptr<Concept>> Cerebrum::SearchBackwardConcepts( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> Cerebrum::SearchBackwardConcepts( const shared_ptr<iConcept> concept ) const
 	{
 		return _conceptset->SearchBackwardConcepts(concept);
 	}

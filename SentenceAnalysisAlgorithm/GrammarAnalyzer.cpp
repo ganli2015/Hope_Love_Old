@@ -9,8 +9,9 @@
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
-#include "../Mind/Cerebrum.h"
 #include "../Mind/CommonFunction.h"
+
+#include "../MindInterface/iCerebrum.h"
 
 #include <functional>
 
@@ -55,7 +56,7 @@ GrammarAnalyzer::GrammarAnalyzer( shared_ptr<DataCollection::Sentence> sen)
 
 WordRep GetWordRep(shared_ptr<Word> word)
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 	WordRep wordrep;
 	vector<shared_ptr<Word>> rep=brain->GetAllKindsofWord(word);
 	if(rep.size()==0)
@@ -75,7 +76,7 @@ WordRep GetWordRep(shared_ptr<Word> word)
 
 int CheckUnknownWords(const vector<shared_ptr<Word>>& words)
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	int count(0);
 	for (unsigned int i=0;i<words.size();++i)
@@ -219,7 +220,7 @@ vector<vector<shared_ptr<Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<
 
 void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combination, vector<shared_ptr<Word>>& optimal)
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	//目标值，等于GrammarPattern的总频率乘以其局域的概率值.
 	double maxValueFun(-1);
@@ -332,7 +333,7 @@ void GrammarAnalyzer::OptimizePOSofWords()
 
 void GrammarAnalyzer::BuildGrammarAssociationOfWords()
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<Word>> grammard=_raw_sen->GetGrammard();
 	if(grammard.empty())

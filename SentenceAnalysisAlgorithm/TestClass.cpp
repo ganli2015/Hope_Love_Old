@@ -7,6 +7,7 @@
 
 #include "../DataCollection/Sentence.h"
 
+#include "../MindInterface/iCerebrum.h"
 #include "../Mind/Cerebrum.h"
 
 using namespace Mind;
@@ -22,6 +23,7 @@ TestClass::~TestClass(void)
 
 void TestClass::RunTest()
 {
+	iCerebrum::SetInstance(Cerebrum::Instance());
 	Test_Punctuation();
 	Test_Segmentation();
 	Test_Grammard();
@@ -55,7 +57,7 @@ void TestClass::Test_Punctuation()
 
 void TestClass::Test_Segmentation()
 {
-	Cerebrum* brain=Cerebrum::Instance();
+	iCerebrum* brain=iCerebrum::Instance();
 
 	{
 		string sample_i="ÄªÄªÎÒ°®Äã£¡";

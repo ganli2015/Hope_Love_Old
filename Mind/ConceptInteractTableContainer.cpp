@@ -13,7 +13,7 @@ namespace Mind
 	{
 	}
 
-	void ConceptInteractTableContainer::Add( const shared_ptr<ConceptInteractTable> table,const shared_ptr<Concept> from, const shared_ptr<Concept> to )
+	void ConceptInteractTableContainer::Add( const shared_ptr<ConceptInteractTable> table,const shared_ptr<iConcept> from, const shared_ptr<iConcept> to )
 	{
 		TableInfo info;
 		info.table=table;
@@ -21,7 +21,7 @@ namespace Mind
 		_tableInfos.push_back(info);
 	}
 
-	vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> ConceptInteractTableContainer::GetAllInteractPairs() const
+	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> ConceptInteractTableContainer::GetAllInteractPairs() const
 	{
 		class Merge
 		{
@@ -38,7 +38,7 @@ namespace Mind
 			shared_ptr<ConceptInteractTable> GetResult(){return _table;}
 		};
 
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> res;
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> res;
 		Merge merge;
 		merge=for_each(_tableInfos.begin(),_tableInfos.end(),merge);
 		res=merge.GetResult()->GetAllRelations();

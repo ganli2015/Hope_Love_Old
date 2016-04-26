@@ -1,14 +1,14 @@
 #include "StdAfx.h"
 #include "ExtractConceptChains.h"
 
-#include "../MindElement/Concept.h"
 #include "../MindElement/ConceptChain.h"
 #include "../Mind/CommonFunction.h"
+#include "../MindInterface/iConcept.h"
 
 using namespace Mind;
 
-// map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_forwardTable;
-// map<shared_ptr<Mind::Concept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_backwardTable;
+// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_forwardTable;
+// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_backwardTable;
 
 int ExtractConceptChains::_recursiveCount=0;
 const int ExtractConceptChains::_recursiveMaxCount=100;
@@ -43,9 +43,9 @@ vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Extract( const vect
 }
 
 void ExtractConceptChains::Recursive_Search(const SearchDir dir,
-	const shared_ptr<Mind::Concept> curConcept,
+	const shared_ptr<Mind::iConcept> curConcept,
 	const vector<ConceptPair>& pairs,
-	const shared_ptr<Mind::ConceptChain>& relatedChain,//记录遍历相邻节点前的包含 curConcept的Chain，便于相邻的Concept能添加上去。
+	const shared_ptr<Mind::ConceptChain>& relatedChain,//记录遍历相邻节点前的包含 curConcept的Chain，便于相邻的iConcept能添加上去。
 	vector<shared_ptr<Mind::ConceptChain>>& chains )//所有Chains
 {
 	// 	if(HasSearched(curConcept,dir,chains))//如果已经递归搜索过curConcept，那么直接从表格里读取。
@@ -60,8 +60,8 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 		throw runtime_error("Error in Recursive_Search");
 	}
 
-	//获得相邻的Concept
-	vector<shared_ptr<Concept>> adjConcepts;
+	//获得相邻的iConcept
+	vector<shared_ptr<iConcept>> adjConcepts;
 	if (dir==Forward)
 	{
 		adjConcepts=GetForwardAdjConcepts(curConcept,pairs);
@@ -71,7 +71,7 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 		adjConcepts=GetBackwordAdjConcepts(curConcept,pairs);
 	}
 
-	if(adjConcepts.empty())//如果没有相邻的Concept，那么把和curConcept相关的Chain都存到<chain>里，并停止递归。
+	if(adjConcepts.empty())//如果没有相邻的iConcept，那么把和curConcept相关的Chain都存到<chain>里，并停止递归。
 	{
 		chains.push_back(relatedChain);
 		return;
@@ -103,9 +103,9 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	chains.insert(chains.end(),curChains.begin(),curChains.end());
 }
 
-vector<shared_ptr<Mind::Concept>> ExtractConceptChains::GetForwardAdjConcepts(const shared_ptr<Mind::Concept> concept, const vector<ConceptPair>& pairs )
+vector<shared_ptr<Mind::iConcept>> ExtractConceptChains::GetForwardAdjConcepts(const shared_ptr<Mind::iConcept> concept, const vector<ConceptPair>& pairs )
 {
-	vector<shared_ptr<Mind::Concept>> res;
+	vector<shared_ptr<Mind::iConcept>> res;
 	for (unsigned int i=0;i<pairs.size();++i)
 	{
 		if(concept->Same(pairs[i].first))
@@ -117,9 +117,9 @@ vector<shared_ptr<Mind::Concept>> ExtractConceptChains::GetForwardAdjConcepts(co
 	return res;
 }
 
-vector<shared_ptr<Mind::Concept>> ExtractConceptChains::GetBackwordAdjConcepts( const shared_ptr<Mind::Concept> concept,const vector<ConceptPair>& pairs )
+vector<shared_ptr<Mind::iConcept>> ExtractConceptChains::GetBackwordAdjConcepts( const shared_ptr<Mind::iConcept> concept,const vector<ConceptPair>& pairs )
 {
-	vector<shared_ptr<Mind::Concept>> res;
+	vector<shared_ptr<Mind::iConcept>> res;
 	for (unsigned int i=0;i<pairs.size();++i)
 	{
 		if(concept->Same(pairs[i].second))
@@ -131,7 +131,7 @@ vector<shared_ptr<Mind::Concept>> ExtractConceptChains::GetBackwordAdjConcepts( 
 	return res;
 }
 
-shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const shared_ptr<Concept> concept,const shared_ptr<Mind::ConceptChain>& chains ,const SearchDir dir)
+shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const shared_ptr<iConcept> concept,const shared_ptr<Mind::ConceptChain>& chains ,const SearchDir dir)
 {
 	shared_ptr<Mind::ConceptChain> res(new ConceptChain(chains->GetConceptVec()));
 	if(dir==Forward)
@@ -146,7 +146,7 @@ shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const share
 	return res;
 }
 
-// bool ExtractConceptChains::HasSearched( const shared_ptr<Mind::Concept> concept,const SearchDir dir,vector<shared_ptr<Mind::ConceptChain>>& chains )
+// bool ExtractConceptChains::HasSearched( const shared_ptr<Mind::iConcept> concept,const SearchDir dir,vector<shared_ptr<Mind::ConceptChain>>& chains )
 // {
 // 	if(dir==Forward)
 // 	{
@@ -195,7 +195,7 @@ vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Merge( const vector
 
 void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 {
-	//去掉含有相同Concept的pair
+	//去掉含有相同iConcept的pair
 	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
 	{
 		if(it->first->Same(it->second))

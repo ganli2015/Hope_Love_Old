@@ -5,7 +5,7 @@
 #include "../DataCollection/WordRelationTable.h"
 #include "../DataCollection/Word.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 #include "../MindElement/Concept.h"
 #include "../MindElement/ConceptInteractTable.h"
 
@@ -23,7 +23,7 @@ WordRelationTableBuilder::~WordRelationTableBuilder(void)
 
 bool WordRelationTableBuilder::Build()
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	double intensity_lowerlimit=1./10;
 
@@ -46,10 +46,10 @@ bool WordRelationTableBuilder::Build()
 
 shared_ptr<ConceptInteractTable> WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to)
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
-	shared_ptr<Concept> fromConcept=brain->GetConcept(from);
-	shared_ptr<Concept> toConcept=brain->GetConcept(to);
+	shared_ptr<iConcept> fromConcept=brain->GetConcept(from);
+	shared_ptr<iConcept> toConcept=brain->GetConcept(to);
 	
 	return fromConcept->DeepInteractWith(toConcept);
 }

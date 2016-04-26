@@ -5,7 +5,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include "../Mathmatic/FindSequence.h"
 
@@ -145,7 +145,7 @@ void MergeCombination_UandA(const vector<shared_ptr<Word>>& words, const vector<
 
 void SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& segmented)
 {
-	Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
 	unsigned int i=0;
 	vector<vector<int>> seqs_UandA; 
@@ -229,7 +229,7 @@ void WordSegmentator::SegmentSubsentence( const string subsentence )
 
 WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(const Character& chara,const int myIndex,const vector<Character>& raw_noPunc)
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	CharacterProperty characterProperty;
 	characterProperty.character=chara;

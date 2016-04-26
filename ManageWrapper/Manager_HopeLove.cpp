@@ -7,6 +7,8 @@
 
 #include "../Mind/Cerebrum.h"
 
+#include "../MindInterface/iCerebrum.h"
+
 #include <string>
 
 using namespace std;
@@ -14,8 +16,8 @@ using namespace std;
 namespace ManageWrapper
 {
 	Manager_HopeLove::Manager_HopeLove(void):_datawrappercpp(new DataWrapperCPP::DataWrapper_Sentence)
-	{
-		Mind::Cerebrum::Instance();
+	{	
+		Mind::iCerebrum::SetInstance(Mind::Cerebrum::Instance());
 	}
 
 	void Manager_HopeLove::ConnectUI( UIForm^ form )

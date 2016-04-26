@@ -3,7 +3,7 @@
 
 namespace Mind
 {
-	class Cerebrum;
+	class iCerebrum;
 	class ConceptChain;
 }
 
@@ -22,7 +22,7 @@ private:
 		int patternFreq;
 	};
 
-	Mind::Cerebrum* _brain;
+	Mind::iCerebrum* _brain;
 
 	shared_ptr<DataCollection::Sentence> _sentence;
 

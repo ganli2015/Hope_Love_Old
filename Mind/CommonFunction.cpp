@@ -121,7 +121,7 @@ namespace Mind
 			//初始化，所有元素等于0
 			shared_ptr<iDataArray> res(new DataArray(conceptSet->BaseConceptCount()));
 
-			vector<shared_ptr<Concept>> conceptSequence=chain->GetConceptVec();
+			vector<shared_ptr<iConcept>> conceptSequence=chain->GetConceptVec();
 			for (unsigned int i=0;i<conceptSequence.size();++i)
 			{
 				shared_ptr<BaseConcept> base=dynamic_pointer_cast<BaseConcept>(conceptSequence[i]);

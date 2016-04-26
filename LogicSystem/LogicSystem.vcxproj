@@ -111,8 +111,8 @@
     <ProjectReference Include="..\MindElement\MindElement.vcxproj">
       <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Mind\Mind.vcxproj">
-      <Project>{b4e0ed6d-cac1-4881-bee1-c154ba5c7df4}</Project>
+    <ProjectReference Include="..\MindInterface\MindInterface.vcxproj">
+      <Project>{fc0e908a-2d96-41d5-b2bc-7416e325dccc}</Project>
     </ProjectReference>
     <ProjectReference Include="..\SentenceAnalysisAlgorithm\SentenceAnalysisAlgorithm.vcxproj">
       <Project>{347b0dc1-09b3-43e1-8ed4-43a85a3dcc7f}</Project>

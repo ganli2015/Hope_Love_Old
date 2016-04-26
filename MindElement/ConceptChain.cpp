@@ -1,13 +1,15 @@
 #include "StdAfx.h"
 #include "ConceptChain.h"
 
+#include "../MindInterface/iConcept.h"
+
 namespace Mind
 {
 	ConceptChain::ConceptChain(void)
 	{
 	}
 
-	ConceptChain::ConceptChain( const vector<shared_ptr<Concept>>& val ):_chain(val.begin(),val.end())
+	ConceptChain::ConceptChain( const vector<shared_ptr<iConcept>>& val ):_chain(val.begin(),val.end())
 	{
 
 	}
@@ -17,14 +19,14 @@ namespace Mind
 	{
 	}
 
-	vector<shared_ptr<Concept>> ConceptChain::GetConceptVec() const
+	vector<shared_ptr<iConcept>> ConceptChain::GetConceptVec() const
 	{
-		return vector<shared_ptr<Concept>>(_chain.begin(),_chain.end());
+		return vector<shared_ptr<iConcept>>(_chain.begin(),_chain.end());
 	}
 
 	void ConceptChain::Append( const shared_ptr<ConceptChain> chain )
 	{
-		vector<shared_ptr<Concept>> vec=chain->GetConceptVec();
+		vector<shared_ptr<iConcept>> vec=chain->GetConceptVec();
 		_chain.insert(_chain.end(),vec.begin(),vec.end());
 	}
 
@@ -53,8 +55,8 @@ namespace Mind
 
 	bool ConceptChain::IsPartChainOf( const shared_ptr<ConceptChain> parentChain )
 	{
-		vector<shared_ptr<Concept>> P=GetConceptVec();
-		vector<shared_ptr<Concept>> T=parentChain->GetConceptVec();
+		vector<shared_ptr<iConcept>> P=GetConceptVec();
+		vector<shared_ptr<iConcept>> T=parentChain->GetConceptVec();
 
 		unsigned int n=T.size();
 		unsigned int m=P.size();
@@ -81,7 +83,7 @@ namespace Mind
 		return false;
 	}
 
-	vector<int> ConceptChain::ComputePrefixFunction( const vector<shared_ptr<Concept>> P)
+	vector<int> ConceptChain::ComputePrefixFunction( const vector<shared_ptr<iConcept>> P)
 	{
 		vector<int> res;
 		int m=P.size();
@@ -107,14 +109,14 @@ namespace Mind
 
 	bool ConceptChain::IsSubSequenceOf( const shared_ptr<ConceptChain> parentChain ) const
 	{
-		vector<shared_ptr<Concept>> sub=GetConceptVec();
-		vector<shared_ptr<Concept>> full=parentChain->GetConceptVec();
+		vector<shared_ptr<iConcept>> sub=GetConceptVec();
+		vector<shared_ptr<iConcept>> full=parentChain->GetConceptVec();
 
 		if(sub.empty()) return true;
 		if(full.empty()) return false;
 
 		unsigned int subIndex(0);
-		shared_ptr<Concept> curElem=sub[subIndex];
+		shared_ptr<iConcept> curElem=sub[subIndex];
 		for (unsigned int i=0;i<full.size();++i)
 		{
 			if(curElem->Same(full[i]))
@@ -133,9 +135,9 @@ namespace Mind
 		return false;
 	}
 
-	bool ConceptChain::Contain( const shared_ptr<Concept> concept ) const
+	bool ConceptChain::Contain( const shared_ptr<iConcept> concept ) const
 	{
-		for (list<shared_ptr<Concept>>::const_iterator it=_chain.begin();it!=_chain.end();++it)
+		for (list<shared_ptr<iConcept>>::const_iterator it=_chain.begin();it!=_chain.end();++it)
 		{
 			if(concept->Same(*it))
 			{

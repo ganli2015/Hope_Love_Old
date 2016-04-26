@@ -6,7 +6,7 @@
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 using namespace DataCollection;
 
@@ -21,18 +21,18 @@ GrammarLearning::~GrammarLearning(void)
 
 void GrammarLearning::AdjustGrammarPatternFrequency( const shared_ptr<DataCollection::Sentence> sentence )
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sentence->GetGrammard());
 	vector<GrammarPattern> matchedPatterns=brain->ContainSubsequence(DataBaseProcessorTool::ConvertToPattern(words));
 
 	class IncreaseFrequency
 	{
-		Mind::Cerebrum* _brain;
+		Mind::iCerebrum* _brain;
 	public:
 		IncreaseFrequency()
 		{
-			_brain=Mind::Cerebrum::Instance();
+			_brain=Mind::iCerebrum::Instance();
 		}
 		~IncreaseFrequency(){}
 

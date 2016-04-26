@@ -24,7 +24,7 @@ namespace Mind
 		throw runtime_error("Forbidden Method!");
 	}
 
-	shared_ptr<Concept> BaseConcept::Copy() const
+	shared_ptr<iConcept> BaseConcept::Copy() const
 	{
 		shared_ptr<BaseConcept> res(new BaseConcept());
 		res->_backward=_backward;

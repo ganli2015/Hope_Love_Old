@@ -1,11 +1,11 @@
 #include "StdAfx.h"
 #include "ConceptLevelTable.h"
-#include "Concept.h"
+#include "../MindInterface/iConcept.h"
 
 
 namespace Mind
 {
-	ConceptLevelTable::ConceptLevelTable(const shared_ptr<Concept> val):_myConcept(val)
+	ConceptLevelTable::ConceptLevelTable(const shared_ptr<iConcept> val):_myConcept(val)
 	{
 	}
 
@@ -14,7 +14,7 @@ namespace Mind
 	{
 	}
 
-	void ConceptLevelTable::Insert( const shared_ptr<Concept> concept,const int level )
+	void ConceptLevelTable::Insert( const shared_ptr<iConcept> concept,const int level )
 	{
 		Check(concept->IsBaseConcept());
 		int findLevelIndex=FindLevelInfoIndex(concept);
@@ -36,13 +36,13 @@ namespace Mind
 		}
 	}
 
-	int ConceptLevelTable::FindLevelInfoIndex( const shared_ptr<Concept> concept ) const
+	int ConceptLevelTable::FindLevelInfoIndex( const shared_ptr<iConcept> concept ) const
 	{
 		class SameConcept
 		{
-			shared_ptr<Concept> _val;
+			shared_ptr<iConcept> _val;
 		public:
-			SameConcept(shared_ptr<Concept> val):_val(val){}
+			SameConcept(shared_ptr<iConcept> val):_val(val){}
 			~SameConcept(){}
 
 			bool operator()(const LevelInfo info)
@@ -70,7 +70,7 @@ namespace Mind
 		
 	}
 
-	int ConceptLevelTable::LevelTo( const shared_ptr<Concept> concept ) const
+	int ConceptLevelTable::LevelTo( const shared_ptr<iConcept> concept ) const
 	{
 		int findLevelIndex=FindLevelInfoIndex(concept);
 		if(findLevelIndex<0)

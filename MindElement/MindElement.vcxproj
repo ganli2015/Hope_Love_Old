@@ -113,6 +113,9 @@
     <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
       <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\MindInterface\MindInterface.vcxproj">
+      <Project>{fc0e908a-2d96-41d5-b2bc-7416e325dccc}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

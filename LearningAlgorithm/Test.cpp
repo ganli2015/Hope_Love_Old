@@ -6,7 +6,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/DataBaseProcessorTool.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 using namespace DataCollection;
 
@@ -40,7 +40,7 @@ public:
 
 vector<int> GetGrammarFrequence(const shared_ptr<DataCollection::Sentence> sentence)
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<Word>> words=DataBaseProcessorTool::RemovePuncs(sentence->GetGrammard());
 	vector<GrammarPattern> matchedPatterns=brain->ContainSubsequence(DataBaseProcessorTool::ConvertToPattern(words));

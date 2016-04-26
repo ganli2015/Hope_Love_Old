@@ -274,52 +274,7 @@ namespace Mind
 		return rep;
 	}
 
-	vector<Concept> ConceptSet::BreadthFirstSearch( const Identity identity )
-	{
-		if(!IsConceptExist(identity.str))
-			throw runtime_error("Error in BreadthFirstSearch");
-
-		for (conceptIter iter=_conceptset.begin();iter!=_conceptset.end();++iter)
-		{
-			iter->second->SetColor(iter->second->WHITE);
-		}
-
-		Concept concept;
-		if(!GetConcept(identity,concept))
-		{
-			throw runtime_error("Error in BreadthFirstSearch:Cannot find concept!");
-		}
-
-		vector<Concept> res;
-		res.push_back(concept);
-		deque<shared_ptr<Concept>> queue;
-		queue.push_back(shared_ptr<Concept>(new Concept(concept)));
-		while(!queue.empty())
-		{
-			shared_ptr<Concept> cur=queue[0];
-			queue.pop_front();
-			vector<shared_ptr<Concept>> adj=cur->GetForwardConcepts();
-			for (unsigned int i=0;i<adj.size();++i)
-			{
-				shared_ptr<Concept> adjConcept=adj[i];
-				if(adjConcept->GetString()==concept.GetString() && adjConcept->GetId()==concept.GetId())
-				{
-					continue;
-				}
-
-				if(adjConcept->GetColor()==adjConcept->WHITE)
-				{
-					adjConcept->SetColor(adjConcept->BLACK);
-					queue.push_back(adjConcept);
-					res.push_back(*adjConcept);
-				}
-			}
-		}
-
-		return res;
-	}
-
-	vector<shared_ptr<Concept>> ConceptSet::SearchForwardConcepts( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> ConceptSet::SearchForwardConcepts( const shared_ptr<iConcept> concept ) const
 	{
 		shared_ptr<Concept> myConcept=GetConceptRef(concept);
 		if(myConcept==NULL)
@@ -331,7 +286,7 @@ namespace Mind
 		return findConnectConcept.FindForward(myConcept);
 	}
 
-	vector<shared_ptr<Concept>> ConceptSet::SearchBackwardConcepts( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> ConceptSet::SearchBackwardConcepts( const shared_ptr<iConcept> concept ) const
 	{
 		shared_ptr<Concept> myConcept=GetConceptRef(concept);
 		if(myConcept==NULL)
@@ -518,7 +473,7 @@ namespace Mind
 		return NULL;
 	}
 
-	shared_ptr<Concept> ConceptSet::GetConceptRef(const shared_ptr<Concept> concept) const 
+	shared_ptr<Concept> ConceptSet::GetConceptRef(const shared_ptr<iConcept> concept) const 
 	{
 		Identity identity;
 		identity.str=concept->GetString();
@@ -537,7 +492,7 @@ namespace Mind
 
 	shared_ptr<DataCollection::Word> ConceptSet::SearchWord( Identity identity )
 	{
-		shared_ptr<Concept> concept_me=GetConceptPtr(identity);
+		shared_ptr<iConcept> concept_me=GetConceptPtr(identity);
 		if(concept_me==NULL)
 		{
 			throw runtime_error("Error in BuildConceptConnection");
@@ -548,7 +503,7 @@ namespace Mind
 		return teset;
 	}
 
-	shared_ptr<ConceptInteractTable> ConceptSet::GetInteractTable( const shared_ptr<Concept> from,const shared_ptr<Concept> to,double level )
+	shared_ptr<ConceptInteractTable> ConceptSet::GetInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to,double level )
 	{
 		shared_ptr<ConceptInteractTable> res=from->InteractWith(to);
 		
@@ -560,7 +515,7 @@ namespace Mind
 		return res;
 	}
 
-	shared_ptr<ConceptInteractTable> ConceptSet::GetDeepInteractTable( const shared_ptr<Concept> from,const shared_ptr<Concept> to )
+	shared_ptr<ConceptInteractTable> ConceptSet::GetDeepInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to )
 	{
 		shared_ptr<ConceptInteractTable> res=from->DeepInteractWith(to);
 
@@ -637,7 +592,7 @@ namespace Mind
 		return NULL;
 	}
 
-	shared_ptr<Concept> ConceptSet::GetConceptPtr( const shared_ptr<DataCollection::Word> word ) const
+	shared_ptr<iConcept> ConceptSet::GetConceptPtr( const shared_ptr<DataCollection::Word> word ) const
 	{
 		shared_ptr<Concept> ref=GetConceptRef(word);
 		if(ref==NULL)
@@ -650,7 +605,7 @@ namespace Mind
 		}
 	}
 
-	shared_ptr<Concept> ConceptSet::GetConceptPtr( const Identity identity ) const
+	shared_ptr<iConcept> ConceptSet::GetConceptPtr( const Identity identity ) const
 	{
 		shared_ptr<Concept> ref=GetConceptRef(identity);
 		if(ref==NULL)

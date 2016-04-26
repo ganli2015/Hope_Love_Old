@@ -1,14 +1,14 @@
 #include "StdAfx.h"
 #include "CommonFunction.h"
-#include "Concept.h"
 #include "ConceptInteractTable.h"
 
+#include "../MindInterface/iConcept.h"
 namespace Mind
 {
 	namespace CommonFunction
 	{
 
-		void AppendToInteractTable( const vector<shared_ptr<Concept>>& from,const vector<shared_ptr<Concept>>& to,shared_ptr<ConceptInteractTable> table )
+		void AppendToInteractTable( const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<ConceptInteractTable> table )
 		{
 			if(table==NULL) return;
 
@@ -21,16 +21,16 @@ namespace Mind
 			}
 		}
 
-		int IndexOf( const vector<shared_ptr<Concept>>& concepts,const shared_ptr<Concept> concept )
+		int IndexOf( const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept )
 		{
 			class IsSameWith
 			{
-				shared_ptr<Concept> _val;
+				shared_ptr<iConcept> _val;
 			public:
-				IsSameWith(const shared_ptr<Concept> val):_val(val){};
+				IsSameWith(const shared_ptr<iConcept> val):_val(val){};
 				~IsSameWith(){}
 
-				bool operator()(const shared_ptr<Concept> val)
+				bool operator()(const shared_ptr<iConcept> val)
 				{
 					if(CommonFunction::IsSameConcept(_val,val))
 					{
@@ -41,7 +41,7 @@ namespace Mind
 				}
 			};
 
-			vector<shared_ptr<Concept>>::const_iterator iter=find_if(concepts.begin(),concepts.end(),IsSameWith(concept));
+			vector<shared_ptr<iConcept>>::const_iterator iter=find_if(concepts.begin(),concepts.end(),IsSameWith(concept));
 			if(iter==concepts.end())
 			{
 				return -1;
@@ -53,7 +53,7 @@ namespace Mind
 		}
 
 
-		bool IsSameConcept( const shared_ptr<Concept> left,const shared_ptr<Concept> right )
+		bool IsSameConcept( const shared_ptr<iConcept> left,const shared_ptr<iConcept> right )
 		{
 			if(left->GetString()==right->GetString() && left->GetId()==right->GetId())
 			{
@@ -65,7 +65,7 @@ namespace Mind
 			}
 		}
 
-		void WriteConcepts(const vector<shared_ptr<Concept>>& vec,ofstream& out )
+		void WriteConcepts(const vector<shared_ptr<iConcept>>& vec,ofstream& out )
 		{
 			for (unsigned int j=0;j<vec.size();++j)
 			{
@@ -74,7 +74,7 @@ namespace Mind
 			out<<endl;
 		}
 
-		bool SameConcept::operator()( const shared_ptr<Concept> val )
+		bool SameConcept::operator()( const shared_ptr<iConcept> val )
 		{
 			if(val->Same(_me))
 			{

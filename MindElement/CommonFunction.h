@@ -12,29 +12,29 @@ namespace Mind
 		int id;
 	};
 
-	class Concept;
+	class iConcept;
 	class ConceptInteractTable;
 	class ConceptChain;
 	namespace CommonFunction
 	{
 		//把<from>和<to>的所有相互作用都添加到table
-		void AppendToInteractTable(const vector<shared_ptr<Concept>>& from,const vector<shared_ptr<Concept>>& to,shared_ptr<ConceptInteractTable> table);
+		void AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<ConceptInteractTable> table);
 	
 		//如果没有找到，则返回-1.
-		int _MINDELEMENTINOUT IndexOf(const vector<shared_ptr<Concept>>& concepts,const shared_ptr<Concept> concept);
+		int _MINDELEMENTINOUT IndexOf(const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
 
-		bool IsSameConcept(const shared_ptr<Concept> left,const shared_ptr<Concept> right);
+		bool IsSameConcept(const shared_ptr<iConcept> left,const shared_ptr<iConcept> right);
 
-		void _MINDELEMENTINOUT WriteConcepts(const vector<shared_ptr<Concept>>& vec,ofstream& out);
+		void _MINDELEMENTINOUT WriteConcepts(const vector<shared_ptr<iConcept>>& vec,ofstream& out);
 
 		class _MINDELEMENTINOUT SameConcept
 		{
-			shared_ptr<Concept> _me;
+			shared_ptr<iConcept> _me;
 		public:
-			SameConcept(const shared_ptr<Concept> val):_me(val){}
+			SameConcept(const shared_ptr<iConcept> val):_me(val){}
 			~SameConcept(){}
 
-			bool operator()(const shared_ptr<Concept> val);
+			bool operator()(const shared_ptr<iConcept> val);
 		};
 	}
 }

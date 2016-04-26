@@ -11,7 +11,7 @@
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/Word.h"
 
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 #include "../MindElement/Concept.h"
 
 #include <iostream>
@@ -36,7 +36,7 @@ SentenceAnalyzer::~SentenceAnalyzer(void)
 
 void SentenceAnalyzer::Analyze()
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	Punctuator punctuator(_rawSentenceString);
 	shared_ptr<DataCollection::Sentence> sentence(new Sentence(_rawSentenceString));
@@ -104,7 +104,7 @@ void SentenceAnalyzer::Cout_WordConnectionIntensity( const shared_ptr<DataCollec
 
 vector<shared_ptr<DataCollection::Word>> SentenceAnalyzer::CountUnknownWords( const shared_ptr<Sentence>& sentences ) const
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<DataCollection::Word>> res;
 

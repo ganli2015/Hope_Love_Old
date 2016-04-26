@@ -106,11 +106,11 @@ namespace Mind
 			Identity iden1;
 			iden1.id=0;
 			iden1.str="°®";
-			shared_ptr<Concept> from=brain->GetConcept(iden1);
+			shared_ptr<iConcept> from=brain->GetConcept(iden1);
 			Identity iden2;
 			iden2.id=0;
 			iden2.str="Äã";
-			shared_ptr<Concept> to=brain->GetConcept(iden2);
+			shared_ptr<iConcept> to=brain->GetConcept(iden2);
 
 			shared_ptr<ConceptInteractTable> table=from->DeepInteractWith(to);
 
@@ -127,11 +127,11 @@ namespace Mind
 			Identity iden1;
 			iden1.id=0;
 			iden1.str="²»";
-			shared_ptr<Concept> from=brain->GetConcept(iden1);
+			shared_ptr<iConcept> from=brain->GetConcept(iden1);
 			Identity iden2;
 			iden2.id=0;
 			iden2.str="ÀÏ";
-			shared_ptr<Concept> to=brain->GetConcept(iden2);
+			shared_ptr<iConcept> to=brain->GetConcept(iden2);
 
 			shared_ptr<ConceptInteractTable> table=from->DeepInteractWith(to);
 
@@ -152,7 +152,7 @@ namespace Mind
 			FindRelation(const pair<string,string> p):_p(p){}
 			~FindRelation(){}
 
-			bool operator()(const pair<shared_ptr<Concept>,shared_ptr<Concept>> conceptPair)
+			bool operator()(const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> conceptPair)
 			{
 				if(conceptPair.first->GetString()==_p.first && conceptPair.second->GetString()==_p.second)
 				{
@@ -165,7 +165,7 @@ namespace Mind
 			}
 		};
 
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> relations=table->GetAllRelations();
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
 		for (unsigned int i=0;i<expect.size();++i)
 		{
 			if(find_if(relations.begin(),relations.end(),FindRelation(expect[i]))==relations.end())

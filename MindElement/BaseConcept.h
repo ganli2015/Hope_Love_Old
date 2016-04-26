@@ -14,7 +14,7 @@ namespace Mind
 		~BaseConcept(void);
 		BaseConcept(shared_ptr<DataCollection::Word> word);
 
-		virtual shared_ptr<Concept> Copy() const;
+		virtual shared_ptr<iConcept> Copy() const;
 
 		virtual bool IsBaseConcept() const {return true;}
 

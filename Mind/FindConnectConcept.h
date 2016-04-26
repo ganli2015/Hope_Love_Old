@@ -4,7 +4,7 @@
 
 namespace Mind
 {
-	class Concept;
+	class iConcept;
 
 	class FindConnectConcept
 	{
@@ -16,19 +16,19 @@ namespace Mind
 			Backward
 		};
 		multimap<string,int> _existedIdentity;//记录已经存入的Concept
-		shared_ptr<Concept> _initialConcept;
+		shared_ptr<iConcept> _initialConcept;
 
 	public:
 		FindConnectConcept(void);
 		~FindConnectConcept(void);
 
-		vector<shared_ptr<Concept>> FindForward(const shared_ptr<Concept> concept);
-		vector<shared_ptr<Concept>> FindBackward(const shared_ptr<Concept> concept);
+		vector<shared_ptr<iConcept>> FindForward(const shared_ptr<iConcept> concept);
+		vector<shared_ptr<iConcept>> FindBackward(const shared_ptr<iConcept> concept);
 	private: 
 		//记录已经找到的Concept
-		void Record(const shared_ptr<Concept> concept);
-		bool ConceptExist(const shared_ptr<Concept> concept) const;
-		void Recursive_Find(const shared_ptr<Concept> concept,const SearchDir dir, vector<shared_ptr<Concept>>& connectConcepts);
+		void Record(const shared_ptr<iConcept> concept);
+		bool ConceptExist(const shared_ptr<iConcept> concept) const;
+		void Recursive_Find(const shared_ptr<iConcept> concept,const SearchDir dir, vector<shared_ptr<iConcept>>& connectConcepts);
 	};
 }
 

@@ -12,6 +12,7 @@ namespace NeuralNetwork
 namespace Mind
 {
 	class ConceptSet;
+	class iConcept;
 
 	class ConceptReactSystem
 	{
@@ -24,7 +25,7 @@ namespace Mind
 		struct ConceptInfo
 		{
 			//根据神经网络转化计算出来的向量序号对应的Concept。
-			shared_ptr<Concept> concept;
+			shared_ptr<iConcept> concept;
 			//根据神经网络转化计算出来的向量序号对应的数值。
 			double arrayComponent;
 		};

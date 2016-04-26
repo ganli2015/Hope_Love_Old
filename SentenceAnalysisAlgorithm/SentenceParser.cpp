@@ -7,7 +7,7 @@
 
 #include "../MindElement/Concept.h"
 #include "../MindElement/ConceptInteractTable.h"
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 using namespace std;
 using namespace DataCollection;
@@ -27,7 +27,7 @@ SentenceParser::~SentenceParser(void)
 
 void SentenceParser::Execute()
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 //	brain->ClearConceptInteractTable();
 
 	shared_ptr<SentenceAnalyzer> sentenceAnalyzer(new SentenceAnalyzer(_sentence));
@@ -47,8 +47,8 @@ void SentenceParser::Execute()
 
 void SentenceParser::Cout_WordRelations()
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
-	vector<pair<shared_ptr<Mind::Concept>,shared_ptr<Mind::Concept>>> relations=_conceptTable->GetAllRelations();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
+	vector<pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>>> relations=_conceptTable->GetAllRelations();
 
 	cout<<"Test Word Relations"<<endl;
 

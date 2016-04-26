@@ -11,7 +11,7 @@
 
 #include "../MindElement/Concept.h"
 #include "../MindElement/ConceptChain.h"
-#include "../Mind/Cerebrum.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include <iostream>
 
@@ -62,7 +62,7 @@ void ReactionParser::DisplayReactChains( const vector<ConceptChainProperty>& cha
 
 void ReactionParser::DisplayChain( const shared_ptr<Mind::ConceptChain>& chain ) const
 {
-	vector<shared_ptr<Concept> > concepts=chain->GetConceptVec();
+	vector<shared_ptr<iConcept> > concepts=chain->GetConceptVec();
 	for (unsigned int j=0;j<concepts.size();++j)
 	{
 		cout<<concepts[j]->GetString()<<" ";
@@ -93,7 +93,7 @@ shared_ptr<DataCollection::Sentence> ReactionParser::GetReactSentence() const
 
 vector<shared_ptr<DataCollection::Word>> ReactionParser::CountUnknownWords( const vector<shared_ptr<DataCollection::Sentence>>& sentences ) const
 {
-	Mind::Cerebrum* brain=Mind::Cerebrum::Instance();
+	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	vector<shared_ptr<DataCollection::Word>> res;
 

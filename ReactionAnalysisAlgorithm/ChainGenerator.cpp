@@ -2,8 +2,8 @@
 #include "ChainGenerator.h"
 #include "ExtractConceptChains.h"
 
-#include "../Mind/Cerebrum.h"
-#include "../MindElement/Concept.h"
+#include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iConcept.h"
 #include "../MindElement/ConceptChain.h"
 #include "../MindElement/ConceptInteractTable.h"
 #include "../Mind/CommonFunction.h"
@@ -14,7 +14,7 @@
 
 using namespace Mind;
 
-ChainGenerator::ChainGenerator(void):_brain(Cerebrum::Instance())
+ChainGenerator::ChainGenerator(void):_brain(iCerebrum::Instance())
 {
 }
 
@@ -41,7 +41,7 @@ void ChainGenerator::DisplayChains( const vector<shared_ptr<ConceptChain>>& chai
 {
 	for (unsigned int i=0;i<chains.size();++i)
 	{
-		vector<shared_ptr<Concept> > concepts=chains[i]->GetConceptVec();
+		vector<shared_ptr<iConcept> > concepts=chains[i]->GetConceptVec();
 		for (unsigned int j=0;j<concepts.size();++j)
 		{
 			cout<<concepts[j]->GetString()<<" ";
@@ -80,7 +80,7 @@ void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Min
 {
 	for (unsigned int i=0;i<chains.size();++i)
 	{
-		vector<shared_ptr<Concept>> vec=chains[i]->GetConceptVec();
+		vector<shared_ptr<iConcept>> vec=chains[i]->GetConceptVec();
 		for (unsigned int j=0;j<vec.size();++j)
 		{
 			if(find_if(vec.begin()+j+1,vec.end(),CommonFunction::SameConcept(vec[j]))!=vec.end())

@@ -14,7 +14,7 @@ namespace Mind
 	{
 	}
 
-	void ConceptInteractTable::Add( const shared_ptr<Concept> from, const shared_ptr<Concept> to )
+	void ConceptInteractTable::Add( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to )
 	{
 		int fromIndex=CommonFunction::IndexOf(_concepts,from);
 		int toIndex=CommonFunction::IndexOf(_concepts,to);
@@ -35,9 +35,9 @@ namespace Mind
 			_interactIndex.insert(make_pair(fromIndex,toIndex));
 	}
 
-	vector<shared_ptr<Concept>> ConceptInteractTable::GetFromConcept( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> ConceptInteractTable::GetFromConcept( const shared_ptr<iConcept> concept ) const
 	{
-		vector<shared_ptr<Concept>> res;
+		vector<shared_ptr<iConcept>> res;
 
 		int index=CommonFunction::IndexOf(_concepts,concept);
 		if(index==-1)//如果没找到
@@ -61,9 +61,9 @@ namespace Mind
 		return res;
 	}
 
-	vector<shared_ptr<Concept>> ConceptInteractTable::GetToConcept( const shared_ptr<Concept> concept ) const
+	vector<shared_ptr<iConcept>> ConceptInteractTable::GetToConcept( const shared_ptr<iConcept> concept ) const
 	{
-		vector<shared_ptr<Concept>> res;
+		vector<shared_ptr<iConcept>> res;
 
 		int index=CommonFunction::IndexOf(_concepts,concept);
 		if(index==-1)//如果没找到
@@ -84,9 +84,9 @@ namespace Mind
 	}
 
 
-	vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> ConceptInteractTable::GetAllRelations() const
+	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> ConceptInteractTable::GetAllRelations() const
 	{
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> res;
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> res;
 		for (const_indexIter it=_interactIndex.begin();it!=_interactIndex.end();++it)
 		{
 			res.push_back(make_pair(_concepts[it->first],_concepts[it->second]));
@@ -114,13 +114,13 @@ namespace Mind
 			Aborbing(ConceptInteractTable* table):_table(table){}
 			~Aborbing(){}
 
-			void operator()(const pair<shared_ptr<Concept>,shared_ptr<Concept>> relation)
+			void operator()(const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> relation)
 			{
 				_table->Add(relation.first,relation.second);
 			}
 		};
 
-		vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> relations=absorbed->GetAllRelations();
+		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=absorbed->GetAllRelations();
 		for_each(relations.begin(),relations.end(),Aborbing(this));
 	}
 

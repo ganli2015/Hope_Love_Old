@@ -1,9 +1,10 @@
 #include "StdAfx.h"
 #include "SentenceGenerator.h"
 
-#include "../Mind/Cerebrum.h"
-#include "../MindElement/Concept.h"
+#include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iConcept.h"
 #include "../MindElement/ConceptChain.h"
+#include "../MindElement/CommonFunction.h"
 
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/Rand.h"
@@ -15,7 +16,7 @@ using namespace Mind;
 using namespace DataCollection;
 using namespace Math;
 
-SentenceGenerator::SentenceGenerator(void):_brain(Cerebrum::Instance())
+SentenceGenerator::SentenceGenerator(void):_brain(iCerebrum::Instance())
 {
 }
 
@@ -49,7 +50,7 @@ void SentenceGenerator::Generate( const vector<shared_ptr<Mind::ConceptChain>>& 
 
 DataCollection::GrammarPattern SentenceGenerator::ChainToPattern( const shared_ptr<Mind::ConceptChain> chain ) const
 {
-	vector<shared_ptr<Concept>> conceptVec=chain->GetConceptVec();
+	vector<shared_ptr<iConcept>> conceptVec=chain->GetConceptVec();
 	vector<PartOfSpeech> pos;
 	pos.reserve(conceptVec.size());
 
@@ -121,7 +122,7 @@ vector<SentenceGenerator::SentenceInfo> SentenceGenerator::SelectHyperChainsOfMa
 
 shared_ptr<DataCollection::Sentence> SentenceGenerator::ChainToSentence( const shared_ptr<Mind::ConceptChain> chain ) const
 {
-	vector<shared_ptr<Concept>> conceptVec=chain->GetConceptVec();
+	vector<shared_ptr<iConcept>> conceptVec=chain->GetConceptVec();
 
 	string sen="";
 	for (unsigned int i=0;i<conceptVec.size();++i)
