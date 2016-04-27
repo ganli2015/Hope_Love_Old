@@ -8,7 +8,7 @@ namespace Mind
 	struct ConceptChainProperty;
 }
 
-class ExtractConceptChains
+class _REACTIONANALYSISALGORITHMINOUT ExtractConceptChains
 {
 	typedef pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>> ConceptPair;
 	enum SearchDir

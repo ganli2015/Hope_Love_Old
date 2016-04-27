@@ -7,7 +7,7 @@ namespace NeuralNetwork
 {
 	class train_MultiNetwork;
 	class MyData;
-	class MultilayerNetworkTrainImp
+	class _NEURALNETWORKDESIGNINOUT MultilayerNetworkTrainImp
 	{
 	protected:
 		double _obj;

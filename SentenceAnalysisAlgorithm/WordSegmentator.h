@@ -10,7 +10,7 @@ namespace DataCollection
 	class SegmentedSentence;
 }
 
-class WordSegmentator
+class _SENTENCEANALYSISALGORITHMINOUT WordSegmentator
 {
     shared_ptr<DataCollection::Sentence> _unsegmented;
 

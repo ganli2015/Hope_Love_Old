@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{80f91c9a-39f5-4e55-8336-5e2cb139c7c5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -35,9 +32,6 @@
     <ClInclude Include="Rand.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="MyInt.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -60,12 +54,6 @@
     </ClCompile>
     <ClCompile Include="Rand.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="MyInt.cpp">
       <Filter>源文件</Filter>

@@ -10,7 +10,7 @@ namespace DataCollection
 	class GrammarPattern;
 }
 
-class  GrammarAnalyzer
+class  _SENTENCEANALYSISALGORITHMINOUT GrammarAnalyzer
 {
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
 	vector<shared_ptr<DataCollection::SegmentedSentence>> _segments;

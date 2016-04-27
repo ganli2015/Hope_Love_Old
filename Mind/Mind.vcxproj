@@ -156,8 +156,6 @@
     <ClInclude Include="GrammaTree.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Stdafx.h" />
-    <ClInclude Include="TestClass.h" />
-    <ClInclude Include="Test_ConceptSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cerebrum.cpp" />
@@ -179,9 +177,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Test.cpp" />
-    <ClCompile Include="TestClass.cpp" />
-    <ClCompile Include="Test_ConceptSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">

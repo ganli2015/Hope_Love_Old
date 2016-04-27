@@ -9,10 +9,12 @@ namespace Math
 	class Vector;
 }
 
+class Test_NeuralNetworkDesign;
+
 namespace NeuralNetwork
 {
 	//Network of the momentum modification to back propagation
-	class MultiNet_MOBP : public MultilayerNetworkTrainImp
+	class _NEURALNETWORKDESIGNINOUT MultiNet_MOBP : public MultilayerNetworkTrainImp
 	{
 		double _momentumCoefficient;
 		vector<Math::Vector> _prevDeltaBias;
@@ -22,7 +24,8 @@ namespace NeuralNetwork
 		double _learnRateIncre;
 		double _learnRateDecre;
 
-		friend class TestClass;
+		friend class Test_NeuralNetworkDesign;
+
 	public:
 		MultiNet_MOBP(void);
 		~MultiNet_MOBP(void);

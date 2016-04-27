@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{11a3e866-afd2-4314-b154-1c2c3a233d3a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -47,9 +44,6 @@
     <ClInclude Include="WordRelationTableBuilder.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Test</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -81,12 +75,6 @@
     </ClCompile>
     <ClCompile Include="WordRelationTableBuilder.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{e5c84828-5a01-4cd8-b018-d91811789970}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -29,9 +26,6 @@
     <ClInclude Include="CompositeExpression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="SingleExpression.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -48,12 +42,6 @@
     </ClCompile>
     <ClCompile Include="CompositeExpression.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="SingleExpression.cpp">
       <Filter>源文件</Filter>

@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Test">
-      <UniqueIdentifier>{a37c7bf1-53e4-4120-825a-41d5146776df}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -58,9 +55,6 @@
     </ClInclude>
     <ClInclude Include="Neuron_compet.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TestClass.h">
-      <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="MultilayerNetworkTrainImp.h">
       <Filter>头文件</Filter>
@@ -114,12 +108,6 @@
     </ClCompile>
     <ClCompile Include="Neuron_compet.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TestClass.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="MultilayerNetworkTrainImp.cpp">
       <Filter>源文件</Filter>

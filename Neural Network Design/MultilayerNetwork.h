@@ -22,7 +22,7 @@ namespace NeuralNetwork
 	{
 		shared_ptr<MultilayerNetworkTrainImp> _trainImp;
 
-		friend class TestClass;
+		friend class Test_NeuralNetworkDesign;
 	public:
 		MultilayerNetwork(const int i, const int j);
 		~MultilayerNetwork(){}

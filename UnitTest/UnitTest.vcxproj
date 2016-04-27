@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{894AE4B6-30FF-493E-85A5-D115DF29C848}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>UnitTest</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="MyTest.h" />
+    <ClInclude Include="PublicHeader.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestClass.h" />
+    <ClInclude Include="Test_LogicSystem.h" />
+    <ClInclude Include="Test_Mathmatic.h" />
+    <ClInclude Include="Test_Mind.h" />
+    <ClInclude Include="Test_NeuralNetworkDesign.h" />
+    <ClInclude Include="Test_ReactionAnalysisAlgorithm.h" />
+    <ClInclude Include="Test_SentenceAnalysisAlgorithm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MyTest.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp" />
+    <ClCompile Include="Test_LogicSystem.cpp" />
+    <ClCompile Include="Test_Mathmatic.cpp" />
+    <ClCompile Include="Test_Mind.cpp" />
+    <ClCompile Include="Test_NeuralNetworkDesign.cpp" />
+    <ClCompile Include="Test_ReactionAnalysisAlgorithm.cpp" />
+    <ClCompile Include="Test_SentenceAnalysisAlgorithm.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">
+      <Project>{e3ce7562-e989-4069-ad9f-fd7d45b1dc46}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
+      <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicSystem\LogicSystem.vcxproj">
+      <Project>{9f99884f-7129-4bf4-af3f-98daeab5224c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
+      <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MindElement\MindElement.vcxproj">
+      <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MindInterface\MindInterface.vcxproj">
+      <Project>{fc0e908a-2d96-41d5-b2bc-7416e325dccc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mind\Mind.vcxproj">
+      <Project>{b4e0ed6d-cac1-4881-bee1-c154ba5c7df4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Neural Network Design\Neural Network Design.vcxproj">
+      <Project>{0f9d9851-7103-4ca2-977f-266020313baf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ReactionAnalysisAlgorithm\ReactionAnalysisAlgorithm.vcxproj">
+      <Project>{2d055626-ad7e-4938-b59e-fe1b8851aa32}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SentenceAnalysisAlgorithm\SentenceAnalysisAlgorithm.vcxproj">
+      <Project>{347b0dc1-09b3-43e1-8ed4-43a85a3dcc7f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
