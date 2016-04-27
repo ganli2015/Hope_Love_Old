@@ -4,7 +4,7 @@
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 	class iConcept;
 	class ConceptEdge : public iConceptEdge
 	{
@@ -34,7 +34,7 @@ namespace Mind
 		virtual vector<shared_ptr<iConcept>> GetModification() const;
 
 		//建立<_modification>对<_concept>深度作用的列表
-		virtual shared_ptr<ConceptInteractTable> GetSelfDeepInteract() const;
+		virtual shared_ptr<iConceptInteractTable> GetSelfDeepInteract() const;
 	};
 }
 

@@ -9,7 +9,7 @@ namespace NeuralNetwork
 namespace Mind
 {
 	struct ConceptChainProperty;
-	class ConceptChain;
+	class iConceptChain;
 	class Concept;
 	class ConceptSet;
 
@@ -30,7 +30,7 @@ namespace Mind
 		ConceptReactImp(ConceptSet* conceptSet);
 		virtual ~ConceptReactImp(void);
 
-		virtual vector<ConceptChainProperty> Perform (const shared_ptr<ConceptChain> chain)=0;
+		virtual vector<ConceptChainProperty> Perform (const shared_ptr<iConceptChain> chain)=0;
 
 	protected:
 

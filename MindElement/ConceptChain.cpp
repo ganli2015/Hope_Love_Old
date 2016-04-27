@@ -24,25 +24,26 @@ namespace Mind
 		return vector<shared_ptr<iConcept>>(_chain.begin(),_chain.end());
 	}
 
-	void ConceptChain::Append( const shared_ptr<ConceptChain> chain )
+	void ConceptChain::Append( const shared_ptr<iConceptChain> chain )
 	{
 		vector<shared_ptr<iConcept>> vec=chain->GetConceptVec();
 		_chain.insert(_chain.end(),vec.begin(),vec.end());
 	}
 
-	shared_ptr<ConceptChain> ConceptChain::Copy() const
+	shared_ptr<iConceptChain> ConceptChain::Copy() const
 	{		
 		shared_ptr<ConceptChain> res(new ConceptChain(GetConceptVec()));
 
 		return res;
 	}
 
-	bool ConceptChain::Same( const shared_ptr<ConceptChain> chain ) const
+	bool ConceptChain::Same( const shared_ptr<iConceptChain> chain ) const
 	{
-		Sequence otherSeq=chain->_chain;
+		Sequence otherSeq=chain->GetConceptVec();
+		Sequence mySeq=GetConceptVec();
 
-		for (Sequence::const_iterator it1=_chain.begin(),it2=otherSeq.begin();
-			it1!=_chain.end(),it2!=otherSeq.end();++it1,++it2)
+		for (Sequence::const_iterator it1=mySeq.begin(),it2=otherSeq.begin();
+			it1!=mySeq.end(),it2!=otherSeq.end();++it1,++it2)
 		{
 			if(!(*it1)->Same(*it2))
 			{
@@ -53,7 +54,7 @@ namespace Mind
 		return true;
 	}
 
-	bool ConceptChain::IsPartChainOf( const shared_ptr<ConceptChain> parentChain )
+	bool ConceptChain::IsPartChainOf( const shared_ptr<iConceptChain> parentChain ) const
 	{
 		vector<shared_ptr<iConcept>> P=GetConceptVec();
 		vector<shared_ptr<iConcept>> T=parentChain->GetConceptVec();
@@ -83,7 +84,7 @@ namespace Mind
 		return false;
 	}
 
-	vector<int> ConceptChain::ComputePrefixFunction( const vector<shared_ptr<iConcept>> P)
+	vector<int> ConceptChain::ComputePrefixFunction( const vector<shared_ptr<iConcept>> P) const
 	{
 		vector<int> res;
 		int m=P.size();
@@ -107,7 +108,7 @@ namespace Mind
 		return res;
 	}
 
-	bool ConceptChain::IsSubSequenceOf( const shared_ptr<ConceptChain> parentChain ) const
+	bool ConceptChain::IsSubSequenceOf( const shared_ptr<iConceptChain> parentChain ) const
 	{
 		vector<shared_ptr<iConcept>> sub=GetConceptVec();
 		vector<shared_ptr<iConcept>> full=parentChain->GetConceptVec();

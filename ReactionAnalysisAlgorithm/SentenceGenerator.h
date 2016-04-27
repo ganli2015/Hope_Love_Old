@@ -4,7 +4,7 @@
 namespace Mind
 {
 	class iCerebrum;
-	class ConceptChain;
+	class iConceptChain;
 }
 
 namespace DataCollection
@@ -18,7 +18,7 @@ class SentenceGenerator
 private:
 	struct SentenceInfo
 	{
-		shared_ptr<Mind::ConceptChain> hyperChain;
+		shared_ptr<Mind::iConceptChain> hyperChain;
 		int patternFreq;
 	};
 
@@ -30,16 +30,16 @@ public:
 	SentenceGenerator(void);
 	~SentenceGenerator(void);
 
-	void Generate(const vector<shared_ptr<Mind::ConceptChain>>& hyperChains);
+	void Generate(const vector<shared_ptr<Mind::iConceptChain>>& hyperChains);
 	shared_ptr<DataCollection::Sentence> GetSentence() const {return _sentence;}
 private:
-	DataCollection::GrammarPattern ChainToPattern(const shared_ptr<Mind::ConceptChain> chain) const;
+	DataCollection::GrammarPattern ChainToPattern(const shared_ptr<Mind::iConceptChain> chain) const;
 	int ComputeTotalFreq(const vector<DataCollection::GrammarPattern>& patterns) const;
 	vector<SentenceGenerator::SentenceInfo> SelectHyperChainsOfMaxFreq(const vector<SentenceInfo>& hyperChainInfos) const;
-	shared_ptr<DataCollection::Sentence> ChainToSentence(const shared_ptr<Mind::ConceptChain> chain) const;
+	shared_ptr<DataCollection::Sentence> ChainToSentence(const shared_ptr<Mind::iConceptChain> chain) const;
 
 	void OutputChainAndPatternInfo(
-		const shared_ptr<Mind::ConceptChain> chain,
+		const shared_ptr<Mind::iConceptChain> chain,
 		const vector<DataCollection::GrammarPattern>& patterns,
 		ofstream& out) const;
 };

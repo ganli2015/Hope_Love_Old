@@ -33,7 +33,7 @@ void SpeakCommand::Update()
 	sentenceParser->Execute();
 
 	shared_ptr<DataCollection::Sentence> parsedSentence=sentenceParser->GetParsedSentence();
-	shared_ptr<Mind::ConceptInteractTable> interactTable=sentenceParser->GetInteractTable();
+	shared_ptr<Mind::iConceptInteractTable> interactTable=sentenceParser->GetInteractTable();
 	_datawrapper->AddParsedInputSentence(parsedSentence);
 
 	vector<shared_ptr<DataCollection::Sentence>> reactInputSentence;

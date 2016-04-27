@@ -3,7 +3,7 @@
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 }
 
 namespace LogicSystem
@@ -14,7 +14,7 @@ namespace LogicSystem
 		Expression(void);
 		virtual ~Expression(void);
 
-		virtual shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const =0;
+		virtual shared_ptr<Mind::iConceptInteractTable> GetInteractTable() const =0;
 	};
 }
 

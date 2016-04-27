@@ -1,41 +1,42 @@
 #include "StdAfx.h"
 #include "ExtractConceptChains.h"
 
-#include "../MindElement/ConceptChain.h"
 #include "../Mind/CommonFunction.h"
+#include "../MindElement/ConceptChain.h"
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iConceptChain.h"
 
 using namespace Mind;
 
-// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_forwardTable;
-// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::ConceptChain>>> ExtractConceptChains::_backwardTable;
+// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::iConceptChain>>> ExtractConceptChains::_forwardTable;
+// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::iConceptChain>>> ExtractConceptChains::_backwardTable;
 
 int ExtractConceptChains::_recursiveCount=0;
 const int ExtractConceptChains::_recursiveMaxCount=100;
 
-vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Extract( const vector<ConceptPair>& pairs )
+vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vector<ConceptPair>& pairs )
 {
 	vector<ConceptPair> pairs_copy=pairs;
 	RemoveBadPairs(pairs_copy);
 
-	vector<shared_ptr<ConceptChain>> res;
+	vector<shared_ptr<iConceptChain>> res;
 
 	for (unsigned int i=0;i<pairs_copy.size();++i)
 	{
 		_recursiveCount=0;
-		shared_ptr<ConceptChain> relatedChain_Back(new ConceptChain());
+		shared_ptr<iConceptChain> relatedChain_Back(new ConceptChain());
 		relatedChain_Back->Push_Back(pairs_copy[i].first);
-		vector<shared_ptr<ConceptChain>> backChains;
+		vector<shared_ptr<iConceptChain>> backChains;
 		Recursive_Search(Backward,pairs_copy[i].first,pairs_copy,relatedChain_Back,backChains);
 
 		_recursiveCount=0;
-		shared_ptr<ConceptChain> relatedChain_Forward(new ConceptChain());
+		shared_ptr<iConceptChain> relatedChain_Forward(new ConceptChain());
 		relatedChain_Forward->Push_Back(pairs_copy[i].second);
-		vector<shared_ptr<ConceptChain>> forwardChains;
+		vector<shared_ptr<iConceptChain>> forwardChains;
 		Recursive_Search(Forward,pairs_copy[i].second,pairs_copy,relatedChain_Forward,forwardChains);
 
 		//合并，遍历所有组合方式。
-		vector<shared_ptr<ConceptChain>> curChains=Merge(backChains,forwardChains);
+		vector<shared_ptr<iConceptChain>> curChains=Merge(backChains,forwardChains);
 		res.insert(res.end(),curChains.begin(),curChains.end());
 	}
 
@@ -45,8 +46,8 @@ vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Extract( const vect
 void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	const shared_ptr<Mind::iConcept> curConcept,
 	const vector<ConceptPair>& pairs,
-	const shared_ptr<Mind::ConceptChain>& relatedChain,//记录遍历相邻节点前的包含 curConcept的Chain，便于相邻的iConcept能添加上去。
-	vector<shared_ptr<Mind::ConceptChain>>& chains )//所有Chains
+	const shared_ptr<Mind::iConceptChain>& relatedChain,//记录遍历相邻节点前的包含 curConcept的Chain，便于相邻的iConcept能添加上去。
+	vector<shared_ptr<Mind::iConceptChain>>& chains )//所有Chains
 {
 	// 	if(HasSearched(curConcept,dir,chains))//如果已经递归搜索过curConcept，那么直接从表格里读取。
 	// 	{
@@ -77,11 +78,11 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 		return;
 	}
 
-	vector<shared_ptr<Mind::ConceptChain>> curChains;//存储遍历相邻节点之后包含curConcept的所有的chain
+	vector<shared_ptr<Mind::iConceptChain>> curChains;//存储遍历相邻节点之后包含curConcept的所有的chain
 	for (unsigned int i=0;i<adjConcepts.size();++i)
 	{
 		//对<relatedChains>补充，建立包含forwardConcepts[i]的Chains。
-		shared_ptr<ConceptChain> newRelatedChains=AppendToChains(adjConcepts[i],relatedChain,dir);
+		shared_ptr<iConceptChain> newRelatedChains=AppendToChains(adjConcepts[i],relatedChain,dir);
 		if(relatedChain->Contain(adjConcepts[i]))//如果这是个闭环，那么就无需递归下去，但是这个闭环会被保留下来。
 		{
 			curChains.push_back(newRelatedChains);
@@ -131,9 +132,9 @@ vector<shared_ptr<Mind::iConcept>> ExtractConceptChains::GetBackwordAdjConcepts(
 	return res;
 }
 
-shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const shared_ptr<iConcept> concept,const shared_ptr<Mind::ConceptChain>& chains ,const SearchDir dir)
+shared_ptr<Mind::iConceptChain> ExtractConceptChains::AppendToChains( const shared_ptr<iConcept> concept,const shared_ptr<Mind::iConceptChain>& chains ,const SearchDir dir)
 {
-	shared_ptr<Mind::ConceptChain> res(new ConceptChain(chains->GetConceptVec()));
+	shared_ptr<Mind::iConceptChain> res(new ConceptChain(chains->GetConceptVec()));
 	if(dir==Forward)
 	{
 		res->Push_Back(concept);
@@ -146,7 +147,7 @@ shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const share
 	return res;
 }
 
-// bool ExtractConceptChains::HasSearched( const shared_ptr<Mind::iConcept> concept,const SearchDir dir,vector<shared_ptr<Mind::ConceptChain>>& chains )
+// bool ExtractConceptChains::HasSearched( const shared_ptr<Mind::iConcept> concept,const SearchDir dir,vector<shared_ptr<Mind::iConceptChain>>& chains )
 // {
 // 	if(dir==Forward)
 // 	{
@@ -174,16 +175,16 @@ shared_ptr<Mind::ConceptChain> ExtractConceptChains::AppendToChains( const share
 // 	}
 // }
 
-vector<shared_ptr<Mind::ConceptChain>> ExtractConceptChains::Merge( const vector<shared_ptr<Mind::ConceptChain>>& backChains,
-	const vector<shared_ptr<Mind::ConceptChain>>& forwardChains )
+vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Merge( const vector<shared_ptr<Mind::iConceptChain>>& backChains,
+	const vector<shared_ptr<Mind::iConceptChain>>& forwardChains )
 {
-	vector<shared_ptr<Mind::ConceptChain>> res;
+	vector<shared_ptr<Mind::iConceptChain>> res;
 	res.reserve(backChains.size()*forwardChains.size());
 	for (unsigned int i=0;i<backChains.size();++i)
 	{		
 		for (unsigned int j=0;j<forwardChains.size();++j)
 		{
-			shared_ptr<ConceptChain> newChain=backChains[i]->Copy();
+			shared_ptr<iConceptChain> newChain=backChains[i]->Copy();
 			//newChain->Reverse();
 			newChain->Append(forwardChains[j]);
 			res.push_back(newChain);

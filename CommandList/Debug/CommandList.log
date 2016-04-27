@@ -1,7 +1,7 @@
-﻿生成启动时间为 2016/4/27 0:47:13。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/4/27 21:21:15。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\CommandList\CommandList.vcxproj”在节点 5 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在对“Debug\CommandList.unsuccessfulbuild”执行 Touch 任务。
+         正在创建“Debug\CommandList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
          所有输出均为最新。
@@ -24,4 +24,4 @@
 
 生成成功。
 
-已用时间 00:00:00.92
+已用时间 00:00:00.74

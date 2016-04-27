@@ -65,24 +65,24 @@ namespace Mind
 
 		//作用于<concept>上，产生相互作用列表。
 		//<me>所依赖的concept（_forward）会作用于<toConcept>,表明对<me>对<toConcept>的解释。
-		virtual shared_ptr<ConceptInteractTable> InteractWith(const shared_ptr<iConcept> toConcept) const;
+		virtual shared_ptr<iConceptInteractTable> InteractWith(const shared_ptr<iConcept> toConcept) const;
 		//<me>的BaseConcept与toConcept的BaseConcept之间的相互作用。
-		virtual shared_ptr<ConceptInteractTable> DeepInteractWith(const shared_ptr<iConcept> toConcept) const;
+		virtual shared_ptr<iConceptInteractTable> DeepInteractWith(const shared_ptr<iConcept> toConcept) const;
 
 		//获得BaseConcept。只会获得与toConcept有关的Base，而不会获得与modification有关的Base。
 		virtual vector<shared_ptr<iConcept>> GetBase() const ;
 		virtual bool IsBaseConcept() const {return false;}
 
-		virtual shared_ptr<ConceptLevelTable> GetLevelTable() const;
+		virtual shared_ptr<iConceptLevelTable> GetLevelTable() const;
 		//Return the same class of <me>
 		shared_ptr<Concept> Clone() const;
 
 	private:
 		shared_ptr<DataCollection::Word> GetParticularWord(DataCollection::PartOfSpeech partofspeech) const;
 		void Recursive_GetBase(const iConcept* concept,vector<shared_ptr<iConcept>>& result) const;
-		void Recursive_GetEdgeInteractTable(const shared_ptr<iConceptEdge>& edge,shared_ptr<ConceptInteractTable> mod_table) const;
+		void Recursive_GetEdgeInteractTable(const shared_ptr<iConceptEdge>& edge,shared_ptr<iConceptInteractTable> mod_table) const;
 		void Recursive_SearchLevel( const iConcept* concept,const int curLevel,shared_ptr<ConceptLevelTable> levelTable ) const;
-		virtual vector<shared_ptr<iConceptEdge>> GetForwardEdges() const ;
+		virtual const vector<shared_ptr<iConceptEdge>> GetForwardEdges() const ;
 	};
 }
 

@@ -8,7 +8,7 @@ namespace DataCollection
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 }
 
 class _SENTENCEANALYSISALGORITHMINOUT SentenceParser
@@ -16,7 +16,7 @@ class _SENTENCEANALYSISALGORITHMINOUT SentenceParser
 	std::string _sentence;
 	shared_ptr<DataCollection::Sentence> _parsedSentence;
 
-	shared_ptr<Mind::ConceptInteractTable> _conceptTable;
+	shared_ptr<Mind::iConceptInteractTable> _conceptTable;
 public:
 	SentenceParser(void);
 	~SentenceParser(void);
@@ -24,7 +24,7 @@ public:
 
 	void Execute();
 	shared_ptr<DataCollection::Sentence> GetParsedSentence() const {return _parsedSentence;}
-	shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const {return _conceptTable;}
+	shared_ptr<Mind::iConceptInteractTable> GetInteractTable() const {return _conceptTable;}
 private:
 	void Cout_WordRelations();
 };

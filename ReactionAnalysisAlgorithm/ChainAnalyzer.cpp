@@ -7,10 +7,12 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iConceptChain.h"
+#include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/iConceptLevelTable.h"
+
 #include "../MindElement/ConceptChain.h"
-#include "../MindElement/ConceptInteractTable.h"
 #include "../Mind/CommonFunction.h"
-#include "../MindElement/ConceptLevelTable.h"
 
 using namespace Mind;
 using namespace Math;
@@ -30,7 +32,7 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 	for (unsigned int i=0;i<baseChains.size();++i)
 	{
 		ConceptChainProperty property=baseChains[i];
-		vector<shared_ptr<ConceptChain>> hyperChains;
+		vector<shared_ptr<iConceptChain>> hyperChains;
 		ComputeHyperChains(property.chain,hyperChains);
 		if(hyperChains.empty()) continue;
 
@@ -51,7 +53,7 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 
 }
 
-void ChainAnalyzer::ComputeHyperChains( const shared_ptr<ConceptChain> baseChain,vector<shared_ptr<ConceptChain>>& hyperChains )
+void ChainAnalyzer::ComputeHyperChains( const shared_ptr<iConceptChain> baseChain,vector<shared_ptr<iConceptChain>>& hyperChains )
 {
 	vector<shared_ptr<iConcept>> conceptSequence=baseChain->GetConceptVec();
 
@@ -68,28 +70,28 @@ void ChainAnalyzer::ComputeHyperChains( const shared_ptr<ConceptChain> baseChain
 	vector<vector<shared_ptr<iConcept>>> combinations=Math::GetAllCombinations<shared_ptr<iConcept>>::Get(backwardConceptSequence);
 	for (unsigned int i=0;i<combinations.size();++i)
 	{
-		vector<shared_ptr<ConceptChain>> properCombi=ComputeProperCombination(combinations[i],baseChain);
+		vector<shared_ptr<iConceptChain>> properCombi=ComputeProperCombination(combinations[i],baseChain);
 		hyperChains.insert(hyperChains.end(),properCombi.begin(),properCombi.end());
 	}
 }
 
-vector<shared_ptr<ConceptChain>> ChainAnalyzer::ComputeProperCombination( const vector<shared_ptr<Mind::iConcept>>& combination,const shared_ptr<Mind::ConceptChain> baseChain ) const
+vector<shared_ptr<iConceptChain>> ChainAnalyzer::ComputeProperCombination( const vector<shared_ptr<Mind::iConcept>>& combination,const shared_ptr<Mind::iConceptChain> baseChain ) const
 {
-	vector<shared_ptr<ConceptChain>> res;
+	vector<shared_ptr<iConceptChain>> res;
 
 	vector<vector<shared_ptr<iConcept>>> subSequences=GetAllSubSequence<shared_ptr<iConcept>>::Get(combination);
 	for (unsigned int i=0;i<subSequences.size();++i)
 	{
 		if(CoverBase(subSequences[i],baseChain))
 		{
-			res.push_back(shared_ptr<ConceptChain>(new ConceptChain(subSequences[i])));
+			res.push_back(shared_ptr<iConceptChain>(new ConceptChain(subSequences[i])));
 		}
 	}
 
 	return res;
 }
 
-bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,const shared_ptr<ConceptChain>& baseChain) const
+bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,const shared_ptr<iConceptChain>& baseChain) const
 {
 	typedef pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>> ConceptPair;
 
@@ -97,13 +99,13 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,con
 	vector<ConceptPair> allPairs;
 	for (unsigned int i=0;i<hyperChain.size()-1;++i)
 	{
-		shared_ptr<ConceptInteractTable> interactTable=hyperChain[i]->DeepInteractWith(hyperChain[i+1]);
+		shared_ptr<iConceptInteractTable> interactTable=hyperChain[i]->DeepInteractWith(hyperChain[i+1]);
 		vector<ConceptPair> basePairs=interactTable->GetAllRelations();
 		allPairs.insert(allPairs.end(),basePairs.begin(),basePairs.end());
 	}
 
 	//对allPairs提取所有的Concept Chain。
-	vector<shared_ptr<ConceptChain>> chains;
+	vector<shared_ptr<iConceptChain>> chains;
 	try
 	{
 		chains=ExtractConceptChains::Extract(allPairs);
@@ -140,7 +142,7 @@ int ChainAnalyzer::OverlappedCount( const int startIndex,const vector<shared_ptr
 	return count;
 }
 
-void ChainAnalyzer::OutputHyperChains( const vector<HyperChainInfo>& hyperChainInfos,const shared_ptr<Mind::ConceptChain> baseChain,ofstream& out )
+void ChainAnalyzer::OutputHyperChains( const vector<HyperChainInfo>& hyperChainInfos,const shared_ptr<Mind::iConceptChain> baseChain,ofstream& out )
 {
 	if(hyperChainInfos.empty()) return;
 
@@ -156,15 +158,15 @@ void ChainAnalyzer::OutputHyperChains( const vector<HyperChainInfo>& hyperChainI
 	out<<endl;
 }
 
-void ChainAnalyzer::ComputeHyperChainLevels( const vector<shared_ptr<ConceptChain>>& hyperChains,const shared_ptr<Mind::ConceptChain> baseChain,vector<double>& levels ) const
+void ChainAnalyzer::ComputeHyperChainLevels( const vector<shared_ptr<iConceptChain>>& hyperChains,const shared_ptr<Mind::iConceptChain> baseChain,vector<double>& levels ) const
 {
 	class ComputeLevel
 	{
-		shared_ptr<Mind::ConceptChain> _baseChain;
+		shared_ptr<Mind::iConceptChain> _baseChain;
 	public:
-		ComputeLevel(const shared_ptr<Mind::ConceptChain> val):_baseChain(val){}
+		ComputeLevel(const shared_ptr<Mind::iConceptChain> val):_baseChain(val){}
 		~ComputeLevel(){}
-		double operator()(const shared_ptr<Mind::ConceptChain> hyperChain)
+		double operator()(const shared_ptr<Mind::iConceptChain> hyperChain)
 		{
 			return ChainAnalyzer::ComputeHyperChainMeanLevel(hyperChain,_baseChain);
 		}
@@ -175,14 +177,14 @@ void ChainAnalyzer::ComputeHyperChainLevels( const vector<shared_ptr<ConceptChai
 	transform(hyperChains.begin(),hyperChains.end(),back_inserter(levels),ComputeLevel(baseChain));
 }
 
-double ChainAnalyzer::ComputeHyperChainMeanLevel( const shared_ptr<Mind::ConceptChain> hyperChain,const shared_ptr<Mind::ConceptChain> baseChain )
+double ChainAnalyzer::ComputeHyperChainMeanLevel( const shared_ptr<Mind::iConceptChain> hyperChain,const shared_ptr<Mind::iConceptChain> baseChain )
 {
 	vector<shared_ptr<iConcept>> hyperConcepts=hyperChain->GetConceptVec();
 	vector<shared_ptr<iConcept>> baseConcepts=baseChain->GetConceptVec();
 	vector<int> levels;
 	for (unsigned int i=0;i<hyperConcepts.size();++i)
 	{
-		shared_ptr<ConceptLevelTable> levelTable=hyperConcepts[i]->GetLevelTable();
+		shared_ptr<iConceptLevelTable> levelTable=hyperConcepts[i]->GetLevelTable();
 		int minLevel=BigInt;
 		//选择与baseConcepts的最小level作为hyperConcepts[i]的level。
 		for (unsigned int j=0;j<baseConcepts.size();++j)
@@ -201,7 +203,7 @@ double ChainAnalyzer::ComputeHyperChainMeanLevel( const shared_ptr<Mind::Concept
 	return MeanValue(levels);
 }
 
-vector<ChainAnalyzer::HyperChainInfo> ChainAnalyzer::AssembleHyperChainInfo( const vector<shared_ptr<Mind::ConceptChain>>& hyperChains, const vector<double>& levels, const double confidence )
+vector<ChainAnalyzer::HyperChainInfo> ChainAnalyzer::AssembleHyperChainInfo( const vector<shared_ptr<Mind::iConceptChain>>& hyperChains, const vector<double>& levels, const double confidence )
 {
 	vector<HyperChainInfo> res;
 	res.reserve(hyperChains.size());
@@ -255,18 +257,18 @@ vector<ChainAnalyzer::HyperChainInfo> ChainAnalyzer::SelectHyperChainsOfMaxLevel
 	return findInfos.GetResult();
 }
 
-vector<shared_ptr<Mind::ConceptChain>> ChainAnalyzer::GetHyperChains() const
+vector<shared_ptr<Mind::iConceptChain>> ChainAnalyzer::GetHyperChains() const
 {
 	class InfoToChain
 	{
 	public:
-		shared_ptr<ConceptChain> operator()(const HyperChainInfo& info)
+		shared_ptr<iConceptChain> operator()(const HyperChainInfo& info)
 		{
 			return info.hyperChain;
 		}
 	};
 
-	vector<shared_ptr<Mind::ConceptChain>> res(_hyperChainInfos.size());
+	vector<shared_ptr<Mind::iConceptChain>> res(_hyperChainInfos.size());
 	transform(_hyperChainInfos.begin(),_hyperChainInfos.end(),res.begin(),InfoToChain());
 
 	return res;

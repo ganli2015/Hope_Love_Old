@@ -3,12 +3,14 @@
 #include "ConceptInteractTable.h"
 
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iConceptInteractTable.h"
+
 namespace Mind
 {
 	namespace CommonFunction
 	{
 
-		void AppendToInteractTable( const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<ConceptInteractTable> table )
+		void AppendToInteractTable( const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<iConceptInteractTable> table )
 		{
 			if(table==NULL) return;
 

@@ -12,7 +12,7 @@ namespace DataCollection
 namespace Mind
 {
 	class iConcept;
-	class ConceptChain;
+	class iConceptChain;
 	struct Identity;
 	struct ConceptChainProperty;
 
@@ -53,6 +53,6 @@ namespace Mind
 		virtual double GetP_Backward(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward) const=0;
 
 		//Concept React System Functions
-		virtual vector<ConceptChainProperty> React(const shared_ptr<ConceptChain> chain)=0;
+		virtual vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain)=0;
 	};
 }

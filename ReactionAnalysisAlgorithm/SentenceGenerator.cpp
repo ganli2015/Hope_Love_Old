@@ -3,7 +3,7 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConcept.h"
-#include "../MindElement/ConceptChain.h"
+#include "../MindInterface/iConceptChain.h"
 #include "../MindElement/CommonFunction.h"
 
 #include "../Mathmatic/MathTool.h"
@@ -25,7 +25,7 @@ SentenceGenerator::~SentenceGenerator(void)
 {
 }
 
-void SentenceGenerator::Generate( const vector<shared_ptr<Mind::ConceptChain>>& hyperChains )
+void SentenceGenerator::Generate( const vector<shared_ptr<Mind::iConceptChain>>& hyperChains )
 {
 	ofstream out("DebugInfo//Chain Grammar Info.txt");
 	
@@ -48,7 +48,7 @@ void SentenceGenerator::Generate( const vector<shared_ptr<Mind::ConceptChain>>& 
 	_sentence=ChainToSentence(selectedInfos[selectedIndex].hyperChain);
 }
 
-DataCollection::GrammarPattern SentenceGenerator::ChainToPattern( const shared_ptr<Mind::ConceptChain> chain ) const
+DataCollection::GrammarPattern SentenceGenerator::ChainToPattern( const shared_ptr<Mind::iConceptChain> chain ) const
 {
 	vector<shared_ptr<iConcept>> conceptVec=chain->GetConceptVec();
 	vector<PartOfSpeech> pos;
@@ -63,7 +63,7 @@ DataCollection::GrammarPattern SentenceGenerator::ChainToPattern( const shared_p
 }
 
 void SentenceGenerator::OutputChainAndPatternInfo( 
-	const shared_ptr<Mind::ConceptChain> chain, 
+	const shared_ptr<Mind::iConceptChain> chain, 
 	const vector<DataCollection::GrammarPattern>& patterns, 
 	ofstream& out ) const
 {
@@ -120,7 +120,7 @@ vector<SentenceGenerator::SentenceInfo> SentenceGenerator::SelectHyperChainsOfMa
 	return findInfos.GetResult();
 }
 
-shared_ptr<DataCollection::Sentence> SentenceGenerator::ChainToSentence( const shared_ptr<Mind::ConceptChain> chain ) const
+shared_ptr<DataCollection::Sentence> SentenceGenerator::ChainToSentence( const shared_ptr<Mind::iConceptChain> chain ) const
 {
 	vector<shared_ptr<iConcept>> conceptVec=chain->GetConceptVec();
 

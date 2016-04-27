@@ -19,7 +19,7 @@ namespace Mind
 	class GrammarSet;
 	class ConceptInteractTableContainer;
 	class ConceptReactSystem;
-	class ConceptChain;
+	class iConceptChain;
 	struct Identity;
 	struct ConceptChainProperty;
 
@@ -90,7 +90,7 @@ namespace Mind
 // 		void ClearConceptInteractTable();
 
 		//Concept React System Functions
-		virtual vector<ConceptChainProperty> React(const shared_ptr<ConceptChain> chain);
+		virtual vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain);
 
 		
 	};

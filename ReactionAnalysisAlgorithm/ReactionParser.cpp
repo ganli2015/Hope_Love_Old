@@ -10,7 +10,7 @@
 #include "../DataCollection/Sentence.h"
 
 #include "../MindElement/Concept.h"
-#include "../MindElement/ConceptChain.h"
+#include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iCerebrum.h"
 
 #include <iostream>
@@ -27,7 +27,7 @@ ReactionParser::~ReactionParser(void)
 {
 }
 
-ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
+ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::iConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
 {
 
 }
@@ -60,7 +60,7 @@ void ReactionParser::DisplayReactChains( const vector<ConceptChainProperty>& cha
 	cout<<endl;
 }
 
-void ReactionParser::DisplayChain( const shared_ptr<Mind::ConceptChain>& chain ) const
+void ReactionParser::DisplayChain( const shared_ptr<Mind::iConceptChain>& chain ) const
 {
 	vector<shared_ptr<iConcept> > concepts=chain->GetConceptVec();
 	for (unsigned int j=0;j<concepts.size();++j)
@@ -70,7 +70,7 @@ void ReactionParser::DisplayChain( const shared_ptr<Mind::ConceptChain>& chain )
 	cout<<endl;
 }
 
-void ReactionParser::DisplayHyperChains( const vector<shared_ptr<Mind::ConceptChain>>& chains ) const
+void ReactionParser::DisplayHyperChains( const vector<shared_ptr<Mind::iConceptChain>>& chains ) const
 {
 	cout<<"Hyper Chains:"<<endl;
 	for (unsigned int i=0;i<chains.size();++i)
@@ -131,7 +131,7 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 
 	ChainAnalyzer chainAnalyzer;
 	chainAnalyzer.Analyze(reactChains);
-	vector<shared_ptr<Mind::ConceptChain>> hyperChains=chainAnalyzer.GetHyperChains();
+	vector<shared_ptr<Mind::iConceptChain>> hyperChains=chainAnalyzer.GetHyperChains();
 
 #ifdef _DEBUG
 	DisplayHyperChains(hyperChains);

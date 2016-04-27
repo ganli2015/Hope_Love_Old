@@ -6,7 +6,7 @@
 
 #include "../DataCollection/Sentence.h"
 
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iConceptInteractTable.h"
 
 using namespace DataCollection;
 
@@ -42,7 +42,7 @@ namespace LogicSystem
 	{
 	}
 
-	shared_ptr<Mind::ConceptInteractTable> SingleExpression::GetInteractTable() const
+	shared_ptr<Mind::iConceptInteractTable> SingleExpression::GetInteractTable() const
 	{
 		if(_sen==NULL) return NULL;
 		if(!_sen->StructureAnalyzed()) return NULL;

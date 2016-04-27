@@ -180,7 +180,7 @@ namespace Mind
 // 		_conceptInteractTableContainer->Add(conceptTable,fromConcept,toConcept);
 // 	}
 
-	vector<ConceptChainProperty> Cerebrum::React( const shared_ptr<ConceptChain> chain )
+	vector<ConceptChainProperty> Cerebrum::React( const shared_ptr<iConceptChain> chain )
 	{
 		return _conceptReactSystem->React(chain);
 	}

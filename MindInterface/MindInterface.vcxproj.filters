@@ -26,6 +26,15 @@
     <ClInclude Include="iConceptEdge.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="iConceptChain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iConceptInteractTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iConceptLevelTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -38,6 +47,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="iConceptEdge.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iConceptChain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iConceptInteractTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iConceptLevelTable.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

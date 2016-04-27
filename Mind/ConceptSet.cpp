@@ -503,9 +503,9 @@ namespace Mind
 		return teset;
 	}
 
-	shared_ptr<ConceptInteractTable> ConceptSet::GetInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to,double level )
+	shared_ptr<iConceptInteractTable> ConceptSet::GetInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to,double level )
 	{
-		shared_ptr<ConceptInteractTable> res=from->InteractWith(to);
+		shared_ptr<iConceptInteractTable> res=from->InteractWith(to);
 		
 		for (int i=0;i<level;++i)
 		{
@@ -515,9 +515,9 @@ namespace Mind
 		return res;
 	}
 
-	shared_ptr<ConceptInteractTable> ConceptSet::GetDeepInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to )
+	shared_ptr<iConceptInteractTable> ConceptSet::GetDeepInteractTable( const shared_ptr<iConcept> from,const shared_ptr<iConcept> to )
 	{
-		shared_ptr<ConceptInteractTable> res=from->DeepInteractWith(to);
+		shared_ptr<iConceptInteractTable> res=from->DeepInteractWith(to);
 
 		return res;
 	}

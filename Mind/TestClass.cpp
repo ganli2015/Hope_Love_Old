@@ -4,7 +4,8 @@
 
 #include "../MindElement/Concept.h"
 #include "../MindElement/CommonFunction.h"
-#include "../MindElement/ConceptInteractTable.h"
+
+#include "../MindInterface/iConceptInteractTable.h"
 
 #include "../Neural Network Design/CompetitiveNetwork.h"
 #include "../Neural Network Design/Neuron_compet.h"
@@ -112,7 +113,7 @@ namespace Mind
 			iden2.str="你";
 			shared_ptr<iConcept> to=brain->GetConcept(iden2);
 
-			shared_ptr<ConceptInteractTable> table=from->DeepInteractWith(to);
+			shared_ptr<iConceptInteractTable> table=from->DeepInteractWith(to);
 
 			vector<pair<string,string>> expect;
 			expect.push_back(make_pair("大","程度"));
@@ -133,7 +134,7 @@ namespace Mind
 			iden2.str="老";
 			shared_ptr<iConcept> to=brain->GetConcept(iden2);
 
-			shared_ptr<ConceptInteractTable> table=from->DeepInteractWith(to);
+			shared_ptr<iConceptInteractTable> table=from->DeepInteractWith(to);
 
 			vector<pair<string,string>> expect;
 			expect.push_back(make_pair("否定","年龄"));
@@ -143,7 +144,7 @@ namespace Mind
 		}
 	}
 
-	bool TestClass::PairSameWithTable( const vector<pair<string,string>>& expect,const shared_ptr<ConceptInteractTable> table )
+	bool TestClass::PairSameWithTable( const vector<pair<string,string>>& expect,const shared_ptr<iConceptInteractTable> table )
 	{
 		class FindRelation
 		{

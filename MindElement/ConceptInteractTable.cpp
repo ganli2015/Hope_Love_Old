@@ -99,12 +99,12 @@ namespace Mind
 	{
 		for (const_indexIter it=_interactIndex.begin();it!=_interactIndex.end();++it)
 		{
-			shared_ptr<ConceptInteractTable> newTable=_concepts[it->first]->InteractWith(_concepts[it->second]);
+			shared_ptr<iConceptInteractTable> newTable=_concepts[it->first]->InteractWith(_concepts[it->second]);
 			Absorb(newTable);
 		}
 	}
 
-	void ConceptInteractTable::Absorb( const shared_ptr<ConceptInteractTable> absorbed )
+	void ConceptInteractTable::Absorb( const shared_ptr<iConceptInteractTable> absorbed )
 	{
 		class Aborbing
 		{

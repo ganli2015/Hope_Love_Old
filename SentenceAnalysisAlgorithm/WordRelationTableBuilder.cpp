@@ -6,13 +6,14 @@
 #include "../DataCollection/Word.h"
 
 #include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iConceptInteractTable.h"
 #include "../MindElement/Concept.h"
 #include "../MindElement/ConceptInteractTable.h"
 
 using namespace DataCollection;
 using namespace Mind;
 
-WordRelationTableBuilder::WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen):_raw_sen(sen),_table(shared_ptr<ConceptInteractTable>(new ConceptInteractTable()))
+WordRelationTableBuilder::WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen):_raw_sen(sen),_table(shared_ptr<iConceptInteractTable>(new ConceptInteractTable()))
 {
 }
 
@@ -35,7 +36,7 @@ bool WordRelationTableBuilder::Build()
 			if(intensity>intensity_lowerlimit)
 			{
 				vector<shared_ptr<Word>> words=_raw_sen->GetGrammard();
-				shared_ptr<ConceptInteractTable> tmpTable=BuildConceptInteractTable(words[i],words[j]);
+				shared_ptr<iConceptInteractTable> tmpTable=BuildConceptInteractTable(words[i],words[j]);
 				_table->Absorb(tmpTable);
 			}
 		}
@@ -44,7 +45,7 @@ bool WordRelationTableBuilder::Build()
 	return true;
 }
 
-shared_ptr<ConceptInteractTable> WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to)
+shared_ptr<iConceptInteractTable> WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to)
 {
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 

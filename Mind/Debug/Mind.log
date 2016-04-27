@@ -1,27 +1,23 @@
-﻿生成启动时间为 2016/4/27 0:41:01。
-     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 3 上(build 个目标)。
+﻿生成启动时间为 2016/4/27 21:20:49。
+     1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Stdafx.cpp
-         Stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Cerebrum.cpp CommonFunction.cpp ConceptInteractTableContainer.cpp ConceptReactImp.cpp ConceptReactImp_1212.cpp ConceptReactImp_1234.cpp ConceptReactSystem.cpp ConceptSet.cpp ConceptSetInitializer.cpp FindConnectConcept.cpp FilePath.cpp GrammaSet.cpp GrammaTree.cpp Test.cpp TestClass.cpp Test_ConceptSet.cpp
-         Test_ConceptSet.cpp
-         TestClass.cpp
-         Test.cpp
-         GrammaTree.cpp
-         GrammaSet.cpp
-         FilePath.cpp
-         FindConnectConcept.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt Cerebrum.cpp CommonFunction.cpp ConceptReactImp.cpp ConceptReactImp_1212.cpp ConceptReactImp_1234.cpp ConceptReactSystem.cpp ConceptSet.cpp ConceptSetInitializer.cpp FindConnectConcept.cpp Test.cpp TestClass.cpp Test_ConceptSet.cpp
          ConceptSetInitializer.cpp
          ConceptSet.cpp
          ConceptReactSystem.cpp
          ConceptReactImp_1234.cpp
          ConceptReactImp_1212.cpp
-         ConceptReactImp.cpp
-         ConceptInteractTableContainer.cpp
          CommonFunction.cpp
+         正在生成代码...
+         正在编译...
+         Test_ConceptSet.cpp
+         TestClass.cpp
+         Test.cpp
+         FindConnectConcept.cpp
+         ConceptReactImp.cpp
          Cerebrum.cpp
          正在生成代码...
        Link:
@@ -48,7 +44,6 @@
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\MindElement.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\MindInterface.lib"
          "E:\Artificial Intelligence\Project\Hope_Love\Debug\Neural Network Design.lib"
-         LINK : 没有找到 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll 或上一个增量链接没有生成它；正在执行完全链接
             正在创建库 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib 和对象 E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.exp
          Mind.vcxproj -> E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll
        Manifest:
@@ -64,4 +59,4 @@
 
 生成成功。
 
-已用时间 00:00:15.62
+已用时间 00:00:11.32

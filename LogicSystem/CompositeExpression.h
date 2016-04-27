@@ -15,7 +15,7 @@ namespace LogicSystem
 		void AddExpression(const shared_ptr<Expression> expre);
 		void AddExpression(const string expre);
 
-		virtual shared_ptr<Mind::ConceptInteractTable> GetInteractTable() const ;
+		virtual shared_ptr<Mind::iConceptInteractTable> GetInteractTable() const ;
 	};
 }
 

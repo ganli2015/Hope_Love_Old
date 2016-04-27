@@ -14,7 +14,7 @@ SpeakReaction::~SpeakReaction(void)
 {
 }
 
-SpeakReaction::SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::ConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
+SpeakReaction::SpeakReaction(const vector<shared_ptr<DataCollection::Sentence>> sentence,const shared_ptr<Mind::iConceptInteractTable> interactTable):_sentence_input(sentence),_interactTable(interactTable)
 {
 
 }

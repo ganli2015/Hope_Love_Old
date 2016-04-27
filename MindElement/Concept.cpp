@@ -129,7 +129,7 @@ namespace Mind
 		return GetParticularWord(_partofspeech);
 	}
 
-	shared_ptr<ConceptInteractTable> Concept::InteractWith( const shared_ptr<iConcept> toConcept ) const
+	shared_ptr<iConceptInteractTable> Concept::InteractWith( const shared_ptr<iConcept> toConcept ) const
 	{
 		class BuildInteractTable
 		{
@@ -161,7 +161,7 @@ namespace Mind
 		return table;
 	}
 
-	shared_ptr<ConceptInteractTable> Concept::DeepInteractWith( const shared_ptr<iConcept> toConcept ) const
+	shared_ptr<iConceptInteractTable> Concept::DeepInteractWith( const shared_ptr<iConcept> toConcept ) const
 	{
 		vector<shared_ptr<iConcept>> myBase=GetBase();
 		vector<shared_ptr<iConcept>> base_to=toConcept->GetBase();
@@ -187,7 +187,7 @@ namespace Mind
 		return res;
 	}
 
-	void Concept::Recursive_GetEdgeInteractTable(const shared_ptr<iConceptEdge>& edge,shared_ptr<ConceptInteractTable> mod_table) const
+	void Concept::Recursive_GetEdgeInteractTable(const shared_ptr<iConceptEdge>& edge,shared_ptr<iConceptInteractTable> mod_table) const
 	{
 		mod_table->Absorb(edge->GetSelfDeepInteract());
 
@@ -265,7 +265,7 @@ namespace Mind
 		}
 	}
 
-	shared_ptr<ConceptLevelTable> Concept::GetLevelTable() const
+	shared_ptr<iConceptLevelTable> Concept::GetLevelTable() const
 	{
 		shared_ptr<ConceptLevelTable> res(new ConceptLevelTable(Copy()));
 		if(IsBaseConcept())
@@ -306,7 +306,7 @@ namespace Mind
 		}
 	}
 
-	vector<shared_ptr<iConceptEdge>> Concept::GetForwardEdges() const
+	const vector<shared_ptr<iConceptEdge>> Concept::GetForwardEdges() const
 	{
 		return _forward;
 	}

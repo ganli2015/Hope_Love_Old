@@ -1,7 +1,8 @@
 #include "StdAfx.h"
 #include "CompositeExpression.h"
 
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iConceptInteractTable.h"
+
 
 namespace LogicSystem
 {
@@ -24,7 +25,7 @@ namespace LogicSystem
 
 	}
 
-	shared_ptr<Mind::ConceptInteractTable> CompositeExpression::GetInteractTable() const
+	shared_ptr<Mind::iConceptInteractTable> CompositeExpression::GetInteractTable() const
 	{
 		return NULL;
 	}

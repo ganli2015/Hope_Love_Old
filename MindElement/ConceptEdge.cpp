@@ -5,6 +5,7 @@
 #include "CommonFunction.h"
 
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iConceptInteractTable.h"
 
 namespace Mind
 {
@@ -30,9 +31,9 @@ namespace Mind
 		}
 	}
 
-	shared_ptr<ConceptInteractTable> ConceptEdge::GetSelfDeepInteract() const
+	shared_ptr<iConceptInteractTable> ConceptEdge::GetSelfDeepInteract() const
 	{
-		shared_ptr<ConceptInteractTable> res(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable());
 
 		vector<shared_ptr<iConcept>> base_to=_concept->GetBase();
 		for (unsigned int i=0;i<_modification.size();++i)

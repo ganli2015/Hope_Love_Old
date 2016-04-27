@@ -17,7 +17,7 @@ namespace Mind
 		ConceptReactImp_1234(const shared_ptr<NeuralNetwork::Network> network,ConceptSet* conceptSet);
 		virtual ~ConceptReactImp_1234(void);
 
-		virtual vector<ConceptChainProperty> Perform(const shared_ptr<ConceptChain> chain);
+		virtual vector<ConceptChainProperty> Perform(const shared_ptr<iConceptChain> chain);
 
 	private:
 

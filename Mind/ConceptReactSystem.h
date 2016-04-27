@@ -40,7 +40,7 @@ namespace Mind
 		ConceptReactSystem(ConceptSet* val);
 		~ConceptReactSystem(void);
 
-		vector<ConceptChainProperty> React(const shared_ptr<ConceptChain> chain);
+		vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain);
 
 	private:
 		void Initialize();

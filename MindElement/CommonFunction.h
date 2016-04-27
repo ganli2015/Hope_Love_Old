@@ -13,12 +13,12 @@ namespace Mind
 	};
 
 	class iConcept;
-	class ConceptInteractTable;
-	class ConceptChain;
+	class iConceptInteractTable;
+	class iConceptChain;
 	namespace CommonFunction
 	{
 		//把<from>和<to>的所有相互作用都添加到table
-		void AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<ConceptInteractTable> table);
+		void AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<iConceptInteractTable> table);
 	
 		//如果没有找到，则返回-1.
 		int _MINDELEMENTINOUT IndexOf(const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);

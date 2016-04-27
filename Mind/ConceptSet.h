@@ -75,8 +75,8 @@ namespace Mind
 		//<from>是施力方，<to>是受力方。
 		//该相互作用不同于ConceptEdge里的连接，后者是原型的依存于大脑的连接，
 		//前者是临时的连接（比如新的语句和知识）。
-		shared_ptr<ConceptInteractTable> GetInteractTable(const shared_ptr<iConcept> from,const shared_ptr<iConcept> to,double level=0);
-		shared_ptr<ConceptInteractTable> GetDeepInteractTable(const shared_ptr<iConcept> from,const shared_ptr<iConcept> to);
+		shared_ptr<iConceptInteractTable> GetInteractTable(const shared_ptr<iConcept> from,const shared_ptr<iConcept> to,double level=0);
+		shared_ptr<iConceptInteractTable> GetDeepInteractTable(const shared_ptr<iConcept> from,const shared_ptr<iConcept> to);
 
 		int BaseConceptCount() const {return _baseConceptset.size();}
 

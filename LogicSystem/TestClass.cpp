@@ -49,7 +49,7 @@ namespace LogicSystem
 
 
 		shared_ptr<SingleExpression> expre(new SingleExpression("二大于一。"));
-		shared_ptr<ConceptInteractTable> table=expre->GetInteractTable();
+		shared_ptr<iConceptInteractTable> table=expre->GetInteractTable();
 		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
 	}
 

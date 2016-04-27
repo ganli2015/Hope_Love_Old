@@ -116,7 +116,7 @@ namespace Mind
 			return me;
 		}
 
-		shared_ptr<NeuralNetwork::iDataArray> ToDataArray( const shared_ptr<ConceptChain> chain , const ConceptSet* conceptSet)
+		shared_ptr<NeuralNetwork::iDataArray> ToDataArray( const shared_ptr<iConceptChain> chain , const ConceptSet* conceptSet)
 		{
 			//初始化，所有元素等于0
 			shared_ptr<iDataArray> res(new DataArray(conceptSet->BaseConceptCount()));

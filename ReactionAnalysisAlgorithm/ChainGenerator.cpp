@@ -4,8 +4,9 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConcept.h"
-#include "../MindElement/ConceptChain.h"
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iConceptChain.h"
+#include "../MindInterface/iConceptInteractTable.h"
+
 #include "../Mind/CommonFunction.h"
 
 #include "../Mathmatic/Rand.h"
@@ -23,10 +24,10 @@ ChainGenerator::~ChainGenerator(void)
 {
 }
 
-void ChainGenerator::Generate(const shared_ptr<Mind::ConceptInteractTable> interactTable)
+void ChainGenerator::Generate(const shared_ptr<Mind::iConceptInteractTable> interactTable)
 {
 	vector<ConceptPair> allPairs=interactTable->GetAllRelations();
-	vector<shared_ptr<ConceptChain>> allChains=ExtractConceptChains::Extract(allPairs);
+	vector<shared_ptr<iConceptChain>> allChains=ExtractConceptChains::Extract(allPairs);
 	RemoveSameChain(allChains);
 
 #ifdef _DEBUG
@@ -37,7 +38,7 @@ void ChainGenerator::Generate(const shared_ptr<Mind::ConceptInteractTable> inter
 	_reactChains=ChainReact(allChains);
 }
 
-void ChainGenerator::DisplayChains( const vector<shared_ptr<ConceptChain>>& chains ) const
+void ChainGenerator::DisplayChains( const vector<shared_ptr<iConceptChain>>& chains ) const
 {
 	for (unsigned int i=0;i<chains.size();++i)
 	{
@@ -50,13 +51,13 @@ void ChainGenerator::DisplayChains( const vector<shared_ptr<ConceptChain>>& chai
 	}
 }
 
-void ChainGenerator::RemoveSameChain( vector<shared_ptr<ConceptChain>>& chains ) const
+void ChainGenerator::RemoveSameChain( vector<shared_ptr<iConceptChain>>& chains ) const
 {
-	vector<shared_ptr<ConceptChain>> removedChains;
+	vector<shared_ptr<iConceptChain>> removedChains;
 
 	for (unsigned int i=0;i<chains.size();++i)
 	{
-		shared_ptr<ConceptChain> curChain=chains[i];
+		shared_ptr<iConceptChain> curChain=chains[i];
 
 		bool duplicated=false;
 		for (unsigned int j=i+1;j<chains.size();++j)
@@ -76,7 +77,7 @@ void ChainGenerator::RemoveSameChain( vector<shared_ptr<ConceptChain>>& chains )
 	chains=removedChains;
 }
 
-void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Mind::ConceptChain>>& chains ) const
+void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Mind::iConceptChain>>& chains ) const
 {
 	for (unsigned int i=0;i<chains.size();++i)
 	{
@@ -91,7 +92,7 @@ void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Min
 	}
 }
 
-vector<ConceptChainProperty> ChainGenerator::ChainReact( const vector<shared_ptr<ConceptChain>>& chains ) const
+vector<ConceptChainProperty> ChainGenerator::ChainReact( const vector<shared_ptr<iConceptChain>>& chains ) const
 {
 	vector<ConceptChainProperty> res;
 
@@ -102,14 +103,14 @@ vector<ConceptChainProperty> ChainGenerator::ChainReact( const vector<shared_ptr
 		if(properties.empty()) continue;
 		OutputChainProperty(chains[i],properties,out);
 
-		//vector<shared_ptr<ConceptChain>> selected=RandomSelectChains(properties);
+		//vector<shared_ptr<iConceptChain>> selected=RandomSelectChains(properties);
 		res.insert(res.end(),properties.begin(),properties.end());
 	}
 
 	return res;
 }
 
-void ChainGenerator::OutputChainProperty( const shared_ptr<Mind::ConceptChain> chain,const vector<Mind::ConceptChainProperty>& properties,ofstream& out ) const
+void ChainGenerator::OutputChainProperty( const shared_ptr<Mind::iConceptChain> chain,const vector<Mind::ConceptChainProperty>& properties,ofstream& out ) const
 {
 	out<<"input chain: "<<endl;
 	CommonFunction::WriteConcepts(chain->GetConceptVec(),out);
@@ -123,9 +124,9 @@ void ChainGenerator::OutputChainProperty( const shared_ptr<Mind::ConceptChain> c
 
 }
 
-vector<shared_ptr<Mind::ConceptChain>> ChainGenerator::RandomSelectChains( const vector<Mind::ConceptChainProperty>& chainProperties ) const
+vector<shared_ptr<Mind::iConceptChain>> ChainGenerator::RandomSelectChains( const vector<Mind::ConceptChainProperty>& chainProperties ) const
 {
-	vector<shared_ptr<Mind::ConceptChain>> res;
+	vector<shared_ptr<Mind::iConceptChain>> res;
 	for (unsigned int i=0;i<chainProperties.size();++i)
 	{
 		if(Math::Rand::RandTrue(chainProperties[i].confidence))

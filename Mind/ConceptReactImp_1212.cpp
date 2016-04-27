@@ -27,7 +27,7 @@ namespace Mind
 	{
 	}
 
-	vector<ConceptChainProperty> ConceptReactImp_1212::Perform( const shared_ptr<ConceptChain> chain )
+	vector<ConceptChainProperty> ConceptReactImp_1212::Perform( const shared_ptr<iConceptChain> chain )
 	{
 		if(_network==NULL) return vector<ConceptChainProperty>();
 

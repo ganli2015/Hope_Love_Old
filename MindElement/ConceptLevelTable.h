@@ -1,5 +1,6 @@
 #pragma once
 #include "InOut.h"
+#include "../MindInterface/iConceptLevelTable.h"
 
 namespace Mind
 {
@@ -7,7 +8,7 @@ namespace Mind
 	class BaseConcept;
 
 	//表示某个Concept与其BaseConcept之间的距离
-	class _MINDELEMENTINOUT ConceptLevelTable
+	class _MINDELEMENTINOUT ConceptLevelTable : public iConceptLevelTable
 	{
 	private:
 		struct LevelInfo

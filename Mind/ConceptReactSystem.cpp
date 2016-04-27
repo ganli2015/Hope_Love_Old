@@ -180,7 +180,7 @@ namespace Mind
 		return residual->Norm();
 	}
 
-	vector<ConceptChainProperty> ConceptReactSystem::React( const shared_ptr<ConceptChain> chain )
+	vector<ConceptChainProperty> ConceptReactSystem::React( const shared_ptr<iConceptChain> chain )
 	{
 		shared_ptr<ConceptReactImp> reactImp(new ConceptReactImp_1212(_network,_conceptSet));
 		return reactImp->Perform(chain);

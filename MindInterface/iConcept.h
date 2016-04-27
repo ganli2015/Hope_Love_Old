@@ -9,9 +9,9 @@ namespace DataCollection
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 	class BaseConcept;
-	class ConceptLevelTable;
+	class iConceptLevelTable;
 	class iConceptEdge;
 
 	class _MINDINTERFACEINOUT iConcept
@@ -43,19 +43,17 @@ namespace Mind
 
 		//作用于<concept>上，产生相互作用列表。
 		//<me>所依赖的concept（_forward）会作用于<toConcept>,表明对<me>对<toConcept>的解释。
-		virtual shared_ptr<ConceptInteractTable> InteractWith(const shared_ptr<iConcept> toConcept) const =0;
+		virtual shared_ptr<iConceptInteractTable> InteractWith(const shared_ptr<iConcept> toConcept) const =0;
 		//<me>的BaseConcept与toConcept的BaseConcept之间的相互作用。
-		virtual shared_ptr<ConceptInteractTable> DeepInteractWith(const shared_ptr<iConcept> toConcept) const =0;
+		virtual shared_ptr<iConceptInteractTable> DeepInteractWith(const shared_ptr<iConcept> toConcept) const =0;
 
 		//获得BaseConcept。只会获得与toConcept有关的Base，而不会获得与modification有关的Base。
 		virtual vector<shared_ptr<iConcept>> GetBase() const  =0;
 		virtual bool IsBaseConcept() const  =0;
 
-		virtual shared_ptr<ConceptLevelTable> GetLevelTable() const  =0;
-		virtual vector<shared_ptr<iConceptEdge>> GetForwardEdges() const =0;
-
+		virtual shared_ptr<iConceptLevelTable> GetLevelTable() const  =0;
+		virtual const vector<shared_ptr<iConceptEdge>> GetForwardEdges() const =0;		
 protected:
-		
 	};
 }
 

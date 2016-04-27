@@ -3,7 +3,7 @@
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 
 	class TestClass
 	{
@@ -18,7 +18,7 @@ namespace Mind
 
 		static void Test_BuildGrammarAssociation();
 
-		static bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<ConceptInteractTable> table);
+		static bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<iConceptInteractTable> table);
 	};
 }
 

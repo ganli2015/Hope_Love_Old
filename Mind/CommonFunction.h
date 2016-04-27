@@ -39,7 +39,7 @@ namespace Mind
 
 		Identity TransformToIdentity(const string idStr,const string wordStr);
 
-		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<ConceptChain> chain, const ConceptSet* conceptSet);
+		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<iConceptChain> chain, const ConceptSet* conceptSet);
 
 		double _MINDINOUT ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern);
 
