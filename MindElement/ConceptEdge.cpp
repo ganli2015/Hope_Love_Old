@@ -2,10 +2,10 @@
 #include "ConceptEdge.h"
 #include "Concept.h"
 #include "ConceptInteractTable.h"
-#include "CommonFunction.h"
 
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/CommonFunction.h"
 
 namespace Mind
 {

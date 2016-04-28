@@ -20,7 +20,7 @@ namespace Mind
 		typedef multimap<int,int>::const_iterator const_indexIter;
 	public:
 		ConceptInteractTable(void);
-		~ConceptInteractTable(void);
+		virtual ~ConceptInteractTable(void);
 
 		//添加的连接不会重复
 		virtual void Add(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to);

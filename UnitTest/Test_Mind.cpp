@@ -4,9 +4,9 @@
 #include "../Mind/Cerebrum.h"
 
 #include "../MindElement/Concept.h"
-#include "../MindElement/CommonFunction.h"
 
 #include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../Neural Network Design/CompetitiveNetwork.h"
 #include "../Neural Network Design/Neuron_compet.h"

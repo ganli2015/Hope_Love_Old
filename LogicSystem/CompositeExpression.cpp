@@ -15,7 +15,7 @@ namespace LogicSystem
 	{
 	}
 
-	void CompositeExpression::AddExpression( const shared_ptr<Expression> expre )
+	void CompositeExpression::AddExpression( const shared_ptr<iExpression> expre )
 	{
 
 	}

@@ -35,9 +35,14 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vec
 		vector<shared_ptr<iConceptChain>> forwardChains;
 		Recursive_Search(Forward,pairs_copy[i].second,pairs_copy,relatedChain_Forward,forwardChains);
 
+		vector<shared_ptr<iConceptChain>> closedChain_back=CollectAndRemoveClosedChains(backChains);
+		vector<shared_ptr<iConceptChain>> closedChain_for=CollectAndRemoveClosedChains(forwardChains);
+
 		//合并，遍历所有组合方式。
 		vector<shared_ptr<iConceptChain>> curChains=Merge(backChains,forwardChains);
 		res.insert(res.end(),curChains.begin(),curChains.end());
+		res.insert(res.end(),closedChain_back.begin(),closedChain_back.end());
+		res.insert(res.end(),closedChain_for.begin(),closedChain_for.end());
 	}
 
 	return res;
@@ -245,6 +250,42 @@ void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 			++it;
 		}
 	}
+}
+
+bool ExtractConceptChains::IsClosedChain( const shared_ptr<iConceptChain> chain )
+{
+	if(chain->Size()==0 || chain->Size()==1)
+	{
+		return false;
+	}
+
+	if(chain->Front()->Same(chain->Back()))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::CollectAndRemoveClosedChains( vector<shared_ptr<iConceptChain>>& inputChains )
+{
+	vector<shared_ptr<Mind::iConceptChain>> res;
+	for (vector<shared_ptr<iConceptChain>>::iterator it=inputChains.begin();it!=inputChains.end();)
+	{
+		if(IsClosedChain(*it))
+		{
+			res.push_back(*it);
+			it=inputChains.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
+	return res;
 }
 
 // void ExtractConceptChains::ClearTable()

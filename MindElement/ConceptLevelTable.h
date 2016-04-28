@@ -21,7 +21,7 @@ namespace Mind
 		vector<LevelInfo> _levels;
 	public:
 		ConceptLevelTable(const shared_ptr<iConcept> val);
-		~ConceptLevelTable(void);
+		virtual ~ConceptLevelTable(void);
 
 		//如果_levels没有concept，则添加一个；否则与之前记录的concept的level作比较，选择较小的level。
 		void Insert(const shared_ptr<iConcept> concept,const int level);

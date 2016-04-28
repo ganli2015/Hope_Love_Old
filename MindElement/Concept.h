@@ -2,9 +2,9 @@
 #include "InOut.h"
 #include "../DataCollection/Word.h"
 #include "ConceptEdge.h"
-#include "CommonFunction.h"
 
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/CommonFunction.h"
 
 namespace DataCollection
 {
@@ -37,7 +37,7 @@ namespace Mind
 		
 	public:
 		Concept(void);
-		~Concept(void);
+		virtual ~Concept(void);
 		//Concept(std::string str);;
 		Concept(shared_ptr<DataCollection::Word> word);
 

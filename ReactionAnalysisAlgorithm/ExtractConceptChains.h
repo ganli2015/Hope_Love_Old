@@ -41,6 +41,10 @@ private:
 	static vector<shared_ptr<Mind::iConceptChain>> Merge(const vector<shared_ptr<Mind::iConceptChain>>& backChains,
 		const vector<shared_ptr<Mind::iConceptChain>>& forwardChains);
 	static void RemoveBadPairs(vector<ConceptPair>& pairs);
+
+	static bool IsClosedChain(const shared_ptr<Mind::iConceptChain> chain);
+	//Remove closed chains from <inputChains> and return them.
+	static vector<shared_ptr<Mind::iConceptChain>> CollectAndRemoveClosedChains(vector<shared_ptr<Mind::iConceptChain>>& inputChains);
 };
 
 

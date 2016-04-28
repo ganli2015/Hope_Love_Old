@@ -1,6 +1,6 @@
 #pragma once
 #include "InOut.h"
-#include "Expression.h"
+#include "../MindInterface/iExpression.h"
 
 namespace DataCollection
 {
@@ -9,7 +9,7 @@ namespace DataCollection
 
 namespace LogicSystem
 {
-	class _LOGICSYSTEMINOUT SingleExpression : public Expression
+	class _LOGICSYSTEMINOUT SingleExpression : public iExpression
 	{
 		shared_ptr<DataCollection::Sentence> _sen;
 

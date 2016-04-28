@@ -7,7 +7,7 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConceptInteractTable.h"
-#include "../MindElement/Concept.h"
+#include "../MindInterface/iConcept.h"
 #include "../MindElement/ConceptInteractTable.h"
 
 using namespace DataCollection;

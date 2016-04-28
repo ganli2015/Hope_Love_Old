@@ -35,6 +35,12 @@
     <ClInclude Include="iConceptLevelTable.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CommonFunction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iExpression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -56,6 +62,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="iConceptLevelTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonFunction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iExpression.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

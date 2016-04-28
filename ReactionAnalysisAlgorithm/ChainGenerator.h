@@ -25,7 +25,6 @@ public:
 	vector<Mind::ConceptChainProperty> GetReactChains() const {return _reactChains;};
 
 private:
-	void RemoveSameChain(vector<shared_ptr<Mind::iConceptChain>>& chains) const;
 	vector<Mind::ConceptChainProperty> ChainReact(const vector<shared_ptr<Mind::iConceptChain>>& chains) const;
 	vector<shared_ptr<Mind::iConceptChain>> RandomSelectChains(const vector<Mind::ConceptChainProperty>& chainProperties) const;
 

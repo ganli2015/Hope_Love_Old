@@ -4,7 +4,7 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iConceptChain.h"
-#include "../MindElement/CommonFunction.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/Rand.h"

@@ -10,7 +10,7 @@ namespace Mind
 	{
 	public:
 		iConceptLevelTable(void);
-		~iConceptLevelTable(void);
+		virtual ~iConceptLevelTable(void);
 
 		//如果_levels没有concept，则添加一个；否则与之前记录的concept的level作比较，选择较小的level。
 		virtual void Insert(const shared_ptr<iConcept> concept,const int level) =0;

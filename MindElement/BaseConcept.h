@@ -11,7 +11,7 @@ namespace Mind
 		
 	public:
 		BaseConcept(void);
-		~BaseConcept(void);
+		virtual ~BaseConcept(void);
 		BaseConcept(shared_ptr<DataCollection::Word> word);
 
 		virtual shared_ptr<iConcept> Copy() const;

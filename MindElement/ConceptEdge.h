@@ -14,7 +14,7 @@ namespace Mind
 		
 	public:
 		ConceptEdge(void);
-		~ConceptEdge(void);
+		virtual ~ConceptEdge(void);
 		ConceptEdge(const shared_ptr<iConcept> concept);
 		ConceptEdge(const shared_ptr<iConcept> concept,const double sensi);
 

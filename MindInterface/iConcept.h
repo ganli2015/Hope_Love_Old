@@ -18,7 +18,7 @@ namespace Mind
 	{
 	public:
 		iConcept(void);
-		~iConcept(void);
+		virtual ~iConcept(void);
 
 		virtual shared_ptr<iConcept> Copy() const =0;
 		virtual bool Same(const shared_ptr<iConcept> concept) const =0;

@@ -192,9 +192,6 @@
     <ProjectReference Include="..\MindInterface\MindInterface.vcxproj">
       <Project>{fc0e908a-2d96-41d5-b2bc-7416e325dccc}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Mind\Mind.vcxproj">
-      <Project>{b4e0ed6d-cac1-4881-bee1-c154ba5c7df4}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

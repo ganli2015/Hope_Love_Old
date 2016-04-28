@@ -42,6 +42,11 @@ namespace Mind
 		Sequence otherSeq=chain->GetConceptVec();
 		Sequence mySeq=GetConceptVec();
 
+		if(otherSeq.size()!=mySeq.size())
+		{
+			return false;
+		}
+
 		for (Sequence::const_iterator it1=mySeq.begin(),it2=otherSeq.begin();
 			it1!=mySeq.end(),it2!=otherSeq.end();++it1,++it2)
 		{

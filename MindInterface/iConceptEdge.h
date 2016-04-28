@@ -9,7 +9,7 @@ namespace Mind
 	{
 	public:
 		iConceptEdge(void);
-		~iConceptEdge(void);
+		virtual ~iConceptEdge(void);
 
 		virtual shared_ptr<iConcept> GetConcept() const=0;
 		virtual double GetSensitivity() const =0;

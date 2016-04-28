@@ -1,7 +1,8 @@
 #include "StdAfx.h"
 #include "ConceptInteractTable.h"
-#include "CommonFunction.h"
 #include "Concept.h"
+
+#include "../MindInterface/CommonFunction.h"
 
 namespace Mind
 {

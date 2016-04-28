@@ -6,8 +6,10 @@
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../Mind/CommonFunction.h"
+
 
 #include "../Mathmatic/Rand.h"
 
@@ -28,7 +30,7 @@ void ChainGenerator::Generate(const shared_ptr<Mind::iConceptInteractTable> inte
 {
 	vector<ConceptPair> allPairs=interactTable->GetAllRelations();
 	vector<shared_ptr<iConceptChain>> allChains=ExtractConceptChains::Extract(allPairs);
-	RemoveSameChain(allChains);
+	CommonFunction::RemoveSameChain(allChains);
 
 #ifdef _DEBUG
 	CheckDuplicatedConceptInChains(allChains);
@@ -51,31 +53,7 @@ void ChainGenerator::DisplayChains( const vector<shared_ptr<iConceptChain>>& cha
 	}
 }
 
-void ChainGenerator::RemoveSameChain( vector<shared_ptr<iConceptChain>>& chains ) const
-{
-	vector<shared_ptr<iConceptChain>> removedChains;
 
-	for (unsigned int i=0;i<chains.size();++i)
-	{
-		shared_ptr<iConceptChain> curChain=chains[i];
-
-		bool duplicated=false;
-		for (unsigned int j=i+1;j<chains.size();++j)
-		{
-			if(chains[j]->Same(curChain))
-			{
-				duplicated=true;
-			}
-		}
-
-		if(!duplicated)
-		{
-			removedChains.push_back(curChain);
-		}
-	}
-
-	chains=removedChains;
-}
 
 void ChainGenerator::CheckDuplicatedConceptInChains( const vector<shared_ptr<Mind::iConceptChain>>& chains ) const
 {

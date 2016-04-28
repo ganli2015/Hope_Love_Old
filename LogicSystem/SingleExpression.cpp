@@ -9,6 +9,7 @@
 #include "../MindInterface/iConceptInteractTable.h"
 
 using namespace DataCollection;
+using namespace Mind;
 
 namespace LogicSystem
 {

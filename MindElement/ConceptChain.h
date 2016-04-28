@@ -14,7 +14,7 @@ namespace Mind
 		list<shared_ptr<iConcept>> _chain;
 	public:
 		ConceptChain(void);
-		~ConceptChain(void);
+		virtual ~ConceptChain(void);
 		ConceptChain(const vector<shared_ptr<iConcept>>& val);
 
 		virtual vector<shared_ptr<iConcept>> GetConceptVec() const;
@@ -28,6 +28,7 @@ namespace Mind
 		virtual shared_ptr<iConceptChain> Copy() const;
 		virtual bool Same(const shared_ptr<iConceptChain> chain) const;
 		virtual bool Contain(const shared_ptr<iConcept> concept) const;
+		virtual int Size() const {return _chain.size();}
 
 		//判断<me>是否是parentChain的连续子序列。
 		virtual bool IsPartChainOf(const shared_ptr<iConceptChain> parentChain) const ;

@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseConcept.h" />
-    <ClInclude Include="CommonFunction.h" />
     <ClInclude Include="Concept.h" />
     <ClInclude Include="ConceptChain.h" />
     <ClInclude Include="ConceptEdge.h" />
@@ -91,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseConcept.cpp" />
-    <ClCompile Include="CommonFunction.cpp" />
     <ClCompile Include="Concept.cpp" />
     <ClCompile Include="ConceptChain.cpp" />
     <ClCompile Include="ConceptEdge.cpp" />

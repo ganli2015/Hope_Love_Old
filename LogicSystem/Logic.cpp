@@ -12,7 +12,7 @@ namespace LogicSystem
 	{
 	}
 
-	LogicSystem::LogicResult Logic::Determine( const shared_ptr<Expression> condition,const shared_ptr<Expression> conclusion )
+	LogicSystem::LogicResult Logic::Determine( const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion )
 	{
 		return Unknown;
 	}

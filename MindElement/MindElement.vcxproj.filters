@@ -38,9 +38,6 @@
     <ClInclude Include="InOut.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="CommonFunction.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -65,9 +62,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GrammarLocal.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="CommonFunction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

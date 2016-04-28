@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CompositeExpression.h" />
-    <ClInclude Include="Expression.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="SingleExpression.h" />
@@ -87,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CompositeExpression.cpp" />
-    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="SingleExpression.cpp" />
     <ClCompile Include="Stdafx.cpp">
