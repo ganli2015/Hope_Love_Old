@@ -78,20 +78,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arbitrariness.h" />
     <ClInclude Include="CompositeExpression.h" />
+    <ClInclude Include="Inequality.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
+    <ClInclude Include="RelationLeaf.h" />
+    <ClInclude Include="RelationNode.h" />
     <ClInclude Include="SingleExpression.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="Symbol.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arbitrariness.cpp" />
     <ClCompile Include="CompositeExpression.cpp" />
+    <ClCompile Include="Inequality.cpp" />
     <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="RelationLeaf.cpp" />
+    <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Symbol.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

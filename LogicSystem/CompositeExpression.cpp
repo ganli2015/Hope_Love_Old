@@ -25,10 +25,16 @@ namespace LogicSystem
 
 	}
 
-	shared_ptr<Mind::iConceptInteractTable> CompositeExpression::GetInteractTable() const
+	shared_ptr<Mind::iConceptInteractTable> CompositeExpression::GetBaseInteractTable() const
 	{
 		return NULL;
 	}
+
+	shared_ptr<Mind::iConceptInteractTable> CompositeExpression::GetProtoInteractTable() const
+	{
+		return NULL;
+	}
+
 
 }
 

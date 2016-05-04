@@ -39,7 +39,7 @@ void SentenceParser::Execute()
 
 	WordRelationTableBuilder wordRelationTableBuilder(_parsedSentence);
 	wordRelationTableBuilder.Build();
-	_conceptTable->Absorb(wordRelationTableBuilder.GetInteractTable());
+	_conceptTable->Absorb(wordRelationTableBuilder.GetBaseInteractTable());
 
 #ifdef _DEBUG //≤‚ ‘WordRelationTableBuilder
 	Cout_WordRelations();

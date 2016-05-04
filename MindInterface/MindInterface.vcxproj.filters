@@ -41,6 +41,21 @@
     <ClInclude Include="iExpression.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="iLogicStatement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iRelation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iSymbol.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iRelationConstraint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PublicTypedef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -68,6 +83,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="iExpression.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iLogicStatement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iRelation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iSymbol.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iRelationConstraint.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -14,11 +14,11 @@
 
 TestClass::TestClass(void)
 {
-	Register(SentenceAnalysisAlgorithm);
-	Register(NeuralNetworkDesign);
-	Register(Mind);
-	Register(Mathmatic);
-//	Register(LogicSystem);
+// 	Register(SentenceAnalysisAlgorithm);
+// 	Register(NeuralNetworkDesign);
+// 	Register(Mind);
+// 	Register(Mathmatic);
+	Register(LogicSystem);
 	Register(ReactionAnalysisAlgorithm);
 }
 

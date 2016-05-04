@@ -1,10 +1,16 @@
-﻿生成启动时间为 2016/4/28 23:26:49。
+﻿生成启动时间为 2016/5/4 23:24:58。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\Mind\Mind.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\Mind.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
          所有输出均为最新。
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Mind.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gz /TP /analyze- /errorReport:prompt CommonFunction.cpp ConceptInteractTableContainer.cpp ConceptSet.cpp
+         CommonFunction.cpp
+         正在生成代码...
+         正在编译...
+         ConceptSet.cpp
+         ConceptInteractTableContainer.cpp
+         正在生成代码...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\Mind.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Artificial Intelligence\Project\Hope_Love\Debug\Mind.lib" /MACHINE:X86 /DLL Debug\Cerebrum.obj
          Debug\CommonFunction.obj
@@ -41,4 +47,4 @@
 
 生成成功。
 
-已用时间 00:00:02.75
+已用时间 00:00:16.04

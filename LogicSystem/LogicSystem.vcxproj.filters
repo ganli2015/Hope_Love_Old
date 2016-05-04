@@ -26,6 +26,21 @@
     <ClInclude Include="SingleExpression.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Arbitrariness.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Symbol.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RelationLeaf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RelationNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Inequality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -38,6 +53,21 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SingleExpression.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Arbitrariness.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Symbol.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationLeaf.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationNode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Inequality.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

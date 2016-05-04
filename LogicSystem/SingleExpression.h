@@ -20,7 +20,8 @@ namespace LogicSystem
 		SingleExpression(const string val);
 		SingleExpression(const shared_ptr<DataCollection::Sentence> val);
 
-		virtual shared_ptr<Mind::iConceptInteractTable> GetInteractTable() const;
+		virtual shared_ptr<Mind::iConceptInteractTable> GetBaseInteractTable() const;
+		virtual shared_ptr<Mind::iConceptInteractTable> GetProtoInteractTable() const;
 	};
 }
 

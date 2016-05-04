@@ -74,6 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FuncForTest.h" />
     <ClInclude Include="MyTest.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="stdafx.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Test_SentenceAnalysisAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FuncForTest.cpp" />
     <ClCompile Include="MyTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

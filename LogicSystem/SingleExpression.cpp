@@ -43,14 +43,24 @@ namespace LogicSystem
 	{
 	}
 
-	shared_ptr<Mind::iConceptInteractTable> SingleExpression::GetInteractTable() const
+	shared_ptr<Mind::iConceptInteractTable> SingleExpression::GetBaseInteractTable() const
 	{
 		if(_sen==NULL) return NULL;
 		if(!_sen->StructureAnalyzed()) return NULL;
 
 		WordRelationTableBuilder builder(_sen);
 		builder.Build();
-		return builder.GetInteractTable();
+		return builder.GetBaseInteractTable();
+	}
+
+	shared_ptr<Mind::iConceptInteractTable> SingleExpression::GetProtoInteractTable() const
+	{
+		if(_sen==NULL) return NULL;
+		if(!_sen->StructureAnalyzed()) return NULL;
+
+		WordRelationTableBuilder builder(_sen);
+		builder.Build();
+		return builder.GetProtoInteractTable();
 	}
 
 }

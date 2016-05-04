@@ -85,7 +85,7 @@ namespace Mind
 	}
 
 
-	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> ConceptInteractTable::GetAllRelations() const
+	vector<ConceptInteractTable::ConceptPair> ConceptInteractTable::GetAllRelations() const
 	{
 		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> res;
 		for (const_indexIter it=_interactIndex.begin();it!=_interactIndex.end();++it)

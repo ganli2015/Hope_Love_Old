@@ -27,13 +27,13 @@ namespace Mind
 		virtual int GetId() const =0;
 		virtual void SetId(int val) =0;
 
-		//Return concepts that <me> is dependent on 
+		///Return concepts that <me> is dependent on 
 		virtual vector<shared_ptr<iConcept>> GetForwardConcepts()const =0;
-		//Return concepts that depend on <me>
+		///Return concepts that depend on <me>
 		virtual vector<shared_ptr<iConcept>> GetBackwardConcepts()const =0;
 		virtual void AddForwardConcept(const shared_ptr<iConcept> concept,const double sensitivity=1) =0;
 		virtual void AddBackwardConcept(const shared_ptr<iConcept> concept,const double sensitivity=1) =0;
-		//添加与toConcept关联的修饰词
+		///添加与toConcept关联的修饰词
 		virtual void AddForwardModification(const shared_ptr<iConcept> toConcept,const shared_ptr<iConcept> modification) =0;
 		virtual void AddBackwardModification(const shared_ptr<iConcept> toConcept,const shared_ptr<iConcept> modification) =0;
 
@@ -41,13 +41,13 @@ namespace Mind
 
 		virtual shared_ptr<DataCollection::Word> GetWord() const  =0;
 
-		//作用于<concept>上，产生相互作用列表。
-		//<me>所依赖的concept（_forward）会作用于<toConcept>,表明对<me>对<toConcept>的解释。
+		///作用于<concept>上，产生相互作用列表。
+		///<me>所依赖的concept（_forward）会作用于<toConcept>,表明对<me>对<toConcept>的解释。
 		virtual shared_ptr<iConceptInteractTable> InteractWith(const shared_ptr<iConcept> toConcept) const =0;
 		//<me>的BaseConcept与toConcept的BaseConcept之间的相互作用。
 		virtual shared_ptr<iConceptInteractTable> DeepInteractWith(const shared_ptr<iConcept> toConcept) const =0;
 
-		//获得BaseConcept。只会获得与toConcept有关的Base，而不会获得与modification有关的Base。
+		///获得BaseConcept。只会获得与toConcept有关的Base，而不会获得与modification有关的Base。
 		virtual vector<shared_ptr<iConcept>> GetBase() const  =0;
 		virtual bool IsBaseConcept() const  =0;
 

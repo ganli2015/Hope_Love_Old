@@ -12,20 +12,27 @@ namespace Mind
 	class iConceptInteractTable;
 }
 
+
+
 class _SENTENCEANALYSISALGORITHMINOUT WordRelationTableBuilder
 {
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
 
-	shared_ptr<Mind::iConceptInteractTable> _table;
+	//An interact table that contain interactions between prototype concepts.
+	shared_ptr<Mind::iConceptInteractTable> _protoTable;
+	//An interact table that contain interactions between base concepts of prototype concepts.
+	shared_ptr<Mind::iConceptInteractTable> _baseTable;
 public:
 	WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen);
 	~WordRelationTableBuilder(void);
 
 	bool Build();
-
-	shared_ptr<Mind::iConceptInteractTable> GetInteractTable() const {return _table;}
+	///Return the interact table that contain interactions between base concepts of prototype concepts.
+	const shared_ptr<Mind::iConceptInteractTable> GetBaseInteractTable() const {return _baseTable;}
+	///Return the interact table that contain interactions between prototype concepts.
+	const shared_ptr<Mind::iConceptInteractTable> GetProtoInteractTable() const {return _protoTable;}
 
 private:
-	shared_ptr<Mind::iConceptInteractTable> BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to);
+	void BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to);
 };
 

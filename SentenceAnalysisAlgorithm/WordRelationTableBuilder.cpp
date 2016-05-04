@@ -13,8 +13,10 @@
 using namespace DataCollection;
 using namespace Mind;
 
-WordRelationTableBuilder::WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen):_raw_sen(sen),_table(shared_ptr<iConceptInteractTable>(new ConceptInteractTable()))
+WordRelationTableBuilder::WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen):_raw_sen(sen)
 {
+	_protoTable=shared_ptr<iConceptInteractTable>(new ConceptInteractTable());
+	_baseTable=shared_ptr<iConceptInteractTable>(new ConceptInteractTable());
 }
 
 
@@ -36,8 +38,7 @@ bool WordRelationTableBuilder::Build()
 			if(intensity>intensity_lowerlimit)
 			{
 				vector<shared_ptr<Word>> words=_raw_sen->GetGrammard();
-				shared_ptr<iConceptInteractTable> tmpTable=BuildConceptInteractTable(words[i],words[j]);
-				_table->Absorb(tmpTable);
+				BuildConceptInteractTable(words[i],words[j]);			
 			}
 		}
 	}
@@ -45,12 +46,15 @@ bool WordRelationTableBuilder::Build()
 	return true;
 }
 
-shared_ptr<iConceptInteractTable> WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to)
+void WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to)
 {
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	shared_ptr<iConcept> fromConcept=brain->GetConcept(from);
 	shared_ptr<iConcept> toConcept=brain->GetConcept(to);
 	
-	return fromConcept->DeepInteractWith(toConcept);
+	shared_ptr<iConceptInteractTable> baseTable=fromConcept->DeepInteractWith(toConcept);
+	_baseTable->Absorb(baseTable);
+	_protoTable->Add(fromConcept,toConcept);
+
 }

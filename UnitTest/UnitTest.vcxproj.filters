@@ -62,6 +62,9 @@
     <ClInclude Include="Test_ReactionAnalysisAlgorithm.h">
       <Filter>ReactionAnalysisAlgorithm</Filter>
     </ClInclude>
+    <ClInclude Include="FuncForTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="Test_ReactionAnalysisAlgorithm.cpp">
       <Filter>ReactionAnalysisAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncForTest.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

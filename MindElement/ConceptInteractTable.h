@@ -10,6 +10,9 @@ namespace Mind
 	//是一个已经有较牢固关系的连接。前者则是临时的连接，通常是在遇见新的知识新的语句的时候建立的。
 	class _MINDELEMENTINOUT ConceptInteractTable : public iConceptInteractTable
 	{
+		typedef MindType::ConceptPair ConceptPair;
+
+
 		vector<shared_ptr<iConcept>> _concepts;
 		multimap<int,int> _interactIndex;
 
@@ -28,7 +31,7 @@ namespace Mind
 		virtual vector<shared_ptr<iConcept>> GetFromConcept(const shared_ptr<iConcept> concept) const;
 		//得到“受力方”的Concept
 		virtual vector<shared_ptr<iConcept>> GetToConcept(const shared_ptr<iConcept> concept) const;
-		virtual vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> GetAllRelations() const;
+		virtual vector<ConceptInteractTable::ConceptPair> GetAllRelations() const;
 
 		//合并ConceptInteractTable
 		virtual void Absorb(const shared_ptr<iConceptInteractTable> absorbed);
