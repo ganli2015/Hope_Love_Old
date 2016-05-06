@@ -12,6 +12,7 @@
 #include <iterator>
 #include <fstream>
 #include "../CommonTools/assertions.h"
+#include "PublicTypedef.h"
 
 using std::tr1::shared_ptr;
 using namespace std;

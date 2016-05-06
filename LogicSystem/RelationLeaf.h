@@ -3,28 +3,24 @@
 #include "../MindInterface/iRelation.h"
 #include "../MindInterface/PublicTypedef.h"
 
+namespace Mind
+{
+	class iConceptInteractTable;
+}
 
 namespace LogicSystem
 {
 	class _LOGICSYSTEMINOUT RelationLeaf :
 		public iRelationLeaf
 	{
-		typedef MindType::ConceptPair ConceptPair;
-		typedef LogicType::ConSymbol ConSymbol;
-		typedef LogicType::SymbolPair SymbolPair;
-
-		//Store concept pair and related symbol pair.
-		struct PairInfo
-		{
-			ConceptPair cPair;
-			SymbolPair sPair;
-		};
-
 		vector<SymbolPair> _relations;
 		vector<shared_ptr<iRelationConstraint>> _constraints;
 
 		const string _connectTag;
 		const char _sepTag;
+
+		friend class Test_iRelation;
+
 	public:
 		RelationLeaf(void);
 		virtual ~RelationLeaf(void);
@@ -35,9 +31,11 @@ namespace LogicSystem
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) const ;
 
 	private:
+		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable) const;
 		static vector<RelationLeaf::ConceptPair> FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs);
 		static vector<vector<RelationLeaf::PairInfo>> FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs);
-		bool SatifyConstraint(const vector<PairInfo>& pairInfos) const;
+
+		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const ;
 	};
 }
 

@@ -42,6 +42,11 @@ bool StructureAnalyzer::Analyze()
 	return true;
 }
 
+void StructureAnalyzer::AnalyzeImp2()
+{
+
+}
+
 int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns )
 {
 	if(word1_assoIndexes.size()!=word1_assoPatterns.size())

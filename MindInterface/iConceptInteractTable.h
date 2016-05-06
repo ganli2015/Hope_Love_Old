@@ -16,10 +16,9 @@ namespace Mind
 
 
 	public:
-		iConceptInteractTable(void);
+		iConceptInteractTable();
 		virtual ~iConceptInteractTable(void);
 
-		//添加的连接不会重复
 		virtual void Add(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) =0;
 		//得到“施力方”的Concept
 		virtual vector<shared_ptr<iConcept>> GetFromConcept(const shared_ptr<iConcept> concept) const =0;

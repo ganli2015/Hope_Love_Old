@@ -22,10 +22,9 @@ namespace Mind
 		typedef multimap<int,int>::iterator indexIter;
 		typedef multimap<int,int>::const_iterator const_indexIter;
 	public:
-		ConceptInteractTable(void);
+		ConceptInteractTable();
 		virtual ~ConceptInteractTable(void);
 
-		//添加的连接不会重复
 		virtual void Add(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to);
 		//得到“施力方”的Concept
 		virtual vector<shared_ptr<iConcept>> GetFromConcept(const shared_ptr<iConcept> concept) const;

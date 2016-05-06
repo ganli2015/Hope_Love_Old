@@ -6,7 +6,7 @@
 
 namespace Mind
 {
-	ConceptInteractTable::ConceptInteractTable(void)
+	ConceptInteractTable::ConceptInteractTable()
 	{
 	}
 
@@ -32,8 +32,8 @@ namespace Mind
 			toIndex=_concepts.size()-1;
 		}
 
-		if(!PairExist(fromIndex,toIndex))
-			_interactIndex.insert(make_pair(fromIndex,toIndex));
+		//if(!PairExist(fromIndex,toIndex))
+		_interactIndex.insert(make_pair(fromIndex,toIndex));
 	}
 
 	vector<shared_ptr<iConcept>> ConceptInteractTable::GetFromConcept( const shared_ptr<iConcept> concept ) const

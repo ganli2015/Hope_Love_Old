@@ -178,6 +178,18 @@ namespace Mind
 
 			return (p_cur_for*p_for_cur+p_cur_back*p_back_cur)/2;
 		}
+
+		void OutputConceptPairs( const vector<MindType::ConceptPair>& pairs,ostream& out )
+		{
+			for (unsigned int i=0;i<pairs.size();++i)
+			{
+				out<<pairs[i].first->GetString();
+				out<<" ";
+				out<<pairs[i].second->GetString();
+				out<<endl;
+			}
+		}
+
 	}
 }
 

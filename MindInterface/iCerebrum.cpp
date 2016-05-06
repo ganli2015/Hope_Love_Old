@@ -16,5 +16,12 @@ namespace Mind
 	{
 		_instance=val;
 	}
+
+	void iCerebrum::KillInstance()
+	{
+		delete _instance;
+		_instance=NULL;
+	}
+
 }
 

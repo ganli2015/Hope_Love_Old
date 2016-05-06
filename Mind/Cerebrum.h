@@ -33,7 +33,7 @@ namespace Mind
 		ConceptReactSystem* _conceptReactSystem;
 
 		Cerebrum(void);
-		~Cerebrum();
+		virtual ~Cerebrum();
 	public:
 		static Cerebrum* Instance();
 

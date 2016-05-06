@@ -21,8 +21,11 @@ namespace Mind
 		static iCerebrum* _instance;
 
 	public:
+		virtual ~iCerebrum(){}
+
 		static iCerebrum* Instance();
 		static void SetInstance(iCerebrum* val);
+		static void KillInstance();
 
 		//Concept Related Functions
 		virtual bool IsInMind(const std::string str) const=0;

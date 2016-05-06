@@ -28,6 +28,7 @@ namespace Mind
 		delete _conceptInteractTableContainer;
 		delete _grammaset;
 		delete _conceptset;
+		_instance=NULL;
 	}
 
 	Cerebrum* Cerebrum::Instance()

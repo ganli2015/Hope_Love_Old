@@ -61,6 +61,8 @@ namespace LogicSystem
 	template<class T>
 	void Symbol<T>::BindReferredObject( const shared_ptr<T> obj )
 	{
+		if(obj==NULL) return;
+
 		if(obj->Same(_object))
 		{
 			_referredObj=obj;

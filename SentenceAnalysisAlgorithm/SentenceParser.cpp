@@ -53,13 +53,8 @@ void SentenceParser::Cout_WordRelations()
 
 	cout<<"Test Word Relations"<<endl;
 
-	for (unsigned int i=0;i<relations.size();++i)
-	{
-		cout<<relations[i].first->GetString();
-		cout<<" ";
-		cout<<relations[i].second->GetString();
-		cout<<endl;
-	}
+	CommonFunction::OutputConceptPairs(relations,cout);
 
 	cout<<endl;
+	
 }

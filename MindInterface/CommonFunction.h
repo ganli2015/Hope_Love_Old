@@ -40,6 +40,8 @@ namespace Mind
 		//计算<curPos>的置信度，假设其相邻两个词性是<forwardPos>和<backwardPos>.
 		double _MINDINTERFACEINOUT ComputeP_GrammarLocal(const DataCollection::PartOfSpeech& curPos,const DataCollection::PartOfSpeech& forwardPos,const DataCollection::PartOfSpeech& backwardPos);
 
+		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
+
 		class _MINDINTERFACEINOUT SameConcept
 		{
 			shared_ptr<iConcept> _me;

@@ -1,7 +1,7 @@
-﻿生成启动时间为 2016/5/4 23:25:27。
+﻿生成启动时间为 2016/5/7 0:43:18。
      1>项目“E:\Artificial Intelligence\Project\Hope_Love\ReactionList\ReactionList.vcxproj”在节点 4 上(build 个目标)。
      1>InitializeBuildStatus:
-         正在创建“Debug\ReactionList.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+         正在对“Debug\ReactionList.unsuccessfulbuild”执行 Touch 任务。
        ClCompile:
          所有输出均为最新。
          所有输出均为最新。
@@ -20,4 +20,4 @@
 
 生成成功。
 
-已用时间 00:00:02.03
+已用时间 00:00:05.10

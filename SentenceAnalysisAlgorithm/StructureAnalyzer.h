@@ -24,5 +24,7 @@ private:
 	int TotalPatternFrequency(const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns);
 	vector<vector<double>> NormalizeFreqMatrix(const vector<vector<int>>& freqMatrix);
 	void SetEachWordIntenstiy(const vector<vector<double>>& intensityMatrix);
+
+	void AnalyzeImp2();
 };
 

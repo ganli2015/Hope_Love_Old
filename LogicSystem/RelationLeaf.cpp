@@ -54,18 +54,30 @@ namespace LogicSystem
 	bool RelationLeaf::Satisfy( const shared_ptr<iExpression> expre ) const
 	{
 		shared_ptr<iConceptInteractTable> interTable=expre->GetProtoInteractTable();
-		vector<ConceptPair> relationPairs=interTable->GetAllRelations();
-		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(_relations,relationPairs);
+		
+		return InterTableSatisfyRelation(interTable);
+	}
+
+	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable ) const
+	{
+		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(interTable->GetAllRelations());
 
 		for (unsigned int i=0;i<matchedPairSeq.size();++i)
 		{
-			if(SatifyConstraint(matchedPairSeq[i]))//Any of them satisfies ,then we consider <expre> satisfying.
+			if(SatifyConstraint(matchedPairSeq[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
 			{
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	vector<iRelation::PairSequence> RelationLeaf::FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const
+	{
+		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(_relations,conceptPairs);
+
+		return matchedPairSeq;
 	}
 
 	vector<RelationLeaf::ConceptPair> RelationLeaf::FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs)
@@ -133,46 +145,5 @@ namespace LogicSystem
 		return pairSequence;
 	}
 
-	bool RelationLeaf::SatifyConstraint(const vector<PairInfo>& pairInfos) const
-	{
-		//Check whether there is one pair not satisfying some constraint.
-		//True for NOT satisfying.
-		class FindUnSatifyConstraint
-		{
-			vector<shared_ptr<iRelationConstraint>> _constraints;
-
-		public:
-			FindUnSatifyConstraint(const vector<shared_ptr<iRelationConstraint>> val):_constraints(val){}
-			~FindUnSatifyConstraint(){}
-
-			bool operator()(const PairInfo& info)
-			{
-				//Bind each symbol with related concept.
-				info.sPair.first->BindReferredObject(info.cPair.first);
-				info.sPair.second->BindReferredObject(info.cPair.second);
-
-				//Check for each constraint.
-				for (unsigned int i=0;i<_constraints.size();++i)
-				{
-					if(!_constraints[i]->Satisfy())
-					{
-						return true;
-					}
-				}
-
-				return false;
-			}
-		};
-
-		vector<PairInfo>::const_iterator pairIter=find_if(pairInfos.begin(),pairInfos.end(),FindUnSatifyConstraint(_constraints));
-		if(pairIter==pairInfos.end())//All satisfy!
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 }
 

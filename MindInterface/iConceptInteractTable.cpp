@@ -4,7 +4,7 @@
 
 namespace Mind
 {
-	iConceptInteractTable::iConceptInteractTable(void)
+	iConceptInteractTable::iConceptInteractTable()
 	{
 	}
 

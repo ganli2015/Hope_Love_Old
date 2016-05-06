@@ -68,11 +68,27 @@ namespace Math
 	template<class T>
 	class GetAllCombinations
 	{
+		class RecusiveTerminate
+		{
+		public:
+			RecusiveTerminate(){}
+			~RecusiveTerminate(){}
+		};
+
 	public:
 		static vector<vector<T>> Get(const vector<vector<T>>& val)
 		{
 			vector<vector<T>> res;
-			Recursive(0,val,res);
+			try
+			{
+				Recursive(0,val,res);
+			}
+			catch(RecusiveTerminate& e)
+			{
+				e.~RecusiveTerminate();
+				res.clear();
+			}
+
 			return res;
 		}
 
@@ -82,6 +98,10 @@ namespace Math
 			if(index>=in.size()) return;
 
 			vector<T> curElem=in[index];
+			if(curElem.empty()) 
+			{
+				throw RecusiveTerminate();
+			}
 
 			vector<vector<T>> newout;
 			for (unsigned int i=0;i<curElem.size();++i)
