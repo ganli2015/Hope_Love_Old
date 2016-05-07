@@ -1,6 +1,0 @@
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\bin\Debug\MySQLDataBase.exe
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\bin\Debug\MySQLDataBase.pdb
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\obj\x86\Debug\ResolveAssemblyReference.cache
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\obj\x86\Debug\MySQLDataBase.exe
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\obj\x86\Debug\MySQLDataBase.pdb
-E:\Artificial Intelligence\Project\Hope_Love\MySQLDataBase\MySQLDataBase\bin\Debug\MySQLDataBase.exe.config

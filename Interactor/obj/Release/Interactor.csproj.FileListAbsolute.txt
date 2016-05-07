@@ -1,4 +1,0 @@
-E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Release\Interactor.dll
-E:\Artificial Intelligence\Project\Hope_Love\Interactor\bin\Release\Interactor.pdb
-E:\Artificial Intelligence\Project\Hope_Love\Interactor\obj\Release\Interactor.dll
-E:\Artificial Intelligence\Project\Hope_Love\Interactor\obj\Release\Interactor.pdb
