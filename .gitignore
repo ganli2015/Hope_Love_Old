@@ -61,3 +61,7 @@ Temporary Items
 *.pch
 *.idb
 *.log
+*.rc
+*.manifest
+*.res
+*.lastbuildstate

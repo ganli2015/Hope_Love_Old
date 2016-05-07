@@ -1,7 +1,0 @@
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.dll
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\DataWrapperCS.pdb
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Debug\DataWrapperCS.dll
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Debug\DataWrapperCS.pdb
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\obj\Debug\DataWrapperCS.csprojResolveAssemblyReference.cache
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\GlobalInterface.dll
-E:\Artificial Intelligence\Project\Hope_Love\DataWrapperCS\bin\Debug\GlobalInterface.pdb
