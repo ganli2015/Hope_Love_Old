@@ -10,11 +10,14 @@ public:
 	static void RunTest();
 
 private:
-	static void TestRand();
+	static void Test_Rand();
 
-	static void TestMatrix();
-	static void TestSubSequence();
+	static void Test_Matrix();
+	static void Test_SubSequence();
+	static void Test_IsSubsequence();
+	static void Test_GetAllCombinations();
+	static void Test_GetAllSubSequence();
 
-	static void TestMyInt();
+	static void Test_MyInt();
 };
 

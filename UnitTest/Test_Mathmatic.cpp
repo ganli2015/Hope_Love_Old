@@ -24,13 +24,16 @@ Test_Mathmatic::~Test_Mathmatic(void)
 
 void Test_Mathmatic::RunTest()
 {
-	TestMatrix();
-	TestSubSequence();
-	TestRand();
-	TestMyInt();
+	Test_Matrix();
+	Test_SubSequence();
+	Test_IsSubsequence();
+	Test_GetAllCombinations();
+	Test_GetAllSubSequence();
+	Test_Rand();
+	Test_MyInt();
 }
 
-void Test_Mathmatic::TestRand()
+void Test_Mathmatic::Test_Rand()
 {
 	int count=0;
 	for (unsigned int i=0;i<200;++i)
@@ -129,7 +132,7 @@ void Test_Mathmatic::TestRand()
 }
 
 
-void Test_Mathmatic::TestMyInt()
+void Test_Mathmatic::Test_MyInt()
 {
 	{
 		MyInt init(80);
@@ -146,7 +149,7 @@ void Test_Mathmatic::TestMyInt()
 	}
 }
 
-void Test_Mathmatic::TestMatrix()
+void Test_Mathmatic::Test_Matrix()
 {
 	{
 		Matrix mat1(5,1);
@@ -234,7 +237,7 @@ void Test_Mathmatic::TestMatrix()
 	}
 }
 
-void Test_Mathmatic::TestSubSequence()
+void Test_Mathmatic::Test_SubSequence()
 {
 	{
 		int a[9]={1,2,6,3,7,8,9,3,2};
@@ -265,5 +268,123 @@ void Test_Mathmatic::TestSubSequence()
 		Check(SameVec(lcs,expect));
 	}
 
+}
+
+void Test_Mathmatic::Test_IsSubsequence()
+{
+	{
+		int a[9]={1,2,6,3,7,8,9,3,2};
+		int b[7]={2,3,7};
+		vector<int> avec=Tovector(a,9);
+		vector<int> bvec=Tovector(b,3);
+
+		Check(IsSubsequence(bvec,avec));
+	}
+
+	{
+		int a[9]={1,2,6,3,7,8,9,3,2};
+		int b[7]={2,3,7,0};
+		vector<int> avec=Tovector(a,9);
+		vector<int> bvec=Tovector(b,4);
+
+		Check(IsSubsequence(bvec,avec)==false);
+	}
+}
+
+void Test_Mathmatic::Test_GetAllCombinations()
+{
+	{
+		vector<string> a;
+		a.push_back("a1");
+		a.push_back("a2");
+		a.push_back("a3");
+		vector<string> b;
+		b.push_back("b1");
+		b.push_back("b2");
+		vector<string> c;
+		c.push_back("c1");
+		c.push_back("c2");
+		c.push_back("c3");
+		c.push_back("c4");
+
+		vector<vector<string>> vec;
+		vec.push_back(a);
+		vec.push_back(b);
+		vec.push_back(c);
+		vector<vector<string>> res=GetAllCombinations<string>::Get(vec);
+
+		vector<vector<string>> expect;
+		for (unsigned int i=0;i<a.size();++i)
+		{
+			for (unsigned int j=0;j<b.size();++j)
+			{
+				for (unsigned int k=0;k<c.size();++k)
+				{
+					string str[]={a[i],b[j],c[k]};
+					vector<string> strvec=Tovector(str,3);
+					expect.push_back(strvec);
+				}
+			}
+		}
+
+		Check(FuncForTest::ContainSameElements(res,expect));
+	}
+
+	{
+		vector<string> a;
+		a.push_back("a1");
+		a.push_back("a2");
+		a.push_back("a3");
+		vector<string> b;
+		b.push_back("b1");
+		b.push_back("b2");
+		vector<string> c;
+
+		vector<vector<string>> vec;
+		vec.push_back(a);
+		vec.push_back(b);
+		vec.push_back(c);
+		vector<vector<string>> res=GetAllCombinations<string>::Get(vec);
+
+		Check(res.empty());
+	}
+}
+
+void Test_Mathmatic::Test_GetAllSubSequence()
+{
+	vector<int> vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+
+	vector<vector<int> > res=GetAllSubSequence<int>::Get(vec);
+
+	vector<vector<int> > expect;
+	for (unsigned int i=0;i<vec.size();++i)
+	{
+		vector<int> e1;
+		e1.push_back(vec[i]);
+		expect.push_back(e1);
+	}
+	
+	vector<int> e2;
+	e2.push_back(1);
+	e2.push_back(2);
+	vector<int> e3;
+	e3.push_back(1);
+	e3.push_back(3);
+	vector<int> e4;
+	e4.push_back(2);
+	e4.push_back(3);
+	vector<int> e5;
+	e5.push_back(1);
+	e5.push_back(2);
+	e5.push_back(3);
+	expect.push_back(e2);
+	expect.push_back(e3);
+	expect.push_back(e4);
+	expect.push_back(e5);
+
+	Check(FuncForTest::ContainSameElements(res,expect));
 }
 

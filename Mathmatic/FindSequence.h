@@ -11,7 +11,7 @@ namespace Math
 		diagonal
 	};
 
-	//算法导论，P210
+	//Introduction to Algorithm，P210
 	_MATHMATICINOUT void FindLongestCommonSubsequence
 		(const std::vector<int>& seq1, 
 		const std::vector<int>& seq2,
@@ -22,7 +22,7 @@ namespace Math
 		const std::vector<int>& seq2,
 		std::vector<std::vector<int>>& common_seqs);
 
-	//算法导论，P570
+	//Introduction to Algorithm，P570
 	_MATHMATICINOUT bool IsMatch(string P,string T);
 
 	_MATHMATICINOUT int MatchCount(string P,string T);
@@ -38,6 +38,7 @@ namespace Math
 		const int i_end,const int j_end, 
 		std::vector<int>& out);
 
+	///Check whether <sub> is the (discontinuous) sub sequence of <full>
 	template<class T>
 	bool IsSubsequence(const std::vector<T>& sub, const std::vector<T>& full)
 	{
@@ -64,7 +65,6 @@ namespace Math
 		return false;
 	}
 
-	//val是一个有序序列，val的每个元素val[i]是个无序序列。遍历每个val[i]的每个元素，获得有序序列的所有组合方式。
 	template<class T>
 	class GetAllCombinations
 	{
@@ -76,6 +76,8 @@ namespace Math
 		};
 
 	public:
+		///<val> is an ordered sequence and every element <val[i]> is the several possibilities of the ith element.
+		///Then get all the possible combinations over every possibility of every element in  <val[i]>.
 		static vector<vector<T>> Get(const vector<vector<T>>& val)
 		{
 			vector<vector<T>> res;
@@ -129,11 +131,11 @@ namespace Math
 		}
 	};
 
-	//seq是一个有序序列，寻找该有序序列的所有子序列，子序列不一定是连续的，但是是有序的。
 	template<class T>
 	class GetAllSubSequence
 	{
 	public:
+		///Find all (discontinuous)  sub sequences of seq.
 		static vector<vector<T>> Get(const vector<T>& seq)
 		{
 			vector<vector<T>> res;

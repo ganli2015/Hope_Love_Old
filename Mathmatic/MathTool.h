@@ -16,10 +16,6 @@ namespace Math
 	
 	vector<double> _MATHMATICINOUT GenerateContinuousNumber(int from,int to);
 
-	vector<double> _MATHMATICINOUT Tovector(const double val[], const int n);
-
-	vector<int> _MATHMATICINOUT Tovector(const int val[], const int n);
-
 	double _MATHMATICINOUT RandomDouble(int figure=10);
 
 	Vector _MATHMATICINOUT ToVector(const double val[], const int n);
@@ -57,4 +53,18 @@ namespace Math
 
 		return res/vec.size();
 	}
+
+	template<class T>
+	vector<T> Tovector(const T val[], const int n)
+	{
+		int size=n;
+		vector<T> vec;
+		vec.reserve(size);
+		for (int i=0;i<size;++i)
+		{
+			vec.push_back(val[i]);
+		}
+		return vec;
+	}
+
 }

@@ -65,3 +65,7 @@ Temporary Items
 *.manifest
 *.res
 *.lastbuildstate
+*.cache
+HopeLove/obj/x86/Debug/*.*
+GlobalInterface/obj/Debug/GlobalInterface.csproj.FileListAbsolute.txt
+DataWrapperCS/obj/Debug/DataWrapperCS.csproj.FileListAbsolute.txt

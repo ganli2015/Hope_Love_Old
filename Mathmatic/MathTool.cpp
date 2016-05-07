@@ -65,31 +65,6 @@ namespace Math
 		return res;
 	}
 
-	vector<double> Tovector( const double val[], const int n)
-	{
-		int size=n;
-		vector<double> vec;
-		vec.reserve(size);
-		for (int i=0;i<size;++i)
-		{
-			vec.push_back(val[i]);
-		}
-		return vec;
-	}
-
-	vector<int> Tovector( const int val[], const int n )
-	{
-		int size=n;
-		vector<int> vec;
-		vec.reserve(size);
-		for (int i=0;i<size;++i)
-		{
-			vec.push_back(val[i]);
-		}
-		assert(vec.size()==n);
-		return vec;
-	}
-
 	double RandomDouble( int figure/*=10*/ )
 	{
 		double val(0);

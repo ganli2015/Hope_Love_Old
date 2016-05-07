@@ -8,4 +8,6 @@
 #include <iterator>
 #include <fstream>
 
+#include "FuncForTest.h"
+
 using namespace std;
