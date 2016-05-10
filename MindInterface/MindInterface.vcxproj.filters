@@ -56,6 +56,12 @@
     <ClInclude Include="PublicTypedef.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="iDeduceResult.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="iLogic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -95,6 +101,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="iRelationConstraint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iDeduceResult.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iLogic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

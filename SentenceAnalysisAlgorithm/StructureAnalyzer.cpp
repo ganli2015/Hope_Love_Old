@@ -31,7 +31,7 @@ bool StructureAnalyzer::Analyze()
 		vector<int> freqRow;
 		for (unsigned int k=j+1;k<_raw_sen->GrammarWordCount();++k)
 		{
-			int totalFreq=TotalPatternFrequency(j,k,associatedIndexes,associatedPatterns);
+			int totalFreq=TotalPatternFrequency2(j,k,associatedIndexes,associatedPatterns);
 			freqRow.push_back(totalFreq);
 		}
 		tri_matrix.push_back(freqRow);
@@ -40,11 +40,6 @@ bool StructureAnalyzer::Analyze()
 	SetEachWordIntenstiy(normalizedMatrix);
 
 	return true;
-}
-
-void StructureAnalyzer::AnalyzeImp2()
-{
-
 }
 
 int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns )
@@ -102,5 +97,45 @@ void StructureAnalyzer::SetEachWordIntenstiy( const vector<vector<double>>& tria
 		{
 			_raw_sen->SetWordIntensity(i,i+j+1,triangleMatrix[i][j]);
 		}
+	}
+}
+
+int StructureAnalyzer::TotalPatternFrequency2( const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns )
+{
+	if(word1_assoIndexes.size()!=word1_assoPatterns.size())
+	{
+		throw logic_error("Error in TotalPatternFrequency");
+	}
+
+	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
+
+	int totalFreq(0);
+	for (unsigned int i=0;i<word1_assoIndexes.size();++i)
+	{
+		vector<int> assoIndexes=word1_assoIndexes[i];
+		if(IsAdjacentInVec(word1_index,word2_index,assoIndexes))
+		{
+			int freq=brain->GetFreqencyofPattern(word1_assoPatterns[i]);
+			totalFreq+=freq;
+		}
+	}
+	return totalFreq;
+}
+
+bool StructureAnalyzer::IsAdjacentInVec( const int word1_index,const int word2_index,const vector<int>& vec )
+{
+	vector<int>::const_iterator iter1=find(vec.begin(),vec.end(),word1_index);
+	vector<int>::const_iterator iter2=find(vec.begin(),vec.end(),word2_index);
+	if(iter1==vec.end() || iter2==vec.end())
+	{
+		return false;
+	}
+	else if(distance(iter1,iter2)!=1)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
 	}
 }

@@ -4,6 +4,10 @@
 #include "../SentenceAnalysisAlgorithm/Punctuator.h"
 #include "../SentenceAnalysisAlgorithm/WordSegmentator.h"
 #include "../SentenceAnalysisAlgorithm/GrammarAnalyzer.h"
+#include "../SentenceAnalysisAlgorithm/SentenceAnalyzer.h"
+#include "../SentenceAnalysisAlgorithm/WordRelationTableBuilder.h"
+
+#include "../Mathmatic/MathTool.h"
 
 #include "../DataCollection/Sentence.h"
 
@@ -26,6 +30,8 @@ void Test_SentenceAnalysisAlgorithm::RunTest()
 	Test_Punctuation();
 	Test_Segmentation();
 	Test_Grammard();
+	Test_StructureAnalyzer();
+	Test_WordRelationTableBuilder();
 }
 
 void Test_SentenceAnalysisAlgorithm::Test_Punctuation()
@@ -193,5 +199,70 @@ bool Test_SentenceAnalysisAlgorithm::SameGrammar( const vector<PartOfSpeech>& ex
 
 void Test_SentenceAnalysisAlgorithm::Test_WordRelationTableBuilder()
 {
+	//Check that the grammar interaction only affects the adjacent words.
+	iCerebrum* brain=iCerebrum::Instance();
+
+	vector<PartOfSpeech> pos;
+	pos.push_back(Numeral);
+	pos.push_back(Adjective);
+	pos.push_back(Preposition);
+	pos.push_back(Numeral);
+	GrammarPattern pattern(pos);
+	for (int i=0;i<200;++i)
+	{
+		brain->IncreasePatternFreqency(pattern);
+	}
+
+	SentenceAnalyzer analyzer("二大于一");
+	analyzer.Analyze();
+	shared_ptr<Sentence> sen=analyzer.GetAnalyzedSentences();
+
+	WordRelationTableBuilder builder(sen);
+	builder.Build();
+	shared_ptr<iConceptInteractTable> table=builder.GetProtoInteractTable();
+
+	vector<pair<string,string>> expect;
+	expect.push_back(make_pair("二","大"));
+	expect.push_back(make_pair("大","于"));
+	expect.push_back(make_pair("于","一"));
+
+	Check(FuncForTest::PairSameWithTable(expect,table));
+}
+
+void Test_SentenceAnalysisAlgorithm::Test_StructureAnalyzer()
+{
+	//Check that the grammar interaction only affects the adjacent words.
+	iCerebrum* brain=iCerebrum::Instance();
+
+	vector<PartOfSpeech> pos;
+	pos.push_back(Numeral);
+	pos.push_back(Adjective);
+	pos.push_back(Preposition);
+	pos.push_back(Numeral);
+	GrammarPattern pattern(pos);
+	for (int i=0;i<200;++i)
+	{
+		brain->IncreasePatternFreqency(pattern);
+	}
+
+	SentenceAnalyzer analyzer("二大于一");
+	analyzer.Analyze();
+	shared_ptr<Sentence> sen=analyzer.GetAnalyzedSentences();
+	for (unsigned int i=0;i<sen->GrammarWordCount();++i)
+	{
+		for (unsigned int j=0;j<sen->GrammarWordCount();++j)
+		{
+			double inten=sen->GetWordIntensity(i,j);
+			if(j-i==1 || i-j==1)
+			{
+				Check(inten!=0);
+			}
+			else
+			{
+				Check(Math::DoubleCompare(inten,0)==0);
+			}
+		}
+	}
+
 
 }

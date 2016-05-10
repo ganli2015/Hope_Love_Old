@@ -9,6 +9,13 @@ namespace DataCollection
 	enum PartOfSpeech;
 }
 
+namespace LogicSystem
+{
+	class iExpression;
+	class iRelation;
+	class iDeduceResult;
+}
+
 namespace Mind
 {
 	class iConcept;
@@ -57,5 +64,8 @@ namespace Mind
 
 		//Concept React System Functions
 		virtual vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain)=0;
+
+		//LogicKnowledge related functions
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const =0;
 	};
 }

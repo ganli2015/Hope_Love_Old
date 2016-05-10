@@ -53,7 +53,7 @@ void Test_ReactionAnalysisAlgorithm::TestExtractConceptChains()
 		expect.push_back(GenerateChain("自己", "好感", "对方"));
 		expect.push_back(GenerateChain("自己", "好感", "对方"));
 
-		Check(SameChainVec(expect,chain));
+		Check(FuncForTest::SameChainVec(expect,chain));
 	}
 
 	{
@@ -73,7 +73,7 @@ void Test_ReactionAnalysisAlgorithm::TestExtractConceptChains()
 		expect.push_back(GenerateChain("干嘛","在乎","想"));
 		expect.push_back(GenerateChain("怎么","想"));
 
-		Check(SameChainVec(expect,chain));
+		Check(FuncForTest::SameChainVec(expect,chain));
 	}
 }
 
@@ -109,67 +109,4 @@ vector<string> Test_ReactionAnalysisAlgorithm::GenerateChain( const string str1,
 	res.push_back(str1);
 	res.push_back(str2);
 	return res;
-}
-
-bool Test_ReactionAnalysisAlgorithm::SameChainVec( const vector<vector<string>>& expect, const vector<shared_ptr<iConceptChain>>& result )
-{
-	if(expect.size()!=result.size())
-	{
-		return false;
-	}
-
-	vector<shared_ptr<iConceptChain>> resCopy=result;
-
-	for (unsigned int i=0;i<expect.size();++i)
-	{
-		bool hasSameChain=false;
-		for (unsigned int j=0;j<resCopy.size();++j)
-		{
-			if(SameChain(expect[i],resCopy[j]))
-			{
-				resCopy.erase(resCopy.begin()+j);
-				hasSameChain=true;
-				break;
-			}
-		}
-
-		if(!hasSameChain)
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-bool Test_ReactionAnalysisAlgorithm::SameChain( const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res )
-{
-	vector<shared_ptr<iConcept> > conVec=res->GetConceptVec();
-	if(expect.size()!=conVec.size())
-	{
-		return false;
-	}
-
-	for (unsigned int i=0;i<expect.size();++i)
-	{
-		if(expect[i]!=conVec[i]->GetString())
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-void Test_ReactionAnalysisAlgorithm::DisplayChains( const vector<shared_ptr<Mind::iConceptChain>>& chains )
-{
-	for (unsigned int i=0;i<chains.size();++i)
-	{
-		vector<shared_ptr<iConcept>> cons=chains[i]->GetConceptVec();
-		for (unsigned int j=0;j<cons.size();++j)
-		{
-			cout<<cons[j]->GetString()<<" ";
-		}
-		cout<<endl;
-	}
 }

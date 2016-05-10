@@ -48,26 +48,28 @@ void Test_LogicSystem::RunTest()
 
 void Test_LogicSystem::Test_Expression()
 {
-	iCerebrum* brain=iCerebrum::Instance();
-	vector<PartOfSpeech> pos;
-	pos.push_back(Numeral);
-	pos.push_back(Adjective);
-	pos.push_back(Preposition);
-	pos.push_back(Numeral);
-	GrammarPattern pattern(pos);
-	for (int i=0;i<200;++i)
-	{
-		brain->IncreasePatternFreqency(pos);
-	}
-
-
-	shared_ptr<SingleExpression> expre(new SingleExpression("二大于一。"));
-	shared_ptr<iConceptInteractTable> table=expre->GetProtoInteractTable();
-	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
+// 	iCerebrum* brain=iCerebrum::Instance();
+// 	vector<PartOfSpeech> pos;
+// 	pos.push_back(Numeral);
+// 	pos.push_back(Adjective);
+// 	pos.push_back(Preposition);
+// 	pos.push_back(Numeral);
+// 	GrammarPattern pattern(pos);
+// 	for (int i=0;i<200;++i)
+// 	{
+// 		brain->IncreasePatternFreqency(pos);
+// 	}
+// 
+// 
+// 	shared_ptr<SingleExpression> expre(new SingleExpression("二大于一。"));
+// 	shared_ptr<iConceptInteractTable> table=expre->GetProtoInteractTable();
+// 	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
 }
 
 void Test_LogicSystem::Test_Logic_Determine()
 {
+	Logic logic;
+
 	shared_ptr<CompositeExpression> condition(new CompositeExpression());
 	condition->AddExpression("二大于一。");
 	condition->AddExpression("三大于二。");
@@ -75,8 +77,8 @@ void Test_LogicSystem::Test_Logic_Determine()
 	shared_ptr<iExpression> conclusion_true(new SingleExpression("三大于一"));
 	shared_ptr<iExpression> conclusion_false(new SingleExpression("一大于三"));
 
-	Check(Logic::Determine(condition,conclusion_true)==True);
-	Check(Logic::Determine(condition,conclusion_true)==False);
+	Check(logic.Determine(condition,conclusion_true)==True);
+	Check(logic.Determine(condition,conclusion_true)==False);
 }
 
 void Test_LogicSystem::Test_Relation()

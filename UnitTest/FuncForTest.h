@@ -4,11 +4,21 @@
 namespace Mind
 {
 	class iConcept;
+	class iConceptChain;
+	class iConceptInteractTable;
 }
 
 namespace FuncForTest
 {
 	shared_ptr<Mind::iConcept> SimpleConcept(const string str);
+
+	bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<Mind::iConceptInteractTable> table);
+
+	bool SameChainVec(const vector<vector<string>>& expect, const vector<shared_ptr<Mind::iConceptChain>>& result);
+
+	bool SameChain(const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res);
+
+	void DisplayChains(const vector<shared_ptr<Mind::iConceptChain>>& chains);
 
 	template<class T>
 	bool ContainSameElements(const vector<vector<T>>& v1,const vector<vector<T>>& v2)

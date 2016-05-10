@@ -20,6 +20,5 @@ private:
 
 	static void Test_BuildGrammarAssociation();
 
-	static bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<Mind::iConceptInteractTable> table);
 };
 

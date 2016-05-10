@@ -5,6 +5,7 @@
 #include "WordRelationTable.h"
 #include "ConceptInteractTableContainer.h"
 #include "ConceptReactSystem.h"
+#include "LogicKnowledge.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/Character.h"
@@ -17,7 +18,8 @@ namespace Mind
 	Cerebrum::Cerebrum(void):
 	_conceptset(new ConceptSet),
 		_grammaset(new GrammarSet),
-		_conceptInteractTableContainer(new ConceptInteractTableContainer)	
+		_conceptInteractTableContainer(new ConceptInteractTableContainer),
+		_logicKnowledge(new LogicKnowledge())
 	{
 		_conceptReactSystem=(new ConceptReactSystem(_conceptset));
 	}
@@ -204,6 +206,11 @@ namespace Mind
 	double Cerebrum::GetP_Backward( const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward ) const
 	{
 		return _grammaset->GetP_Backward(me,backward);
+	}
+
+	vector<shared_ptr<LogicSystem::iDeduceResult>> Cerebrum::Deduce( const shared_ptr<LogicSystem::iExpression> expre ) const
+	{
+		return _logicKnowledge->Deduce(expre);
 	}
 
 }

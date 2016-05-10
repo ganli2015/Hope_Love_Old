@@ -29,6 +29,8 @@ namespace Mind
 		//ºÏ²¢ConceptInteractTable
 		virtual void Absorb(const shared_ptr<iConceptInteractTable> absorbed) =0;
 		virtual void InteractDeeper() =0;
+
+		virtual void RemoveDuplicated() =0;
 	};
 }
 

@@ -22,14 +22,14 @@ namespace Mind
 
 		if(fromIndex==-1)//如果没有找到from，则添加进容器，index改为容器的末尾
 		{
-			_concepts.push_back(from);
-			fromIndex=_concepts.size()-1;
+			fromIndex=_concepts.size();
+			_concepts[fromIndex]=from;
 		}
 		
 		if(toIndex==-1)//同上
 		{
-			_concepts.push_back(to);
-			toIndex=_concepts.size()-1;
+			toIndex=_concepts.size();
+			_concepts[toIndex]=to;
 		}
 
 		//if(!PairExist(fromIndex,toIndex))
@@ -54,7 +54,7 @@ namespace Mind
 				if(find(fromIndexes.begin(),fromIndexes.end(),iter->first)==fromIndexes.end())//如果Concept不重复，则存进去。
 				{
 					fromIndexes.push_back(iter->first);
-					res.push_back(_concepts[iter->first]);
+					res.push_back(_concepts.at(iter->first));
 				}
 			}
 		}
@@ -77,7 +77,7 @@ namespace Mind
 
 		while(beg!=end)
 		{
-			res.push_back(_concepts[beg->second]);
+			res.push_back(_concepts.at(beg->second));
 			beg++;
 		}
 
@@ -90,7 +90,7 @@ namespace Mind
 		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> res;
 		for (const_indexIter it=_interactIndex.begin();it!=_interactIndex.end();++it)
 		{
-			res.push_back(make_pair(_concepts[it->first],_concepts[it->second]));
+			res.push_back(make_pair(_concepts.at(it->first),_concepts.at(it->second)));
 		}
 
 		return res;
@@ -146,6 +146,43 @@ namespace Mind
 		}
 
 		return false;
+	}
+
+	void ConceptInteractTable::RemoveDuplicated()
+	{
+		multimap<int,int> newIndex;
+
+		for (const_indexIter index_it=_interactIndex.begin();index_it!=_interactIndex.end();++index_it)
+		{
+			int index1=index_it->first;
+			int index2=index_it->second;
+			indexIter beg=newIndex.lower_bound(index1);
+			indexIter end=newIndex.upper_bound(index1);
+			
+			//check whether <index1> and <index2> exists in <newIndex>.
+			if(ValueCount(beg,end,index2)==0)
+			{
+				newIndex.insert(make_pair(index1,index2));
+			}
+		}
+
+		_interactIndex=newIndex;
+	}
+
+	int ConceptInteractTable::ValueCount(const_indexIter beg, const_indexIter end, const int val)
+	{
+		int res=0;
+		while(beg!=end)
+		{
+			if(beg->second==val)
+			{
+				++res;
+			}
+
+			++beg;
+		}
+
+		return res;
 	}
 
 }

@@ -85,7 +85,9 @@
     <ClInclude Include="iConceptEdge.h" />
     <ClInclude Include="iConceptInteractTable.h" />
     <ClInclude Include="iConceptLevelTable.h" />
+    <ClInclude Include="iDeduceResult.h" />
     <ClInclude Include="iExpression.h" />
+    <ClInclude Include="iLogic.h" />
     <ClInclude Include="iLogicStatement.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="iRelation.h" />
@@ -102,7 +104,9 @@
     <ClCompile Include="iConceptEdge.cpp" />
     <ClCompile Include="iConceptInteractTable.cpp" />
     <ClCompile Include="iConceptLevelTable.cpp" />
+    <ClCompile Include="iDeduceResult.cpp" />
     <ClCompile Include="iExpression.cpp" />
+    <ClCompile Include="iLogic.cpp" />
     <ClCompile Include="iLogicStatement.cpp" />
     <ClCompile Include="iRelation.cpp" />
     <ClCompile Include="iRelationConstraint.cpp" />

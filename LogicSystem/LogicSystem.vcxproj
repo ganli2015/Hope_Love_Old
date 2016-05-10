@@ -80,9 +80,11 @@
   <ItemGroup>
     <ClInclude Include="Arbitrariness.h" />
     <ClInclude Include="CompositeExpression.h" />
+    <ClInclude Include="DeduceResult.h" />
     <ClInclude Include="Inequality.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
+    <ClInclude Include="LogicStatement.h" />
     <ClInclude Include="RelationLeaf.h" />
     <ClInclude Include="RelationNode.h" />
     <ClInclude Include="SingleExpression.h" />
@@ -92,8 +94,10 @@
   <ItemGroup>
     <ClCompile Include="Arbitrariness.cpp" />
     <ClCompile Include="CompositeExpression.cpp" />
+    <ClCompile Include="DeduceResult.cpp" />
     <ClCompile Include="Inequality.cpp" />
     <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="LogicStatement.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />
@@ -112,6 +116,9 @@
     </ProjectReference>
     <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
       <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
+      <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MindElement\MindElement.vcxproj">
       <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>

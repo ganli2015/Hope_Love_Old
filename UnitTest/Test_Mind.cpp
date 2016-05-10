@@ -114,6 +114,7 @@ void Test_Mind::Test_ConceptDeepInteraction()
 		shared_ptr<iConcept> to=brain->GetConcept(iden2);
 
 		shared_ptr<iConceptInteractTable> table=from->DeepInteractWith(to);
+		table->RemoveDuplicated();
 
 		vector<pair<string,string>> expect;
 		expect.push_back(make_pair("大","程度"));
@@ -121,7 +122,7 @@ void Test_Mind::Test_ConceptDeepInteraction()
 		expect.push_back(make_pair("好感","对方"));
 		expect.push_back(make_pair("大","好感"));
 
-		Check(PairSameWithTable(expect,table));
+		Check(FuncForTest::PairSameWithTable(expect,table));
 	}
 
 	{
@@ -140,43 +141,11 @@ void Test_Mind::Test_ConceptDeepInteraction()
 		expect.push_back(make_pair("否定","年龄"));
 		expect.push_back(make_pair("大","年龄"));
 
-		Check(PairSameWithTable(expect,table));
+		Check(FuncForTest::PairSameWithTable(expect,table));
 	}
 }
 
-bool Test_Mind::PairSameWithTable( const vector<pair<string,string>>& expect,const shared_ptr<iConceptInteractTable> table )
-{
-	class FindRelation
-	{
-		pair<string,string> _p;
-	public: 
-		FindRelation(const pair<string,string> p):_p(p){}
-		~FindRelation(){}
 
-		bool operator()(const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> conceptPair)
-		{
-			if(conceptPair.first->GetString()==_p.first && conceptPair.second->GetString()==_p.second)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	};
-
-	vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> relations=table->GetAllRelations();
-	for (unsigned int i=0;i<expect.size();++i)
-	{
-		if(find_if(relations.begin(),relations.end(),FindRelation(expect[i]))==relations.end())
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
 
 
 

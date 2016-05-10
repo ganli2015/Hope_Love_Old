@@ -3,15 +3,20 @@
 
 namespace LogicSystem
 {
+	class iRelation;
+	class iExpression;
+	class iDeduceResult;
+
 	///A logic statement tells a result under some input conditions.
 	///It is not necessarily true, but has some confidence.
-	class iLogicStatement
+	class _MINDINTERFACEINOUT iLogicStatement
 	{
+
 	public:
 		iLogicStatement(void);
 		~iLogicStatement(void);
 
-
+		virtual shared_ptr<iDeduceResult> Deduce(const shared_ptr<iExpression> condition) const =0;
 	};
 }
 

@@ -20,6 +20,7 @@ namespace Mind
 	class ConceptInteractTableContainer;
 	class ConceptReactSystem;
 	class iConceptChain;
+	class LogicKnowledge;
 	struct Identity;
 	struct ConceptChainProperty;
 
@@ -31,6 +32,7 @@ namespace Mind
 		GrammarSet* _grammaset;
 		ConceptInteractTableContainer* _conceptInteractTableContainer;
 		ConceptReactSystem* _conceptReactSystem;
+		LogicKnowledge* _logicKnowledge;
 
 		Cerebrum(void);
 		virtual ~Cerebrum();
@@ -92,7 +94,9 @@ namespace Mind
 		//Concept React System Functions
 		virtual vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain);
 
-		
+		//LogicKnowledge related functions
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const;
+
 	};
 }
 
