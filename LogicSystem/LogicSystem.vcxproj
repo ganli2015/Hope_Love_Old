@@ -81,6 +81,7 @@
     <ClInclude Include="Arbitrariness.h" />
     <ClInclude Include="CompositeExpression.h" />
     <ClInclude Include="DeduceResult.h" />
+    <ClInclude Include="Equality.h" />
     <ClInclude Include="Inequality.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="Arbitrariness.cpp" />
     <ClCompile Include="CompositeExpression.cpp" />
     <ClCompile Include="DeduceResult.cpp" />
+    <ClCompile Include="Equality.cpp" />
     <ClCompile Include="Inequality.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="LogicStatement.cpp" />

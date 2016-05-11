@@ -200,18 +200,7 @@ bool Test_SentenceAnalysisAlgorithm::SameGrammar( const vector<PartOfSpeech>& ex
 void Test_SentenceAnalysisAlgorithm::Test_WordRelationTableBuilder()
 {
 	//Check that the grammar interaction only affects the adjacent words.
-	iCerebrum* brain=iCerebrum::Instance();
-
-	vector<PartOfSpeech> pos;
-	pos.push_back(Numeral);
-	pos.push_back(Adjective);
-	pos.push_back(Preposition);
-	pos.push_back(Numeral);
-	GrammarPattern pattern(pos);
-	for (int i=0;i<200;++i)
-	{
-		brain->IncreasePatternFreqency(pattern);
-	}
+	FuncForTest::AddGrammarPatternToCerebrum();
 
 	SentenceAnalyzer analyzer("二大于一");
 	analyzer.Analyze();
@@ -227,23 +216,15 @@ void Test_SentenceAnalysisAlgorithm::Test_WordRelationTableBuilder()
 	expect.push_back(make_pair("于","一"));
 
 	Check(FuncForTest::PairSameWithTable(expect,table));
+
+	iCerebrum::KillInstance();
+	iCerebrum::SetInstance(Cerebrum::Instance());
 }
 
 void Test_SentenceAnalysisAlgorithm::Test_StructureAnalyzer()
 {
 	//Check that the grammar interaction only affects the adjacent words.
-	iCerebrum* brain=iCerebrum::Instance();
-
-	vector<PartOfSpeech> pos;
-	pos.push_back(Numeral);
-	pos.push_back(Adjective);
-	pos.push_back(Preposition);
-	pos.push_back(Numeral);
-	GrammarPattern pattern(pos);
-	for (int i=0;i<200;++i)
-	{
-		brain->IncreasePatternFreqency(pattern);
-	}
+	FuncForTest::AddGrammarPatternToCerebrum();
 
 	SentenceAnalyzer analyzer("二大于一");
 	analyzer.Analyze();
@@ -264,5 +245,6 @@ void Test_SentenceAnalysisAlgorithm::Test_StructureAnalyzer()
 		}
 	}
 
-
+	iCerebrum::KillInstance();
+	iCerebrum::SetInstance(Cerebrum::Instance());
 }

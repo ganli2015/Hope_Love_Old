@@ -1,11 +1,14 @@
 #include "StdAfx.h"
 #include "RelationLeaf.h"
+#include "Symbol.h"
 
 #include "../MindInterface/iSymbol.h"
 #include "../MindInterface/iExpression.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iRelationConstraint.h"
+
+#include "../MindElement/ConceptInteractTable.h"
 
 #include "../Mathmatic/FindSequence.h"
 
@@ -51,31 +54,49 @@ namespace LogicSystem
 		return res;
 	}
 
-	bool RelationLeaf::Satisfy( const shared_ptr<iExpression> expre ) const
+	bool RelationLeaf::Satisfy( const shared_ptr<iExpression> expre )
 	{
 		shared_ptr<iConceptInteractTable> interTable=expre->GetProtoInteractTable();
 		
 		return InterTableSatisfyRelation(interTable);
 	}
 
-	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable ) const
+	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable )
 	{
 		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(interTable->GetAllRelations());
-
-		for (unsigned int i=0;i<matchedPairSeq.size();++i)
+		if(matchedPairSeq.empty())
 		{
-			if(SatifyConstraint(matchedPairSeq[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
-			{
-				return true;
-			}
+			_satisfiedSequence.clear();
+
+			return false;
+		}
+		else
+		{
+			_satisfiedSequence=matchedPairSeq.front();
+
+			return true;
 		}
 
-		return false;
+// 		for (unsigned int i=0;i<matchedPairSeq.size();++i)
+// 		{
+// 			if(SatifyConstraint(matchedPairSeq[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
+// 			{
+// 				_satisfiedSequence=matchedPairSeq[i];
+// 
+// 				return true;
+// 			}
+// 		}
+// 
+// 		_satisfiedSequence.clear();
+// 
+// 		return false;
 	}
 
 	vector<iRelation::PairSequence> RelationLeaf::FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const
 	{
 		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(_relations,conceptPairs);
+
+		RemoveSequencesUnsatifyConstraints(_constraints,matchedPairSeq);
 
 		return matchedPairSeq;
 	}
@@ -143,6 +164,29 @@ namespace LogicSystem
 		vector<vector<PairInfo>> pairSequence=Math::GetAllCombinations<PairInfo>::Get(relatedPairs);
 
 		return pairSequence;
+	}
+
+	shared_ptr<iRelation> RelationLeaf::GenerateSpecialRelation() const
+	{
+		shared_ptr<RelationLeaf> res(new RelationLeaf());
+
+		for (unsigned int i=0;i<_relations.size();++i)
+		{
+			shared_ptr<iConcept> firstObj=_relations[i].first->GetReferredObject();
+			shared_ptr<iConcept> secondObj=_relations[i].second->GetReferredObject();
+			if(firstObj==NULL || secondObj==NULL)
+			{
+				return NULL;
+			}
+			else
+			{
+				shared_ptr<ConSymbol> fromSymbol(new Symbol<iConcept>(firstObj));
+				shared_ptr<ConSymbol> toSymbol(new Symbol<iConcept>(secondObj));
+				res->AddRelation(fromSymbol,toSymbol);
+			}
+		}
+
+		return res;
 	}
 
 }

@@ -14,6 +14,7 @@ namespace LogicSystem
 	class iExpression;
 	class iRelation;
 	class iDeduceResult;
+	class iLogicStatement;
 }
 
 namespace Mind
@@ -67,5 +68,6 @@ namespace Mind
 
 		//LogicKnowledge related functions
 		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const =0;
+		virtual void AddLogicStatement(const shared_ptr<LogicSystem::iLogicStatement> statement) =0;
 	};
 }

@@ -9,6 +9,10 @@
 #include "../LogicSystem/RelationNode.h"
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Symbol.h"
+#include "../LogicSystem/LogicStatement.h"
+#include "../LogicSystem/Inequality.h"
+
+#include "../Mind/Cerebrum.h"
 
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/Concept.h"
@@ -39,10 +43,8 @@ Test_LogicSystem::~Test_LogicSystem(void)
 
 void Test_LogicSystem::RunTest()
 {
-	iCerebrum* brain=iCerebrum::Instance();
-
 	Test_Expression();
-//	Test_Logic_Determine();
+	Test_Logic_Determine();
 	Test_Relation();
 }
 
@@ -68,17 +70,32 @@ void Test_LogicSystem::Test_Expression()
 
 void Test_LogicSystem::Test_Logic_Determine()
 {
+	FuncForTest::AddGrammarPatternToCerebrum();
+
+	shared_ptr<RelationNode> conditionRel(new RelationNode());
+	shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
+	Test_iRelation::RelationPair(conditionRel,resultRel);
+
+	//Create logic statement
+	shared_ptr<LogicStatement> statement(new LogicStatement(conditionRel,resultRel));
+
+	iCerebrum* brain=iCerebrum::Instance();
+	brain->AddLogicStatement(statement);
+
 	Logic logic;
 
 	shared_ptr<CompositeExpression> condition(new CompositeExpression());
-	condition->AddExpression("二大于一。");
-	condition->AddExpression("三大于二。");
+	condition->AddExpression("二大于一");
+	condition->AddExpression("三大于二");
 
 	shared_ptr<iExpression> conclusion_true(new SingleExpression("三大于一"));
 	shared_ptr<iExpression> conclusion_false(new SingleExpression("一大于三"));
 
 	Check(logic.Determine(condition,conclusion_true)==True);
-	Check(logic.Determine(condition,conclusion_true)==False);
+	Check(logic.Determine(condition,conclusion_false)==False);
+
+	brain->KillInstance();
+	iCerebrum::SetInstance(Cerebrum::Instance());
 }
 
 void Test_LogicSystem::Test_Relation()

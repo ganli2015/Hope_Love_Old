@@ -12,6 +12,9 @@ namespace LogicSystem
 		static int ArbNum;
 
 		int _id;
+
+		friend class Test_iRelation;
+
 	public:
 		Arbitrariness(void);
 		virtual ~Arbitrariness(void);

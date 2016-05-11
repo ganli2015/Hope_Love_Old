@@ -16,6 +16,7 @@ namespace LogicSystem
 		vector<SymbolPair> _relations;
 		vector<shared_ptr<iRelationConstraint>> _constraints;
 
+
 		const string _connectTag;
 		const char _sepTag;
 
@@ -28,10 +29,10 @@ namespace LogicSystem
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) ;
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual string GetString() const ;
-		virtual bool Satisfy(const shared_ptr<iExpression> expre) const ;
-
+		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
+		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
 	private:
-		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable) const;
+		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable);
 		static vector<RelationLeaf::ConceptPair> FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs);
 		static vector<vector<RelationLeaf::PairInfo>> FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs);
 

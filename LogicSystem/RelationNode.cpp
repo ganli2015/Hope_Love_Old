@@ -5,6 +5,10 @@
 #include "../MindInterface/iExpression.h"
 #include "../MindInterface/iConceptInteractTable.h"
 
+#include "../MindElement/ConceptInteractTable.h"
+
+using namespace Mind;
+
 namespace LogicSystem
 {
 	RelationNode::RelationNode(void):_andTag("&&"),_orTag("||")
@@ -42,36 +46,51 @@ namespace LogicSystem
 		return res;
 	}
 
-	bool RelationNode::Satisfy( const shared_ptr<iExpression> expre ) const
+	bool RelationNode::Satisfy( const shared_ptr<iExpression> expre )
 	{
 		shared_ptr<Mind::iConceptInteractTable> interTable=expre->GetProtoInteractTable();
 		
 		return InterTableSatisfyRelation(interTable);
 	}
 
-	bool RelationNode::InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable ) const
+	bool RelationNode::InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable )
 	{
 		vector<iRelation::PairSequence> matchedPairSequences=FindMatchedPairSequence(interTable->GetAllRelations());
 		if(matchedPairSequences.empty())
 		{
+			_satisfiedSequence.clear();
+
 			return false;
 		}
-
-		for (unsigned int i=0;i<matchedPairSequences.size();++i)
+		else
 		{
-			if(SatifyConstraint(matchedPairSequences[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
-			{
-				return true;
-			}
+			_satisfiedSequence=matchedPairSequences.front();
+
+			return true;
 		}
 
-		return false;
+// 		for (unsigned int i=0;i<matchedPairSequences.size();++i)
+// 		{
+// 			if(SatifyConstraint(matchedPairSequences[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
+// 			{
+// 				_satisfiedSequence=matchedPairSequences[i];
+// 
+// 				return true;
+// 			}
+// 		}
+// 
+// 		_satisfiedSequence.clear();
+// 
+// 		return false;
 	}
 
 	vector<iRelation::PairSequence> RelationNode::FindMatchedPairSequence( const vector<ConceptPair>& conceptPairs ) const
 	{
 		vector<iRelation::PairSequence> res;
 		Recursive_FindMatchedPairSequence(conceptPairs,_subRelations,res);
+
+		RemoveSequencesUnsatifyConstraints(_constraints,res);
+
 		return res;
 	}
 
@@ -185,6 +204,27 @@ namespace LogicSystem
 	void RelationNode::AddConstraint( const shared_ptr<iRelationConstraint> constraint )
 	{
 		_constraints.push_back(constraint);
+	}
+
+	shared_ptr<iRelation> RelationNode::GenerateSpecialRelation() const
+	{
+		shared_ptr<iRelationNode> res(new RelationNode());
+		res->SetState(_state);
+
+		for (unsigned int i=0;i<_subRelations.size();++i)
+		{
+			shared_ptr<iRelation> subRelation=_subRelations[i]->GenerateSpecialRelation();
+			if(subRelation==NULL)
+			{
+				return NULL;
+			}
+			else
+			{
+				res->AddSubRelation(subRelation);
+			}
+		}
+
+		return res;
 	}
 
 }

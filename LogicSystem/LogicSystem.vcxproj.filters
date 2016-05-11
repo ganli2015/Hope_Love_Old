@@ -47,6 +47,9 @@
     <ClInclude Include="DeduceResult.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Equality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -80,6 +83,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DeduceResult.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Equality.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

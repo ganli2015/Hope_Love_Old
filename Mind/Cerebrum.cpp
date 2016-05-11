@@ -10,6 +10,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/Character.h"
 
+
 using namespace DataCollection;
 
 namespace Mind
@@ -211,6 +212,11 @@ namespace Mind
 	vector<shared_ptr<LogicSystem::iDeduceResult>> Cerebrum::Deduce( const shared_ptr<LogicSystem::iExpression> expre ) const
 	{
 		return _logicKnowledge->Deduce(expre);
+	}
+
+	void Cerebrum::AddLogicStatement( const shared_ptr<LogicSystem::iLogicStatement> statement )
+	{
+		_logicKnowledge->Add(statement);
 	}
 
 }

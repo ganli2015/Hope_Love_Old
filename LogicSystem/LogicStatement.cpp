@@ -19,7 +19,16 @@ namespace LogicSystem
 	{
 		if(_relationPair.first->Satisfy(condition))
 		{
-			return shared_ptr<DeduceResult>(new DeduceResult(_relationPair.second));
+			shared_ptr<iRelation> resultRelation=_relationPair.first->SymbolResonance(_relationPair.second);
+
+			if(resultRelation!=NULL)
+			{
+				return shared_ptr<DeduceResult>(new DeduceResult(resultRelation));		
+			}
+			else
+			{
+				return NULL;
+			}
 		}
 		else
 		{

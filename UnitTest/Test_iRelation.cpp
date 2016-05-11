@@ -9,6 +9,7 @@
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Symbol.h"
 #include "../LogicSystem/Inequality.h"
+#include "../LogicSystem/Equality.h"
 
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/Concept.h"
@@ -42,13 +43,21 @@ Test_iRelation::~Test_iRelation(void)
 
 void Test_iRelation::RunTest()
 {
+	FuncForTest::AddGrammarPatternToCerebrum();
+
 	Test_GetString();
 	Test_RelationLeafSatisfy();
 	Test_RelationNodeSatisfy();
+	Test_iRelationResonance();
+
+	iCerebrum::KillInstance();
+	iCerebrum::SetInstance(Cerebrum::Instance());
 }
 
 void Test_iRelation::Test_GetString()
 {
+	Arbitrariness<iConcept>::ArbNum=0;
+
 	{
 		shared_ptr<iRelationNode> node=RelationSample1();
 
@@ -417,4 +426,62 @@ shared_ptr<LogicSystem::RelationNode> Test_iRelation::RelationSample2()
 	node->SetState(iRelationNode::Or);
 
 	return node;
+}
+
+void Test_iRelation::Test_iRelationResonance()
+{
+	shared_ptr<RelationNode> conditionRel(new RelationNode());
+	shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
+	RelationPair(conditionRel,resultRel);
+
+	shared_ptr<CompositeExpression> condition(new CompositeExpression());
+	condition->AddExpression("二大于一");
+	condition->AddExpression("三大于二");
+	if(conditionRel->Satisfy(condition))
+	{
+		shared_ptr<iRelation> specialRel=conditionRel->SymbolResonance(resultRel);
+
+		string relStr=specialRel->GetString();
+
+		shared_ptr<iExpression> conclusion_true(new SingleExpression("三大于一"));
+		Check(specialRel->Satisfy(conclusion_true));
+	}
+}
+
+void Test_iRelation::RelationPair( shared_ptr<RelationNode> condition,shared_ptr<RelationLeaf> result )
+{
+	//Create condition
+	shared_ptr<Arb> arb1=Arb::Create();
+	shared_ptr<Sym> s1(new Sym(SimpleConcept("大")));
+	shared_ptr<Sym> s2(new Sym(SimpleConcept("于")));
+	shared_ptr<Arb> arb2=Arb::Create();	
+
+	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
+	leaf1->AddRelation(arb1,s1);
+	leaf1->AddRelation(s1,s2);
+	leaf1->AddRelation(s2,arb2);
+	leaf1->AddConstraint(Inequality::Create(arb1,arb2));
+
+	shared_ptr<Arb> arb3=Arb::Create();	
+	shared_ptr<Sym> s3(new Sym(SimpleConcept("大")));
+	shared_ptr<Sym> s4(new Sym(SimpleConcept("于")));
+	shared_ptr<Arb> arb4=Arb::Create();	
+
+	shared_ptr<RelationLeaf> leaf2(new RelationLeaf());
+	leaf2->AddRelation(arb3,s3);
+	leaf2->AddRelation(s3,s4);
+	leaf2->AddRelation(s4,arb4);
+	leaf1->AddConstraint(Inequality::Create(arb2,arb4));
+
+	condition->AddSubRelation(leaf1);
+	condition->AddSubRelation(leaf2);
+	condition->SetState(iRelationNode::And);
+	condition->AddConstraint(Equality::Create(arb2,arb3));
+
+	//Create result
+	result->AddRelation(arb1,s1);
+	result->AddRelation(s1,s2);
+	result->AddRelation(s2,arb4);
+	
+
 }

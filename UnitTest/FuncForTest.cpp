@@ -7,8 +7,10 @@
 
 #include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include "../DataCollection/Word.h"
+#include "../DataCollection/GrammaPattern.h"
 
 using namespace Mind;
 using namespace DataCollection;
@@ -130,4 +132,21 @@ namespace FuncForTest
 			cout<<endl;
 		}
 	}
+
+	void AddGrammarPatternToCerebrum()
+	{
+		iCerebrum* brain=iCerebrum::Instance();
+
+		vector<PartOfSpeech> pos;
+		pos.push_back(Numeral);
+		pos.push_back(Adjective);
+		pos.push_back(Preposition);
+		pos.push_back(Numeral);
+		GrammarPattern pattern(pos);
+		for (int i=0;i<200;++i)
+		{
+			brain->IncreasePatternFreqency(pattern);
+		}
+	}
+
 }

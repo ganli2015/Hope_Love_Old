@@ -4,7 +4,7 @@
 
 namespace LogicSystem
 {
-	class LogicStatement : public iLogicStatement
+	class _LOGICSYSTEMINOUT LogicStatement : public iLogicStatement
 	{
 		pair<shared_ptr<iRelation>,shared_ptr<iRelation>> _relationPair;
 
