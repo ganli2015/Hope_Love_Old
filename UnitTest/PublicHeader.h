@@ -10,5 +10,6 @@
 
 #include "FuncForTest.h"
 #include "../CommonTools/MyPtr.h"
+#include "../CommonTools/assertions.h"
 
 using namespace std;

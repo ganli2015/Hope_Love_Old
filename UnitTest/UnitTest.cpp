@@ -12,6 +12,8 @@ using namespace std;
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
+	int objCountStart=MyObject::GetObjectCount();
+
 	TestClass testClass;
 
 	try
@@ -24,6 +26,9 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 		system("pause");
 	}
 
+	int objCountEnd=MyObject::GetObjectCount();
+
+	Check(objCountEnd==objCountStart);
 
 	return 0;
 }

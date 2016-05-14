@@ -10,5 +10,6 @@ namespace GlobalInterface
         void Notify(DataWrapper data);
         void ConnectUI(UIForm form);
         void Execute(DataWrapper data);
+        void Kill();
     }
 }

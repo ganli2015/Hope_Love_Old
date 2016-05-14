@@ -41,7 +41,7 @@ void Test_SentenceAnalysisAlgorithm::RunTest()
 
 	int objCountEnd=MyObject::GetObjectCount();
 
-//	Check(objCountEnd==objCountStart);
+	Check(objCountEnd==objCountStart);
 }
 
 void Test_SentenceAnalysisAlgorithm::Test_Punctuation()

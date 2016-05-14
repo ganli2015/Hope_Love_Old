@@ -21,11 +21,15 @@ namespace ManageWrapper
 	public:
 		Manager_HopeLove(void);
 
+		~Manager_HopeLove();
+
 		virtual void ConnectUI(UIForm^ form);
 
 		virtual void Notify(DataWrapper^ data);
 
 		virtual void Execute(DataWrapper^ data);
+
+		virtual void Kill();
 
 	private:
 

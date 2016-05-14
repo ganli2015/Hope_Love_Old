@@ -45,7 +45,7 @@ void Test_CommonTool::Test_MemoryLeak()
 
 		Check(objCountStart==objCountEnd);
 	}
-	//
+	//Cerebrum
 	{
 		int objCountStart=MyObject::GetObjectCount();
 		iCerebrum::SetInstance(Cerebrum::Instance());
@@ -53,7 +53,6 @@ void Test_CommonTool::Test_MemoryLeak()
 		iCerebrum::KillInstance();
 		int objCountEnd=MyObject::GetObjectCount();
 
-		MyObject::OutputObjects();
 
 		Check(objCountStart==objCountEnd);
 	}

@@ -123,6 +123,13 @@ namespace HopeLove
             Init();
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            foreach (CPPManager m in _managers)
+            {
+                m.Kill();
+            }
+        }
 
     }
 }

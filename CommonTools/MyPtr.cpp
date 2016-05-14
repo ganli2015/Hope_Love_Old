@@ -7,68 +7,46 @@
 
 int MyObject::count=0;
 
-std::map<int,MyObject*> MyObject::objects;
-vector<void*> MyObject::objectsVec;
+vector<MyObject*> MyObject::objectsVec;
 
-int MyObject::maxID=0;
+std::ofstream MyObject::out("Objects.txt");
 
-MyObject::MyObject()/*:_id(maxID)*/
+
+MyObject::MyObject()
 {
-//	InceaseObj();
-}
-
-MyObject::MyObject( const MyObject& obj )/*:_id(maxID)*/
-{
-//	InceaseObj();
 }
 
 MyObject::~MyObject()
 {
-// 	int idCount=objects.count(_id);
-// 	MyObject *tmpObj=objects[_id];
-// 	assert(idCount==1);
-// 	Check(idCount==1);
-// 
-// 	objects.erase(_id);
-// 
-// 	--count;
+
 }
 
-void MyObject::InceaseObj()
+#ifdef _DEBUG
+
+void MyObject::operator delete( void* p )
 {
-// 	int idCount=objects.count(_id);
-// 	MyObject *tmpObj=objects[_id];
-// 	assert(idCount==0);
-// 	Check(idCount==0);
-// 
-// 	objects[_id]=this;
-// 	++count;
-// 	++maxID;
+	vector<MyObject*>::iterator it=find(objectsVec.begin(),objectsVec.end(),p);
+	objectsVec.erase(it);
+	free(p);
+
+	MyObject::count--;
+	out<<MyObject::count<<endl;
+
 }
 
-void MyObject::operator=( const MyObject& obj )
+void* MyObject::operator new( size_t size )
 {
-	//_id=maxID;
-	//InceaseObj();
+	void* p = malloc(size);  
+
+	MyObject::count++;
+	objectsVec.push_back(reinterpret_cast<MyObject*>(p));
+	out<<MyObject::count<<endl;
+
+	return p;
 }
 
-void MyObject::OutputObjects()
-{
-	ofstream out("Objects.txt");
+#endif // _DEBUG
 
-// 	for (map<int,MyObject*>::iterator it=objects.begin();it!=objects.end();++it)
-// 	{
-// 		out<<it->first<<" "<<typeid(it->second).name()<<endl;
-// 	}
-
-	for (unsigned int i=0;i<objectsVec.size();++i)
-	{
-		MyObject* obj=reinterpret_cast<MyObject*>(objectsVec[i]);
-		out<<typeid(obj).name()<<endl;
-	}
-
-	out.close();
-}
 
 
 

@@ -55,7 +55,7 @@ void Test_LogicSystem::RunTest()
 
 	int objCountEnd=MyObject::GetObjectCount();
 
-//	Check(objCountEnd==objCountStart);
+	Check(objCountEnd==objCountStart);
 }
 
 void Test_LogicSystem::Test_Expression()
