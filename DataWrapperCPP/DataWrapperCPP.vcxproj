@@ -157,9 +157,6 @@
     <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
       <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Interactor\Interactor.csproj">
-      <Project>{14caea45-0b21-4f74-a7cd-05f01f35f4f1}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

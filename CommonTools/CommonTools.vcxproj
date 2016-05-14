@@ -143,6 +143,7 @@
     <ClInclude Include="CommonTranslateFunction.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="IOFunction.h" />
+    <ClInclude Include="MyPtr.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -152,17 +153,13 @@
     <ClCompile Include="CommonStringFunction.cpp" />
     <ClCompile Include="CommonTranslateFunction.cpp" />
     <ClCompile Include="IOFunction.cpp" />
+    <ClCompile Include="MyPtr.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mathmatic\Mathmatic.vcxproj">
-      <Project>{e077393a-a460-43cf-869e-d4b3ea36dc3b}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

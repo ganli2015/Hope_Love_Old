@@ -11,7 +11,6 @@ using namespace std;
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
 	TestClass testClass;
-	//testClass.Register("SentenceAnalysisAlgorithm");
 
 	try
 	{

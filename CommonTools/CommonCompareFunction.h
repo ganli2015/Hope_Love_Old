@@ -27,5 +27,7 @@ namespace CommonTool
 		comp_samedouble(const double val):_val(val){}
 		~comp_samedouble(){}
 		bool operator()(const double val) const;
+
+		int DoubleCompare( double left,double right,double tol=1e-6 ) const;
 	};
 }
