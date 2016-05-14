@@ -22,7 +22,7 @@ namespace Mind
 		int frequency;
 	};
 
-	class GrammarSet
+	class _MINDINOUT GrammarSet : public MyObject
 	{
 	private:
 		struct Sen_Gra

@@ -12,7 +12,7 @@ namespace Math
 namespace NeuralNetwork
 {
 
-	class _NEURALNETWORKDESIGNINOUT iDataArray
+	class _NEURALNETWORKDESIGNINOUT iDataArray : public MyObject
 	{
 	public:
 		iDataArray(void);

@@ -5,7 +5,7 @@ namespace DataCollection
 {
 	class Word;
 
-	class _DATACOLLECTIONINOUT StructuredSentence
+	class _DATACOLLECTIONINOUT StructuredSentence : public MyObject
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _sen;
 		vector<vector<double>> _intensityMatrix; //记录两两word连接强度的矩阵，对称的。

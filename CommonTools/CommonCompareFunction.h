@@ -1,6 +1,8 @@
 #pragma once
 #include "InOut.h"
 
+//#include "MyPtr.h"
+
 namespace CommonTool
 {
 	//compare two pointers

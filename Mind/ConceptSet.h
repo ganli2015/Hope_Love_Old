@@ -15,7 +15,7 @@ namespace Mind
 {
 	class ConceptInteractTable;
 
-	class _MINDINOUT ConceptSet
+	class _MINDINOUT ConceptSet : public MyObject
 	{
 		typedef std::multimap<std::string,shared_ptr<Concept>> ConceptMap;
 		typedef std::multimap<std::string,shared_ptr<BaseConcept>> BaseConceptMap;
@@ -84,8 +84,6 @@ namespace Mind
 	private:
 		void Initialize();
 
-		bool GetConcept(const shared_ptr<DataCollection::Word> word,Concept& concept) const;
-		bool GetConcept(const Identity identity,Concept& concept) const;
 		//获得私有成员的引用
 		shared_ptr<Concept> GetConceptRef(const shared_ptr<DataCollection::Word> word) const ;
 		shared_ptr<Concept> GetConceptRef(const Identity identity) const ;

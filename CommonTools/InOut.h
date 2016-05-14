@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <map>
+#include <stdlib.h>
 using namespace std::tr1;
 using namespace std;
 

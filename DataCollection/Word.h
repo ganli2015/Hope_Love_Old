@@ -1,6 +1,5 @@
 #pragma once
 #include "InOut.h"
-#include "WordSearchAlgorithm.h"
 #include "Character.h"
 
 namespace DataCollection
@@ -26,7 +25,7 @@ namespace DataCollection
 
 	const int NUM_PARTOFSPEECH=12;
 
-	class _DATACOLLECTIONINOUT Word
+	class _DATACOLLECTIONINOUT Word : public MyObject
 	{
 		std::vector<shared_ptr<Character>> _word;
 

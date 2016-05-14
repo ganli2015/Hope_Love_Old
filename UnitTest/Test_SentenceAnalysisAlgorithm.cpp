@@ -27,11 +27,21 @@ Test_SentenceAnalysisAlgorithm::~Test_SentenceAnalysisAlgorithm(void)
 
 void Test_SentenceAnalysisAlgorithm::RunTest()
 {
+	int objCountStart=MyObject::GetObjectCount();
+
+	iCerebrum::SetInstance(Cerebrum::Instance());
+
 	Test_Punctuation();
 	Test_Segmentation();
 	Test_Grammard();
 	Test_StructureAnalyzer();
 	Test_WordRelationTableBuilder();
+
+	iCerebrum::KillInstance();
+
+	int objCountEnd=MyObject::GetObjectCount();
+
+//	Check(objCountEnd==objCountStart);
 }
 
 void Test_SentenceAnalysisAlgorithm::Test_Punctuation()

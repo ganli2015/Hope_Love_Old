@@ -43,9 +43,19 @@ Test_LogicSystem::~Test_LogicSystem(void)
 
 void Test_LogicSystem::RunTest()
 {
+	int objCountStart=MyObject::GetObjectCount();
+
+	iCerebrum::SetInstance(Cerebrum::Instance());
+
 	Test_Expression();
 	Test_Logic_Determine();
 	Test_Relation();
+
+	iCerebrum::KillInstance();
+
+	int objCountEnd=MyObject::GetObjectCount();
+
+//	Check(objCountEnd==objCountStart);
 }
 
 void Test_LogicSystem::Test_Expression()

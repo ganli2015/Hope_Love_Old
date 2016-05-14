@@ -52,7 +52,7 @@ namespace Mind
 			GrammarPattern pattern=patterns[i].pattern;
 			_patterns.push_back(patterns[i]);
 
-			AddPatternToTree(pattern);
+			//AddPatternToTree(pattern);
 		}
 
 	}

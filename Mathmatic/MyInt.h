@@ -4,7 +4,7 @@
 namespace Math
 {
 	//可以表示大Int，最高表示到1e18.
-	class _MATHMATICINOUT MyInt
+	class _MATHMATICINOUT MyInt : public MyObject
 	{
 		int _low;
 		int _high;

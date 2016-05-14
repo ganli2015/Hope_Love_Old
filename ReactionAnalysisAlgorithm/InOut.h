@@ -8,6 +8,7 @@
 #include <assert.h>
 #include <string>
 #include <algorithm>
+#include "../CommonTools/MyPtr.h"
 using namespace std::tr1;
 using namespace std;
 

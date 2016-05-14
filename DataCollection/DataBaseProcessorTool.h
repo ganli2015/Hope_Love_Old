@@ -10,7 +10,9 @@ namespace DataCollection
 	enum PartOfSpeech;
 	class _DATACOLLECTIONINOUT DataBaseProcessorTool
 	{
-		const static DataBase* _database;
+		//const static DataBase* _database;
+
+		static shared_ptr<Punctures> _punctures;
 	public:
 		DataBaseProcessorTool(void);
 		~DataBaseProcessorTool(void);

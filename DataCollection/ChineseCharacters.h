@@ -1,11 +1,10 @@
 #pragma once
 #include <map>
-#include "WordSearchAlgorithm.h"
 
 namespace DataCollection
 {
 	class Character;
-	class _DATACOLLECTIONINOUT ChineseCharacters
+	class _DATACOLLECTIONINOUT ChineseCharacters : public MyObject
 	{
        std::map<int,Character> _chinesecharacters;
 

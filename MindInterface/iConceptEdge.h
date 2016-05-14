@@ -5,7 +5,7 @@ namespace Mind
 {
 	class iConcept;
 	class iConceptInteractTable;
-	class _MINDINTERFACEINOUT iConceptEdge
+	class _MINDINTERFACEINOUT iConceptEdge: public MyObject
 	{
 	public:
 		iConceptEdge(void);

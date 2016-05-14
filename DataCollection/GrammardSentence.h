@@ -8,7 +8,7 @@ namespace DataCollection
 {
 	class Word;
 
-	class _DATACOLLECTIONINOUT GrammardSentence
+	class _DATACOLLECTIONINOUT GrammardSentence : public MyObject
 	{
 	public:
 		struct GraAssoInfo

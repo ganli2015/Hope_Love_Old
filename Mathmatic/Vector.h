@@ -17,7 +17,7 @@ namespace Math
 // 	};
 
 
-	class _MATHMATICINOUT Vector
+	class _MATHMATICINOUT Vector : public MyObject
 	{
 		const unsigned int _d; //dimension,count from 1.
 		std::vector<double> _r;

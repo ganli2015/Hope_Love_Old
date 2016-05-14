@@ -7,7 +7,7 @@ namespace DataWrapperCPP
 	class DataWrapper_Sentence;
 }
 
-class _COMMANDINOUT Command
+class _COMMANDINOUT Command : public MyObject
 {
 protected:
 public:

@@ -3,12 +3,13 @@
 #include "Character.h"
 #include "Word.h"
 #include "GrammaPattern.h"
+#include "Punctures.h"
 
 using namespace std;
 
 namespace DataCollection
 {
-	const DataBase* DataBaseProcessorTool::_database=DataBase::GetInstance();
+	shared_ptr<Punctures> DataBaseProcessorTool::_punctures(new Punctures());
 
 	DataCollection::DataBaseProcessorTool::DataBaseProcessorTool(void)
 	{
@@ -21,12 +22,12 @@ namespace DataCollection
 
 	bool DataCollection::DataBaseProcessorTool::IsPuncEndofSentence( shared_ptr<Character> val )
 	{
-		return _database->IsPuncEndofSentence(val);
+		return _punctures->IsPuncEndofSentence(val);
 	}
 
 	bool DataCollection::DataBaseProcessorTool::IsPuncRightside( shared_ptr<Character> val )
 	{
-		return _database->IsPuncRightside(val);
+		return _punctures->IsPuncRightside(val);
 	}
 
 	std::vector<shared_ptr<Character>> DataCollection::DataBaseProcessorTool::ConvertStringToCharacter( std::string str)

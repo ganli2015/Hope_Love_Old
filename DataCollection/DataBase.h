@@ -9,7 +9,7 @@ namespace DataCollection
 	class Character;
 
 	//Singleton
-	class _DATACOLLECTIONINOUT DataBase
+	class _DATACOLLECTIONINOUT DataBase : public MyObject
 	{
 		DataBase(void);
 		~DataBase(void);

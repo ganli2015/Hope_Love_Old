@@ -18,7 +18,7 @@ namespace Math
 	};
 
  
-	class _MATHMATICINOUT Matrix
+	class _MATHMATICINOUT Matrix : public MyObject
 	{
 		std::vector<Vector> _m;
 		const int _i;

@@ -44,6 +44,9 @@ void Test_Mind::RunTest()
 {
 	Test_ConceptDeepInteraction();
 	Test_BuildGrammarAssociation();
+
+	iCerebrum::KillInstance();
+
 }
 
 void Test_Mind::Test_BuildGrammarAssociation()
@@ -143,6 +146,8 @@ void Test_Mind::Test_ConceptDeepInteraction()
 
 		Check(FuncForTest::PairSameWithTable(expect,table));
 	}
+
+	delete brain;
 }
 
 

@@ -10,7 +10,7 @@ namespace DataCollection
 	class GrammarPattern;
 	
 	//子句子，只包含一个间断标点符号（逗号、句号）
-	class SubSentence
+	class SubSentence : public MyObject
 	{
 		std::vector<shared_ptr<Character>> _raw;
 	public:
@@ -24,7 +24,7 @@ namespace DataCollection
 
 	};
 
-	class _DATACOLLECTIONINOUT SegmentedSentence
+	class _DATACOLLECTIONINOUT SegmentedSentence : public MyObject
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _seg;
 	public:
@@ -38,7 +38,7 @@ namespace DataCollection
 
 
 	//表示一个完整的句子，可以包括标点符号
-	class _DATACOLLECTIONINOUT Sentence
+	class _DATACOLLECTIONINOUT Sentence : public MyObject
 	{
 		//储存子句子的信息，包括断句方式、语法分析结果和词语之间的作用强度.
 		class SubSentenceInfo

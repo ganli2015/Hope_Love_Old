@@ -161,10 +161,8 @@
     <ClInclude Include="Sentence.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StructuredSentence.h" />
-    <ClInclude Include="WordColletction.h" />
     <ClInclude Include="DataBaseProcessorTool.h" />
     <ClInclude Include="Word.h" />
-    <ClInclude Include="WordSearchAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
@@ -182,10 +180,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StructuredSentence.cpp" />
-    <ClCompile Include="WordColletction.cpp" />
     <ClCompile Include="DataBaseProcessorTool.cpp" />
     <ClCompile Include="Word.cpp" />
-    <ClCompile Include="WordSearchAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">

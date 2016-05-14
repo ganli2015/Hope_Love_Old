@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "DataBase.h"
 #include "ChineseCharacters.h"
-#include "WordColletction.h"
 #include "Punctures.h"
 #include "Character.h"
 using namespace std;
@@ -17,7 +16,6 @@ namespace DataCollection
 	DataBase* DataBase::_pDataBase=NULL;
 
 	DataBase::DataBase(void):_chinesecharacters(new ChineseCharacters()),
-		_wordCollection(new WordColletction()),
 		_punctures(new Punctures())
 	{
 	}

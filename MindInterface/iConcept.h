@@ -14,7 +14,7 @@ namespace Mind
 	class iConceptLevelTable;
 	class iConceptEdge;
 
-	class _MINDINTERFACEINOUT iConcept
+	class _MINDINTERFACEINOUT iConcept :public MyObject
 	{
 	public:
 		iConcept(void);

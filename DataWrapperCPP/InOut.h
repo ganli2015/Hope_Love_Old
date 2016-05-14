@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "../CommonTools/MyPtr.h"
 using std::tr1::shared_ptr;
 
 #ifdef DATAWRAPPERAPI

@@ -4,7 +4,7 @@
 namespace LogicSystem
 {
 	//iRelationConstraint is the constraint on iRelation.
-	class _MINDINTERFACEINOUT iRelationConstraint
+	class _MINDINTERFACEINOUT iRelationConstraint: public MyObject
 	{
 	public:
 		iRelationConstraint(void);

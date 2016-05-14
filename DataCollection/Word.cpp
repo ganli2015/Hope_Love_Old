@@ -87,7 +87,7 @@ namespace DataCollection
 
 	Word& Word::operator+=(const Character right)
 	{
-		_word.push_back(val2sptr(right));
+		_word.push_back(shared_ptr<Character>(new Character(right)));
 		return *this;
 	}
 

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <assert.h>
 #include "../CommonTools/assertions.h"
+#include "../CommonTools/MyPtr.h"
 
 using namespace std;
 

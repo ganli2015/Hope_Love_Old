@@ -1,0 +1,11 @@
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *
+class MyObject *

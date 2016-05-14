@@ -10,7 +10,7 @@ namespace LogicSystem
 {
 	//iSymbol is a logic symbol.It is a fundamental element in a logic expression.
 	template<class T>
-	class _MINDINTERFACEINOUT iSymbol
+	class _MINDINTERFACEINOUT iSymbol: public MyObject
 	{
 	protected:
 		shared_ptr<T> _referredObj;

@@ -27,6 +27,9 @@
     <Filter Include="ReactionAnalysisAlgorithm">
       <UniqueIdentifier>{aae8d50b-4790-428b-95fc-f2e2222e4aa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CommonTool">
+      <UniqueIdentifier>{d78b37a9-8617-42ca-88b0-cc23b8e919aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -68,6 +71,9 @@
     <ClInclude Include="Test_iRelation.h">
       <Filter>LogicSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Test_CommonTool.h">
+      <Filter>CommonTool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -105,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="Test_iRelation.cpp">
       <Filter>LogicSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_CommonTool.cpp">
+      <Filter>CommonTool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

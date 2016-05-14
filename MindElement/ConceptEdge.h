@@ -8,8 +8,8 @@ namespace Mind
 	class iConcept;
 	class ConceptEdge : public iConceptEdge
 	{
-		shared_ptr<iConcept> _concept;
-		vector<shared_ptr<iConcept>> _modification;//修饰词，表示被连接的concept与连接的concept的关系，可以为空.
+		weak_ptr<iConcept> _concept;
+		vector<weak_ptr<iConcept>> _modification;//修饰词，表示被连接的concept与连接的concept的关系，可以为空.
 		double _sensitivity; //From -1 (negative) to 1(positive)
 		
 	public:

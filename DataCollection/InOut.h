@@ -13,6 +13,7 @@ using namespace std;
 
 #include "../CommonTools/CommonDeleteFunction.h"
 #include "../CommonTools/CommonTranslateFunction.h"
+#include "../CommonTools/MyPtr.h"
 
 #ifdef  DATACOLLECTIONAPI
 #define _DATACOLLECTIONINOUT _declspec(dllexport)

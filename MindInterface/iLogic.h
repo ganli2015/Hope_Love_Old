@@ -13,7 +13,7 @@ namespace LogicSystem
 	class iExpression;
 
 	///iLogic contains functions about logic manipulation.
-	class _MINDINTERFACEINOUT iLogic
+	class _MINDINTERFACEINOUT iLogic: public MyObject
 	{
 		shared_ptr<iLogic> _instance;
 		

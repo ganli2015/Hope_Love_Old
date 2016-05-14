@@ -3,7 +3,7 @@
 
 namespace DataCollection
 {
-	class _DATACOLLECTIONINOUT Character
+	class _DATACOLLECTIONINOUT Character : public MyObject
 	{
 		std::string _character;
 	public:

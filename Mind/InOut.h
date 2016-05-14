@@ -12,6 +12,7 @@
 #include <iterator>
 #include <fstream>
 #include "../CommonTools/assertions.h"
+#include "../CommonTools/MyPtr.h"
 
 #include "FilePath.h"
 

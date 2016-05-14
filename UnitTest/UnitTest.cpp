@@ -7,6 +7,8 @@
 using namespace std;
 
 #include "TestClass.h"
+#include "PublicHeader.h"
+
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
@@ -21,6 +23,7 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 		cout<<e.what()<<endl;
 		system("pause");
 	}
+
 
 	return 0;
 }

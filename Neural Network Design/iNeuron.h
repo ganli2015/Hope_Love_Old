@@ -22,7 +22,7 @@ namespace NeuralNetwork
 
 	class iDataArray;
 
-	class _NEURALNETWORKDESIGNINOUT iNeuron
+	class _NEURALNETWORKDESIGNINOUT iNeuron : public MyObject
 	{
 	public:
 		iNeuron(void);

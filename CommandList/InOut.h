@@ -7,6 +7,8 @@
 #include <string>
 #include <algorithm>
 
+#include "../CommonTools/MyPtr.h"
+
 #ifdef COMMANDAPI
 #define _COMMANDINOUT _declspec(dllexport)
 #else

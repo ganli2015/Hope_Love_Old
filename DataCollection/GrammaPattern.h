@@ -7,7 +7,7 @@ namespace DataCollection
 {
 	const static int num_speech=12;
 
-	class _DATACOLLECTIONINOUT GrammarPattern
+	class _DATACOLLECTIONINOUT GrammarPattern : public MyObject
 	{
 		std::vector<int> _pattern;
 		int _id;

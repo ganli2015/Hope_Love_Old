@@ -31,6 +31,7 @@ namespace Mind
 		delete _conceptInteractTableContainer;
 		delete _grammaset;
 		delete _conceptset;
+		delete _logicKnowledge;
 		_instance=NULL;
 	}
 

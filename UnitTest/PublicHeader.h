@@ -9,5 +9,6 @@
 #include <fstream>
 
 #include "FuncForTest.h"
+#include "../CommonTools/MyPtr.h"
 
 using namespace std;

@@ -155,6 +155,9 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">
+      <Project>{e3ce7562-e989-4069-ad9f-fd7d45b1dc46}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
       <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
     </ProjectReference>

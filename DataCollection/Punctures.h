@@ -4,7 +4,7 @@
 namespace DataCollection
 {
 	class Character;
-	class _DATACOLLECTIONINOUT Punctures
+	class _DATACOLLECTIONINOUT Punctures : public MyObject
 	{
 		std::vector<shared_ptr<Character>> _punctures;
 		std::vector<shared_ptr<Character>> _puncEndofSentence;

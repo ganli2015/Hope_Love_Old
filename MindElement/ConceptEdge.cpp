@@ -35,10 +35,10 @@ namespace Mind
 	{
 		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable());
 
-		vector<shared_ptr<iConcept>> base_to=_concept->GetBase();
+		vector<shared_ptr<iConcept>> base_to=_concept.lock()->GetBase();
 		for (unsigned int i=0;i<_modification.size();++i)
 		{
-			vector<shared_ptr<iConcept>> base_mod=_modification[i]->GetBase();
+			vector<shared_ptr<iConcept>> base_mod=_modification[i].lock()->GetBase();
 			CommonFunction::AppendToInteractTable(base_mod,base_to,res);
 		}
 
@@ -47,7 +47,7 @@ namespace Mind
 
 	shared_ptr<iConcept> ConceptEdge::GetConcept() const
 	{
-		return _concept->Copy();
+		return _concept.lock()->Copy();
 	}
 
 	void ConceptEdge::AddModification( const shared_ptr<iConcept> modification )
@@ -60,7 +60,7 @@ namespace Mind
 		vector<shared_ptr<iConcept>> res(_modification.size());
 		for (unsigned int i=0;i<_modification.size();++i)
 		{
-			res[i]=_modification[i]->Copy();
+			res[i]=_modification[i].lock()->Copy();
 		}
 
 		return res;

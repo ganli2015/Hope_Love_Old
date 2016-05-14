@@ -361,22 +361,27 @@ namespace Mind
 
 	void ConceptSet::MakeConnection( const shared_ptr<Word> from,const shared_ptr<Word> to )
 	{
-		Concept fromConcept,toConcept;
-		if(!GetConcept(from,fromConcept) || !GetConcept(to,toConcept))
+// 		Concept fromConcept,toConcept;
+// 		if(!GetConcept(from,fromConcept) || !GetConcept(to,toConcept))
+// 		{
+// 			throw runtime_error("Error in MakeConnection: Cannot find the concept!");
+// 		}
+// 
+// 		if(from->Type()!=to->Type() && to->Type()!=Noun)
+// 		{
+// 			throw runtime_error("Error in MakeConnection: POS not matched!");
+// 		}
+// 
+// 		Identity fromIdentity=GetIdentity(fromConcept);
+// 		Identity toIdentity=GetIdentity(toConcept);
+		
+		shared_ptr<Concept> pfromConcept=GetConceptRef(from);
+		shared_ptr<Concept> ptoConcept=GetConceptRef(to);
+		if(pfromConcept==NULL || ptoConcept==NULL)
 		{
 			throw runtime_error("Error in MakeConnection: Cannot find the concept!");
 		}
 
-		if(from->Type()!=to->Type() && to->Type()!=Noun)
-		{
-			throw runtime_error("Error in MakeConnection: POS not matched!");
-		}
-
-		Identity fromIdentity=GetIdentity(fromConcept);
-		Identity toIdentity=GetIdentity(toConcept);
-		
-		shared_ptr<Concept> pfromConcept=GetConceptRef(fromIdentity);
-		shared_ptr<Concept> ptoConcept=GetConceptRef(toIdentity);
 		pfromConcept->AddForwardConcept(ptoConcept);
 		ptoConcept->AddBackwardConcept(pfromConcept);
 	}
@@ -395,29 +400,51 @@ namespace Mind
 		ptoConcept->AddBackwardModification(pfromConcept,pmodConcept);
 	}
 
-	bool ConceptSet::GetConcept( const Identity identity,Concept& concept ) const  
-	{
-		const_conceptIter beg=_conceptset.lower_bound(identity.str);
-		const_conceptIter end=_conceptset.upper_bound(identity.str);
-		if(beg==_conceptset.end() && end==_conceptset.end())
-		{
-			return false;
-		}
+// 	bool ConceptSet::GetConcept( const Identity identity,Concept& concept ) const  
+// 	{
+// 		const_conceptIter beg=_conceptset.lower_bound(identity.str);
+// 		const_conceptIter end=_conceptset.upper_bound(identity.str);
+// 		if(beg==_conceptset.end() && end==_conceptset.end())
+// 		{
+// 			return false;
+// 		}
+// 
+// 		while(beg!=end)
+// 		{
+// 			if(beg->second->GetId()==identity.id)
+// 			{
+// 				concept=*beg->second;
+// 				return true;
+// 			}
+// 			beg++;
+// 		}
+// 
+// 		return false;
+// 	}
+// 
+// 	bool ConceptSet::GetConcept( const shared_ptr<Word> word,Concept& concept ) const 
+// 	{
+// 		const_conceptIter beg=_conceptset.lower_bound(word->GetString());
+// 		const_conceptIter end=_conceptset.upper_bound(word->GetString());
+// 		if(beg==_conceptset.end() && end==_conceptset.end())
+// 		{
+// 			return false;
+// 		}
+// 
+// 		while(beg!=end)
+// 		{
+// 			if(beg->second->GetPartOfSpeech()==word->Type())
+// 			{
+// 				concept=*beg->second;
+// 				return true;
+// 			}
+// 			beg++;
+// 		}
+// 
+// 		return false;
+// 	}
 
-		while(beg!=end)
-		{
-			if(beg->second->GetId()==identity.id)
-			{
-				concept=*beg->second;
-				return true;
-			}
-			beg++;
-		}
-
-		return false;
-	}
-
-	bool ConceptSet::GetConcept( const shared_ptr<Word> word,Concept& concept ) const 
+	shared_ptr<Concept> ConceptSet::GetConceptRef(const shared_ptr<DataCollection::Word> word) const 
 	{
 		const_conceptIter beg=_conceptset.lower_bound(word->GetString());
 		const_conceptIter end=_conceptset.upper_bound(word->GetString());
@@ -430,26 +457,12 @@ namespace Mind
 		{
 			if(beg->second->GetPartOfSpeech()==word->Type())
 			{
-				concept=*beg->second;
-				return true;
+				return beg->second;
 			}
 			beg++;
 		}
 
-		return false;
-	}
-
-	shared_ptr<Concept> ConceptSet::GetConceptRef(const shared_ptr<DataCollection::Word> word) const 
-	{
-		Concept toConcept;
-		if(!GetConcept(word,toConcept))
-		{
-			return NULL;
-		}
-
-		Identity toIdentity=GetIdentity(toConcept);
-		shared_ptr<Concept> ptoConcept=GetConceptRef(toIdentity);
-		return ptoConcept;
+		return NULL;
 	}
 
 	shared_ptr<Concept> ConceptSet::GetConceptRef( const Identity identity ) const

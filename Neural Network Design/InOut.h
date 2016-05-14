@@ -10,6 +10,7 @@
 #include <math.h>
 #include <algorithm>
 #include <iterator>
+#include "../CommonTools/MyPtr.h"
 
 using namespace std;
 using std::tr1::shared_ptr;

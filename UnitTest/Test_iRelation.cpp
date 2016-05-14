@@ -32,6 +32,7 @@ typedef Arbitrariness<iConcept> Arb;
 typedef LogicType::ConSymbol ConSymbol;
 typedef Symbol<iConcept> Sym;
 
+
 Test_iRelation::Test_iRelation(void)
 {
 }
@@ -51,7 +52,6 @@ void Test_iRelation::RunTest()
 	Test_iRelationResonance();
 
 	iCerebrum::KillInstance();
-	iCerebrum::SetInstance(Cerebrum::Instance());
 }
 
 void Test_iRelation::Test_GetString()
@@ -485,3 +485,5 @@ void Test_iRelation::RelationPair( shared_ptr<RelationNode> condition,shared_ptr
 	
 
 }
+
+
