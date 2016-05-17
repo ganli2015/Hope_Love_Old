@@ -125,7 +125,7 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	chainGenerator.Generate(_interactTable);
 	vector<Mind::ConceptChainProperty> reactChains=chainGenerator.GetReactChains();
 
-#ifdef _DEBUG
+#ifdef _COUT_DEBUG_INFO
 	DisplayReactChains(reactChains);
 #endif // _DEBUG
 
@@ -133,7 +133,7 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	chainAnalyzer.Analyze(reactChains);
 	vector<shared_ptr<Mind::iConceptChain>> hyperChains=chainAnalyzer.GetHyperChains();
 
-#ifdef _DEBUG
+#ifdef _COUT_DEBUG_INFO
 	DisplayHyperChains(hyperChains);
 #endif // _DEBUG
 

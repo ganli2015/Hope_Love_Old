@@ -8,6 +8,22 @@ namespace Mind
 	class iConceptInteractTable;
 }
 
+class InitCerebrum:public testing::Test
+{
+	int _initObjectCount;
+protected:
+	virtual void SetUp();
+	virtual void TearDown();
+};
+
+class AddPatternToCerebrum:public testing::Test
+{
+	int _initObjectCount;
+protected:
+	virtual void SetUp();
+	virtual void TearDown();
+};
+
 namespace FuncForTest
 {
 	shared_ptr<Mind::iConcept> SimpleConcept(const string str);

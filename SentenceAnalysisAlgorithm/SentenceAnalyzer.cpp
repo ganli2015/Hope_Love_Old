@@ -53,7 +53,7 @@ void SentenceAnalyzer::Analyze()
 	}
 	grammarAnalyzer.Analyze();
 
-#ifdef _DEBUG //≤‚ ‘GrammarAnalyzer
+#ifdef _COUT_DEBUG_INFO //≤‚ ‘GrammarAnalyzer
 		cout<<"The raw sentence is "<<DataBaseProcessorTool::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
 		Cout_GrammardSentence(sentence);
 #endif // _DEBUG
@@ -61,7 +61,7 @@ void SentenceAnalyzer::Analyze()
 	StructureAnalyzer structureAnalyzer(sentence);
 	structureAnalyzer.Analyze();
 
-#ifdef _DEBUG //≤‚ ‘StructureAnalyzer
+#ifdef _COUT_DEBUG_INFO //≤‚ ‘StructureAnalyzer
 		cout<<"The raw sentence is "<<DataBaseProcessorTool::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
 		Cout_WordConnectionIntensity(sentence);
 #endif

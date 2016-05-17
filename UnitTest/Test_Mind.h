@@ -7,18 +7,18 @@ namespace Mind
 
 }
 
-class Test_Mind
-{
-public:
-	Test_Mind(void);
-	~Test_Mind(void);
-
-	static void RunTest();
-
-private:
-	static void Test_ConceptDeepInteraction();
-
-	static void Test_BuildGrammarAssociation();
-
-};
+// class Test_Mind
+// {
+// public:
+// 	Test_Mind(void);
+// 	~Test_Mind(void);
+// 
+// 	static void RunTest();
+// 
+// private:
+// 	static void Test_ConceptDeepInteraction();
+// 
+// 	static void Test_BuildGrammarAssociation();
+// 
+// };
 

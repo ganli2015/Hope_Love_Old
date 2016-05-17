@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <gtest/gtest.h>
 
 #include "FuncForTest.h"
 #include "../CommonTools/MyPtr.h"

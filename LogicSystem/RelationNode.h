@@ -19,7 +19,7 @@ namespace LogicSystem
 		vector<shared_ptr<iRelationConstraint>> _constraints;
 
 
-		friend class Test_iRelation;
+		friend class Test_iRelationFun;
 	public:
 		RelationNode(void);
 		~RelationNode(void);

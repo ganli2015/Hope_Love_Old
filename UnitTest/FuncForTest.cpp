@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "FuncForTest.h"
 
+#include "../Mind/Cerebrum.h"
+
 #include "../MindElement/Concept.h"
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/ConceptChain.h"
@@ -12,8 +14,11 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
 
+#include "../CommonTools/MyPtr.h"
+
 using namespace Mind;
 using namespace DataCollection;
+
 
 namespace FuncForTest
 {
@@ -149,4 +154,29 @@ namespace FuncForTest
 		}
 	}
 
+}
+
+void InitCerebrum::SetUp()
+{
+	_initObjectCount=MyObject::GetObjectCount();
+	iCerebrum::SetInstance(Cerebrum::Instance());
+}
+
+void InitCerebrum::TearDown()
+{
+	iCerebrum::KillInstance();
+	Check(_initObjectCount==MyObject::GetObjectCount());
+}
+
+void AddPatternToCerebrum::SetUp()
+{
+	_initObjectCount=MyObject::GetObjectCount();
+	iCerebrum::SetInstance(Cerebrum::Instance());
+	FuncForTest::AddGrammarPatternToCerebrum();
+}
+
+void AddPatternToCerebrum::TearDown()
+{
+	iCerebrum::KillInstance();
+	Check(_initObjectCount==MyObject::GetObjectCount());
 }

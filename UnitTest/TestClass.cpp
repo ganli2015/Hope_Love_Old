@@ -15,13 +15,13 @@
 
 TestClass::TestClass(void)
 {
-	Register(CommonTool);
-	Register(SentenceAnalysisAlgorithm);
-	Register(NeuralNetworkDesign);
-	Register(Mind);
-	Register(Mathmatic);
-	Register(LogicSystem);
-	Register(ReactionAnalysisAlgorithm);
+//	Register(CommonTool);
+//	Register(SentenceAnalysisAlgorithm);
+//	Register(NeuralNetworkDesign);
+//	Register(Mind);
+//	Register(Mathmatic);
+//	Register(LogicSystem);
+//	Register(ReactionAnalysisAlgorithm);
 }
 
 

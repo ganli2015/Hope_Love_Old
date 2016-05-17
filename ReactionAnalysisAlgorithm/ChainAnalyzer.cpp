@@ -41,7 +41,7 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 		vector<HyperChainInfo> hyperInfos=AssembleHyperChainInfo(hyperChains,levels,property.confidence);
 
 
-#ifdef _DEBUG
+#ifdef _COUT_DEBUG_INFO
 		OutputHyperChains(hyperInfos,baseChains[i].chain,out);
 #endif // _DEBUG
 
