@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "DataBaseProcessorTool.h"
+#include "LanguageFunc.h"
 #include "Character.h"
 #include "Word.h"
 #include "GrammaPattern.h"
@@ -9,28 +9,28 @@ using namespace std;
 
 namespace DataCollection
 {
-	shared_ptr<Punctures> DataBaseProcessorTool::_punctures(new Punctures());
+	shared_ptr<Punctures> LanguageFunc::_punctures(new Punctures());
 
-	DataCollection::DataBaseProcessorTool::DataBaseProcessorTool(void)
+	DataCollection::LanguageFunc::LanguageFunc(void)
 	{
 	}
 
 
-	DataCollection::DataBaseProcessorTool::~DataBaseProcessorTool(void)
+	DataCollection::LanguageFunc::~LanguageFunc(void)
 	{
 	}
 
-	bool DataCollection::DataBaseProcessorTool::IsPuncEndofSentence( shared_ptr<Character> val )
+	bool DataCollection::LanguageFunc::IsPuncEndofSentence( shared_ptr<Character> val )
 	{
 		return _punctures->IsPuncEndofSentence(val);
 	}
 
-	bool DataCollection::DataBaseProcessorTool::IsPuncRightside( shared_ptr<Character> val )
+	bool DataCollection::LanguageFunc::IsPuncRightside( shared_ptr<Character> val )
 	{
 		return _punctures->IsPuncRightside(val);
 	}
 
-	std::vector<shared_ptr<Character>> DataCollection::DataBaseProcessorTool::ConvertStringToCharacter( std::string str)
+	std::vector<shared_ptr<Character>> DataCollection::LanguageFunc::ConvertStringToCharacter( std::string str)
 	{
 		assert(str.size()%2==0);
 		vector<shared_ptr<Character>> charas;
@@ -44,7 +44,7 @@ namespace DataCollection
 		return charas;
 	}
 
-	pair<vector<shared_ptr<Character>>,vector<shared_ptr<Character>>> DataBaseProcessorTool::TrimEndPunctures( const vector<shared_ptr<Character>>& raw )
+	pair<vector<shared_ptr<Character>>,vector<shared_ptr<Character>>> LanguageFunc::TrimEndPunctures( const vector<shared_ptr<Character>>& raw )
 	{
 		vector<shared_ptr<Character>>::const_iterator chara_it=find_if(raw.begin(),raw.end(),IsPuncEndofSentence);
 		int index=distance(raw.begin(),chara_it);
@@ -62,7 +62,7 @@ namespace DataCollection
 		return make_pair(sentenceWithNoPunctures,endPunctures);
 	}
 
-	pair<vector<Character>,vector<Character>> DataBaseProcessorTool::TrimEndPunctures( const vector<Character>& raw )
+	pair<vector<Character>,vector<Character>> LanguageFunc::TrimEndPunctures( const vector<Character>& raw )
 	{
 		vector<shared_ptr<Character>> sptr_raw;
 		for (unsigned int i=0;i<raw.size();++i)
@@ -85,7 +85,7 @@ namespace DataCollection
 	}
 
 
-	vector<shared_ptr<Word>> DataBaseProcessorTool::ConvertPuncturesToWords( const vector<Character>& puncs )
+	vector<shared_ptr<Word>> LanguageFunc::ConvertPuncturesToWords( const vector<Character>& puncs )
 	{
 		vector<shared_ptr<Word>> res;
 		res.reserve(puncs.size());
@@ -100,7 +100,7 @@ namespace DataCollection
 		return res;
 	}
 
-	pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> DataBaseProcessorTool::TrimEndPunctures( const vector<shared_ptr<Word>>& raw )
+	pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> LanguageFunc::TrimEndPunctures( const vector<shared_ptr<Word>>& raw )
 	{
 		unsigned int index=raw.size();
 		for (unsigned int i=0;i<raw.size();++i)
@@ -127,7 +127,7 @@ namespace DataCollection
 		return make_pair(sentenceWithNoPunctures,endPunctures);
 	}
 
-	pair<vector<Word>,vector<Word>> DataBaseProcessorTool::TrimEndPunctures( const vector<Word>& raw )
+	pair<vector<Word>,vector<Word>> LanguageFunc::TrimEndPunctures( const vector<Word>& raw )
 	{
 		vector<shared_ptr<Word>> sptr_raw;
 		for (unsigned int i=0;i<raw.size();++i)
@@ -149,7 +149,7 @@ namespace DataCollection
 		return make_pair(sen,punc);
 	}
 
-	std::string DataBaseProcessorTool::ConvertCharacterToString( std::vector<shared_ptr<Character>> charas )
+	std::string LanguageFunc::ConvertCharacterToString( std::vector<shared_ptr<Character>> charas )
 	{
 		string res="";
 		for (unsigned int i=0;i<charas.size();++i)
@@ -160,7 +160,7 @@ namespace DataCollection
 		return res;
 	}
 
-	DataCollection::GrammarPattern DataBaseProcessorTool::ConvertToPattern( const vector<shared_ptr<DataCollection::Word>> words )
+	DataCollection::GrammarPattern LanguageFunc::ConvertToPattern( const vector<shared_ptr<DataCollection::Word>> words )
 	{
 		vector<PartOfSpeech> ps(words.size());
 		for (unsigned int i=0;i<words.size();++i)
@@ -171,7 +171,7 @@ namespace DataCollection
 		return GrammarPattern(ps);
 	}
 
-	shared_ptr<DataCollection::Word> DataBaseProcessorTool::GetParticularWord( const std::string str, const DataCollection::PartOfSpeech partofspeech )
+	shared_ptr<DataCollection::Word> LanguageFunc::GetParticularWord( const std::string str, const DataCollection::PartOfSpeech partofspeech )
 	{
 		switch(partofspeech)
 		{
@@ -210,7 +210,7 @@ namespace DataCollection
 		return NULL;
 	}
 
-	int DataBaseProcessorTool::IndexOf( const vector<shared_ptr<Word>>& words,const shared_ptr<Word> word )
+	int LanguageFunc::IndexOf( const vector<shared_ptr<Word>>& words,const shared_ptr<Word> word )
 	{
 		class IsSameWith
 		{
@@ -242,14 +242,14 @@ namespace DataCollection
 	}
 
 
-	vector<shared_ptr<Word>> DataBaseProcessorTool::RemovePuncs( const vector<shared_ptr<Word>>& words )
+	vector<shared_ptr<Word>> LanguageFunc::RemovePuncs( const vector<shared_ptr<Word>>& words )
 	{
 		vector<shared_ptr<Word>> res;
-		remove_copy_if(words.begin(),words.end(),back_inserter(res),DataBaseProcessorTool::IsPuncture);
+		remove_copy_if(words.begin(),words.end(),back_inserter(res),LanguageFunc::IsPuncture);
 		return res;
 	}
 
-	bool DataBaseProcessorTool::IsPuncture( const shared_ptr<Word> word )
+	bool LanguageFunc::IsPuncture( const shared_ptr<Word> word )
 	{
 		if(word->Type()==Puncture)
 		{
@@ -261,12 +261,12 @@ namespace DataCollection
 		}
 	}
 
-	bool DataBaseProcessorTool::SameGrammarPattern( const GrammarPattern& left,const GrammarPattern& right )
+	bool LanguageFunc::SameGrammarPattern( const GrammarPattern& left,const GrammarPattern& right )
 	{
 		return left.IsSameWith(right);
 	}
 
-	std::string DataBaseProcessorTool::ConvertWordsToString( const vector<shared_ptr<Word>> words )
+	std::string LanguageFunc::ConvertWordsToString( const vector<shared_ptr<Word>> words )
 	{
 		string res="";
 		for (unsigned int i=0;i<words.size();++i)

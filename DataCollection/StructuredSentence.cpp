@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "StructuredSentence.h"
 #include "Word.h"
-#include "DataBaseProcessorTool.h"
+#include "LanguageFunc.h"
 
 namespace DataCollection
 {

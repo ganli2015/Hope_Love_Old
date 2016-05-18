@@ -2,6 +2,7 @@
 #include "GrammarLocal.h"
 
 #include "../DataCollection/GrammaPattern.h"
+#include "../DataCollection/Word.h"
 
 using namespace DataCollection;
 using namespace Math;
@@ -17,7 +18,7 @@ namespace Mind
 
 	GrammarLocal::GrammarLocal( const PartOfSpeech myPos ) :_pos(myPos)
 	{
-		for (int i=0;i<DataCollection::num_speech;++i)
+		for (int i=0;i<DataCollection::NUM_PARTOFSPEECH;++i)
 		{
 			_forward[PartOfSpeech(i)]=MyInt();
 			_backward[PartOfSpeech(i)]=MyInt();

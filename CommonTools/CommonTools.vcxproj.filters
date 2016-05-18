@@ -35,7 +35,7 @@
     <ClInclude Include="CommonStringFunction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MyPtr.h">
+    <ClInclude Include="MyObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,7 +61,7 @@
     <ClCompile Include="CommonStringFunction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MyPtr.cpp">
+    <ClCompile Include="MyObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

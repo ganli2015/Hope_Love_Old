@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "Character.h"
-#include "ChineseCharacters.h"
 #include <assert.h>
 
 using namespace std;

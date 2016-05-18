@@ -9,7 +9,7 @@ namespace DataCollection
 	class Word;
 	class GrammarPattern;
 	
-	//子句子，只包含一个间断标点符号（逗号、句号）
+	//SubSentence contains only one of the puncture of end of the sentence.
 	class SubSentence : public MyObject
 	{
 		std::vector<shared_ptr<Character>> _raw;
@@ -24,6 +24,8 @@ namespace DataCollection
 
 	};
 
+	///SegmentedSentence indicates the segmentation structure of a certain sentence.
+	///Words in SegmentedSentence are probably of no definite POS.
 	class _DATACOLLECTIONINOUT SegmentedSentence : public MyObject
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _seg;
@@ -37,10 +39,9 @@ namespace DataCollection
 	};
 
 
-	//表示一个完整的句子，可以包括标点符号
+	//Sentence constitutes of several sub sentence, and may contain several punctures.
 	class _DATACOLLECTIONINOUT Sentence : public MyObject
 	{
-		//储存子句子的信息，包括断句方式、语法分析结果和词语之间的作用强度.
 		class SubSentenceInfo
 		{
 			std::string _str;
@@ -76,14 +77,15 @@ namespace DataCollection
 
 		void SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec);
 		std::vector<shared_ptr<Word>> GetGrammard() const;
-		//根据<patterns>来对子句子subsentence建立语法联系.
+		///Build grammar association of <me> according to <patterns>.
 		void BuildGrammarAssociation(const std::vector<GrammarPattern>& patterns);
-		//获得子句子subsentence中的第i_thWord个word的语法匹配信息，associatedIndexes是语法模式匹配的序号集合，associatedPatterns是相应的模式，两者vector一一对应。		
+		///Get the association info of the <i_thWord>th word, including the associated indexes <associatedIndexes> and patterns related to them.
+		///<associatedIndexes> and <associatedPatterns> are one-to-one mapping.
 		void GetAssociationInfo(const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns);
 		unsigned int GrammarWordCount();
 		bool StructureAnalyzed() const {return _structured->Analyzed();}
 
-		//设定子句子subsentence中的第i_word个word和第j_word个word的intensity。
+		///Set the intensity of the <i_word>th and <j_word>th word.
 		void SetWordIntensity(const unsigned int i_word,const unsigned int j_word,double intensity);
 		double GetWordIntensity(const unsigned int i_word,const unsigned int j_word);
 

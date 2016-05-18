@@ -4,7 +4,7 @@
 #include "ConceptLevelTable.h"
 
 #include "../DataCollection/Word.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 using namespace DataCollection;
 using namespace std;
@@ -37,7 +37,7 @@ namespace Mind
 
 	shared_ptr<DataCollection::Word> Concept::GetParticularWord( DataCollection::PartOfSpeech partofspeech ) const
 	{
-		return DataBaseProcessorTool::GetParticularWord(_identity.str,partofspeech);
+		return LanguageFunc::GetParticularWord(_identity.str,partofspeech);
 	}
 
 	vector<shared_ptr<iConcept>> Concept::GetForwardConcepts() const

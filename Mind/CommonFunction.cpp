@@ -13,7 +13,7 @@
 #include "../CommonTools/CommonStringFunction.h"
 
 #include "../DataCollection/Word.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/GrammaPattern.h"
 
 #include "../Neural Network Design/DataArray.h"

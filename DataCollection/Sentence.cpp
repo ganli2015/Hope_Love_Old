@@ -2,7 +2,7 @@
 #include "Sentence.h"
 #include "Character.h"
 
-#include "DataBaseProcessorTool.h"
+#include "LanguageFunc.h"
 #include "Word.h"
 
 using namespace CommonTool;
@@ -31,7 +31,7 @@ namespace DataCollection
 
 	Sentence::Sentence(std::string str)
 	{
-		_raw=DataBaseProcessorTool::ConvertStringToCharacter(str);
+		_raw=LanguageFunc::ConvertStringToCharacter(str);
 	}
 
 	std::vector<shared_ptr<Character>> Sentence::GetRawSentence() const
@@ -121,13 +121,13 @@ namespace DataCollection
 
 	std::string Sentence::GetString() const
 	{
-		return DataBaseProcessorTool::ConvertCharacterToString(_raw);
+		return LanguageFunc::ConvertCharacterToString(_raw);
 	}
 
 	void Sentence::AddSubSentence( const std::vector<shared_ptr<DataCollection::Character>> vec )
 	{
 		shared_ptr<SubSentence> subsentence(new SubSentence(vec));
-		SubSentenceInfo subInfo(DataBaseProcessorTool::ConvertCharacterToString(vec),subsentence);
+		SubSentenceInfo subInfo(LanguageFunc::ConvertCharacterToString(vec),subsentence);
 
 		_subInfos.push_back(subInfo);
 	}
@@ -182,7 +182,7 @@ namespace DataCollection
 
 	SubSentence::SubSentence(std::string str)
 	{
-		std::vector<shared_ptr<Character>> val=DataBaseProcessorTool::ConvertStringToCharacter(str);
+		std::vector<shared_ptr<Character>> val=LanguageFunc::ConvertStringToCharacter(str);
 		_raw=val;
 	}
 
@@ -193,7 +193,7 @@ namespace DataCollection
 
 	std::string SubSentence::GetString() const
 	{
-		return DataBaseProcessorTool::ConvertCharacterToString(_raw);
+		return LanguageFunc::ConvertCharacterToString(_raw);
 	}
 
 

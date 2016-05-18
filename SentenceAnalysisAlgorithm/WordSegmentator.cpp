@@ -3,7 +3,7 @@
 
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/Word.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 #include "../MindInterface/iCerebrum.h"
 
@@ -189,7 +189,7 @@ bool WordSegmentator::Segment(  )
 void WordSegmentator::SegmentSubsentence( const string subsentence )
 {
 	vector<Character> raw=ConvertStringToCharacter(subsentence);
-	pair<vector<Character>,vector<Character>> sen_punc =DataBaseProcessorTool::TrimEndPunctures(raw);
+	pair<vector<Character>,vector<Character>> sen_punc =LanguageFunc::TrimEndPunctures(raw);
 	vector<Character> raw_noPunc=sen_punc.first;
 	vector<Character> punc=sen_punc.second;
 
@@ -217,7 +217,7 @@ void WordSegmentator::SegmentSubsentence( const string subsentence )
 	vector<vector<shared_ptr<Word>>> segmented;
 	SegmentMannersAccordingToUandA(initial_segmented,segmented);
 
-	vector<shared_ptr<Word>> punc_words=DataBaseProcessorTool::ConvertPuncturesToWords(punc);
+	vector<shared_ptr<Word>> punc_words=LanguageFunc::ConvertPuncturesToWords(punc);
 	for (unsigned int i=0;i<segmented.size();++i)
 	{
 		vector<shared_ptr<Word>> seg_withPunc=segmented[i];
@@ -273,7 +273,7 @@ std::vector<Character> WordSegmentator::GetRawSentence( shared_ptr<DataCollectio
 
 std::vector<DataCollection::Character> WordSegmentator::ConvertStringToCharacter( const string str ) const
 {
-	vector<shared_ptr<Character>> ptrCharas=DataBaseProcessorTool::ConvertStringToCharacter(str);
+	vector<shared_ptr<Character>> ptrCharas=LanguageFunc::ConvertStringToCharacter(str);
 	vector<Character> res;
 	res.reserve(ptrCharas.size());
 	for (unsigned int i=0;i<ptrCharas.size();++i)

@@ -4,6 +4,8 @@
 
 namespace DataCollection
 {
+	///There are 12 type of part of speech. 
+	///Usually I write POS short for PartOfSpeech.
 	enum PartOfSpeech
 	{
 		Noun,
@@ -18,13 +20,14 @@ namespace DataCollection
 		Auxiliary,
 		Onomatopoeia,
 		Interjection,
-		Ambiguous,
-		Unknown,
+		Ambiguous,//Ambiguous indicates a word is known by AI but has no definite POS temporarily.
+		Unknown,//Unknown indicates a word is unknown.
 		Puncture
 	};
 
 	const int NUM_PARTOFSPEECH=12;
 
+	///A Word constitutes of one or more characters.
 	class _DATACOLLECTIONINOUT Word : public MyObject
 	{
 		std::vector<shared_ptr<Character>> _word;

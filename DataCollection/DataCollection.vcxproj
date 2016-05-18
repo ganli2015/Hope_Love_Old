@@ -151,26 +151,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
-    <ClInclude Include="ChineseCharacters.h" />
-    <ClInclude Include="DataBase.h" />
     <ClInclude Include="GrammaPattern.h" />
     <ClInclude Include="GrammardSentence.h" />
     <ClInclude Include="InOut.h" />
-    <ClInclude Include="PrepositionCollection.h" />
     <ClInclude Include="Punctures.h" />
     <ClInclude Include="Sentence.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="StructuredSentence.h" />
-    <ClInclude Include="DataBaseProcessorTool.h" />
+    <ClInclude Include="LanguageFunc.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="ChineseCharacters.cpp" />
-    <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="GrammaPattern.cpp" />
     <ClCompile Include="GrammardSentence.cpp" />
-    <ClCompile Include="PrepositionCollection.cpp" />
     <ClCompile Include="Punctures.cpp" />
     <ClCompile Include="Sentence.cpp" />
     <ClCompile Include="Stdafx.cpp">
@@ -180,7 +174,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StructuredSentence.cpp" />
-    <ClCompile Include="DataBaseProcessorTool.cpp" />
+    <ClCompile Include="LanguageFunc.cpp" />
     <ClCompile Include="Word.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@
 #include <gtest/gtest.h>
 
 #include "FuncForTest.h"
-#include "../CommonTools/MyPtr.h"
+#include "../CommonTools/MyObject.h"
 #include "../CommonTools/assertions.h"
 
 using namespace std;

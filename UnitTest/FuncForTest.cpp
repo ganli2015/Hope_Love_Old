@@ -14,7 +14,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
 
-#include "../CommonTools/MyPtr.h"
+#include "../CommonTools/MyObject.h"
 
 using namespace Mind;
 using namespace DataCollection;

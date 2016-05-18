@@ -5,8 +5,8 @@
 
 namespace DataCollection
 {
-	const static int num_speech=12;
 
+	///GrammarPattern is a pattern that describes the grammar of sentence.
 	class _DATACOLLECTIONINOUT GrammarPattern : public MyObject
 	{
 		std::vector<int> _pattern;

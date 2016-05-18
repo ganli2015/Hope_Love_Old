@@ -12,7 +12,7 @@ using namespace std;
 
 #include "../CommonTools/CommonDeleteFunction.h"
 #include "../CommonTools/assertions.h"
-#include "../CommonTools/MyPtr.h"
+#include "../CommonTools/MyObject.h"
 
 
 #ifdef SENTENCEANALYSISALGORITHMAPI

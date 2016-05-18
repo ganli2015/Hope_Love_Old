@@ -4,7 +4,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/GrammaPattern.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 #include "../MindInterface/iCerebrum.h"
 

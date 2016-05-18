@@ -1,21 +1,21 @@
 #pragma once
 #include "InOut.h"
-#include "DataBase.h"
 #include <utility>
 
 namespace DataCollection
 {
 	class Word;
 	class GrammarPattern;
+	class Character;
+	class Punctures;
 	enum PartOfSpeech;
-	class _DATACOLLECTIONINOUT DataBaseProcessorTool
+	class _DATACOLLECTIONINOUT LanguageFunc
 	{
-		//const static DataBase* _database;
 
 		static shared_ptr<Punctures> _punctures;
 	public:
-		DataBaseProcessorTool(void);
-		~DataBaseProcessorTool(void);
+		LanguageFunc(void);
+		~LanguageFunc(void);
 
 	//puncture
 		static bool IsPuncEndofSentence(shared_ptr<Character> val);

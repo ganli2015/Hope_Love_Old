@@ -17,25 +17,13 @@
     <ClInclude Include="InOut.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ChineseCharacters.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Word.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="PrepositionCollection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Punctures.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DataBaseProcessorTool.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Sentence.h">
@@ -50,15 +38,12 @@
     <ClInclude Include="StructuredSentence.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LanguageFunc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ChineseCharacters.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
@@ -67,13 +52,7 @@
     <ClCompile Include="Word.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PrepositionCollection.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Punctures.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DataBaseProcessorTool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Sentence.cpp">
@@ -86,6 +65,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="StructuredSentence.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LanguageFunc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

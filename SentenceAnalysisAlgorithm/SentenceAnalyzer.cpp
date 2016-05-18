@@ -6,7 +6,7 @@
 #include "StructureAnalyzer.h"
 
 #include "../CommonTools/CommonTranslateFunction.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/Character.h"
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/Word.h"
@@ -54,7 +54,7 @@ void SentenceAnalyzer::Analyze()
 	grammarAnalyzer.Analyze();
 
 #ifdef _COUT_DEBUG_INFO //≤‚ ‘GrammarAnalyzer
-		cout<<"The raw sentence is "<<DataBaseProcessorTool::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
+		cout<<"The raw sentence is "<<LanguageFunc::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
 		Cout_GrammardSentence(sentence);
 #endif // _DEBUG
 
@@ -62,7 +62,7 @@ void SentenceAnalyzer::Analyze()
 	structureAnalyzer.Analyze();
 
 #ifdef _COUT_DEBUG_INFO //≤‚ ‘StructureAnalyzer
-		cout<<"The raw sentence is "<<DataBaseProcessorTool::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
+		cout<<"The raw sentence is "<<LanguageFunc::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
 		Cout_WordConnectionIntensity(sentence);
 #endif
 

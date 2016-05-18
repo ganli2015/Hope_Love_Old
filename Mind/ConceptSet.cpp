@@ -14,7 +14,7 @@
 
 #include "../DataCollection/Character.h"
 #include "../DataCollection/Word.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/CommonFunctions.h"
 
 using namespace std;
@@ -263,7 +263,7 @@ namespace Mind
 		const_conceptIter end=_conceptset.upper_bound(str);
 		while(beg!=end)
 		{
-			shared_ptr<Word> aword=DataBaseProcessorTool::GetParticularWord(str,beg->second->GetPartOfSpeech());
+			shared_ptr<Word> aword=LanguageFunc::GetParticularWord(str,beg->second->GetPartOfSpeech());
 			if(aword!=NULL)
 			{
 				rep.push_back(aword);

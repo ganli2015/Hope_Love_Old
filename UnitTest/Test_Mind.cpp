@@ -18,7 +18,7 @@
 #include "../Mathmatic/MathTool.h"
 
 #include "../DataCollection/GrammardSentence.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
 
@@ -115,7 +115,7 @@ TEST_F(Test_Concept,DeepInteraction2)
 // 	vector<shared_ptr<Word>> words;
 // 	for (unsigned int i=0;i<pos.size();++i)
 // 	{
-// 		words.push_back(DataBaseProcessorTool::GetParticularWord("ÎÒ",pos[i]));
+// 		words.push_back(LanguageFunc::GetParticularWord("ÎÒ",pos[i]));
 // 	}
 // 
 // 	vector<PartOfSpeech> pos1;

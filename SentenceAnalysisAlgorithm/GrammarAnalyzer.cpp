@@ -7,7 +7,7 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/GrammaPattern.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 #include "../Mind/CommonFunction.h"
 
@@ -159,7 +159,7 @@ void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word>> words, const i
 		vector<vector<shared_ptr<Word>>> newout;
 		for (unsigned int i=0;i<DataCollection::NUM_PARTOFSPEECH;++i)
 		{
-			shared_ptr<Word> newword=DataBaseProcessorTool::GetParticularWord(words[index]->GetString(),PartOfSpeech(i));
+			shared_ptr<Word> newword=LanguageFunc::GetParticularWord(words[index]->GetString(),PartOfSpeech(i));
 			if(index!=words.size()-1)
 			{
 				vector<vector<shared_ptr<Word>>> tmpout(out.size());
@@ -226,7 +226,7 @@ void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combina
 	double maxValueFun(-1);
 	for (unsigned int i=0;i<combination.size();++i)
 	{
-		GrammarPattern pattern=DataBaseProcessorTool::ConvertToPattern(combination[i]);
+		GrammarPattern pattern=LanguageFunc::ConvertToPattern(combination[i]);
 		vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
 		if(matchedPattern.empty()) continue;;
 
@@ -266,7 +266,7 @@ void GrammarAnalyzer::OptimizePOSofWords()
 	for (unsigned int i=0;i<_segments.size();++i)
 	{
 		vector<shared_ptr<Word>> segmented=_segments[i]->Get();
-		pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> sen_punc =DataBaseProcessorTool::TrimEndPunctures(segmented);
+		pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> sen_punc =LanguageFunc::TrimEndPunctures(segmented);
 		vector<shared_ptr<Word>> segmented_withNoPunc=sen_punc.first;
 		vector<shared_ptr<Word>> punc=sen_punc.second;
 
@@ -341,7 +341,7 @@ void GrammarAnalyzer::BuildGrammarAssociationOfWords()
 		return;
 	}
 
-	GrammarPattern pattern=DataBaseProcessorTool::ConvertToPattern(grammard);
+	GrammarPattern pattern=LanguageFunc::ConvertToPattern(grammard);
 	vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
 	_raw_sen->BuildGrammarAssociation(matchedPattern);
 }

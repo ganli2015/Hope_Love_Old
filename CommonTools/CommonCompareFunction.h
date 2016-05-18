@@ -1,7 +1,7 @@
 #pragma once
 #include "InOut.h"
 
-//#include "MyPtr.h"
+//#include "MyObject.h"
 
 namespace CommonTool
 {

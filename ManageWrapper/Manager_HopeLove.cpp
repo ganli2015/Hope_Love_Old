@@ -5,7 +5,7 @@
 
 #include "../CommandList/SpeakCommand.h"
 
-#include "../CommonTools/MyPtr.h"
+#include "../CommonTools/MyObject.h"
 
 #include "../Mind/Cerebrum.h"
 

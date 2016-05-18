@@ -4,7 +4,7 @@
 
 #include "../MindElement/GrammarLocal.h"
 
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/Word.h"
 
 #include "../Mathmatic/FindSequence.h"
@@ -353,7 +353,7 @@ namespace Mind
 
 			int count;
 			in>>count;
-			Vector array(num_speech);
+			Vector array(NUM_PARTOFSPEECH);
 			vector<int> gra;
 			gra.reserve(count);
 			for (int i=1;i<=count;++i)
@@ -452,7 +452,7 @@ namespace Mind
 		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
 
 		map<PartOfSpeech,GrammarLocal> grammarLocalTable;
-		for (int i=0;i<num_speech;++i)
+		for (int i=0;i<NUM_PARTOFSPEECH;++i)
 		{
 			_grammarLocalTable[PartOfSpeech(i)]=shared_ptr<GrammarLocal>(new GrammarLocal(PartOfSpeech(i)));
 		}

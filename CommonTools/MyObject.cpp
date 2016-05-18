@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "MyPtr.h"
+#include "MyObject.h"
 
 #include <fstream>
 

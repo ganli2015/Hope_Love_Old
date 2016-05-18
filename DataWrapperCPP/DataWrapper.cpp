@@ -1,9 +1,8 @@
 #include "StdAfx.h"
 #include "DataWrapper.h"
-#include "../DataCollection/DataBase.h"
 
 //test
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/Sentence.h"
 
 
@@ -15,7 +14,7 @@ DataWrapperCPP::DataWrapper_Sentence::DataWrapper_Sentence(void)
 {
 	////test
 	//string a("Œ“ «À≠£ø");
-	//vector<shared_ptr<Character>> charas=DataBaseProcessorTool::ConvertStringToCharacter(a);
+	//vector<shared_ptr<Character>> charas=LanguageFunc::ConvertStringToCharacter(a);
 }
 
 

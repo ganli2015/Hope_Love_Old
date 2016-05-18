@@ -5,10 +5,11 @@ namespace DataCollection
 {
 	class Word;
 
+	///StructuredSentence contains information of relationship of words in a sentence and how strong each pair of words is related.
 	class _DATACOLLECTIONINOUT StructuredSentence : public MyObject
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _sen;
-		vector<vector<double>> _intensityMatrix; //记录两两word连接强度的矩阵，对称的。
+		vector<vector<double>> _intensityMatrix; //Record the intensity of each pair of words.The matrix is symmetric.
 		bool _analyzed;
 
 	public:
@@ -16,7 +17,6 @@ namespace DataCollection
 		~StructuredSentence(void);
 		StructuredSentence(const std::vector<shared_ptr<DataCollection::Word>>& vec);
 
-		//设定第i个word和第j个word的intensity。
 		void SetIntensity(const unsigned int i,const unsigned int j,double intensity);
 		double GetIntensity(const unsigned int i,const unsigned int j);
 

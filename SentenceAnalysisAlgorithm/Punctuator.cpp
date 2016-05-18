@@ -2,7 +2,7 @@
 #include "Punctuator.h"
 #include "../DataCollection/Character.h"
 #include "../DataCollection/Sentence.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 using namespace DataCollection;
 using namespace std;
@@ -25,7 +25,7 @@ bool Punctuator::Punctuate( shared_ptr<DataCollection::Sentence>& punctuated )
 	vector<shared_ptr<Character>>::iterator sen_it=unpun.begin();
 	do 
 	{
-		vector<shared_ptr<Character>>::iterator chara_it=find_if(sen_it,unpun.end(),DataBaseProcessorTool::IsPuncEndofSentence);
+		vector<shared_ptr<Character>>::iterator chara_it=find_if(sen_it,unpun.end(),LanguageFunc::IsPuncEndofSentence);
 
 		if(chara_it==unpun.end()) //if there is no punctuation in the end
 		{
@@ -44,7 +44,7 @@ bool Punctuator::Punctuate( shared_ptr<DataCollection::Sentence>& punctuated )
 				punctuated->AddSubSentence(aSen);
 				break;
 			}
-			else if(DataBaseProcessorTool::IsPuncEndofSentence(*chara_it)||DataBaseProcessorTool::IsPuncRightside(*chara_it))
+			else if(LanguageFunc::IsPuncEndofSentence(*chara_it)||LanguageFunc::IsPuncRightside(*chara_it))
 				continue;
 			else 
 			{

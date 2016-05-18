@@ -4,7 +4,7 @@
 #include <fstream>
 
 #include "../DataCollection/Word.h"
-#include "../DataCollection/DataBaseProcessorTool.h"
+#include "../DataCollection/LanguageFunc.h"
 
 using namespace DataCollection;
 
@@ -140,7 +140,7 @@ namespace Mind
 			in>>POS;
 			Word_ID word_id;
 			word_id.id=id;
-			word_id.word=DataBaseProcessorTool::GetParticularWord(str,PartOfSpeech(POS));
+			word_id.word=LanguageFunc::GetParticularWord(str,PartOfSpeech(POS));
 			words_id.push_back(word_id);
 
 		}

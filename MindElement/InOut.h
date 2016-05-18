@@ -12,7 +12,7 @@
 #include <iterator>
 #include <fstream>
 #include "../CommonTools/assertions.h"
-#include "../CommonTools/MyPtr.h"
+#include "../CommonTools/MyObject.h"
 
 
 using std::tr1::shared_ptr;

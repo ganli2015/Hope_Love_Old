@@ -2,7 +2,7 @@
 #include "GrammardSentence.h"
 #include "GrammaPattern.h"
 #include "Word.h"
-#include "DataBaseProcessorTool.h"
+#include "LanguageFunc.h"
 
 
 namespace DataCollection
@@ -47,7 +47,7 @@ namespace DataCollection
 		if(_gra.empty()) return false;
 
 		//Õû¾ä»°µÄGrammarPattern
-		GrammarPattern raw=DataBaseProcessorTool::ConvertToPattern(_gra);
+		GrammarPattern raw=LanguageFunc::ConvertToPattern(_gra);
 		for (unsigned int i=0;i<grammarPatterns.size();++i)
 		{
 			if(grammarPatterns[i].GetID()<0)
