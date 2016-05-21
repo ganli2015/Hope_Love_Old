@@ -23,13 +23,11 @@ private:
 
 public:
 
-#ifdef _DEBUG
 
 	void operator delete(void* p);  
 
 	void* operator new(size_t size);
 
-#endif // _DEBUG
 	
 };
 

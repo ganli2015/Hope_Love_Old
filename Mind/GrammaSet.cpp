@@ -244,7 +244,7 @@ namespace Mind
 		{
 			int _max;
 		public:
-			FindMaxID(){}
+			FindMaxID():_max(0){}
 			~FindMaxID(){}
 
 			void operator()(const GrammarAttribute& g_a)

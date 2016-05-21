@@ -8,6 +8,7 @@ using namespace std;
 
 #include "TestClass.h"
 #include "PublicHeader.h"
+#include "FuncForTest.h"
 
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
@@ -19,24 +20,5 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 
-// 	int objCountStart=MyObject::GetObjectCount();
-// 
-// 	TestClass testClass;
-// 
-// 	try
-// 	{
-// 		testClass.RunTest();
-// 	}
-// 	catch(exception e)
-// 	{
-// 		cout<<e.what()<<endl;
-// 		system("pause");
-// 	}
-// 
-// 	int objCountEnd=MyObject::GetObjectCount();
-// 
-// 	Check(objCountEnd==objCountStart);
-// 
-// 	return 0;
 }
 
