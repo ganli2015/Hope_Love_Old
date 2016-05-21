@@ -16,7 +16,8 @@ namespace HopeLove
         enum FormType
         {
             Main,
-            AppendConcept
+            AppendConcept,
+            AppendLogicStatement
         }
 
         FormType formType;
@@ -39,6 +40,11 @@ namespace HopeLove
                 case FormType.AppendConcept:
                     {
                         myApp = new AppendConceptForm();
+                        break;
+                    }
+                case FormType.AppendLogicStatement:
+                    {
+                        myApp = new AppendLogicStatementForm();
                         break;
                     }
                 default:

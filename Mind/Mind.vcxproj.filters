@@ -59,6 +59,9 @@
     <ClInclude Include="LogicKnowledge.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LogicKnowledgeInitializer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -104,6 +107,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LogicKnowledge.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicKnowledgeInitializer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

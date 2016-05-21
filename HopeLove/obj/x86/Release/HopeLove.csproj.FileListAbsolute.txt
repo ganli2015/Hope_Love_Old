@@ -20,3 +20,5 @@ E:\Artificial Intelligence\Project\Hope_Love\HopeLove\bin\Release\GlobalInterfac
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\bin\Release\ManageWrapper.pdb
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Release\HopeLove.exe
 E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Release\HopeLove.pdb
+E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Release\AppendLogicStatementForm.baml
+E:\Artificial Intelligence\Project\Hope_Love\HopeLove\obj\x86\Release\AppendLogicStatementForm.g.cs

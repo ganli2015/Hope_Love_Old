@@ -29,7 +29,6 @@ namespace HopeLove
         const string NonBaseConceptString_InitialFilename = "NonBaseConceptString_Initial.txt";
         const string ConceptConnections_InitialFilename = "ConceptConnections_Initial.txt";
         const string BaseConceptsStringFilename = "BaseConceptsString.txt";
-        const string HopeLoveMindPath = "HopeLoveData\\";
 
         Encoding MyEncoding = null;
 
@@ -44,9 +43,9 @@ namespace HopeLove
 
         private void Init()
         {
-            _baseConcepts = InputWordFromFile(HopeLoveMindPath + BaseConceptsStringFilename);
-            _nonBaseConcepts = InputWordFromFile(HopeLoveMindPath + NonBaseConceptString_InitialFilename);
-            _connectionInfos = InputConnectionFromFile(HopeLoveMindPath + ConceptConnections_InitialFilename);
+            _baseConcepts = InputWordFromFile(CommonForAppendForm.HopeLoveMindPath + BaseConceptsStringFilename);
+            _nonBaseConcepts = InputWordFromFile(CommonForAppendForm.HopeLoveMindPath + NonBaseConceptString_InitialFilename);
+            _connectionInfos = InputConnectionFromFile(CommonForAppendForm.HopeLoveMindPath + ConceptConnections_InitialFilename);
 
 //             StreamWriter sw = new StreamWriter(HopeLoveMindPath + "1.txt",false,MyEncoding);
 //             _nonBaseConcepts.ForEach(w_i =>
@@ -369,7 +368,7 @@ namespace HopeLove
 
         private void WriteNonBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -377,7 +376,7 @@ namespace HopeLove
 
         private void WriteBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + BaseConceptsStringFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + BaseConceptsStringFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -385,7 +384,7 @@ namespace HopeLove
 
         private void WriteConnnectionFile(Word_ID newWord,Word_ID toWord, List<Word_ID> mods)
         {
-            StreamWriter sw = new StreamWriter(HopeLoveMindPath + ConceptConnections_InitialFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + ConceptConnections_InitialFilename, true, MyEncoding);
 
             string modStr="";
             mods.ForEach(m=>
@@ -516,58 +515,7 @@ namespace HopeLove
         }
     }
 
-    enum PartOfSpeech
-    {
-        Noun,
-        Verb,
-        Adjective,
-        Numeral,
-        Quantifier,
-        Pronoun,
-        Adverb,
-        Preposition,
-        Conjunction,
-        Auxiliary,
-        Onomatopoeia,
-        Interjection,
-        Ambiguous,
-        Unknown,
-        Puncture
-    };
-
-    class Word_ID
-    {
-        public string word;
-        public int id;
-        public PartOfSpeech pos = PartOfSpeech.Unknown;
-
-        public bool Same(Word_ID w_i)
-        {
-            return word == w_i.word && id == w_i.id && pos == w_i.pos;
-        }
-
-        public bool WeakSame(Word_ID w_i)
-        {
-            return word == w_i.word && id == w_i.id ;
-        }
-
-        override public string ToString()
-        {
-            string res = "";
-            res += id + " " + word+" "+(int)pos ;
-
-            return res;
-        }
-
-        public string ToWeakString()
-        {
-            string res = "";
-            res += id + " " + word ;
-
-            return res;
-        }
-    }
-
+    
     class Edge_Info
     {
         public Word_ID to = new Word_ID();

@@ -62,6 +62,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AppendLogicStatementForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonWordTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,10 @@
     <Compile Include="AppendConceptForm.xaml.cs">
       <DependentUpon>AppendConceptForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppendLogicStatementForm.xaml.cs">
+      <DependentUpon>AppendLogicStatementForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonForAppendForm.cs" />
     <Compile Include="CommonWordTable.xaml.cs">
       <DependentUpon>CommonWordTable.xaml</DependentUpon>
     </Compile>

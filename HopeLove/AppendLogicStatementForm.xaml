@@ -1,0 +1,20 @@
+﻿<Window x:Class="HopeLove.AppendLogicStatementForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AppendLogicStatementForm" Height="534" Width="478">
+    <Grid Height="495">
+        <Label Content="Condition" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,55,0,0" Name="textBox_Condition1" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,113,0,0" Name="textBox_Condition3" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,84,0,0" Name="textBox_Condition2" VerticalAlignment="Top" Width="294" />
+        <Label Content="Constraint" Height="28" HorizontalAlignment="Left" Margin="12,141,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="Result" Height="28" HorizontalAlignment="Left" Margin="12,264,0,0" Name="label3" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,167,0,0" Name="textBox_Constraint1" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,225,0,0" Name="textBox_Constraint3" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,196,0,0" Name="textBox_Constraint2" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,291,0,0" Name="textBox_Result1" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,349,0,0" Name="textBox_Result3" VerticalAlignment="Top" Width="294" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="78,320,0,0" Name="textBox_Result2" VerticalAlignment="Top" Width="294" />
+        <Button Content="Button_Append" Height="23" HorizontalAlignment="Left" Margin="351,433,0,0" Name="button_Append" VerticalAlignment="Top" Width="93" Click="button_Append_Click" />
+    </Grid>
+</Window>
