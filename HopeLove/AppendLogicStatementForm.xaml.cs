@@ -27,6 +27,8 @@ namespace HopeLove
         const string FromNode = "From";
         const string ToNode = "To";
         const string SymbolNode = "Symbol";
+        const string EqualityNode = "Equality";
+        const string InequalityNode = "Inequality";
 
         const string ArbSymbol = "Arb";
         const string EqualSymbol = "==";
@@ -177,7 +179,7 @@ namespace HopeLove
                 List<string> symbolSplit = SplitAndRemoveBlank(str,EqualSymbol);
                 if (symbolSplit.Count == 2)
                 {
-                    XmlElement constrElem = _document.CreateElement("Equality");
+                    XmlElement constrElem = _document.CreateElement(EqualityNode);
                     constrElem.AppendChild(CreateSimpleElement(SymbolNode, symbolSplit[0]));
                     constrElem.AppendChild(CreateSimpleElement(SymbolNode, symbolSplit[1]));
                     node.AppendChild(constrElem);
@@ -188,7 +190,7 @@ namespace HopeLove
                 List<string> symbolSplit = SplitAndRemoveBlank(str, InequalSymbol);
                 if (symbolSplit.Count == 2)
                 {
-                    XmlElement constrElem = _document.CreateElement("Inequality");
+                    XmlElement constrElem = _document.CreateElement(InequalityNode);
                     constrElem.AppendChild(CreateSimpleElement(SymbolNode, symbolSplit[0]));
                     constrElem.AppendChild(CreateSimpleElement(SymbolNode, symbolSplit[1]));
                     node.AppendChild(constrElem);

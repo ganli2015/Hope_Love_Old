@@ -422,7 +422,6 @@ void Test_iRelationFun::RelationPair( shared_ptr<RelationNode> condition,shared_
 	leaf1->AddRelation(arb1,s1);
 	leaf1->AddRelation(s1,s2);
 	leaf1->AddRelation(s2,arb2);
-	leaf1->AddConstraint(Inequality::Create(arb1,arb2));
 
 	shared_ptr<Arb> arb3=Arb::Create();	
 	shared_ptr<Sym> s3(new Sym(SimpleConcept("´ó")));
@@ -433,12 +432,13 @@ void Test_iRelationFun::RelationPair( shared_ptr<RelationNode> condition,shared_
 	leaf2->AddRelation(arb3,s3);
 	leaf2->AddRelation(s3,s4);
 	leaf2->AddRelation(s4,arb4);
-	leaf1->AddConstraint(Inequality::Create(arb2,arb4));
 
 	condition->AddSubRelation(leaf1);
 	condition->AddSubRelation(leaf2);
 	condition->SetState(iRelationNode::And);
 	condition->AddConstraint(Equality::Create(arb2,arb3));
+	condition->AddConstraint(Inequality::Create(arb2,arb4));
+	condition->AddConstraint(Inequality::Create(arb1,arb2));
 
 	//Create result
 	result->AddRelation(arb1,s1);

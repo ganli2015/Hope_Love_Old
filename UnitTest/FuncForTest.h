@@ -26,6 +26,8 @@ protected:
 
 namespace FuncForTest
 {
+	const string TestSampleDir="TestSample\\";
+
 	shared_ptr<Mind::iConcept> SimpleConcept(const string str);
 
 	bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<Mind::iConceptInteractTable> table);

@@ -1,0 +1,14 @@
+<Condition>
+        <SymbolPair>
+          <From>Arb1</From>
+          <To ID="0" Word="大" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="大" />
+          <To ID="0" Word="于" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="于" />
+          <To>Arb2</To>
+        </SymbolPair>
+</Condition>

@@ -15,5 +15,7 @@ namespace CommonTool
 		ss<<t;
 		return ss.str();
 	}
+
+	_COMMONTOOLSINOUT int StrToInt(const string str);
 }
 

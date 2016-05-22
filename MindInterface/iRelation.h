@@ -40,18 +40,26 @@ namespace LogicSystem
 		virtual ~iRelation(void);
 
 		virtual string GetString() const =0;
+
+		///Add Constraints to symbols.
+		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
+
 		///Check whether <expre> satisfy the relation <me>.
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) =0;
+
 		///Find match symbol and concept pairs in <conceptPairs>.
 		virtual vector<PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const =0;
+
 		///Generate iRelation in which all of symbols refer to a definite object according to symbols of <me>.
 		///If one of symbols refers to null object, then iRelation will be null.
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const =0;
+
 		///Use <Satisfy> before!
 		///After <Satisfy>, symbols of <me> will refer to concepts and then generate a special relation of <relation>.
 		///Each symbol in the result relation will refer to a definite object.
 		///Same symbols in <relation> and <me> will refer to the same objects.
 		shared_ptr<iRelation> SymbolResonance(const shared_ptr<iRelation> relation) const ;
+
 	protected:
 		bool SatifyConstraint(const vector<PairInfo>& pairInfos,const vector<shared_ptr<iRelationConstraint>>& constraints) const;
 		void RemoveSequencesUnsatifyConstraints(const vector<shared_ptr<iRelationConstraint>>& constraints,vector<iRelation::PairSequence>& sequences) const;

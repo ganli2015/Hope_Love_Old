@@ -19,8 +19,7 @@ namespace Mind
 	Cerebrum::Cerebrum(void):
 	_conceptset(new ConceptSet),
 		_grammaset(new GrammarSet),
-		_conceptInteractTableContainer(new ConceptInteractTableContainer),
-		_logicKnowledge(new LogicKnowledge())
+		_conceptInteractTableContainer(new ConceptInteractTableContainer)
 	{
 		_conceptReactSystem=(new ConceptReactSystem(_conceptset));
 	}
@@ -35,10 +34,18 @@ namespace Mind
 		_instance=NULL;
 	}
 
+	void Cerebrum::PostInitialize()
+	{
+		_logicKnowledge=new LogicKnowledge();		
+	}
+
 	Cerebrum* Cerebrum::Instance()
 	{
 		if(_instance==NULL)
+		{
 			_instance=new Cerebrum;
+			_instance->PostInitialize();
+		}
 		return _instance;
 	}
 

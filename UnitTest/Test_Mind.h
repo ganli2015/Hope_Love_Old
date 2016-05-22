@@ -4,21 +4,21 @@
 namespace Mind
 {
 	class iConceptInteractTable;
-
+	class LogicKnowledgeInitializer;
 }
 
-// class Test_Mind
-// {
-// public:
-// 	Test_Mind(void);
-// 	~Test_Mind(void);
-// 
-// 	static void RunTest();
-// 
-// private:
-// 	static void Test_ConceptDeepInteraction();
-// 
-// 	static void Test_BuildGrammarAssociation();
-// 
-// };
+namespace LogicSystem
+{
+	class iRelation;
+	class iLogicStatement;
+}
 
+class TiXmlNode;
+
+class Test_Mind
+{
+public:
+
+	static shared_ptr<LogicSystem::iRelation> ParseRelation(const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer);
+	static shared_ptr<LogicSystem::iLogicStatement> ParseLogicStatement(const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer);
+};

@@ -13,6 +13,7 @@ using namespace std;
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
+//	::testing::GTEST_FLAG(filter) = "Test_LogicKnowledgeInitializer*";
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
 

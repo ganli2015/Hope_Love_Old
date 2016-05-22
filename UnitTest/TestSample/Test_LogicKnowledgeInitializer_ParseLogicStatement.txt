@@ -1,0 +1,58 @@
+<LogicStatement>
+    <ConditionCollection Relation="And">
+      <Condition>
+        <SymbolPair>
+          <From>Arb1</From>
+          <To ID="0" Word="大" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="大" />
+          <To ID="0" Word="于" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="于" />
+          <To>Arb2</To>
+        </SymbolPair>
+      </Condition>
+      <Condition>
+        <SymbolPair>
+          <From>Arb3</From>
+          <To ID="0" Word="大" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="大" />
+          <To ID="0" Word="于" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="于" />
+          <To>Arb4</To>
+        </SymbolPair>
+      </Condition>
+    </ConditionCollection>
+    <Inequality>
+      <Symbol>Arb1</Symbol>
+      <Symbol>Arb2</Symbol>
+    </Inequality>
+    <Inequality>
+      <Symbol>Arb3</Symbol>
+      <Symbol>Arb4</Symbol>
+    </Inequality>
+    <Equality>
+      <Symbol>Arb2</Symbol>
+      <Symbol>Arb3</Symbol>
+    </Equality>
+    <Result>
+      <SymbolPair>
+        <From>Arb1</From>
+        <To ID="0" Word="大" />
+      </SymbolPair>
+      <SymbolPair>
+        <From ID="0" Word="大" />
+        <To ID="0" Word="于" />
+      </SymbolPair>
+      <SymbolPair>
+        <From ID="0" Word="于" />
+        <To>Arb4</To>
+      </SymbolPair>
+    </Result>
+  </LogicStatement>

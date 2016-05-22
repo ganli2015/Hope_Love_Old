@@ -35,6 +35,7 @@ namespace Mind
 		LogicKnowledge* _logicKnowledge;
 
 		Cerebrum(void);
+		void PostInitialize();
 	public:
 		static Cerebrum* Instance();
 		virtual ~Cerebrum();

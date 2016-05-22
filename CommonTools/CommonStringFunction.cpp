@@ -19,3 +19,11 @@ vector<string> CommonTool::SplitString( const string& str, const char splitTag )
 
 	return res;
 }
+
+_COMMONTOOLSINOUT int CommonTool::StrToInt( const string str )
+{
+	stringstream ss(str);
+	int res;
+	ss>>res;
+	return res;
+}
