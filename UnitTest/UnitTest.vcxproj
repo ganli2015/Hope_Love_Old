@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FuncForTest.h" />
+    <ClInclude Include="LeafCreator.h" />
     <ClInclude Include="MyTest.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="stdafx.h" />
@@ -102,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FuncForTest.cpp" />
+    <ClCompile Include="LeafCreator.cpp" />
     <ClCompile Include="MyTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

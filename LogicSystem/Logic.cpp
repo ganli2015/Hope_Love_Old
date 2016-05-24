@@ -58,5 +58,11 @@ namespace LogicSystem
 
 	}
 
+	vector<shared_ptr<iDeduceResult>> Logic::Deduce( const shared_ptr<iExpression> condition )
+	{
+		Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
+		return brain->Deduce(condition);
+	}
+
 }
 

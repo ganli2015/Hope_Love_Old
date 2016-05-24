@@ -41,6 +41,8 @@ namespace FuncForTest
 	///Pattern is Numeral,Adjective,Preposition,Numeral.
 	void AddGrammarPatternToCerebrum();
 
+	shared_ptr<Mind::iConcept> GetConcept(const string str,const int id);
+
 	template<class T>
 	bool ContainSameElements(const vector<vector<T>>& v1,const vector<vector<T>>& v2)
 	{

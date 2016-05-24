@@ -5,7 +5,7 @@
 
 namespace LogicSystem
 {
-	///An Arbitrariness indicates any valid iLogicSymbol.
+	///An Arbitrariness indicates any valid iSymbol.
 	template<class T>
 	class Arbitrariness : public iSymbol<T>
 	{
@@ -39,7 +39,7 @@ namespace LogicSystem
 	template<class T>
 	Arbitrariness<T>::~Arbitrariness(void)
 	{
-		--ArbNum;
+		//--ArbNum;
 	}
 
 	template<class T>

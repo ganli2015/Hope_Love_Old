@@ -10,6 +10,7 @@
 #include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
@@ -152,6 +153,15 @@ namespace FuncForTest
 		{
 			brain->IncreasePatternFreqency(pattern);
 		}
+	}
+
+	shared_ptr<iConcept> GetConcept( const string str,const int id )
+	{
+		iCerebrum *brain=iCerebrum::Instance();
+		if(brain==NULL) return NULL;
+
+		Identity w_i(str,id);
+		return brain->GetConcept(w_i);
 	}
 
 }

@@ -7,6 +7,7 @@
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
 #include "../LogicSystem/Arbitrariness.h"
+#include "../LogicSystem/Number.h"
 #include "../LogicSystem/Symbol.h"
 #include "../LogicSystem/Inequality.h"
 #include "../LogicSystem/Equality.h"
@@ -16,12 +17,14 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/PublicTypedef.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../Mind/Cerebrum.h"
 
 #include "../DataCollection/GrammaPattern.h"
 
 #include "FuncForTest.h"
+#include "LeafCreator.h"
 
 using namespace DataCollection;
 using namespace Mind;
@@ -29,6 +32,7 @@ using namespace LogicSystem;
 using namespace FuncForTest;
 
 typedef Arbitrariness<iConcept> Arb;
+typedef Number<iConcept> Num;
 typedef LogicType::ConSymbol ConSymbol;
 typedef Symbol<iConcept> Sym;
 
@@ -36,6 +40,7 @@ typedef AddPatternToCerebrum Test_Relation;
 
 TEST_F(Test_Relation,GetString1)
 {
+	Test_iRelation::ClearArbNum();
 	shared_ptr<iRelationNode> node=Test_iRelationFun::RelationSample1();
 
 	string result=node->GetString();
@@ -45,6 +50,8 @@ TEST_F(Test_Relation,GetString1)
 
 TEST_F(Test_Relation,GetString2)
 {
+	Test_iRelation::ClearArbNum();
+
 	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
 	shared_ptr<Arb> arb1=Arb::Create();
 	shared_ptr<Arb> arb2=Arb::Create();
@@ -88,17 +95,20 @@ TEST_F(Test_Relation,RelationLeafSatisfy)
 	shared_ptr<iConcept> da=SimpleConcept("大");
 	shared_ptr<iConcept> yu=SimpleConcept("于");
 	shared_ptr<iConcept> er=SimpleConcept("二");
+// 
+// 	shared_ptr<Arb> arb1=Arb::Create();
+// 	shared_ptr<Sym> s1(new Sym(da));
+// 	shared_ptr<Sym> s2(new Sym(yu));
+// 	shared_ptr<Arb> arb2=Arb::Create();	
+// 
+// 	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
+// 	leaf1->AddRelation(arb1,s1);
+// 	leaf1->AddRelation(s1,s2);
+// 	leaf1->AddRelation(s2,arb2);
+// 	leaf1->AddConstraint(Inequality::Create(arb1,arb2));
 
-	shared_ptr<Arb> arb1=Arb::Create();
-	shared_ptr<Sym> s1(new Sym(da));
-	shared_ptr<Sym> s2(new Sym(yu));
-	shared_ptr<Arb> arb2=Arb::Create();	
-
-	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
-	leaf1->AddRelation(arb1,s1);
-	leaf1->AddRelation(s1,s2);
-	leaf1->AddRelation(s2,arb2);
-	leaf1->AddConstraint(Inequality::Create(arb1,arb2));
+	string leafStr="三-大,大-于,于-二";
+	shared_ptr<RelationLeaf> leaf1=LeafCreator::Create(leafStr);
 
 	shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
 	interTable->Add(san,da);
@@ -410,6 +420,21 @@ TEST_F(Test_Relation,iRelationResonance)
 	}
 }
 
+TEST_F(Test_Relation,PlusOfNumber)
+{
+	shared_ptr<iConcept> san=GetConcept("三",0);
+	shared_ptr<iConcept> jia=GetConcept("加",0);
+	shared_ptr<iConcept> er=GetConcept("二",0);
+
+	shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+	interTable->Add(san,jia);
+	interTable->Add(jia,er);
+
+	shared_ptr<RelationLeaf> leaf=Test_iRelationFun::RelationSample3();
+
+	ASSERT_TRUE(Test_iRelationFun::InterTableSatisfyRelation(leaf,interTable));
+}
+
 void Test_iRelationFun::RelationPair( shared_ptr<RelationNode> condition,shared_ptr<RelationLeaf> result )
 {
 	//Create condition
@@ -504,6 +529,19 @@ shared_ptr<LogicSystem::RelationNode> Test_iRelationFun::RelationSample2()
 	return node;
 }
 
+shared_ptr<LogicSystem::RelationLeaf> Test_iRelationFun::RelationSample3()
+{
+	shared_ptr<Num> num1=Num::Create();
+	shared_ptr<Sym> jia(new Sym(SimpleConcept("加")));
+	shared_ptr<Num> num2=Num::Create();
+
+	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
+	leaf1->AddRelation(num1,jia);
+	leaf1->AddRelation(jia,num2);
+
+	return leaf1;
+}
+
 bool Test_iRelationFun::InterTableSatisfyRelation( shared_ptr<RelationLeaf> leaf1,shared_ptr<iConceptInteractTable> interTable )
 {
 	return leaf1->InterTableSatisfyRelation(interTable);
@@ -512,4 +550,9 @@ bool Test_iRelationFun::InterTableSatisfyRelation( shared_ptr<RelationLeaf> leaf
 bool Test_iRelationFun::InterTableSatisfyRelation( shared_ptr<RelationNode> node,shared_ptr<iConceptInteractTable> interTable )
 {
 	return node->InterTableSatisfyRelation(interTable);
+}
+
+void Test_iRelation::ClearArbNum()
+{
+	Arbitrariness<iConcept>::ArbNum=0;
 }

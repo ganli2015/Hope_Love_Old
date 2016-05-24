@@ -11,6 +11,7 @@ namespace LogicSystem
 	};
 
 	class iExpression;
+	class iDeduceResult;
 
 	///iLogic contains functions about logic manipulation.
 	class _MINDINTERFACEINOUT iLogic: public MyObject
@@ -27,6 +28,9 @@ namespace LogicSystem
 		///Check whether <conclusion> can be deduced by <condition>.
 		///<condition> should have been analyzed!
 		virtual LogicResult Determine(const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion) =0;
+
+		///Deduce results from <condition>.
+		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) =0;
 	};
 }
 

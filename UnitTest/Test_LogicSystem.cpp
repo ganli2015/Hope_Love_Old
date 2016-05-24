@@ -11,6 +11,7 @@
 #include "../LogicSystem/Symbol.h"
 #include "../LogicSystem/LogicStatement.h"
 #include "../LogicSystem/Inequality.h"
+#include "../LogicSystem/Number.h"
 
 #include "../Mind/Cerebrum.h"
 
@@ -18,6 +19,7 @@
 #include "../MindElement/Concept.h"
 
 #include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/CommonFunction.h"
 
 #include "../DataCollection/GrammaPattern.h"
 
@@ -33,6 +35,7 @@ typedef LogicType::ConSymbol ConSymbol;
 typedef Symbol<iConcept> Sym;
 
 typedef AddPatternToCerebrum Test_Logic;
+typedef InitCerebrum Test_Number;
 
 TEST_F(Test_Logic,Determine)
 {
@@ -59,3 +62,14 @@ TEST_F(Test_Logic,Determine)
 	ASSERT_TRUE(logic.Determine(condition,conclusion_false)==False);
 }
 
+TEST_F(Test_Number,Match)
+{
+	Identity iden;
+	iden.str="¶þ";
+	iden.id=0;
+	shared_ptr<iConcept> er=iCerebrum::Instance()->GetConcept(iden);
+
+	shared_ptr<Number<iConcept>> num=Number<iConcept>::Create();
+
+	ASSERT_TRUE(num->Match(er));
+}

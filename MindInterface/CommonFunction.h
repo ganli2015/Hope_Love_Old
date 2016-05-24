@@ -12,10 +12,14 @@ namespace Mind
 	struct Identity
 	{
 		string str;
-		//表示同一个string所对应的不同的concept。引导词的id等于-1！
-		//目前同一个单词的同一个词性只对应于一个id！
-		//也就是说这个id暂时起不到作用！
+		
+		///<id> represents different concept with the same <str>.
+		///However , currently I assume one concept for one POS of the word.
+		///That is to say, id behaves same with POS.
 		int id;
+
+		Identity(){}
+		Identity(string s, int i):str(s),id(i){}
 	};
 
 	class iConcept;

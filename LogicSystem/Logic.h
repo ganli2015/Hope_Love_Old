@@ -10,7 +10,10 @@ namespace LogicSystem
 		Logic(void);
 		~Logic(void);
 
-		virtual LogicResult Determine(const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion) ;		
+		virtual LogicResult Determine(const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion) ;
+
+		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) ;
+
 	};
 }
 

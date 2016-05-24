@@ -87,6 +87,7 @@
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="LogicStatement.h" />
+    <ClInclude Include="Number.h" />
     <ClInclude Include="RelationLeaf.h" />
     <ClInclude Include="RelationNode.h" />
     <ClInclude Include="SingleExpression.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Inequality.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="LogicStatement.cpp" />
+    <ClCompile Include="Number.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />
