@@ -77,6 +77,15 @@
     <ClInclude Include="LeafCreator.h">
       <Filter>LogicSystem</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptCreator.h">
+      <Filter>Mind</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolCreator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConceptTableCreator.h">
+      <Filter>Mind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -120,6 +129,15 @@
     </ClCompile>
     <ClCompile Include="LeafCreator.cpp">
       <Filter>LogicSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptCreator.cpp">
+      <Filter>Mind</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbolCreator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptTableCreator.cpp">
+      <Filter>Mind</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

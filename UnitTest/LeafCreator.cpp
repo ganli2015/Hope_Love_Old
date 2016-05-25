@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "LeafCreator.h"
 #include "FuncForTest.h"
+#include "ConceptCreator.h"
 
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Number.h"
@@ -8,6 +9,8 @@
 #include "../LogicSystem/Symbol.h"
 
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/iCerebrum.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 
@@ -19,6 +22,8 @@ typedef Number<Mind::iConcept> Num;
 
 map<string,LeafCreator::iSpecialSymbol*> LeafCreator::SpSym;
 
+shared_ptr<ConceptCreator> LeafCreator::MyConceptCreator;
+
 LeafCreator::LeafCreator(void)
 {
 }
@@ -28,7 +33,21 @@ LeafCreator::~LeafCreator(void)
 {
 }
 
+shared_ptr<LogicSystem::RelationLeaf> LeafCreator::SimpleCreate( const string str )
+{
+	MyConceptCreator=shared_ptr<SimpleConceptCreator>(new SimpleConceptCreator());
+
+	return Parse(str);
+}
+
 shared_ptr<LogicSystem::RelationLeaf> LeafCreator::Create( const string str )
+{
+	MyConceptCreator=shared_ptr<CerebrumConceptCreator>(new CerebrumConceptCreator());
+
+	return Parse(str);
+}
+
+shared_ptr<LogicSystem::RelationLeaf> LeafCreator::Parse( const string str )
 {
 	shared_ptr<LogicSystem::RelationLeaf> res(new RelationLeaf());
 
@@ -43,13 +62,13 @@ shared_ptr<LogicSystem::RelationLeaf> LeafCreator::Create( const string str )
 		shared_ptr<LogicType::ConSymbol> from=ParseSpSymbol(fromTo[0]);
 		if(from==NULL)//Parse common symbol.
 		{
-			from=ParseSimpleSymbol(fromTo[0]);
+			from=ParseSymbol(fromTo[0]);
 		}
 
 		shared_ptr<LogicType::ConSymbol> to=ParseSpSymbol(fromTo[1]);
 		if(to==NULL)//Parse common symbol.
 		{
-			to=ParseSimpleSymbol(fromTo[1]);
+			to=ParseSymbol(fromTo[1]);
 		}
 
 		res->AddRelation(from,to);
@@ -85,10 +104,9 @@ shared_ptr<LogicType::ConSymbol> LeafCreator::ParseSpSymbol( const string str )
 	}
 }
 
-shared_ptr<LogicType::ConSymbol> LeafCreator::ParseSimpleSymbol( const string str )
+shared_ptr<LogicType::ConSymbol> LeafCreator::ParseSymbol( const string str )
 {
-	shared_ptr<iConcept> con=FuncForTest::SimpleConcept(str);
-	shared_ptr<LogicType::ConSymbol> res(new Symbol<iConcept>(con));
+	shared_ptr<iConcept> con=MyConceptCreator->Create(str);
 
-	return res;
+	return shared_ptr<LogicType::ConSymbol>(new Symbol<iConcept>(con));
 }

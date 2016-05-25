@@ -85,11 +85,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConceptCreator.h" />
+    <ClInclude Include="ConceptTableCreator.h" />
     <ClInclude Include="FuncForTest.h" />
     <ClInclude Include="LeafCreator.h" />
     <ClInclude Include="MyTest.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SymbolCreator.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="Test_CommonTool.h" />
@@ -102,6 +105,8 @@
     <ClInclude Include="Test_SentenceAnalysisAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConceptCreator.cpp" />
+    <ClCompile Include="ConceptTableCreator.cpp" />
     <ClCompile Include="FuncForTest.cpp" />
     <ClCompile Include="LeafCreator.cpp" />
     <ClCompile Include="MyTest.cpp" />
@@ -109,6 +114,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SymbolCreator.cpp" />
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="Test_CommonTool.cpp" />
     <ClCompile Include="Test_iRelation.cpp" />

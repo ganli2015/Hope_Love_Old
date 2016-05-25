@@ -20,7 +20,7 @@ namespace LogicSystem
 		const string _connectTag;
 		const char _sepTag;
 
-		friend class Test_iRelationFun;
+		friend class Test_iRelation;
 
 	public:
 		RelationLeaf(void);
