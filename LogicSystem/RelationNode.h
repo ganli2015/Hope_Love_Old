@@ -28,6 +28,7 @@ namespace LogicSystem
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
+		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;
 
 	private:
 		//If state is And, then any relation not satisfied will make its respective PairSequence vanish in result.

@@ -189,5 +189,26 @@ namespace LogicSystem
 		return res;
 	}
 
+	shared_ptr<Mind::iConceptInteractTable> RelationLeaf::GenerateConceptTable() const
+	{
+		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable());
+
+		for (unsigned int i=0;i<_relations.size();++i)
+		{
+			shared_ptr<iConcept> firstObj=_relations[i].first->GetReferredObject();
+			shared_ptr<iConcept> secondObj=_relations[i].second->GetReferredObject();
+			if(firstObj==NULL || secondObj==NULL)
+			{
+				continue;
+			}
+			else
+			{
+				res->Add(firstObj,secondObj);
+			}
+		}
+
+		return res;
+	}
+
 }
 

@@ -31,6 +31,7 @@ namespace LogicSystem
 		virtual string GetString() const ;
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
+		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;
 	private:
 		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable);
 		static vector<RelationLeaf::ConceptPair> FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs);

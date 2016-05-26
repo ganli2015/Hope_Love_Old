@@ -14,6 +14,7 @@ namespace LogicSystem
 
 		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) ;
 
+		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition) ;
 	};
 }
 

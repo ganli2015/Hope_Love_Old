@@ -23,10 +23,11 @@
 
 #include "../DataCollection/GrammaPattern.h"
 
+#include "../UTFacility/LeafCreator.h"
+#include "../UTFacility/ConceptCreator.h"
+#include "../UTFacility/SymbolCreator.h"
+
 #include "FuncForTest.h"
-#include "LeafCreator.h"
-#include "ConceptCreator.h"
-#include "SymbolCreator.h"
 
 using namespace DataCollection;
 using namespace Mind;
@@ -388,6 +389,21 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy7)
 
 		ASSERT_FALSE(InterTableSatisfyRelation(relation,interTable));
 	}
+}
+
+TEST_F(Test_iRelation,GenerateConceptTable)
+{
+	string leafStr="三-大,大-于,于-二";
+	shared_ptr<RelationLeaf> leaf=LeafCreator::SimpleCreate(leafStr);
+
+	shared_ptr<iConceptInteractTable> result=leaf->GenerateConceptTable();
+
+	vector<pair<string,string>> expect;
+	expect.push_back(make_pair("三","大"));
+	expect.push_back(make_pair("大","于"));
+	expect.push_back(make_pair("于","二"));
+
+	ASSERT_TRUE(FuncForTest::PairSameWithTable(expect,result));
 }
 
 typedef AddPatternToCerebrum Test_RelationNeedGrammarPatten;

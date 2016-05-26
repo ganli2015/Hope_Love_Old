@@ -60,6 +60,9 @@ namespace LogicSystem
 		///Same symbols in <relation> and <me> will refer to the same objects.
 		shared_ptr<iRelation> SymbolResonance(const shared_ptr<iRelation> relation) const ;
 
+		///Generate the corresponding iConceptInteractTable according to symbol pairs of <me>.
+		///If one symbol pair both refer to certain concepts, then the pair will appear in iConceptInteractTable.
+		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const =0;
 	protected:
 		bool SatifyConstraint(const vector<PairInfo>& pairInfos,const vector<shared_ptr<iRelationConstraint>>& constraints) const;
 		void RemoveSequencesUnsatifyConstraints(const vector<shared_ptr<iRelationConstraint>>& constraints,vector<iRelation::PairSequence>& sequences) const;

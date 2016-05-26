@@ -24,13 +24,16 @@
 
 #include "../DataCollection/GrammaPattern.h"
 
+#include "../UTFacility/ConceptTableCreator.h"
+#include "../UTFacility/MockExpression.h"
+
 #include "FuncForTest.h"
-#include "ConceptTableCreator.h"
 
 using namespace DataCollection;
 using namespace Mind;
 using namespace LogicSystem;
 using namespace FuncForTest;
+using ::testing::Return;
 
 typedef Arbitrariness<iConcept> Arb;
 typedef LogicType::ConSymbol ConSymbol;
@@ -38,7 +41,7 @@ typedef Symbol<iConcept> Sym;
 
 typedef AddPatternToCerebrum Test_Logic;
 typedef InitCerebrum Test_Number;
-typedef InitCerebrum Test_iLogicStatement;
+typedef InitCerebrum Test_LogicStatement;
 
 TEST_F(Test_Logic,Determine)
 {
@@ -77,7 +80,7 @@ TEST_F(Test_Number,Match)
 	ASSERT_TRUE(num->Match(er));
 }
 
-TEST_F(Test_iLogicStatement,Deduce)
+TEST_F(Test_LogicStatement,Deduce)
 {
 	///Construct a logicStatment.
 	///Input: "二-加,加-三",
@@ -87,16 +90,39 @@ TEST_F(Test_iLogicStatement,Deduce)
 	iRelationSample::RelationPair2(conditionRel,resultRel);
 
 	shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel,resultRel));
-
+	//Create mock expression of condition.
 	string tableStr="二-加,加-三";
 	shared_ptr<iConceptInteractTable> table=ConceptTableCreator::Create(tableStr);
-	shared_ptr<Stub_Expression> expre(new Stub_Expression(table));
+	shared_ptr<MockExpression> expre(new MockExpression());
+	EXPECT_CALL(*expre,GetProtoInteractTable()).WillRepeatedly(Return(table));
+	EXPECT_CALL(*expre,GetBaseInteractTable()).Times(0);
 
 	shared_ptr<iDeduceResult> result=logicStatment->Deduce(expre);
 
+	//Create mock expression of result.
 	string resTableStr="二-加,加-一,三-次,次-加";
 	shared_ptr<iConceptInteractTable> expectTable=ConceptTableCreator::Create(resTableStr);
-	shared_ptr<Stub_Expression> expect(new Stub_Expression(expectTable));
+	shared_ptr<MockExpression> expect(new MockExpression());
+	EXPECT_CALL(*expect,GetProtoInteractTable()).WillRepeatedly(Return(expectTable));
+	EXPECT_CALL(*expect,GetBaseInteractTable()).Times(0);
 
 	ASSERT_TRUE(result->Matching(expect)==1);
+}
+
+TEST_F(Test_Logic,Deduce)
+{
+	//Create mock expression of condition.
+	string tableStr="二-加,加-三";
+	shared_ptr<iConceptInteractTable> table=ConceptTableCreator::Create(tableStr);
+	shared_ptr<MockExpression> expre(new MockExpression());
+	EXPECT_CALL(*expre,GetProtoInteractTable()).WillRepeatedly(Return(table));
+	EXPECT_CALL(*expre,GetBaseInteractTable()).Times(0);
+
+	Logic logic;
+	vector<shared_ptr<iDeduceResult>> results=logic.FinalDeduce(expre);
+
+	ASSERT_EQ(results.size(),1);
+
+	shared_ptr<iExpression> expect(new SingleExpression("五"));
+	ASSERT_TRUE(results.front()->Matching(expect)==1);
 }

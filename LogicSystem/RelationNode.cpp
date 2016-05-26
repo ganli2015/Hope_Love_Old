@@ -227,5 +227,17 @@ namespace LogicSystem
 		return res;
 	}
 
+	shared_ptr<Mind::iConceptInteractTable> RelationNode::GenerateConceptTable() const
+	{
+		shared_ptr<Mind::iConceptInteractTable> res(new ConceptInteractTable());
+		for (unsigned int i=0;i<_subRelations.size();++i)
+		{
+			shared_ptr<Mind::iConceptInteractTable> subTable=_subRelations[i]->GenerateConceptTable();
+			res->Absorb(subTable);
+		}
+
+		return res;
+	}
+
 }
 

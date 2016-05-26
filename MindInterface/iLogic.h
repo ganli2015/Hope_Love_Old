@@ -16,14 +16,9 @@ namespace LogicSystem
 	///iLogic contains functions about logic manipulation.
 	class _MINDINTERFACEINOUT iLogic: public MyObject
 	{
-		shared_ptr<iLogic> _instance;
-		
 	public:
 		iLogic(void);
 		~iLogic(void);
-
-		shared_ptr<iLogic> GetInstance() const { return _instance; }
-		void SetInstance(const shared_ptr<iLogic> val) { _instance = val; }
 
 		///Check whether <conclusion> can be deduced by <condition>.
 		///<condition> should have been analyzed!
@@ -31,6 +26,9 @@ namespace LogicSystem
 
 		///Deduce results from <condition>.
 		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) =0;
+
+		///Deduce results from <condition> repeatedly until the results converge.
+		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition) =0;
 	};
 }
 

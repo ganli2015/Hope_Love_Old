@@ -9,7 +9,7 @@ using namespace std;
 #include "TestClass.h"
 #include "PublicHeader.h"
 #include "FuncForTest.h"
-#include "LeafCreator.h"
+#include "../UTFacility/LeafCreator.h"
 
 class MyGlobal: public testing::Environment
 {

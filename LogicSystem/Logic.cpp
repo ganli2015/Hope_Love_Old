@@ -64,5 +64,10 @@ namespace LogicSystem
 		return brain->Deduce(condition);
 	}
 
+	vector<shared_ptr<iDeduceResult>> Logic::FinalDeduce( const shared_ptr<iExpression> condition )
+	{
+		return vector<shared_ptr<iDeduceResult>>();
+	}
+
 }
 
