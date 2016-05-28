@@ -18,9 +18,19 @@ namespace Mind
 		return _imp->CreateConcept(type);
 	}
 
+	shared_ptr<iConcept> iMindElementCreator::CreateConcept( const shared_ptr<DataCollection::Word> word,const ElementType type/*=ConceptD*/ )
+	{
+		return _imp->CreateConcept(word,type);
+	}
+
 	shared_ptr<iConceptChain> iMindElementCreator::CreateConceptChain( const ElementType type/*=ConceptChainD*/ )
 	{
 		return _imp->CreateConceptChain(type);
+	}
+
+	shared_ptr<iConceptChain> iMindElementCreator::CreateConceptChain( const vector<shared_ptr<iConcept>>& val,const ElementType type )
+	{
+		return _imp->CreateConceptChain(val,type);
 	}
 
 	shared_ptr<iConceptEdge> iMindElementCreator::CreateConceptEdge( const ElementType type/*=ConceptEdgeD*/ )

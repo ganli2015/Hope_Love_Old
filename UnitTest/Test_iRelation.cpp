@@ -19,6 +19,7 @@
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/iMindElementCreator.h"
+#include "../MindInterface/iLogicElementCreator.h"
 
 #include "../Mind/Cerebrum.h"
 
@@ -414,16 +415,18 @@ TEST_F(Test_RelationNeedGrammarPatten,iRelationResonance)
 	shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
 	iRelationSample::RelationPair(conditionRel,resultRel);
 
-	shared_ptr<CompositeExpression> condition(new CompositeExpression());
-	condition->AddExpression("二大于一");
-	condition->AddExpression("三大于二");
+	vector<string> conditionStr;
+	conditionStr.push_back("二大于一");
+	conditionStr.push_back("三大于二");
+	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
+
 	if(conditionRel->Satisfy(condition))
 	{
 		shared_ptr<iRelation> specialRel=conditionRel->SymbolResonance(resultRel);
 
 		string relStr=specialRel->GetString();
 
-		shared_ptr<iExpression> conclusion_true(new SingleExpression("三大于一"));
+		shared_ptr<iExpression> conclusion_true(iLogicElementCreator::CreateExpression("三大于一"));
 		ASSERT_TRUE(specialRel->Satisfy(conclusion_true));
 	}
 }

@@ -27,6 +27,11 @@ namespace LogicSystem
 		_expres.push_back(shared_ptr<SingleExpression>(new SingleExpression(expre)));
 	}
 
+	void CompositeExpression::AddExpression( const shared_ptr<DataCollection::Sentence> val )
+	{
+		_expres.push_back(shared_ptr<SingleExpression>(new SingleExpression(val)));
+	}
+
 	shared_ptr<Mind::iConceptInteractTable> CompositeExpression::GetBaseInteractTable() const
 	{
 		if(_expres.empty()) return NULL;

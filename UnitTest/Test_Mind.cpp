@@ -11,6 +11,7 @@
 #include "../MindInterface/iRelation.h"
 #include "../MindInterface/iLogicStatement.h"
 #include "../MindInterface/iDeduceResult.h"
+#include "../MindInterface/iLogicElementCreator.h"
 
 #include "../Neural Network Design/CompetitiveNetwork.h"
 #include "../Neural Network Design/Neuron_compet.h"
@@ -115,13 +116,14 @@ TEST_F(Test_LogicKnowledgeInitializer,ParseLogicStatement)
 	shared_ptr<LogicSystem::iLogicStatement> statement=Test_Mind::ParseLogicStatement(logicNode,initer);
 
 	//test the deduction of statement 
-	shared_ptr<CompositeExpression> condition(new CompositeExpression());
-	condition->AddExpression("二大于一");
-	condition->AddExpression("三大于二");
+	vector<string> conditionStr;
+	conditionStr.push_back("二大于一");
+	conditionStr.push_back("三大于二");
+	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
 
 	shared_ptr<iDeduceResult> deduceResult=statement->Deduce(condition);
 	
-	shared_ptr<SingleExpression> expect(new SingleExpression("三大于一"));
+	shared_ptr<iExpression> expect(iLogicElementCreator::CreateExpression("三大于一"));
 	ASSERT_EQ(deduceResult->Matching(expect),1);
 }
 

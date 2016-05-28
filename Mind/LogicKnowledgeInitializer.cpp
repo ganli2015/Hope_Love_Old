@@ -7,6 +7,7 @@
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iLogicElementCreator.h"
 
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
@@ -83,7 +84,7 @@ namespace Mind
 
 		shared_ptr<iRelation> results=ParseRelationCollection(node,ResultCollectionNode,ResultNode);
 
-		shared_ptr<iLogicStatement> res(new LogicStatement(conditions,results));
+		shared_ptr<iLogicStatement> res(iLogicElementCreator::CreateLogicStatement(conditions,results));
 
 		return res;
 	}
@@ -101,7 +102,7 @@ namespace Mind
 		else//Parse relation node
 		{
 			const TiXmlElement *relationNode=relationCollectionNode->FirstChildElement(relationNodeStr.c_str());
-			shared_ptr<iRelationNode> nodeRoot(new RelationNode());
+			shared_ptr<iRelationNode> nodeRoot(iLogicElementCreator::CreateRelationNode());
 
 			//Read logic relation , Or or And
 			string logicRelation=relationCollectionNode->Attribute("Relation");
@@ -167,7 +168,7 @@ namespace Mind
 
 	shared_ptr<iRelation> LogicKnowledgeInitializer::ParseRelation(const TiXmlNode * node)
 	{
-		shared_ptr<RelationLeaf> leaf(new RelationLeaf());
+		shared_ptr<iRelationLeaf> leaf(iLogicElementCreator::CreateRelationLeaf());
 
 		const TiXmlNode *symbolPairNode=node->FirstChild(SymbolPairNode.c_str());
 		for (;symbolPairNode!=0;symbolPairNode=symbolPairNode->NextSibling())
@@ -223,7 +224,7 @@ namespace Mind
 		w_i.str=word;
 
 		shared_ptr<iConcept> concept=iCerebrum::Instance()->GetConcept(w_i);
-		shared_ptr<Sym> sym(new Sym(concept));
+		shared_ptr<LogicType::ConSymbol> sym(iLogicElementCreator::CreateConceptSymbol(concept));
 		return sym;
 	}
 
@@ -236,7 +237,7 @@ namespace Mind
 		}
 		else
 		{
-			shared_ptr<Arb> arb=Arb::Create();
+			shared_ptr<LogicType::ConSymbol> arb=iLogicElementCreator::CreateSpecialSymbol(iLogicElementCreator::Arb);
 			_arbTable[arbStr]=arb;
 			return arb;
 		}	
@@ -248,11 +249,11 @@ namespace Mind
 	{
 		if(constaintStr==EqualityNode)
 		{
-			return Equality::Create(sym1,sym2);
+			return iLogicElementCreator::CreateBinaryConstraint(iLogicElementCreator::Eq,sym1,sym2);
 		}
 		else if(constaintStr==InequalityNode)
 		{
-			return Inequality::Create(sym1,sym2);
+			return iLogicElementCreator::CreateBinaryConstraint(iLogicElementCreator::Ineq,sym1,sym2);
 		}
 		else
 		{

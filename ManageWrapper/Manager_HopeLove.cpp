@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Manager_HopeLove.h"
+#include "ConfigureManager.h"
 
 #include "../DataWrapperCPP/DataWrapper.h"
 
@@ -20,7 +21,7 @@ namespace ManageWrapper
 
 	Manager_HopeLove::Manager_HopeLove(void):_datawrappercpp(new DataWrapperCPP::DataWrapper_Sentence)
 	{	
-		Mind::iCerebrum::SetInstance(Mind::Cerebrum::Instance());
+		ConfigureManager::Configure();
 	}
 
 	Manager_HopeLove::~Manager_HopeLove()

@@ -40,11 +40,8 @@ namespace Mind
 		const static string EqualSymbol ;
 		const static string InequalSymbol ;
 
-		typedef LogicSystem::Symbol<iConcept> Sym;
-		typedef LogicSystem::Arbitrariness<iConcept> Arb;
-
 		///Record the arb symbol string in Xml file and arb symbol during parsing the file.
-		map<string,shared_ptr<Arb>> _arbTable;
+		map<string,shared_ptr<LogicType::ConSymbol>> _arbTable;
 		vector<string> _constraintNodeTag;
 
 		friend class Test_Mind;

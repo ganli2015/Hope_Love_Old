@@ -34,6 +34,21 @@ namespace Mind
 		}
 	}
 
+	shared_ptr<iConcept> MindElementCreator::CreateConcept(const shared_ptr<DataCollection::Word> word, const ElementType type ) const
+	{
+		switch(type)
+		{
+		case Host::ConceptD:
+			{
+				return shared_ptr<Concept>(new Concept(word));
+			}
+		default:
+			{
+				return NULL;
+			}
+		}
+	}
+
 	shared_ptr<iConceptChain> MindElementCreator::CreateConceptChain( const ElementType type ) const
 	{
 		switch(type)
@@ -41,6 +56,21 @@ namespace Mind
 		case Host::ConceptChainD:
 			{
 				return shared_ptr<ConceptChain>(new ConceptChain());
+			}
+		default:
+			{
+				return NULL;
+			}
+		}
+	}
+
+	shared_ptr<iConceptChain> MindElementCreator::CreateConceptChain( const vector<shared_ptr<iConcept>>& val,const ElementType type ) const
+	{
+		switch(type)
+		{
+		case Host::ConceptChainD:
+			{
+				return shared_ptr<ConceptChain>(new ConceptChain(val));
 			}
 		default:
 			{

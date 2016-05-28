@@ -9,6 +9,7 @@
 
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 using namespace Mind;
 using namespace DataCollection;
@@ -24,7 +25,7 @@ ConceptCreator::~ConceptCreator(void)
 shared_ptr<Mind::iConcept> SimpleConceptCreator::Create( const string str, const int i/*=0*/ ) const
 {
 	shared_ptr<Word> w(new Word(str));
-	shared_ptr<Concept> res(new Concept(w)); 
+	shared_ptr<iConcept> res=iMindElementCreator::CreateConcept(w); 
 
 	return res;
 }

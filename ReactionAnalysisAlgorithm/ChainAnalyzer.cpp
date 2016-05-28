@@ -10,6 +10,7 @@
 #include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iConceptLevelTable.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 #include "../MindElement/ConceptChain.h"
 #include "../Mind/CommonFunction.h"
@@ -84,7 +85,7 @@ vector<shared_ptr<iConceptChain>> ChainAnalyzer::ComputeProperCombination( const
 	{
 		if(CoverBase(subSequences[i],baseChain))
 		{
-			res.push_back(shared_ptr<iConceptChain>(new ConceptChain(subSequences[i])));
+			res.push_back(iMindElementCreator::CreateConceptChain(subSequences[i]));
 		}
 	}
 

@@ -21,6 +21,7 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/iDeduceResult.h"
+#include "../MindInterface/iLogicElementCreator.h"
 
 #include "../DataCollection/GrammaPattern.h"
 
@@ -57,12 +58,13 @@ TEST_F(Test_Logic,Determine)
 
 	Logic logic;
 
-	shared_ptr<CompositeExpression> condition(new CompositeExpression());
-	condition->AddExpression("二大于一");
-	condition->AddExpression("三大于二");
+	vector<string> conditionStr;
+	conditionStr.push_back("二大于一");
+	conditionStr.push_back("三大于二");
+	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
 
-	shared_ptr<iExpression> conclusion_true(new SingleExpression("三大于一"));
-	shared_ptr<iExpression> conclusion_false(new SingleExpression("一大于三"));
+	shared_ptr<iExpression> conclusion_true(iLogicElementCreator::CreateExpression("三大于一"));
+	shared_ptr<iExpression> conclusion_false(iLogicElementCreator::CreateExpression("一大于三"));
 
 	ASSERT_TRUE(logic.Determine(condition,conclusion_true)==True);
 	ASSERT_TRUE(logic.Determine(condition,conclusion_false)==False);
@@ -123,6 +125,6 @@ TEST_F(Test_Logic,Deduce)
 
 	ASSERT_EQ(results.size(),1);
 
-	shared_ptr<iExpression> expect(new SingleExpression("五"));
+	shared_ptr<iExpression> expect(iLogicElementCreator::CreateExpression("五"));
 	ASSERT_TRUE(results.front()->Matching(expect)==1);
 }

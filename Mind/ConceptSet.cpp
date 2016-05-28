@@ -1,8 +1,6 @@
 #include "StdAfx.h"
 #include "ConceptSet.h"
-#include "../MindElement/BaseConcept.h"
 #include "CommonFunction.h"
-#include "../MindElement/ConceptInteractTable.h"
 #include "ConceptSetInitializer.h"
 #include "FindConnectConcept.h"
 #include <fstream>
@@ -16,6 +14,9 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/CommonFunctions.h"
+
+#include "../MindElement/ConceptInteractTable.h"
+#include "../MindElement/BaseConcept.h"
 
 using namespace std;
 using namespace DataCollection;

@@ -39,7 +39,7 @@ namespace Mind
 		Concept(void);
 		virtual ~Concept(void);
 		//Concept(std::string str);;
-		Concept(shared_ptr<DataCollection::Word> word);
+		Concept(const shared_ptr<DataCollection::Word> word);
 
 		virtual shared_ptr<iConcept> Copy() const;
 		virtual bool Same(const shared_ptr<iConcept> concept) const;

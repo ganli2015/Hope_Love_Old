@@ -21,7 +21,7 @@ namespace Mind
 		//DeleteVectorPtr(_adjWord);
 	}
 
-	Concept::Concept(shared_ptr<DataCollection::Word> word)
+	Concept::Concept(const shared_ptr<DataCollection::Word> word)
 	{
 		_identity.str=word->GetString();
 		_identity.id=0;

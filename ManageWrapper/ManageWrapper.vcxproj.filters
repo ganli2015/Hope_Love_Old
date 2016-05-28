@@ -20,12 +20,18 @@
     <ClInclude Include="Manager_HopeLove.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ConfigureManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Manager_HopeLove.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigureManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,6 +5,7 @@
 #include "../MindElement/ConceptChain.h"
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iConceptChain.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 using namespace Mind;
 
@@ -24,13 +25,13 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vec
 	for (unsigned int i=0;i<pairs_copy.size();++i)
 	{
 		_recursiveCount=0;
-		shared_ptr<iConceptChain> relatedChain_Back(new ConceptChain());
+		shared_ptr<iConceptChain> relatedChain_Back=iMindElementCreator::CreateConceptChain();
 		relatedChain_Back->Push_Back(pairs_copy[i].first);
 		vector<shared_ptr<iConceptChain>> backChains;
 		Recursive_Search(Backward,pairs_copy[i].first,pairs_copy,relatedChain_Back,backChains);
 
 		_recursiveCount=0;
-		shared_ptr<iConceptChain> relatedChain_Forward(new ConceptChain());
+		shared_ptr<iConceptChain> relatedChain_Forward=iMindElementCreator::CreateConceptChain();
 		relatedChain_Forward->Push_Back(pairs_copy[i].second);
 		vector<shared_ptr<iConceptChain>> forwardChains;
 		Recursive_Search(Forward,pairs_copy[i].second,pairs_copy,relatedChain_Forward,forwardChains);
@@ -139,7 +140,7 @@ vector<shared_ptr<Mind::iConcept>> ExtractConceptChains::GetBackwordAdjConcepts(
 
 shared_ptr<Mind::iConceptChain> ExtractConceptChains::AppendToChains( const shared_ptr<iConcept> concept,const shared_ptr<Mind::iConceptChain>& chains ,const SearchDir dir)
 {
-	shared_ptr<Mind::iConceptChain> res(new ConceptChain(chains->GetConceptVec()));
+	shared_ptr<Mind::iConceptChain> res=iMindElementCreator::CreateConceptChain(chains->GetConceptVec());
 	if(dir==Forward)
 	{
 		res->Push_Back(concept);

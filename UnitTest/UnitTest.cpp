@@ -11,6 +11,7 @@ using namespace std;
 #include "FuncForTest.h"
 #include "../UTFacility/LeafCreator.h"
 #include "../MindElement/MindElementCreator.h"
+#include "../LogicSystem/LogicElementCreator.h"
 
 class MyGlobal: public testing::Environment
 {
@@ -23,8 +24,11 @@ public:
 void MyGlobal::SetUp()
 {
 	LeafCreator::Init();
-	shared_ptr<Mind::MindElementCreator> creator(new Mind::MindElementCreator());
-	Mind::iMindElementCreator::SetImp(creator);
+	shared_ptr<Mind::MindElementCreator> mindCreator(new Mind::MindElementCreator());
+	Mind::iMindElementCreator::SetImp(mindCreator);
+
+	shared_ptr<LogicSystem::LogicElementCreator> logicCreator(new LogicSystem::LogicElementCreator());
+	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
 }
 
 

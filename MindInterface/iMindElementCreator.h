@@ -1,6 +1,11 @@
 #pragma once
 #include "InOut.h"
 
+namespace DataCollection
+{
+	class Word;
+}
+
 namespace Mind
 {
 	class iConcept;
@@ -32,7 +37,11 @@ namespace Mind
 		static void SetImp(const shared_ptr<iMindElementCreatorImp> imp){_imp=imp;}
 
 		static shared_ptr<iConcept> CreateConcept(const ElementType type=ConceptD);
+		static shared_ptr<iConcept> CreateConcept(const shared_ptr<DataCollection::Word> word,const ElementType type=ConceptD);
+
 		static shared_ptr<iConceptChain> CreateConceptChain(const ElementType type=ConceptChainD);
+		static shared_ptr<iConceptChain> CreateConceptChain(const vector<shared_ptr<iConcept>>& val,const ElementType type=ConceptChainD) ;
+
 		static shared_ptr<iConceptEdge> CreateConceptEdge(const ElementType type=ConceptEdgeD);
 		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type=ConceptInteractTableD);
 		///<val> is the central concept of level table.
@@ -54,7 +63,11 @@ namespace Mind
 		virtual ~iMindElementCreatorImp(){}
 
 		virtual shared_ptr<iConcept> CreateConcept(const ElementType type) const =0;
+		virtual shared_ptr<iConcept> CreateConcept(const shared_ptr<DataCollection::Word> word,const ElementType type) const =0;
+
 		virtual shared_ptr<iConceptChain> CreateConceptChain(const ElementType type) const =0;
+		virtual shared_ptr<iConceptChain> CreateConceptChain(const vector<shared_ptr<iConcept>>& val,const ElementType type) const =0;
+
 		virtual shared_ptr<iConceptEdge> CreateConceptEdge(const ElementType type) const =0;
 		virtual shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type) const =0;
 		virtual shared_ptr<iConceptLevelTable> CreateConceptLevelTable(const shared_ptr<iConcept> val ,const ElementType type) const =0;

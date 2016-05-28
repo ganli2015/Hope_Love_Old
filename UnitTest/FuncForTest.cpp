@@ -12,6 +12,7 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/PublicTypedef.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
@@ -28,7 +29,7 @@ namespace FuncForTest
 	shared_ptr<iConcept> SimpleConcept( const string str )
 	{
 		shared_ptr<Word> w(new Word(str));
-		shared_ptr<Concept> res(new Concept(w)); 
+		shared_ptr<iConcept> res=iMindElementCreator::CreateConcept(w); 
 
 		return res;
 	}
