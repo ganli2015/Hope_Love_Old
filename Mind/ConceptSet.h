@@ -13,7 +13,7 @@ namespace DataCollection
 
 namespace Mind
 {
-	class ConceptInteractTable_iConcept;
+	class iConceptInteractTable;
 
 	class _MINDINOUT ConceptSet : public MyObject
 	{
@@ -45,8 +45,11 @@ namespace Mind
 		//当前只认为一个word对应一个Concept，两个词性不同的word即使string相同，也对应两个Concept
 		//暂定：任何词性的word都只能和名词以及与其自身相同词性的word连接
 		void MakeConnection(const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to);
-		//对from和to的连接建立修饰词modification
-		void AddModification(const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to,const shared_ptr<DataCollection::Word> modification);
+		
+		///Add modification betweeen <from> and <to>.
+		void AddModification(const Identity& from,const Identity& to,const Identity& modification);
+		void AddModification(const Identity& from,const Identity& to,const shared_ptr<iConceptInteractTable>& modification);
+		
 		//获得Concept指针的拷贝，不是直接引用私有成员。
 		shared_ptr<iConcept> GetConceptPtr(const shared_ptr<DataCollection::Word> word) const ;
 		shared_ptr<iConcept> GetConceptPtr(const Identity identity) const ;

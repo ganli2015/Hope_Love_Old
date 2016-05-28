@@ -11,6 +11,7 @@ namespace DataCollection
 namespace Mind
 {
 	class ConceptSet;
+	class iConceptInteractTable;
 	struct Identity;
 	struct Connection_Info;
 
@@ -34,11 +35,13 @@ namespace Mind
 
 		static void InitializeConceptConnection(ConceptSet* conceptSet,string filename);
 
-		static void CheckInitialConceptData();
+		static void CheckInitialConceptData(const ConceptSet* conceptSet);
 
 	private:
 		//初始化ConceptSet时使用
 		static vector<Word_ID> InputWordFromFile( string filename );
+		//初始化ConceptSet时使用
+		static vector<Connection_Info> InputConnectionFromFile(string filename,const ConceptSet* conceptSet);
 
 		//检查wholeConcepts里是否有重复的单词（相同字符串同时ID也相同的单词）.
 		static void CheckNonBaseConceptString(const vector<Word_ID>& wholeConcepts,ofstream& out);
@@ -56,5 +59,13 @@ namespace Mind
 		static bool IdentityExist(const Identity identity,const vector<Word_ID>& list);
 		static bool WordIDExist(const Word_ID word_id,const vector<Word_ID>& list);
 
+		///<str> should be something like "0@A-0@B,1@C-0@D".
+		///Concept pairs are separated by ','.
+		///From and to concept are separated by '-'.
+		///ID and word are separated by '@'.
+		static shared_ptr<iConceptInteractTable> ParseStrToTable(const string str,const ConceptSet* conceptSet);
+		static Identity ParseStrToIdentity(const string str);
+		static shared_ptr<iConceptInteractTable> ParseSingleMod(const vector<string>::iterator& beg,const vector<string>::iterator& end, const Identity& to,const ConceptSet* conceptSet);
+		static bool IsConceptTableStr(const vector<string>::iterator& beg,const vector<string>::iterator& end);
 	};
 }

@@ -6,9 +6,12 @@
 #include "iConcept.h"
 #include "iConceptInteractTable.h"
 #include "iConceptChain.h"
+#include "iMindElementCreator.h"
 
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/Word.h"
+
+#include "../CommonTools/CommonStringFunction.h"
 
 using namespace DataCollection;
 

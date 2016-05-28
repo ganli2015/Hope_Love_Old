@@ -6,7 +6,13 @@
 #include "../DataCollection/Word.h"
 #include "../DataCollection/LanguageFunc.h"
 
+#include "../MindInterface/iMindElementCreator.h"
+#include "../MindInterface/iConceptInteractTable.h"
+
+#include "../CommonTools/CommonStringFunction.h"
+
 using namespace DataCollection;
+using namespace Mind;
 
 namespace Mind
 {
@@ -101,28 +107,25 @@ namespace Mind
 			void operator()(const Connection_Info connection_info)
 			{
 				//找到当前单词对应的Word（含有词性）
-				shared_ptr<Word> word_me=_val->SearchWord(connection_info.me);
+				Identity meID=connection_info.me;
+				shared_ptr<Word> word_me=_val->SearchWord(meID);
 
 				for (unsigned int i=0;i<connection_info.edge_infos.size();++i)
 				{
 					//找到依赖单词对应的Word（含有词性）
-					shared_ptr<Word> word_to=_val->SearchWord(connection_info.edge_infos[i].to);
+					Identity toID=connection_info.edge_infos[i].to;
+					shared_ptr<Word> word_to=_val->SearchWord(toID);
 
 					_val->MakeConnection(word_me,word_to);
-					//为每一个依赖单词添加修饰词
-					for (unsigned int j=0;j<connection_info.edge_infos[i].modifications.size();++j)
-					{
-						shared_ptr<Word> word_mod=_val->SearchWord(connection_info.edge_infos[i].modifications[j]);
-
-						_val->AddModification(word_me,
-							word_to,
-							word_mod);
-					}
+					//Add modification table.
+					shared_ptr<iConceptInteractTable> modTable=connection_info.edge_infos[i].modifications;
+					if(modTable==NULL) continue;
+					_val->AddModification(meID,toID,modTable);
 				}
 			}
 		};
 
-		vector<Connection_Info> connections=CommonFunction::InputConnectionFromFile(filename);
+		vector<Connection_Info> connections=InputConnectionFromFile(filename,conceptSet);
 		for_each(connections.begin(),connections.end(),BuildConceptConnection(conceptSet));
 	}
 
@@ -148,12 +151,12 @@ namespace Mind
 		return words_id;
 	}
 
-	void ConceptSetInitializer::CheckInitialConceptData()
+	void ConceptSetInitializer::CheckInitialConceptData(const ConceptSet* conceptSet)
 	{
 		ofstream out("CheckInitialConceptData.txt");
 
 		vector<Word_ID> nonBase_word_ids=InputWordFromFile(GetHopeLoveMindPath()+NonBaseConceptString_InitialFilename);
-		vector<Connection_Info> connectionInfos=CommonFunction::InputConnectionFromFile(GetHopeLoveMindPath()+ConceptConnections_InitialFilename);
+		vector<Connection_Info> connectionInfos=InputConnectionFromFile(GetHopeLoveMindPath()+ConceptConnections_InitialFilename,conceptSet);
 		vector<Word_ID> base_word_ids=InputWordFromFile(GetHopeLoveMindPath()+BaseConceptsStringFilename);
 		vector<Word_ID> whole_word_ids=base_word_ids;whole_word_ids.insert(whole_word_ids.end(),nonBase_word_ids.begin(),nonBase_word_ids.end());
 
@@ -261,17 +264,30 @@ namespace Mind
 				}
 
 				//检查Modification
-				for (unsigned int k=0;k<connectionInfos[i].edge_infos[j].modifications.size();++k)
+				shared_ptr<iConceptInteractTable> modTable=connectionInfos[i].edge_infos[j].modifications;
+				if(modTable==NULL) continue;
+				vector<MindType::ConceptPair> pairs=modTable->GetAllRelations();
+				for (unsigned int k=0;k<pairs.size();++k)
 				{
-					if(!IdentityExist(connectionInfos[i].edge_infos[j].modifications[k],wholeConcepts))
+					Identity fromID=pairs[k].first->GetIdentity();
+					Identity toD=pairs[k].second->GetIdentity();
+
+					if(!IdentityExist(fromID,wholeConcepts))
 					{
 						cout<<"Identity not Exist"<<endl;
 
-						OutputIdentity(connectionInfos[i].edge_infos[j].modifications[k],out);
+						OutputIdentity(fromID,out);
 
 						throw runtime_error("CheckInitialConceptData");
 					}
+					if(!IdentityExist(toD,wholeConcepts))
+					{
+						cout<<"Identity not Exist"<<endl;
 
+						OutputIdentity(toD,out);
+
+						throw runtime_error("CheckInitialConceptData");
+					}
 				}
 			}
 
@@ -321,6 +337,151 @@ namespace Mind
 		}
 
 		return false;
+	}
+
+	shared_ptr<iConceptInteractTable> ConceptSetInitializer::ParseStrToTable( const string str,const ConceptSet* conceptSet )
+	{
+		shared_ptr<Mind::iConceptInteractTable> res=iMindElementCreator::CreateConceptInteractTable(/*iMindElementCreator::ConceptInteractTable_IdentityBased*/);
+
+		//split ','
+		vector<string> pariStr=CommonTool::SplitString(str,',');
+		for (unsigned int i=0;i<pariStr.size();++i)
+		{
+			//split '-'
+			vector<string> fromTo=CommonTool::SplitString(pariStr[i],'-');
+			Check(fromTo.size()==2);
+
+			Identity idFrom=ParseStrToIdentity(fromTo[0]);
+			shared_ptr<iConcept> from=conceptSet->GetConceptPtr(idFrom);
+
+			Identity idTo=ParseStrToIdentity(fromTo[1]);
+			shared_ptr<iConcept> to=conceptSet->GetConceptPtr(idTo);
+
+			res->Add(from,to);
+		}
+
+		return res;
+	}
+
+	Mind::Identity ConceptSetInitializer::ParseStrToIdentity( const string str )
+	{
+		vector<string> w_i=CommonTool::SplitString(str,'@');
+		Check(w_i.size()==2);
+
+		Identity res;
+		res.id=CommonTool::StrToInt(w_i[0]);
+		res.str=w_i[1];
+
+		return res;
+	}
+
+	vector<Connection_Info> ConceptSetInitializer::InputConnectionFromFile( string filename ,const ConceptSet* conceptSet)
+	{
+		ifstream in(filename);
+		vector<Connection_Info> res;
+		string str;
+		while(getline(in,str))
+		{
+			vector<string> split=CommonTool::SplitString(str,' ');
+
+			if(split.size()<2)
+			{
+				throw logic_error("Error in InputConnectionFromFile");
+			}
+
+			Connection_Info connnection_info;
+			//读取当前的word和id
+			connnection_info.me=CommonFunction::TransformToIdentity(split[0],split[1]);
+
+			if(split.size()==2)//没有ConceptEdge就继续下个循环
+			{
+				res.push_back(connnection_info);
+				continue;
+			}
+
+			//读取Edge
+			int index=2;//开始遍历后面的string
+			while(true)
+			{
+				if(split[index]!="to")
+				{
+					throw runtime_error("Error in InputConnectionFromFile");
+				}
+				else
+				{
+					index++;
+				}
+
+				//读取依赖的word及其id
+				Edge_Info edge_info;
+				edge_info.to=CommonFunction::TransformToIdentity(split[index],split[index+1]);
+				index+=2;
+
+				if(split.begin()+index==split.end())
+				{
+					connnection_info.edge_infos.push_back(edge_info);
+					break;
+				}
+
+				//读取修饰词
+				vector<string>::iterator find_next_to=find(split.begin()+index,split.end(),"to");
+				
+				shared_ptr<iConceptInteractTable> modifications;
+				if(IsConceptTableStr(split.begin()+index,split.end()))
+				{
+					modifications=ParseStrToTable(*(split.begin()+index),conceptSet);
+				}
+				else
+				{
+					modifications=ParseSingleMod(split.begin()+index,split.end(),edge_info.to,conceptSet);
+				}
+				edge_info.modifications=modifications;
+
+				connnection_info.edge_infos.push_back(edge_info);
+
+				if(find_next_to==split.end())
+				{
+					break;
+				}
+
+				index+=distance(split.begin()+index,find_next_to);//移动index到下一个to的位置。
+			}
+
+			res.push_back(connnection_info);
+		}
+
+		return res;
+	}
+
+	shared_ptr<iConceptInteractTable> ConceptSetInitializer::ParseSingleMod( const vector<string>::iterator& beg,const vector<string>::iterator& end ,const Identity& toID,const ConceptSet* conceptSet)
+	{
+		if(distance(beg,end)%2!=0)//string的个数必须是偶数，因为word和id总是成对出现
+		{
+			throw runtime_error("Error in InputConnectionFromFile");
+		}
+		shared_ptr<iConceptInteractTable> res= iMindElementCreator::CreateConceptInteractTable(/*iMindElementCreator::ConceptInteractTable_IdentityBased*/);
+		shared_ptr<iConcept> to=conceptSet->GetConceptPtr(toID);
+
+		for (vector<string>::iterator it=beg;it!=end;it+=2)
+		{
+			Identity modID=CommonFunction::TransformToIdentity(*it,*(it+1));
+			shared_ptr<iConcept> mod=conceptSet->GetConceptPtr(modID);
+			res->Add(mod,to);
+		}
+
+		return res;
+	}
+
+	bool ConceptSetInitializer::IsConceptTableStr( const vector<string>::iterator& beg,const vector<string>::iterator& end )
+	{
+		if(distance(beg,end)==1 && beg->find('-')!=string::npos)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

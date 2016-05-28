@@ -50,6 +50,7 @@ namespace Mind
 
 		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
 
+
 		class _MINDINTERFACEINOUT SameConcept
 		{
 			shared_ptr<iConcept> _me;

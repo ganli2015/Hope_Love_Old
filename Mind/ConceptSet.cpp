@@ -231,10 +231,17 @@ namespace Mind
 
 	void ConceptSet::Initialize()
 	{
+		ConceptSetInitializer::InitializeBaseConcept(this,GetHopeLoveMindPath()+BaseConceptsStringFilename);
+
+		ConceptSetInitializer::InitializeNonBaseConcept(this,GetHopeLoveMindPath()+NonBaseConceptString_InitialFilename);
+
+		ConceptSetInitializer::InitializeConceptConnection(this,GetHopeLoveMindPath()+ConceptConnections_InitialFilename);
+
+
 #ifdef _CheckInitialConceptData
 		try
 		{
-			ConceptSetInitializer::CheckInitialConceptData();
+			ConceptSetInitializer::CheckInitialConceptData(this);
 		}
 		catch(...)
 		{
@@ -242,11 +249,6 @@ namespace Mind
 		}
 #endif
 
-		ConceptSetInitializer::InitializeBaseConcept(this,GetHopeLoveMindPath()+BaseConceptsStringFilename);
-
-		ConceptSetInitializer::InitializeNonBaseConcept(this,GetHopeLoveMindPath()+NonBaseConceptString_InitialFilename);
-
-		ConceptSetInitializer::InitializeConceptConnection(this,GetHopeLoveMindPath()+ConceptConnections_InitialFilename);
 	}
 
 	std::vector<shared_ptr<DataCollection::Word>> ConceptSet::GetAllKindsofWord(const shared_ptr<DataCollection::Word> word) const
@@ -387,7 +389,7 @@ namespace Mind
 		ptoConcept->AddBackwardConcept(pfromConcept);
 	}
 
-	void ConceptSet::AddModification(const shared_ptr<DataCollection::Word> from, const shared_ptr<DataCollection::Word> to,const shared_ptr<DataCollection::Word> modification )
+	void ConceptSet::AddModification(const Identity& from,const Identity& to,const Identity& modification)
 	{
 		shared_ptr<Concept> pfromConcept=GetConceptRef(from);
 		shared_ptr<Concept> ptoConcept=GetConceptRef(to);
@@ -398,52 +400,21 @@ namespace Mind
 		}
 
 		pfromConcept->AddForwardModification(ptoConcept,pmodConcept);
-		ptoConcept->AddBackwardModification(pfromConcept,pmodConcept);
+//		ptoConcept->AddBackwardModification(pfromConcept,pmodConcept);
 	}
 
-// 	bool ConceptSet::GetConcept( const Identity identity,Concept& concept ) const  
-// 	{
-// 		const_conceptIter beg=_conceptset.lower_bound(identity.str);
-// 		const_conceptIter end=_conceptset.upper_bound(identity.str);
-// 		if(beg==_conceptset.end() && end==_conceptset.end())
-// 		{
-// 			return false;
-// 		}
-// 
-// 		while(beg!=end)
-// 		{
-// 			if(beg->second->GetId()==identity.id)
-// 			{
-// 				concept=*beg->second;
-// 				return true;
-// 			}
-// 			beg++;
-// 		}
-// 
-// 		return false;
-// 	}
-// 
-// 	bool ConceptSet::GetConcept( const shared_ptr<Word> word,Concept& concept ) const 
-// 	{
-// 		const_conceptIter beg=_conceptset.lower_bound(word->GetString());
-// 		const_conceptIter end=_conceptset.upper_bound(word->GetString());
-// 		if(beg==_conceptset.end() && end==_conceptset.end())
-// 		{
-// 			return false;
-// 		}
-// 
-// 		while(beg!=end)
-// 		{
-// 			if(beg->second->GetPartOfSpeech()==word->Type())
-// 			{
-// 				concept=*beg->second;
-// 				return true;
-// 			}
-// 			beg++;
-// 		}
-// 
-// 		return false;
-// 	}
+	void ConceptSet::AddModification( const Identity& from,const Identity& to,const shared_ptr<iConceptInteractTable>& modification )
+	{
+		shared_ptr<Concept> pfromConcept=GetConceptRef(from);
+		shared_ptr<Concept> ptoConcept=GetConceptRef(to);
+		if(pfromConcept==NULL || ptoConcept==NULL )
+		{
+			throw runtime_error("Error in MakeConnection: Cannot find the concept!");
+		}
+
+		pfromConcept->AddForwardModification(ptoConcept,modification);
+//		ptoConcept->AddBackwardModification(pfromConcept,pmodConcept);
+	}
 
 	shared_ptr<Concept> ConceptSet::GetConceptRef(const shared_ptr<DataCollection::Word> word) const 
 	{

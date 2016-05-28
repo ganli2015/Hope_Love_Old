@@ -111,6 +111,19 @@ namespace Mind
 		}
 	}
 
+	void Concept::AddForwardModification( const shared_ptr<iConcept> toConcept,const shared_ptr<iConceptInteractTable> modification )
+	{
+		vector<shared_ptr<iConceptEdge>>::iterator it=find_if(_forward.begin(),_forward.end(),find_conceptEdge(toConcept));
+		if(it==_forward.end())
+		{
+			throw runtime_error("Error in AddModification: not find concept in conceptEdges!");
+		}
+		else
+		{
+			(*it)->AddModification(modification);
+		}
+	}
+
 	void Concept::AddBackwardModification( const shared_ptr<iConcept> fromConcept,const shared_ptr<iConcept> modification )
 	{
 		vector<shared_ptr<iConceptEdge>>::iterator it=find_if(_backward.begin(),_backward.end(),find_conceptEdge(fromConcept));

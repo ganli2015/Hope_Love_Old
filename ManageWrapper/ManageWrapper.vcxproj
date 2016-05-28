@@ -181,6 +181,9 @@
     <ProjectReference Include="..\GlobalInterface\GlobalInterface.csproj">
       <Project>{b35d6007-1c1b-48a3-a6a8-b9438366537a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\LogicSystem\LogicSystem.vcxproj">
+      <Project>{9f99884f-7129-4bf4-af3f-98daeab5224c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\MindElement\MindElement.vcxproj">
       <Project>{0270e5bd-21c1-4423-9969-0ef1ce1b0274}</Project>
     </ProjectReference>

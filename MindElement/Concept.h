@@ -55,6 +55,7 @@ namespace Mind
 		virtual void AddBackwardConcept(const shared_ptr<iConcept> concept,const double sensitivity=1);
 		//添加与toConcept关联的修饰词
 		virtual void AddForwardModification(const shared_ptr<iConcept> toConcept,const shared_ptr<iConcept> modification);
+		virtual void AddForwardModification(const shared_ptr<iConcept> toConcept,const shared_ptr<iConceptInteractTable> modification) ;
 		virtual void AddBackwardModification(const shared_ptr<iConcept> toConcept,const shared_ptr<iConcept> modification);
 
 		virtual DataCollection::PartOfSpeech GetPartOfSpeech() const {return _partofspeech;}

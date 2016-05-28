@@ -17,7 +17,7 @@ namespace Mind
 		virtual void SetSensitivity(double val) =0;
 
 		virtual void AddModification(const shared_ptr<iConcept> modification) =0;
-		//virtual vector<shared_ptr<iConcept>> GetModification() const =0;
+		virtual void AddModification(const shared_ptr<iConceptInteractTable> table) =0;
 
 		///Get the modification represented as a iConceptInteractTable which contains concept pairs 
 		///and describe the relation graph about <me>.

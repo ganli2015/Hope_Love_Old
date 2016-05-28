@@ -71,6 +71,11 @@ namespace Mind
 		_modTable->Add(modification,_concept.lock());
 	}
 
+	void ConceptEdge::AddModification( const shared_ptr<iConceptInteractTable> table )
+	{
+		_modTable->Absorb(table);
+	}
+
 // 	vector<shared_ptr<iConcept>> ConceptEdge::GetModification() const
 // 	{
 // 		vector<shared_ptr<iConcept>> res(_modification.size());

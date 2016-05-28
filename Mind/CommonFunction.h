@@ -17,10 +17,13 @@ namespace NeuralNetwork
 
 namespace Mind
 {
+	class ConceptSet;
+	class iConceptInteractTable;
+
 	struct Edge_Info//表示从文件读取的ConceptEdge的信息
 	{
 		Identity to;
-		vector<Identity> modifications;
+		shared_ptr<iConceptInteractTable> modifications;
 	};
 	struct Connection_Info
 	{
@@ -30,13 +33,9 @@ namespace Mind
 
 
 	
-	class ConceptSet;
 
 	namespace CommonFunction
 	{
-		//初始化ConceptSet时使用
-		vector<Connection_Info> InputConnectionFromFile(string filename);
-
 		Identity TransformToIdentity(const string idStr,const string wordStr);
 
 		shared_ptr<NeuralNetwork::iDataArray> ToDataArray(const shared_ptr<iConceptChain> chain, const ConceptSet* conceptSet);

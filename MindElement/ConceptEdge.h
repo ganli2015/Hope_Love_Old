@@ -32,6 +32,8 @@ namespace Mind
 		}
 
 		virtual void AddModification(const shared_ptr<iConcept> modification);
+		virtual void AddModification(const shared_ptr<iConceptInteractTable> table) ;
+
 		//virtual vector<shared_ptr<iConcept>> GetModification() const;
 		virtual shared_ptr<iConceptInteractTable> GetModification() const ;
 
