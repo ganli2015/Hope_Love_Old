@@ -7,9 +7,7 @@ namespace Mind
 	class iConcept;
 
 	
-
-	//Concept相互作用的列表。该相互作用与ConceptEdge不同，后者是存在于ConceptSet里的原型的连接，
-	//是一个已经有较牢固关系的连接。前者则是临时的连接，通常是在遇见新的知识新的语句的时候建立的。
+	///iConceptInteractTable contains concept pairs that describe the temporary relationship between them. 
 	class _MINDINTERFACEINOUT iConceptInteractTable: public MyObject
 	{
 		typedef MindType::ConceptPair ConceptPair;
@@ -31,6 +29,8 @@ namespace Mind
 		virtual void InteractDeeper() =0;
 
 		virtual void RemoveDuplicated() =0;
+
+		virtual shared_ptr<iConceptInteractTable> Copy() const =0;
 	};
 }
 

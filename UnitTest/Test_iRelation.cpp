@@ -18,6 +18,7 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 #include "../Mind/Cerebrum.h"
 
@@ -101,7 +102,7 @@ TEST_F(Test_iRelation,RelationLeafSatisfy)
 	string leafStr="三-大,大-于,于-二";
 	shared_ptr<RelationLeaf> leaf1=LeafCreator::SimpleCreate(leafStr);
 
-	shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+	shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 	interTable->Add(san,da);
 	interTable->Add(da,yu);
 	interTable->Add(yu,er);
@@ -130,7 +131,7 @@ TEST_F(Test_iRelation,RelationLeafSatisfy2)
 		leaf1->AddRelation(s2,arb2);
 		leaf1->AddConstraint(Inequality::Create(arb1,arb2));
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,san2);
@@ -162,7 +163,7 @@ TEST_F(Test_iRelation,RelationLeafSatisfy3)
 		leaf1->AddRelation(s1,s2);
 		leaf1->AddRelation(s2,arb2);
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -197,7 +198,7 @@ TEST_F(Test_iRelation,RelationLeafSatisfy4)
 		leaf1->AddRelation(s1,s2);
 		leaf1->AddRelation(s2,arb2);
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(si,er);
@@ -217,7 +218,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy)
 		shared_ptr<iConcept> er=_conceptCreator->Create("二");
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -245,7 +246,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy2)
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 		shared_ptr<iConcept> xiao=_conceptCreator->Create("小");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -275,7 +276,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy3)
 		shared_ptr<iConcept> wu=_conceptCreator->Create("五");
 		shared_ptr<iConcept> liu=_conceptCreator->Create("六");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -304,7 +305,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy4)
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 		shared_ptr<iConcept> xiao=_conceptCreator->Create("小");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -330,7 +331,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy5)
 		shared_ptr<iConcept> er=_conceptCreator->Create("二");
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -355,7 +356,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy6)
 		shared_ptr<iConcept> er=_conceptCreator->Create("二");
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,da);
 		interTable->Add(da,yu);
 		interTable->Add(yu,er);
@@ -377,7 +378,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy7)
 		shared_ptr<iConcept> er=_conceptCreator->Create("二");
 		shared_ptr<iConcept> yi=_conceptCreator->Create("一");
 
-		shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 		interTable->Add(san,xiao);
 		interTable->Add(xiao,yu);
 		interTable->Add(yu,er);
@@ -434,7 +435,7 @@ TEST_F(Test_RelationNeedCerebrum,PlusOfNumber)
 	shared_ptr<iConcept> jia=GetConcept("加",0);
 	shared_ptr<iConcept> er=GetConcept("二",0);
 
-	shared_ptr<iConceptInteractTable> interTable(new ConceptInteractTable());
+	shared_ptr<iConceptInteractTable> interTable=iMindElementCreator::CreateConceptInteractTable();
 	interTable->Add(san,jia);
 	interTable->Add(jia,er);
 

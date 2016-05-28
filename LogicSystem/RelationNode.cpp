@@ -5,7 +5,8 @@
 #include "../MindInterface/iExpression.h"
 #include "../MindInterface/iConceptInteractTable.h"
 
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iMindElementCreator.h"
+
 
 using namespace Mind;
 
@@ -229,7 +230,7 @@ namespace LogicSystem
 
 	shared_ptr<Mind::iConceptInteractTable> RelationNode::GenerateConceptTable() const
 	{
-		shared_ptr<Mind::iConceptInteractTable> res(new ConceptInteractTable());
+		shared_ptr<Mind::iConceptInteractTable> res=iMindElementCreator::CreateConceptInteractTable();
 		for (unsigned int i=0;i<_subRelations.size();++i)
 		{
 			shared_ptr<Mind::iConceptInteractTable> subTable=_subRelations[i]->GenerateConceptTable();

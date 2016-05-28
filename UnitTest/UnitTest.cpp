@@ -10,17 +10,22 @@ using namespace std;
 #include "PublicHeader.h"
 #include "FuncForTest.h"
 #include "../UTFacility/LeafCreator.h"
+#include "../MindElement/MindElementCreator.h"
 
 class MyGlobal: public testing::Environment
 {
 public:
 
-	virtual void SetUp() 
-	{
-		LeafCreator::Init();
-	}
+	virtual void SetUp();
 	virtual void TearDown() {}
 };
+
+void MyGlobal::SetUp()
+{
+	LeafCreator::Init();
+	shared_ptr<Mind::MindElementCreator> creator(new Mind::MindElementCreator());
+	Mind::iMindElementCreator::SetImp(creator);
+}
 
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])

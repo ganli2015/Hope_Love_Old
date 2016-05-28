@@ -1,16 +1,19 @@
 #include "StdAfx.h"
 #include "ConceptEdge.h"
 #include "Concept.h"
-#include "ConceptInteractTable.h"
+#include "ConceptInteractTable_iConcept.h"
 
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/PublicTypedef.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 namespace Mind
 {
 	ConceptEdge::ConceptEdge(void)
 	{
+		Init();
 	}
 
 
@@ -20,7 +23,7 @@ namespace Mind
 
 	ConceptEdge::ConceptEdge( const shared_ptr<iConcept> concept ):_concept(concept),_sensitivity(1)
 	{
-
+		Init();
 	}
 
 	ConceptEdge::ConceptEdge(const shared_ptr<iConcept> concept,const double sensi):_concept(concept),_sensitivity(sensi)
@@ -29,17 +32,29 @@ namespace Mind
 		{
 			throw runtime_error("Sensitivity must be between -1 and 1 !!");
 		}
+
+		Init();
 	}
 
 	shared_ptr<iConceptInteractTable> ConceptEdge::GetSelfDeepInteract() const
 	{
-		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable_iConcept());
 
-		vector<shared_ptr<iConcept>> base_to=_concept.lock()->GetBase();
-		for (unsigned int i=0;i<_modification.size();++i)
+// 		vector<shared_ptr<iConcept>> base_to=_concept.lock()->GetBase();
+// 		for (unsigned int i=0;i<_modification.size();++i)
+// 		{
+// 			vector<shared_ptr<iConcept>> base_mod=_modification[i].lock()->GetBase();
+// 			CommonFunction::AppendToInteractTable(base_mod,base_to,res);
+// 		}
+
+		
+		vector<MindType::ConceptPair> pairs=_modTable->GetAllRelations();
+		//Go through all concept pairs and collect base interaction pairs.
+		for (unsigned int i=0;i<pairs.size();++i)
 		{
-			vector<shared_ptr<iConcept>> base_mod=_modification[i].lock()->GetBase();
-			CommonFunction::AppendToInteractTable(base_mod,base_to,res);
+			vector<shared_ptr<iConcept>> base_from=pairs[i].first->GetBase();
+			vector<shared_ptr<iConcept>> base_to=pairs[i].second->GetBase();
+			CommonFunction::AppendToInteractTable(base_from,base_to,res);
 		}
 
 		return res;
@@ -52,18 +67,29 @@ namespace Mind
 
 	void ConceptEdge::AddModification( const shared_ptr<iConcept> modification )
 	{
-		_modification.push_back(modification);
+		//_modification.push_back(modification);
+		_modTable->Add(modification,_concept.lock());
 	}
 
-	vector<shared_ptr<iConcept>> ConceptEdge::GetModification() const
-	{
-		vector<shared_ptr<iConcept>> res(_modification.size());
-		for (unsigned int i=0;i<_modification.size();++i)
-		{
-			res[i]=_modification[i].lock()->Copy();
-		}
+// 	vector<shared_ptr<iConcept>> ConceptEdge::GetModification() const
+// 	{
+// 		vector<shared_ptr<iConcept>> res(_modification.size());
+// 		for (unsigned int i=0;i<_modification.size();++i)
+// 		{
+// 			res[i]=_modification[i].lock()->Copy();
+// 		}
+// 
+// 		return res;
+// 	}
 
-		return res;
+	void ConceptEdge::Init()
+	{
+		_modTable=iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
+	}
+
+	shared_ptr<iConceptInteractTable> ConceptEdge::GetModification() const
+	{
+		return _modTable->Copy();
 	}
 
 }

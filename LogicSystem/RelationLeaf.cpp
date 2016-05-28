@@ -8,7 +8,7 @@
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iRelationConstraint.h"
 
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iMindElementCreator.h"
 
 #include "../Mathmatic/FindSequence.h"
 
@@ -191,7 +191,7 @@ namespace LogicSystem
 
 	shared_ptr<Mind::iConceptInteractTable> RelationLeaf::GenerateConceptTable() const
 	{
-		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable());
+		shared_ptr<iConceptInteractTable> res=iMindElementCreator::CreateConceptInteractTable();
 
 		for (unsigned int i=0;i<_relations.size();++i)
 		{

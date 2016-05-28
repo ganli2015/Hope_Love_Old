@@ -74,6 +74,19 @@ namespace Mind
 			return -1;
 		}
 
+		int IndexOf( const map<int,weak_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept )
+		{
+			for (map<int,weak_ptr<iConcept>>::const_iterator it=concepts.begin();it!=concepts.end();++it)
+			{
+				if(it->second.lock()->Same(concept))
+				{
+					return it->first;
+				}
+			}
+
+			return -1;
+		}
+
 
 		bool IsSameConcept( const shared_ptr<iConcept> left,const shared_ptr<iConcept> right )
 		{

@@ -4,6 +4,8 @@
 
 #include "../MindElement/ConceptInteractTable.h"
 
+#include "../MindInterface/iMindElementCreator.h"
+
 #include "../CommonTools/CommonStringFunction.h"
 
 using namespace Mind;
@@ -17,23 +19,23 @@ ConceptTableCreator::~ConceptTableCreator(void)
 {
 }
 
-shared_ptr<Mind::ConceptInteractTable> ConceptTableCreator::SimpleCreate( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::SimpleCreate( const string str )
 {
 	_myConceptCreator=shared_ptr<SimpleConceptCreator>(new SimpleConceptCreator());
 
 	return Parse(str);
 }
 
-shared_ptr<Mind::ConceptInteractTable> ConceptTableCreator::Create( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Create( const string str )
 {
 	_myConceptCreator=shared_ptr<CerebrumConceptCreator>(new CerebrumConceptCreator());
 
 	return Parse(str);
 }
 
-shared_ptr<Mind::ConceptInteractTable> ConceptTableCreator::Parse( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string str )
 {
-	shared_ptr<Mind::ConceptInteractTable> res(new ConceptInteractTable());
+	shared_ptr<Mind::iConceptInteractTable> res=iMindElementCreator::CreateConceptInteractTable();
 
 	//split ','
 	vector<string> pariStr=CommonTool::SplitString(str,',');

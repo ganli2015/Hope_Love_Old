@@ -13,7 +13,7 @@ namespace DataCollection
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class ConceptInteractTable_iConcept;
 	class BaseConcept;
 	class ConceptLevelTable;
 
@@ -47,6 +47,7 @@ namespace Mind
 		virtual std::string GetString() const {return _identity.str;}
 		virtual int GetId() const { return _identity.id; }
 		virtual void SetId(int val) { _identity.id = val; }
+		virtual Identity GetIdentity() const ; 
 
 		virtual vector<shared_ptr<iConcept>> GetForwardConcepts()const;
 		virtual vector<shared_ptr<iConcept>> GetBackwardConcepts()const;

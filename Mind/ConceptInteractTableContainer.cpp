@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "ConceptInteractTableContainer.h"
-#include "../MindElement/ConceptInteractTable.h"
+#include "../MindInterface/iMindElementCreator.h"
+#include "../MindInterface/iConceptInteractTable.h"
+
 
 namespace Mind
 {
@@ -13,7 +15,7 @@ namespace Mind
 	{
 	}
 
-	void ConceptInteractTableContainer::Add( const shared_ptr<ConceptInteractTable> table,const shared_ptr<iConcept> from, const shared_ptr<iConcept> to )
+	void ConceptInteractTableContainer::Add( const shared_ptr<iConceptInteractTable> table,const shared_ptr<iConcept> from, const shared_ptr<iConcept> to )
 	{
 		TableInfo info;
 		info.table=table;
@@ -25,9 +27,9 @@ namespace Mind
 	{
 		class Merge
 		{
-			shared_ptr<ConceptInteractTable> _table;
+			shared_ptr<iConceptInteractTable> _table;
 		public:
-			Merge():_table(new ConceptInteractTable()){}
+			Merge():_table(iMindElementCreator::CreateConceptInteractTable()){}
 			~Merge(){}
 
 			void operator()(const TableInfo& table)
@@ -35,7 +37,7 @@ namespace Mind
 				_table->Absorb(table.table);
 			}
 
-			shared_ptr<ConceptInteractTable> GetResult(){return _table;}
+			shared_ptr<iConceptInteractTable> GetResult(){return _table;}
 		};
 
 		vector<pair<shared_ptr<iConcept>,shared_ptr<iConcept>>> res;

@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "Concept.h"
-#include "ConceptInteractTable.h"
+#include "ConceptInteractTable_iConcept.h"
 #include "ConceptLevelTable.h"
 
 #include "../DataCollection/Word.h"
@@ -133,11 +133,11 @@ namespace Mind
 	{
 		class BuildInteractTable
 		{
-			shared_ptr<ConceptInteractTable> _table;
+			shared_ptr<ConceptInteractTable_iConcept> _table;
 			shared_ptr<iConcept> _to;//to concept
 
 		public:
-			BuildInteractTable(const shared_ptr<ConceptInteractTable> table,const shared_ptr<iConcept> to):_table(table),_to(to){}
+			BuildInteractTable(const shared_ptr<ConceptInteractTable_iConcept> table,const shared_ptr<iConcept> to):_table(table),_to(to){}
 			~BuildInteractTable(){}
 
 			void operator()(const shared_ptr<iConceptEdge>& edge)
@@ -147,15 +147,15 @@ namespace Mind
 				_table->Add(interept,_to);
 
 				//处理修饰词和解释词的关系
-				vector<shared_ptr<iConcept>> modifications=edge->GetModification();
+				vector<MindType::ConceptPair> modifications=edge->GetModification()->GetAllRelations();
 				for (unsigned int i=0;i<modifications.size();++i)
 				{
-					_table->Add(modifications[i],interept);
+					_table->Add(modifications[i].first,modifications[i].second);
 				}
 			} 
 		};
 
-		shared_ptr<ConceptInteractTable> table(new ConceptInteractTable);
+		shared_ptr<ConceptInteractTable_iConcept> table(new ConceptInteractTable_iConcept);
 		for_each(_forward.begin(),_forward.end(),BuildInteractTable(table,toConcept));
 
 		return table;
@@ -165,13 +165,13 @@ namespace Mind
 	{
 		vector<shared_ptr<iConcept>> myBase=GetBase();
 		vector<shared_ptr<iConcept>> base_to=toConcept->GetBase();
-		shared_ptr<ConceptInteractTable> res(new ConceptInteractTable());
+		shared_ptr<ConceptInteractTable_iConcept> res(new ConceptInteractTable_iConcept());
 		CommonFunction::AppendToInteractTable(myBase,base_to,res);
 
 		//添加_forward对<me>的作用
 		for (unsigned int i=0;i<_forward.size();++i)
 		{
-			shared_ptr<ConceptInteractTable> mod_table(new ConceptInteractTable());
+			shared_ptr<ConceptInteractTable_iConcept> mod_table(new ConceptInteractTable_iConcept());
 			Recursive_GetEdgeInteractTable(_forward[i],mod_table);
 			res->Absorb(mod_table);
 		}
@@ -179,7 +179,7 @@ namespace Mind
 		//添加toConcept的_forward对toConcept的作用
 		for (unsigned int i=0;i<toConcept->GetForwardEdges().size();++i)
 		{
-			shared_ptr<ConceptInteractTable> mod_table(new ConceptInteractTable());
+			shared_ptr<ConceptInteractTable_iConcept> mod_table(new ConceptInteractTable_iConcept());
 			Recursive_GetEdgeInteractTable(toConcept->GetForwardEdges()[i],mod_table);
 			res->Absorb(mod_table);
 		}
@@ -199,12 +199,19 @@ namespace Mind
 		}
 
 		//递归地建立modification所依赖的每个Edge的Table
-		vector<shared_ptr<iConcept>> mods=edge->GetModification();
+		vector<MindType::ConceptPair> mods=edge->GetModification()->GetAllRelations();
 		for (unsigned int i=0;i<mods.size();++i)
 		{
-			for (unsigned int j=0;j<mods[i]->GetForwardEdges().size();++j)
+			vector<shared_ptr<iConceptEdge>> from_edges=mods[i].first->GetForwardEdges();
+			for (unsigned int j=0;j<from_edges.size();++j)
 			{
-				Recursive_GetEdgeInteractTable(mods[i]->GetForwardEdges()[j],mod_table);
+				Recursive_GetEdgeInteractTable(from_edges[j],mod_table);
+			}
+
+			vector<shared_ptr<iConceptEdge>> to_edges=mods[i].second->GetForwardEdges();
+			for (unsigned int j=0;j<to_edges.size();++j)
+			{
+				Recursive_GetEdgeInteractTable(to_edges[j],mod_table);
 			}
 		}
 	}
@@ -321,6 +328,15 @@ namespace Mind
 		res->_partofspeech=_partofspeech;
 
 		return res;
+	}
+
+	Mind::Identity Concept::GetIdentity() const
+	{
+		Identity id;
+		id.id=GetId();
+		id.str=GetString();
+
+		return id;
 	}
 
 }

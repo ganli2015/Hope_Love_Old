@@ -37,6 +37,9 @@ namespace FuncForTest
 	bool SameChain(const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res);
 
 	void DisplayChains(const vector<shared_ptr<Mind::iConceptChain>>& chains);
+
+	void DisplayConceptTable(const shared_ptr<Mind::iConceptInteractTable> table);
+
 	///Add a grammar pattern to cerebrum.
 	///Pattern is Numeral,Adjective,Preposition,Numeral.
 	void AddGrammarPatternToCerebrum();

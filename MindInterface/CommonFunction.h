@@ -35,6 +35,8 @@ namespace Mind
 
 		int _MINDINTERFACEINOUT IndexOf(const map<int,shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
 
+		int _MINDINTERFACEINOUT IndexOf(const map<int,weak_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
+
 		bool _MINDINTERFACEINOUT IsSameConcept(const shared_ptr<iConcept> left,const shared_ptr<iConcept> right);
 
 		void _MINDINTERFACEINOUT WriteConcepts(const vector<shared_ptr<iConcept>>& vec,ofstream& out);

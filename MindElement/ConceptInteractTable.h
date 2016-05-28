@@ -4,16 +4,11 @@
 
 namespace Mind
 {
-	class iConcept;
-
-	//Concept相互作用的列表。该相互作用与ConceptEdge不同，后者是存在于ConceptSet里的原型的连接，
-	//是一个已经有较牢固关系的连接。前者则是临时的连接，通常是在遇见新的知识新的语句的时候建立的。
-	class _MINDELEMENTINOUT ConceptInteractTable : public iConceptInteractTable
+	class ConceptInteractTable: public iConceptInteractTable
 	{
+	protected:
 		typedef MindType::ConceptPair ConceptPair;
 
-
-		map<int,shared_ptr<iConcept>> _concepts;
 		multimap<int,int> _interactIndex;
 
 		typedef map<int,shared_ptr<iConcept>>::iterator conceptIter;
@@ -21,26 +16,29 @@ namespace Mind
 
 		typedef multimap<int,int>::iterator indexIter;
 		typedef multimap<int,int>::const_iterator const_indexIter;
+
 	public:
 		ConceptInteractTable();
-		virtual ~ConceptInteractTable(void);
+		virtual ~ConceptInteractTable();
 
-		virtual void Add(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to);
-		//得到“施力方”的Concept
 		virtual vector<shared_ptr<iConcept>> GetFromConcept(const shared_ptr<iConcept> concept) const;
-		//得到“受力方”的Concept
-		virtual vector<shared_ptr<iConcept>> GetToConcept(const shared_ptr<iConcept> concept) const;
-		virtual vector<ConceptInteractTable::ConceptPair> GetAllRelations() const;
 
-		//合并ConceptInteractTable
-		virtual void Absorb(const shared_ptr<iConceptInteractTable> absorbed);
-		virtual void InteractDeeper();
+		virtual vector<shared_ptr<iConcept>> GetToConcept(const shared_ptr<iConcept> concept) const;
 
 		virtual void RemoveDuplicated() ;
 
-	private: 
+		virtual void Absorb(const shared_ptr<iConceptInteractTable> absorbed);
+		virtual void InteractDeeper();
+
+		virtual vector<ConceptInteractTable::ConceptPair> GetAllRelations() const;
+
+	protected:
 		bool PairExist(const int index1,const int index2) const;
 		int ValueCount(const_indexIter beg, const_indexIter end, const int val);
+
+	private:
+		virtual shared_ptr<iConcept> GetSharedConcept(const int i) const =0;
+		virtual int GetConceptIndex(const shared_ptr<iConcept> con) const =0;
 	};
 }
 

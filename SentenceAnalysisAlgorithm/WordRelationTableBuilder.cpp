@@ -8,6 +8,8 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iConcept.h"
+#include "../MindInterface/iMindElementCreator.h"
+
 #include "../MindElement/ConceptInteractTable.h"
 
 using namespace DataCollection;
@@ -15,8 +17,8 @@ using namespace Mind;
 
 WordRelationTableBuilder::WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen):_raw_sen(sen)
 {
-	_protoTable=shared_ptr<iConceptInteractTable>(new ConceptInteractTable());
-	_baseTable=shared_ptr<iConceptInteractTable>(new ConceptInteractTable());
+	_protoTable=iMindElementCreator::CreateConceptInteractTable();
+	_baseTable=iMindElementCreator::CreateConceptInteractTable();
 }
 
 

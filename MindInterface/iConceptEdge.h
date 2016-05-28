@@ -17,9 +17,13 @@ namespace Mind
 		virtual void SetSensitivity(double val) =0;
 
 		virtual void AddModification(const shared_ptr<iConcept> modification) =0;
-		virtual vector<shared_ptr<iConcept>> GetModification() const =0;
+		//virtual vector<shared_ptr<iConcept>> GetModification() const =0;
 
-		//建立<_modification>对<_concept>深度作用的列表
+		///Get the modification represented as a iConceptInteractTable which contains concept pairs 
+		///and describe the relation graph about <me>.
+		virtual shared_ptr<iConceptInteractTable> GetModification() const =0;
+
+		//Build the deep interaction table of <me> including the interaction from modifications to "to concept".
 		virtual shared_ptr<iConceptInteractTable> GetSelfDeepInteract() const =0;
 	};
 }

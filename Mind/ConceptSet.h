@@ -13,7 +13,7 @@ namespace DataCollection
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class ConceptInteractTable_iConcept;
 
 	class _MINDINOUT ConceptSet : public MyObject
 	{

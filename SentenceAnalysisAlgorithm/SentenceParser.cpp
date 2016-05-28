@@ -8,6 +8,7 @@
 #include "../MindElement/Concept.h"
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iCerebrum.h"
+#include "../MindInterface/iMindElementCreator.h"
 #include "../MindElement/ConceptInteractTable.h"
 
 using namespace std;
@@ -17,7 +18,7 @@ SentenceParser::SentenceParser(void)
 {
 }
 
-SentenceParser::SentenceParser(const std::string sen):_sentence(sen),_conceptTable(shared_ptr<iConceptInteractTable>(new ConceptInteractTable()))
+SentenceParser::SentenceParser(const std::string sen):_sentence(sen),_conceptTable(shared_ptr<iConceptInteractTable>(iMindElementCreator::CreateConceptInteractTable()))
 {
 
 }

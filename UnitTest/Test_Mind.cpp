@@ -65,7 +65,6 @@ TEST_F(Test_Concept,DeepInteraction)
 	expect.push_back(make_pair("´ó","ºÃ¸Ð"));
 
 	ASSERT_TRUE(FuncForTest::PairSameWithTable(expect,table));
-
 }
 
 TEST_F(Test_Concept,DeepInteraction2)

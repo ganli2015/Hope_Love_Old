@@ -13,6 +13,7 @@ namespace Mind
 	class BaseConcept;
 	class iConceptLevelTable;
 	class iConceptEdge;
+	struct Identity;
 
 	class _MINDINTERFACEINOUT iConcept :public MyObject
 	{
@@ -26,6 +27,7 @@ namespace Mind
 		virtual std::string GetString() const =0;
 		virtual int GetId() const =0;
 		virtual void SetId(int val) =0;
+		virtual Identity GetIdentity() const =0; 
 
 		///Return concepts that <me> is dependent on 
 		virtual vector<shared_ptr<iConcept>> GetForwardConcepts()const =0;

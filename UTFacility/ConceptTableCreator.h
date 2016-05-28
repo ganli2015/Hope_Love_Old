@@ -3,7 +3,7 @@
 
 namespace Mind
 {
-	class ConceptInteractTable;
+	class iConceptInteractTable;
 	class iConcept;
 }
 
@@ -17,11 +17,11 @@ public:
 	ConceptTableCreator(void);
 	~ConceptTableCreator(void);
 
-	static shared_ptr<Mind::ConceptInteractTable> SimpleCreate(const string str);
-	static shared_ptr<Mind::ConceptInteractTable> Create(const string str);
+	static shared_ptr<Mind::iConceptInteractTable> SimpleCreate(const string str);
+	static shared_ptr<Mind::iConceptInteractTable> Create(const string str);
 
 private:
-	static shared_ptr<Mind::ConceptInteractTable> Parse(const string str);
+	static shared_ptr<Mind::iConceptInteractTable> Parse(const string str);
 	static shared_ptr<Mind::iConcept> ParseConcept( const string str );
 };
 

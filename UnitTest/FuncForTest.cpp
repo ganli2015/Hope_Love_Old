@@ -11,6 +11,7 @@
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iCerebrum.h"
 #include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/PublicTypedef.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
@@ -162,6 +163,15 @@ namespace FuncForTest
 
 		Identity w_i(str,id);
 		return brain->GetConcept(w_i);
+	}
+
+	void DisplayConceptTable( const shared_ptr<Mind::iConceptInteractTable> table )
+	{
+		vector<MindType::ConceptPair> pairs=table->GetAllRelations();
+		for (unsigned int i=0;i<pairs.size();++i)
+		{
+			cout<<pairs[i].first->GetString()<<" "<<pairs[i].second->GetString()<<endl;
+		}
 	}
 
 }

@@ -38,6 +38,15 @@
     <ClInclude Include="InOut.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptInteractTable_Identity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConceptInteractTable_iConcept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MindElementCreator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -62,6 +71,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GrammarLocal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptInteractTable_Identity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptInteractTable_iConcept.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MindElementCreator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
