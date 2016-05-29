@@ -94,9 +94,9 @@
     <ClInclude Include="SingleExpression.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Symbol.h" />
+    <ClInclude Include="Verb.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Arbitrariness.cpp" />
     <ClCompile Include="CompositeExpression.cpp" />
     <ClCompile Include="DeduceResult.cpp" />
     <ClCompile Include="Equality.cpp" />
@@ -104,7 +104,6 @@
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="LogicElementCreator.cpp" />
     <ClCompile Include="LogicStatement.cpp" />
-    <ClCompile Include="Number.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />

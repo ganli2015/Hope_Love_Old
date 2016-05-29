@@ -32,6 +32,8 @@ namespace FuncForTest
 
 	bool PairSameWithTable(const vector<pair<string,string>>& expect,const shared_ptr<Mind::iConceptInteractTable> table);
 
+	bool SameTable(const shared_ptr<Mind::iConceptInteractTable> left,const shared_ptr<Mind::iConceptInteractTable> right);
+
 	bool SameChainVec(const vector<vector<string>>& expect, const vector<shared_ptr<Mind::iConceptChain>>& result);
 
 	bool SameChain(const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res);

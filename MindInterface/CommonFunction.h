@@ -20,6 +20,11 @@ namespace Mind
 
 		Identity(){}
 		Identity(string s, int i):str(s),id(i){}
+
+		friend bool operator==(const Identity& left,const Identity& right)
+		{
+			return left.id==right.id && left.str==right.str;
+		}
 	};
 
 	class iConcept;

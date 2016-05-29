@@ -35,7 +35,8 @@ namespace LogicSystem
 		enum SymbolType
 		{
 			Arb,
-			Num
+			Num,
+			Verb
 		};
 
 		enum ConstraintType

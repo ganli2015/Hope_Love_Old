@@ -120,6 +120,8 @@ namespace LogicSystem
 
 		///Add the relation of the two symbols to <me>.
 		///<from> acts on <to>.
+		///Note!!If two special symbol are the same in different pairs, they are not treated the same when using <Satisfy>.
+		///Instead, use different special symbols in different pairs, then add the constraint <Equality> between them to make them equal.
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) =0;
 		///Add Constraints to symbols.
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;

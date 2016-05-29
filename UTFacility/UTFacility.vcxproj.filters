@@ -32,6 +32,9 @@
     <ClInclude Include="MockExpression.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="RelationSample.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -47,6 +50,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SymbolCreator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationSample.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

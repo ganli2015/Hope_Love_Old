@@ -15,7 +15,7 @@ namespace Mind
 	struct Identity;
 	struct Connection_Info;
 
-	class ConceptSetInitializer
+	class _MINDINOUT ConceptSetInitializer
 	{
 		struct Word_ID
 		{
@@ -24,6 +24,8 @@ namespace Mind
 			//也就是说这个id暂时起不到作用！
 			int id;
 		};
+
+		friend class Test_Mind;
 
 	public:
 		ConceptSetInitializer(void);
@@ -42,6 +44,7 @@ namespace Mind
 		static vector<Word_ID> InputWordFromFile( string filename );
 		//初始化ConceptSet时使用
 		static vector<Connection_Info> InputConnectionFromFile(string filename,const ConceptSet* conceptSet);
+		static Connection_Info ParseStrToConnectionInfo(const string line,const ConceptSet* conceptSet);
 
 		//检查wholeConcepts里是否有重复的单词（相同字符串同时ID也相同的单词）.
 		static void CheckNonBaseConceptString(const vector<Word_ID>& wholeConcepts,ofstream& out);

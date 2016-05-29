@@ -382,75 +382,81 @@ namespace Mind
 		string str;
 		while(getline(in,str))
 		{
-			vector<string> split=CommonTool::SplitString(str,' ');
-
-			if(split.size()<2)
-			{
-				throw logic_error("Error in InputConnectionFromFile");
-			}
-
-			Connection_Info connnection_info;
-			//读取当前的word和id
-			connnection_info.me=CommonFunction::TransformToIdentity(split[0],split[1]);
-
-			if(split.size()==2)//没有ConceptEdge就继续下个循环
-			{
-				res.push_back(connnection_info);
-				continue;
-			}
-
-			//读取Edge
-			int index=2;//开始遍历后面的string
-			while(true)
-			{
-				if(split[index]!="to")
-				{
-					throw runtime_error("Error in InputConnectionFromFile");
-				}
-				else
-				{
-					index++;
-				}
-
-				//读取依赖的word及其id
-				Edge_Info edge_info;
-				edge_info.to=CommonFunction::TransformToIdentity(split[index],split[index+1]);
-				index+=2;
-
-				if(split.begin()+index==split.end())
-				{
-					connnection_info.edge_infos.push_back(edge_info);
-					break;
-				}
-
-				//读取修饰词
-				vector<string>::iterator find_next_to=find(split.begin()+index,split.end(),"to");
-				
-				shared_ptr<iConceptInteractTable> modifications;
-				if(IsConceptTableStr(split.begin()+index,split.end()))
-				{
-					modifications=ParseStrToTable(*(split.begin()+index),conceptSet);
-				}
-				else
-				{
-					modifications=ParseSingleMod(split.begin()+index,split.end(),edge_info.to,conceptSet);
-				}
-				edge_info.modifications=modifications;
-
-				connnection_info.edge_infos.push_back(edge_info);
-
-				if(find_next_to==split.end())
-				{
-					break;
-				}
-
-				index+=distance(split.begin()+index,find_next_to);//移动index到下一个to的位置。
-			}
+			Connection_Info connnection_info=ParseStrToConnectionInfo(str,conceptSet);
 
 			res.push_back(connnection_info);
 		}
 
 		return res;
+	}
+
+	Mind::Connection_Info ConceptSetInitializer::ParseStrToConnectionInfo( const string line,const ConceptSet* conceptSet )
+	{
+		vector<string> split=CommonTool::SplitString(line,' ');
+
+		if(split.size()<2)
+		{
+			throw logic_error("Error in InputConnectionFromFile");
+		}
+
+		Connection_Info connnection_info;
+		//读取当前的word和id
+		connnection_info.me=CommonFunction::TransformToIdentity(split[0],split[1]);
+
+		if(split.size()==2)//没有ConceptEdge就继续下个循环
+		{
+			return connnection_info;
+		}
+
+		//读取Edge
+		int index=2;//开始遍历后面的string
+		while(true)
+		{
+			if(split[index]!="to")
+			{
+				throw runtime_error("Error in InputConnectionFromFile");
+			}
+			else
+			{
+				index++;
+			}
+
+			//读取依赖的word及其id
+			Edge_Info edge_info;
+			edge_info.to=CommonFunction::TransformToIdentity(split[index],split[index+1]);
+			index+=2;
+
+			if(split.begin()+index==split.end())
+			{
+				connnection_info.edge_infos.push_back(edge_info);
+				break;
+			}
+
+			//读取修饰词
+			vector<string>::iterator find_next_to=find(split.begin()+index,split.end(),"to");
+
+			shared_ptr<iConceptInteractTable> modifications;
+			if(IsConceptTableStr(split.begin()+index,split.end()))
+			{
+				modifications=ParseStrToTable(*(split.begin()+index),conceptSet);
+			}
+			else
+			{
+				modifications=ParseSingleMod(split.begin()+index,split.end(),edge_info.to,conceptSet);
+			}
+			edge_info.modifications=modifications;
+
+			connnection_info.edge_infos.push_back(edge_info);
+
+			if(find_next_to==split.end())
+			{
+				break;
+			}
+
+			index+=distance(split.begin()+index,find_next_to);//移动index到下一个to的位置。
+		}
+
+		return connnection_info;
 	}
 
 	shared_ptr<iConceptInteractTable> ConceptSetInitializer::ParseSingleMod( const vector<string>::iterator& beg,const vector<string>::iterator& end ,const Identity& toID,const ConceptSet* conceptSet)

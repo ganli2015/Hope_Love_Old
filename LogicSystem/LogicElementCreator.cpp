@@ -11,6 +11,7 @@
 #include "Number.h"
 #include "Equality.h"
 #include "Inequality.h"
+#include "Verb.h"
 
 #include "../MindInterface/iConcept.h"
 
@@ -97,6 +98,7 @@ namespace LogicSystem
 	{
 		_spSym[Host::Arb]=new SpecialSymbolCreator<Arbitrariness<Mind::iConcept>>();
 		_spSym[Host::Num]=new SpecialSymbolCreator<Number<Mind::iConcept>>();
+		_spSym[Host::Verb]=new SpecialSymbolCreator<Verb<Mind::iConcept>>();
 
 		_biContr[Host::Eq]=new BinaryConstraintCreator<Equality>();
 		_biContr[Host::Ineq]=new BinaryConstraintCreator<Inequality>();

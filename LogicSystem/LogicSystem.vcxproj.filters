@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="SpecialSymbol">
+      <UniqueIdentifier>{da2c82d7-8ff1-4328-8e11-1f9fc69f54e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -24,9 +27,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SingleExpression.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Arbitrariness.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Symbol.h">
@@ -50,11 +50,17 @@
     <ClInclude Include="Equality.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Number.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="LogicElementCreator.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>SpecialSymbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbitrariness.h">
+      <Filter>SpecialSymbol</Filter>
+    </ClInclude>
+    <ClInclude Include="Verb.h">
+      <Filter>SpecialSymbol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +74,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SingleExpression.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Arbitrariness.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Symbol.cpp">
@@ -92,9 +95,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Equality.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Number.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LogicElementCreator.cpp">

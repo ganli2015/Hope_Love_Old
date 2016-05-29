@@ -157,21 +157,17 @@ namespace HopeLove
 
 					//读取修饰词
 					int nextTo=split.FindIndex(index,s=>s=="to");
-                    if (nextTo == -1)
+                    if (nextTo == -1)//reach end
                     {
                         nextTo = split.Count;
                     }
 
-					if((nextTo-index)%2!=0)//string的个数必须是偶数，因为word和id总是成对出现
-					{
-						throw new ArgumentOutOfRangeException("Error in InputConnectionFromFile");
-					}
-					List<Word_ID> modifications=new List<Word_ID>();
-                    for (int i = index; i != nextTo;i+=2 )
+                    if (nextTo - index == 1)
                     {
-                        modifications.Add(TransformToIdentity(split[i], split[i+1]));
+                        edge_info.mods = split[index];
                     }
-					edge_info.mods=modifications;
+                    else
+                        edge_info.mods = ParseModification(split, index, nextTo);
 
 					connnection_info.edge_infos.Add(edge_info);
 
@@ -184,6 +180,24 @@ namespace HopeLove
 				}
 
 				res.Add(connnection_info);
+            }
+
+            return res;
+        }
+
+        private string ParseModification(List<string> split,int startIndex,int endIndex)
+        {
+            if ((endIndex - startIndex) % 2 != 0)//string的个数必须是偶数，因为word和id总是成对出现
+            {
+                throw new ArgumentOutOfRangeException("Error in InputConnectionFromFile");
+            }
+
+            string res = "";
+            for (int i = startIndex; i != endIndex; i += 2)
+            {
+                res += split[i] + " ";
+                res += split[i + 1] + " ";
+
             }
 
             return res;
@@ -519,7 +533,8 @@ namespace HopeLove
     class Edge_Info
     {
         public Word_ID to = new Word_ID();
-        public List<Word_ID> mods = new List<Word_ID>();
+        //public List<Word_ID> mods = new List<Word_ID>();
+        public string mods="";
     }
 
     class Connection_Info
@@ -534,10 +549,12 @@ namespace HopeLove
             edge_infos.ForEach(edgeInfo =>
             {
                 res+="to "+edgeInfo.to.ToString()+" ";
-                edgeInfo.mods.ForEach(mod =>
-                {
-                    res += mod.ToString() + " ";
-                });
+//                 edgeInfo.mods.ForEach(mod =>
+//                 {
+//                     res += mod.ToString() + " ";
+//                 });
+
+                res += edgeInfo.mods;
             });
 
             return res;

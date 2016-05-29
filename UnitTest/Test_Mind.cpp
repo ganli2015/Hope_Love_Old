@@ -3,6 +3,8 @@
 
 #include "../Mind/Cerebrum.h"
 #include "../Mind/LogicKnowledgeInitializer.h"
+#include "../Mind/ConceptSetInitializer.h"
+#include "../Mind/ConceptSet.h"
 
 #include "../MindElement/Concept.h"
 
@@ -127,7 +129,43 @@ TEST_F(Test_LogicKnowledgeInitializer,ParseLogicStatement)
 	ASSERT_EQ(deduceResult->Matching(expect),1);
 }
 
+TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo)
+{
+	//Test modifications of single words.
+	string line="0 爱 to 0 喜欢 0 深深 0 非常";
 
+	ConceptSet* conceptSet=new ConceptSet();
+	Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
+
+	Identity expectMe("爱",0);
+	Identity expectTo("喜欢",0);
+	vector<pair<string,string>> expectMod;
+	expectMod.push_back(make_pair("深深","喜欢"));
+	expectMod.push_back(make_pair("非常","喜欢"));
+
+	ASSERT_EQ(info.me,expectMe);
+	ASSERT_EQ(info.edge_infos[0].to,expectTo);
+	ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
+}
+
+TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo2)
+{
+	//Test modifications of a concept interact table.
+	string line="0 三 to 0 二 0@二-0@加,0@加-0@一";
+
+	ConceptSet* conceptSet=new ConceptSet();
+	Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
+
+	Identity expectMe("三",0);
+	Identity expectTo("二",0);
+	vector<pair<string,string>> expectMod;
+	expectMod.push_back(make_pair("二","加"));
+	expectMod.push_back(make_pair("加","一"));
+
+	ASSERT_EQ(info.me,expectMe);
+	ASSERT_EQ(info.edge_infos[0].to,expectTo);
+	ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
+}
 
 shared_ptr<LogicSystem::iRelation> Test_Mind::ParseRelation( const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer )
 {
@@ -137,4 +175,9 @@ shared_ptr<LogicSystem::iRelation> Test_Mind::ParseRelation( const TiXmlNode * n
 shared_ptr<LogicSystem::iLogicStatement> Test_Mind::ParseLogicStatement( const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer )
 {
 	return initer.ParseLogicStatement(node);
+}
+
+Mind::Connection_Info Test_Mind::ParseStrToConnectionInfo( const string line,const Mind::ConceptSet* conceptSet )
+{
+	return ConceptSetInitializer::ParseStrToConnectionInfo(line,conceptSet);
 }

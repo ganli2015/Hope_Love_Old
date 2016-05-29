@@ -13,6 +13,7 @@
 #include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/iMindElementCreator.h"
+#include "../MindInterface/PublicTypedef.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
@@ -173,6 +174,19 @@ namespace FuncForTest
 		{
 			cout<<pairs[i].first->GetString()<<" "<<pairs[i].second->GetString()<<endl;
 		}
+	}
+
+	bool SameTable( const shared_ptr<Mind::iConceptInteractTable> left,const shared_ptr<Mind::iConceptInteractTable> right )
+	{
+		//Convert table to vector<pair<string,string>>.
+		vector<MindType::ConceptPair> pairs=left->GetAllRelations();
+		vector<pair<string,string>> stringPairs;
+		for (unsigned int i=0;i<pairs.size();++i)
+		{
+			stringPairs.push_back(make_pair(pairs[i].first->GetString(),pairs[i].second->GetString()));
+		}
+
+		return PairSameWithTable(stringPairs,right);
 	}
 
 }
