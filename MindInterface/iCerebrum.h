@@ -41,7 +41,7 @@ namespace Mind
 
 		virtual int MaxLength_WordWithHead(const shared_ptr<DataCollection::Character> headChara) const=0;
 
-		//得到已知的所有词性的<word>。
+		///Get all words whose string is the same as <word>.
 		virtual std::vector<shared_ptr<DataCollection::Word>> GetAllKindsofWord(const shared_ptr<DataCollection::Word> word) const=0;
 		virtual vector<shared_ptr<DataCollection::Word>> GetAllWordsOfPOS(const DataCollection::PartOfSpeech pos) const=0;
 

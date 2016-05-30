@@ -19,23 +19,32 @@ ConceptTableCreator::~ConceptTableCreator(void)
 {
 }
 
-shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::SimpleCreate( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::SimpleCreate( const string str ,const Type type)
 {
 	_myConceptCreator=shared_ptr<SimpleConceptCreator>(new SimpleConceptCreator());
 
 	return Parse(str);
 }
 
-shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Create( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Create( const string str,const Type type )
 {
 	_myConceptCreator=shared_ptr<CerebrumConceptCreator>(new CerebrumConceptCreator());
 
 	return Parse(str);
 }
 
-shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string str )
+shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string str,const Type type  )
 {
-	shared_ptr<Mind::iConceptInteractTable> res=iMindElementCreator::CreateConceptInteractTable();
+	shared_ptr<Mind::iConceptInteractTable> res;
+	if(type==Concept_Based)
+	{
+		res==iMindElementCreator::CreateConceptInteractTable();
+	}
+	else
+	{
+		res==iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
+	}
+
 
 	//split ','
 	vector<string> pariStr=CommonTool::SplitString(str,',');

@@ -32,6 +32,8 @@ namespace Mind
 
 		virtual vector<ConceptInteractTable::ConceptPair> GetAllRelations() const;
 
+		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const;
+
 	protected:
 		bool PairExist(const int index1,const int index2) const;
 		int ValueCount(const_indexIter beg, const_indexIter end, const int val);

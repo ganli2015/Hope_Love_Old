@@ -42,7 +42,7 @@ typedef Arbitrariness<iConcept> Arb;
 typedef LogicType::ConSymbol ConSymbol;
 typedef Symbol<iConcept> Sym;
 
-typedef AddPatternToCerebrum Test_Logic;
+typedef InitCerebrum Test_Logic;
 typedef InitCerebrum Test_Number;
 typedef InitCerebrum Test_Verb;
 typedef InitCerebrum Test_LogicStatement;
@@ -61,13 +61,13 @@ TEST_F(Test_Logic,Determine)
 
 	Logic logic;
 
-	vector<string> conditionStr;
-	conditionStr.push_back("二大于一");
-	conditionStr.push_back("三大于二");
-	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
+	string conditionStr="二-大,大-于,于-一,三-大,大-于,于-二";
+	shared_ptr<MockExpression> condition=MockExpression::Create(conditionStr);
 
-	shared_ptr<iExpression> conclusion_true(iLogicElementCreator::CreateExpression("三大于一"));
-	shared_ptr<iExpression> conclusion_false(iLogicElementCreator::CreateExpression("一大于三"));
+	string resultStr_true="三-大,大-于,于-一";
+	string resultStr_false="一-大,大-于,于-三";
+	shared_ptr<iExpression> conclusion_true=MockExpression::Create(resultStr_true);
+	shared_ptr<iExpression> conclusion_false=MockExpression::Create(resultStr_false);
 
 	ASSERT_TRUE(logic.Determine(condition,conclusion_true)==True);
 	ASSERT_TRUE(logic.Determine(condition,conclusion_false)==False);
@@ -149,20 +149,12 @@ TEST_F(Test_Logic,Deduce)
 void Test_LogicSystem::TestLogicStatementDeduce( const shared_ptr<LogicSystem::iLogicStatement> logicStatment, const string conditionStr,const string expectResultStr )
 {
 	//Create mock expression of condition.
-	shared_ptr<iConceptInteractTable> table=ConceptTableCreator::Create(conditionStr);
-	shared_ptr<MockExpression> expre(new MockExpression());
-	EXPECT_CALL(*expre,GetProtoInteractTable()).WillRepeatedly(Return(table));
-	EXPECT_CALL(*expre,GetBaseInteractTable()).Times(0);
+	shared_ptr<MockExpression> expre=MockExpression::Create(conditionStr);
 
 	shared_ptr<iDeduceResult> result=logicStatment->Deduce(expre);
 
 	//Create mock expression of result.
 	shared_ptr<iConceptInteractTable> expectTable=ConceptTableCreator::Create(expectResultStr);
-// 	shared_ptr<MockExpression> expect(new MockExpression());
-// 	EXPECT_CALL(*expect,GetProtoInteractTable()).WillRepeatedly(Return(expectTable));
-// 	EXPECT_CALL(*expect,GetBaseInteractTable()).Times(0);
-// 
-// 	ASSERT_TRUE(result->Matching(expect)==1);
 
 	ASSERT_TRUE(FuncForTest::SameTable(expectTable,result->GetConceptTable()));
 }

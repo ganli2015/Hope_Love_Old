@@ -31,6 +31,8 @@ namespace Mind
 		virtual void RemoveDuplicated() =0;
 
 		virtual shared_ptr<iConceptInteractTable> Copy() const =0;
+
+		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const =0;
 	};
 }
 

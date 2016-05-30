@@ -95,6 +95,7 @@
     <ClCompile Include="ConceptCreator.cpp" />
     <ClCompile Include="ConceptTableCreator.cpp" />
     <ClCompile Include="LeafCreator.cpp" />
+    <ClCompile Include="MockExpression.cpp" />
     <ClCompile Include="RelationSample.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

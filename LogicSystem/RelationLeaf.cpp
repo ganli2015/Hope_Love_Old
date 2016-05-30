@@ -94,8 +94,10 @@ namespace LogicSystem
 
 	vector<iRelation::PairSequence> RelationLeaf::FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const
 	{
-		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(_relations,conceptPairs);
+		//vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(_relations,conceptPairs);
 
+		vector<vector<PairInfo>> matchedPairSeq;
+		Recursive_FindMatchedPairSequence(_relations,conceptPairs,matchedPairSeq);
 		RemoveSequencesUnsatifyConstraints(_constraints,matchedPairSeq);
 
 		return matchedPairSeq;
@@ -164,6 +166,60 @@ namespace LogicSystem
 		vector<vector<PairInfo>> pairSequence=Math::GetAllCombinations<PairInfo>::Get(relatedPairs);
 
 		return pairSequence;
+	}
+
+	void RelationLeaf::Recursive_FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs,
+		vector<PairSequence>& sequence) const
+	{
+		if(sPairs.empty())
+		{
+			return;
+		}
+
+		SymbolPair curSymbolPair=sPairs.front();
+		vector<SymbolPair> remainingSymbolPairs(sPairs.begin()+1,sPairs.end());
+
+		//Go through <cPairs>.
+		//for each matched cPair, delete it from <cPairs> and delete the matched symbol from <sPairs>.
+		//Then search for the remaining <cPairs> and <sPairs>.
+		for (unsigned int i=0;i<cPairs.size();++i)
+		{
+			if(!(curSymbolPair.first->Match(cPairs[i].first) && curSymbolPair.second->Match(cPairs[i].second))) continue;//Not matched
+			
+			//Generate concept pairs without the current matched one.
+			vector<ConceptPair> remainingCPairs(cPairs);
+			remainingCPairs.erase(remainingCPairs.begin()+i);
+
+			if(remainingSymbolPairs.empty())//Currently reach the end of the sPairs, then construct the last PairInfo.
+			{
+				PairSequence seq=CreateSequenceWithOneElem(curSymbolPair,cPairs[i]);
+				sequence.push_back(seq);
+			}
+			else
+			{
+				vector<PairSequence> subSequence;
+				Recursive_FindMatchedPairSequence(remainingSymbolPairs,remainingCPairs,subSequence);
+				//Merge each subSequence with current sequence. 
+				for (unsigned int j=0;j<subSequence.size();++j)
+				{
+					PairSequence seq=CreateSequenceWithOneElem(curSymbolPair,cPairs[i]);
+					seq.insert(seq.end(),subSequence[j].begin(),subSequence[j].end());
+					sequence.push_back(seq);
+				}
+			}
+			
+		}
+	}
+
+	RelationLeaf::PairSequence RelationLeaf::CreateSequenceWithOneElem(const SymbolPair& sPair,const ConceptPair& cPair) const
+	{
+		PairSequence seq;
+		PairInfo info;
+		info.cPair=cPair;
+		info.sPair=sPair;
+		seq.push_back(info);
+
+		return seq;
 	}
 
 	shared_ptr<iRelation> RelationLeaf::GenerateSpecialRelation() const

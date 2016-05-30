@@ -29,6 +29,7 @@
 #include "../UTFacility/ConceptCreator.h"
 #include "../UTFacility/SymbolCreator.h"
 #include "../UTFacility/RelationSample.h"
+#include "../UTFacility/ConceptTableCreator.h"
 
 #include "FuncForTest.h"
 
@@ -175,8 +176,7 @@ TEST_F(Test_iRelation,RelationLeafSatisfy3)
 
 		ASSERT_TRUE(InterTableSatisfyRelation(leaf1,interTable));
 
-	}
-	
+	}	
 }
 
 TEST_F(Test_iRelation,RelationLeafSatisfy4)
@@ -208,6 +208,33 @@ TEST_F(Test_iRelation,RelationLeafSatisfy4)
 		ASSERT_FALSE(InterTableSatisfyRelation(leaf1,interTable));
 
 	}
+}
+
+TEST_F(Test_iRelation,RelationLeafSatisfy5)
+{
+	//If relation contains numbers of the same pairs, then iConceptInteractTable containing the same number of pairs will satisfy the relation.
+	
+	//Add three same pairs of s1,s2
+	string leafStr="三-四,三-四,三-四";
+	shared_ptr<RelationLeaf> leaf1=LeafCreator::SimpleCreate(leafStr);
+
+	string tableStr="三-四";
+	shared_ptr<iConceptInteractTable> interTable=ConceptTableCreator::SimpleCreate(tableStr);
+
+	ASSERT_FALSE(InterTableSatisfyRelation(leaf1,interTable));
+}
+
+TEST_F(Test_iRelation,RelationLeafSatisfy6)
+{
+	//If one of the relation satisfy and another fails, then expect not to satisfy.
+
+	string leafStr="三-四,四-五";
+	shared_ptr<RelationLeaf> leaf1=LeafCreator::SimpleCreate(leafStr);
+
+	string tableStr="三-四,五-六";
+	shared_ptr<iConceptInteractTable> interTable=ConceptTableCreator::SimpleCreate(tableStr);
+
+	ASSERT_FALSE(InterTableSatisfyRelation(leaf1,interTable));
 }
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy)

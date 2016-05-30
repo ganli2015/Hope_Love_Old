@@ -32,6 +32,7 @@
 #include "../LogicSystem/CompositeExpression.h"
 #include "../LogicSystem/SingleExpression.h"
 
+
 #include <tinyxml.h>
 
 using namespace std;
@@ -166,6 +167,8 @@ TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo2)
 	ASSERT_EQ(info.edge_infos[0].to,expectTo);
 	ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
 }
+
+
 
 shared_ptr<LogicSystem::iRelation> Test_Mind::ParseRelation( const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer )
 {

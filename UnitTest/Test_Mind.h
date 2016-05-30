@@ -25,3 +25,4 @@ public:
 	static shared_ptr<LogicSystem::iLogicStatement> ParseLogicStatement(const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer);
 	static Mind::Connection_Info ParseStrToConnectionInfo(const string line,const Mind::ConceptSet* conceptSet);
 };
+

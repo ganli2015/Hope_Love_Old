@@ -166,4 +166,12 @@ namespace Mind
 
 		return res;
 	}
+
+	double ConceptInteractTable::Similarity( const shared_ptr<iConceptInteractTable> other ) const
+	{
+
+
+		return -1;
+	}
+
 }

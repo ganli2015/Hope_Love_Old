@@ -34,10 +34,13 @@ namespace LogicSystem
 		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;
 	private:
 		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable);
+		void Recursive_FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs, vector<PairSequence>& sequence) const;
+		RelationLeaf::PairSequence CreateSequenceWithOneElem(const SymbolPair& sPair,const ConceptPair& cPair) const;
+		
+		///Used for relation node
+		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const ;
 		static vector<RelationLeaf::ConceptPair> FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs);
 		static vector<vector<RelationLeaf::PairInfo>> FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs);
-
-		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const ;
 	};
 }
 

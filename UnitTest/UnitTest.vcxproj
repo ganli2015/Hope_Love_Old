@@ -92,6 +92,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="Test_CommonTool.h" />
+    <ClInclude Include="Test_ConceptInteractTable.h" />
     <ClInclude Include="Test_iRelation.h" />
     <ClInclude Include="Test_LogicSystem.h" />
     <ClInclude Include="Test_Mathmatic.h" />
@@ -109,6 +110,7 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="Test_CommonTool.cpp" />
+    <ClCompile Include="Test_ConceptInteractTable.cpp" />
     <ClCompile Include="Test_iRelation.cpp" />
     <ClCompile Include="Test_LogicSystem.cpp" />
     <ClCompile Include="Test_Mathmatic.cpp" />

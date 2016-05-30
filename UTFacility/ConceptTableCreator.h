@@ -14,14 +14,22 @@ class _UTFACILITYINOUT ConceptTableCreator
 	static shared_ptr<ConceptCreator> _myConceptCreator;
 
 public:
+	enum Type
+	{
+		Concept_Based,
+		Identity_Based
+	};
+
+public:
 	ConceptTableCreator(void);
 	~ConceptTableCreator(void);
 
-	static shared_ptr<Mind::iConceptInteractTable> SimpleCreate(const string str);
-	static shared_ptr<Mind::iConceptInteractTable> Create(const string str);
+	///Create ConceptInteractTable_iConcept.
+	static shared_ptr<Mind::iConceptInteractTable> SimpleCreate(const string str,const Type type=Concept_Based);
+	static shared_ptr<Mind::iConceptInteractTable> Create(const string str,const Type type=Concept_Based);
 
 private:
-	static shared_ptr<Mind::iConceptInteractTable> Parse(const string str);
+	static shared_ptr<Mind::iConceptInteractTable> Parse(const string str,const Type type );
 	static shared_ptr<Mind::iConcept> ParseConcept( const string str );
 };
 

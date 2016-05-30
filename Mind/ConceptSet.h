@@ -50,7 +50,7 @@ namespace Mind
 		void AddModification(const Identity& from,const Identity& to,const Identity& modification);
 		void AddModification(const Identity& from,const Identity& to,const shared_ptr<iConceptInteractTable>& modification);
 		
-		//获得Concept指针的拷贝，不是直接引用私有成员。
+		//Get the concept of <word>.The returned concept is copy of the one in <me>.
 		shared_ptr<iConcept> GetConceptPtr(const shared_ptr<DataCollection::Word> word) const ;
 		shared_ptr<iConcept> GetConceptPtr(const Identity identity) const ;
 		shared_ptr<BaseConcept> GetBaseConcept(const int id) const;
@@ -58,14 +58,6 @@ namespace Mind
 
 		vector<shared_ptr<DataCollection::Word>> GetAllWordsOfPOS(const DataCollection::PartOfSpeech pos) const;
 
-		int Count_ForwardAdjWord(const shared_ptr<DataCollection::Character> chara) const;
-		int Count_ForwardAdjWord(const shared_ptr<DataCollection::Word> word) const;
-		void GetForwardAdjWord(const shared_ptr<DataCollection::Character> chara,std::vector<std::string>& adjword) const;
-		void GetForwardAdjWord(const shared_ptr<DataCollection::Word> word,std::vector<std::string>& adjword) const;
-		void GetForwardAdjWord(const shared_ptr<DataCollection::Character> chara,std::vector<DataCollection::Word>& adjword) const;
-		void GetForwardAdjWord(const shared_ptr<DataCollection::Word> word,std::vector<DataCollection::Word>& adjword) const;
-		int MaxLength_AdjacentWord(const shared_ptr<DataCollection::Character> chara) const;
-		int MaxLength_AdjacentWord(const shared_ptr<DataCollection::Word> word) const;
 		int MaxLength_WordWithHead(const shared_ptr<DataCollection::Character> headChara) const;
 
 		//从<_conceptset>里找出<word>的字符串对应的所有词性的单词
@@ -83,7 +75,18 @@ namespace Mind
 
 		int BaseConceptCount() const {return _baseConceptset.size();}
 
-		void OutputConceptData() const;
+
+
+
+		int Count_ForwardAdjWord(const shared_ptr<DataCollection::Character> chara) const;
+		int Count_ForwardAdjWord(const shared_ptr<DataCollection::Word> word) const;
+		void GetForwardAdjWord(const shared_ptr<DataCollection::Character> chara,std::vector<std::string>& adjword) const;
+		void GetForwardAdjWord(const shared_ptr<DataCollection::Word> word,std::vector<std::string>& adjword) const;
+		void GetForwardAdjWord(const shared_ptr<DataCollection::Character> chara,std::vector<DataCollection::Word>& adjword) const;
+		void GetForwardAdjWord(const shared_ptr<DataCollection::Word> word,std::vector<DataCollection::Word>& adjword) const;
+		int MaxLength_AdjacentWord(const shared_ptr<DataCollection::Character> chara) const;
+		int MaxLength_AdjacentWord(const shared_ptr<DataCollection::Word> word) const;
+
 	private:
 		void Initialize();
 
@@ -96,7 +99,6 @@ namespace Mind
 		void CheckWordIDExist(const shared_ptr<DataCollection::Word> word,const int id,const ConceptMap& conceptset);
 		void CheckBaseWordIDExist(const shared_ptr<DataCollection::Word> word, const int id,const BaseConceptMap& conceptset );
 
-		void OutputNonBaseConcept() const;
 	};
 
 	

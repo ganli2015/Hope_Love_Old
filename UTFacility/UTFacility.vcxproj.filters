@@ -55,6 +55,9 @@
     <ClCompile Include="RelationSample.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MockExpression.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

@@ -9,10 +9,15 @@
 ///You can pass the desired table to <me> instead of sentence analysis.
 #include <gmock/gmock.h>
 
-class MockExpression : public LogicSystem::iExpression
+class _UTFACILITYINOUT MockExpression : public LogicSystem::iExpression
 {
 public:
 	MOCK_CONST_METHOD0(GetBaseInteractTable, shared_ptr<Mind::iConceptInteractTable>());
 	MOCK_CONST_METHOD0(GetProtoInteractTable, shared_ptr<Mind::iConceptInteractTable>());
+
+	///Create a MockExpression which returns ProtoInteractTable of <table> and BaseInteractTable of null.
+	static shared_ptr<MockExpression> Create(const string table);
 };
+
+
 
