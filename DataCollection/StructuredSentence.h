@@ -6,7 +6,7 @@ namespace DataCollection
 	class Word;
 
 	///StructuredSentence contains information of relationship of words in a sentence and how strong each pair of words is related.
-	class _DATACOLLECTIONINOUT StructuredSentence : public MyObject
+	class _DATACOLLECTIONINOUT StructuredSentence : public Obj<StructuredSentence>
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _sen;
 		vector<vector<double>> _intensityMatrix; //Record the intensity of each pair of words.The matrix is symmetric.

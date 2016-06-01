@@ -5,7 +5,7 @@ namespace Mind
 {
 	class iConcept;
 	class iConceptInteractTable;
-	class _MINDINTERFACEINOUT iConceptEdge: public MyObject
+	class _MINDINTERFACEINOUT iConceptEdge: public Obj<iConceptEdge>
 	{
 	public:
 		iConceptEdge(void);
@@ -25,6 +25,9 @@ namespace Mind
 
 		//Build the deep interaction table of <me> including the interaction from modifications to "to concept".
 		virtual shared_ptr<iConceptInteractTable> GetSelfDeepInteract() const =0;
+
+		///Check whether the description of <me> to a concept is exactly matched with <description>.
+		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description) const =0;
 	};
 }
 

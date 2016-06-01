@@ -5,7 +5,7 @@ namespace Mind
 {
 	class iConcept;
 
-	class _MINDINTERFACEINOUT iConceptChain : public MyObject
+	class _MINDINTERFACEINOUT iConceptChain : public Obj<iConceptChain>
 	{
 	public:
 		iConceptChain(void);

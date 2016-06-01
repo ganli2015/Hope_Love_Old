@@ -10,7 +10,7 @@ namespace DataCollection
 	class GrammarPattern;
 	
 	//SubSentence contains only one of the puncture of end of the sentence.
-	class SubSentence : public MyObject
+	class SubSentence : public Obj<SubSentence>
 	{
 		std::vector<shared_ptr<Character>> _raw;
 	public:
@@ -26,7 +26,7 @@ namespace DataCollection
 
 	///SegmentedSentence indicates the segmentation structure of a certain sentence.
 	///Words in SegmentedSentence are probably of no definite POS.
-	class _DATACOLLECTIONINOUT SegmentedSentence : public MyObject
+	class _DATACOLLECTIONINOUT SegmentedSentence : public Obj<SegmentedSentence>
 	{
 		std::vector<shared_ptr<DataCollection::Word>> _seg;
 	public:
@@ -40,7 +40,7 @@ namespace DataCollection
 
 
 	//Sentence constitutes of several sub sentence, and may contain several punctures.
-	class _DATACOLLECTIONINOUT Sentence : public MyObject
+	class _DATACOLLECTIONINOUT Sentence : public Obj<Sentence>
 	{
 		class SubSentenceInfo
 		{

@@ -9,6 +9,8 @@
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/iMindElementCreator.h"
 
+#include "../Mathmatic/MathTool.h"
+
 namespace Mind
 {
 	ConceptEdge::ConceptEdge(void)
@@ -95,6 +97,20 @@ namespace Mind
 	shared_ptr<iConceptInteractTable> ConceptEdge::GetModification() const
 	{
 		return _modTable->Copy();
+	}
+
+	bool ConceptEdge::MatchWithConceptTable( const shared_ptr<iConceptInteractTable> description ) const
+	{
+		double similarity=description->Similarity(_modTable);
+
+		if(Math::DoubleCompare(similarity,1)==0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

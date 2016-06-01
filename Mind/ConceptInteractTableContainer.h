@@ -7,7 +7,7 @@ namespace Mind
 	class iConcept;
 
 	//存放ConceptInteractTable的类，作为对Concept连接的临时记忆体
-	class ConceptInteractTableContainer : public MyObject
+	class ConceptInteractTableContainer : public Obj<ConceptInteractTableContainer>
 	{
 	private:
 		struct TableInfo  

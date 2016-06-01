@@ -7,7 +7,7 @@ namespace DataCollection
 
 	///Punctures is a collection of punctures.
 	///It only supports for Chinese punctures.
-	class _DATACOLLECTIONINOUT Punctures : public MyObject
+	class _DATACOLLECTIONINOUT Punctures : public Obj<Punctures>
 	{
 		std::vector<shared_ptr<Character>> _punctures;
 		std::vector<shared_ptr<Character>> _puncEndofSentence;

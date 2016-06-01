@@ -15,7 +15,7 @@ namespace Mind
 	class iConceptEdge;
 	struct Identity;
 
-	class _MINDINTERFACEINOUT iConcept :public MyObject
+	class _MINDINTERFACEINOUT iConcept :public Obj<iConcept>
 	{
 	public:
 		iConcept(void);
@@ -56,7 +56,9 @@ namespace Mind
 		virtual bool IsBaseConcept() const  =0;
 
 		virtual shared_ptr<iConceptLevelTable> GetLevelTable() const  =0;
-		virtual const vector<shared_ptr<iConceptEdge>> GetForwardEdges() const =0;		
+		virtual const vector<shared_ptr<iConceptEdge>> GetForwardEdges() const =0;	
+
+		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description) const =0;
 protected:
 	};
 }

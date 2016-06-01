@@ -12,7 +12,7 @@ namespace LogicSystem
 	class iExpression;
 
 	///iDeduceResult contains the information of deduction .
-	class _MINDINTERFACEINOUT iDeduceResult: public MyObject
+	class _MINDINTERFACEINOUT iDeduceResult: public Obj<iDeduceResult>
 	{
 
 	public:

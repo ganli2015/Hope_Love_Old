@@ -8,7 +8,7 @@ namespace Mind
 
 namespace LogicSystem
 {
-	class _MINDINTERFACEINOUT iExpression: public MyObject
+	class _MINDINTERFACEINOUT iExpression: public Obj<iExpression>
 	{
 	public:
 		iExpression(void);

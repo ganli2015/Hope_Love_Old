@@ -8,7 +8,7 @@ namespace Mind
 
 	
 	///iConceptInteractTable contains concept pairs that describe the temporary relationship between them. 
-	class _MINDINTERFACEINOUT iConceptInteractTable: public MyObject
+	class _MINDINTERFACEINOUT iConceptInteractTable: public Obj<iConceptInteractTable>
 	{
 		typedef MindType::ConceptPair ConceptPair;
 
@@ -33,6 +33,8 @@ namespace Mind
 		virtual shared_ptr<iConceptInteractTable> Copy() const =0;
 
 		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const =0;
+
+		virtual bool ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const=0;
 	};
 }
 

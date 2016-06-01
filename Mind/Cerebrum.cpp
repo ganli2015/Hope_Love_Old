@@ -167,12 +167,12 @@ namespace Mind
 		return _conceptset->MaxLength_WordWithHead(headChara);
 	}
 
-	shared_ptr<iConcept> Cerebrum::GetConcept( const shared_ptr<DataCollection::Word> word )
+	shared_ptr<iConcept> Cerebrum::GetConcept( const shared_ptr<DataCollection::Word> word ) const
 	{
 		return _conceptset->GetConceptPtr(word);
 	}
 
-	shared_ptr<iConcept> Cerebrum::GetConcept( const Identity identity )
+	shared_ptr<iConcept> Cerebrum::GetConcept( const Identity identity ) const
 	{
 		return _conceptset->GetConceptPtr(identity);
 	}
@@ -225,6 +225,11 @@ namespace Mind
 	void Cerebrum::AddLogicStatement( const shared_ptr<LogicSystem::iLogicStatement> statement )
 	{
 		_logicKnowledge->Add(statement);
+	}
+
+	vector<shared_ptr<iConcept>> Cerebrum::FindConceptWithMatchedDisc( const shared_ptr<iConceptInteractTable> description ) const
+	{
+		return _conceptset->FindConceptWithMatchedDisc(description);
 	}
 
 }

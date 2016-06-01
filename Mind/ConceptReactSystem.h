@@ -14,7 +14,7 @@ namespace Mind
 	class ConceptSet;
 	class iConcept;
 
-	class ConceptReactSystem : public MyObject
+	class ConceptReactSystem : public Obj<ConceptReactSystem>
 	{
 	private:
 		struct DataInfo

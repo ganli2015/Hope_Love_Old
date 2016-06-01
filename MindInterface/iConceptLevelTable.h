@@ -6,7 +6,7 @@ namespace Mind
 	class iConcept;
 
 	//表示某个Concept与其BaseConcept之间的距离
-	class _MINDINTERFACEINOUT iConceptLevelTable: public MyObject
+	class _MINDINTERFACEINOUT iConceptLevelTable: public Obj<iConceptLevelTable>
 	{
 	public:
 		iConceptLevelTable(void);

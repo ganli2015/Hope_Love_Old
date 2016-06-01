@@ -26,6 +26,10 @@ namespace LogicSystem
 		virtual void BindReferredObject(const shared_ptr<T> obj) ;
 	};
 
+	///Specialize for iConcept
+	template<>
+	bool _LOGICSYSTEMINOUT Number<Mind::iConcept>::Match( const shared_ptr<Mind::iConcept> con ) const;
+
 	template<class T>
 	int Number<T>::NumNum=0;
 
@@ -38,26 +42,26 @@ namespace LogicSystem
 		return shared_ptr<Number>(new Number());
 	}
 
-	template<class T>
-	bool Number<T>::Match( const shared_ptr<T> con ) const
-	{
-		if(typeid(Mind::iConcept).name()==TypeName)
-		{
-			//Check whether the forward concepts of <con> exists 数字 concept.
-			vector<shared_ptr<Mind::iConcept>> forward=con->GetBase();
-			for (unsigned int i=0;i<forward.size();++i)
-			{
-				if(forward[i]->GetString()=="数字")
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-		else
-			throw runtime_error("Not implemented!!");
-	}
+// 	template<class T>
+// 	bool Number<T>::Match( const shared_ptr<T> con ) const
+// 	{
+// 		if(typeid(Mind::iConcept).name()==TypeName)
+// 		{
+// 			//Check whether the forward concepts of <con> exists 数字 concept.
+// 			vector<shared_ptr<Mind::iConcept>> forward=con->GetBase();
+// 			for (unsigned int i=0;i<forward.size();++i)
+// 			{
+// 				if(forward[i]->GetString()=="数字")
+// 				{
+// 					return true;
+// 				}
+// 			}
+// 
+// 			return false;
+// 		}
+// 		else
+// 			throw runtime_error("Not implemented!!");
+// 	}
 
 	template<class T>
 	void Number<T>::BindReferredObject(const shared_ptr<T> obj) 

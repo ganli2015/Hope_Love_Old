@@ -67,5 +67,19 @@ namespace Mind
 		return CommonFunction::IndexOf(_concepts,con);
 	}
 
+	bool ConceptInteractTable_iConcept::ConceptPairExist( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to ) const
+	{
+		for (const_indexIter indexIt=_interactIndex.begin();indexIt!=_interactIndex.end();++indexIt)
+		{
+			shared_ptr<iConcept> from_me=_concepts.at(indexIt->first);
+			shared_ptr<iConcept> to_me=_concepts.at(indexIt->second);
+			if(from_me->Same(from) && to_me->Same(to))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
 

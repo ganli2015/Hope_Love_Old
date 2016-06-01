@@ -29,6 +29,8 @@ namespace Mind
 		
 		virtual shared_ptr<iConceptInteractTable> Copy() const ;
 
+		virtual bool ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const;
+
 	private:
 		virtual shared_ptr<iConcept> GetSharedConcept(const int i) const;
 		virtual int GetConceptIndex(const shared_ptr<iConcept> con) const ;

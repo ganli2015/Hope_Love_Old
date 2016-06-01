@@ -104,6 +104,7 @@
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="LogicElementCreator.cpp" />
     <ClCompile Include="LogicStatement.cpp" />
+    <ClCompile Include="Number.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />

@@ -28,7 +28,7 @@ namespace DataCollection
 	const int NUM_PARTOFSPEECH=12;
 
 	///A Word constitutes of one or more characters.
-	class _DATACOLLECTIONINOUT Word : public MyObject
+	class _DATACOLLECTIONINOUT Word : public Obj<Word>
 	{
 		std::vector<shared_ptr<Character>> _word;
 

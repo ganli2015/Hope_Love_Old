@@ -41,7 +41,7 @@ namespace NeuralNetwork
 	};
 
 	//Base of network
-	class _NEURALNETWORKDESIGNINOUT Network : public MyObject
+	class _NEURALNETWORKDESIGNINOUT Network : public Obj<Network>
 	{
 	public:
 		Network();

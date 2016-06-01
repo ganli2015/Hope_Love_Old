@@ -65,6 +65,17 @@ namespace Mind
 
 			bool operator()(const shared_ptr<iConcept> val);
 		};
+
+		class _MINDINTERFACEINOUT SameConceptPair
+		{
+			shared_ptr<iConcept> _from;
+			shared_ptr<iConcept> _to;
+		public:
+			SameConceptPair(const shared_ptr<iConcept> from,const shared_ptr<iConcept> to):_from(from),_to(to){}
+			~SameConceptPair(){}
+
+			bool operator()(const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> val);
+		};
 	}
 }
 

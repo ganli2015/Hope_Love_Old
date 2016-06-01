@@ -7,7 +7,7 @@ namespace DataCollection
 {
 
 	///GrammarPattern is a pattern that describes the grammar of sentence.
-	class _DATACOLLECTIONINOUT GrammarPattern : public MyObject
+	class _DATACOLLECTIONINOUT GrammarPattern : public Obj<GrammarPattern>
 	{
 		std::vector<int> _pattern;
 		int _id;

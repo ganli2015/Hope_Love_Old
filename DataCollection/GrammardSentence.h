@@ -9,7 +9,7 @@ namespace DataCollection
 	class Word;
 
 	///GrammardSentence contains information of POS of words and their association of them.
-	class _DATACOLLECTIONINOUT GrammardSentence : public MyObject
+	class _DATACOLLECTIONINOUT GrammardSentence : public Obj<GrammardSentence>
 	{
 	public:
 		struct GraAssoInfo

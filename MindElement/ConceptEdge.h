@@ -40,6 +40,8 @@ namespace Mind
 		//建立<_modification>对<_concept>深度作用的列表
 		virtual shared_ptr<iConceptInteractTable> GetSelfDeepInteract() const;
 
+		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description) const ;
+
 	private:
 		void Init() ;
 	};

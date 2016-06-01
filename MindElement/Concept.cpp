@@ -352,5 +352,18 @@ namespace Mind
 		return id;
 	}
 
+	bool Concept::MatchWithDescription( const shared_ptr<iConceptInteractTable> description ) const
+	{
+		for (unsigned int i=0;i<_forward.size();++i)
+		{
+			if(_forward[i]->MatchWithConceptTable(description))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }
 

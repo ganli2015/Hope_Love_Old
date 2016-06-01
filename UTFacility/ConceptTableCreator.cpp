@@ -23,14 +23,14 @@ shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::SimpleCreate( const
 {
 	_myConceptCreator=shared_ptr<SimpleConceptCreator>(new SimpleConceptCreator());
 
-	return Parse(str);
+	return Parse(str,type);
 }
 
 shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Create( const string str,const Type type )
 {
 	_myConceptCreator=shared_ptr<CerebrumConceptCreator>(new CerebrumConceptCreator());
 
-	return Parse(str);
+	return Parse(str,type);
 }
 
 shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string str,const Type type  )
@@ -38,11 +38,11 @@ shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string
 	shared_ptr<Mind::iConceptInteractTable> res;
 	if(type==Concept_Based)
 	{
-		res==iMindElementCreator::CreateConceptInteractTable();
+		res=iMindElementCreator::CreateConceptInteractTable();
 	}
 	else
 	{
-		res==iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
+		res=iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
 	}
 
 

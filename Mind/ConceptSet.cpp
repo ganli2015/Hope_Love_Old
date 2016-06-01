@@ -603,5 +603,40 @@ namespace Mind
 		}
 	}
 
+	vector<shared_ptr<iConcept>> ConceptSet::FindConceptWithMatchedDisc( const shared_ptr<iConceptInteractTable> description ) const
+	{
+		class CheckMatch
+		{
+			shared_ptr<iConceptInteractTable> _description;
+		public:
+			CheckMatch(const shared_ptr<iConceptInteractTable> description):_description(description){}
+			~CheckMatch(){}
+
+			bool operator()(const pair<std::string,shared_ptr<Concept>>& concept)
+			{
+				if(concept.second->MatchWithDescription(_description))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		};
+
+		vector<shared_ptr<iConcept>> res;
+
+		const_conceptIter matchedIter=find_if(_conceptset.begin(),_conceptset.end(),CheckMatch(description));
+		while(matchedIter!=_conceptset.end())//Go through all concepts until reaching the end.
+		{
+			res.push_back(matchedIter->second);
+			++matchedIter;
+			matchedIter=find_if(matchedIter,_conceptset.end(),CheckMatch(description));
+		}
+
+		return res;
+	}
+
 }
 

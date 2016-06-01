@@ -68,10 +68,12 @@ namespace Mind
 		virtual vector<shared_ptr<DataCollection::Word>> GetAllWordsOfPOS(const DataCollection::PartOfSpeech pos) const;
 
 		void MakeConceptConnection(const shared_ptr<DataCollection::Word> from,const shared_ptr<DataCollection::Word> to);
-		virtual shared_ptr<iConcept> GetConcept(const shared_ptr<DataCollection::Word> word);
-		virtual shared_ptr<iConcept> GetConcept(const Identity identity);
+		virtual shared_ptr<iConcept> GetConcept(const shared_ptr<DataCollection::Word> word) const ;
+		virtual shared_ptr<iConcept> GetConcept(const Identity identity) const;
 		virtual vector<shared_ptr<iConcept>> SearchForwardConcepts(const shared_ptr<iConcept> concept) const;
 		virtual vector<shared_ptr<iConcept>> SearchBackwardConcepts(const shared_ptr<iConcept> concept) const;
+
+		virtual vector<shared_ptr<iConcept>> FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description) const ;
 
 		//Grammar Related Functions
 		//搜索<pattern>所包含的子pattern.

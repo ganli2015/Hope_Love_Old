@@ -1,6 +1,11 @@
 #pragma once
 #include "InOut.h"
 
+namespace Mind
+{
+	class iConceptInteractTable;
+}
+
 namespace LogicSystem
 {
 	enum LogicResult
@@ -12,9 +17,10 @@ namespace LogicSystem
 
 	class iExpression;
 	class iDeduceResult;
+	class iReduceResult;
 
 	///iLogic contains functions about logic manipulation.
-	class _MINDINTERFACEINOUT iLogic: public MyObject
+	class _MINDINTERFACEINOUT iLogic: public Obj<iLogic>
 	{
 	public:
 		iLogic(void);
@@ -22,13 +28,16 @@ namespace LogicSystem
 
 		///Check whether <conclusion> can be deduced by <condition>.
 		///<condition> should have been analyzed!
-		virtual LogicResult Determine(const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion) =0;
+		virtual LogicResult Determine(const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion) const =0;
 
 		///Deduce results from <condition>.
-		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) =0;
+		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) const =0;
 
 		///Deduce results from <condition> repeatedly until the results converge.
-		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition) =0;
+		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition) const =0;
+
+		///Reduce <conceptTable> to a simpler one.
+		virtual vector<shared_ptr<iReduceResult>> Reduce(const shared_ptr<Mind::iConceptInteractTable> conceptTable) const =0;
 	};
 }
 

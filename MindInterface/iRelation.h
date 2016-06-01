@@ -16,7 +16,7 @@ namespace LogicSystem
 	class iRelationConstraint;
 
 	///iRelation indicates the logic relationship between logic symbols.
-	class _MINDINTERFACEINOUT iRelation: public MyObject
+	class _MINDINTERFACEINOUT iRelation: public Obj<iRelation>
 	{
 	protected:
 		struct PairInfo;

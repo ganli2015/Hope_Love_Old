@@ -89,6 +89,20 @@ namespace Mind
 		return iCerebrum::Instance();
 	}
 
+	bool ConceptInteractTable_Identity::ConceptPairExist( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to ) const
+	{
+		for (const_indexIter indexIt=_interactIndex.begin();indexIt!=_interactIndex.end();++indexIt)
+		{
+			Identity from_me=_concepts.at(indexIt->first);
+			Identity to_me=_concepts.at(indexIt->second);
+			if(from_me==from->GetIdentity() && to_me==to->GetIdentity())
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 	
 
 }

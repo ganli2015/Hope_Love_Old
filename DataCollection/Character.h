@@ -4,7 +4,7 @@
 namespace DataCollection
 {
 	///A Character is a Chinese character (for temporary£© or a puncture.
-	class _DATACOLLECTIONINOUT Character : public MyObject
+	class _DATACOLLECTIONINOUT Character : public Obj<Character>
 	{
 		std::string _character;
 	public:

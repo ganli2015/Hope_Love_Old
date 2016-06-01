@@ -2,6 +2,7 @@
 #include "ConceptInteractTable.h"
 #include "Concept.h"
 
+#include "../MindInterface/CommonFunction.h"
 
 namespace Mind
 {
@@ -169,9 +170,41 @@ namespace Mind
 
 	double ConceptInteractTable::Similarity( const shared_ptr<iConceptInteractTable> other ) const
 	{
+		vector<ConceptPair> otherPairs=other->GetAllRelations();
+		int otherPairCount=otherPairs.size();
 
+		//The number of same concept pairs
+		int sameCount=0;
+		//Determine how many pairs are duplicated in <me> and <other>
+		for (const_indexIter indexIt=_interactIndex.begin();indexIt!=_interactIndex.end();++indexIt)
+		{
+			shared_ptr<iConcept> from=GetSharedConcept(indexIt->first);
+			shared_ptr<iConcept> to=GetSharedConcept(indexIt->second);
 
-		return -1;
+			//If pair in <otherPairs> is duplicated , then remove it.
+			if(RemoveFirstExistConceptPair(from,to,otherPairs))
+			{
+				sameCount+=2;
+			}
+		}
+
+		return (double)sameCount/(otherPairCount+_interactIndex.size());
+	}
+
+	bool ConceptInteractTable::RemoveFirstExistConceptPair( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to,
+		vector<ConceptPair>& pairs ) const
+	{
+		vector<ConceptPair>::iterator sameIt=find_if(pairs.begin(),pairs.end(),CommonFunction::SameConceptPair(from,to));
+		
+		if(sameIt!=pairs.end())
+		{
+			pairs.erase(sameIt);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

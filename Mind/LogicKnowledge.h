@@ -12,7 +12,7 @@ namespace LogicSystem
 namespace Mind
 {
 	///LogicKnowledge contains logic statements.
-	class LogicKnowledge : public MyObject
+	class LogicKnowledge : public Obj<LogicKnowledge>
 	{
 		vector<shared_ptr<LogicSystem::iLogicStatement>> _statements;
 

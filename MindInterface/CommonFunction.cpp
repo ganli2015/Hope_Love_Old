@@ -219,6 +219,19 @@ namespace Mind
 			}
 		}
 
+
+		bool SameConceptPair::operator()( const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> val )
+		{
+			if(val.first->Same(_from) && val.second->Same(_to))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }
 

@@ -79,6 +79,8 @@ namespace Mind
 		//Return the same class of <me>
 		shared_ptr<Concept> Clone() const;
 
+		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description) const ;
+
 	private:
 		shared_ptr<DataCollection::Word> GetParticularWord(DataCollection::PartOfSpeech partofspeech) const;
 		void Recursive_GetBase(const iConcept* concept,vector<shared_ptr<iConcept>>& result) const;

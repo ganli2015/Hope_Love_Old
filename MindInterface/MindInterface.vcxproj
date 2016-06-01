@@ -93,6 +93,7 @@
     <ClInclude Include="iLogicStatement.h" />
     <ClInclude Include="iMindElementCreator.h" />
     <ClInclude Include="InOut.h" />
+    <ClInclude Include="iReduceResult.h" />
     <ClInclude Include="iRelation.h" />
     <ClInclude Include="iRelationConstraint.h" />
     <ClInclude Include="iSymbol.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="iLogicElementCreator.cpp" />
     <ClCompile Include="iLogicStatement.cpp" />
     <ClCompile Include="iMindElementCreator.cpp" />
+    <ClCompile Include="iReduceResult.cpp" />
     <ClCompile Include="iRelation.cpp" />
     <ClCompile Include="iRelationConstraint.cpp" />
     <ClCompile Include="iSymbol.cpp" />

@@ -21,6 +21,7 @@ namespace Mind
 {
 	class iConcept;
 	class iConceptChain;
+	class iConceptInteractTable;
 	struct Identity;
 	struct ConceptChainProperty;
 
@@ -45,10 +46,13 @@ namespace Mind
 		virtual std::vector<shared_ptr<DataCollection::Word>> GetAllKindsofWord(const shared_ptr<DataCollection::Word> word) const=0;
 		virtual vector<shared_ptr<DataCollection::Word>> GetAllWordsOfPOS(const DataCollection::PartOfSpeech pos) const=0;
 
-		virtual shared_ptr<iConcept> GetConcept(const shared_ptr<DataCollection::Word> word)=0;
-		virtual shared_ptr<iConcept> GetConcept(const Identity identity)=0;
+		virtual shared_ptr<iConcept> GetConcept(const shared_ptr<DataCollection::Word> word) const =0;
+		virtual shared_ptr<iConcept> GetConcept(const Identity identity) const =0;
 		virtual vector<shared_ptr<iConcept>> SearchForwardConcepts(const shared_ptr<iConcept> concept) const=0;
 		virtual vector<shared_ptr<iConcept>> SearchBackwardConcepts(const shared_ptr<iConcept> concept) const=0;
+
+		///Find a concept which has the same meaning with the concept pairs in  <description>.
+		virtual vector<shared_ptr<iConcept>> FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description) const = 0;
 
 		//Grammar Related Functions
 		//搜索<pattern>所包含的子pattern.

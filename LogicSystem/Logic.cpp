@@ -20,7 +20,7 @@ namespace LogicSystem
 	{
 	}
 
-	LogicSystem::LogicResult Logic::Determine( const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion )
+	LogicSystem::LogicResult Logic::Determine( const shared_ptr<iExpression> condition,const shared_ptr<iExpression> conclusion ) const
 	{
 		class FindMatchRelation
 		{
@@ -58,15 +58,20 @@ namespace LogicSystem
 
 	}
 
-	vector<shared_ptr<iDeduceResult>> Logic::Deduce( const shared_ptr<iExpression> condition )
+	vector<shared_ptr<iDeduceResult>> Logic::Deduce( const shared_ptr<iExpression> condition ) const
 	{
 		Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 		return brain->Deduce(condition);
 	}
 
-	vector<shared_ptr<iDeduceResult>> Logic::FinalDeduce( const shared_ptr<iExpression> condition )
+	vector<shared_ptr<iDeduceResult>> Logic::FinalDeduce( const shared_ptr<iExpression> condition ) const
 	{
 		return vector<shared_ptr<iDeduceResult>>();
+	}
+
+	vector<shared_ptr<iReduceResult>> Logic::Reduce( const shared_ptr<Mind::iConceptInteractTable> conceptTable ) const
+	{
+		return vector<shared_ptr<iReduceResult>>();
 	}
 
 }
