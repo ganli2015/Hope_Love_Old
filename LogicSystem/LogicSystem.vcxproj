@@ -89,6 +89,7 @@
     <ClInclude Include="LogicElementCreator.h" />
     <ClInclude Include="LogicStatement.h" />
     <ClInclude Include="Number.h" />
+    <ClInclude Include="ReduceResult.h" />
     <ClInclude Include="RelationLeaf.h" />
     <ClInclude Include="RelationNode.h" />
     <ClInclude Include="SingleExpression.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="LogicElementCreator.cpp" />
     <ClCompile Include="LogicStatement.cpp" />
     <ClCompile Include="Number.cpp" />
+    <ClCompile Include="ReduceResult.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />

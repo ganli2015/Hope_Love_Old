@@ -18,6 +18,8 @@
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/BaseConcept.h"
 
+#include "../MindInterface/iCerebrum.h"
+
 using namespace std;
 using namespace DataCollection;
 
@@ -636,6 +638,44 @@ namespace Mind
 		}
 
 		return res;
+	}
+
+
+	void ConceptSet::FindConceptWithMatchedDisc( const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos ) const
+	{
+		class GenerateMatchInfo
+		{
+			shared_ptr<iConceptInteractTable> _description;
+
+			vector<DescMatchedConceptInfo> _infos;
+		public:
+			GenerateMatchInfo(const shared_ptr<iConceptInteractTable> description):_description(description){}
+			~GenerateMatchInfo(){}
+
+			void operator()(const pair<std::string,shared_ptr<Concept>>& concept)
+			{
+				shared_ptr<iConcept> toConcept;
+
+				if(concept.second->MatchWithDescription(_description),toConcept)
+				{
+					assert(toConcept!=NULL);
+					DescMatchedConceptInfo info;
+					info.matchedConcept=concept.second;
+					info.toConcept=toConcept;
+					_infos.push_back(info);
+
+				}
+			}
+
+			vector<DescMatchedConceptInfo> GetResult() const {return _infos; }
+		};
+
+		matchedInfos.clear();
+		
+		GenerateMatchInfo genarate(description);
+		genarate=for_each(_conceptset.begin(),_conceptset.end(),genarate);
+
+		matchedInfos=genarate.GetResult();
 	}
 
 }

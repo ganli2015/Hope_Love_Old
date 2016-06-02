@@ -113,6 +113,19 @@ namespace Mind
 		}
 	}
 
+	bool ConceptEdge::MatchWithConceptTable( const shared_ptr<iConceptInteractTable> description,shared_ptr<iConcept>& toConcept ) const
+	{
+		if(MatchWithConceptTable(description))
+		{
+			toConcept=_concept.lock()->Copy();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 

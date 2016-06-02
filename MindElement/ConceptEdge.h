@@ -41,7 +41,7 @@ namespace Mind
 		virtual shared_ptr<iConceptInteractTable> GetSelfDeepInteract() const;
 
 		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description) const ;
-
+		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description,shared_ptr<iConcept>& toConcept) const ;
 	private:
 		void Init() ;
 	};

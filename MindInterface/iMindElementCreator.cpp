@@ -43,6 +43,11 @@ namespace Mind
 		return _imp->CreateConceptInteractTable(type);
 	}
 
+	shared_ptr<iConceptInteractTable> iMindElementCreator::CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type)
+	{
+		return _imp->CreateConceptInteractTable(pairs,type);
+	}
+
 	shared_ptr<iConceptLevelTable> iMindElementCreator::CreateConceptLevelTable( const shared_ptr<iConcept> val ,const ElementType type/*=ConceptLevelTableD*/ )
 	{
 		return _imp->CreateConceptLevelTable(val,type);

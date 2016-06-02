@@ -24,6 +24,7 @@ namespace Mind
 	class iConceptInteractTable;
 	struct Identity;
 	struct ConceptChainProperty;
+	struct DescMatchedConceptInfo;
 
 	class _MINDINTERFACEINOUT iCerebrum
 	{
@@ -53,6 +54,7 @@ namespace Mind
 
 		///Find a concept which has the same meaning with the concept pairs in  <description>.
 		virtual vector<shared_ptr<iConcept>> FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description) const = 0;
+		virtual void FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos) const = 0;
 
 		//Grammar Related Functions
 		//搜索<pattern>所包含的子pattern.
@@ -73,5 +75,12 @@ namespace Mind
 		//LogicKnowledge related functions
 		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const =0;
 		virtual void AddLogicStatement(const shared_ptr<LogicSystem::iLogicStatement> statement) =0;
+	};
+
+
+	struct DescMatchedConceptInfo
+	{
+		shared_ptr<iConcept> matchedConcept;
+		shared_ptr<iConcept> toConcept;//The to concept of <matchedConcept> with corresponding description.
 	};
 }

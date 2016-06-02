@@ -232,6 +232,11 @@ namespace Mind
 		return _conceptset->FindConceptWithMatchedDisc(description);
 	}
 
+	void Cerebrum::FindConceptWithMatchedDisc( const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos ) const
+	{
+		_conceptset->FindConceptWithMatchedDisc(description,matchedInfos);
+	}
+
 }
 
 

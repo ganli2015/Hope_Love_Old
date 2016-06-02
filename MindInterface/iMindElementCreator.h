@@ -43,7 +43,9 @@ namespace Mind
 		static shared_ptr<iConceptChain> CreateConceptChain(const vector<shared_ptr<iConcept>>& val,const ElementType type=ConceptChainD) ;
 
 		static shared_ptr<iConceptEdge> CreateConceptEdge(const ElementType type=ConceptEdgeD);
+
 		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type=ConceptInteractTableD);
+		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type=ConceptInteractTableD);
 		///<val> is the central concept of level table.
 		static shared_ptr<iConceptLevelTable> CreateConceptLevelTable(const shared_ptr<iConcept> val ,const ElementType type=ConceptLevelTableD);
 
@@ -69,7 +71,10 @@ namespace Mind
 		virtual shared_ptr<iConceptChain> CreateConceptChain(const vector<shared_ptr<iConcept>>& val,const ElementType type) const =0;
 
 		virtual shared_ptr<iConceptEdge> CreateConceptEdge(const ElementType type) const =0;
+
 		virtual shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type) const =0;
+		virtual shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type) const =0;
+
 		virtual shared_ptr<iConceptLevelTable> CreateConceptLevelTable(const shared_ptr<iConcept> val ,const ElementType type) const =0;
 
 	};

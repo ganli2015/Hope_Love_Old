@@ -53,6 +53,10 @@ namespace Mind
 			throw runtime_error("Forbidden!");
 		}
 
+		virtual void FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos) const 
+		{
+			throw runtime_error("Forbidden!");
+		}
 	};
 }
 

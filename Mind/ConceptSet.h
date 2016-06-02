@@ -14,6 +14,7 @@ namespace DataCollection
 namespace Mind
 {
 	class iConceptInteractTable;
+	struct DescMatchedConceptInfo;
 
 	class _MINDINOUT ConceptSet : public Obj<ConceptSet>
 	{
@@ -76,6 +77,7 @@ namespace Mind
 		int BaseConceptCount() const {return _baseConceptset.size();}
 
 		vector<shared_ptr<iConcept>> FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description) const ;		
+		void FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos) const ;	
 
 
 		int Count_ForwardAdjWord(const shared_ptr<DataCollection::Character> chara) const;

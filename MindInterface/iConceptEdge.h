@@ -28,6 +28,7 @@ namespace Mind
 
 		///Check whether the description of <me> to a concept is exactly matched with <description>.
 		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description) const =0;
+		virtual bool MatchWithConceptTable(const shared_ptr<iConceptInteractTable> description,shared_ptr<iConcept>& toConcept) const =0;
 	};
 }
 

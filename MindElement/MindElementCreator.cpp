@@ -113,6 +113,37 @@ namespace Mind
 		}
 	}
 
+	shared_ptr<iConceptInteractTable> MindElementCreator::CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type) const
+	{
+		shared_ptr<iConceptInteractTable> res;
+
+		switch(type)
+		{
+		case Host::ConceptInteractTableD:
+			{
+				res= shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
+			}
+		case Host::ConceptInteractTable_IdentityBased:
+			{
+				res= shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
+			}
+		default:
+			{
+				res= NULL;
+			}
+		}
+
+		if(res!=NULL)
+		{
+			for (unsigned int i=0;i<pairs.size();++i)
+			{
+				res->Add(pairs[i].first,pairs[i].second);
+			}
+		}
+
+		return res;
+	}
+
 	shared_ptr<iConceptLevelTable> MindElementCreator::CreateConceptLevelTable(const shared_ptr<iConcept> val ,const  ElementType type ) const
 	{
 		switch(type)

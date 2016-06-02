@@ -62,6 +62,9 @@
     <ClInclude Include="Verb.h">
       <Filter>SpecialSymbol</Filter>
     </ClInclude>
+    <ClInclude Include="ReduceResult.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="Number.cpp">
       <Filter>SpecialSymbol</Filter>
+    </ClCompile>
+    <ClCompile Include="ReduceResult.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

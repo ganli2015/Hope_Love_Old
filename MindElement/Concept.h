@@ -80,6 +80,7 @@ namespace Mind
 		shared_ptr<Concept> Clone() const;
 
 		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description) const ;
+		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description,shared_ptr<iConcept>& toConcept) const ;
 
 	private:
 		shared_ptr<DataCollection::Word> GetParticularWord(DataCollection::PartOfSpeech partofspeech) const;

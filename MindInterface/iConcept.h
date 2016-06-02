@@ -59,6 +59,8 @@ namespace Mind
 		virtual const vector<shared_ptr<iConceptEdge>> GetForwardEdges() const =0;	
 
 		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description) const =0;
+		///Return the first matched <toConcept>.
+		virtual bool MatchWithDescription(const shared_ptr<iConceptInteractTable> description,shared_ptr<iConcept>& toConcept) const =0;
 protected:
 	};
 }
