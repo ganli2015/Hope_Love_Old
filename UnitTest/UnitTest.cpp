@@ -31,11 +31,16 @@ void MyGlobal::SetUp()
 	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
 }
 
+void RunFilter(const string filterStr);
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
-//	::testing::GTEST_FLAG(filter) = "Test_LogicKnowledgeInitializer*";
-	testing::AddGlobalTestEnvironment(new MyGlobal);
+//	RunFilter("Test_Logic*");
+
+	MyGlobal global;
+	global.SetUp();
+
+//	testing::AddGlobalTestEnvironment(new MyGlobal);
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
 
@@ -43,5 +48,12 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 
+}
+
+void RunFilter(const string filterStr)
+{
+//	::testing::GTEST_FLAG(filter) = filterStr;
+
+	
 }
 

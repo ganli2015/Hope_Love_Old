@@ -1,11 +1,18 @@
 #pragma once
 #include "PublicHeader.h"
+#include "../Mathmatic/MathTool.h"
+#include <gmock/gmock.h>
 
 namespace Mind
 {
 	class iConcept;
 	class iConceptChain;
 	class iConceptInteractTable;
+}
+
+namespace LogicSystem
+{
+	class iReduceResult;
 }
 
 class InitCerebrum:public testing::Test
@@ -37,6 +44,8 @@ namespace FuncForTest
 	bool SameChainVec(const vector<vector<string>>& expect, const vector<shared_ptr<Mind::iConceptChain>>& result);
 
 	bool SameChain(const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res);
+
+	bool SameReduceResult(const vector<pair<string,string>>& tablePairs, const string conceptStr, const shared_ptr<LogicSystem::iReduceResult> result);
 
 	void DisplayChains(const vector<shared_ptr<Mind::iConceptChain>>& chains);
 
@@ -98,6 +107,19 @@ namespace FuncForTest
 		}
 
 		return true;
+	}
+
+
+	MATCHER_P(SameConceptTable,table,"")
+	{
+		if(Math::DoubleCompare(arg->Similarity(table),1)==0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 

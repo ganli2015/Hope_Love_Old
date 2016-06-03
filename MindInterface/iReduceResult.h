@@ -4,6 +4,7 @@
 namespace Mind
 {
 	class iConceptInteractTable;
+	class iConcept;
 }
 
 namespace LogicSystem
@@ -17,6 +18,9 @@ namespace LogicSystem
 
 		///Get the result represented as .iConceptInteractTable.
 		virtual shared_ptr<Mind::iConceptInteractTable> GetConceptTable() const =0;
+		///Get the result of a single concept.
+		virtual shared_ptr<Mind::iConcept> GetSingleConcept() const =0;
+
 	};
 }
 

@@ -26,6 +26,7 @@ namespace Mind
 		case Host::ConceptD:
 			{
 				return shared_ptr<Concept>(new Concept());
+				break;
 			}
 		default:
 			{
@@ -41,6 +42,7 @@ namespace Mind
 		case Host::ConceptD:
 			{
 				return shared_ptr<Concept>(new Concept(word));
+				break;
 			}
 		default:
 			{
@@ -56,6 +58,7 @@ namespace Mind
 		case Host::ConceptChainD:
 			{
 				return shared_ptr<ConceptChain>(new ConceptChain());
+				break;
 			}
 		default:
 			{
@@ -71,6 +74,7 @@ namespace Mind
 		case Host::ConceptChainD:
 			{
 				return shared_ptr<ConceptChain>(new ConceptChain(val));
+				break;
 			}
 		default:
 			{
@@ -86,6 +90,7 @@ namespace Mind
 		case Host::ConceptEdgeD:
 			{
 				return shared_ptr<ConceptEdge>(new ConceptEdge());
+				break;
 			}
 		default:
 			{
@@ -101,10 +106,12 @@ namespace Mind
 		case Host::ConceptInteractTableD:
 			{
 				return shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
+				break;
 			}
 		case Host::ConceptInteractTable_IdentityBased:
 			{
 				return shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
+				break;
 			}
 		default:
 			{
@@ -122,10 +129,12 @@ namespace Mind
 		case Host::ConceptInteractTableD:
 			{
 				res= shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
+				break;
 			}
 		case Host::ConceptInteractTable_IdentityBased:
 			{
 				res= shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
+				break;
 			}
 		default:
 			{
@@ -151,6 +160,7 @@ namespace Mind
 		case Host::ConceptLevelTableD:
 			{
 				return shared_ptr<ConceptLevelTable>(new ConceptLevelTable(val));
+				break;
 			}
 		default:
 			{

@@ -2,12 +2,19 @@
 #include "InOut.h"
 #include "../MindInterface/iLogic.h"
 
+namespace Mind
+{
+	class iCerebrum;
+	struct DescMatchedConceptInfo;
+};
+
 namespace LogicSystem
 {
 	class _LOGICSYSTEMINOUT Logic : public iLogic
 	{
 		typedef MindType::ConceptPair ConceptPair;
 
+		friend class Test_LogicSystem;
 	public:
 		Logic(void);
 		~Logic(void);
@@ -28,8 +35,9 @@ namespace LogicSystem
 		bool FindPair_SameFirstConcept(const vector<ConceptPair>& total,const shared_ptr<Mind::iConcept> concept,Logic::ConceptPair& resultPair) const;
 		///Find a ConceptPair whose second concept is <concept>.
 		bool FindPair_SameSecondConcept(const vector<ConceptPair>& total,const shared_ptr<Mind::iConcept> concept,Logic::ConceptPair& resultPair) const;
-
-		vector<Logic::ConceptPair> FindConnectedPairs(const vector<ConceptPair>& total,)
+	
+		vector<shared_ptr<iReduceResult>> ReduceConceptPairSequence(const vector<ConceptPair>& subPairs,const vector<ConceptPair>& totalPairs,const Mind::iCerebrum* brain) const;
+		shared_ptr<iReduceResult> ReduceFromMatchedConcept(const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs) const;
 	};
 }
 

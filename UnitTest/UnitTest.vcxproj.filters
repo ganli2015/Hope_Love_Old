@@ -109,9 +109,6 @@
     <ClCompile Include="Test_ReactionAnalysisAlgorithm.cpp">
       <Filter>ReactionAnalysisAlgorithm</Filter>
     </ClCompile>
-    <ClCompile Include="FuncForTest.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Test_iRelation.cpp">
       <Filter>LogicSystem</Filter>
     </ClCompile>
@@ -120,6 +117,9 @@
     </ClCompile>
     <ClCompile Include="Test_ConceptInteractTable.cpp">
       <Filter>Mind</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncForTest.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

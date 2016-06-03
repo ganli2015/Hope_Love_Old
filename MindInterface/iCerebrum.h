@@ -77,7 +77,7 @@ namespace Mind
 		virtual void AddLogicStatement(const shared_ptr<LogicSystem::iLogicStatement> statement) =0;
 	};
 
-
+	///Some information of concept that is matched with some description.
 	struct DescMatchedConceptInfo
 	{
 		shared_ptr<iConcept> matchedConcept;

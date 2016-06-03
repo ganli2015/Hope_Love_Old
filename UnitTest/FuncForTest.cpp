@@ -14,6 +14,7 @@
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/iMindElementCreator.h"
 #include "../MindInterface/PublicTypedef.h"
+#include "../MindInterface/iReduceResult.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/GrammaPattern.h"
@@ -22,7 +23,7 @@
 
 using namespace Mind;
 using namespace DataCollection;
-
+using namespace LogicSystem;
 
 namespace FuncForTest
 {
@@ -187,6 +188,69 @@ namespace FuncForTest
 		}
 
 		return PairSameWithTable(stringPairs,right);
+	}
+
+	bool SameReduceResult( const vector<pair<string,string>>& tablePairs, const string conceptStr, const shared_ptr<iReduceResult> result )
+	{
+		if(tablePairs.empty() && conceptStr=="")
+		{
+			if(result==NULL)
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+
+		shared_ptr<iConceptInteractTable> resTable=result->GetConceptTable();
+		shared_ptr<iConcept> resConcept=result->GetSingleConcept();
+
+		//Both iConceptInteractTable and iConcept may be the result.
+		if(!tablePairs.empty())
+		{
+			if(resTable!=NULL && FuncForTest::PairSameWithTable(tablePairs,resTable))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(resTable==NULL)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		if(conceptStr!="")
+		{
+			if(conceptStr==resConcept->GetString())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(resConcept==NULL)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 
 }
