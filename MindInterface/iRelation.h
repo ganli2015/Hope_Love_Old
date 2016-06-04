@@ -46,6 +46,7 @@ namespace LogicSystem
 
 		///Check whether <expre> satisfy the relation <me>.
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) =0;
+		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> expre) =0;
 
 		///Find match symbol and concept pairs in <conceptPairs>.
 		virtual vector<PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const =0;
@@ -55,7 +56,7 @@ namespace LogicSystem
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const =0;
 
 		///Use <Satisfy> before!
-		///After <Satisfy>, symbols of <me> will refer to concepts and then generate a special relation of <relation>.
+		///After <Satisfy>, symbols of <me> will refer to concepts and then generate a special relation of <relation> and return it.
 		///Each symbol in the result relation will refer to a definite object.
 		///Same symbols in <relation> and <me> will refer to the same objects.
 		shared_ptr<iRelation> SymbolResonance(const shared_ptr<iRelation> relation) const ;

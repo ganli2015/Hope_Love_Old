@@ -82,7 +82,7 @@ namespace DataCollection
 		}
 	}
 
-	unsigned int Sentence::GrammarWordCount()
+	unsigned int Sentence::GrammarWordCount() const
 	{
 		if(_grammard!=NULL)
 		{
@@ -162,6 +162,18 @@ namespace DataCollection
 		}
 
 		return false;
+	}
+
+	shared_ptr<Word> Sentence::GetGrammardWord( const unsigned int i ) const
+	{
+		if(i>GrammarWordCount())
+		{
+			return NULL;
+		}
+		else
+		{
+			return GetGrammard()[i];
+		}
 	}
 
 

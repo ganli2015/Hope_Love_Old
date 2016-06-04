@@ -58,6 +58,11 @@ namespace LogicSystem
 		return res;
 	}
 
+	shared_ptr<Mind::iConcept> CompositeExpression::GetProtoConcept() const
+	{
+		return NULL;
+	}
+
 
 }
 

@@ -33,3 +33,5 @@ private:
 	static shared_ptr<Mind::iConcept> ParseConcept( const string str );
 };
 
+
+

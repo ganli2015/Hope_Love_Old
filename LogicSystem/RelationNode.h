@@ -25,7 +25,10 @@ namespace LogicSystem
 		~RelationNode(void);
 
 		virtual string GetString() const ;
+
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
+		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> conceptTable) ;
+
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
 		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;

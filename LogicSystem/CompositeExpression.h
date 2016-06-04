@@ -23,6 +23,8 @@ namespace LogicSystem
 
 		virtual shared_ptr<Mind::iConceptInteractTable> GetBaseInteractTable() const;
 		virtual shared_ptr<Mind::iConceptInteractTable> GetProtoInteractTable() const;
+
+		virtual shared_ptr<Mind::iConcept> GetProtoConcept() const ;
 	};
 }
 

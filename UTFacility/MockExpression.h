@@ -14,9 +14,14 @@ class _UTFACILITYINOUT MockExpression : public LogicSystem::iExpression
 public:
 	MOCK_CONST_METHOD0(GetBaseInteractTable, shared_ptr<Mind::iConceptInteractTable>());
 	MOCK_CONST_METHOD0(GetProtoInteractTable, shared_ptr<Mind::iConceptInteractTable>());
+	MOCK_CONST_METHOD0(GetProtoConcept, shared_ptr<Mind::iConcept>());
 
 	///Create a MockExpression which returns ProtoInteractTable of <table> and BaseInteractTable of null.
 	static shared_ptr<MockExpression> Create(const string table);
+	static shared_ptr<MockExpression> SimpleCreate(const string table);
+	static shared_ptr<MockExpression> Create();
+
+	void AddExpectCall_GetProtoConcept(const string concept);
 };
 
 

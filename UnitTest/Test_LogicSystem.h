@@ -79,12 +79,7 @@ namespace LogicSystem
 
 	protected:
 
-		///Create MockiCerebrum that designates the reduce result on the condition of <conceptTableStr>.
-		static Mind::MockiCerebrum* CreateMockCerebrum(const string conceptTableStr,
-			const string matchedConceptStr,
-			const string toConceptStr,
-			const shared_ptr<ConceptTableCreator> tableCreator,
-			const shared_ptr<ConceptCreator> conceptCreator);
+		
 	};
 }
 

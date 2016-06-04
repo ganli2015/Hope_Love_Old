@@ -23,5 +23,17 @@ namespace Mind
 		_instance=NULL;
 	}
 
+	bool iCerebrum::Empty()
+	{
+		if(_instance==NULL)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 

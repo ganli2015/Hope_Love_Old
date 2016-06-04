@@ -77,12 +77,13 @@ namespace DataCollection
 
 		void SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec);
 		std::vector<shared_ptr<Word>> GetGrammard() const;
+		shared_ptr<Word> GetGrammardWord(const unsigned int i) const;
 		///Build grammar association of <me> according to <patterns>.
 		void BuildGrammarAssociation(const std::vector<GrammarPattern>& patterns);
 		///Get the association info of the <i_thWord>th word, including the associated indexes <associatedIndexes> and patterns related to them.
 		///<associatedIndexes> and <associatedPatterns> are one-to-one mapping.
 		void GetAssociationInfo(const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns);
-		unsigned int GrammarWordCount();
+		unsigned int GrammarWordCount() const;
 		bool StructureAnalyzed() const {return _structured->Analyzed();}
 
 		///Set the intensity of the <i_word>th and <j_word>th word.

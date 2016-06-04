@@ -40,12 +40,13 @@ using namespace LogicSystem;
 using namespace FuncForTest;
 using ::testing::Return;
 using ::testing::_;
+using testing::Matcher;
 
 typedef Arbitrariness<iConcept> Arb;
 typedef LogicType::ConSymbol ConSymbol;
 typedef Symbol<iConcept> Sym;
 
-typedef InitCerebrum Test_Logic;
+typedef InitCerebrum TestF_Logic;
 typedef InitCerebrum Test_Number;
 typedef InitCerebrum Test_Verb;
 typedef InitCerebrum Test_LogicStatement;
@@ -53,7 +54,7 @@ typedef InitCerebrum Test_LogicStatement;
 
 namespace LogicSystem
 {
-	TEST_F(Test_Logic,Determine)
+	TEST_F(TestF_Logic,Determine)
 	{
 		shared_ptr<RelationNode> conditionRel(new RelationNode());
 		shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
@@ -134,22 +135,39 @@ namespace LogicSystem
 		Test_LogicSystem::TestLogicStatementDeduce(logicStatment,condition,expect);
 	}
 
-	TEST_F(Test_Logic,Deduce)
+	TEST(Test_Logic,FinalDeduce)
 	{
 		//Create mock expression of condition.
 		string tableStr="二-加,加-三";
-		shared_ptr<iConceptInteractTable> table=ConceptTableCreator::Create(tableStr);
-		shared_ptr<MockExpression> expre(new MockExpression());
-		EXPECT_CALL(*expre,GetProtoInteractTable()).WillRepeatedly(Return(table));
-		EXPECT_CALL(*expre,GetBaseInteractTable()).Times(0);
+		shared_ptr<MockExpression> expre=MockExpression::SimpleCreate(tableStr);
+
+		MockiCerebrum* mockBrain=MockiCerebrum::Create();
+
+		//Prepare data for FindConceptWithMatchedDisc.
+		typedef MockiCerebrum::FindMatchConceptParam FindMatchConceptParam;
+		vector<FindMatchConceptParam> params;
+		params.push_back(FindMatchConceptParam("二-加,加-一","三","二"));
+		params.push_back(FindMatchConceptParam("三-加,加-一","四","三"));
+		params.push_back(FindMatchConceptParam("四-加,加-一","五","四"));
+
+		mockBrain->AddExpectCall_FindConceptWithMatchedDisc(params);
+
+		//Prepare data for iCerebrum::Deduce
+		string condition="二-加,加-三";
+		string deduceRes="二-加,加-一,三-次,次-加";
+		mockBrain->AddExpectCall_Deduce(condition,deduceRes);
+		string condition2="二-加,三-次,次-加,加-一";
+		string deduceRes2="二-加,加-一,加-一,加-一";
+		mockBrain->AddExpectCall_Deduce(condition2,deduceRes2);
+		iCerebrum::SetInstance(mockBrain);
 
 		Logic logic;
 		vector<shared_ptr<iDeduceResult>> results=logic.FinalDeduce(expre);
 
 		ASSERT_EQ(results.size(),1);
 
-		shared_ptr<iExpression> expect(iLogicElementCreator::CreateExpression("五"));
-		ASSERT_TRUE(results.front()->Matching(expect)==1);
+		string resStr=results.front()->GetConcept()->GetString();
+		ASSERT_EQ(resStr,"五");
 	}
 
 	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_ReduceFromMatchedConcept, testing::ValuesIn(Test_ReduceFromMatchedConcept::GenerateSamples()));
@@ -363,8 +381,8 @@ namespace LogicSystem
 			Param_Reduce param;
 			param.inputTable=tableCreator->SimpleCreate("二-加,加-一,加-一");
 
-
-			param.mockCerebrum=CreateMockCerebrum("二-加,加-一",
+			param.mockCerebrum=MockiCerebrum::Create();
+			param.mockCerebrum->AddExpectCall_FindConceptWithMatchedDisc("二-加,加-一",
 				"三",
 				"二",
 				tableCreator,
@@ -392,8 +410,8 @@ namespace LogicSystem
 			Param_Reduce param;
 			param.inputTable=tableCreator->SimpleCreate("二-加,加-一,加-一,加-一");
 
-
-			param.mockCerebrum=CreateMockCerebrum("二-加,加-一",
+			param.mockCerebrum=MockiCerebrum::Create();
+			param.mockCerebrum->AddExpectCall_FindConceptWithMatchedDisc("二-加,加-一",
 				"三",
 				"二",
 				tableCreator,
@@ -421,27 +439,34 @@ namespace LogicSystem
 			res.push_back(param);
 		}
 
+		{
+			//二-加,加-一  --> 三
+			Param_Reduce param;
+			param.inputTable=tableCreator->SimpleCreate("二-加,加-一");
+
+			param.mockCerebrum=MockiCerebrum::Create();
+			param.mockCerebrum->AddExpectCall_FindConceptWithMatchedDisc("二-加,加-一",
+				"三",
+				"二",
+				tableCreator,
+				conceptCreator);
+
+			//Create result.
+			vector<Param_ReduceResult> results;
+			Param_ReduceResult resP;
+			string conceptStr="三";
+			resP.conceptStr=conceptStr;
+			results.push_back( resP);
+			
+			param.results=results;
+
+			res.push_back(param);
+		}
+
 		return res;
 	}
 
-	Mind::MockiCerebrum* Test_Reduce::CreateMockCerebrum( const string conceptTableStr, const string matchedConceptStr, const string toConceptStr, const shared_ptr<ConceptTableCreator> tableCreator, const shared_ptr<ConceptCreator> conceptCreator )
-	{
-		//Create the description table to find matched concept.
-		shared_ptr<iConceptInteractTable> descTable=tableCreator->SimpleCreate(conceptTableStr);
-		//Create the output DescMatchedConceptInfo.
-		vector<DescMatchedConceptInfo> matchedInfo;
-		DescMatchedConceptInfo info;
-		info.matchedConcept=conceptCreator->Create(matchedConceptStr);
-		info.toConcept=conceptCreator->Create(toConceptStr);
-		matchedInfo.push_back(info);
-		//Create MockiCerebrum
-		MockiCerebrum* mockCerebrum=new MockiCerebrum();
-		EXPECT_CALL(*mockCerebrum,FindConceptWithMatchedDisc(_,_)).WillRepeatedly(Return());
-		EXPECT_CALL(*mockCerebrum,FindConceptWithMatchedDisc(SameConceptTable(descTable),_))
-			.WillRepeatedly(testing::SetArgReferee<1>(matchedInfo));
-
-		return mockCerebrum;
-	}
+	
 
 }
 

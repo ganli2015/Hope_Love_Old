@@ -19,16 +19,33 @@ namespace LogicSystem
 	{
 		if(_relationPair.first->Satisfy(condition))
 		{
-			shared_ptr<iRelation> resultRelation=_relationPair.first->SymbolResonance(_relationPair.second);
+			return GenerateResult(_relationPair.first,_relationPair.second);
+		}
+		else
+		{
+			return NULL;
+		}
+	}
 
-			if(resultRelation!=NULL)
-			{
-				return shared_ptr<DeduceResult>(new DeduceResult(resultRelation));		
-			}
-			else
-			{
-				return NULL;
-			}
+	shared_ptr<iDeduceResult> LogicStatement::Deduce( const shared_ptr<Mind::iConceptInteractTable> condition ) const
+	{
+		if(_relationPair.first->Satisfy(condition))
+		{
+			return GenerateResult(_relationPair.first,_relationPair.second);
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
+	shared_ptr<iDeduceResult> LogicStatement::GenerateResult(const shared_ptr<iRelation> conditionRelation, const shared_ptr<iRelation> resultRelation)
+	{
+		shared_ptr<iRelation> result=conditionRelation->SymbolResonance(resultRelation);
+
+		if(result!=NULL)
+		{
+			return shared_ptr<iDeduceResult>(new DeduceResult<iRelation>(result));		
 		}
 		else
 		{

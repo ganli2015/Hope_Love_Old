@@ -35,7 +35,7 @@ void RunFilter(const string filterStr);
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
-//	RunFilter("Test_Logic*");
+	RunFilter("Test_Logic*");
 
 	MyGlobal global;
 	global.SetUp();

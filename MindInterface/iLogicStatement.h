@@ -1,6 +1,11 @@
 #pragma once
 #include "InOut.h"
 
+namespace Mind
+{
+	class iConceptInteractTable;
+}
+
 namespace LogicSystem
 {
 	class iRelation;
@@ -16,7 +21,11 @@ namespace LogicSystem
 		iLogicStatement(void);
 		~iLogicStatement(void);
 
+		///Deduce results from <condition>.
+		///If only part of <condition> can deduce something , 
+		///then the result only contains deduction result from that part and the other part will be dropped.
 		virtual shared_ptr<iDeduceResult> Deduce(const shared_ptr<iExpression> condition) const =0;
+		virtual shared_ptr<iDeduceResult> Deduce(const shared_ptr<Mind::iConceptInteractTable> condition) const =0;
 	};
 }
 

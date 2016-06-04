@@ -29,7 +29,10 @@ namespace LogicSystem
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) ;
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual string GetString() const ;
+
 		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
+		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> conceptTable) ;
+
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
 		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;
 	private:

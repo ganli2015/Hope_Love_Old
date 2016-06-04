@@ -22,6 +22,9 @@ namespace Mind
 		virtual shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type) const;
 
 		virtual shared_ptr<iConceptLevelTable> CreateConceptLevelTable(const shared_ptr<iConcept> val ,const ElementType type) const ;
+	
+	private:
+
 	};
 }
 

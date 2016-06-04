@@ -14,6 +14,8 @@
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/FindSequence.h"
 
+#include <set>
+
 using namespace Math;
 using namespace Mind;
 
@@ -72,9 +74,47 @@ namespace LogicSystem
 		return brain->Deduce(condition);
 	}
 
+	vector<shared_ptr<iDeduceResult>> Logic::Deduce( const shared_ptr<Mind::iConceptInteractTable> condition ) const
+	{
+		Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
+		return brain->Deduce(condition);
+	}
+
 	vector<shared_ptr<iDeduceResult>> Logic::FinalDeduce( const shared_ptr<iExpression> condition ) const
 	{
-		return vector<shared_ptr<iDeduceResult>>();
+		vector<shared_ptr<iDeduceResult>> res;
+		shared_ptr<iConceptInteractTable> conditionTable=condition->GetProtoInteractTable();
+		Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
+		if(brain==NULL) return res;
+		
+		//Generate initial deduction results.
+		//If they are not empty, it indicate that the <condition> can at least deduce something 
+		//and the following iteration is based on <initDeduceResults>.
+		vector<shared_ptr<iDeduceResult>> initDeduceResults=brain->Deduce(conditionTable);
+		if(initDeduceResults.empty()) return res;
+
+		//A table list for iteration.Each table of it needs to be reduced and deduced.
+		list<shared_ptr<iConceptInteractTable>> curDeduceTables=ToConceptTable(initDeduceResults);	
+		
+		ConceptList conceptResults;
+		TableList finalDeduceTables;
+		do 
+		{
+			//<reducedTables> contains the tables reduced from <curDeduceTables>.
+			//If one table reduces to nothing, it will not appear in <reducedTables>.
+			TableList reducedTables;
+			TableList noChangedTables;
+			ReduceTableList(curDeduceTables,reducedTables,noChangedTables,conceptResults);
+
+			curDeduceTables.clear();		
+			DeduceTableList(reducedTables,noChangedTables,curDeduceTables);
+			//<noChangedTables> contains table with no reduction and deduction during current iteration,
+			//and they will be kicked out from iteration and become the final results.
+			finalDeduceTables.insert(finalDeduceTables.end(),noChangedTables.begin(),noChangedTables.end());
+
+		} while (!curDeduceTables.empty());
+
+		return AssembleDeduceResults(conceptResults,finalDeduceTables);
 	}
 
 	vector<shared_ptr<iReduceResult>> Logic::Reduce( const shared_ptr<Mind::iConceptInteractTable> conceptTable ) const
@@ -261,6 +301,132 @@ namespace LogicSystem
 			resultPair=*findePair;
 			return true;
 		}
+	}
+
+	list<shared_ptr<Mind::iConceptInteractTable>> Logic::ToConceptTable( const vector<shared_ptr<iDeduceResult>>& deduceResults )const
+	{
+		list<shared_ptr<Mind::iConceptInteractTable>> res;
+
+		for (unsigned int i=0;i<deduceResults.size();++i)
+		{
+			shared_ptr<iConceptInteractTable> table=deduceResults[i]->GetConceptTable();
+			assert(table!=NULL);
+
+			res.push_back(table);
+		}
+
+		return res;
+	}
+
+	list<shared_ptr<Mind::iConceptInteractTable>> Logic::ToConceptTable( const vector<shared_ptr<iReduceResult>>& reduceResults )const
+	{
+		list<shared_ptr<Mind::iConceptInteractTable>> res;
+
+		for (unsigned int i=0;i<reduceResults.size();++i)
+		{
+			shared_ptr<iConceptInteractTable> table=reduceResults[i]->GetConceptTable();
+			if(table!=NULL)
+			{
+				res.push_back(table);
+			}
+		}
+
+		return res;
+	}
+
+	list<shared_ptr<Mind::iConcept>> Logic::ToConceptList( const vector<shared_ptr<iReduceResult>>& reduceResults )const
+	{
+		list<shared_ptr<Mind::iConcept>> res;
+
+		for (unsigned int i=0;i<reduceResults.size();++i)
+		{
+			shared_ptr<iConcept> con=reduceResults[i]->GetSingleConcept();
+			if(con!=NULL)
+			{
+				res.push_back(con);
+			}
+		}
+
+		return res;
+	}
+
+	void Logic::ReduceTableList( const TableList& tableList,
+		TableList& reducedTables,TableList& noChangedTables,ConceptList& conceptResults )const
+	{
+		for (TableIterConst table=tableList.begin();table!=tableList.end();++table)
+		{
+			vector<shared_ptr<iReduceResult>> reduceRes=Reduce(*table);
+			TableList reduceTables=ToConceptTable(reduceRes);
+			//If there are some iReduceResult, then replace the current table with new reduced tables.
+			//The current table will not appear in the next iteration.
+			if(!reduceTables.empty())
+			{
+				reducedTables.insert(reducedTables.end(),reduceTables.begin(),reduceTables.end());
+			}
+
+			//Get concept list.
+			//If it is not empty, the list will be appended to the final result and the current table will not appear in the next iteration.
+			ConceptList reduceConcepts=ToConceptList(reduceRes);
+			conceptResults.insert(conceptResults.end(),reduceConcepts.begin(),reduceConcepts.end());
+
+			if(reduceTables.empty() && reduceConcepts.empty())
+			{
+				noChangedTables.push_back(*table);
+			}
+		}
+	}
+
+	void Logic::DeduceTableList( const TableList& reducedTables,
+		TableList& noChangedTables,
+		TableList& tableForIter ) const
+	{
+		for (TableIterConst table=reducedTables.begin();table!=reducedTables.end();++table)
+		{
+			vector<shared_ptr<iDeduceResult>> deduceRes=Deduce(*table);
+			TableList deduceTable=ToConceptTable(deduceRes);
+			//Deduce from the results from reduction.
+			//If there is any iDeduceResult, it will replace the current table.
+			//Otherwise ,the current table will be hold.
+			if(!deduceTable.empty())
+			{
+				tableForIter.insert(tableForIter.end(),deduceTable.begin(),deduceTable.end());
+			}
+			else
+			{
+				tableForIter.push_back(*table);
+			}
+		}
+
+		iCerebrum* brain=iCerebrum::Instance();
+		for (TableIterConst table=noChangedTables.begin();table!=noChangedTables.end();)
+		{
+			vector<shared_ptr<iDeduceResult>> deduceRes=Deduce(*table);
+			TableList deduceTable=ToConceptTable(deduceRes);
+			//If we can deduce something from <noChangedTables>, the current table will be kicked out from <noChangedTables>.
+			//Otherwise, the current table will stay in <noChangedTables>.
+			if(!deduceTable.empty())
+			{
+				tableForIter.insert(tableForIter.end(),deduceTable.begin(),deduceTable.end());
+				table=noChangedTables.erase(table);
+			}
+			else
+			{
+				++table;
+			}
+		}
+	}
+
+	vector<shared_ptr<iDeduceResult>> Logic::AssembleDeduceResults( const ConceptList& conceptResults, const TableList& finalDeduceTables )  const
+	{
+		set<shared_ptr<iConcept>> conceptResultsSet(conceptResults.begin(),conceptResults.end());
+		set<shared_ptr<iConceptInteractTable>> finalDeduceTablesSet(finalDeduceTables.begin(),finalDeduceTables.end());
+
+		vector<shared_ptr<iDeduceResult>> res(conceptResultsSet.size()+finalDeduceTablesSet.size());
+
+		transform(conceptResultsSet.begin(),conceptResultsSet.end(),res.begin(),ToDeduceResult<iConcept>());
+		transform(finalDeduceTablesSet.begin(),finalDeduceTablesSet.end(),res.begin()+conceptResultsSet.size(),ToDeduceResult<iConceptInteractTable>());
+
+		return res;
 	}
 
 }

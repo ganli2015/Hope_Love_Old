@@ -222,6 +222,11 @@ namespace Mind
 		return _logicKnowledge->Deduce(expre);
 	}
 
+	vector<shared_ptr<LogicSystem::iDeduceResult>> Cerebrum::Deduce( const shared_ptr<iConceptInteractTable> expre ) const
+	{
+		return _logicKnowledge->Deduce(expre);
+	}
+
 	void Cerebrum::AddLogicStatement( const shared_ptr<LogicSystem::iLogicStatement> statement )
 	{
 		_logicKnowledge->Add(statement);

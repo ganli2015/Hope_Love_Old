@@ -36,6 +36,7 @@ namespace Mind
 		static iCerebrum* Instance();
 		static void SetInstance(iCerebrum* val);
 		static void KillInstance();
+		static bool Empty();
 
 		//Concept Related Functions
 		virtual bool IsInMind(const std::string str) const=0;
@@ -74,6 +75,7 @@ namespace Mind
 
 		//LogicKnowledge related functions
 		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const =0;
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<iConceptInteractTable> conceptTable) const =0;
 		virtual void AddLogicStatement(const shared_ptr<LogicSystem::iLogicStatement> statement) =0;
 	};
 

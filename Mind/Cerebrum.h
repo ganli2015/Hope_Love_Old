@@ -100,6 +100,7 @@ namespace Mind
 
 		//LogicKnowledge related functions
 		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<LogicSystem::iExpression> expre) const;
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<iConceptInteractTable> conceptTable) const ;
 		virtual void AddLogicStatement(const shared_ptr<LogicSystem::iLogicStatement> statement) ;
 
 	};

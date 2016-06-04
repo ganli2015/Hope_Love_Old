@@ -1,6 +1,8 @@
 #pragma once
 #include "InOut.h"
+#include "DeduceResult.h"
 #include "../MindInterface/iLogic.h"
+#include <list>
 
 namespace Mind
 {
@@ -13,6 +15,10 @@ namespace LogicSystem
 	class _LOGICSYSTEMINOUT Logic : public iLogic
 	{
 		typedef MindType::ConceptPair ConceptPair;
+		typedef list<shared_ptr<Mind::iConceptInteractTable>> TableList;
+		typedef TableList::iterator TableIter;
+		typedef TableList::const_iterator TableIterConst;
+		typedef list<shared_ptr<Mind::iConcept>> ConceptList;
 
 		friend class Test_LogicSystem;
 	public:
@@ -29,6 +35,8 @@ namespace LogicSystem
 
 
 	private:
+		vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<Mind::iConceptInteractTable> condition)  const;
+
 		///Filter <total> with <partial> and return the remaining.
 		vector<Logic::ConceptPair> FilterPartialConceptPairs(const vector<ConceptPair>& total, const vector<ConceptPair>& partial) const;
 		///Find a ConceptPair whose first concept is <concept>.
@@ -38,6 +46,29 @@ namespace LogicSystem
 	
 		vector<shared_ptr<iReduceResult>> ReduceConceptPairSequence(const vector<ConceptPair>& subPairs,const vector<ConceptPair>& totalPairs,const Mind::iCerebrum* brain) const;
 		shared_ptr<iReduceResult> ReduceFromMatchedConcept(const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs) const;
+	
+	
+		list<shared_ptr<Mind::iConceptInteractTable>> ToConceptTable(const vector<shared_ptr<iDeduceResult>>& deduceResults) const;
+		list<shared_ptr<Mind::iConceptInteractTable>> ToConceptTable(const vector<shared_ptr<iReduceResult>>& reduceResults) const;
+		list<shared_ptr<Mind::iConcept>> ToConceptList(const vector<shared_ptr<iReduceResult>>& reduceResults) const;
+		void ReduceTableList(const TableList& tableList,
+			TableList& reducedTables,TableList& noChangedTables,ConceptList& conceptResults) const;
+		void DeduceTableList(const TableList& reducedTables,TableList& noChangedTables,
+			TableList& tableForIter) const;
+		vector<shared_ptr<iDeduceResult>> AssembleDeduceResults(const ConceptList& conceptResults,
+			const TableList& finalDeduceTables) const;
+
+
+	private:
+		template<class InputType>
+		class ToDeduceResult
+		{
+		public:
+			shared_ptr<iDeduceResult> operator()(const shared_ptr<InputType> input)
+			{
+				return shared_ptr<iDeduceResult>(new DeduceResult<InputType>(input));
+			}
+		};
 	};
 }
 

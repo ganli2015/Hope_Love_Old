@@ -61,6 +61,11 @@ namespace LogicSystem
 		return InterTableSatisfyRelation(interTable);
 	}
 
+	bool RelationLeaf::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable )
+	{
+		return InterTableSatisfyRelation(conceptTable);
+	}
+
 	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable )
 	{
 		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(interTable->GetAllRelations());
