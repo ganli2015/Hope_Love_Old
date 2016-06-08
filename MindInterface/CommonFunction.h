@@ -1,5 +1,6 @@
 #pragma once
 #include "InOut.h"
+#include "iConcept.h"
 
 namespace DataCollection
 {
@@ -54,6 +55,9 @@ namespace Mind
 		double _MINDINTERFACEINOUT ComputeP_GrammarLocal(const DataCollection::PartOfSpeech& curPos,const DataCollection::PartOfSpeech& forwardPos,const DataCollection::PartOfSpeech& backwardPos);
 
 		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
+
+		///Filter <total> with <partial> and return the remaining.
+		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs(const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial);
 
 		class _MINDINTERFACEINOUT SameConcept
 		{

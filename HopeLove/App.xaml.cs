@@ -24,7 +24,7 @@ namespace HopeLove
 
         public App()
         {
-            formType = FormType.Main;
+            formType = FormType.AppendLogicStatement;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

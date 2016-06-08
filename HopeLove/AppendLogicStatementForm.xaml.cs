@@ -30,11 +30,16 @@ namespace HopeLove
         const string EqualityNode = "Equality";
         const string InequalityNode = "Inequality";
 
+        //Special symbol
         const string ArbSymbol = "Arb";
+        const string NumSymbol = "Num";
+        const string VerbSymbol = "Verb";
+        List<string> _specialSymbols;
+
         const string EqualSymbol = "==";
         const string InequalSymbol = "!=";
 
-        const string LogicStatementsFilename = "LogicStatements.txt";
+        const string LogicStatementsFilename = "LogicStatements.xml";
 
         XmlDocument _document;
         List<TextBox> _conditionBox;
@@ -51,6 +56,11 @@ namespace HopeLove
             _document.Load(CommonForAppendForm.HopeLoveMindPath + LogicStatementsFilename);
 
             CollectTextBoxes();
+
+            _specialSymbols = new List<string>();
+            _specialSymbols.Add(ArbSymbol);
+            _specialSymbols.Add(NumSymbol);
+            _specialSymbols.Add(VerbSymbol);
         }
 
         private void CollectTextBoxes()
@@ -138,30 +148,10 @@ namespace HopeLove
                 }
 
                 //Write from symbol
-                XmlElement fromNode = document.CreateElement(FromNode);
-                if (fromTo[0].Contains(ArbSymbol))//if it is Arbitrariness
-                {
-                    fromNode.InnerText = fromTo[0];
-                }
-                else//if it is a common symbol
-                {
-                    Word_ID from = CommonForAppendForm.StringToWordID(fromTo[0]);
-                    fromNode.SetAttribute("ID", Convert.ToString(from.id));
-                    fromNode.SetAttribute("Word", from.word);
-                }
+                XmlElement fromNode = CreateFromToNode(fromTo[0],FromNode);
 
                 //Write to symbol
-                XmlElement toNode = document.CreateElement(ToNode);
-                if (fromTo[1].Contains(ArbSymbol))//if it is Arbitrariness
-                {
-                    toNode.InnerText = fromTo[1];
-                }
-                else//if it is a common symbol
-                {
-                    Word_ID to = CommonForAppendForm.StringToWordID(fromTo[1]);
-                    toNode.SetAttribute("ID", Convert.ToString(to.id));
-                    toNode.SetAttribute("Word", to.word);
-                }
+                XmlElement toNode = CreateFromToNode(fromTo[1],ToNode);
 
                 XmlElement symbolPairNode = document.CreateElement(SymbolPairNode);           
                 symbolPairNode.AppendChild(fromNode);
@@ -171,6 +161,35 @@ namespace HopeLove
             }
         }
 
+        private XmlElement CreateFromToNode(string fromTo,string nodeTag)
+        {
+            XmlElement fromNode = _document.CreateElement(nodeTag);
+            if (ContainSpecialSymbol(fromTo))//if it is Arbitrariness
+            {
+                fromNode.InnerText = fromTo;
+            }
+            else//if it is a common symbol
+            {
+                Word_ID from = CommonForAppendForm.StringToWordID(fromTo);
+                fromNode.SetAttribute("ID", Convert.ToString(from.id));
+                fromNode.SetAttribute("Word", from.word);
+            }
+
+            return fromNode;
+        }
+
+        private bool ContainSpecialSymbol(string str)
+        {
+            foreach (string sp in _specialSymbols)
+            {
+                if (str.Contains(sp))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void WriteContraintToFile(string str, XmlNode node)
         {

@@ -1,16 +1,12 @@
 #include "StdAfx.h"
 #include "Test_LogicSystem.h"
-#include "Test_iRelation.h"
 
 #include "../LogicSystem/Logic.h"
-#include "../LogicSystem/CompositeExpression.h"
-#include "../LogicSystem/SingleExpression.h"
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Symbol.h"
 #include "../LogicSystem/LogicStatement.h"
-#include "../LogicSystem/Inequality.h"
 #include "../LogicSystem/Number.h"
 #include "../LogicSystem/Verb.h"
 
@@ -19,18 +15,14 @@
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/Concept.h"
 
-#include "../MindInterface/CommonFunction.h"
 #include "../MindInterface/iDeduceResult.h"
 #include "../MindInterface/iLogicElementCreator.h"
 #include "../MindInterface/iReduceResult.h"
-
-#include "../DataCollection/GrammaPattern.h"
 
 #include "../UTFacility/ConceptTableCreator.h"
 #include "../UTFacility/MockExpression.h"
 #include "../UTFacility/RelationSample.h"
 #include "../UTFacility/ConceptCreator.h"
-#include "../UTFacility/MockiCerebrum.h"
 
 #include "FuncForTest.h"
 
@@ -135,39 +127,68 @@ namespace LogicSystem
 		Test_LogicSystem::TestLogicStatementDeduce(logicStatment,condition,expect);
 	}
 
-	TEST(Test_Logic,FinalDeduce)
+	TEST_F(Test_LogicStatement,Deduce3)
 	{
+		///Test if the sub table satisfies the relation, then output deduce result as well as other part of table.
+		///Input: "二-加,加-三,一-二",
+		///Output: "二-加,加-一,三-次,次-加,一-二".
+		shared_ptr<RelationLeaf> conditionRel(new RelationLeaf());
+		shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
+		iRelationSample::RelationPair2(conditionRel,resultRel);
+
+		shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel,resultRel));
+
+		string condition="二-加,加-三,一-二";
+		string expect="二-加,加-一,三-次,次-加,一-二";
+		Test_LogicSystem::TestLogicStatementDeduce(logicStatment,condition,expect);
+	}
+
+	TEST_F(Test_LogicStatement,Deduce4)
+	{
+		///Test if the sub table satisfies the relation, then output deduce result as well as other part of table.
+		///Input: "二-加,加-三,加-三",
+		///Output: "二-加,加-一,三-次,次-加,加-三".
+		shared_ptr<RelationLeaf> conditionRel(new RelationLeaf());
+		shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
+		iRelationSample::RelationPair2(conditionRel,resultRel);
+
+		shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel,resultRel));
+
+		string condition="二-加,加-三,加-三";
+		string expect="二-加,加-一,三-次,次-加,加-三";
+		Test_LogicSystem::TestLogicStatementDeduce(logicStatment,condition,expect);
+	}
+
+	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_FinalDeduce, testing::ValuesIn(Test_FinalDeduce::GenerateSamples()));
+
+	TEST_P(Test_FinalDeduce,FinalDeduce)
+	{
+		Param_FinalDeduce param=GetParam();
+
 		//Create mock expression of condition.
-		string tableStr="二-加,加-三";
-		shared_ptr<MockExpression> expre=MockExpression::SimpleCreate(tableStr);
+		shared_ptr<MockExpression> expre=MockExpression::SimpleCreate(param.inputExpreTable);
 
 		MockiCerebrum* mockBrain=MockiCerebrum::Create();
 
 		//Prepare data for FindConceptWithMatchedDisc.
-		typedef MockiCerebrum::FindMatchConceptParam FindMatchConceptParam;
-		vector<FindMatchConceptParam> params;
-		params.push_back(FindMatchConceptParam("二-加,加-一","三","二"));
-		params.push_back(FindMatchConceptParam("三-加,加-一","四","三"));
-		params.push_back(FindMatchConceptParam("四-加,加-一","五","四"));
-
-		mockBrain->AddExpectCall_FindConceptWithMatchedDisc(params);
+		mockBrain->AddExpectCall_FindConceptWithMatchedDisc(param.matchedConceptParam);
 
 		//Prepare data for iCerebrum::Deduce
-		string condition="二-加,加-三";
-		string deduceRes="二-加,加-一,三-次,次-加";
-		mockBrain->AddExpectCall_Deduce(condition,deduceRes);
-		string condition2="二-加,三-次,次-加,加-一";
-		string deduceRes2="二-加,加-一,加-一,加-一";
-		mockBrain->AddExpectCall_Deduce(condition2,deduceRes2);
+		for (unsigned int i=0;i<param.condition_deduce.size();++i)
+		{
+			mockBrain->AddExpectCall_Deduce(param.condition_deduce[i].first,param.condition_deduce[i].second);
+		}
 		iCerebrum::SetInstance(mockBrain);
 
 		Logic logic;
 		vector<shared_ptr<iDeduceResult>> results=logic.FinalDeduce(expre);
 
-		ASSERT_EQ(results.size(),1);
+		EXPECT_EQ(results.size(),1);
 
-		string resStr=results.front()->GetConcept()->GetString();
-		ASSERT_EQ(resStr,"五");
+		ASSERT_TRUE(FuncForTest::SameLogicResult(param.result.tablePairs,param.result.conceptStr,results.front()))
+			<<"expect: \n"+FuncForTest::TablePairToString(param.result.tablePairs)
+			+param.result.conceptStr+"\n"
+			+"result: \n"+results.front()->GetString();
 	}
 
 	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_ReduceFromMatchedConcept, testing::ValuesIn(Test_ReduceFromMatchedConcept::GenerateSamples()));
@@ -178,7 +199,7 @@ namespace LogicSystem
 		Logic logic;
 		shared_ptr<iReduceResult> result=Test_LogicSystem::ReduceFromMatchedConcept(logic,param.matchedInfo,param.subPairs,param.remainingPairs);
 	
-		ASSERT_TRUE(FuncForTest::SameReduceResult(param.tablePairs,param.conceptStr,result));
+		ASSERT_TRUE(FuncForTest::SameLogicResult(param.tablePairs,param.conceptStr,result));
 
 	}
 
@@ -196,7 +217,10 @@ namespace LogicSystem
 		ASSERT_EQ(results.size(),param.results.size());
 		for (unsigned int i=0;i<results.size();++i)
 		{
-			ASSERT_TRUE(FuncForTest::SameReduceResult(param.results[i].tablePairs,param.results[i].conceptStr,results[i]));
+			ASSERT_TRUE(FuncForTest::SameLogicResult(param.results[i].tablePairs,param.results[i].conceptStr,results[i]))
+				<<"expect: \n"+FuncForTest::TablePairToString(param.results[i].tablePairs)
+				+param.results[i].conceptStr+"\n"
+				+"result: \n"+results[i]->GetString();
 		}
 
 		iCerebrum::KillInstance();
@@ -211,8 +235,10 @@ namespace LogicSystem
 
 		//Create mock expression of result.
 		shared_ptr<iConceptInteractTable> expectTable=ConceptTableCreator::Create(expectResultStr);
-
-		ASSERT_TRUE(FuncForTest::SameTable(expectTable,result->GetConceptTable()));
+		shared_ptr<iConceptInteractTable> resultTable=result->GetConceptTable();
+		ASSERT_TRUE(FuncForTest::SameTable(expectTable,resultTable))
+			<<"expect: \n"+expectTable->GetString()
+			+"result: \n"+resultTable->GetString();
 	}
 
 	shared_ptr<iReduceResult> Test_LogicSystem::ReduceFromMatchedConcept( const Logic& logic, const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs )
@@ -389,15 +415,15 @@ namespace LogicSystem
 				conceptCreator);
 
 			//Create result.
-			vector<Param_ReduceResult> results;
-			Param_ReduceResult resP;
+			vector<Param_LogicResult> results;
+			Param_LogicResult resP;
 			vector<pair<string,string>> tablePairs;
 			tablePairs.push_back(make_pair("三","加"));
 			tablePairs.push_back(make_pair("加","一"));
 			resP.tablePairs=tablePairs;
 			results.push_back( resP);
 			//The second one is the same as the first.
-			Param_ReduceResult resP2;
+			Param_LogicResult resP2;
 			resP2.tablePairs=tablePairs;
 			results.push_back( resP2);
 			param.results=results;
@@ -418,8 +444,8 @@ namespace LogicSystem
 				conceptCreator);
 
 			//Create result.
-			vector<Param_ReduceResult> results;
-			Param_ReduceResult resP;
+			vector<Param_LogicResult> results;
+			Param_LogicResult resP;
 			vector<pair<string,string>> tablePairs;
 			tablePairs.push_back(make_pair("三","加"));
 			tablePairs.push_back(make_pair("加","一"));
@@ -427,11 +453,11 @@ namespace LogicSystem
 			resP.tablePairs=tablePairs;
 			results.push_back( resP);
 			//The second one is the same as the first.
-			Param_ReduceResult resP2;
+			Param_LogicResult resP2;
 			resP2.tablePairs=tablePairs;
 			results.push_back( resP2);
 			//The third is tha same too.
-			Param_ReduceResult resP3;
+			Param_LogicResult resP3;
 			resP3.tablePairs=tablePairs;
 			results.push_back( resP3);
 			param.results=results;
@@ -452,8 +478,8 @@ namespace LogicSystem
 				conceptCreator);
 
 			//Create result.
-			vector<Param_ReduceResult> results;
-			Param_ReduceResult resP;
+			vector<Param_LogicResult> results;
+			Param_LogicResult resP;
 			string conceptStr="三";
 			resP.conceptStr=conceptStr;
 			results.push_back( resP);
@@ -467,6 +493,61 @@ namespace LogicSystem
 	}
 
 	
+
+
+	vector<Param_FinalDeduce> Test_FinalDeduce::GenerateSamples()
+	{
+		typedef MockiCerebrum::FindMatchConceptParam FindMatchConceptParam;
+
+		vector<Param_FinalDeduce> res;
+
+		{
+			//二加三等于五
+			Param_FinalDeduce param;
+			param.inputExpreTable="二-加,加-三";
+
+			vector<FindMatchConceptParam> matchedParams;
+			matchedParams.push_back(FindMatchConceptParam("二-加,加-一","三","二"));
+			matchedParams.push_back(FindMatchConceptParam("三-加,加-一","四","三"));
+			matchedParams.push_back(FindMatchConceptParam("四-加,加-一","五","四"));
+			param.matchedConceptParam=matchedParams;
+
+			string condition="二-加,加-三";
+			string deduceRes="二-加,加-一,三-次,次-加";
+			param.condition_deduce.push_back(make_pair(condition,deduceRes));
+			string condition2="二-加,三-次,次-加,加-一";
+			string deduceRes2="二-加,加-一,加-一,加-一";
+			param.condition_deduce.push_back(make_pair(condition2,deduceRes2));
+
+			param.result.conceptStr="五";
+
+			res.push_back(param);
+		}
+
+		{
+			//二乘三等于六
+			Param_FinalDeduce param;
+			param.inputExpreTable="二-乘,乘-三";
+
+			string condition="二-乘,乘-三";
+			string deduceRes="二-加,加-二,二-次,次-加";
+			param.condition_deduce.push_back(make_pair(condition,deduceRes));
+			string condition2="二-加,加-二,二-次,次-加";
+			string deduceRes2="二-加,加-二,加-二";
+			param.condition_deduce.push_back(make_pair(condition2,deduceRes2));
+
+			vector<FindMatchConceptParam> matchedParams;
+			matchedParams.push_back(FindMatchConceptParam("二-加,加-二","四","二"));
+			matchedParams.push_back(FindMatchConceptParam("四-加,加-二","六","四"));
+			param.matchedConceptParam=matchedParams;
+
+			param.result.conceptStr="六";
+
+			res.push_back(param);
+		}
+
+		return res;
+	}
 
 }
 

@@ -21,6 +21,7 @@ namespace LogicSystem
 		///Get the result of a single concept.
 		virtual shared_ptr<Mind::iConcept> GetSingleConcept() const =0;
 
+		virtual string GetString() const;
 	};
 }
 

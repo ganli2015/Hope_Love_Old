@@ -26,7 +26,9 @@ namespace LogicSystem
 		///Get the result of the most possibility.
 		virtual shared_ptr<Mind::iConceptInteractTable> GetConceptTable() const =0;
 
-		virtual shared_ptr<Mind::iConcept> GetConcept() const =0;
+		virtual shared_ptr<Mind::iConcept> GetSingleConcept() const =0;
+
+		virtual string GetString() const;
 	};
 }
 

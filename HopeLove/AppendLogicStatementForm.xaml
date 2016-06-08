@@ -1,8 +1,12 @@
 ﻿<Window x:Class="HopeLove.AppendLogicStatementForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AppendLogicStatementForm" Height="534" Width="478">
-    <Grid Height="495">
+        Title="AppendLogicStatementForm" Height="667" Width="478">
+    <Grid Height="616">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="431*" />
+            <RowDefinition Height="185*" />
+        </Grid.RowDefinitions>
         <Label Content="Condition" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="78,55,0,0" Name="textBox_Condition1" VerticalAlignment="Top" Width="294" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="78,113,0,0" Name="textBox_Condition3" VerticalAlignment="Top" Width="294" />
@@ -15,6 +19,17 @@
         <TextBox Height="23" HorizontalAlignment="Left" Margin="78,291,0,0" Name="textBox_Result1" VerticalAlignment="Top" Width="294" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="78,349,0,0" Name="textBox_Result3" VerticalAlignment="Top" Width="294" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="78,320,0,0" Name="textBox_Result2" VerticalAlignment="Top" Width="294" />
-        <Button Content="Button_Append" Height="23" HorizontalAlignment="Left" Margin="351,433,0,0" Name="button_Append" VerticalAlignment="Top" Width="93" Click="button_Append_Click" />
+        <Button Content="Button_Append" Height="23" HorizontalAlignment="Left" Margin="351,401,0,0" Name="button_Append" VerticalAlignment="Top" Width="93" Click="button_Append_Click" />
+        <GroupBox Header="Example" Height="185" HorizontalAlignment="Left" Margin="12,0,0,0" Name="groupBox_example" VerticalAlignment="Top" Width="432" Grid.Row="1">
+            <Grid>
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="100,6,0,0" Name="textBlock1" Text="Arb1-&gt;0 大,0 大-&gt;0 于,0 于-&gt;Arb2" VerticalAlignment="Top" Width="284" />
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="100,35,0,0" Name="textBlock2" Text="Arb3-&gt;0 大,0 大-&gt;0 于,0 于-&gt;Arb4" VerticalAlignment="Top" Width="284" />
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="100,64,0,0" Name="textBlock3" Text="Arb1!=Arb2 Arb3!=Arb4 Arb2==Arb3" VerticalAlignment="Top" Width="284" />
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="100,93,0,0" Name="textBlock4" Text="Arb1-&gt;0 大,0 大-&gt;0 于,0 于-&gt;Arb4" VerticalAlignment="Top" Width="284" />
+                <Label Content="Condition" Height="28" HorizontalAlignment="Left" Margin="23,6,0,0" Name="label4" VerticalAlignment="Top" />
+                <Label Content="Constraint" Height="28" HorizontalAlignment="Left" Margin="23,59,0,0" Name="label5" VerticalAlignment="Top" />
+                <Label Content="Result" Height="28" HorizontalAlignment="Left" Margin="23,88,0,0" Name="label6" VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

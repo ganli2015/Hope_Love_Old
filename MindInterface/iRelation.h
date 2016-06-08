@@ -14,6 +14,8 @@ namespace LogicSystem
 	template<class T>
 	class iSymbol;
 	class iRelationConstraint;
+	template<class T>
+	class Number;
 
 	///iRelation indicates the logic relationship between logic symbols.
 	class _MINDINTERFACEINOUT iRelation: public Obj<iRelation>
@@ -22,9 +24,29 @@ namespace LogicSystem
 		struct PairInfo;
 		typedef MindType::ConceptPair ConceptPair;
 		typedef LogicType::ConSymbol ConSymbol;
-		typedef LogicType::SymbolPair SymbolPair;
 		typedef vector<iRelation::PairInfo> PairSequence;
 
+		typedef Number<Mind::iConcept> Num;
+
+		//Redefine SymbolPair
+		class SymbolPair
+		{
+			shared_ptr<ConSymbol> _from;
+			shared_ptr<ConSymbol> _to;
+
+			///The number of repetition of <_from> <_to>.
+			///It has a definite value until <_num> refers to  a definite object.
+			shared_ptr<Num> _num;
+
+		public:
+			SymbolPair(){}
+			SymbolPair(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to ):_from(from),_to(to){}
+			SymbolPair(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to ,const shared_ptr<Num> num):_from(from),_to(to),_num(num){}
+			~SymbolPair(){}
+
+			shared_ptr<ConSymbol> First() const {return _from;}
+			shared_ptr<ConSymbol> Second() const {return _to;}
+		};
 
 		//Store concept pair and related symbol pair.
 		struct PairInfo
@@ -45,8 +67,10 @@ namespace LogicSystem
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 
 		///Check whether <expre> satisfy the relation <me>.
-		virtual bool Satisfy(const shared_ptr<iExpression> expre) =0;
-		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> expre) =0;
+		///If <exact> is false , then even part of <expre> satisfying the relation will return true.
+		///If <exact> is true , then only full part of <expre> satisfying the relation will return true.
+		virtual bool Satisfy(const shared_ptr<iExpression> expre,const bool exact=true) =0;
+		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> expre,const bool exact=true) =0;
 
 		///Find match symbol and concept pairs in <conceptPairs>.
 		virtual vector<PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const =0;
@@ -107,7 +131,6 @@ namespace LogicSystem
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 
 		virtual string GetString() const =0;
-		virtual bool Satisfy(const shared_ptr<iExpression> expre) =0;
 
 	protected:
 	};
@@ -127,7 +150,6 @@ namespace LogicSystem
 		///Add Constraints to symbols.
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 		virtual string GetString() const =0;
-		virtual bool Satisfy(const shared_ptr<iExpression> expre) =0;
 	};
 
 

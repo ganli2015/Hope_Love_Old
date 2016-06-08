@@ -3,6 +3,14 @@
 #include "DeduceResult.h"
 
 #include "../MindInterface/iRelation.h"
+#include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/iMindElementCreator.h"
+#include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/iExpression.h"
+
+#include "../Mathmatic/FindSequence.h"
+
+using namespace Mind;
 
 namespace LogicSystem
 {
@@ -17,26 +25,39 @@ namespace LogicSystem
 
 	shared_ptr<iDeduceResult> LogicStatement::Deduce( const shared_ptr<iExpression> condition ) const
 	{
-		if(_relationPair.first->Satisfy(condition))
-		{
-			return GenerateResult(_relationPair.first,_relationPair.second);
-		}
-		else
-		{
-			return NULL;
-		}
+		shared_ptr<Mind::iConceptInteractTable> conditionTable=condition->GetProtoInteractTable();
+		if(condition==NULL) return NULL;
+
+		return Deduce(conditionTable);
 	}
 
 	shared_ptr<iDeduceResult> LogicStatement::Deduce( const shared_ptr<Mind::iConceptInteractTable> condition ) const
 	{
-		if(_relationPair.first->Satisfy(condition))
+		vector<MindType::ConceptPair> totalPairs=condition->GetAllRelations();
+		//Get all sub pairs of condition.
+		vector<vector<MindType::ConceptPair>> subConceptPairs=Math::GetAllSubSequence<MindType::ConceptPair>::Get(totalPairs);
+		//Search a sub pair sequence that satisfied the relation.
+		for (unsigned int i=0;i<subConceptPairs.size();++i)
 		{
-			return GenerateResult(_relationPair.first,_relationPair.second);
+			shared_ptr<iConceptInteractTable> subTable=iMindElementCreator::CreateConceptInteractTable(subConceptPairs[i]);
+
+			if(_relationPair.first->Satisfy(subTable))
+			{
+				//Append the other part of pairs to the result.
+				vector<MindType::ConceptPair> remainPairs=CommonFunction::FilterPartialConceptPairs(totalPairs,subConceptPairs[i]);
+				shared_ptr<iRelation> result=_relationPair.first->SymbolResonance(_relationPair.second);
+				shared_ptr<iConceptInteractTable> deduceTable=result->GenerateConceptTable();
+
+				for (unsigned int j=0;j<remainPairs.size();++j)
+				{
+					deduceTable->Add(remainPairs[j].first,remainPairs[j].second);
+				}
+
+				return shared_ptr<iDeduceResult>(new DeduceResult<iConceptInteractTable>(deduceTable));	
+			}
 		}
-		else
-		{
-			return NULL;
-		}
+
+		return NULL;
 	}
 
 	shared_ptr<iDeduceResult> LogicStatement::GenerateResult(const shared_ptr<iRelation> conditionRelation, const shared_ptr<iRelation> resultRelation)

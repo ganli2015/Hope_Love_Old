@@ -47,22 +47,23 @@ namespace LogicSystem
 		return res;
 	}
 
-	bool RelationNode::Satisfy( const shared_ptr<iExpression> expre )
+	bool RelationNode::Satisfy( const shared_ptr<iExpression> expre ,const bool exact)
 	{
 		shared_ptr<Mind::iConceptInteractTable> interTable=expre->GetProtoInteractTable();
 		
 		return InterTableSatisfyRelation(interTable);
 	}
 
-	bool RelationNode::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable )
+	bool RelationNode::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable ,const bool exact)
 	{
 		return InterTableSatisfyRelation(conceptTable);
 	}
 
-	bool RelationNode::InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable )
+	bool RelationNode::InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable ,const bool exact)
 	{
-		vector<iRelation::PairSequence> matchedPairSequences=FindMatchedPairSequence(interTable->GetAllRelations());
-		if(matchedPairSequences.empty())
+		vector<ConceptPair> conceptPairs=interTable->GetAllRelations();
+		vector<iRelation::PairSequence> matchedPairSequences=FindMatchedPairSequence(conceptPairs);
+		if(matchedPairSequences.empty() || (exact && conceptPairs.size()!=matchedPairSequences.front().size()))
 		{
 			_satisfiedSequence.clear();
 
@@ -74,20 +75,6 @@ namespace LogicSystem
 
 			return true;
 		}
-
-// 		for (unsigned int i=0;i<matchedPairSequences.size();++i)
-// 		{
-// 			if(SatifyConstraint(matchedPairSequences[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
-// 			{
-// 				_satisfiedSequence=matchedPairSequences[i];
-// 
-// 				return true;
-// 			}
-// 		}
-// 
-// 		_satisfiedSequence.clear();
-// 
-// 		return false;
 	}
 
 	vector<iRelation::PairSequence> RelationNode::FindMatchedPairSequence( const vector<ConceptPair>& conceptPairs ) const

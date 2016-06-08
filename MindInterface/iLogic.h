@@ -32,9 +32,9 @@ namespace LogicSystem
 
 		///Deduce results from <condition>.
 		///If only part of <condition> can deduce something , 
-		///then the result only contains deduction result from that part and the other part will be dropped.
+		///then the result includes deduction result from that part as well as the other original part.
 		virtual vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<iExpression> condition) const =0;
-
+		
 		///Deduce results from <condition> repeatedly until the results converge.
 		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition) const =0;
 

@@ -35,6 +35,8 @@ namespace Mind
 		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const =0;
 
 		virtual bool ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const=0;
+
+		virtual string GetString() const;
 	};
 }
 

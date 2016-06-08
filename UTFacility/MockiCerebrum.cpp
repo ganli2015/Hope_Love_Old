@@ -6,6 +6,7 @@
 
 #include "../MindInterface/iConceptInteractTable.h"
 #include "../MindInterface/iDeduceResult.h"
+#include "../MindInterface/iConcept.h"
 
 #include "../LogicSystem/DeduceResult.h"
 

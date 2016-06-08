@@ -37,8 +37,7 @@ namespace LogicSystem
 	private:
 		vector<shared_ptr<iDeduceResult>> Deduce(const shared_ptr<Mind::iConceptInteractTable> condition)  const;
 
-		///Filter <total> with <partial> and return the remaining.
-		vector<Logic::ConceptPair> FilterPartialConceptPairs(const vector<ConceptPair>& total, const vector<ConceptPair>& partial) const;
+		vector<Logic::ConceptPair> FilterPartialConceptPairs( const vector<ConceptPair>& total, const vector<ConceptPair>& partial ) const;
 		///Find a ConceptPair whose first concept is <concept>.
 		bool FindPair_SameFirstConcept(const vector<ConceptPair>& total,const shared_ptr<Mind::iConcept> concept,Logic::ConceptPair& resultPair) const;
 		///Find a ConceptPair whose second concept is <concept>.
@@ -57,7 +56,6 @@ namespace LogicSystem
 			TableList& tableForIter) const;
 		vector<shared_ptr<iDeduceResult>> AssembleDeduceResults(const ConceptList& conceptResults,
 			const TableList& finalDeduceTables) const;
-
 
 	private:
 		template<class InputType>

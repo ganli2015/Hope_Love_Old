@@ -170,11 +170,7 @@ namespace FuncForTest
 
 	void DisplayConceptTable( const shared_ptr<Mind::iConceptInteractTable> table )
 	{
-		vector<MindType::ConceptPair> pairs=table->GetAllRelations();
-		for (unsigned int i=0;i<pairs.size();++i)
-		{
-			cout<<pairs[i].first->GetString()<<" "<<pairs[i].second->GetString()<<endl;
-		}
+		cout<<table->GetString();
 	}
 
 	bool SameTable( const shared_ptr<Mind::iConceptInteractTable> left,const shared_ptr<Mind::iConceptInteractTable> right )
@@ -190,67 +186,16 @@ namespace FuncForTest
 		return PairSameWithTable(stringPairs,right);
 	}
 
-	bool SameReduceResult( const vector<pair<string,string>>& tablePairs, const string conceptStr, const shared_ptr<iReduceResult> result )
+	std::string TablePairToString( const vector<pair<string,string>>& tablePairs )
 	{
-		if(tablePairs.empty() && conceptStr=="")
+		string res="";
+
+		for (unsigned int i=0;i<tablePairs.size();++i)
 		{
-			if(result==NULL)
-			{
-				return true;
-			}
-			else
-				return false;
+			res+=tablePairs[i].first+" "+tablePairs[i].second+"\n";
 		}
 
-		shared_ptr<iConceptInteractTable> resTable=result->GetConceptTable();
-		shared_ptr<iConcept> resConcept=result->GetSingleConcept();
-
-		//Both iConceptInteractTable and iConcept may be the result.
-		if(!tablePairs.empty())
-		{
-			if(resTable!=NULL && FuncForTest::PairSameWithTable(tablePairs,resTable))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			if(resTable==NULL)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		if(conceptStr!="")
-		{
-			if(conceptStr==resConcept->GetString())
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			if(resConcept==NULL)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+		return res;
 	}
 
 }

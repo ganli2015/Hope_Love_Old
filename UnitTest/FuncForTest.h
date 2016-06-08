@@ -43,11 +43,11 @@ namespace FuncForTest
 
 	bool SameChain(const vector<string>& expect,const shared_ptr<Mind::iConceptChain> res);
 
-	bool SameReduceResult(const vector<pair<string,string>>& tablePairs, const string conceptStr, const shared_ptr<LogicSystem::iReduceResult> result);
-
 	void DisplayChains(const vector<shared_ptr<Mind::iConceptChain>>& chains);
 
 	void DisplayConceptTable(const shared_ptr<Mind::iConceptInteractTable> table);
+
+	string TablePairToString(const vector<pair<string,string>>& tablePairs);
 
 	///Add a grammar pattern to cerebrum.
 	///Pattern is Numeral,Adjective,Preposition,Numeral.
@@ -105,6 +105,71 @@ namespace FuncForTest
 		}
 
 		return true;
+	}
+
+	///Check whether the logic result <result> is the same with <tablePairs> and <conceptStr>.
+	template<class ResultType>
+	bool SameLogicResult(const vector<pair<string,string>>& tablePairs, const string conceptStr, const shared_ptr<ResultType> result)
+	{
+		if(tablePairs.empty() && conceptStr=="")
+		{
+			if(result==NULL)
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+
+		shared_ptr<iConceptInteractTable> resTable=result->GetConceptTable();
+		shared_ptr<iConcept> resConcept=result->GetSingleConcept();
+
+		//Both iConceptInteractTable and iConcept may be the result.
+		if(!tablePairs.empty())
+		{
+			if(resTable!=NULL && FuncForTest::PairSameWithTable(tablePairs,resTable))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(resTable==NULL)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		if(conceptStr!="")
+		{
+			if(conceptStr==resConcept->GetString())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if(resConcept==NULL)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }
 

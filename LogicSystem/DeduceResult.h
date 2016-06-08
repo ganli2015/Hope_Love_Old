@@ -18,7 +18,7 @@ namespace LogicSystem
 		virtual double Matching(const shared_ptr<iExpression> expre) const;
 
 		virtual shared_ptr<Mind::iConceptInteractTable> GetConceptTable() const ;
-		virtual shared_ptr<Mind::iConcept> GetConcept() const;
+		virtual shared_ptr<Mind::iConcept> GetSingleConcept() const;
 	};
 
 	template<class ResultType>
@@ -40,7 +40,7 @@ namespace LogicSystem
 	}
 
 	template<class ResultType>
-	shared_ptr<Mind::iConcept> DeduceResult<ResultType>::GetConcept() const
+	shared_ptr<Mind::iConcept> DeduceResult<ResultType>::GetSingleConcept() const
 	{
 		return NULL;
 	}
@@ -64,7 +64,7 @@ namespace LogicSystem
 	_LOGICSYSTEMINOUT double DeduceResult<Mind::iConcept>::Matching( const shared_ptr<iExpression> expre ) const;
 
 	template<>
-	_LOGICSYSTEMINOUT shared_ptr<Mind::iConcept> DeduceResult<Mind::iConcept>::GetConcept() const;
+	_LOGICSYSTEMINOUT shared_ptr<Mind::iConcept> DeduceResult<Mind::iConcept>::GetSingleConcept() const;
 }
 
 

@@ -3,10 +3,10 @@
 
 #include "iConceptInteractTable.h"
 #include "iCerebrum.h"
-#include "iConcept.h"
 #include "iConceptInteractTable.h"
 #include "iConceptChain.h"
 #include "iMindElementCreator.h"
+#include "PublicTypedef.h"
 
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/Word.h"
@@ -230,6 +230,21 @@ namespace Mind
 			{
 				return false;
 			}
+		}
+
+		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs( const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial )
+		{
+			vector<MindType::ConceptPair> res(total);
+
+			for (unsigned int i=0;i<partial.size();++i)
+			{
+				vector<MindType::ConceptPair>::iterator samePairIter=find_if(res.begin(),res.end(),CommonFunction::SameConceptPair(partial[i].first,partial[i].second));
+				assert(samePairIter!=res.end());
+
+				res.erase(samePairIter);
+			}
+
+			return res;
 		}
 
 	}

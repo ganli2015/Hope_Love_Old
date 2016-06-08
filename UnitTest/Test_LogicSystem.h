@@ -1,7 +1,10 @@
 #pragma once
 #include "PublicHeader.h"
+
 #include "../MindInterface/PublicTypedef.h"
 #include "../MindInterface/iCerebrum.h"
+
+#include "../UTFacility/MockiCerebrum.h"
 
 namespace Mind
 {
@@ -34,7 +37,7 @@ namespace LogicSystem
 
 	};
 
-	struct Param_ReduceResult
+	struct Param_LogicResult
 	{
 		vector<pair<string,string>> tablePairs;
 		string conceptStr;
@@ -68,7 +71,7 @@ namespace LogicSystem
 		shared_ptr<Mind::iConceptInteractTable> inputTable;
 		Mind::MockiCerebrum* mockCerebrum;
 		//expect
-		vector<Param_ReduceResult> results;
+		vector<Param_LogicResult> results;
 	};
 
 	class Test_Reduce : public::testing::TestWithParam<Param_Reduce> 
@@ -76,10 +79,20 @@ namespace LogicSystem
 	public:
 
 		static vector<Param_Reduce> GenerateSamples() ;
+	};
 
-	protected:
+	struct Param_FinalDeduce
+	{
+		string inputExpreTable;//mock expression of condition
+		vector<Mind::MockiCerebrum::FindMatchConceptParam> matchedConceptParam;//data for FindConceptWithMatchedDisc.
+		vector<pair<string,string>> condition_deduce;//data for iCerebrum::Deduce
+		Param_LogicResult result;//result of final deduce.
+	};
 
-		
+	class Test_FinalDeduce : public::testing::TestWithParam<Param_FinalDeduce> 
+	{
+	public:
+		static vector<Param_FinalDeduce> GenerateSamples() ;
 	};
 }
 

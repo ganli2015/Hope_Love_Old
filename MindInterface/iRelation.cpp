@@ -78,8 +78,8 @@ namespace LogicSystem
 			void operator()(const PairInfo& info)
 			{
 				//Bind each symbol with related concept.
-				info.sPair.first->BindReferredObject(info.cPair.first);
-				info.sPair.second->BindReferredObject(info.cPair.second);
+				info.sPair.First()->BindReferredObject(info.cPair.first);
+				info.sPair.Second()->BindReferredObject(info.cPair.second);
 
 			}
 		};
@@ -95,8 +95,8 @@ namespace LogicSystem
 			void operator()(const PairInfo& info)
 			{
 				//Bind each symbol with related concept.
-				info.sPair.first->BindReferredObject(NULL);
-				info.sPair.second->BindReferredObject(NULL);
+				info.sPair.First()->BindReferredObject(NULL);
+				info.sPair.Second()->BindReferredObject(NULL);
 			}
 		};
 

@@ -221,17 +221,7 @@ namespace LogicSystem
 
 	vector<Logic::ConceptPair> Logic::FilterPartialConceptPairs( const vector<ConceptPair>& total, const vector<ConceptPair>& partial ) const
 	{
-		vector<Logic::ConceptPair> res(total);
-
-		for (unsigned int i=0;i<partial.size();++i)
-		{
-			vector<ConceptPair>::iterator samePairIter=find_if(res.begin(),res.end(),CommonFunction::SameConceptPair(partial[i].first,partial[i].second));
-			assert(samePairIter!=res.end());
-
-			res.erase(samePairIter);
-		}
-
-		return res;
+		return CommonFunction::FilterPartialConceptPairs(total,partial);
 	}
 
 	bool Logic::FindPair_SameFirstConcept( const vector<ConceptPair>& total,const shared_ptr<Mind::iConcept> concept,Logic::ConceptPair& resultPair ) const

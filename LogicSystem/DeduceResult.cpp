@@ -77,7 +77,7 @@ namespace LogicSystem
 	}
 
 	template<>
-	shared_ptr<Mind::iConcept> DeduceResult<Mind::iConcept>::GetConcept() const
+	shared_ptr<Mind::iConcept> DeduceResult<Mind::iConcept>::GetSingleConcept() const
 	{
 		return _result;
 	}

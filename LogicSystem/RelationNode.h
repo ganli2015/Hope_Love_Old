@@ -26,8 +26,8 @@ namespace LogicSystem
 
 		virtual string GetString() const ;
 
-		virtual bool Satisfy(const shared_ptr<iExpression> expre) ;
-		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> conceptTable) ;
+		virtual bool Satisfy(const shared_ptr<iExpression> expre,const bool exact=true) ;
+		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> conceptTable,const bool exact=true) ;
 
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
@@ -37,7 +37,7 @@ namespace LogicSystem
 		//If state is And, then any relation not satisfied will make its respective PairSequence vanish in result.
 		//If state is Or, then only when all relations failing to satisfy will make its respective PairSequence vanish in result.
 		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const;
-		bool InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable );
+		bool InterTableSatisfyRelation( const shared_ptr<Mind::iConceptInteractTable> interTable ,const bool exact=true);
 
 		void Recursive_FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs,
 			const vector<shared_ptr<iRelation>>& relations,

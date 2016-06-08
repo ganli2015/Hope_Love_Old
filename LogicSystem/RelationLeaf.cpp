@@ -27,7 +27,7 @@ namespace LogicSystem
 	void RelationLeaf::AddRelation( const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to )
 	{
 		assert(from!=NULL && to!=NULL);
-		_relations.push_back(make_pair(from,to));
+		_relations.push_back(SymbolPair(from,to));
 	}
 
 	void RelationLeaf::AddConstraint( const shared_ptr<iRelationConstraint> constraint )
@@ -41,9 +41,9 @@ namespace LogicSystem
 		string res="";
 		for (unsigned int i=0;i<_relations.size();++i)
 		{
-			res+=_relations[i].first->GetString();
+			res+=_relations[i].First()->GetString();
 			res+=_connectTag;
-			res+=_relations[i].second->GetString();
+			res+=_relations[i].Second()->GetString();
 			
 			if(i!=_relations.size()-1)
 			{
@@ -54,22 +54,33 @@ namespace LogicSystem
 		return res;
 	}
 
-	bool RelationLeaf::Satisfy( const shared_ptr<iExpression> expre )
+	bool RelationLeaf::Satisfy( const shared_ptr<iExpression> expre ,const bool exact)
 	{
 		shared_ptr<iConceptInteractTable> interTable=expre->GetProtoInteractTable();
 		
-		return InterTableSatisfyRelation(interTable);
+		if(exact && _relations.size()!=interTable->GetAllRelations().size())
+		{
+			return false;
+		}
+		else
+			return InterTableSatisfyRelation(interTable);
 	}
 
-	bool RelationLeaf::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable )
+	bool RelationLeaf::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable ,const bool exact)
 	{
-		return InterTableSatisfyRelation(conceptTable);
+		if(exact && _relations.size()!=conceptTable->GetAllRelations().size())
+		{
+			return false;
+		}
+		else
+			return InterTableSatisfyRelation(conceptTable);
 	}
 
-	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable )
+	bool RelationLeaf::InterTableSatisfyRelation( const shared_ptr<iConceptInteractTable> interTable)
 	{
-		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(interTable->GetAllRelations());
-		if(matchedPairSeq.empty())
+		vector<ConceptPair> conPairs=interTable->GetAllRelations();
+		vector<vector<PairInfo>> matchedPairSeq=FindMatchedPairSequence(conPairs);
+		if(matchedPairSeq.empty() )
 		{
 			_satisfiedSequence.clear();
 
@@ -122,7 +133,7 @@ namespace LogicSystem
 			vector<ConceptPair> GetResult() const {return _result;}
 			void operator()(const ConceptPair& cPair)
 			{
-				if(_symbolPair.first->Match(cPair.first) && _symbolPair.second->Match(cPair.second))
+				if(_symbolPair.First()->Match(cPair.first) && _symbolPair.Second()->Match(cPair.second))
 				{
 					_result.push_back(cPair);
 				}
@@ -189,7 +200,7 @@ namespace LogicSystem
 		//Then search for the remaining <cPairs> and <sPairs>.
 		for (unsigned int i=0;i<cPairs.size();++i)
 		{
-			if(!(curSymbolPair.first->Match(cPairs[i].first) && curSymbolPair.second->Match(cPairs[i].second))) continue;//Not matched
+			if(!(curSymbolPair.First()->Match(cPairs[i].first) && curSymbolPair.Second()->Match(cPairs[i].second))) continue;//Not matched
 			
 			//Generate concept pairs without the current matched one.
 			vector<ConceptPair> remainingCPairs(cPairs);
@@ -233,8 +244,8 @@ namespace LogicSystem
 
 		for (unsigned int i=0;i<_relations.size();++i)
 		{
-			shared_ptr<iConcept> firstObj=_relations[i].first->GetReferredObject();
-			shared_ptr<iConcept> secondObj=_relations[i].second->GetReferredObject();
+			shared_ptr<iConcept> firstObj=_relations[i].First()->GetReferredObject();
+			shared_ptr<iConcept> secondObj=_relations[i].Second()->GetReferredObject();
 			if(firstObj==NULL || secondObj==NULL)
 			{
 				return NULL;
@@ -256,8 +267,8 @@ namespace LogicSystem
 
 		for (unsigned int i=0;i<_relations.size();++i)
 		{
-			shared_ptr<iConcept> firstObj=_relations[i].first->GetReferredObject();
-			shared_ptr<iConcept> secondObj=_relations[i].second->GetReferredObject();
+			shared_ptr<iConcept> firstObj=_relations[i].First()->GetReferredObject();
+			shared_ptr<iConcept> secondObj=_relations[i].Second()->GetReferredObject();
 			if(firstObj==NULL || secondObj==NULL)
 			{
 				continue;

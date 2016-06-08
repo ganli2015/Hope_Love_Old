@@ -485,7 +485,7 @@ bool Test_iRelation::InterTableSatisfyRelation( shared_ptr<RelationLeaf> leaf1,s
 
 bool Test_iRelation::InterTableSatisfyRelation( shared_ptr<RelationNode> node,shared_ptr<iConceptInteractTable> interTable )
 {
-	return node->InterTableSatisfyRelation(interTable);
+	return node->InterTableSatisfyRelation(interTable,false);
 }
 
 void Test_iRelation::ClearArbNum()
