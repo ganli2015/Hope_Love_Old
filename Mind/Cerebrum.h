@@ -12,6 +12,11 @@ namespace DataCollection
 	enum PartOfSpeech;
 }
 
+namespace LogicSystem
+{
+	class iLogicKnowledge;
+}
+
 namespace Mind
 {
 	class iConcept;
@@ -20,7 +25,6 @@ namespace Mind
 	class ConceptInteractTableContainer;
 	class ConceptReactSystem;
 	class iConceptChain;
-	class LogicKnowledge;
 	struct Identity;
 	struct ConceptChainProperty;
 
@@ -32,7 +36,7 @@ namespace Mind
 		GrammarSet* _grammaset;
 		ConceptInteractTableContainer* _conceptInteractTableContainer;
 		ConceptReactSystem* _conceptReactSystem;
-		LogicKnowledge* _logicKnowledge;
+		LogicSystem::iLogicKnowledge* _logicKnowledge;
 
 		Cerebrum(void);
 		void PostInitialize();
@@ -40,6 +44,7 @@ namespace Mind
 		static Cerebrum* Instance();
 		virtual ~Cerebrum();
 
+		void SetLogicKnowledge(LogicSystem::iLogicKnowledge* val){_logicKnowledge=val;}
 
 		//Concept Related Functions
 		virtual bool IsInMind(const std::string str) const;

@@ -54,6 +54,8 @@ namespace Mind
 		void AddExpectCall_Deduce(const string inputTable, const vector<string>& outputResults);
 		void AddExpectCall_Deduce(const string inputTable, const string& outputResults);
 
+		MOCK_METHOD1(SetLogicKnowledge,void(LogicSystem::iLogicKnowledge*));
+
 		MOCK_CONST_METHOD1(IsInMind,bool(const string));
 		MOCK_CONST_METHOD1(IsInMind,bool(const shared_ptr<DataCollection::Word>));
 		MOCK_CONST_METHOD1(MaxLength_WordWithHead,int(const shared_ptr<DataCollection::Character>));

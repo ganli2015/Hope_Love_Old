@@ -157,8 +157,6 @@
     <ClInclude Include="GrammaSet.h" />
     <ClInclude Include="GrammaTree.h" />
     <ClInclude Include="InOut.h" />
-    <ClInclude Include="LogicKnowledge.h" />
-    <ClInclude Include="LogicKnowledgeInitializer.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -175,8 +173,6 @@
     <ClCompile Include="FilePath.cpp" />
     <ClCompile Include="GrammaSet.cpp" />
     <ClCompile Include="GrammaTree.cpp" />
-    <ClCompile Include="LogicKnowledge.cpp" />
-    <ClCompile Include="LogicKnowledgeInitializer.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

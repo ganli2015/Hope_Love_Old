@@ -2,7 +2,6 @@
 #include "Test_Mind.h"
 
 #include "../Mind/Cerebrum.h"
-#include "../Mind/LogicKnowledgeInitializer.h"
 #include "../Mind/ConceptSetInitializer.h"
 #include "../Mind/ConceptSet.h"
 
@@ -31,156 +30,122 @@
 
 #include "../LogicSystem/CompositeExpression.h"
 #include "../LogicSystem/SingleExpression.h"
+#include "../LogicSystem/LogicKnowledge.h"
+#include "../LogicSystem/LogicKnowledgeInitializer.h"
 
+#include "../UTFacility/MockExpression.h"
 
-#include <tinyxml.h>
 
 using namespace std;
 using namespace Math;
 using namespace CommonTool;
 using namespace NeuralNetwork;
 using namespace DataCollection;
-using namespace Mind;
 using namespace LogicSystem;
 
-typedef InitCerebrum Test_Concept;
-typedef AddPatternToCerebrum Test_LogicKnowledgeInitializer;
-
-TEST_F(Test_Concept,DeepInteraction)
+namespace Mind
 {
-	iCerebrum* brain=iCerebrum::Instance();
+	const string logicFilename="HopeLoveData//LogicStatements.xml";
 
-	Identity iden1;
-	iden1.id=0;
-	iden1.str="爱";
-	shared_ptr<iConcept> from=brain->GetConcept(iden1);
-	Identity iden2;
-	iden2.id=0;
-	iden2.str="你";
-	shared_ptr<iConcept> to=brain->GetConcept(iden2);
+	TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo)
+	{
+		MEMOCHECK;
 
-	shared_ptr<iConceptInteractTable> table=from->DeepInteractWith(to);
-	table->RemoveDuplicated();
+		//Test modifications of single words.
+		string line="0 爱 to 0 喜欢 0 深深 0 非常";
 
-	vector<pair<string,string>> expect;
-	expect.push_back(make_pair("大","程度"));
-	expect.push_back(make_pair("程度","好感"));
-	expect.push_back(make_pair("好感","对方"));
-	expect.push_back(make_pair("大","好感"));
+		ConceptSet* conceptSet=new ConceptSet();
+		Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
 
-	ASSERT_TRUE(FuncForTest::PairSameWithTable(expect,table));
-}
+		Identity expectMe("爱",0);
+		Identity expectTo("喜欢",0);
+		vector<pair<string,string>> expectMod;
+		expectMod.push_back(make_pair("深深","喜欢"));
+		expectMod.push_back(make_pair("非常","喜欢"));
 
-TEST_F(Test_Concept,DeepInteraction2)
-{
-	iCerebrum* brain=iCerebrum::Instance();
+		ASSERT_EQ(info.me,expectMe);
+		ASSERT_EQ(info.edge_infos[0].to,expectTo);
+		ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
+		delete conceptSet;
+	}
 
-	Identity iden1;
-	iden1.id=0;
-	iden1.str="不";
-	shared_ptr<iConcept> from=brain->GetConcept(iden1);
-	Identity iden2;
-	iden2.id=0;
-	iden2.str="老";
-	shared_ptr<iConcept> to=brain->GetConcept(iden2);
+	TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo2)
+	{
+		MEMOCHECK;
 
-	shared_ptr<iConceptInteractTable> table=from->DeepInteractWith(to);
+		//Test modifications of a concept interact table.
+		string line="0 三 to 0 二 0@二-0@加,0@加-0@一";
 
-	vector<pair<string,string>> expect;
-	expect.push_back(make_pair("否定","年龄"));
-	expect.push_back(make_pair("大","年龄"));
+		ConceptSet* conceptSet=new ConceptSet();
+		Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
 
-	ASSERT_TRUE(FuncForTest::PairSameWithTable(expect,table));
-}
+		Identity expectMe("三",0);
+		Identity expectTo("二",0);
+		vector<pair<string,string>> expectMod;
+		expectMod.push_back(make_pair("二","加"));
+		expectMod.push_back(make_pair("加","一"));
 
-TEST_F(Test_LogicKnowledgeInitializer,ParseRelation)
-{
-	string filename=FuncForTest::TestSampleDir+"Test_LogicKnowledgeInitializer_ParseRelation.txt";
-	TiXmlDocument *myDocument = new TiXmlDocument();
-	myDocument->LoadFile(filename.c_str());
-	TiXmlNode *conditionNode=myDocument->FirstChild("Condition");
+		ASSERT_EQ(info.me,expectMe);
+		ASSERT_EQ(info.edge_infos[0].to,expectTo);
+		ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
+		delete conceptSet;
+	}
 
-	LogicKnowledgeInitializer initer;
-	shared_ptr<LogicSystem::iRelation> relation=Test_Mind::ParseRelation(conditionNode,initer);
+	TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo3)
+	{
+		MEMOCHECK;
 
-	string result=relation->GetString();
-	string expect="S0->大,大->于,于->S1";
-	ASSERT_EQ(expect,result);
-}
+		//Test modifications of a concept interact table.
+		string line="0 一 to 0 整数 to 0 零 0@零-0@加,0@加-0@一";
 
-TEST_F(Test_LogicKnowledgeInitializer,ParseLogicStatement)
-{
-	string filename=FuncForTest::TestSampleDir+"Test_LogicKnowledgeInitializer_ParseLogicStatement.txt";
-	TiXmlDocument *myDocument = new TiXmlDocument();
-	myDocument->LoadFile(filename.c_str());
-	TiXmlNode *logicNode=myDocument->FirstChild("LogicStatement");
+		ConceptSet* conceptSet=new ConceptSet();
+		Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
 
-	LogicKnowledgeInitializer initer;
-	shared_ptr<LogicSystem::iLogicStatement> statement=Test_Mind::ParseLogicStatement(logicNode,initer);
+		Identity expectMe("一",0);
+		Identity expectTo("零",0);
+		vector<pair<string,string>> expectMod;
+		expectMod.push_back(make_pair("零","加"));
+		expectMod.push_back(make_pair("加","一"));
 
-	//test the deduction of statement 
-	vector<string> conditionStr;
-	conditionStr.push_back("二大于一");
-	conditionStr.push_back("三大于二");
-	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
+		ASSERT_EQ(info.me,expectMe);
+		ASSERT_EQ(info.edge_infos[1].to,expectTo);
+		ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[1].modifications));
 
-	shared_ptr<iDeduceResult> deduceResult=statement->Deduce(condition);
-	
-	shared_ptr<iExpression> expect(iLogicElementCreator::CreateExpression("三大于一"));
-	ASSERT_EQ(deduceResult->Matching(expect),1);
-}
+		delete conceptSet;
+	}
 
-TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo)
-{
-	//Test modifications of single words.
-	string line="0 爱 to 0 喜欢 0 深深 0 非常";
+	TEST(Test_Cerebrum,LogicStatementInitialized)
+	{
+		MEMOCHECK;
 
-	ConceptSet* conceptSet=new ConceptSet();
-	Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
+		Cerebrum* brain=Cerebrum::Instance();
+		iCerebrum::SetInstance(brain);
 
-	Identity expectMe("爱",0);
-	Identity expectTo("喜欢",0);
-	vector<pair<string,string>> expectMod;
-	expectMod.push_back(make_pair("深深","喜欢"));
-	expectMod.push_back(make_pair("非常","喜欢"));
+		LogicKnowledge* knowledge=new LogicKnowledge();
+		LogicKnowledgeInitializer init;
+		init.Initialize(logicFilename,knowledge);
+		brain->SetLogicKnowledge(knowledge);
 
-	ASSERT_EQ(info.me,expectMe);
-	ASSERT_EQ(info.edge_infos[0].to,expectTo);
-	ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
-}
+		//test the deduction of statement 
+		string conditionTable="二-大,大-于,于-一,三-大,大-于,于-二";
+		shared_ptr<MockExpression> condition=MockExpression::Create(conditionTable);
 
-TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo2)
-{
-	//Test modifications of a concept interact table.
-	string line="0 三 to 0 二 0@二-0@加,0@加-0@一";
+		vector<shared_ptr<LogicSystem::iDeduceResult>> deduceResult=brain->Deduce(condition);
 
-	ConceptSet* conceptSet=new ConceptSet();
-	Connection_Info info=Test_Mind::ParseStrToConnectionInfo(line,conceptSet);
+		string resultTable="三-大,大-于,于-一";
+		shared_ptr<iExpression> expect=MockExpression::Create(resultTable);
+		ASSERT_EQ(deduceResult.size(),1);
+		ASSERT_EQ(deduceResult.front()->Matching(expect),1);
 
-	Identity expectMe("三",0);
-	Identity expectTo("二",0);
-	vector<pair<string,string>> expectMod;
-	expectMod.push_back(make_pair("二","加"));
-	expectMod.push_back(make_pair("加","一"));
+		iCerebrum::KillInstance();
+	}
 
-	ASSERT_EQ(info.me,expectMe);
-	ASSERT_EQ(info.edge_infos[0].to,expectTo);
-	ASSERT_TRUE(FuncForTest::PairSameWithTable(expectMod,info.edge_infos[0].modifications));
+	Mind::Connection_Info Test_Mind::ParseStrToConnectionInfo( const string line,const Mind::ConceptSet* conceptSet )
+	{
+		return ConceptSetInitializer::ParseStrToConnectionInfo(line,conceptSet);
+	}
 }
 
 
 
-shared_ptr<LogicSystem::iRelation> Test_Mind::ParseRelation( const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer )
-{
-	return initer.ParseRelation(node);
-}
 
-shared_ptr<LogicSystem::iLogicStatement> Test_Mind::ParseLogicStatement( const TiXmlNode * node,Mind::LogicKnowledgeInitializer& initer )
-{
-	return initer.ParseLogicStatement(node);
-}
-
-Mind::Connection_Info Test_Mind::ParseStrToConnectionInfo( const string line,const Mind::ConceptSet* conceptSet )
-{
-	return ConceptSetInitializer::ParseStrToConnectionInfo(line,conceptSet);
-}

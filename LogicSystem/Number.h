@@ -11,7 +11,7 @@ namespace LogicSystem
 	class Number : public iSymbol<T>
 	{
 		static int NumNum;
-		static string TypeName;
+		static string _integerStr;
 
 		int _id;
 
@@ -24,44 +24,32 @@ namespace LogicSystem
 		virtual bool Match(const shared_ptr<T> con) const ;
 		virtual string GetString() const;
 		virtual void BindReferredObject(const shared_ptr<T> obj) ;
+
+		///Transform to a integer if possible.
+		///Currently only support positive integers!
+		bool ToInt(int& out) const;
+
+	private:
 	};
+
+	template<class T>
+	string LogicSystem::Number<T>::_integerStr="整数";
 
 	///Specialize for iConcept
 	template<>
 	bool _LOGICSYSTEMINOUT Number<Mind::iConcept>::Match( const shared_ptr<Mind::iConcept> con ) const;
 
-	template<class T>
-	int Number<T>::NumNum=0;
+	template<>
+	bool _LOGICSYSTEMINOUT Number<Mind::iConcept>::ToInt( int& out ) const;
 
 	template<class T>
-	string Number<T>::TypeName=typeid(T).name();
+	int Number<T>::NumNum=0;
 
 	template<class T>
 	shared_ptr<Number<T>> Number<T>::Create()
 	{
 		return shared_ptr<Number>(new Number());
 	}
-
-// 	template<class T>
-// 	bool Number<T>::Match( const shared_ptr<T> con ) const
-// 	{
-// 		if(typeid(Mind::iConcept).name()==TypeName)
-// 		{
-// 			//Check whether the forward concepts of <con> exists 数字 concept.
-// 			vector<shared_ptr<Mind::iConcept>> forward=con->GetBase();
-// 			for (unsigned int i=0;i<forward.size();++i)
-// 			{
-// 				if(forward[i]->GetString()=="数字")
-// 				{
-// 					return true;
-// 				}
-// 			}
-// 
-// 			return false;
-// 		}
-// 		else
-// 			throw runtime_error("Not implemented!!");
-// 	}
 
 	template<class T>
 	void Number<T>::BindReferredObject(const shared_ptr<T> obj) 

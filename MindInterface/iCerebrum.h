@@ -15,6 +15,7 @@ namespace LogicSystem
 	class iRelation;
 	class iDeduceResult;
 	class iLogicStatement;
+	class iLogicKnowledge;
 }
 
 namespace Mind
@@ -37,6 +38,8 @@ namespace Mind
 		static void SetInstance(iCerebrum* val);
 		static void KillInstance();
 		static bool Empty();
+
+		virtual void SetLogicKnowledge(LogicSystem::iLogicKnowledge* val) =0;
 
 		//Concept Related Functions
 		virtual bool IsInMind(const std::string str) const=0;

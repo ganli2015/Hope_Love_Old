@@ -77,6 +77,12 @@
     <ClInclude Include="Test_ConceptInteractTable.h">
       <Filter>Mind</Filter>
     </ClInclude>
+    <ClInclude Include="Test_Concept.h">
+      <Filter>Mind</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryChecker.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -119,6 +125,12 @@
       <Filter>Mind</Filter>
     </ClCompile>
     <ClCompile Include="FuncForTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_Concept.cpp">
+      <Filter>Mind</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryChecker.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

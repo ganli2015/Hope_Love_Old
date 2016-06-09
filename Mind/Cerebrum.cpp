@@ -5,11 +5,11 @@
 #include "WordRelationTable.h"
 #include "ConceptInteractTableContainer.h"
 #include "ConceptReactSystem.h"
-#include "LogicKnowledge.h"
 
 #include "../DataCollection/Word.h"
 #include "../DataCollection/Character.h"
 
+#include "../MindInterface/iLogicKnowledge.h"
 
 using namespace DataCollection;
 
@@ -30,13 +30,16 @@ namespace Mind
 		delete _conceptInteractTableContainer;
 		delete _grammaset;
 		delete _conceptset;
-		delete _logicKnowledge;
+		if(_logicKnowledge!=NULL)
+		{
+			delete _logicKnowledge;
+		}
 		_instance=NULL;
 	}
 
 	void Cerebrum::PostInitialize()
 	{
-		_logicKnowledge=new LogicKnowledge();		
+		_logicKnowledge=NULL;
 	}
 
 	Cerebrum* Cerebrum::Instance()

@@ -3,6 +3,7 @@
 #include "SingleExpression.h"
 
 #include "../MindInterface/iConceptInteractTable.h"
+#include "../MindInterface/iConcept.h"
 
 using namespace Mind;
 

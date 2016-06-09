@@ -33,7 +33,7 @@ public:
 	static void RelationPair(shared_ptr<LogicSystem::RelationNode> condition,shared_ptr<LogicSystem::RelationLeaf> result );
 	///condition: Num0->加,加->Num1. result: Num0->加,加->一,Num1->次,次->加.
 	static void RelationPair2(shared_ptr<LogicSystem::RelationLeaf> condition,shared_ptr<LogicSystem::RelationLeaf> result );
-	///condition: Num0->次,次->Verb0,Verb1->Arb0. result: Verb0->Arb0 X3 
+	///condition: Num0->次,次->Verb0,Verb1->Arb0. result: Verb0->Arb0 X Num0 
 	static void RelationPair3(shared_ptr<LogicSystem::RelationLeaf>& condition,shared_ptr<LogicSystem::RelationLeaf>& result );
  
 };

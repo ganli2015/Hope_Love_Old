@@ -46,6 +46,8 @@ namespace LogicSystem
 
 			shared_ptr<ConSymbol> First() const {return _from;}
 			shared_ptr<ConSymbol> Second() const {return _to;}
+			shared_ptr<Num> GetRepeatNum() const{return _num;}
+
 		};
 
 		//Store concept pair and related symbol pair.

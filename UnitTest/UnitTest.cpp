@@ -15,13 +15,28 @@ using namespace std;
 
 class MyGlobal: public testing::Environment
 {
+	int _startObjCount;
+
 public:
+	~MyGlobal(){TearDown();}
 
 	virtual void SetUp();
-	virtual void TearDown() {}
+	virtual void TearDown();
 };
 
 void MyGlobal::SetUp()
+{
+	_startObjCount=MyObject::GetObjectCount();
+}
+
+void MyGlobal::TearDown()
+{
+	ASSERT_EQ(MyObject::GetObjectCount(),_startObjCount);
+}
+
+void RunFilter(const string filterStr);
+
+void Init()
 {
 	LeafCreator::Init();
 	shared_ptr<Mind::MindElementCreator> mindCreator(new Mind::MindElementCreator());
@@ -31,20 +46,20 @@ void MyGlobal::SetUp()
 	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
 }
 
-void RunFilter(const string filterStr);
-
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
-	RunFilter("Test_Logic*");
+	RunFilter("Test_Cerebrum*");
 
-	MyGlobal global;
-	global.SetUp();
+	Init();
 
 //	testing::AddGlobalTestEnvironment(new MyGlobal);
 	testing::InitGoogleTest(&argc, argv);
+	MEMOCHECK;
 	RUN_ALL_TESTS();
+	RELEASE_MEMOCHECK;
 
 	system("pause");
+
 
 	return 0;
 
@@ -52,7 +67,7 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 
 void RunFilter(const string filterStr)
 {
-//	::testing::GTEST_FLAG(filter) = filterStr;
+	::testing::GTEST_FLAG(filter) = filterStr;
 
 	
 }

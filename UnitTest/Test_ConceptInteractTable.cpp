@@ -22,6 +22,8 @@ namespace Mind
 
 	TEST_P(Test_Similarity,Similarity)
 	{
+		MEMOCHECK;
+
 		PrepareMockCerebrum();
 
 		ConceptTableSimilarityParam param=GetParam();

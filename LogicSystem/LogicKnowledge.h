@@ -1,30 +1,30 @@
 #pragma once
 #include "InOut.h"
 
-#include "../MindInterface/iLogicStatement.h"
+#include "../MindInterface/iLogicKnowledge.h"
 
 namespace LogicSystem
 {
-	class iRelation;
 	class iExpression;
-	class iDeduceResult;
-}
 
-namespace Mind
-{
 	///LogicKnowledge contains logic statements.
-	class LogicKnowledge : public Obj<LogicKnowledge>
+	class _LOGICSYSTEMINOUT LogicKnowledge : public iLogicKnowledge
 	{
-		vector<shared_ptr<LogicSystem::iLogicStatement>> _statements;
+		vector<shared_ptr<iLogicStatement>> _statements;
 
 	public:
 		LogicKnowledge(void);
-		~LogicKnowledge(void);
+		virtual ~LogicKnowledge(void);
 
 		void Add(const shared_ptr<LogicSystem::iLogicStatement> statement) {_statements.push_back(statement);}
 
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<iExpression> expre) const;
+
+		virtual vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<Mind::iConceptInteractTable> expre) const;
+
+
 		template<class ExpreType>
-		vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<ExpreType> expre) const
+		vector<shared_ptr<LogicSystem::iDeduceResult>> Deduce(const shared_ptr<ExpreType> expre,const vector<shared_ptr<iLogicStatement>>& statements) const
 		{
 			class FindResult
 			{
@@ -48,7 +48,7 @@ namespace Mind
 			};
 
 			FindResult findResult(expre);
-			findResult=for_each(_statements.begin(),_statements.end(),findResult);
+			findResult=for_each(statements.begin(),statements.end(),findResult);
 
 			return findResult.GetResult();
 		}

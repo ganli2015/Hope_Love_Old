@@ -5,7 +5,6 @@
 #include "iRelationConstraint.h"
 #include "iConcept.h"
 
-
 using namespace Mind;
 
 namespace LogicSystem

@@ -56,6 +56,9 @@ namespace Mind
 
 		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
 
+		///Get the concept that represents an integer from <conceptVec>.
+		shared_ptr<Mind::iConcept> _MINDINTERFACEINOUT FindIntegerConcept(const vector<shared_ptr<Mind::iConcept>>& conceptVec);
+
 		///Filter <total> with <partial> and return the remaining.
 		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs(const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial);
 

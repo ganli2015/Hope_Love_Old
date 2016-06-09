@@ -71,6 +71,9 @@
     <ClInclude Include="iReduceResult.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="iLogicKnowledge.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -125,6 +128,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="iReduceResult.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="iLogicKnowledge.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

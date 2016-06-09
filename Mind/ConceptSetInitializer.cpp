@@ -442,7 +442,7 @@ namespace Mind
 			}
 			else
 			{
-				modifications=ParseSingleMod(split.begin()+index,split.end(),edge_info.to,conceptSet);
+				modifications=ParseSingleMod(split.begin()+index,find_next_to,edge_info.to,conceptSet);
 			}
 			edge_info.modifications=modifications;
 

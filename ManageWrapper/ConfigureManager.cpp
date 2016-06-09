@@ -6,6 +6,7 @@
 #include "../MindElement/MindElementCreator.h"
 
 #include "../LogicSystem/LogicElementCreator.h"
+#include "../LogicSystem/LogicKnowledge.h"
 
 namespace ManageWrapper
 {
@@ -21,7 +22,9 @@ namespace ManageWrapper
 		shared_ptr<LogicSystem::LogicElementCreator> logicElementCreator(new LogicSystem::LogicElementCreator());
 		LogicSystem::iLogicElementCreator::SetImp(logicElementCreator);
 
-		Mind::iCerebrum::SetInstance(Mind::Cerebrum::Instance());
+		Mind::Cerebrum *brain=Mind::Cerebrum::Instance();
+		brain->SetLogicKnowledge(new LogicSystem::LogicKnowledge());
+		Mind::iCerebrum::SetInstance(brain);
 	}
 }
 

@@ -133,7 +133,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy  "$(SolutionDir)$(ConfigurationName)\*.dll" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy  "$(SolutionDir)$(ConfigurationName)\*.dll" "$(TargetDir)"
+copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(TargetDir)HopeLoveData\"
+copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.xml" "$(TargetDir)HopeLoveData\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -247,6 +247,26 @@ namespace Mind
 			return res;
 		}
 
+		shared_ptr<Mind::iConcept> FindIntegerConcept( const vector<shared_ptr<Mind::iConcept>>& conceptVec )
+		{
+			static string integerStr="ÕûÊý";
+
+			for (unsigned int i=0;i<conceptVec.size();++i)
+			{
+				vector<shared_ptr<Mind::iConcept>> forward=conceptVec[i]->GetForwardConcepts();
+				//Find a concept of <integerStr> and imply conceptVec[i] is an integer.
+				for (unsigned int j=0;j<forward.size();++j)
+				{
+					if(forward[j]->GetString()==integerStr)
+					{
+						return conceptVec[i];
+					}
+				}
+			}
+
+			return NULL;
+		}
+
 	}
 }
 

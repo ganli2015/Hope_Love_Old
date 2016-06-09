@@ -9,17 +9,42 @@
 ///MyObject contains information of total objects.
 class _COMMONTOOLSINOUT MyObject
 {
+protected:
+	struct MyObjectInfo
+	{
+		MyObject* pointer;
+		string classname;
+	};
+
+	class SamePointer
+	{
+		void* _p;
+	public:
+		SamePointer(void* p):_p(p){}
+		bool operator()(const MyObjectInfo& info)
+		{
+			if(info.pointer==_p)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	};
 
 protected:
 	static ofstream out;
 	static int count;
-	static vector<MyObject*> objectsVec;
+	static vector<MyObjectInfo> objectsVec;
 
 public:
 	MyObject();
 	virtual ~MyObject();
 
 	static int GetObjectCount() {return count;}	
+	static string CurrentObjInfo ();
 };
 
 ///An Object contains type information.
@@ -38,11 +63,11 @@ void Obj<T>::operator delete( void* p )
 {
 #ifdef _DEBUG
 
-	vector<MyObject*>::iterator it=find(objectsVec.begin(),objectsVec.end(),p);
+	vector<MyObjectInfo>::iterator it=find_if(objectsVec.begin(),objectsVec.end(),SamePointer(p));
 	objectsVec.erase(it);
 
 	MyObject::count--;
-	out<<MyObject::count<<" "<<typeid(T).name()<<endl;
+	out<<MyObject::count<<" "<<typeid(T).name()<<"-"<<endl;
 #endif // _DEBUG
 
 	free(p);
@@ -55,8 +80,12 @@ void* Obj<T>::operator new( size_t size )
 
 #ifdef _DEBUG
 	MyObject::count++;
-	objectsVec.push_back(reinterpret_cast<MyObject*>(p));
-	out<<MyObject::count<<" "<<typeid(T).name()<<endl;
+	MyObjectInfo info;
+	info.pointer=reinterpret_cast<MyObject*>(p);
+	info.classname=typeid(T).name();
+
+	objectsVec.push_back(info);
+	out<<MyObject::count<<" "<<info.classname<<"+"<<endl;
 #endif // _DEBUG
 
 	return p;

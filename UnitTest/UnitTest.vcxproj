@@ -64,6 +64,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>gtest_maind.lib;gtestd.lib;tinyxml.lib;gmock_main.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"
+copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.*" "$(ProjectDir)HopeLoveData\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -83,15 +87,21 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>gtest_main.lib;gtest.lib;tinyxml.lib;gmock_mainr.lib;gmockr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"
+copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.*" "$(ProjectDir)HopeLoveData\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FuncForTest.h" />
+    <ClInclude Include="MemoryChecker.h" />
     <ClInclude Include="MyTest.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestClass.h" />
     <ClInclude Include="Test_CommonTool.h" />
+    <ClInclude Include="Test_Concept.h" />
     <ClInclude Include="Test_ConceptInteractTable.h" />
     <ClInclude Include="Test_iRelation.h" />
     <ClInclude Include="Test_LogicSystem.h" />
@@ -103,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FuncForTest.cpp" />
+    <ClCompile Include="MemoryChecker.cpp" />
     <ClCompile Include="MyTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -110,6 +121,7 @@
     </ClCompile>
     <ClCompile Include="TestClass.cpp" />
     <ClCompile Include="Test_CommonTool.cpp" />
+    <ClCompile Include="Test_Concept.cpp" />
     <ClCompile Include="Test_ConceptInteractTable.cpp" />
     <ClCompile Include="Test_iRelation.cpp" />
     <ClCompile Include="Test_LogicSystem.cpp" />

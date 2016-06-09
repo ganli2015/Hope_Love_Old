@@ -10,6 +10,7 @@
 #include <gtest/gtest.h>
 
 #include "FuncForTest.h"
+#include "MemoryChecker.h"
 #include "../CommonTools/MyObject.h"
 #include "../CommonTools/assertions.h"
 

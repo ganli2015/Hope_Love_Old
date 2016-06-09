@@ -42,9 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>..\TinyXml\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\TinyXml\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>..\TinyXml\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\TinyXml\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -56,8 +60,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>tinyxml.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,8 +72,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>tinyxml.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -87,6 +89,8 @@
     <ClInclude Include="InOut.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="LogicElementCreator.h" />
+    <ClInclude Include="LogicKnowledge.h" />
+    <ClInclude Include="LogicKnowledgeInitializer.h" />
     <ClInclude Include="LogicStatement.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="ReduceResult.h" />
@@ -104,6 +108,8 @@
     <ClCompile Include="Inequality.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="LogicElementCreator.cpp" />
+    <ClCompile Include="LogicKnowledge.cpp" />
+    <ClCompile Include="LogicKnowledgeInitializer.cpp" />
     <ClCompile Include="LogicStatement.cpp" />
     <ClCompile Include="Number.cpp" />
     <ClCompile Include="ReduceResult.cpp" />

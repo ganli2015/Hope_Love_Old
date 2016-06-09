@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "RelationLeaf.h"
 #include "Symbol.h"
+#include "Number.h"
 
 #include "../MindInterface/iSymbol.h"
 #include "../MindInterface/iExpression.h"
@@ -11,6 +12,7 @@
 #include "../MindInterface/iMindElementCreator.h"
 
 #include "../Mathmatic/FindSequence.h"
+
 
 using namespace Mind;
 namespace LogicSystem
@@ -28,6 +30,11 @@ namespace LogicSystem
 	{
 		assert(from!=NULL && to!=NULL);
 		_relations.push_back(SymbolPair(from,to));
+	}
+
+	void RelationLeaf::AddRelation( const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to, const shared_ptr<Num> num )
+	{
+		_relations.push_back(SymbolPair(from,to,num));
 	}
 
 	void RelationLeaf::AddConstraint( const shared_ptr<iRelationConstraint> constraint )
@@ -119,71 +126,6 @@ namespace LogicSystem
 		return matchedPairSeq;
 	}
 
-	vector<RelationLeaf::ConceptPair> RelationLeaf::FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs)
-	{
-		class FindConceptPair
-		{
-			SymbolPair _symbolPair;
-			vector<ConceptPair> _result;
-
-		public:
-			FindConceptPair(const SymbolPair& val):_symbolPair(val){}
-			~FindConceptPair(){}
-			
-			vector<ConceptPair> GetResult() const {return _result;}
-			void operator()(const ConceptPair& cPair)
-			{
-				if(_symbolPair.First()->Match(cPair.first) && _symbolPair.Second()->Match(cPair.second))
-				{
-					_result.push_back(cPair);
-				}
-			}
-		};
-
-		FindConceptPair findPairs(symbolPair);
-		findPairs=for_each(cPairs.begin(),cPairs.end(),findPairs);
-		vector<RelationLeaf::ConceptPair> res=findPairs.GetResult();
-
-		return res;
-	}
-
-	vector<vector<RelationLeaf::PairInfo>> RelationLeaf::FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs)
-	{
-		class FindEachRelatedConceptPairs
-		{
-			vector<ConceptPair> _cPairs;
-
-		public:
-			FindEachRelatedConceptPairs(const vector<ConceptPair>& cPairs):_cPairs(cPairs){}
-			~FindEachRelatedConceptPairs(){}
-
-			vector<PairInfo> operator()(const SymbolPair& sPair)
-			{
-				vector<PairInfo> res;
-				vector<ConceptPair> relatedPairs= FindMatchedPairs(sPair,_cPairs);
-				res.reserve(relatedPairs.size());
-				for (unsigned int i=0;i<relatedPairs.size();++i)
-				{
-					PairInfo info;
-					info.cPair=relatedPairs[i];
-					info.sPair=sPair;
-					res.push_back(info);
-				}
-
-				return res;
-			}
-		};
-
-		//Each element in <relatedPairs> is all the concept pairs that one symbol pair is related with.
-		vector<vector<PairInfo>> relatedPairs;
-		transform(sPairs.begin(),sPairs.end(),back_inserter(relatedPairs),FindEachRelatedConceptPairs(cPairs));
-
-		//Each element in <pairSequence> is concept pairs that all different symbol pairs are related with.
-		vector<vector<PairInfo>> pairSequence=Math::GetAllCombinations<PairInfo>::Get(relatedPairs);
-
-		return pairSequence;
-	}
-
 	void RelationLeaf::Recursive_FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs,
 		vector<PairSequence>& sequence) const
 	{
@@ -244,17 +186,26 @@ namespace LogicSystem
 
 		for (unsigned int i=0;i<_relations.size();++i)
 		{
-			shared_ptr<iConcept> firstObj=_relations[i].First()->GetReferredObject();
-			shared_ptr<iConcept> secondObj=_relations[i].Second()->GetReferredObject();
-			if(firstObj==NULL || secondObj==NULL)
+// 			shared_ptr<iConcept> firstObj=_relations[i].First()->GetReferredObject();
+// 			shared_ptr<iConcept> secondObj=_relations[i].Second()->GetReferredObject();
+// 			if(firstObj==NULL || secondObj==NULL)
+// 			{
+// 				return NULL;
+// 			}
+// 			
+// 			shared_ptr<ConSymbol> fromSymbol(new Symbol<iConcept>(firstObj));
+// 			shared_ptr<ConSymbol> toSymbol(new Symbol<iConcept>(secondObj));
+// 			res->AddRelation(fromSymbol,toSymbol);
+
+			vector<SymbolPair> specialSymbolPairs=GeneratePairSequence(_relations[i]);
+			if(specialSymbolPairs.empty())
 			{
 				return NULL;
 			}
-			else
+
+			for (unsigned int j=0;j<specialSymbolPairs.size();++j)
 			{
-				shared_ptr<ConSymbol> fromSymbol(new Symbol<iConcept>(firstObj));
-				shared_ptr<ConSymbol> toSymbol(new Symbol<iConcept>(secondObj));
-				res->AddRelation(fromSymbol,toSymbol);
+				res->AddRelation(specialSymbolPairs[j].First(),specialSymbolPairs[j].Second());
 			}
 		}
 
@@ -276,6 +227,45 @@ namespace LogicSystem
 			else
 			{
 				res->Add(firstObj,secondObj);
+			}
+		}
+
+		return res;
+	}
+
+	vector<RelationLeaf::SymbolPair> RelationLeaf::GeneratePairSequence( const SymbolPair& symbolPair ) const
+	{
+		vector<SymbolPair> res;
+
+		shared_ptr<iConcept> firstObj=symbolPair.First()->GetReferredObject();
+		shared_ptr<iConcept> secondObj=symbolPair.Second()->GetReferredObject();
+
+		if(firstObj==NULL || secondObj==NULL)
+		{
+			return res;
+		}
+
+		shared_ptr<ConSymbol> fromSymbol(new Symbol<iConcept>(firstObj));
+		shared_ptr<ConSymbol> toSymbol(new Symbol<iConcept>(secondObj));
+
+		shared_ptr<Num> repeatNumSymbol=symbolPair.GetRepeatNum();
+		if(repeatNumSymbol==NULL)//Push back one pair.
+		{			
+			res.push_back(SymbolPair(fromSymbol,toSymbol));
+		}
+		else
+		{
+			int repeatNum;
+			if(repeatNumSymbol->ToInt(repeatNum))//Push back <repeatNum> pairs
+			{
+				for (int i=0;i<repeatNum;++i)
+				{
+					res.push_back(SymbolPair(fromSymbol,toSymbol));
+				}
+			}
+			else
+			{
+				res.push_back(SymbolPair(fromSymbol,toSymbol));
 			}
 		}
 

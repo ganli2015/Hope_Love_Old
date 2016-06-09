@@ -5,9 +5,12 @@
 #include "../Mind/ConceptSet.h"
 #include "../Mind/GrammaSet.h"
 
+#include "../LogicSystem/LogicKnowledge.h"
+
 #include <Windows.h>
 
 using namespace Mind;
+using namespace LogicSystem;
 
 TEST(MemoryLeak,ConceptSet)
 {
@@ -36,6 +39,18 @@ TEST(MemoryLeak,Cerebrum)
 	iCerebrum::SetInstance(Cerebrum::Instance());
 	int objCountInit=MyObject::GetObjectCount();
 	iCerebrum::KillInstance();
+	int objCountEnd=MyObject::GetObjectCount();
+
+
+	ASSERT_EQ(objCountStart,objCountEnd);
+}
+
+TEST(MemoryLeak,LogicKnowledge)
+{
+	int objCountStart=MyObject::GetObjectCount();
+	LogicKnowledge* knowledge=new LogicKnowledge();
+	int objCountInit=MyObject::GetObjectCount();
+	delete knowledge;
 	int objCountEnd=MyObject::GetObjectCount();
 
 

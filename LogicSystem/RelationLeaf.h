@@ -33,6 +33,7 @@ namespace LogicSystem
 		virtual ~RelationLeaf(void);
 
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) ;
+		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to, const shared_ptr<Num> num) ;
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) ;
 		virtual string GetString() const ;
 
@@ -47,9 +48,9 @@ namespace LogicSystem
 		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const ;
 		RelationLeaf::PairSequence CreateSequenceWithOneElem(const SymbolPair& sPair,const ConceptPair& cPair) const;
 		
-		///Used for relation node
-		static vector<RelationLeaf::ConceptPair> FindMatchedPairs(const SymbolPair& symbolPair,const vector<ConceptPair>& cPairs);
-		static vector<vector<RelationLeaf::PairInfo>> FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs);
+		//Generate new symbol pairs considering the repetition of the original pair.
+		vector<SymbolPair> GeneratePairSequence(const SymbolPair& symbolPair) const;
+
 	};
 }
 

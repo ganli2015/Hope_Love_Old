@@ -171,9 +171,7 @@ void iRelationSample::RelationPair3( shared_ptr<LogicSystem::RelationLeaf>& cond
 	condition->AddRelation(verb1,arb0);
 	condition->AddConstraint(Equality::Create(verb0,verb1));
 
-	//Result:Verb0->Arb0 X3 
+	//Result:Verb0->Arb0 X Num0
 	result=shared_ptr<RelationLeaf>(new RelationLeaf());
-	result->AddRelation(verb0,arb0);
-	result->AddRelation(verb0,arb0);
-	result->AddRelation(verb0,arb0);
+	result->AddRelation(verb0,arb0,num0);
 }

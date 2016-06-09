@@ -1,12 +1,14 @@
 #pragma once
 #include "InOut.h"
 #include "../MindInterface/PublicTypedef.h"
+#include "../MindInterface/iLogicElementCreator.h"
 
 class TiXmlNode;
 class TiXmlElement;
 
 namespace LogicSystem
 {
+	class LogicKnowledge;
 	class iLogicStatement;
 	class iRelation;
 	class iRelationConstraint;
@@ -15,14 +17,9 @@ namespace LogicSystem
 	class Arbitrariness;
 	template<class T>
 	class Symbol;
-}
-
-namespace Mind
-{
-	class LogicKnowledge;
 
 	///Append initial logic statements to the object of LogicKnowledge.
-	class _MINDINOUT LogicKnowledgeInitializer
+	class _LOGICSYSTEMINOUT LogicKnowledgeInitializer
 	{
 		const static string ConditionCollectionNode;
 		const static string ConditionNode;
@@ -37,14 +34,16 @@ namespace Mind
 		const static string InequalityNode ;
 
 		const static string ArbSymbol ;
+		const static string NumSymbol ;
+		const static string VerbSymbol ;
 		const static string EqualSymbol ;
 		const static string InequalSymbol ;
 
-		///Record the arb symbol string in Xml file and arb symbol during parsing the file.
-		map<string,shared_ptr<LogicType::ConSymbol>> _arbTable;
+		///Record the special symbol string in Xml file and special symbol during parsing the file.
+		map<string,shared_ptr<LogicType::ConSymbol>> _spSymbolTable;
 		vector<string> _constraintNodeTag;
 
-		friend class Test_Mind;
+		friend class Test_LogicSystem;
 
 	public:
 		LogicKnowledgeInitializer(void);
@@ -59,7 +58,7 @@ namespace Mind
 		LogicType::SymbolPair ParseSymbolPair(const TiXmlNode * node);
 		shared_ptr<LogicType::ConSymbol> ParseFromToSymbol(const TiXmlElement *node);
 		shared_ptr<LogicType::ConSymbol> ParseConSymbol(const TiXmlElement * element) const;
-		shared_ptr<LogicType::ConSymbol> ParseArbSymbol(const TiXmlElement * element);
+		shared_ptr<LogicType::ConSymbol> ParseArbSymbol(const TiXmlElement * element,const iLogicElementCreator::SymbolType type);
 		shared_ptr<LogicSystem::iRelation> ParseRelationCollection(const TiXmlNode * node,
 			const string relationCollectionNodeStr,//Tag name of relation node
 			const string relationNodeStr);//Tag name of relation leaf

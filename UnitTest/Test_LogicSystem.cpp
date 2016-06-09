@@ -9,6 +9,8 @@
 #include "../LogicSystem/LogicStatement.h"
 #include "../LogicSystem/Number.h"
 #include "../LogicSystem/Verb.h"
+#include "../LogicSystem/LogicKnowledge.h"
+#include "../LogicSystem/LogicKnowledgeInitializer.h"
 
 #include "../Mind/Cerebrum.h"
 
@@ -25,6 +27,7 @@
 #include "../UTFacility/ConceptCreator.h"
 
 #include "FuncForTest.h"
+#include <tinyxml.h>
 
 using namespace DataCollection;
 using namespace Mind;
@@ -42,10 +45,48 @@ typedef InitCerebrum TestF_Logic;
 typedef InitCerebrum Test_Number;
 typedef InitCerebrum Test_Verb;
 typedef InitCerebrum Test_LogicStatement;
+typedef AddPatternToCerebrum Test_LogicKnowledgeInitializer;
 
 
 namespace LogicSystem
 {
+	TEST_F(Test_LogicKnowledgeInitializer,ParseRelation)
+	{
+		string filename=FuncForTest::TestSampleDir+"Test_LogicKnowledgeInitializer_ParseRelation.txt";
+		TiXmlDocument *myDocument = new TiXmlDocument();
+		myDocument->LoadFile(filename.c_str());
+		TiXmlNode *conditionNode=myDocument->FirstChild("Condition");
+
+		LogicKnowledgeInitializer initer;
+		shared_ptr<LogicSystem::iRelation> relation=Test_LogicSystem::ParseRelation(conditionNode,initer);
+
+		string result=relation->GetString();
+		string expect="S0->大,大->于,于->S1";
+		ASSERT_EQ(expect,result);
+	}
+
+	TEST_F(Test_LogicKnowledgeInitializer,ParseLogicStatement)
+	{
+		string filename=FuncForTest::TestSampleDir+"Test_LogicKnowledgeInitializer_ParseLogicStatement.txt";
+		TiXmlDocument *myDocument = new TiXmlDocument();
+		myDocument->LoadFile(filename.c_str());
+		TiXmlNode *logicNode=myDocument->FirstChild("LogicStatement");
+
+		LogicKnowledgeInitializer initer;
+		shared_ptr<LogicSystem::iLogicStatement> statement=Test_LogicSystem::ParseLogicStatement(logicNode,initer);
+
+		//test the deduction of statement 
+		string conditionTable="二-大,大-于,于-一,三-大,大-于,于-二";
+		shared_ptr<MockExpression> condition=MockExpression::Create(conditionTable);
+
+		shared_ptr<iDeduceResult> deduceResult=statement->Deduce(condition);
+
+		string resultTable="三-大,大-于,于-一";
+		shared_ptr<iExpression> expect=MockExpression::Create(resultTable);
+		ASSERT_EQ(deduceResult->Matching(expect),1);
+	}
+
+
 	TEST_F(TestF_Logic,Determine)
 	{
 		shared_ptr<RelationNode> conditionRel(new RelationNode());
@@ -56,6 +97,7 @@ namespace LogicSystem
 		shared_ptr<LogicStatement> statement(new LogicStatement(conditionRel,resultRel));
 
 		iCerebrum* brain=iCerebrum::Instance();
+		brain->SetLogicKnowledge(new LogicKnowledge());
 		brain->AddLogicStatement(statement);
 
 		Logic logic;
@@ -82,6 +124,21 @@ namespace LogicSystem
 		shared_ptr<Number<iConcept>> num=Number<iConcept>::Create();
 
 		ASSERT_TRUE(num->Match(er));
+	}
+
+	TEST_F(Test_Number,ToInt)
+	{
+		Identity iden;
+		iden.str="三";
+		iden.id=0;
+		shared_ptr<iConcept> san=iCerebrum::Instance()->GetConcept(iden);
+
+		shared_ptr<Number<iConcept>> num=Number<iConcept>::Create();
+		num->BindReferredObject(san);
+
+		int resultInt;
+		ASSERT_TRUE(num->ToInt(resultInt));
+		ASSERT_EQ(resultInt,3);
 	}
 
 	TEST_F(Test_Verb,Match)
@@ -163,6 +220,8 @@ namespace LogicSystem
 
 	TEST_P(Test_FinalDeduce,FinalDeduce)
 	{
+		MemoryChecker mc(__FUNCTION__);
+
 		Param_FinalDeduce param=GetParam();
 
 		//Create mock expression of condition.
@@ -189,24 +248,29 @@ namespace LogicSystem
 			<<"expect: \n"+FuncForTest::TablePairToString(param.result.tablePairs)
 			+param.result.conceptStr+"\n"
 			+"result: \n"+results.front()->GetString();
+
+		iCerebrum::KillInstance();
 	}
 
 	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_ReduceFromMatchedConcept, testing::ValuesIn(Test_ReduceFromMatchedConcept::GenerateSamples()));
 
 	TEST_P(Test_ReduceFromMatchedConcept,ReduceFromMatchedConcept)
 	{
+		MemoryChecker mc(__FUNCTION__);
+
 		Param_ReduceFromMatchedConcept param=GetParam();
 		Logic logic;
 		shared_ptr<iReduceResult> result=Test_LogicSystem::ReduceFromMatchedConcept(logic,param.matchedInfo,param.subPairs,param.remainingPairs);
 	
 		ASSERT_TRUE(FuncForTest::SameLogicResult(param.tablePairs,param.conceptStr,result));
-
 	}
 
 	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_Reduce, testing::ValuesIn(Test_Reduce::GenerateSamples()));
 
 	TEST_P(Test_Reduce,Reduce)
 	{
+		MemoryChecker mc(__FUNCTION__);
+
 		Param_Reduce param=GetParam();
 
 		iCerebrum::SetInstance(param.mockCerebrum);
@@ -222,8 +286,6 @@ namespace LogicSystem
 				+param.results[i].conceptStr+"\n"
 				+"result: \n"+results[i]->GetString();
 		}
-
-		iCerebrum::KillInstance();
 	}
 
 	void Test_LogicSystem::TestLogicStatementDeduce( const shared_ptr<LogicSystem::iLogicStatement> logicStatment, const string conditionStr,const string expectResultStr )
@@ -246,6 +308,16 @@ namespace LogicSystem
 		return logic.ReduceFromMatchedConcept(matchedConceptInfo,subPairs,remainingPairs);
 	}
 
+
+	shared_ptr<LogicSystem::iRelation> Test_LogicSystem::ParseRelation( const TiXmlNode * node,LogicKnowledgeInitializer& initer )
+	{
+		return initer.ParseRelation(node);
+	}
+
+	shared_ptr<LogicSystem::iLogicStatement> Test_LogicSystem::ParseLogicStatement( const TiXmlNode * node,LogicKnowledgeInitializer& initer )
+	{
+		return initer.ParseLogicStatement(node);
+	}
 
 	ConceptPair Test_ReduceFromMatchedConcept::MakeConceptPair( const string c1,const string c2,const shared_ptr<ConceptCreator> conceptCreator )
 	{

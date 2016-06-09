@@ -9,23 +9,23 @@
 #include "../MindInterface/iConcept.h"
 #include "../MindInterface/iLogicElementCreator.h"
 
-#include "../LogicSystem/RelationLeaf.h"
-#include "../LogicSystem/RelationNode.h"
-#include "../LogicSystem/Symbol.h"
-#include "../LogicSystem/Arbitrariness.h"
-#include "../LogicSystem/Equality.h"
-#include "../LogicSystem/Inequality.h"
-#include "../LogicSystem/LogicStatement.h"
+#include "RelationLeaf.h"
+#include "RelationNode.h"
+#include "Symbol.h"
+#include "Arbitrariness.h"
+#include "Equality.h"
+#include "Inequality.h"
+#include "LogicStatement.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 
 
 #include "tinyxml.h"
 
-using namespace LogicSystem;
 using namespace CommonTool;
+using namespace Mind;
 
-namespace Mind
+namespace LogicSystem
 {
 	const string LogicKnowledgeInitializer::ConditionCollectionNode = "ConditionCollection";
 	const string LogicKnowledgeInitializer::ConditionNode = "Condition";
@@ -40,6 +40,8 @@ namespace Mind
 	const string LogicKnowledgeInitializer::InequalityNode = "Inequality";
 
 	const string LogicKnowledgeInitializer::ArbSymbol = "Arb";
+	const string LogicKnowledgeInitializer::NumSymbol = "Num";
+	const string LogicKnowledgeInitializer::VerbSymbol = "Vb";
 	const string LogicKnowledgeInitializer::EqualSymbol = "==";
 	const string LogicKnowledgeInitializer::InequalSymbol = "!=";
 
@@ -68,12 +70,11 @@ namespace Mind
 		}
 
 		delete root;
-		delete myDocument;
 	}
 
 	shared_ptr<iLogicStatement> LogicKnowledgeInitializer::ParseLogicStatement(const TiXmlNode * node)
 	{
-		_arbTable.clear();
+		_spSymbolTable.clear();
 
 		shared_ptr<iRelation> conditions=ParseRelationCollection(node,ConditionCollectionNode,ConditionNode);
 		vector<shared_ptr<iRelationConstraint>> constraints=ParseConstraints(node);
@@ -151,13 +152,13 @@ namespace Mind
 		{
 			//Currently assume only Arbitrariness appear in the constraint node.
 			string symbolStr=symbolNode->GetText();
-			if(_arbTable.count(symbolStr)==0)
+			if(_spSymbolTable.count(symbolStr)==0)
 			{
 				throw runtime_error("No symbolStr in _arbTable");
 			}
 			else
 			{
-				symbols.push_back(_arbTable.at(symbolStr));
+				symbols.push_back(_spSymbolTable.at(symbolStr));
 			}
 		}
 		//Currently assume there are only two symbols in a constraint relation.
@@ -206,7 +207,15 @@ namespace Mind
 			string innerText(textCh);
 			if(innerText.find(ArbSymbol)!=string::npos)
 			{
-				sym=ParseArbSymbol(node);
+				sym=ParseArbSymbol(node,iLogicElementCreator::Arb);
+			}
+			else if(innerText.find(NumSymbol)!=string::npos)
+			{
+				sym=ParseArbSymbol(node,iLogicElementCreator::Num);
+			}
+			else if(innerText.find(VerbSymbol)!=string::npos)
+			{
+				sym=ParseArbSymbol(node,iLogicElementCreator::Verb);
 			}
 		}
 
@@ -228,17 +237,17 @@ namespace Mind
 		return sym;
 	}
 
-	shared_ptr<LogicType::ConSymbol> LogicKnowledgeInitializer::ParseArbSymbol( const TiXmlElement * element )
+	shared_ptr<LogicType::ConSymbol> LogicKnowledgeInitializer::ParseArbSymbol( const TiXmlElement * element ,const iLogicElementCreator::SymbolType type)
 	{
 		string arbStr=element->GetText();
-		if(_arbTable.count(arbStr)!=0)
+		if(_spSymbolTable.count(arbStr)!=0)
 		{
-			return _arbTable[arbStr];
+			return _spSymbolTable[arbStr];
 		}
 		else
 		{
-			shared_ptr<LogicType::ConSymbol> arb=iLogicElementCreator::CreateSpecialSymbol(iLogicElementCreator::Arb);
-			_arbTable[arbStr]=arb;
+			shared_ptr<LogicType::ConSymbol> arb=iLogicElementCreator::CreateSpecialSymbol(type);
+			_spSymbolTable[arbStr]=arb;
 			return arb;
 		}	
 

@@ -15,6 +15,7 @@ namespace Mind
 
 class ConceptCreator;
 class ConceptTableCreator;
+class TiXmlNode;
 
 namespace LogicSystem
 {
@@ -23,6 +24,7 @@ namespace LogicSystem
 	class iLogicStatement;
 	class iReduceResult;
 	class Logic;
+	class LogicKnowledgeInitializer;
 
 	class Test_LogicSystem
 	{
@@ -34,6 +36,9 @@ namespace LogicSystem
 
 		static shared_ptr<iReduceResult> ReduceFromMatchedConcept(const Logic& logic,
 			const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs);
+
+		static shared_ptr<LogicSystem::iRelation> ParseRelation(const TiXmlNode * node,LogicKnowledgeInitializer& initer);
+		static shared_ptr<LogicSystem::iLogicStatement> ParseLogicStatement(const TiXmlNode * node,LogicKnowledgeInitializer& initer);
 
 	};
 

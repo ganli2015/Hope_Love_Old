@@ -202,7 +202,8 @@ namespace Mind
 
 	void Concept::Recursive_GetEdgeInteractTable(const shared_ptr<iConceptEdge>& edge,shared_ptr<iConceptInteractTable> mod_table) const
 	{
-		mod_table->Absorb(edge->GetSelfDeepInteract());
+		shared_ptr<iConceptInteractTable> selfTable=edge->GetSelfDeepInteract();
+		mod_table->Absorb(selfTable);
 
 		//递归地建立toConcep所依赖的每个Edge的Table
 		vector<shared_ptr<iConceptEdge>> forwardEdges=edge->GetConcept()->GetForwardEdges();		

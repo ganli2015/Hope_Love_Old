@@ -30,6 +30,7 @@
 #include "../UTFacility/SymbolCreator.h"
 #include "../UTFacility/RelationSample.h"
 #include "../UTFacility/ConceptTableCreator.h"
+#include "../UTFacility/MockExpression.h"
 
 #include "FuncForTest.h"
 
@@ -46,6 +47,8 @@ typedef Symbol<iConcept> Sym;
 
 TEST_F(Test_iRelation,GetString1)
 {
+	MemoryChecker mc;
+
 	Test_iRelation::ClearArbNum();
 	shared_ptr<iRelationNode> node=iRelationSample::RelationSample1();
 
@@ -56,6 +59,8 @@ TEST_F(Test_iRelation,GetString1)
 
 TEST_F(Test_iRelation,GetString2)
 {
+	MemoryChecker mc;
+
 	Test_iRelation::ClearArbNum();
 
 	shared_ptr<RelationLeaf> leaf1(new RelationLeaf());
@@ -96,6 +101,8 @@ TEST_F(Test_iRelation,GetString2)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy)
 {
+	MemoryChecker mc;
+
 	//InterTableSatisfyRelation
 	shared_ptr<iConcept> san=_conceptCreator->Create("三");
 	shared_ptr<iConcept> da=_conceptCreator->Create("大");
@@ -116,6 +123,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy2)
 {
+	MemoryChecker mc;
+
 	//AddConstraint
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -147,6 +156,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy2)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy3)
 {
+	MemoryChecker mc;
+
 	//InterTableSatisfyRelation
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -181,6 +192,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy3)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy4)
 {
+	MemoryChecker mc;
+
 	//InterTableSatisfyRelation
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -212,6 +225,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy4)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy5)
 {
+	MemoryChecker mc;
+
 	//If relation contains numbers of the same pairs, then iConceptInteractTable containing the same number of pairs will satisfy the relation.
 	
 	//Add three same pairs of s1,s2
@@ -226,6 +241,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy5)
 
 TEST_F(Test_iRelation,RelationLeafSatisfy6)
 {
+	MemoryChecker mc;
+
 	//If one of the relation satisfy and another fails, then expect not to satisfy.
 
 	string leafStr="三-四,四-五";
@@ -239,6 +256,8 @@ TEST_F(Test_iRelation,RelationLeafSatisfy6)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy)
 {
+	MemoryChecker mc;
+
 	//"三大于二" and "二大于一"
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -265,6 +284,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy2)
 {
+	MemoryChecker mc;
 
 	//"三大于二" and "二小于一"
 	{
@@ -293,6 +313,7 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy2)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy3)
 {
+	MemoryChecker mc;
 
 	//"三大于二" and "二大于一" with perturbation
 	{		
@@ -325,6 +346,8 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy3)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy4)
 {
+	MemoryChecker mc;
+
 	//"三大于二" and "二小于一" with perturbation
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -352,6 +375,8 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy4)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy5)
 {
+	MemoryChecker mc;
+
 	//"三大于二" or "二大于一"
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -377,6 +402,8 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy5)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy6)
 {
+	MemoryChecker mc;
+
 	//"三大于二" or "二大于一"
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -399,6 +426,8 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy6)
 
 TEST_F(Test_iRelation,Test_RelationNodeSatisfy7)
 {
+	MemoryChecker mc;
+
 	//"三大于二" or "二大于一"
 	{
 		shared_ptr<iConcept> san=_conceptCreator->Create("三");
@@ -423,6 +452,8 @@ TEST_F(Test_iRelation,Test_RelationNodeSatisfy7)
 
 TEST_F(Test_iRelation,GenerateConceptTable)
 {
+	MemoryChecker mc;
+
 	string leafStr="三-大,大-于,于-二";
 	shared_ptr<RelationLeaf> leaf=LeafCreator::SimpleCreate(leafStr);
 
@@ -436,17 +467,17 @@ TEST_F(Test_iRelation,GenerateConceptTable)
 	ASSERT_TRUE(FuncForTest::PairSameWithTable(expect,result));
 }
 
-typedef AddPatternToCerebrum Test_RelationNeedGrammarPatten;
-TEST_F(Test_RelationNeedGrammarPatten,iRelationResonance)
+typedef InitCerebrum Test_RelationNeedCerebrum;
+TEST_F(Test_RelationNeedCerebrum,iRelationResonance)
 {
+	MemoryChecker mc;
+
 	shared_ptr<RelationNode> conditionRel(new RelationNode());
 	shared_ptr<RelationLeaf> resultRel(new RelationLeaf());
 	iRelationSample::RelationPair(conditionRel,resultRel);
 
-	vector<string> conditionStr;
-	conditionStr.push_back("二大于一");
-	conditionStr.push_back("三大于二");
-	shared_ptr<iExpression> condition(iLogicElementCreator::CreateExpression(conditionStr));
+	string conditionTable="二-大,大-于,于-一,三-大,大-于,于-二";
+	shared_ptr<MockExpression> condition=MockExpression::Create(conditionTable);
 
 	if(conditionRel->Satisfy(condition))
 	{
@@ -454,14 +485,16 @@ TEST_F(Test_RelationNeedGrammarPatten,iRelationResonance)
 
 		string relStr=specialRel->GetString();
 
-		shared_ptr<iExpression> conclusion_true(iLogicElementCreator::CreateExpression("三大于一"));
+		string resultTable="三-大,大-于,于-一";
+		shared_ptr<iExpression> conclusion_true=MockExpression::Create(resultTable);
 		ASSERT_TRUE(specialRel->Satisfy(conclusion_true));
 	}
 }
 
-typedef InitCerebrum Test_RelationNeedCerebrum;
 TEST_F(Test_RelationNeedCerebrum,PlusOfNumber)
 {
+	MemoryChecker mc;
+
 	shared_ptr<iConcept> san=GetConcept("三",0);
 	shared_ptr<iConcept> jia=GetConcept("加",0);
 	shared_ptr<iConcept> er=GetConcept("二",0);
