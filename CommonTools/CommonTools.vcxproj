@@ -141,6 +141,8 @@
     <ClInclude Include="CommonFindFunction.h" />
     <ClInclude Include="CommonStringFunction.h" />
     <ClInclude Include="CommonTranslateFunction.h" />
+    <ClInclude Include="ConfigureInfoManager.h" />
+    <ClInclude Include="GeneralFunctor.h" />
     <ClInclude Include="InOut.h" />
     <ClInclude Include="IOFunction.h" />
     <ClInclude Include="MyObject.h" />
@@ -152,6 +154,7 @@
     <ClCompile Include="CommonFindFunction.cpp" />
     <ClCompile Include="CommonStringFunction.cpp" />
     <ClCompile Include="CommonTranslateFunction.cpp" />
+    <ClCompile Include="ConfigureInfoManager.cpp" />
     <ClCompile Include="IOFunction.cpp" />
     <ClCompile Include="MyObject.cpp" />
     <ClCompile Include="Stdafx.cpp">

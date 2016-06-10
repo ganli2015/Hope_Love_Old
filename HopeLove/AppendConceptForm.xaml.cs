@@ -21,6 +21,8 @@ namespace HopeLove
     /// </summary>
     public partial class AppendConceptForm : Window
     {
+        const string HopeLoveMindPath = "..\\..\\..\\Mind\\HopeLoveData\\";
+
         List<Word_ID> _nonBaseConcepts = new List<Word_ID>();
         List<Word_ID> _baseConcepts = new List<Word_ID>();
         List<Connection_Info> _connectionInfos = new List<Connection_Info>();
@@ -43,9 +45,9 @@ namespace HopeLove
 
         private void Init()
         {
-            _baseConcepts = InputWordFromFile(CommonForAppendForm.HopeLoveMindPath + BaseConceptsStringFilename);
-            _nonBaseConcepts = InputWordFromFile(CommonForAppendForm.HopeLoveMindPath + NonBaseConceptString_InitialFilename);
-            _connectionInfos = InputConnectionFromFile(CommonForAppendForm.HopeLoveMindPath + ConceptConnections_InitialFilename);
+            _baseConcepts = InputWordFromFile(HopeLoveMindPath + BaseConceptsStringFilename);
+            _nonBaseConcepts = InputWordFromFile(HopeLoveMindPath + NonBaseConceptString_InitialFilename);
+            _connectionInfos = InputConnectionFromFile(HopeLoveMindPath + ConceptConnections_InitialFilename);
 
 //             StreamWriter sw = new StreamWriter(HopeLoveMindPath + "1.txt",false,MyEncoding);
 //             _nonBaseConcepts.ForEach(w_i =>
@@ -382,7 +384,7 @@ namespace HopeLove
 
         private void WriteNonBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + NonBaseConceptString_InitialFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -390,7 +392,7 @@ namespace HopeLove
 
         private void WriteBaseFile(Word_ID newWord)
         {
-            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + BaseConceptsStringFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + BaseConceptsStringFilename, true, MyEncoding);
             sw.Write("\r\n" + newWord.ToString());
             sw.Flush();
             sw.Close();
@@ -398,7 +400,7 @@ namespace HopeLove
 
         private void WriteConnnectionFile(Word_ID newWord,Word_ID toWord, List<Word_ID> mods)
         {
-            StreamWriter sw = new StreamWriter(CommonForAppendForm.HopeLoveMindPath + ConceptConnections_InitialFilename, true, MyEncoding);
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + ConceptConnections_InitialFilename, true, MyEncoding);
 
             string modStr="";
             mods.ForEach(m=>

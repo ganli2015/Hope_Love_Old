@@ -7,6 +7,8 @@
 
 #include "../LogicSystem/LogicKnowledge.h"
 
+#include "../CommonTools/CommonStringFunction.h"
+
 #include <Windows.h>
 
 using namespace Mind;
@@ -55,4 +57,12 @@ TEST(MemoryLeak,LogicKnowledge)
 
 
 	ASSERT_EQ(objCountStart,objCountEnd);
+}
+
+TEST(Test_CommonStringFunction,TrimBeginEndBlank)
+{
+	string origin="  가가가 ";
+	CommonTool::TrimBeginEndBlank(origin);
+
+	ASSERT_EQ("가가가",origin);
 }

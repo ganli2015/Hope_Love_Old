@@ -15,5 +15,8 @@ public:
 	virtual ~Command(void);
 
 	virtual void Update()=0;
+
+private:
+	void UpdateConfigureManager() const;
 };
 

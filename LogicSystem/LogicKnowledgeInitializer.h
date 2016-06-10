@@ -6,6 +6,11 @@
 class TiXmlNode;
 class TiXmlElement;
 
+namespace Mind
+{
+	class iConcept;
+}
+
 namespace LogicSystem
 {
 	class LogicKnowledge;
@@ -17,10 +22,14 @@ namespace LogicSystem
 	class Arbitrariness;
 	template<class T>
 	class Symbol;
+	template<class T>
+	class Number;
 
 	///Append initial logic statements to the object of LogicKnowledge.
 	class _LOGICSYSTEMINOUT LogicKnowledgeInitializer
 	{
+		typedef Number<Mind::iConcept> Num;
+
 		const static string ConditionCollectionNode;
 		const static string ConditionNode;
 		const static string ConstraintnNode;
@@ -29,6 +38,7 @@ namespace LogicSystem
 		const static string SymbolPairNode;
 		const static string FromNode ;
 		const static string ToNode ;
+		const static string RepNumNode ;
 		const static string SymbolNode;
 		const static string EqualityNode ;
 		const static string InequalityNode ;
@@ -42,6 +52,9 @@ namespace LogicSystem
 		///Record the special symbol string in Xml file and special symbol during parsing the file.
 		map<string,shared_ptr<LogicType::ConSymbol>> _spSymbolTable;
 		vector<string> _constraintNodeTag;
+		
+		///Special symbol string and its type.
+		map<string,iLogicElementCreator::SymbolType> _str_type;
 
 		friend class Test_LogicSystem;
 
@@ -55,10 +68,10 @@ namespace LogicSystem
 		//I make an assumption that the condition depth is 1, i.e.,there is no tag "ConditionCollection" under "ConditionCollection" in the xml file.
 		shared_ptr<LogicSystem::iLogicStatement> ParseLogicStatement(const TiXmlNode * node);
 		shared_ptr<LogicSystem::iRelation> ParseRelation(const TiXmlNode * node);
-		LogicType::SymbolPair ParseSymbolPair(const TiXmlNode * node);
+		LogicType::SymbolPair ParseSymbolPair(const TiXmlNode * node ,shared_ptr<Num>& repNum);
 		shared_ptr<LogicType::ConSymbol> ParseFromToSymbol(const TiXmlElement *node);
 		shared_ptr<LogicType::ConSymbol> ParseConSymbol(const TiXmlElement * element) const;
-		shared_ptr<LogicType::ConSymbol> ParseArbSymbol(const TiXmlElement * element,const iLogicElementCreator::SymbolType type);
+		shared_ptr<LogicType::ConSymbol> ParseSpecialSymbol(const TiXmlElement * element,const iLogicElementCreator::SymbolType type);
 		shared_ptr<LogicSystem::iRelation> ParseRelationCollection(const TiXmlNode * node,
 			const string relationCollectionNodeStr,//Tag name of relation node
 			const string relationNodeStr);//Tag name of relation leaf

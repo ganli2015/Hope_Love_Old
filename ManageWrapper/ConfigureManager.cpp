@@ -8,6 +8,8 @@
 #include "../LogicSystem/LogicElementCreator.h"
 #include "../LogicSystem/LogicKnowledge.h"
 
+#include "../CommonTools/ConfigureInfoManager.h"
+
 namespace ManageWrapper
 {
 	ConfigureManager::ConfigureManager(void)
@@ -16,6 +18,9 @@ namespace ManageWrapper
 
 	void ConfigureManager::Configure()
 	{
+		shared_ptr<CommonTool::ConfigureInfoManager> cfgInfo=CommonTool::ConfigureInfoManager::GetInstance();
+		cfgInfo->UpdateConfigure();
+
 		shared_ptr<Mind::MindElementCreator> mindElementCreator(new Mind::MindElementCreator());
 		Mind::iMindElementCreator::SetImp(mindElementCreator);
 

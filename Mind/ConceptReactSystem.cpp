@@ -11,6 +11,7 @@
 #include "ConceptReactImp_1212.h"
 
 #include "../CommonTools/CommonStringFunction.h"
+#include "../CommonTools/ConfigureInfoManager.h"
 
 #include "../Mathmatic/Rand.h"
 #include "../Mathmatic/Vector.h"
@@ -43,11 +44,16 @@ namespace Mind
 
 	void ConceptReactSystem::Initialize()
 	{
-#ifdef _Train_Initial_React_Network
-		BasicTrainNetwork();
-#else
-		InitNetworkFromFile();
-#endif // _ReadFile
+		CFG_IF(Train_Initial_React_Network,
+			BasicTrainNetwork();,
+			InitNetworkFromFile();
+		)
+
+// #ifdef _Train_Initial_React_Network
+// 		BasicTrainNetwork();
+// #else
+// 		InitNetworkFromFile();
+// #endif // _ReadFile
 	}
 
 	void ConceptReactSystem::InitNetworkFromFile()

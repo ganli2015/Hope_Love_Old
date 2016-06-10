@@ -66,8 +66,6 @@ namespace HopeLove
 
     public class CommonForAppendForm
     {
-        public static string HopeLoveMindPath = "HopeLoveData\\";
-
         public static Word_ID StringToWordID(string str)
         {
             string[] sp = str.Split(' ');

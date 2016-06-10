@@ -149,6 +149,9 @@ namespace LogicSystem
 		///Note!!If two special symbol are the same in different pairs, they are not treated the same when using <Satisfy>.
 		///Instead, use different special symbols in different pairs, then add the constraint <Equality> between them to make them equal.
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) =0;
+		///Add the relation of the two symbols to <me>.
+		///<num> represents the repetition of <from> <to>.<num>  is a symbol and the concrete value will be determined after binding to a definite object.
+		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to, const shared_ptr<Num> num)=0 ;
 		///Add Constraints to symbols.
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 		virtual string GetString() const =0;

@@ -16,6 +16,7 @@
 #include "Equality.h"
 #include "Inequality.h"
 #include "LogicStatement.h"
+#include "Number.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 
@@ -35,13 +36,14 @@ namespace LogicSystem
 	const string LogicKnowledgeInitializer::SymbolPairNode = "SymbolPair";
 	const string LogicKnowledgeInitializer::FromNode = "From";
 	const string LogicKnowledgeInitializer::ToNode = "To";
+	const string LogicKnowledgeInitializer::RepNumNode= "RepNum";
 	const string LogicKnowledgeInitializer::SymbolNode = "Symbol";
 	const string LogicKnowledgeInitializer::EqualityNode = "Equality";
 	const string LogicKnowledgeInitializer::InequalityNode = "Inequality";
 
 	const string LogicKnowledgeInitializer::ArbSymbol = "Arb";
 	const string LogicKnowledgeInitializer::NumSymbol = "Num";
-	const string LogicKnowledgeInitializer::VerbSymbol = "Vb";
+	const string LogicKnowledgeInitializer::VerbSymbol = "Verb";
 	const string LogicKnowledgeInitializer::EqualSymbol = "==";
 	const string LogicKnowledgeInitializer::InequalSymbol = "!=";
 
@@ -49,6 +51,11 @@ namespace LogicSystem
 	{
 		_constraintNodeTag.push_back(EqualityNode);
 		_constraintNodeTag.push_back(InequalityNode);
+
+		_str_type.insert(make_pair(ArbSymbol,iLogicElementCreator::Arb));
+		_str_type.insert(make_pair(NumSymbol,iLogicElementCreator::Num));
+		_str_type.insert(make_pair(VerbSymbol,iLogicElementCreator::Verb));
+
 	}
 
 
@@ -58,8 +65,8 @@ namespace LogicSystem
 
 	void LogicKnowledgeInitializer::Initialize( const string filename,LogicKnowledge* logicKnowledge )
 	{
-		TiXmlDocument *myDocument = new TiXmlDocument();
-		myDocument->LoadFile(filename.c_str());
+		TiXmlDocument *myDocument = new TiXmlDocument(filename.c_str());
+		myDocument->LoadFile();
 		TiXmlNode *root=myDocument->FirstChild("Root");
 	
 		TiXmlNode *statementNode=root->FirstChild("LogicStatement");
@@ -174,8 +181,12 @@ namespace LogicSystem
 		const TiXmlNode *symbolPairNode=node->FirstChild(SymbolPairNode.c_str());
 		for (;symbolPairNode!=0;symbolPairNode=symbolPairNode->NextSibling())
 		{
-			LogicType::SymbolPair pair=ParseSymbolPair(symbolPairNode);
-			leaf->AddRelation(pair.first,pair.second);	
+			shared_ptr<Num> repNum;
+			LogicType::SymbolPair pair=ParseSymbolPair(symbolPairNode,repNum);
+			if(repNum==NULL)
+				leaf->AddRelation(pair.first,pair.second);	
+			else
+				leaf->AddRelation(pair.first,pair.second,repNum);	
 		}
 
 		return leaf;
@@ -183,14 +194,22 @@ namespace LogicSystem
 
 
 
-	LogicType::SymbolPair LogicKnowledgeInitializer::ParseSymbolPair( const TiXmlNode * node )
+	LogicType::SymbolPair LogicKnowledgeInitializer::ParseSymbolPair( const TiXmlNode * node ,shared_ptr<Num>& repNum)
 	{
+		//Parse from
 		const TiXmlElement *fromNode=node->FirstChildElement(FromNode.c_str());
 		shared_ptr<LogicType::ConSymbol> fromSym=ParseFromToSymbol(fromNode);
-
+		//Parse to
 		const TiXmlElement *toNode=node->FirstChildElement(ToNode.c_str());
 		shared_ptr<LogicType::ConSymbol> toSym=ParseFromToSymbol(toNode);
-
+		//Parse repetition number
+		const TiXmlElement *repNumNode=node->FirstChildElement(RepNumNode.c_str());
+		if(repNumNode!=NULL)
+		{
+			shared_ptr<LogicType::ConSymbol> spSymbol=ParseSpecialSymbol(repNumNode,iLogicElementCreator::Num);
+			repNum=dynamic_pointer_cast<Num>(spSymbol);
+		}
+		
 		return make_pair(fromSym,toSym);
 	}
 
@@ -202,21 +221,18 @@ namespace LogicSystem
 		{
 			sym=ParseConSymbol(node);
 		}
-		else
+		else//Special symbol
 		{
 			string innerText(textCh);
-			if(innerText.find(ArbSymbol)!=string::npos)
+			for (map<string,iLogicElementCreator::SymbolType>::const_iterator it=_str_type.begin();it!=_str_type.end();++it)
 			{
-				sym=ParseArbSymbol(node,iLogicElementCreator::Arb);
+				if(innerText.find(it->first)!=string::npos)
+				{
+					sym=ParseSpecialSymbol(node,it->second);
+					break;
+				}
 			}
-			else if(innerText.find(NumSymbol)!=string::npos)
-			{
-				sym=ParseArbSymbol(node,iLogicElementCreator::Num);
-			}
-			else if(innerText.find(VerbSymbol)!=string::npos)
-			{
-				sym=ParseArbSymbol(node,iLogicElementCreator::Verb);
-			}
+
 		}
 
 		assert(sym!=NULL);
@@ -237,7 +253,7 @@ namespace LogicSystem
 		return sym;
 	}
 
-	shared_ptr<LogicType::ConSymbol> LogicKnowledgeInitializer::ParseArbSymbol( const TiXmlElement * element ,const iLogicElementCreator::SymbolType type)
+	shared_ptr<LogicType::ConSymbol> LogicKnowledgeInitializer::ParseSpecialSymbol( const TiXmlElement * element ,const iLogicElementCreator::SymbolType type)
 	{
 		string arbStr=element->GetText();
 		if(_spSymbolTable.count(arbStr)!=0)

@@ -4,28 +4,28 @@
       <Condition>
         <SymbolPair>
           <From>Arb0</From>
-          <To ID="0" Word="å¤§" />
+          <To ID="0" Word="´ó" />
         </SymbolPair>
         <SymbolPair>
-          <From ID="0" Word="å¤§" />
-          <To ID="0" Word="äºŽ" />
+          <From ID="0" Word="´ó" />
+          <To ID="0" Word="ÓÚ" />
         </SymbolPair>
         <SymbolPair>
-          <From ID="0" Word="äºŽ" />
+          <From ID="0" Word="ÓÚ" />
           <To>Arb1</To>
         </SymbolPair>
       </Condition>
       <Condition>
         <SymbolPair>
           <From>Arb2</From>
-          <To ID="0" Word="å¤§" />
+          <To ID="0" Word="´ó" />
         </SymbolPair>
         <SymbolPair>
-          <From ID="0" Word="å¤§" />
-          <To ID="0" Word="äºŽ" />
+          <From ID="0" Word="´ó" />
+          <To ID="0" Word="ÓÚ" />
         </SymbolPair>
         <SymbolPair>
-          <From ID="0" Word="äºŽ" />
+          <From ID="0" Word="ÓÚ" />
           <To>Arb3</To>
         </SymbolPair>
       </Condition>
@@ -45,14 +45,14 @@
     <Result>
       <SymbolPair>
         <From>Arb0</From>
-        <To ID="0" Word="å¤§" />
+        <To ID="0" Word="´ó" />
       </SymbolPair>
       <SymbolPair>
-        <From ID="0" Word="å¤§" />
-        <To ID="0" Word="äºŽ" />
+        <From ID="0" Word="´ó" />
+        <To ID="0" Word="ÓÚ" />
       </SymbolPair>
       <SymbolPair>
-        <From ID="0" Word="äºŽ" />
+        <From ID="0" Word="ÓÚ" />
         <To>Arb3</To>
       </SymbolPair>
     </Result>
@@ -62,10 +62,10 @@
       <Condition>
         <SymbolPair>
           <From>Num0</From>
-          <To ID="0" Word="åŠ " />
+          <To ID="0" Word="¼Ó" />
         </SymbolPair>
         <SymbolPair>
-          <From ID="0" Word="åŠ " />
+          <From ID="0" Word="¼Ó" />
           <To>Num1</To>
         </SymbolPair>
       </Condition>
@@ -73,19 +73,19 @@
     <Result>
       <SymbolPair>
         <From>Num0</From>
-        <To ID="0" Word="åŠ " />
+        <To ID="0" Word="¼Ó" />
       </SymbolPair>
       <SymbolPair>
-        <From ID="0" Word="åŠ " />
-        <To ID="0" Word="ä¸€" />
+        <From ID="0" Word="¼Ó" />
+        <To ID="0" Word="Ò»" />
       </SymbolPair>
       <SymbolPair>
         <From>Num1</From>
-        <To ID="0" Word="æ¬¡" />
+        <To ID="0" Word="´Î" />
       </SymbolPair>
       <SymbolPair>
-        <From ID="0" Word="æ¬¡" />
-        <To ID="0" Word="åŠ " />
+        <From ID="0" Word="´Î" />
+        <To ID="0" Word="¼Ó" />
       </SymbolPair>
     </Result>
   </LogicStatement>

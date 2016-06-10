@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using System.IO;
 
 namespace HopeLove
 {
@@ -19,6 +20,8 @@ namespace HopeLove
     /// </summary>
     public partial class AppendLogicStatementForm : Window
     {
+        const string HopeLoveMindPath = "..\\..\\..\\LogicSystem\\HopeLoveData\\";
+
         const string ConditionCollectionNode = "ConditionCollection";
         const string ConditionNode = "Condition";
         const string ConstraintnNode = "Constraint";
@@ -39,7 +42,7 @@ namespace HopeLove
         const string EqualSymbol = "==";
         const string InequalSymbol = "!=";
 
-        const string LogicStatementsFilename = "LogicStatements.xml";
+        const string LogicStatementsFilename = "LogicStatements.txt";
 
         XmlDocument _document;
         List<TextBox> _conditionBox;
@@ -53,7 +56,8 @@ namespace HopeLove
             _document = new XmlDocument();
 //             XmlElement root=_document.CreateElement("Root");
 //             _document.AppendChild(root);
-            _document.Load(CommonForAppendForm.HopeLoveMindPath + LogicStatementsFilename);
+            StreamReader sr = new StreamReader(HopeLoveMindPath + LogicStatementsFilename, Encoding.UTF8);
+            _document.Load(sr);
 
             CollectTextBoxes();
 
@@ -115,7 +119,7 @@ namespace HopeLove
             XmlNode root = _document.SelectSingleNode("Root");
             root.AppendChild(statementNode);
 
-            _document.Save(CommonForAppendForm.HopeLoveMindPath + LogicStatementsFilename);
+            _document.Save(HopeLoveMindPath + LogicStatementsFilename);
         }
 
         private void WriteConditionToFile(string str, XmlNode node, XmlDocument document)

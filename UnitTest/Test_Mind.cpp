@@ -35,7 +35,6 @@
 
 #include "../UTFacility/MockExpression.h"
 
-
 using namespace std;
 using namespace Math;
 using namespace CommonTool;
@@ -43,9 +42,10 @@ using namespace NeuralNetwork;
 using namespace DataCollection;
 using namespace LogicSystem;
 
+
 namespace Mind
 {
-	const string logicFilename="HopeLoveData//LogicStatements.xml";
+	const string logicFilename="HopeLoveData//LogicStatements.txt";
 
 	TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo)
 	{
@@ -114,9 +114,13 @@ namespace Mind
 		delete conceptSet;
 	}
 
-	TEST(Test_Cerebrum,LogicStatementInitialized)
+	INSTANTIATE_TEST_CASE_P(Test_Cerebrum, Test_LogicStatementInitialized, testing::ValuesIn(Test_LogicStatementInitialized::GenerateSamples()));
+
+	TEST_P(Test_LogicStatementInitialized,LogicStatementInitialized)
 	{
 		MEMOCHECK;
+
+		Param_LogicStatementInitialized param=GetParam();
 
 		Cerebrum* brain=Cerebrum::Instance();
 		iCerebrum::SetInstance(brain);
@@ -127,13 +131,11 @@ namespace Mind
 		brain->SetLogicKnowledge(knowledge);
 
 		//test the deduction of statement 
-		string conditionTable="二-大,大-于,于-一,三-大,大-于,于-二";
-		shared_ptr<MockExpression> condition=MockExpression::Create(conditionTable);
+		shared_ptr<MockExpression> condition=MockExpression::Create(param.conditionTable);
 
 		vector<shared_ptr<LogicSystem::iDeduceResult>> deduceResult=brain->Deduce(condition);
 
-		string resultTable="三-大,大-于,于-一";
-		shared_ptr<iExpression> expect=MockExpression::Create(resultTable);
+		shared_ptr<iExpression> expect=MockExpression::Create(param.resultTable);
 		ASSERT_EQ(deduceResult.size(),1);
 		ASSERT_EQ(deduceResult.front()->Matching(expect),1);
 
@@ -144,6 +146,30 @@ namespace Mind
 	{
 		return ConceptSetInitializer::ParseStrToConnectionInfo(line,conceptSet);
 	}
+
+	vector<Param_LogicStatementInitialized> Test_LogicStatementInitialized::GenerateSamples()
+	{
+		vector<Param_LogicStatementInitialized> res;
+
+		{
+			Param_LogicStatementInitialized param;
+			param.conditionTable="二-大,大-于,于-一,三-大,大-于,于-二";
+			param.resultTable="三-大,大-于,于-一";
+
+			res.push_back(param);
+		}
+
+		{
+			Param_LogicStatementInitialized param;
+			param.conditionTable="三-次,次-加,加-一";
+			param.resultTable="加-一,加-一,加-一";
+
+			res.push_back(param);
+		}
+
+		return res;
+	}
+
 }
 
 
