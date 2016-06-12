@@ -27,4 +27,17 @@
 		{	\
 		body	\
 		}	\
+	};
+
+///A functor with return type.
+#define CREATE_FUNCTOR_R(funName,InputType,ReturnType,body)\
+	class funName	\
+	{	\
+	public:	\
+	funName(){}	\
+	~funName(){}	\
+	ReturnType operator()(const InputType& input)	\
+		{	\
+		body	\
+		}	\
 	};	

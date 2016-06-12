@@ -245,6 +245,11 @@ namespace Mind
 		_conceptset->FindConceptWithMatchedDisc(description,matchedInfos);
 	}
 
+	int Cerebrum::BaseConceptCount() const
+	{
+		return _conceptset->BaseConceptCount();
+	}
+
 }
 
 

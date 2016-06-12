@@ -22,7 +22,7 @@ namespace Mind
 		virtual shared_ptr<iConceptChain> Copy() const =0;
 		virtual bool Same(const shared_ptr<iConceptChain> chain) const =0;
 		virtual bool Contain(const shared_ptr<iConcept> concept) const =0;
-		virtual int Size() const =0;
+		virtual unsigned int Size() const =0;
 
 		//判断<me>是否是parentChain的连续子序列。
 		virtual bool IsPartChainOf(const shared_ptr<iConceptChain> parentChain) const =0;

@@ -143,3 +143,4 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 
 	return res;
 }
+

@@ -95,6 +95,7 @@ namespace Mind
 
 		MOCK_CONST_METHOD2(FindConceptWithMatchedDisc,void(const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos));
 	
+		MOCK_CONST_METHOD0(BaseConceptCount,int());
 	
 	private:
 

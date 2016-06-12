@@ -40,7 +40,12 @@ void SpeakCommand::Update()
 	reactInputSentence.push_back(parsedSentence);
 	shared_ptr<SpeakReaction> reaction(new SpeakReaction(reactInputSentence,interactTable));
 	reaction->React();
-	string reactStr=reaction->GetReactSentence()->GetString();
+	shared_ptr<DataCollection::Sentence> reactSentence=reaction->GetReactSentence();
+	if(reactSentence==NULL)
+	{
+		return;
+	}
+	string reactStr=reactSentence->GetString();
 
 	_datawrapper->AddOutputSentence(reactStr);
 }

@@ -14,12 +14,15 @@ namespace Mind
 	struct ConceptChainProperty;
 }
 
+
 class _REACTIONANALYSISALGORITHMINOUT ReactionParser
 {
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_input;
 	shared_ptr<Mind::iConceptInteractTable> _interactTable;
 
 	vector<shared_ptr<DataCollection::Sentence>> _sentence_output;
+
+	
 
 public:
 	ReactionParser(void);

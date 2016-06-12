@@ -31,8 +31,10 @@ namespace Mind
 	{
 		if(_network==NULL) return vector<ConceptChainProperty>();
 
-		shared_ptr<iDataArray> input=CommonFunction::ToDataArray(chain,_conceptSet);
-		vector<shared_ptr<iDataArray>> splitArray=SplitTo1212(input);
+// 		shared_ptr<iDataArray> input=CommonFunction::ToDataArray(chain,_conceptSet);
+// 		vector<shared_ptr<iDataArray>> splitArray=SplitTo1212(input);
+
+		vector<shared_ptr<iDataArray>> splitArray=ConvertTo1212Sequence(chain,iCerebrum::Instance()->BaseConceptCount());
 		vector<shared_ptr<iDataArray>> outArray;
 		for (unsigned int i=0;i<splitArray.size();++i)
 		{
@@ -61,6 +63,37 @@ namespace Mind
 
 		vector<ConceptChainProperty> res= generateResult.GetResult();
 		//NormalizeConfidence(res);
+
+		return res;
+	}
+
+	vector<shared_ptr<iDataArray>> ConceptReactImp_1212::ConvertTo1212Sequence(const shared_ptr<iConceptChain> chain,const int arrayDimension)
+	{
+		vector<shared_ptr<iDataArray>> res;
+
+		vector<shared_ptr<iConcept>> conceptSequence=chain->GetConceptVec();
+		if(conceptSequence.size()<2)
+		{
+			return res;
+		}
+
+		shared_ptr<BaseConcept> firstBase=dynamic_pointer_cast<BaseConcept>(conceptSequence.front());
+		assert(firstBase!=NULL);
+		int prevBaseID=firstBase->GetBaseId();
+		for (unsigned int i=1;i<conceptSequence.size();++i)//Convert each adjacent concepts to a data array with the first one equal to 1 and the next one equal to 2 and other 0.
+		{
+			shared_ptr<iDataArray> array(new DataArray(arrayDimension));
+
+			shared_ptr<BaseConcept> base=dynamic_pointer_cast<BaseConcept>(conceptSequence[i]);
+			assert(base!=NULL);
+
+			array->Set_ithVal(prevBaseID,1);
+			array->Set_ithVal(base->GetBaseId(),2);
+
+			prevBaseID=base->GetBaseId();
+
+			res.push_back(array);
+		}
 
 		return res;
 	}

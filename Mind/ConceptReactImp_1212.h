@@ -23,6 +23,7 @@ namespace Mind
 	private:
 		vector<shared_ptr<NeuralNetwork::iDataArray>> SplitTo1212(const shared_ptr<NeuralNetwork::iDataArray> input) const;
 		void ConceptReactImp_1212::ResetArrayComponent(vector<vector<ConceptInfo>>& infoSequence);
+		vector<shared_ptr<NeuralNetwork::iDataArray>> ConvertTo1212Sequence(const shared_ptr<iConceptChain> chain ,const int arrayDimension);
 	};
 }
 

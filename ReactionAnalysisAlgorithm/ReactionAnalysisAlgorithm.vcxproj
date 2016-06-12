@@ -145,6 +145,7 @@
     <ClInclude Include="ExtractConceptChains.h" />
     <ClInclude Include="GrammarPatternSelector.h" />
     <ClInclude Include="InOut.h" />
+    <ClInclude Include="LogicReactor.h" />
     <ClInclude Include="ReactionParser.h" />
     <ClInclude Include="SentenceGenerator.h" />
     <ClInclude Include="Stdafx.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="ChainGenerator.cpp" />
     <ClCompile Include="ExtractConceptChains.cpp" />
     <ClCompile Include="GrammarPatternSelector.cpp" />
+    <ClCompile Include="LogicReactor.cpp" />
     <ClCompile Include="ReactionParser.cpp" />
     <ClCompile Include="SentenceGenerator.cpp" />
     <ClCompile Include="Stdafx.cpp">

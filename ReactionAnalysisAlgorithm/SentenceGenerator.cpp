@@ -44,6 +44,10 @@ void SentenceGenerator::Generate( const vector<shared_ptr<Mind::iConceptChain>>&
 	}
 
 	vector<SentenceInfo> selectedInfos=SelectHyperChainsOfMaxFreq(sentenceInfo);
+	if(selectedInfos.empty())
+	{
+		return;
+	}
 	int selectedIndex=Rand::GetRandInt(0,selectedInfos.size()-1);
 	_sentence=ChainToSentence(selectedInfos[selectedIndex].hyperChain);
 }
@@ -94,6 +98,8 @@ vector<SentenceGenerator::SentenceInfo> SentenceGenerator::SelectHyperChainsOfMa
 			return left.patternFreq<right.patternFreq;
 		}
 	};
+
+	if(hyperChainInfos.empty()) return vector<SentenceGenerator::SentenceInfo>();
 
 	double maxFreq=max_element(hyperChainInfos.begin(),hyperChainInfos.end(),Compare_Info())->patternFreq;
 

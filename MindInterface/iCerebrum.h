@@ -60,6 +60,8 @@ namespace Mind
 		virtual vector<shared_ptr<iConcept>> FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description) const = 0;
 		virtual void FindConceptWithMatchedDisc(const shared_ptr<iConceptInteractTable> description, vector<DescMatchedConceptInfo>& matchedInfos) const = 0;
 
+		virtual int BaseConceptCount() const =0;
+
 		//Grammar Related Functions
 		//搜索<pattern>所包含的子pattern.
 		virtual std::vector<DataCollection::GrammarPattern> ContainSubsequence(const DataCollection::GrammarPattern& pattern) const=0;
