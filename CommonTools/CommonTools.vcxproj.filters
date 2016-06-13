@@ -44,6 +44,9 @@
     <ClInclude Include="GeneralFunctor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LogWriter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -71,6 +74,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConfigureInfoManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogWriter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

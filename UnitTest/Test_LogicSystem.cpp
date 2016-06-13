@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "Test_LogicSystem.h"
 
+#include "../CommonTools/LogWriter.h"
+
 #include "../LogicSystem/Logic.h"
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
@@ -221,6 +223,7 @@ namespace LogicSystem
 	TEST_P(Test_FinalDeduce,FinalDeduce)
 	{
 		MemoryChecker mc(__FUNCTION__);
+		LOG("FinalDeduce: ");
 
 		Param_FinalDeduce param=GetParam();
 
@@ -589,30 +592,6 @@ namespace LogicSystem
 			param.condition_deduce.push_back(make_pair(condition,deduceRes));
 			string condition2="二-加,三-次,次-加,加-一";
 			string deduceRes2="二-加,加-一,加-一,加-一";
-			param.condition_deduce.push_back(make_pair(condition2,deduceRes2));
-
-			param.result.conceptStr="五";
-
-			res.push_back(param);
-		}
-
-		{
-			//二加三等于五
-			//二加三 is a sub sequence of <inputExpreTable>
-			Param_FinalDeduce param;
-			param.inputExpreTable="二-加,加-三,等于-多少,加-等于";
-
-			vector<FindMatchConceptParam> matchedParams;
-			matchedParams.push_back(FindMatchConceptParam("二-加,加-一","三","二"));
-			matchedParams.push_back(FindMatchConceptParam("三-加,加-一","四","三"));
-			matchedParams.push_back(FindMatchConceptParam("四-加,加-一","五","四"));
-			param.matchedConceptParam=matchedParams;
-
-			string condition="二-加,加-三,等于-多少,加-等于";
-			string deduceRes="二-加,加-一,三-次,次-加,等于-多少,加-等于";
-			param.condition_deduce.push_back(make_pair(condition,deduceRes));
-			string condition2="二-加,三-次,次-加,加-一,等于-多少,加-等于";
-			string deduceRes2="二-加,加-一,加-一,加-一,等于-多少,加-等于";
 			param.condition_deduce.push_back(make_pair(condition2,deduceRes2));
 
 			param.result.conceptStr="五";

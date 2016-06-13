@@ -14,6 +14,8 @@
 #include "../Mathmatic/MathTool.h"
 #include "../Mathmatic/FindSequence.h"
 
+#include "../CommonTools/LogWriter.h"
+
 #include <set>
 
 using namespace Math;
@@ -91,11 +93,12 @@ namespace LogicSystem
 		//If they are not empty, it indicate that the <condition> can at least deduce something 
 		//and the following iteration is based on <initDeduceResults>.
 		vector<shared_ptr<iDeduceResult>> initDeduceResults=brain->Deduce(conditionTable);
-		if(initDeduceResults.empty()) return res;
+		if(initDeduceResults.empty()) return res;		
 
 		//A table list for iteration.Each table of it needs to be reduced and deduced.
 		list<shared_ptr<iConceptInteractTable>> curDeduceTables=ToConceptTable(initDeduceResults);	
-		
+		LOG_DESC("Initial Deduced Tables: ",curDeduceTables);
+
 		ConceptList conceptResults;
 		TableList finalDeduceTables;
 		do 
@@ -105,9 +108,12 @@ namespace LogicSystem
 			TableList reducedTables;
 			TableList noChangedTables;
 			ReduceTableList(curDeduceTables,reducedTables,noChangedTables,conceptResults);
+			LOG_DESC("Reduced Tables after reduction: ",reducedTables);
 
 			curDeduceTables.clear();		
 			DeduceTableList(reducedTables,noChangedTables,curDeduceTables);
+			LOG_DESC("Deduced Tables after deduction: ",curDeduceTables);
+
 			//<noChangedTables> contains table with no reduction and deduction during current iteration,
 			//and they will be kicked out from iteration and become the final results.
 			finalDeduceTables.insert(finalDeduceTables.end(),noChangedTables.begin(),noChangedTables.end());
