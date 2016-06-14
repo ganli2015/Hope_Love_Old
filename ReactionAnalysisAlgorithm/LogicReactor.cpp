@@ -8,6 +8,8 @@
 #include "../MindInterface/iMindElementCreator.h"
 #include "../MindInterface/iLogicElementCreator.h"
 #include "../MindInterface/CommonFunction.h"
+#include "../MindInterface/iLogic.h"
+#include "../MindInterface/iDeduceResult.h"
 
 #include "../DataCollection/Sentence.h"
 #include "../DataCollection/LanguageFunc.h"
@@ -34,28 +36,16 @@ LogicReactor::~LogicReactor(void)
 bool LogicReactor::ContainLogicExpression( const shared_ptr<DataCollection::Sentence> sen, shared_ptr<LogicSystem::iExpression>& expression ) const
 {
 	vector<shared_ptr<Mind::iConceptChain>> subConceptChains=ConvertToSubChains(sen);
-	CREATE_FUNCTOR_IR(SatifyPattern,shared_ptr<LogicPattern>,shared_ptr<iConceptChain>,bool,
-		if(_init->Satify(input))
+	for (unsigned int i=0;i<subConceptChains.size();++i)
+	{
+		if(_logicPattern->Satify(subConceptChains[i],expression))
 		{
 			return true;
 		}
-		else
-		{
-			return false;
-		}
-	);
+	}
 
-	vector<shared_ptr<Mind::iConceptChain>>::iterator matchIter=find_if(subConceptChains.begin(),subConceptChains.end(),SatifyPattern(_logicPattern));
-	if(matchIter!=subConceptChains.end())
-	{
-		expression=iLogicElementCreator::CreateExpression(sen);
-		return true;
-	}
-	else
-	{
-		expression=NULL;
-		return false;
-	}
+	expression=NULL;
+	return false;
 }
 
 vector<shared_ptr<Mind::iConceptChain>> LogicReactor::ConvertToSubChains( const shared_ptr<DataCollection::Sentence> sen ) const
@@ -107,9 +97,9 @@ void LogicReactor::InitLogicPattern()
 
 	//Plus 
 	vector<Identity> patternIdentity;
-	patternIdentity.push_back(Identity("数字",0));
+	patternIdentity.push_back(Identity("整数",0));
 	patternIdentity.push_back(Identity("加",0));
-	patternIdentity.push_back(Identity("数字",0));
+	patternIdentity.push_back(Identity("整数",0));
 	patternIdentity.push_back(Identity("等于",0));
 	patternIdentity.push_back(Identity("多少",0));
 
@@ -130,9 +120,39 @@ void LogicReactor::InitLogicPattern()
 	}
 
 	_logicPattern=shared_ptr<LogicPattern>(new LogicPattern(iMindElementCreator::CreateConceptChain(concepts)));
+
+	vector<int> expressionIndex;
+	expressionIndex.push_back(0);
+	expressionIndex.push_back(1);
+	expressionIndex.push_back(2);
+	_logicPattern->SetExpressionIndex(expressionIndex);
 }
 
-bool LogicReactor::LogicPattern::Satify( const shared_ptr<Mind::iConceptChain> chain )
+shared_ptr<Sentence> LogicReactor::Analyze( const shared_ptr<LogicSystem::iExpression> expre ) const
+{
+	shared_ptr<iLogic> logic=iLogicElementCreator::CreateLogic();
+	vector<shared_ptr<iDeduceResult>> deduceRes=logic->FinalDeduce(expre);
+	if(deduceRes.empty())
+	{
+		return NULL;
+	}
+
+	//Currently only consider the first result.
+	shared_ptr<iDeduceResult> firstRes=deduceRes.front();
+	//Currently only consider the concept result.
+	shared_ptr<iConcept> conRes=firstRes->GetSingleConcept();
+	if(conRes!=NULL)
+	{
+		string conStr=conRes->GetString();
+		return shared_ptr<Sentence>(new Sentence(conStr));
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+bool LogicReactor::LogicPattern::Satify( const shared_ptr<Mind::iConceptChain> chain ,shared_ptr<LogicSystem::iExpression>& expressionForLogic)
 {
 	if(_pattern->Size()!=chain->Size() || iCerebrum::Empty())
 	{
@@ -151,6 +171,16 @@ bool LogicReactor::LogicPattern::Satify( const shared_ptr<Mind::iConceptChain> c
 			return false;
 		}
 	}
+
+	//Extract expression component.
+	string expreStr="";
+	for (unsigned int i=0;i<_expressionIndex.size();++i)
+	{
+		string conStr=inputVec[_expressionIndex[i]]->GetString();
+		expreStr+=conStr;
+	}
+
+	expressionForLogic=iLogicElementCreator::CreateExpression(expreStr);
 
 	return true;
 }

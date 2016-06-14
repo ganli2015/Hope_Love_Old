@@ -656,7 +656,7 @@ namespace Mind
 			{
 				shared_ptr<iConcept> toConcept;
 
-				if(concept.second->MatchWithDescription(_description),toConcept)
+				if(concept.second->MatchWithDescription(_description,toConcept))
 				{
 					assert(toConcept!=NULL);
 					DescMatchedConceptInfo info;

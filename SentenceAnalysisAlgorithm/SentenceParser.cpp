@@ -44,9 +44,6 @@ void SentenceParser::Execute()
 	shared_ptr<iConceptInteractTable> protoConceptTable=wordRelationTableBuilder.GetProtoInteractTable();
 	_conceptTable->Absorb(baseConceptTable);
 
-	cout<<baseConceptTable->GetString()<<endl;
-	cout<<protoConceptTable->GetString()<<endl;
-
 #ifdef _COUT_DEBUG_INFO //²âÊÔWordRelationTableBuilder
 	Cout_WordRelations();
 #endif

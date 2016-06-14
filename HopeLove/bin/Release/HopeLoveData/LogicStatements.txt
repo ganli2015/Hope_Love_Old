@@ -89,4 +89,29 @@
       </SymbolPair>
     </Result>
   </LogicStatement>
+  <LogicStatement>
+    <ConditionCollection Relation="And">
+      <Condition>
+        <SymbolPair>
+          <From>Num0</From>
+          <To ID="0" Word="´Î" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="´Î" />
+          <To>Verb0</To>
+        </SymbolPair>
+        <SymbolPair>
+          <From>Verb1</From>
+          <To>Arb0</To>
+        </SymbolPair>
+      </Condition>
+    </ConditionCollection>
+    <Result>
+      <SymbolPair>
+        <From>Verb0</From>
+        <To>Arb0</To>
+	<RepNum>Num0</RepNum>
+      </SymbolPair>
+    </Result>
+  </LogicStatement>
 </Root>

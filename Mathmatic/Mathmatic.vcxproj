@@ -92,7 +92,8 @@
       </AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(CodeAnalysisInputAssembly)" "$(SolutionDir)test\Debug\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -34,6 +34,7 @@
 #include "../LogicSystem/LogicKnowledgeInitializer.h"
 
 #include "../UTFacility/MockExpression.h"
+#include "../UTFacility/ConceptTableCreator.h"
 
 using namespace std;
 using namespace Math;
@@ -138,6 +139,23 @@ namespace Mind
 		shared_ptr<iExpression> expect=MockExpression::Create(param.resultTable);
 		ASSERT_EQ(deduceResult.size(),1);
 		ASSERT_EQ(deduceResult.front()->Matching(expect),1);
+
+		iCerebrum::KillInstance();
+	}
+
+	TEST(Test_Cerebrum,FindConceptWithMatchedDisc)
+	{
+		Cerebrum* brain=Cerebrum::Instance();
+		iCerebrum::SetInstance(brain);
+		shared_ptr<ConceptTableCreator> tableCreator(new ConceptTableCreator());
+
+		shared_ptr<iConceptInteractTable> inputTable=tableCreator->SimpleCreate("二-加,加-一");
+
+		vector<DescMatchedConceptInfo> matchedInfo;
+		brain->FindConceptWithMatchedDisc(inputTable,matchedInfo);
+
+		ASSERT_EQ(matchedInfo.size(),1);
+		ASSERT_EQ(matchedInfo.front().matchedConcept->GetString(),"三");
 
 		iCerebrum::KillInstance();
 	}

@@ -48,7 +48,7 @@ void Init()
 
 int _cdecl _tmain(int argc, _TCHAR* argv[])
 {
-//	RunFilter("Test_Logic/Test_FinalDeduce*");
+	RunFilter("Test_Cerebrum*");
 
 	Init();
 

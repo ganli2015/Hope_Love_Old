@@ -5,6 +5,7 @@
 #include "ChainAnalyzer.h"
 #include "SentenceGenerator.h"
 #include "AskAboutUnknownWords.h"
+#include "LogicReactor.h"
 
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/Sentence.h"
@@ -38,14 +39,17 @@ void ReactionParser::Execute()
 // 	GrammarPattern selectedPattern=grammarPatternSelector.SelectReactPattern(_sentence[0]);
 
 	vector<shared_ptr<DataCollection::Word>> unknownWords=CountUnknownWords(_sentence_input);
-	if(unknownWords.empty())
-	{
-		_sentence_output=GenerateByConceptChainAnalysis();
-	}
-	else
+	if(!unknownWords.empty())
 	{
 		AskAboutUnknownWords askAboutUnknownWords(unknownWords);
 		_sentence_output.push_back(askAboutUnknownWords.GenerateReactSentence());
+	}
+	
+	_sentence_output=GenerateByLogicAnalysis();
+
+	if(_sentence_output.empty())
+	{
+		_sentence_output=GenerateByConceptChainAnalysis();		
 	}
 }
 
@@ -140,6 +144,29 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	SentenceGenerator sentenceGenerator;
 	sentenceGenerator.Generate(hyperChains);
 	res.push_back(sentenceGenerator.GetSentence());
+
+	return res;
+}
+
+vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByLogicAnalysis() const
+{
+	vector<shared_ptr<DataCollection::Sentence>> res;
+
+	LogicReactor logicReactor;
+
+	for (unsigned int i=0;i<_sentence_input.size();++i)
+	{
+		shared_ptr<LogicSystem::iExpression> expre;
+		if(logicReactor.ContainLogicExpression(_sentence_input[i],expre))
+		{
+			assert(expre!=NULL);
+			shared_ptr<Sentence> outSentence=logicReactor.Analyze(expre);
+			if(outSentence!=NULL)
+			{
+				res.push_back(outSentence);
+			}
+		}
+	}
 
 	return res;
 }

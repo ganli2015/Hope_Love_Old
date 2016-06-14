@@ -84,12 +84,22 @@ namespace CommonTool
 			for_each(objects.begin(),objects.end(),OutputObjectPointer<shared_ptr<T>>());
 		}
 	};
-
-
-
-
 }
 
-#define LOG(object) CommonTool::LogWriter::Output(object)
+
+
+#define _USE_LOG
+
+#ifdef _USE_LOG
+
+#define LOG(object) CommonTool::LogWriter::Output(object) 
+
 ///Write information of object as well as its description.
 #define LOG_DESC(desc,object) CommonTool::LogWriter::Output(desc);CommonTool::LogWriter::Output(object);
+
+#define CREATELOG(filename) CommonTool::LogWriter NEWLOG(filename)
+
+#else 
+#define LOG_DESC(object)
+#endif // _USE_LOG
+

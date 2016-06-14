@@ -84,8 +84,11 @@ namespace LogicSystem
 
 	vector<shared_ptr<iDeduceResult>> Logic::FinalDeduce( const shared_ptr<iExpression> condition ) const
 	{
+		CREATELOG("FinalDeduce");
+
 		vector<shared_ptr<iDeduceResult>> res;
 		shared_ptr<iConceptInteractTable> conditionTable=condition->GetProtoInteractTable();
+		LOG_DESC("conditionTable:",conditionTable);
 		Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 		if(brain==NULL) return res;
 		
@@ -117,6 +120,11 @@ namespace LogicSystem
 			//<noChangedTables> contains table with no reduction and deduction during current iteration,
 			//and they will be kicked out from iteration and become the final results.
 			finalDeduceTables.insert(finalDeduceTables.end(),noChangedTables.begin(),noChangedTables.end());
+
+			if(!finalDeduceTables.empty() || !conceptResults.empty())
+			{
+				break;
+			}
 
 		} while (!curDeduceTables.empty());
 

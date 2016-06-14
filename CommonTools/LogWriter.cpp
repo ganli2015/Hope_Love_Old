@@ -4,14 +4,14 @@
 
 namespace CommonTool
 {
-	const string LogWriter::_defaultLogFilename("DefaultLog.log");
+	const string LogWriter::_defaultLogFilename("Log\\DefaultLog.log");
 
 	std::ofstream LogWriter::_currentLog(LogWriter::_defaultLogFilename);
 
 	LogWriter::LogWriter(const string filename)
 	{
 		_currentLog.close();
-		_currentLog.open(filename);
+		_currentLog.open("Log\\"+filename+".log");
 	}
 
 	LogWriter::~LogWriter(void)
