@@ -20,5 +20,6 @@ void Command::UpdateConfigureManager() const
 {
 	shared_ptr<ConfigureInfoManager> cfgManager=ConfigureInfoManager::GetInstance();
 	cfgManager->UpdateConfigure();
+
 }
 

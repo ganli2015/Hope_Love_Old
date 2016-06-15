@@ -2,15 +2,20 @@
 #include "InOut.h"
 #include <fstream>
 #include <list>
-
+#include <time.h>
 
 namespace CommonTool
 {
 	///Write log file.
 	class _COMMONTOOLSINOUT LogWriter
 	{
+	private:
 		const static string _defaultLogFilename;
 
+		///The default time when pushing enter key.
+		static double _startTime;
+
+	private:
 		///The current log file.
 		static ofstream _currentLog;
 
@@ -20,7 +25,7 @@ namespace CommonTool
 		public:
 			void operator()(const T& obj)
 			{
-				_currentLog<<obj.GetString()<<endl;
+				_currentLog<<obj.GetString()<<"		"<<GetDuration()<<endl;
 			}
 		};
 
@@ -30,7 +35,7 @@ namespace CommonTool
 		public:
 			void operator()(const T& obj)
 			{
-				_currentLog<<obj->GetString()<<endl;
+				_currentLog<<obj->GetString()<<"		"<<GetDuration()<<endl;
 			}
 		};
 
@@ -42,25 +47,31 @@ namespace CommonTool
 		template<class T> 
 		static void Output(const T object)
 		{
-			_currentLog<<object.GetString()<<endl;
+			OutputObjectVal<T> output;
+			output(object);
 		}
 
 		///For string
 		template<> 
-		static void Output(const string str);
+		static void Output(const string str)
+		{
+			_currentLog<<str<<"		"<<GetDuration()<<endl;
+		}
 
 		///For const char
 		template<> 
 		static void Output(const char* str)
 		{
-			_currentLog<<str<<endl;
+			string chStr(str);
+			Output(chStr);
 		}
 
 		///For shared_ptr
 		template<class T> 
 		static void Output(const shared_ptr<T> object)
 		{
-			_currentLog<<object->GetString()<<endl;
+			OutputObjectPointer<shared_ptr<T>> output;
+			output(object);
 		}
 
 		///For vector
@@ -83,6 +94,13 @@ namespace CommonTool
 		{
 			for_each(objects.begin(),objects.end(),OutputObjectPointer<shared_ptr<T>>());
 		}
+
+
+		static void ResetStartTime();
+
+	private:
+
+		static double GetDuration() ;
 	};
 }
 

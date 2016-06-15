@@ -14,6 +14,8 @@
 #include "../MindInterface/iCerebrum.h"
 #include "../MindElement/Concept.h"
 
+#include "../CommonTools/LogWriter.h"
+
 #include <iostream>
 
 using namespace std;
@@ -36,15 +38,19 @@ SentenceAnalyzer::~SentenceAnalyzer(void)
 
 void SentenceAnalyzer::Analyze()
 {
+	LOG("SentenceAnalyzer: Begin");
+
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
 	Punctuator punctuator(_rawSentenceString);
 	shared_ptr<DataCollection::Sentence> sentence(new Sentence(_rawSentenceString));
 	punctuator.Punctuate(sentence);
+	LOG("Punctuator");
 
 	WordSegmentator wordsegmentor(sentence);
 	wordsegmentor.Segment();
 	vector<shared_ptr<SegmentedSentence>> segmented=wordsegmentor.GetAllSegementedSentence();
+	LOG("WordSegmentator");
 
 	GrammarAnalyzer grammarAnalyzer(sentence);
 	for (unsigned int i=0;i<segmented.size();++i)
@@ -52,6 +58,7 @@ void SentenceAnalyzer::Analyze()
 		grammarAnalyzer.AddSegment(segmented[i]);
 	}
 	grammarAnalyzer.Analyze();
+	LOG("GrammarAnalyzer");
 
 #ifdef _COUT_DEBUG_INFO //²âÊÔGrammarAnalyzer
 		cout<<"The raw sentence is "<<LanguageFunc::ConvertCharacterToString(sentence->GetRawSentence())<<endl;
@@ -60,6 +67,7 @@ void SentenceAnalyzer::Analyze()
 
 	StructureAnalyzer structureAnalyzer(sentence);
 	structureAnalyzer.Analyze();
+	LOG("StructureAnalyzer");
 
 #ifdef _COUT_DEBUG_INFO //²âÊÔStructureAnalyzer
 		cout<<"The raw sentence is "<<LanguageFunc::ConvertCharacterToString(sentence->GetRawSentence())<<endl;

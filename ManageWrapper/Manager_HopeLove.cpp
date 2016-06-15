@@ -7,6 +7,7 @@
 #include "../CommandList/SpeakCommand.h"
 
 #include "../CommonTools/MyObject.h"
+#include "../CommonTools/LogWriter.h"
 
 #include "../Mind/Cerebrum.h"
 
@@ -41,11 +42,18 @@ namespace ManageWrapper
 
 	void Manager_HopeLove::Execute( DataWrapper^ data )
 	{
+		CommonTool::LogWriter::ResetStartTime();
+
 		UpdateDataWrapperCPP(data);
+
+		LOG("Input sentence: "+_datawrappercpp->GetInputSentence());
 		Command* acommand=new SpeakCommand(_datawrappercpp);
 		acommand->Update();
+		LOG("Output sentence: "+_datawrappercpp->GetNewOutSentence());
+
 		UpdateDataWrapperCS(data);
 		Notify(data);
+
 
 		delete acommand;
 	}

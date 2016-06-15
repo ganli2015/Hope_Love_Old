@@ -11,6 +11,8 @@
 #include "../MindInterface/iMindElementCreator.h"
 #include "../MindElement/ConceptInteractTable.h"
 
+#include "../CommonTools/LogWriter.h"
+
 using namespace std;
 using namespace DataCollection;
 using namespace Mind;
@@ -29,6 +31,8 @@ SentenceParser::~SentenceParser(void)
 
 void SentenceParser::Execute()
 {
+	LOG("SentenceParser: Begin");
+
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 //	brain->ClearConceptInteractTable();
 
@@ -43,6 +47,7 @@ void SentenceParser::Execute()
 	shared_ptr<iConceptInteractTable> baseConceptTable=wordRelationTableBuilder.GetBaseInteractTable();
 	shared_ptr<iConceptInteractTable> protoConceptTable=wordRelationTableBuilder.GetProtoInteractTable();
 	_conceptTable->Absorb(baseConceptTable);
+	LOG("WordRelationTableBuilder");
 
 #ifdef _COUT_DEBUG_INFO //≤‚ ‘WordRelationTableBuilder
 	Cout_WordRelations();

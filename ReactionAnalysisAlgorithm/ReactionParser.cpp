@@ -14,6 +14,8 @@
 #include "../MindInterface/iConceptChain.h"
 #include "../MindInterface/iCerebrum.h"
 
+#include "../CommonTools/LogWriter.h"
+
 #include <iostream>
 
 using namespace DataCollection;
@@ -35,6 +37,8 @@ ReactionParser::ReactionParser(const vector<shared_ptr<DataCollection::Sentence>
 
 void ReactionParser::Execute()
 {
+	LOG("ReactionParser: Begin");
+
 // 	GrammarPatternSelector grammarPatternSelector;
 // 	GrammarPattern selectedPattern=grammarPatternSelector.SelectReactPattern(_sentence[0]);
 
@@ -43,13 +47,16 @@ void ReactionParser::Execute()
 	{
 		AskAboutUnknownWords askAboutUnknownWords(unknownWords);
 		_sentence_output.push_back(askAboutUnknownWords.GenerateReactSentence());
+		LOG("AskAboutUnknownWords");
 	}
 	
 	_sentence_output=GenerateByLogicAnalysis();
+	LOG("GenerateByLogicAnalysis");
 
 	if(_sentence_output.empty())
 	{
 		_sentence_output=GenerateByConceptChainAnalysis();		
+		LOG("GenerateByConceptChainAnalysis");
 	}
 }
 
@@ -123,11 +130,14 @@ vector<shared_ptr<DataCollection::Word>> ReactionParser::CountUnknownWords( cons
 
 vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptChainAnalysis() const
 {
+	LOG("GenerateByConceptChainAnalysis: Begin");
+
 	vector<shared_ptr<DataCollection::Sentence>> res;
 
 	ChainGenerator chainGenerator;
 	chainGenerator.Generate(_interactTable);
 	vector<Mind::ConceptChainProperty> reactChains=chainGenerator.GetReactChains();
+	LOG("ChainGenerator");
 
 #ifdef _COUT_DEBUG_INFO
 	DisplayReactChains(reactChains);
@@ -136,6 +146,7 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	ChainAnalyzer chainAnalyzer;
 	chainAnalyzer.Analyze(reactChains);
 	vector<shared_ptr<Mind::iConceptChain>> hyperChains=chainAnalyzer.GetHyperChains();
+	LOG("ChainAnalyzer");
 
 #ifdef _COUT_DEBUG_INFO
 	DisplayHyperChains(hyperChains);
@@ -144,12 +155,15 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	SentenceGenerator sentenceGenerator;
 	sentenceGenerator.Generate(hyperChains);
 	res.push_back(sentenceGenerator.GetSentence());
+	LOG("SentenceGenerator");
 
 	return res;
 }
 
 vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByLogicAnalysis() const
 {
+	LOG("GenerateByLogicAnalysis: Begin");
+
 	vector<shared_ptr<DataCollection::Sentence>> res;
 
 	LogicReactor logicReactor;
