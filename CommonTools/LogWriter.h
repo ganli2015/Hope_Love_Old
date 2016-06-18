@@ -102,6 +102,37 @@ namespace CommonTool
 
 		static double GetDuration() ;
 	};
+
+	///Record time durations of each code section.
+	class _COMMONTOOLSINOUT EfficiencyRecorder
+	{
+		///The section key and its total duration.
+		static map<string, double> _section_duration;
+		const static string _outFilename;
+
+		friend class CodeSection;
+	public:
+		EfficiencyRecorder();
+		~EfficiencyRecorder();
+
+		static void Output();
+		static void Clear() { _section_duration.clear(); }
+	};
+
+
+	class _COMMONTOOLSINOUT CodeSection
+	{
+		string _secName;
+		double _startTime;
+		bool _released;
+	public:
+		CodeSection(const string secName);
+		~CodeSection();
+
+		void Release();
+	};
+
+	
 }
 
 
@@ -110,12 +141,17 @@ namespace CommonTool
 
 #ifdef _USE_LOG
 
+///Output object.<Object> must have a method of GetString().
 #define LOG(object) CommonTool::LogWriter::Output(object) 
 
 ///Write information of object as well as its description.
 #define LOG_DESC(desc,object) CommonTool::LogWriter::Output(desc);CommonTool::LogWriter::Output(object);
 
 #define CREATELOG(filename) CommonTool::LogWriter NEWLOG(filename)
+
+///Create a section and record the time consuming of it.
+#define SECTION_TIME(tag) CommonTool::CodeSection tag##CodeSection(#tag)
+#define END_SECTION(tag) tag##CodeSection.Release()
 
 #else 
 #define LOG_DESC(object)

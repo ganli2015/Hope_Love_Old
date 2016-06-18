@@ -37,5 +37,13 @@ namespace Mind
 		return res;
 	}
 
+	std::vector<shared_ptr<Mind::iConcept>> BaseConcept::GetBase() const
+	{
+		vector<shared_ptr<Mind::iConcept>> res;
+		res.push_back(Copy());
+
+		return res;
+	}
+
 }
 

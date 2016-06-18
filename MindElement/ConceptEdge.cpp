@@ -101,6 +101,11 @@ namespace Mind
 
 	bool ConceptEdge::MatchWithConceptTable( const shared_ptr<iConceptInteractTable> description ) const
 	{
+		if(description->GetPairCount()!=_modTable->GetPairCount())
+		{
+			return false;
+		}
+
 		double similarity=description->Similarity(_modTable);
 
 		if(Math::DoubleCompare(similarity,1)==0)

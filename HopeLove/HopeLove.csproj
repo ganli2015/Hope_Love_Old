@@ -39,7 +39,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>HopeLove.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -138,7 +141,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy  "$(SolutionDir)$(ConfigurationName)\*.dll" "$(TargetDir)"
-copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(TargetDir)HopeLoveData\"</PostBuildEvent>
+copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(TargetDir)HopeLoveData</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -191,7 +191,7 @@ namespace Mind
 		return (double)sameCount/(otherPairCount+_interactIndex.size());
 	}
 
-	bool ConceptInteractTable::RemoveFirstExistConceptPair( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to,
+	bool ConceptInteractTable::RemoveFirstExistConceptPair(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to,
 		vector<ConceptPair>& pairs ) const
 	{
 		vector<ConceptPair>::iterator sameIt=find_if(pairs.begin(),pairs.end(),CommonFunction::SameConceptPair(from,to));

@@ -20,6 +20,8 @@ namespace Mind
 
 		int GetBaseId() const { return _baseId; }
 		void SetBaseId(int val) { _baseId = val; }
+
+		virtual vector<shared_ptr<iConcept>> GetBase() const;
 	private:
 		virtual void AddForwardConcept(const shared_ptr<Concept> concept,const double sensitivity=1);
 	};

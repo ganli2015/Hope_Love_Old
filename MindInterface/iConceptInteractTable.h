@@ -37,6 +37,8 @@ namespace Mind
 		virtual bool ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const=0;
 
 		virtual string GetString() const;
+
+		virtual int GetPairCount() const = 0;
 	};
 }
 

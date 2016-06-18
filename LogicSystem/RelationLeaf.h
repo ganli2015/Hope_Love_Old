@@ -45,7 +45,8 @@ namespace LogicSystem
 	private:
 		bool InterTableSatisfyRelation(const shared_ptr<Mind::iConceptInteractTable> interTable);
 		void Recursive_FindMatchedPairSequence(const vector<SymbolPair>& sPairs,const vector<ConceptPair>& cPairs, vector<PairSequence>& sequence) const;
-		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const ;
+		bool ConPairSymPairMatch(const ConceptPair& cPair, const SymbolPair& sPair) const;
+		virtual vector<iRelation::PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const;
 		RelationLeaf::PairSequence CreateSequenceWithOneElem(const SymbolPair& sPair,const ConceptPair& cPair) const;
 		
 		//Generate new symbol pairs considering the repetition of the original pair.

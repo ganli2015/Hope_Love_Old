@@ -485,9 +485,9 @@ TEST_F(Test_RelationNeedCerebrum,iRelationResonance)
 
 		string relStr=specialRel->GetString();
 
-		string resultTable="三-大,大-于,于-一";
-		shared_ptr<iExpression> conclusion_true=MockExpression::Create(resultTable);
-		ASSERT_TRUE(specialRel->Satisfy(conclusion_true));
+		string resultTable="三->大,大->于,于->一";
+//		shared_ptr<iExpression> conclusion_true=MockExpression::Create(resultTable);
+		ASSERT_EQ(relStr,resultTable);
 	}
 }
 

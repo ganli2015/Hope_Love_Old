@@ -43,6 +43,7 @@ namespace ManageWrapper
 	void Manager_HopeLove::Execute( DataWrapper^ data )
 	{
 		CommonTool::LogWriter::ResetStartTime();
+		CommonTool::EfficiencyRecorder::Clear();
 
 		UpdateDataWrapperCPP(data);
 
@@ -54,6 +55,7 @@ namespace ManageWrapper
 		UpdateDataWrapperCS(data);
 		Notify(data);
 
+		CommonTool::EfficiencyRecorder::Output();
 
 		delete acommand;
 	}

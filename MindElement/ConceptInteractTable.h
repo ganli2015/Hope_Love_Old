@@ -34,6 +34,8 @@ namespace Mind
 
 		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const ;
 
+		virtual int GetPairCount() const { return _interactIndex.size(); };
+
 	protected:
 		bool PairExist(const int index1,const int index2) const;
 		int ValueCount(const_indexIter beg, const_indexIter end, const int val);

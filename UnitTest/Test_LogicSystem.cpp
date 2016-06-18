@@ -567,9 +567,6 @@ namespace LogicSystem
 		return res;
 	}
 
-	
-
-
 	vector<Param_FinalDeduce> Test_FinalDeduce::GenerateSamples()
 	{
 		typedef MockiCerebrum::FindMatchConceptParam FindMatchConceptParam;

@@ -114,8 +114,8 @@ namespace LogicSystem
 			LOG_DESC("Reduced Tables after reduction: ",reducedTables);
 
 			curDeduceTables.clear();		
-			DeduceTableList(reducedTables,noChangedTables,curDeduceTables);
-			LOG_DESC("Deduced Tables after deduction: ",curDeduceTables);
+			DeduceTableList(reducedTables, noChangedTables, curDeduceTables);
+			LOG_DESC("Deduced Tables after deduction: ", curDeduceTables);
 
 			//<noChangedTables> contains table with no reduction and deduction during current iteration,
 			//and they will be kicked out from iteration and become the final results.
@@ -161,15 +161,18 @@ namespace LogicSystem
 
 		//Convert to iConceptInteractTable.
 		shared_ptr<iConceptInteractTable> table=iMindElementCreator::CreateConceptInteractTable(subPairs);
+
+		SECTION_TIME(ReduceConceptPairSequence_FindConceptWithMatchedDisc);
 		//Find concepts matching with description <table>.
 		vector<DescMatchedConceptInfo> matchedInfos;
 		brain->FindConceptWithMatchedDisc(table,matchedInfos);
+		END_SECTION(ReduceConceptPairSequence_FindConceptWithMatchedDisc);
 
 		vector<ConceptPair> remainingPairs=FilterPartialConceptPairs(totalPairs,subPairs);
 		for (unsigned int j=0;j<matchedInfos.size();++j)
 		{
-			shared_ptr<iReduceResult> reduceResult=ReduceFromMatchedConcept(matchedInfos[j],subPairs,remainingPairs);
-			if(reduceResult!=NULL)
+			shared_ptr<iReduceResult> reduceResult = ReduceFromMatchedConcept(matchedInfos[j], subPairs, remainingPairs);
+			if (reduceResult != NULL)
 			{
 				res.push_back(reduceResult);
 			}

@@ -13,6 +13,8 @@
 
 #include "../Mathmatic/FindSequence.h"
 
+#include "../CommonTools/GeneralFunctor.h"
+
 
 using namespace Mind;
 namespace LogicSystem
@@ -142,7 +144,7 @@ namespace LogicSystem
 		//Then search for the remaining <cPairs> and <sPairs>.
 		for (unsigned int i=0;i<cPairs.size();++i)
 		{
-			if(!(curSymbolPair.First()->Match(cPairs[i].first) && curSymbolPair.Second()->Match(cPairs[i].second))) continue;//Not matched
+			if(!ConPairSymPairMatch(cPairs[i], curSymbolPair)) continue;//Not matched
 			
 			//Generate concept pairs without the current matched one.
 			vector<ConceptPair> remainingCPairs(cPairs);
@@ -167,6 +169,36 @@ namespace LogicSystem
 			}
 			
 		}
+	}
+
+	bool RelationLeaf::ConPairSymPairMatch(const ConceptPair& cPair, const SymbolPair& sPair) const
+	{
+		CREATE_FUNCTOR_IR(BaseMatchSymbol,shared_ptr<ConSymbol>,shared_ptr<iConcept>,bool,
+			if(_init->Match(input))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		);
+
+		vector<shared_ptr<iConcept>> fromBase = cPair.first->GetBase();
+		vector<shared_ptr<iConcept>>::iterator fromMatchIter = find_if(fromBase.begin(), fromBase.end(), BaseMatchSymbol(sPair.First()));
+		if(fromMatchIter==fromBase.end())
+		{
+			return false;
+		}
+
+		vector<shared_ptr<iConcept>> toBase = cPair.second->GetBase();
+		vector<shared_ptr<iConcept>>::iterator toMatchIter = find_if(toBase.begin(), toBase.end(), BaseMatchSymbol(sPair.Second()));
+		if (toMatchIter == toBase.end())
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	RelationLeaf::PairSequence RelationLeaf::CreateSequenceWithOneElem(const SymbolPair& sPair,const ConceptPair& cPair) const

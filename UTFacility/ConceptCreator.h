@@ -4,6 +4,7 @@
 namespace Mind
 {
 	class iConcept;
+	class BaseConcept;
 }
 
 class _UTFACILITYINOUT ConceptCreator
@@ -22,6 +23,9 @@ public:
 	~SimpleConceptCreator(void){};
 
 	virtual shared_ptr<Mind::iConcept> Create(const string str, const int i=0) const;
+
+private:
+	shared_ptr<Mind::BaseConcept> CreateBaseConcept(const string str, const int i = 0) const;
 };
 
 class _UTFACILITYINOUT CerebrumConceptCreator : public ConceptCreator
