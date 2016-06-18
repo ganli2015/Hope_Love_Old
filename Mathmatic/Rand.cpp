@@ -83,7 +83,7 @@ namespace Math
 
 	double Rand::GetRandDouble(const double min,const double max)
 	{
-		uniform_int_distribution<double> dis(min,max);
+		uniform_real_distribution<double> dis(min,max);
 
 		return dis(_rd);
 	}
