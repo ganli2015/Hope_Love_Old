@@ -1,0 +1,26 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly ManageWrapper, Version=0.0.*, Culture=固定语言(固定国家/地区): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly DataWrapperCS, Version=1.0.*, Culture=固定语言(固定国家/地区): 
+	hash=None, flags=None
+Assembly GlobalInterface, Version=1.0.*, Culture=固定语言(固定国家/地区): 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class ManageWrapper.Manager_HopeLove: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    GlobalInterface.CPPManager
+    System.IDisposable
+  Methods:
+    ConnectUI(UIForm): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Notify(DataWrapper): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Execute(DataWrapper): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Kill(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig

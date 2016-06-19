@@ -1,0 +1,3 @@
+DeduceTableList    1.283
+ReduceConceptPairSequence_FindConceptWithMatchedDisc    0.968
+ReduceTableList    1.841
