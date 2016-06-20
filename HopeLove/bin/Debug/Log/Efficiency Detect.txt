@@ -1,1 +1,1 @@
-ReduceConceptPairSequence_FindConceptWithMatchedDisc    6.79
+ReduceConceptPairSequence_FindConceptWithMatchedDisc    4.429

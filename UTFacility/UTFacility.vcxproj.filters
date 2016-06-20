@@ -41,6 +41,9 @@
     <ClInclude Include="Matchers.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PerformanceTester.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -65,6 +68,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MockiCerebrum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PerformanceTester.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

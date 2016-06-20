@@ -106,7 +106,7 @@ namespace Mind
 			return false;
 		}
 
-		double similarity=description->Similarity(_modTable);
+		double similarity= _modTable->Similarity(description);
 
 		if(Math::DoubleCompare(similarity,1)==0)
 		{

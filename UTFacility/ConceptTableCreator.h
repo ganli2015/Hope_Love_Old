@@ -17,7 +17,8 @@ public:
 	enum Type
 	{
 		Concept_Based,
-		Identity_Based
+		Identity_Based,
+		Set_Based
 	};
 
 public:

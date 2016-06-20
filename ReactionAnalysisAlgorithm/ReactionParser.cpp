@@ -6,6 +6,7 @@
 #include "SentenceGenerator.h"
 #include "AskAboutUnknownWords.h"
 #include "LogicReactor.h"
+#include "SentenceTypeDetermination.h"
 
 #include "../DataCollection/GrammaPattern.h"
 #include "../DataCollection/Sentence.h"
@@ -15,6 +16,7 @@
 #include "../MindInterface/iCerebrum.h"
 
 #include "../CommonTools/LogWriter.h"
+
 
 #include <iostream>
 
@@ -39,9 +41,6 @@ void ReactionParser::Execute()
 {
 	LOG("ReactionParser: Begin");
 
-// 	GrammarPatternSelector grammarPatternSelector;
-// 	GrammarPattern selectedPattern=grammarPatternSelector.SelectReactPattern(_sentence[0]);
-
 	vector<shared_ptr<DataCollection::Word>> unknownWords=CountUnknownWords(_sentence_input);
 	if(!unknownWords.empty())
 	{
@@ -50,9 +49,19 @@ void ReactionParser::Execute()
 		LOG("AskAboutUnknownWords");
 	}
 	
-	_sentence_output=GenerateByLogicAnalysis();
-	LOG("GenerateByLogicAnalysis");
+	SentenceTypeDetermination typeDetermine;
+	SentenceTypeDetermination::Type type=typeDetermine.Determine(_sentence_input.front());//Cope with the first sentence!
+	LOG("SentenceTypeDetermination");
+	if (type == SentenceTypeDetermination::Interrogative)
+	{
+		shared_ptr<Sentence> questionPart = typeDetermine.GetQuestionPart();
+		assert(questionPart != NULL);
+		_sentence_output = GenerateByLogicAnalysis(questionPart);
+		LOG("GenerateByLogicAnalysis");
+	}
 
+	//If there is null result of Logic Analysis or the sentence is declarative, 
+	//then generate the result sentence by concept chain Analysis.
 	if(_sentence_output.empty())
 	{
 		_sentence_output=GenerateByConceptChainAnalysis();		
@@ -160,28 +169,22 @@ vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByConceptCh
 	return res;
 }
 
-vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByLogicAnalysis() const
+vector<shared_ptr<DataCollection::Sentence>> ReactionParser::GenerateByLogicAnalysis(const shared_ptr<DataCollection::Sentence> input) const
 {
 	LOG("GenerateByLogicAnalysis: Begin");
 
 	vector<shared_ptr<DataCollection::Sentence>> res;
 
 	LogicReactor logicReactor;
-
-	for (unsigned int i=0;i<_sentence_input.size();++i)
+	shared_ptr<Sentence> outSentence = logicReactor.Analyze(input);
+	if(outSentence==NULL)
 	{
-		shared_ptr<LogicSystem::iExpression> expre;
-		if(logicReactor.ContainLogicExpression(_sentence_input[i],expre))
-		{
-			assert(expre!=NULL);
-			shared_ptr<Sentence> outSentence=logicReactor.Analyze(expre);
-			if(outSentence!=NULL)
-			{
-				res.push_back(outSentence);
-			}
-		}
+		return res;
 	}
-
-	return res;
+	else
+	{
+		res.push_back(outSentence);
+		return res;
+	}
 }
 

@@ -47,6 +47,9 @@
     <ClInclude Include="MindElementCreator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptInteractTable_MultiSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -80,6 +83,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MindElementCreator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptInteractTable_MultiSet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

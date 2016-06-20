@@ -35,7 +35,7 @@ namespace CommonTool
 	}
 
 	std::map<std::string, double> EfficiencyRecorder::_section_duration;
-	const string EfficiencyRecorder::_outFilename("Log//Efficiency Detect.txt");
+	const string EfficiencyRecorder::_outFilename("Log//Performance Detect.txt");
 
 	EfficiencyRecorder::EfficiencyRecorder()
 	{

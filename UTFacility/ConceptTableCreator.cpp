@@ -38,13 +38,16 @@ shared_ptr<Mind::iConceptInteractTable> ConceptTableCreator::Parse( const string
 	shared_ptr<Mind::iConceptInteractTable> res;
 	if(type==Concept_Based)
 	{
-		res=iMindElementCreator::CreateConceptInteractTable();
+		res=iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_ConceptBased);
 	}
-	else
+	else if (type == Identity_Based)
 	{
 		res=iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
 	}
-
+	else
+	{
+		res = iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_SetBased);
+	}
 
 	//split ','
 	vector<string> pariStr=CommonTool::SplitString(str,',');

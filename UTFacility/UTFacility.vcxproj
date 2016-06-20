@@ -90,6 +90,7 @@
     <ClInclude Include="Matchers.h" />
     <ClInclude Include="MockExpression.h" />
     <ClInclude Include="MockiCerebrum.h" />
+    <ClInclude Include="PerformanceTester.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="RelationSample.h" />
     <ClInclude Include="Stdafx.h" />
@@ -101,6 +102,7 @@
     <ClCompile Include="LeafCreator.cpp" />
     <ClCompile Include="MockExpression.cpp" />
     <ClCompile Include="MockiCerebrum.cpp" />
+    <ClCompile Include="PerformanceTester.cpp" />
     <ClCompile Include="RelationSample.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

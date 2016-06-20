@@ -29,6 +29,7 @@ namespace Mind
 		ConceptTableSimilarityParam param=GetParam();
 		Test_ConceptInteractTable_iConcept(param);
 		Test_ConceptInteractTable_Identity(param);
+		Test_ConceptInteractTable_MultiSet(param);
 
 		iCerebrum::KillInstance();
 	}
@@ -47,6 +48,14 @@ namespace Mind
 		shared_ptr<iConceptInteractTable> other=ConceptTableCreator::SimpleCreate(param.otherStr,ConceptTableCreator::Identity_Based);
 
 		ASSERT_EQ(me->Similarity(other),param.similarity);
+	}
+
+	void Test_Similarity::Test_ConceptInteractTable_MultiSet(const ConceptTableSimilarityParam& param)
+	{
+		shared_ptr<iConceptInteractTable> me = ConceptTableCreator::SimpleCreate(param.meStr, ConceptTableCreator::Set_Based);
+		shared_ptr<iConceptInteractTable> other = ConceptTableCreator::SimpleCreate(param.otherStr, ConceptTableCreator::Set_Based);
+
+		ASSERT_EQ(me->Similarity(other), param.similarity);
 	}
 
 	vector<ConceptTableSimilarityParam> Test_Similarity::GenerateSamples()

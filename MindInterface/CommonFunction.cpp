@@ -267,6 +267,18 @@ namespace Mind
 			return NULL;
 		}
 
+		bool SameConceptPair_Identity::operator()(const pair<shared_ptr<iConcept>, shared_ptr<iConcept>> val)
+		{
+			if (val.first->GetIdentity()==_from && val.second->GetIdentity()==_to)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }
 

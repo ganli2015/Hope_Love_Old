@@ -26,6 +26,22 @@ namespace Mind
 		{
 			return left.id==right.id && left.str==right.str;
 		}
+
+		friend bool operator<(const Identity& left, const Identity& right)
+		{
+			if(left.str<right.str)
+			{
+				return true;
+			}
+			else if (left.str == right.str && left.id < right.id)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	};
 
 	class iConcept;
@@ -81,6 +97,17 @@ namespace Mind
 			~SameConceptPair(){}
 
 			bool operator()(const pair<shared_ptr<iConcept>,shared_ptr<iConcept>> val);
+		};
+
+		class _MINDINTERFACEINOUT SameConceptPair_Identity
+		{
+			Identity _from;
+			Identity _to;
+		public:
+			SameConceptPair_Identity(const Identity from, const Identity to) :_from(from), _to(to) {}
+			~SameConceptPair_Identity() {}
+
+			bool operator()(const pair<shared_ptr<iConcept>, shared_ptr<iConcept>> val);
 		};
 	}
 }

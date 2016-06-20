@@ -5,6 +5,7 @@
 #include "ConceptChain.h"
 #include "ConceptInteractTable_iConcept.h"
 #include "ConceptInteractTable_Identity.h"
+#include "ConceptInteractTable_MultiSet.h"
 #include "ConceptLevelTable.h"
 
 namespace Mind
@@ -99,48 +100,35 @@ namespace Mind
 		}
 	}
 
-	shared_ptr<iConceptInteractTable> MindElementCreator::CreateConceptInteractTable( const ElementType type ) const
+	shared_ptr<iConceptInteractTable> MindElementCreator::CreateConceptInteractTable(const ElementType type) const
 	{
-		switch(type)
+		switch (type)
 		{
-		case Host::ConceptInteractTableD:
-			{
-				return shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
-				break;
-			}
+		case Host::ConceptInteractTable_ConceptBased:
+		{
+			return shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
+			break;
+		}
 		case Host::ConceptInteractTable_IdentityBased:
-			{
-				return shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
-				break;
-			}
+		{
+			return shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
+			break;
+		}
+		case Host::ConceptInteractTable_SetBased:
+		{
+			return shared_ptr<ConceptInteractTable_MultiSet>(new ConceptInteractTable_MultiSet());
+			break;
+		}
 		default:
-			{
-				return NULL;
-			}
+		{
+			return NULL;
+		}
 		}
 	}
 
 	shared_ptr<iConceptInteractTable> MindElementCreator::CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type) const
 	{
-		shared_ptr<iConceptInteractTable> res;
-
-		switch(type)
-		{
-		case Host::ConceptInteractTableD:
-			{
-				res= shared_ptr<ConceptInteractTable_iConcept>(new ConceptInteractTable_iConcept());
-				break;
-			}
-		case Host::ConceptInteractTable_IdentityBased:
-			{
-				res= shared_ptr<ConceptInteractTable_Identity>(new ConceptInteractTable_Identity());
-				break;
-			}
-		default:
-			{
-				res= NULL;
-			}
-		}
+		shared_ptr<iConceptInteractTable> res = CreateConceptInteractTable(type);
 
 		if(res!=NULL)
 		{

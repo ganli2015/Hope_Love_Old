@@ -33,7 +33,7 @@ public:
 	shared_ptr<DataCollection::Sentence> GetReactSentence() const;
 private:
 	vector<shared_ptr<DataCollection::Sentence>> GenerateByConceptChainAnalysis() const;
-	vector<shared_ptr<DataCollection::Sentence>> GenerateByLogicAnalysis() const;
+	vector<shared_ptr<DataCollection::Sentence>> GenerateByLogicAnalysis(const shared_ptr<DataCollection::Sentence> input) const;
 
 	vector<shared_ptr<DataCollection::Word>> CountUnknownWords(const vector<shared_ptr<DataCollection::Sentence>>& sentences) const;
 

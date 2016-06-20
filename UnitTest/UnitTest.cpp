@@ -9,9 +9,8 @@ using namespace std;
 #include "TestClass.h"
 #include "PublicHeader.h"
 #include "FuncForTest.h"
-#include "../UTFacility/LeafCreator.h"
-#include "../MindElement/MindElementCreator.h"
-#include "../LogicSystem/LogicElementCreator.h"
+#include "TestPerformance.h"
+#include "UTInitializer.h"
 
 class MyGlobal: public testing::Environment
 {
@@ -36,30 +35,44 @@ void MyGlobal::TearDown()
 
 void RunFilter(const string filterStr);
 
-void Init()
+// void Init()
+// {
+// 	LeafCreator::Init();
+// 	shared_ptr<Mind::MindElementCreator> mindCreator(new Mind::MindElementCreator());
+// 	Mind::iMindElementCreator::SetImp(mindCreator);
+// 
+// 	shared_ptr<LogicSystem::LogicElementCreator> logicCreator(new LogicSystem::LogicElementCreator());
+// 	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
+// }
+
+
+
+void RunUnitTest(int argc, _TCHAR* argv[])
 {
-	LeafCreator::Init();
-	shared_ptr<Mind::MindElementCreator> mindCreator(new Mind::MindElementCreator());
-	Mind::iMindElementCreator::SetImp(mindCreator);
+	//	RunFilter("Test_Cerebrum*");
 
-	shared_ptr<LogicSystem::LogicElementCreator> logicCreator(new LogicSystem::LogicElementCreator());
-	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
-}
-
-int _cdecl _tmain(int argc, _TCHAR* argv[])
-{
-//	RunFilter("Test_Cerebrum*");
-
-	Init();
-
-//	testing::AddGlobalTestEnvironment(new MyGlobal);
 	testing::InitGoogleTest(&argc, argv);
 	MEMOCHECK;
 	RUN_ALL_TESTS();
 	RELEASE_MEMOCHECK;
 
-	system("pause");
+}
 
+#define _RUN_PERFORMANCE
+
+Initializer init;
+int _cdecl _tmain(int argc, _TCHAR* argv[])
+{
+#ifdef _RUN_PERFORMANCE
+
+	RunPerformance::Run();
+
+#else
+	RunUnitTest(argc, argv);
+
+#endif // _RUN_PERFORMANCE
+
+	system("pause");
 
 	return 0;
 

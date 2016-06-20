@@ -19,13 +19,15 @@ namespace Mind
 
 		void Test_ConceptInteractTable_iConcept(const ConceptTableSimilarityParam& param);
 		void Test_ConceptInteractTable_Identity(const ConceptTableSimilarityParam& param);
+		void Test_ConceptInteractTable_MultiSet(const ConceptTableSimilarityParam& param);
 
 		static vector<ConceptTableSimilarityParam> GenerateSamples() ;
 		static vector<pair<Identity,shared_ptr<iConcept>>> CreateNumberConcept();
 
-	protected:
 		///Construct a MockiCerebrum that only contains the concept of number from one to nine.
-		void PrepareMockCerebrum();
+		static void PrepareMockCerebrum();
+	protected:
+		
 	};
 }
 

@@ -100,6 +100,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestClass.h" />
+    <ClInclude Include="TestPerformance.h" />
     <ClInclude Include="Test_CommonTool.h" />
     <ClInclude Include="Test_Concept.h" />
     <ClInclude Include="Test_ConceptInteractTable.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Test_NeuralNetworkDesign.h" />
     <ClInclude Include="Test_ReactionAnalysisAlgorithm.h" />
     <ClInclude Include="Test_SentenceAnalysisAlgorithm.h" />
+    <ClInclude Include="UTInitializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FuncForTest.cpp" />
@@ -120,6 +122,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestClass.cpp" />
+    <ClCompile Include="TestPerformance.cpp" />
     <ClCompile Include="Test_CommonTool.cpp" />
     <ClCompile Include="Test_Concept.cpp" />
     <ClCompile Include="Test_ConceptInteractTable.cpp" />
@@ -131,6 +134,7 @@
     <ClCompile Include="Test_ReactionAnalysisAlgorithm.cpp" />
     <ClCompile Include="Test_SentenceAnalysisAlgorithm.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UTInitializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">

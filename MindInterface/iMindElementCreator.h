@@ -28,8 +28,9 @@ namespace Mind
 			ConceptD,
 			ConceptChainD,
 			ConceptEdgeD,
-			ConceptInteractTableD,
+			ConceptInteractTable_ConceptBased,
 			ConceptInteractTable_IdentityBased,
+			ConceptInteractTable_SetBased,
 			ConceptLevelTableD
 		};
 
@@ -44,8 +45,8 @@ namespace Mind
 
 		static shared_ptr<iConceptEdge> CreateConceptEdge(const ElementType type=ConceptEdgeD);
 
-		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type=ConceptInteractTableD);
-		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type=ConceptInteractTableD);
+		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const ElementType type= ConceptInteractTable_ConceptBased);
+		static shared_ptr<iConceptInteractTable> CreateConceptInteractTable(const vector<MindType::ConceptPair>& pairs,const ElementType type= ConceptInteractTable_ConceptBased);
 		///<val> is the central concept of level table.
 		static shared_ptr<iConceptLevelTable> CreateConceptLevelTable(const shared_ptr<iConcept> val ,const ElementType type=ConceptLevelTableD);
 

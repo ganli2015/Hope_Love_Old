@@ -152,6 +152,7 @@
     <ClInclude Include="LogicReactor.h" />
     <ClInclude Include="ReactionParser.h" />
     <ClInclude Include="SentenceGenerator.h" />
+    <ClInclude Include="SentenceTypeDetermination.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClCompile Include="LogicReactor.cpp" />
     <ClCompile Include="ReactionParser.cpp" />
     <ClCompile Include="SentenceGenerator.cpp" />
+    <ClCompile Include="SentenceTypeDetermination.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

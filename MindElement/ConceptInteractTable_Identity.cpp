@@ -89,7 +89,22 @@ namespace Mind
 		return iCerebrum::Instance();
 	}
 
-	bool ConceptInteractTable_Identity::ConceptPairExist( const shared_ptr<iConcept> from, const shared_ptr<iConcept> to ) const
+	bool ConceptInteractTable_Identity::RemoveFirstExistConceptPair(const Identity from, const Identity to, vector<ConceptPair>& pairs) const
+	{
+		vector<ConceptPair>::iterator sameIt = find_if(pairs.begin(), pairs.end(), CommonFunction::SameConceptPair_Identity(from, to));
+
+		if (sameIt != pairs.end())
+		{
+			pairs.erase(sameIt);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool ConceptInteractTable_Identity::ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const
 	{
 		for (const_indexIter indexIt=_interactIndex.begin();indexIt!=_interactIndex.end();++indexIt)
 		{
@@ -104,6 +119,25 @@ namespace Mind
 		return false;
 	}
 	
+
+	double ConceptInteractTable_Identity::Similarity(const shared_ptr<iConceptInteractTable> other) const
+	{
+		vector<ConceptPair> otherPairs = other->GetAllRelations();
+		int otherPairCount = otherPairs.size();
+
+		//The number of same concept pairs
+		int sameCount = 0;
+		//Determine how many pairs are duplicated in <me> and <other>
+		for (const_indexIter indexIt = _interactIndex.begin(); indexIt != _interactIndex.end(); ++indexIt)
+		{
+			if (RemoveFirstExistConceptPair(_concepts.at(indexIt->first), _concepts.at(indexIt->second), otherPairs))
+			{
+				sameCount += 2;
+			}
+		}
+
+		return (double)sameCount / (otherPairCount + _interactIndex.size());
+	}
 
 }
 

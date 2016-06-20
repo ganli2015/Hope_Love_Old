@@ -83,6 +83,12 @@
     <ClInclude Include="MemoryChecker.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TestPerformance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UTInitializer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -131,6 +137,12 @@
       <Filter>Mind</Filter>
     </ClCompile>
     <ClCompile Include="MemoryChecker.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPerformance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UTInitializer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
