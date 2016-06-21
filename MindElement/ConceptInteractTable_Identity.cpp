@@ -139,5 +139,26 @@ namespace Mind
 		return (double)sameCount / (otherPairCount + _interactIndex.size());
 	}
 
+	bool ConceptInteractTable_Identity::Same(const shared_ptr<iConceptInteractTable> other) const
+	{
+		if (other->GetPairCount() != GetPairCount())
+		{
+			return false;
+		}
+
+		//Check whether all pair exist in <me>.
+		vector<ConceptPair> otherPairs = other->GetAllRelations();
+		for (const_indexIter indexIt = _interactIndex.begin(); indexIt != _interactIndex.end(); ++indexIt)
+		{
+			//If pair in <otherPairs> is duplicated , then remove it.
+			if (!RemoveFirstExistConceptPair(_concepts.at(indexIt->first), _concepts.at(indexIt->second), otherPairs))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
 

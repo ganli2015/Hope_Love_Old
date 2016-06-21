@@ -247,7 +247,24 @@ namespace Mind
 			return res;
 		}
 
-		shared_ptr<Mind::iConcept> FindIntegerConcept( const vector<shared_ptr<Mind::iConcept>>& conceptVec )
+		void RemoveDuplicated(list<shared_ptr<iConceptInteractTable>>& tables)
+		{
+			vector<shared_ptr<iConceptInteractTable>> copy(tables.begin(), tables.end());
+			for (vector<shared_ptr<iConceptInteractTable>>::iterator it= copy.begin();it!= copy.end();++it)
+			{
+				//Search the tables behind <it>.
+				//If there is the same one ,then remove it.
+				//Finally the last one will exist.
+				if (find_if(it + 1, copy.end(), SameConceptTable(*it)) != copy.end())
+				{
+					it = copy.erase(it);
+				}
+			}
+
+			tables = list<shared_ptr<iConceptInteractTable>>(copy.begin(), copy.end());
+		}
+
+		shared_ptr<Mind::iConcept> FindIntegerConcept(const vector<shared_ptr<Mind::iConcept>>& conceptVec)
 		{
 			static string integerStr="ÕûÊý";
 
@@ -270,6 +287,18 @@ namespace Mind
 		bool SameConceptPair_Identity::operator()(const pair<shared_ptr<iConcept>, shared_ptr<iConcept>> val)
 		{
 			if (val.first->GetIdentity()==_from && val.second->GetIdentity()==_to)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		bool SameConceptTable::operator()(const shared_ptr<iConceptInteractTable> val)
+		{
+			if(val->Same(_me))
 			{
 				return true;
 			}

@@ -33,6 +33,7 @@ namespace Mind
 		virtual vector<ConceptInteractTable::ConceptPair> GetAllRelations() const;
 
 		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const ;
+		virtual bool Same(const shared_ptr<iConceptInteractTable> other) const;
 
 		virtual int GetPairCount() const { return _interactIndex.size(); };
 
@@ -44,6 +45,7 @@ namespace Mind
 		virtual shared_ptr<iConcept> GetSharedConcept(const int i) const =0;
 		virtual int GetConceptIndex(const shared_ptr<iConcept> con) const =0;
 
+		///If pair exists, return true and remove it from <pairs>.
 		bool RemoveFirstExistConceptPair(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to,vector<ConceptPair>& pairs) const;
 	};
 }

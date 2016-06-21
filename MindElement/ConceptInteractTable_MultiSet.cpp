@@ -120,6 +120,16 @@ namespace Mind
 		return (double)sameCount / (otherPairCount + _identityPairs.size());
 	}
 
+	bool ConceptInteractTable_MultiSet::Same(const shared_ptr<iConceptInteractTable> other) const
+	{
+		if (other->GetPairCount() != GetPairCount())
+		{
+			return false;
+		}
+
+		throw runtime_error("Not Implemented!");
+	}
+
 	bool ConceptInteractTable_MultiSet::ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const
 	{
 		IdentityPair otherIDPair(from->GetIdentity(), to->GetIdentity());

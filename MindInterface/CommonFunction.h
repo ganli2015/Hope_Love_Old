@@ -2,6 +2,8 @@
 #include "InOut.h"
 #include "iConcept.h"
 
+#include <list>
+
 namespace DataCollection
 {
 	class GrammarPattern;
@@ -78,6 +80,8 @@ namespace Mind
 		///Filter <total> with <partial> and return the remaining.
 		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs(const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial);
 
+		void _MINDINTERFACEINOUT RemoveDuplicated(list<shared_ptr<iConceptInteractTable>>& tables);
+
 		class _MINDINTERFACEINOUT SameConcept
 		{
 			shared_ptr<iConcept> _me;
@@ -108,6 +112,16 @@ namespace Mind
 			~SameConceptPair_Identity() {}
 
 			bool operator()(const pair<shared_ptr<iConcept>, shared_ptr<iConcept>> val);
+		};
+
+		class _MINDINTERFACEINOUT SameConceptTable
+		{
+			shared_ptr<iConceptInteractTable> _me;
+		public:
+			SameConceptTable(const shared_ptr<iConceptInteractTable> val) :_me(val) {}
+			~SameConceptTable() {}
+
+			bool operator()(const shared_ptr<iConceptInteractTable> val);
 		};
 	}
 }

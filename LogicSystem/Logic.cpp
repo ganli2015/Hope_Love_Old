@@ -113,18 +113,26 @@ namespace LogicSystem
 			ReduceTableList(curDeduceTables,reducedTables,noChangedTables,conceptResults);
 			LOG_DESC("Reduced Tables after reduction: ",reducedTables);
 
+			CommonFunction::RemoveDuplicated(reducedTables);
+			CommonFunction::RemoveDuplicated(noChangedTables);
+
 			curDeduceTables.clear();		
 			DeduceTableList(reducedTables, noChangedTables, curDeduceTables);
 			LOG_DESC("Deduced Tables after deduction: ", curDeduceTables);
 
-			//<noChangedTables> contains table with no reduction and deduction during current iteration,
-			//and they will be kicked out from iteration and become the final results.
-			finalDeduceTables.insert(finalDeduceTables.end(),noChangedTables.begin(),noChangedTables.end());
+			if (!noChangedTables.empty())
+			{
+				//<noChangedTables> contains table with no reduction and deduction during current iteration,
+				//and they will be kicked out from iteration and become the final results.
+				finalDeduceTables.insert(finalDeduceTables.end(), noChangedTables.begin(), noChangedTables.end());
+			}		
 
 			if(!finalDeduceTables.empty() || !conceptResults.empty())
 			{
 				break;
 			}
+
+			CommonFunction::RemoveDuplicated(curDeduceTables);
 
 		} while (!curDeduceTables.empty());
 

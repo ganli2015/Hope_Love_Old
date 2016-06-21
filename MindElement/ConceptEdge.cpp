@@ -42,13 +42,6 @@ namespace Mind
 	{
 		shared_ptr<iConceptInteractTable> res(new ConceptInteractTable_iConcept());
 
-// 		vector<shared_ptr<iConcept>> base_to=_concept.lock()->GetBase();
-// 		for (unsigned int i=0;i<_modification.size();++i)
-// 		{
-// 			vector<shared_ptr<iConcept>> base_mod=_modification[i].lock()->GetBase();
-// 			CommonFunction::AppendToInteractTable(base_mod,base_to,res);
-// 		}
-
 		
 		vector<MindType::ConceptPair> pairs=_modTable->GetAllRelations();
 		//Go through all concept pairs and collect base interaction pairs.
@@ -78,17 +71,6 @@ namespace Mind
 		_modTable->Absorb(table);
 	}
 
-// 	vector<shared_ptr<iConcept>> ConceptEdge::GetModification() const
-// 	{
-// 		vector<shared_ptr<iConcept>> res(_modification.size());
-// 		for (unsigned int i=0;i<_modification.size();++i)
-// 		{
-// 			res[i]=_modification[i].lock()->Copy();
-// 		}
-// 
-// 		return res;
-// 	}
-
 	void ConceptEdge::Init()
 	{
 		_modTable=iMindElementCreator::CreateConceptInteractTable(iMindElementCreator::ConceptInteractTable_IdentityBased);
@@ -101,14 +83,7 @@ namespace Mind
 
 	bool ConceptEdge::MatchWithConceptTable( const shared_ptr<iConceptInteractTable> description ) const
 	{
-		if(description->GetPairCount()!=_modTable->GetPairCount())
-		{
-			return false;
-		}
-
-		double similarity= _modTable->Similarity(description);
-
-		if(Math::DoubleCompare(similarity,1)==0)
+		if(_modTable->Same(description))
 		{
 			return true;
 		}

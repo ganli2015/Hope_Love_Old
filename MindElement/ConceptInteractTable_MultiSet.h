@@ -93,6 +93,7 @@ namespace Mind
 		virtual shared_ptr<iConceptInteractTable> Copy() const ;
 
 		virtual double Similarity(const shared_ptr<iConceptInteractTable> other) const ;
+		virtual bool Same(const shared_ptr<iConceptInteractTable> other) const;
 
 		virtual bool ConceptPairExist(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to) const ;
 

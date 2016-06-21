@@ -4,6 +4,10 @@
 
 #include "../MindInterface/CommonFunction.h"
 
+#include "../CommonTools/GeneralFunctor.h"
+
+#include "../Mathmatic/MathTool.h"
+
 namespace Mind
 {
 
@@ -189,6 +193,30 @@ namespace Mind
 		}
 
 		return (double)sameCount/(otherPairCount+_interactIndex.size());
+	}
+
+	bool ConceptInteractTable::Same(const shared_ptr<iConceptInteractTable> other) const
+	{
+		if(other->GetPairCount()!=GetPairCount())
+		{
+			return false;
+		}
+
+		//Check whether all pair exist in <me>.
+		vector<ConceptPair> otherPairs = other->GetAllRelations();
+		for (const_indexIter indexIt = _interactIndex.begin(); indexIt != _interactIndex.end(); ++indexIt)
+		{
+			shared_ptr<iConcept> from = GetSharedConcept(indexIt->first);
+			shared_ptr<iConcept> to = GetSharedConcept(indexIt->second);
+
+			//If pair in <otherPairs> is duplicated , then remove it.
+			if (!RemoveFirstExistConceptPair(from, to, otherPairs))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	bool ConceptInteractTable::RemoveFirstExistConceptPair(const shared_ptr<iConcept> from, const shared_ptr<iConcept> to,
