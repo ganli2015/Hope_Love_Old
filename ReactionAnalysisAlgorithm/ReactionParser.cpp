@@ -41,14 +41,20 @@ void ReactionParser::Execute()
 {
 	LOG("ReactionParser: Begin");
 
+	//Check how many unknown words there are.
+	//Once there is one unknown, AI will ask about it.
+	//AI cannot deduce the meaning of it and cannot cope with the sentence with unknown words.
 	vector<shared_ptr<DataCollection::Word>> unknownWords=CountUnknownWords(_sentence_input);
 	if(!unknownWords.empty())
 	{
 		AskAboutUnknownWords askAboutUnknownWords(unknownWords);
 		_sentence_output.push_back(askAboutUnknownWords.GenerateReactSentence());
 		LOG("AskAboutUnknownWords");
+		return;
 	}
 	
+	//Deduce the type of sentence.
+	//Only if AI knows the type of sentence, she can answer or ask or behave accordingly.
 	SentenceTypeDetermination typeDetermine;
 	SentenceTypeDetermination::Type type=typeDetermine.Determine(_sentence_input.front());//Cope with the first sentence!
 	LOG("SentenceTypeDetermination");

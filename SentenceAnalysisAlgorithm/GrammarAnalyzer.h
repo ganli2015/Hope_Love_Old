@@ -10,8 +10,19 @@ namespace DataCollection
 	class GrammarPattern;
 }
 
+class WordRep;
+
 class  _SENTENCEANALYSISALGORITHMINOUT GrammarAnalyzer
 {
+private:
+
+	enum AnalyzeResult
+	{
+		TooManyUknownWords,
+		TooManyAmbiguousWords,
+		Fine
+	};
+
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
 	vector<shared_ptr<DataCollection::SegmentedSentence>> _segments;
 
@@ -29,14 +40,17 @@ private:
 	void OptimizePOSofWords();
 	void BuildGrammarAssociationOfWords();
 
+
+	WordRep GetWordRep(shared_ptr<DataCollection::Word> word);
+	int CheckUnknownWords(const vector<shared_ptr<DataCollection::Word>>& words);
+	int CheckAmbiguousWords(const vector<WordRep>& words);
+	void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, vector<vector<shared_ptr<DataCollection::Word>>>& out);
+	void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
+	vector<vector<shared_ptr<DataCollection::Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<DataCollection::Word>> words);
+	void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<DataCollection::Word>>>& combination, vector<shared_ptr<DataCollection::Word>>& optimal);
+
+	GrammarAnalyzer::AnalyzeResult AnalyzeEachSegmented(const vector<shared_ptr<DataCollection::Word>>& segmented, vector<shared_ptr<DataCollection::Word>> &optimal);
+	vector<WordRep> SearchAllWordRep(const vector<shared_ptr<DataCollection::Word>>& segmented_withNoPunc);
+
 };
 
-class WordRep;
-
-WordRep GetWordRep(shared_ptr<DataCollection::Word> word);
-int CheckUnknownWords(const vector<shared_ptr<DataCollection::Word>>& words);
-int CheckAmbiguousWords(const vector<WordRep>& words);
-void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, vector<vector<shared_ptr<DataCollection::Word>>>& out);
-void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
-vector<vector<shared_ptr<DataCollection::Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<DataCollection::Word>> words);
-void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<DataCollection::Word>>>& combination, vector<shared_ptr<DataCollection::Word>>& optimal);

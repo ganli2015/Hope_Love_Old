@@ -84,3 +84,5 @@ HopeLove/obj/x86/Release/MainWindow.g.i.cs
 Hope_Love.suo
 *.asm
 Release/UnitTest.ipdb
+HopeLove/bin/Debug/Objects.txt
+UnitTest/Objects.txt

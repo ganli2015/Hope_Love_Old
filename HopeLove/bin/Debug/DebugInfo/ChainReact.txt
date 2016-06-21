@@ -1,26 +1,20 @@
 input chain: 
-整数 加 整数 
+自己 好感 对方 
 output chains: 
-自己 
-1
-好感 
+自己 也 好感 对方 
 1
 
 input chain: 
-加 整数 加 
+大 程度 好感 对方 
 output chains: 
-自己 
+自己 好感 对方 
 1
 
 input chain: 
-加 整数 加 等于 多少 
+大 好感 对方 
 output chains: 
-干干 
+自己 好感 对方 
 1
-也 
-1
-好感 
-1
-东西 
+也 好感 对方 
 1
 

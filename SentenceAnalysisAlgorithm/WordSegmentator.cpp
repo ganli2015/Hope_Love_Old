@@ -23,8 +23,10 @@ WordSegmentator::~WordSegmentator(void)
 {
 }
 
-void GetAllPossibleSequentialCombine(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& combinations)
+void WordSegmentator::GetAllPossibleSequentialCombine(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& combinations)
 {
+	//Get all continuous combinations of a word sequence.
+	//For example, a b c, the result is a b c, ab c, a bc, and abc.
 	combinations.clear();
 	if(words.empty()) return;
 	if(words.size()==1) 
@@ -69,44 +71,95 @@ void GetAllPossibleSequentialCombine(const vector<shared_ptr<Word>>& words, vect
 	}
 }
 
-void MergeCombination_UandA(const vector<shared_ptr<Word>>& words, const vector<vector<int>>& seqs_UandA , const int index,vector<vector<shared_ptr<Word>>>& combinations)
+void WordSegmentator::AppendLastKnownWordsToCombinations(const vector<shared_ptr<Word>>& words, const vector<vector<int>>& seqs_UandA, vector<vector<shared_ptr<Word>>>& combinations)
 {
-	if(index==seqs_UandA.size())
+	//Collect the words behind the last U_A word.
+	//As it reaches the end of U_A word, remaining words must be known words and 
+	//there is only one combination.
+	vector<shared_ptr<Word>> lastWords;
+	int startIndex = *seqs_UandA.back().rbegin() + 1;
+	for (unsigned int i = startIndex; i < words.size(); ++i)
 	{
-		vector<shared_ptr<Word>> lastWords;
-		int startIndex=*seqs_UandA[index-1].rbegin()+1;
-		
-		for (unsigned int i=startIndex;i<words.size();++i)
-		{
-			lastWords.push_back(words[i]);
-		}
-
-		for (unsigned int i=0;i<combinations.size();++i)
-		{
-			vector<shared_ptr<Word>> newComb=combinations[i];
-			newComb.insert(newComb.end(),lastWords.begin(),lastWords.end());
-			combinations[i]=newComb;
-		}
-
-		return ;
+		lastWords.push_back(words[i]);
 	}
 
-	vector<shared_ptr<Word>> forwardWords;
-	int seqStartIndex=seqs_UandA[index][0];
-	int index_prev;
-	if(index==0)
+	//Connect combinations with the last words.
+	for (unsigned int i = 0; i < combinations.size(); ++i)
 	{
-		index_prev=0;
+		vector<shared_ptr<Word>> newComb = combinations[i];
+		newComb.insert(newComb.end(), lastWords.begin(), lastWords.end());
+		combinations[i] = newComb;
+	}
+}
+
+vector<shared_ptr<Word>> WordSegmentator::CollectKnownWordsBetweenUandAWords(const vector<shared_ptr<Word>>& words, const vector<vector<int>>& seqs_UandA, const int index)
+{
+	//Collect the words between the end U_A word of last sequence and the start U_A word of current  sequence.
+	//If <index> equals to 0, <forwardWords> is empty. 
+	vector<shared_ptr<Word>> forwardWords;
+	int seqStartIndex = seqs_UandA[index][0];
+	int index_prev;
+	if (index == 0)
+	{
+		index_prev = 0;
 	}
 	else
 	{
-		index_prev=*seqs_UandA[index-1].rbegin()+1;
+		index_prev = *seqs_UandA[index - 1].rbegin() + 1;
 	}
-	for (int i=index_prev;i<seqStartIndex;++i)
+	for (int i = index_prev; i < seqStartIndex; ++i)
 	{
 		forwardWords.push_back(words[i]);
 	}
+
+	return forwardWords;
+}
+
+vector<vector<shared_ptr<Word>>> WordSegmentator::GenerateNewCombinations(const vector<shared_ptr<Word>>& forwardWords,
+	const vector<vector<shared_ptr<Word>>>& combinations_UandA, vector<vector<shared_ptr<Word>>>& combinations)
+{
+	vector<vector<shared_ptr<Word>>> newCombinations;
+	for (unsigned int i = 0; i < combinations_UandA.size(); ++i)
+	{
+		//If <index> is zero, <combinations> is empty.
+		//Then connect  <forwardWords> and current U_A words for the first combination.
+		//Otherwise, there are several combinations between <forwardWords> and 
+		//we should connect <forwardWords> with each of combinations before it as well as current U_A words.
+		if (combinations.empty())
+		{
+			vector<shared_ptr<Word>> aCombination;
+			aCombination.insert(aCombination.end(), forwardWords.begin(), forwardWords.end());
+			aCombination.insert(aCombination.end(), combinations_UandA[i].begin(), combinations_UandA[i].end());
+			newCombinations.push_back(aCombination);
+		}
+		else
+		{
+			for (unsigned int j = 0; j < combinations.size(); ++j)
+			{
+				vector<shared_ptr<Word>> aCombination;
+				aCombination.insert(aCombination.end(), combinations[j].begin(), combinations[j].end());
+				aCombination.insert(aCombination.end(), forwardWords.begin(), forwardWords.end());
+				aCombination.insert(aCombination.end(), combinations_UandA[i].begin(), combinations_UandA[i].end());
+				newCombinations.push_back(aCombination);
+			}
+		}
+	}
+
+	return newCombinations;
+}
+
+void WordSegmentator::MergeCombination_UandA(const vector<shared_ptr<Word>>& words, const vector<vector<int>>& seqs_UandA , const int index,vector<vector<shared_ptr<Word>>>& combinations)
+{
+	//After reach the end of <seqs_UandA>, append the words behind the last U_A word to combinations.
+	if(index==seqs_UandA.size())
+	{
+		AppendLastKnownWordsToCombinations(words, seqs_UandA, combinations);
+		return ;
+	}
+
+	vector<shared_ptr<Word>> forwardWords = CollectKnownWordsBetweenUandAWords(words, seqs_UandA, index);
 	
+	//Collect all U_A words of current sequence and search all possible combinations.
 	vector<shared_ptr<Word>> uandAwords(seqs_UandA[index].size());
 	for (unsigned int i=0;i<seqs_UandA[index].size();++i)
 	{
@@ -114,39 +167,23 @@ void MergeCombination_UandA(const vector<shared_ptr<Word>>& words, const vector<
 	}
 	vector<vector<shared_ptr<Word>>> combinations_UandA;
 	GetAllPossibleSequentialCombine(uandAwords,combinations_UandA);
-	vector<vector<shared_ptr<Word>>> newCombinations;
-	for (unsigned int i=0;i<combinations_UandA.size();++i)
-	{
-		if(combinations.empty())
-		{
-			vector<shared_ptr<Word>> aCombination;
-			aCombination.insert(aCombination.end(),forwardWords.begin(),forwardWords.end());
-			aCombination.insert(aCombination.end(),combinations_UandA[i].begin(),combinations_UandA[i].end());
-			newCombinations.push_back(aCombination);
-		}
-		else
-		{
-			for (unsigned int j=0;j<combinations.size();++j)
-			{
-				vector<shared_ptr<Word>> aCombination;
-				aCombination.insert(aCombination.end(),combinations[j].begin(),combinations[j].end());
-				aCombination.insert(aCombination.end(),forwardWords.begin(),forwardWords.end());
-				aCombination.insert(aCombination.end(),combinations_UandA[i].begin(),combinations_UandA[i].end());
-				newCombinations.push_back(aCombination);
-			}
-		}
-		
-		
-	}
+
+	//Go through every U_A word combination.
+	//And its diverse combination contribute to final diversity of sentence combinations.
+	vector<vector<shared_ptr<Word>>> newCombinations=GenerateNewCombinations(forwardWords, combinations_UandA, combinations);
+
+	//Step into the next U_A word sequence and continue to explore combinations.
 	combinations=newCombinations;
 	MergeCombination_UandA(words,seqs_UandA,index+1,combinations);
 
 }
 
-void SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& segmented)
+void WordSegmentator::SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& segmented)
 {
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
+	//Collect all continuous U_A words in <words> and each of sequences will append to <seqs_UandA>.
+	//There are many combinations in each continuous U_A sequence.
 	unsigned int i=0;
 	vector<vector<int>> seqs_UandA; 
 	while(i<words.size())
@@ -164,7 +201,9 @@ void SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vecto
 		++i;
 	}
 
-	if(seqs_UandA.empty())//one way
+	//If there is no U_A words, then there is only one combination.
+	//Otherwise, go through all U_A words and find all combinations.
+	if(seqs_UandA.empty())
 	{
 		segmented.push_back(words);
 		return ;

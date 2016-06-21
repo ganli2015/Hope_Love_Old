@@ -54,7 +54,7 @@ GrammarAnalyzer::GrammarAnalyzer( shared_ptr<DataCollection::Sentence> sen)
 	_raw_sen=sen;
 }
 
-WordRep GetWordRep(shared_ptr<Word> word)
+WordRep GrammarAnalyzer::GetWordRep(shared_ptr<Word> word)
 {
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 	WordRep wordrep;
@@ -74,7 +74,7 @@ WordRep GetWordRep(shared_ptr<Word> word)
 	return wordrep;
 }
 
-int CheckUnknownWords(const vector<shared_ptr<Word>>& words)
+int GrammarAnalyzer::CheckUnknownWords(const vector<shared_ptr<Word>>& words)
 {
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
@@ -90,7 +90,7 @@ int CheckUnknownWords(const vector<shared_ptr<Word>>& words)
 }
 
 
-int CheckAmbiguousWords(const vector<WordRep>& words)
+int GrammarAnalyzer::CheckAmbiguousWords(const vector<WordRep>& words)
 {
 	int count(0);
 	for (unsigned int i=0;i<words.size();++i)
@@ -122,7 +122,7 @@ public:
 	}
 };
 
-void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, vector<vector<shared_ptr<Word>>>& out)
+void GrammarAnalyzer::GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, vector<vector<shared_ptr<Word>>>& out)
 {
 	if(index<0) return;
 
@@ -149,7 +149,7 @@ void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, v
 }
 
 
-void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word>> words, const int index, vector<vector<shared_ptr<Word>>>& out)
+void GrammarAnalyzer::GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word>> words, const int index, vector<vector<shared_ptr<Word>>>& out)
 {
 	if(index<0) return;
 
@@ -195,7 +195,7 @@ void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word>> words, const i
 	
 }
 
-vector<vector<shared_ptr<Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<Word>> words)
+vector<vector<shared_ptr<Word>>> GrammarAnalyzer::SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<Word>> words)
 {
 	vector<int> unknown_ambiguous_vec;
 	for (unsigned int i=0;i<words.size();++i)
@@ -218,7 +218,7 @@ vector<vector<shared_ptr<Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<
 }
 
 
-void SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combination, vector<shared_ptr<Word>>& optimal)
+void GrammarAnalyzer::SelectOptimalGrammarPattern(const vector<vector<shared_ptr<Word>>>& combination, vector<shared_ptr<Word>>& optimal)
 {
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
@@ -257,78 +257,97 @@ bool GrammarAnalyzer::Analyze()
 
 void GrammarAnalyzer::OptimizePOSofWords()
 {
-	int unknown_ambiguous_Limit=2;
-	bool containUnknownWord(false);
-	bool containAmbiguousWord(false);
+	vector<vector<shared_ptr<Word>>> candidates;
 
-	vector<vector<shared_ptr<Word>>> candidates;//存入所有的可能性，再选择最优的。
-
+	//Go through all segmented sentences and find the most optimal.
+	//There will be only one sentence survive!
 	for (unsigned int i=0;i<_segments.size();++i)
 	{
-		vector<shared_ptr<Word>> segmented=_segments[i]->Get();
-		pair<vector<shared_ptr<Word>>,vector<shared_ptr<Word>>> sen_punc =LanguageFunc::TrimEndPunctures(segmented);
-		vector<shared_ptr<Word>> segmented_withNoPunc=sen_punc.first;
-		vector<shared_ptr<Word>> punc=sen_punc.second;
-
-		//Get all kinds of part of speech of each word
-		vector<WordRep> segmente_allRep(segmented_withNoPunc.size());
-		for (unsigned int j=0;j<segmented_withNoPunc.size();++j)
-		{
-			segmente_allRep[j]=GetWordRep(segmented_withNoPunc[j]);
-		}
-
-		int count_unknown=CheckUnknownWords(segmented_withNoPunc);
-		if(count_unknown>0)
-		{
-			containUnknownWord=true;
-		}
-		if(count_unknown>unknown_ambiguous_Limit)
-		{
-			return;
-		}
-
-		int count_ambiguous=CheckAmbiguousWords(segmente_allRep);
-		if(count_ambiguous>0)
-		{
-			containAmbiguousWord=true;
-		}
-		if(count_ambiguous+count_unknown>unknown_ambiguous_Limit)
-		{
-			return;
-		}
-
-		//Get all combinations according to  POS of each word.
-		vector<vector<shared_ptr<Word>>> possi_Combine;
-		GetAllPossibleCombine(segmente_allRep.size()-1,segmente_allRep,possi_Combine);
-
-
-		//Compute the count of pattern match of each combination.
+		vector<shared_ptr<Word>> segmented = _segments[i]->Get();
 		vector<shared_ptr<Word>> optimal;
-		if(containUnknownWord || containAmbiguousWord)
-		{
-			for (unsigned int j=0;j<possi_Combine.size();++j)
-			{
-				vector<vector<shared_ptr<Word>>> spannedCombination=SpanUnknownAndAmbiguousToEveryPOS(possi_Combine[j]);//Let the unknown word span over every POS.
-				SelectOptimalGrammarPattern(spannedCombination,optimal);
-			}
-		}
-		else
-		{
-			SelectOptimalGrammarPattern(possi_Combine,optimal);
-		}
+		AnalyzeResult result = AnalyzeEachSegmented(segmented, optimal);
 
-		optimal.insert(optimal.end(),punc.begin(),punc.end());
 		candidates.push_back(optimal);
 		//_raw_sen->AddGrammard(optimal);
 	}
 	
-
+	//After go through segmented sentences, there are several candidates for final sentence.
+	//And now we continue to select one of them for convenience of following computation.
 	vector<shared_ptr<Word>> mostOptimal;
 	SelectOptimalGrammarPattern(candidates,mostOptimal);
-	//当前只处理只有一个间断标点的短句子.
 	_raw_sen->SetGrammard(mostOptimal);
 }
 
+vector<WordRep> GrammarAnalyzer::SearchAllWordRep(const vector<shared_ptr<Word>>& segmented_withNoPunc)
+{
+	//Search all words in Cerebrum and
+	//find all known POS of each word for every possible combination.
+	vector<WordRep> segmente_allRep(segmented_withNoPunc.size());
+	for (unsigned int j = 0; j < segmented_withNoPunc.size(); ++j)
+	{
+		segmente_allRep[j] = GetWordRep(segmented_withNoPunc[j]);
+	}
+
+	return segmente_allRep;
+}
+
+GrammarAnalyzer::AnalyzeResult GrammarAnalyzer::AnalyzeEachSegmented(const vector<shared_ptr<Word>>& segmented, vector<shared_ptr<Word>> &optimal)
+{
+	int unknown_ambiguous_Limit = 2;
+	bool containUnknownWord(false);
+	bool containAmbiguousWord(false);
+
+	//Separate words with punctures as punctures will interfere grammar analysis.
+	pair<vector<shared_ptr<Word>>, vector<shared_ptr<Word>>> sen_punc = LanguageFunc::TrimEndPunctures(segmented);
+	vector<shared_ptr<Word>> segmented_withNoPunc = sen_punc.first;
+	vector<shared_ptr<Word>> punc = sen_punc.second;
+
+	vector<WordRep> segmente_allRep = SearchAllWordRep(segmented_withNoPunc);
+
+	//If the number of unknown and ambiguous words exceed the limit, then it is hard and inaccurate to analyze.
+	int count_unknown = CheckUnknownWords(segmented_withNoPunc);
+	if (count_unknown > 0)
+	{
+		containUnknownWord = true;
+	}
+	if (count_unknown > unknown_ambiguous_Limit)
+	{
+		return TooManyUknownWords;
+	}
+	int count_ambiguous = CheckAmbiguousWords(segmente_allRep);
+	if (count_ambiguous > 0)
+	{
+		containAmbiguousWord = true;
+	}
+	if (count_ambiguous + count_unknown > unknown_ambiguous_Limit)
+	{
+		return TooManyAmbiguousWords;
+	}
+
+	//Get all combinations according to  POS of each word.
+	//Each word has several POS and collection all combinations.
+	vector<vector<shared_ptr<Word>>> possi_Combine;
+	GetAllPossibleCombine(segmente_allRep.size() - 1, segmente_allRep, possi_Combine);
+
+	//Compute the count of pattern match of each combination.
+	if (containUnknownWord || containAmbiguousWord)
+	{
+		//For each U_A word, we consider its POS arbitrary and go through every POS.
+		for (unsigned int j = 0; j < possi_Combine.size(); ++j)
+		{
+			vector<vector<shared_ptr<Word>>> spannedCombination = SpanUnknownAndAmbiguousToEveryPOS(possi_Combine[j]);//Let the unknown word span over every POS.
+			SelectOptimalGrammarPattern(spannedCombination, optimal);
+		}
+	}
+	else
+	{
+		SelectOptimalGrammarPattern(possi_Combine, optimal);
+	}
+
+	optimal.insert(optimal.end(), punc.begin(), punc.end());
+
+	return Fine;
+}
 
 
 void GrammarAnalyzer::BuildGrammarAssociationOfWords()

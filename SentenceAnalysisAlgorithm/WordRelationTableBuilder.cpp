@@ -54,9 +54,15 @@ void WordRelationTableBuilder::BuildConceptInteractTable( const shared_ptr<DataC
 
 	shared_ptr<iConcept> fromConcept=brain->GetConcept(from);
 	shared_ptr<iConcept> toConcept=brain->GetConcept(to);
+
+	//If either of from or to concept is null, we cannot get the interaction concept pairs of their base concepts,
+	//as AI has no knowledge of the null concept.
+	if(fromConcept!=NULL && toConcept!=NULL)
+	{
+		shared_ptr<iConceptInteractTable> baseTable = fromConcept->DeepInteractWith(toConcept);
+		_baseTable->Absorb(baseTable);
+		_protoTable->Add(fromConcept, toConcept);
+	}
 	
-	shared_ptr<iConceptInteractTable> baseTable=fromConcept->DeepInteractWith(toConcept);
-	_baseTable->Absorb(baseTable);
-	_protoTable->Add(fromConcept,toConcept);
 
 }

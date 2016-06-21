@@ -58,7 +58,7 @@ void RunUnitTest(int argc, _TCHAR* argv[])
 
 }
 
-#define _RUN_PERFORMANCE
+//#define _RUN_PERFORMANCE
 
 Initializer init;
 int _cdecl _tmain(int argc, _TCHAR* argv[])
