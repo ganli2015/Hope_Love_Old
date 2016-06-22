@@ -15,7 +15,7 @@ public:
 	~Punctuator(void);
 	
 	///Punctuate the input sentence and the result will store in <punctuated> as several sub sentences.
-	///The input sentence will be separated according to end-of-sentence punctures. 
+	///The input sentence will be separated according to end-of-sentence punctuations. 
 	bool Punctuate(shared_ptr<DataCollection::Sentence>& punctuated);
 
 	//std::vector<shared_ptr<DataCollection::Sentence>> GetPunctuated() const {return _punctuated;}
