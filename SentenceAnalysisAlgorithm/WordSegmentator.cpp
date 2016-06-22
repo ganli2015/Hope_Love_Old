@@ -35,19 +35,26 @@ void WordSegmentator::GetAllPossibleSequentialCombine(const vector<shared_ptr<Wo
 		return ;
 	}
 
+	//Use divide-and-conquer to get all combinations.
+	//Each combination can be divide into two parts:
+	//first few continuous words and all combinations of remaining words.
+	//Then connect them.
 	for (unsigned int i=0;i<words.size();++i)
 	{
+		//Collect first few continuous words.
 		Word newword=*words[0];
 		for (unsigned int j=1;j<=i;++j)
 		{
 			newword=newword+*words[j];
 		}
 
+		//Get all combinations of remaining words.
 		vector<shared_ptr<Word>> restWords;
 		restWords.insert(restWords.end(),words.begin()+i+1,words.end());
 		vector<vector<shared_ptr<Word>>> tmp_combinations;
 		GetAllPossibleSequentialCombine(restWords,tmp_combinations);
 		
+		//Connect.
 		vector<vector<shared_ptr<Word>>> newtmp_combinations;
 		if(tmp_combinations.empty())
 		{
@@ -227,13 +234,15 @@ bool WordSegmentator::Segment(  )
 
 void WordSegmentator::SegmentSubsentence( const string subsentence )
 {
+	//Separate words with punctuations as only words need to be segmented.
 	vector<Character> raw=ConvertStringToCharacter(subsentence);
 	pair<vector<Character>,vector<Character>> sen_punc =LanguageFunc::TrimEndPunctures(raw);
 	vector<Character> raw_noPunc=sen_punc.first;
 	vector<Character> punc=sen_punc.second;
 
 	vector<CharacterProperty> vec_characterProperty;
-	//find the candidate word of each character
+	//Find the candidate word of each character.
+	//The first character of each word is <chara>.
 	for (unsigned int i=0;i<raw_noPunc.size();++i)
 	{
 		Character chara=raw_noPunc[i];
@@ -242,7 +251,8 @@ void WordSegmentator::SegmentSubsentence( const string subsentence )
 		vec_characterProperty.push_back(characterProperty);
 	}
 
-	//pick the longest candidate word of each character to compose the sentence
+	//Pick the longest candidate word of each character to compose the sentence.
+	//It is experiential.We assume the sentence made with fewest words as possible.
 	unsigned int index(0);
 	vector<shared_ptr<Word>> initial_segmented;
 	while(index<raw_noPunc.size())
@@ -253,9 +263,12 @@ void WordSegmentator::SegmentSubsentence( const string subsentence )
 		index+=step;
 	}
 
+	//Collect all combinations according to U_A words.
+	//How to determine the desired combination is things behind.
 	vector<vector<shared_ptr<Word>>> segmented;
 	SegmentMannersAccordingToUandA(initial_segmented,segmented);
 
+	//Recover punctuations.
 	vector<shared_ptr<Word>> punc_words=LanguageFunc::ConvertPuncturesToWords(punc);
 	for (unsigned int i=0;i<segmented.size();++i)
 	{
@@ -278,8 +291,12 @@ WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(co
 	{
 		curWord.KnowIt();
 	}
-	characterProperty.candidate.push_back(curWord);//当前的字一定是候选之一，否则如果没有找到新的候选，那么characterProperty.candidate就会是空容器，会引起后面的错误。
+	//The current character must be a candidate whether it is unknown or not.
+	//This is for the following computation.
+	characterProperty.candidate.push_back(curWord);
 
+	//Determine the longest candidate of <character>.
+	//We do not need to search to the end of the sentence, but only to search to the max possible length of candidates.
 	unsigned int maxLength_Word=brain->MaxLength_WordWithHead(shared_ptr<Character>(new Character(chara)));//Get the max length of the forward adjacent word, to determine how further we should search in the raw sentence.
 	Word possibleWord(chara.GetString());//find the possible word related with the character
 	for (unsigned int j=1;j<=maxLength_Word;++j)
@@ -325,7 +342,8 @@ std::vector<DataCollection::Character> WordSegmentator::ConvertStringToCharacter
 
 vector<shared_ptr<DataCollection::SegmentedSentence>> WordSegmentator::GetAllSegementedSentence() const
 {
-	//每个元素表示一个子句子对应的所有分词方式.
+	//Collect all manners of segmentation of all sub sentences.
+	//Each element of <subSentenSeg> is all manners of segmentation of one sub sentence.
 	vector<vector<shared_ptr<SegmentedSentence>>> subSentenSeg; 
 	for (unsigned int i=0;i<_unsegmented->Count_SubSentence();++i)
 	{
@@ -343,9 +361,9 @@ vector<shared_ptr<DataCollection::SegmentedSentence>> WordSegmentator::GetAllSeg
 		subSentenSeg.push_back(allSeg);
 	}
 
-	//每个元素表示完整句子的分词序列.
+	//Go through all combinations of each sub sentence and connect them into all possible sentence.
 	vector<vector<shared_ptr<SegmentedSentence>>> segSequence= Math::GetAllCombinations<shared_ptr<SegmentedSentence>>::Get(subSentenSeg);
-	//把<segSequence>的每个元素组合成一个完整的句子.
+	
 	vector<shared_ptr<SegmentedSentence>> res;
 	res.reserve(segSequence.size());
 	for (unsigned int i=0;i<segSequence.size();++i)
