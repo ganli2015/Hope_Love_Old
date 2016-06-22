@@ -13,18 +13,21 @@ class StructureAnalyzer
 	shared_ptr<DataCollection::Sentence> _raw_sen;//unanalyzed
 
 public:
+	///The input sentence should have built grammara association.
 	StructureAnalyzer( shared_ptr<DataCollection::Sentence> sen);
 	~StructureAnalyzer(void);
 
+	///Build intensity relation between associated words and store intensity values in the input sentence.
 	bool Analyze();
 
 	shared_ptr<DataCollection::Sentence> GetResult(){return _raw_sen;}
 private:
-	//¼ÆËã°üº¬µÚword1_index¸öwordºÍµÚword2_index¸öwordµÄGrammarPatternµÄÆµÂÊµÄ×ÜºÍ¡£word1_assoIndexesÊÇÓëword1Ïà¹ØÁªµÄÓï·¨Ä£Ê½¶ÔÓ¦µÄwordĞòºÅ£¬word1_assoPatternsÊÇÃ¿Ò»×éĞòºÅ¶ÔÓ¦µÄÓï·¨Ä£Ê½¡£
+	///è®¡ç®—åŒ…å«ç¬¬word1_indexä¸ªwordå’Œç¬¬word2_indexä¸ªwordçš„GrammarPatternçš„é¢‘ç‡çš„æ€»å’Œã€‚word1_assoIndexesæ˜¯ä¸word1ç›¸å…³è”çš„è¯­æ³•æ¨¡å¼å¯¹åº”çš„wordåºå·ï¼Œword1_assoPatternsæ˜¯æ¯ä¸€ç»„åºå·å¯¹åº”çš„è¯­æ³•æ¨¡å¼ã€‚
 	int TotalPatternFrequency(const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns);
-	//Compute pattern frequency only if <word1_index> and <word2_index> are adjacent index in <word1_assoIndexes>.
+	///Compute pattern frequency only if <word1_index> and <word2_index> are adjacent index in <word1_assoIndexes>.
 	int TotalPatternFrequency2(const int word1_index,const int word2_index,const vector<vector<int>>& word1_assoIndexes,const vector<DataCollection::GrammarPattern>& word1_assoPatterns);
 	vector<vector<double>> NormalizeFreqMatrix(const vector<vector<int>>& freqMatrix);
+	///Input <intensityMatrix> to the input sentence.
 	void SetEachWordIntenstiy(const vector<vector<double>>& intensityMatrix);
 	bool IsAdjacentInVec(const int word1_index,const int word2_index,const vector<int>& vec);
 };
