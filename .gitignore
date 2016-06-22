@@ -66,8 +66,10 @@ Temporary Items
 *.res
 *.lastbuildstate
 *.cache
-HopeLove/obj/*.*
-HopeLove/bin/*.*
+HopeLove/obj/x86/Debug/*.*
+HopeLove/obj/x86/Release/*.*
+HopeLove/bin/Debug/*.*
+HopeLove/bin/Release/*.*
 UnitTest/Objects.txt
 UnitTest/Debug/*.*
 GlobalInterface/obj/*.*
