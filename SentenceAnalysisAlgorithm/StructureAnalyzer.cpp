@@ -22,15 +22,26 @@ StructureAnalyzer::~StructureAnalyzer(void)
 
 bool StructureAnalyzer::Analyze()
 {
-	vector<vector<int>> tri_matrix;//Èý½Ç¾ØÕó£¬¼ÇÂ¼Á½Á½wordµÄÓï·¨Ä£Ê½µÄ×ÜÆµÂÊ£¬²»°üº¬Óë×ÔÉíµÄÆµÂÊ£¬ËùÒÔÊÇ¸öÉÏÈý½Ç¾ØÕó¡£
+	//The triangular matrix records the total frequencies between two words. 
+	//The row index and column index represent the index of words in the sentence.
+	//It exclude the intensity of each word itself, so it diagonal is all zeroes.
+	//The matrix is upper triangular.
+	vector<vector<int>> tri_matrix;
 	for (unsigned int j=0;j<_raw_sen->GrammarWordCount();++j)
 	{
+		//Get all grammar patterns that current word is related with.
 		vector<vector<int>> associatedIndexes;
 		vector<GrammarPattern> associatedPatterns;
 		_raw_sen->GetAssociationInfo(j,associatedIndexes,associatedPatterns);
+		//Compute the intensity between the current word and words behind it.
+		//Words in front of the current word have been computed in previous iterations.
 		vector<int> freqRow;
 		for (unsigned int k=j+1;k<_raw_sen->GrammarWordCount();++k)
 		{
+			//Only words adjacent in <associatedIndexes> contribute to the total frequency.
+			//It means that the relation of words in a grammar pattern is as local as possible.
+			//It does not mean one word can not interact with words faraway and 
+			//it propagates the interaction through intermediate words in a grammar pattern.
 			int totalFreq=TotalPatternFrequency2(j,k,associatedIndexes,associatedPatterns);
 			freqRow.push_back(totalFreq);
 		}
@@ -55,7 +66,7 @@ int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int wo
 	for (unsigned int i=0;i<word1_assoIndexes.size();++i)
 	{
 		vector<int> assoIndexes=word1_assoIndexes[i];
-		if(find(assoIndexes.begin(),assoIndexes.end(),word2_index)!=assoIndexes.end()) //Èç¹ûassoIndexes°üº¬word2_index£¬±ãÍ³¼ÆÏà¶ÔÓ¦µÄÓï·¨Ä£Ê½µÄÆµÂÊ
+		if(find(assoIndexes.begin(),assoIndexes.end(),word2_index)!=assoIndexes.end()) //å¦‚æžœassoIndexesåŒ…å«word2_indexï¼Œä¾¿ç»Ÿè®¡ç›¸å¯¹åº”çš„è¯­æ³•æ¨¡å¼çš„é¢‘çŽ‡
 		{
 			int freq=brain->GetFreqencyofPattern(word1_assoPatterns[i]);
 			totalFreq+=freq;
@@ -66,6 +77,7 @@ int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int wo
 
 vector<vector<double>> StructureAnalyzer::NormalizeFreqMatrix( const vector<vector<int>>& freqMatrix )
 {
+	//Compute the sum of elements of the matrix.
 	double sum(0);
 	for (unsigned int i=0;i<freqMatrix.size();++i)
 	{
@@ -75,6 +87,7 @@ vector<vector<double>> StructureAnalyzer::NormalizeFreqMatrix( const vector<vect
 		}
 	}
 
+	//Each element divides the sum.
 	vector<vector<double>> res;
 	for (unsigned int i=0;i<freqMatrix.size();++i)
 	{
@@ -109,6 +122,7 @@ int StructureAnalyzer::TotalPatternFrequency2( const int word1_index,const int w
 
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
+	//Only <word1_index> and <word2_index> are adjacent in <word1_assoIndexes> will contribute to the result.
 	int totalFreq(0);
 	for (unsigned int i=0;i<word1_assoIndexes.size();++i)
 	{
