@@ -27,14 +27,18 @@ bool Punctuator::Punctuate( shared_ptr<DataCollection::Sentence>& punctuated )
 	{
 		vector<shared_ptr<Character>>::iterator chara_it=find_if(sen_it,unpun.end(),LanguageFunc::IsPuncEndofSentence);
 
-		if(chara_it==unpun.end()) //if there is no punctuation in the end
+ 		//if there is no punctuation in the end, then add the remaining sentence.
+		if(chara_it==unpun.end())
 		{
 			vector<shared_ptr<Character>> aSen(sen_it,chara_it);
 			punctuated->AddSubSentence(aSen);
 			break;
 		}
 
-		//find the next character which is not a punctuation
+		//Find the next character which is not a punctuation.
+		//There may be several continuous punctuation around <chara_it>.
+		//For example, 你好。。。.
+		//We need to skip those punctuations and include all of them in the current sub sentence.
 		do 
 		{
 			++chara_it;
