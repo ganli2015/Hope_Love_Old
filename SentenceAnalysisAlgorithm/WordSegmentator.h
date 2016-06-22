@@ -45,6 +45,7 @@ private:
 	std::vector<DataCollection::Character> ConvertStringToCharacter(const string str) const ;
 	WordSegmentator::CharacterProperty GenerateCharacterProperty(const DataCollection::Character& chara,const int myIndex,const vector<DataCollection::Character>& raw_noPunc);
 
+	///Get all combinations considering the different combination of U_A words.
 	void SegmentMannersAccordingToUandA(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& segmented);
 	void GetAllPossibleSequentialCombine(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& combinations);
 
@@ -53,7 +54,10 @@ private:
 	///When U_A words in <words> are continuous , there will be several combinations of them.
 	///Then one element of <seqs_UandA> is one continuous U_A word sequence in <words>.
 	void MergeCombination_UandA(const vector<shared_ptr<DataCollection::Word>>& words, const vector<vector<int>>& seqs_UandA, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& combinations);
+	///Append the words behind the last U_A word to combinations.
 	void AppendLastKnownWordsToCombinations(const vector<shared_ptr<DataCollection::Word>>& words, const vector<vector<int>>& seqs_UandA, vector<vector<shared_ptr<DataCollection::Word>>>& combinations);
+	///Collect the words between the end word of seqs_UandA[index-1] and the start word of seqs_UandA[index] .
+	///They are all known words.
 	vector<shared_ptr<DataCollection::Word>> CollectKnownWordsBetweenUandAWords(const vector<shared_ptr<DataCollection::Word>>& words, const vector<vector<int>>& seqs_UandA, const int index);
 	vector<vector<shared_ptr<DataCollection::Word>>> GenerateNewCombinations(const vector<shared_ptr<DataCollection::Word>>& forwardWords, const vector<vector<shared_ptr<DataCollection::Word>>>& combinations_UandA, vector<vector<shared_ptr<DataCollection::Word>>>& combinations);
 };
