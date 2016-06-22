@@ -57,7 +57,12 @@ private:
 	///Each word has several POS, and consider all possible combination of them.
 	void GetAllPossibleCombine(const int index, const vector<WordRep>& wordRepSet, vector<vector<shared_ptr<DataCollection::Word>>>& out);
 	
+
 	void GetAllUnknownAmbiguousCombine(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
+	///Span the word <words[index]> through all kinds of POS.
+	///Then connect them with previous calculated combinations <latterCombinations>.
+	vector<vector<shared_ptr<DataCollection::Word>>> SpanUandAWords(const vector<shared_ptr<DataCollection::Word>>& words, const int index, const vector<vector<shared_ptr<DataCollection::Word>>>& latterCombinations);
+	void SpanNonUandAWords(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
 	///If there are U_A words in <words>, we consider each U_A word's POS range from Noun to Interjection.
 	///And get all possible combinations according to U_A words.
 	vector<vector<shared_ptr<DataCollection::Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<DataCollection::Word>> words);

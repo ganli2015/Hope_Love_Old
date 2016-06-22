@@ -4,6 +4,7 @@
 namespace DataCollection
 {
 	class Sentence;
+	class Character;
 }
 
 ///Algorithm of punctuating a sentence.
@@ -18,6 +19,10 @@ public:
 	///The input sentence will be separated according to end-of-sentence punctuations. 
 	bool Punctuate(shared_ptr<DataCollection::Sentence>& punctuated);
 
-	//std::vector<shared_ptr<DataCollection::Sentence>> GetPunctuated() const {return _punctuated;}
+	///Compute sub sentence from <unpun>.
+	///<sen_it> denotes the start of the sub sentence and <chara_it> the end of the sub sentence.
+	///After getting sub sentence, <sen_it> and <chara_it> will refresh.
+	vector<shared_ptr<DataCollection::Character>> ComputeSubSentence(const vector<shared_ptr<DataCollection::Character>>& unpun, vector<shared_ptr<DataCollection::Character>>::iterator& sen_it, 
+		vector<shared_ptr<DataCollection::Character>>::iterator& chara_it);
 };
 

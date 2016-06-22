@@ -152,6 +152,47 @@ void GrammarAnalyzer::GetAllPossibleCombine(const int index, const vector<WordRe
 	GetAllPossibleCombine(index-1,wordRepSet,out);
 }
 
+vector<vector<shared_ptr<Word>>> GrammarAnalyzer::SpanUandAWords(const vector<shared_ptr<Word>>& words, const int index,
+	const vector<vector<shared_ptr<Word>>>& latterCombinations)
+{
+	vector<vector<shared_ptr<Word>>> newout;
+	for (unsigned int i = 0; i < DataCollection::NUM_PARTOFSPEECH; ++i)
+	{
+		shared_ptr<Word> newword = LanguageFunc::GetParticularWord(words[index]->GetString(), PartOfSpeech(i));
+		if (index != words.size() - 1)
+		{
+			vector<vector<shared_ptr<Word>>> tmpout(latterCombinations.size());
+			transform(latterCombinations.begin(), latterCombinations.end(), tmpout.begin(), pushfrontval(newword));
+			newout.insert(newout.end(), tmpout.begin(), tmpout.end());
+		}
+		else
+		{
+			//As usual ,the last word does not connect to the latter combinations 
+			//as it is the start of iterations.
+			vector<shared_ptr<Word>> oneword;
+			oneword.push_back(newword);
+			newout.push_back(oneword);
+		}
+	}
+
+	return newout;
+}
+
+void GrammarAnalyzer::SpanNonUandAWords(const vector<shared_ptr<Word>> words, const int index,vector<vector<shared_ptr<Word>>>& out)
+{
+	if (!out.empty())
+	{
+		vector<vector<shared_ptr<Word>>> newout(out.size());
+		transform(out.begin(), out.end(), newout.begin(), pushfrontval(words[index]));
+		out = newout;
+	}
+	else
+	{
+		vector<shared_ptr<Word>> oneword;
+		oneword.push_back(words[index]);
+		out.push_back(oneword);
+	}
+}
 
 void GrammarAnalyzer::GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word>> words, const int index, vector<vector<shared_ptr<Word>>>& out)
 {
@@ -161,40 +202,13 @@ void GrammarAnalyzer::GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word
 	if(pos==Unknown || pos==Ambiguous)
 	{
 		//For U_A word, span the word from Noun to Interjection and generate all combinations with other words.
-		vector<vector<shared_ptr<Word>>> newout;
-		for (unsigned int i=0;i<DataCollection::NUM_PARTOFSPEECH;++i)
-		{
-			shared_ptr<Word> newword=LanguageFunc::GetParticularWord(words[index]->GetString(),PartOfSpeech(i));
-			if(index!=words.size()-1)
-			{
-				vector<vector<shared_ptr<Word>>> tmpout(out.size());
-				transform(out.begin(),out.end(),tmpout.begin(),pushfrontval(newword));
-				newout.insert(newout.end(),tmpout.begin(),tmpout.end());
-			}
-			else
-			{
-				vector<shared_ptr<Word>> oneword;
-				oneword.push_back(newword);
-				newout.push_back(oneword);
-			}
-		}
+		vector<vector<shared_ptr<Word>>> newout = SpanUandAWords(words, index, out);
 		out=newout;
 	}
 	else
 	{
 		//For non U_A word, simply connect it to combinations.
-		if(!out.empty())
-		{
-			vector<vector<shared_ptr<Word>>> newout(out.size());
-			transform(out.begin(),out.end(),newout.begin(),pushfrontval(words[index]));
-			out=newout;
-		}
-		else
-		{
-			vector<shared_ptr<Word>> oneword;
-			oneword.push_back(words[index]);
-			out.push_back(oneword);
-		}
+		SpanNonUandAWords(words, index, out);
 	}
 
 	GetAllUnknownAmbiguousCombine(words,index-1,out);
@@ -360,7 +374,6 @@ GrammarAnalyzer::AnalyzeResult GrammarAnalyzer::AnalyzeEachSegmented(const vecto
 
 	return Fine;
 }
-
 
 void GrammarAnalyzer::BuildGrammarAssociationOfWords()
 {

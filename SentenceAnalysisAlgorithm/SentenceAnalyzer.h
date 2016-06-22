@@ -20,8 +20,10 @@ public:
 	~SentenceAnalyzer(void);
 	SentenceAnalyzer(const std::string sen);
 
+	///Analyze the input sentence and generate the internal relation between words in the sentence.
 	void Analyze();
 
+	///Return the unknown words in the input sentence.
 	vector<shared_ptr<DataCollection::Word>> GetUnknownWords() const {return _unknownWords;};
 	shared_ptr<DataCollection::Sentence> GetAnalyzedSentences() const {return _analyzedSentences;}
 private:

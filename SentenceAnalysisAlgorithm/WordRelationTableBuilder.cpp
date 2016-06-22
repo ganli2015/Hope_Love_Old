@@ -30,9 +30,11 @@ bool WordRelationTableBuilder::Build()
 {
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 
+	//The lower limit of the intensity.
+	//Only if the intensity of two concepts is above the limit,then the pair will contribute to the result.
 	double intensity_lowerlimit=1./10;
 
-	for (unsigned int i=0;i<_raw_sen->GrammarWordCount();++i)//暂时只考虑第一个语法句子
+	for (unsigned int i=0;i<_raw_sen->GrammarWordCount();++i)
 	{
 		for (unsigned int j=i+1;j<_raw_sen->GrammarWordCount();++j)
 		{

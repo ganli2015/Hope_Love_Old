@@ -66,7 +66,7 @@ int StructureAnalyzer::TotalPatternFrequency( const int word1_index,const int wo
 	for (unsigned int i=0;i<word1_assoIndexes.size();++i)
 	{
 		vector<int> assoIndexes=word1_assoIndexes[i];
-		if(find(assoIndexes.begin(),assoIndexes.end(),word2_index)!=assoIndexes.end()) //å¦‚æžœassoIndexesåŒ…å«word2_indexï¼Œä¾¿ç»Ÿè®¡ç›¸å¯¹åº”çš„è¯­æ³•æ¨¡å¼çš„é¢‘çŽ‡
+		if(find(assoIndexes.begin(),assoIndexes.end(),word2_index)!=assoIndexes.end()) //Èç¹ûassoIndexes°üº¬word2_index£¬±ãÍ³¼ÆÏà¶ÔÓ¦µÄÓï·¨Ä£Ê½µÄÆµÂÊ
 		{
 			int freq=brain->GetFreqencyofPattern(word1_assoPatterns[i]);
 			totalFreq+=freq;

@@ -55,27 +55,34 @@ void WordSegmentator::GetAllPossibleSequentialCombine(const vector<shared_ptr<Wo
 		GetAllPossibleSequentialCombine(restWords,tmp_combinations);
 		
 		//Connect.
-		vector<vector<shared_ptr<Word>>> newtmp_combinations;
-		if(tmp_combinations.empty())
-		{
-			vector<shared_ptr<Word>> new_combination;
-			new_combination.push_back(shared_ptr<Word>(new Word(newword)));
-			newtmp_combinations.push_back(new_combination);
-		}
-		else
-		{
-			for (unsigned int j=0;j<tmp_combinations.size();++j)
-			{
-				vector<shared_ptr<Word>> new_combination;
-				new_combination.push_back(shared_ptr<Word>(new Word(newword)));
-				new_combination.insert(new_combination.end(),tmp_combinations[j].begin(),tmp_combinations[j].end());
-				newtmp_combinations.push_back(new_combination);
-			}
-		}
-		
+		vector<vector<shared_ptr<Word>>> newtmp_combinations = ConnectCurrentWordWithSubCombinations(newword, tmp_combinations);	
 
 		combinations.insert(combinations.end(),newtmp_combinations.begin(),newtmp_combinations.end());
 	}
+}
+
+vector<vector<shared_ptr<Word>>> WordSegmentator::ConnectCurrentWordWithSubCombinations(const Word& newword,const vector<vector<shared_ptr<Word>>>& sub_combinations)
+{
+	//Each sub combination contributes to new combinations.
+	vector<vector<shared_ptr<Word>>> newtmp_combinations;
+	if (sub_combinations.empty())
+	{
+		vector<shared_ptr<Word>> new_combination;
+		new_combination.push_back(shared_ptr<Word>(new Word(newword)));
+		newtmp_combinations.push_back(new_combination);
+	}
+	else
+	{
+		for (unsigned int j = 0; j < sub_combinations.size(); ++j)
+		{
+			vector<shared_ptr<Word>> new_combination;
+			new_combination.push_back(shared_ptr<Word>(new Word(newword)));
+			new_combination.insert(new_combination.end(), sub_combinations[j].begin(), sub_combinations[j].end());
+			newtmp_combinations.push_back(new_combination);
+		}
+	}
+
+	return newtmp_combinations;
 }
 
 void WordSegmentator::AppendLastKnownWordsToCombinations(const vector<shared_ptr<Word>>& words, const vector<vector<int>>& seqs_UandA, vector<vector<shared_ptr<Word>>>& combinations)
@@ -187,26 +194,9 @@ void WordSegmentator::MergeCombination_UandA(const vector<shared_ptr<Word>>& wor
 
 void WordSegmentator::SegmentMannersAccordingToUandA(const vector<shared_ptr<Word>>& words, vector<vector<shared_ptr<Word>>>& segmented)
 {
-	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
-
 	//Collect all continuous U_A words in <words> and each of sequences will append to <seqs_UandA>.
 	//There are many combinations in each continuous U_A sequence.
-	unsigned int i=0;
-	vector<vector<int>> seqs_UandA; 
-	while(i<words.size())
-	{
-		vector<int> seq_UandA;
-		while(i<words.size() && brain->GetAllKindsofWord(words[i]).empty())//if the word is unknown or ambiguous
-		{
-			seq_UandA.push_back(i++);
-		}
-
-		if(!seq_UandA.empty())
-		{
-			seqs_UandA.push_back(seq_UandA);
-		}
-		++i;
-	}
+	vector<vector<int>> seqs_UandA=ComputeUandAIndexes(words); 
 
 	//If there is no U_A words, then there is only one combination.
 	//Otherwise, go through all U_A words and find all combinations.
@@ -220,6 +210,31 @@ void WordSegmentator::SegmentMannersAccordingToUandA(const vector<shared_ptr<Wor
 		MergeCombination_UandA(words,seqs_UandA,0,segmented);
 	}
 
+}
+
+vector<vector<int>> WordSegmentator::ComputeUandAIndexes(const vector<shared_ptr<Word>>& words)
+{
+	Mind::iCerebrum *brain = Mind::iCerebrum::Instance();
+
+	unsigned int i = 0;
+	vector<vector<int>> seqs_UandA;
+	while (i < words.size())
+	{
+		vector<int> seq_UandA;
+		//Search for continuous U_A words.
+		while (i < words.size() && brain->GetAllKindsofWord(words[i]).empty())//if the word is unknown or ambiguous
+		{
+			seq_UandA.push_back(i++);
+		}
+
+		if (!seq_UandA.empty())
+		{
+			seqs_UandA.push_back(seq_UandA);
+		}
+		++i;
+	}
+
+	return seqs_UandA;
 }
 
 bool WordSegmentator::Segment(  )

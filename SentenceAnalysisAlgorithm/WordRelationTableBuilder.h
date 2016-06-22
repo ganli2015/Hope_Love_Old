@@ -26,6 +26,7 @@ public:
 	WordRelationTableBuilder( shared_ptr<DataCollection::Sentence> sen);
 	~WordRelationTableBuilder(void);
 
+	///Build a table containing interactions between concepts of the input sentence.
 	bool Build();
 	///Return the interact table that contain interactions between base concepts of prototype concepts.
 	const shared_ptr<Mind::iConceptInteractTable> GetBaseInteractTable() const {return _baseTable;}

@@ -41,17 +41,19 @@ void SentenceAnalyzer::Analyze()
 	LOG("SentenceAnalyzer: Begin");
 
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
-
+	//Punctuate the sentence into several sub sentence.
 	Punctuator punctuator(_rawSentenceString);
 	shared_ptr<DataCollection::Sentence> sentence(new Sentence(_rawSentenceString));
 	punctuator.Punctuate(sentence);
 	LOG("Punctuator");
 
+	//Segment the sentence and get all manners of segmented sentences.
 	WordSegmentator wordsegmentor(sentence);
 	wordsegmentor.Segment();
 	vector<shared_ptr<SegmentedSentence>> segmented=wordsegmentor.GetAllSegementedSentence();
 	LOG("WordSegmentator");
 
+	//Compute the optimal POS of each words in the sentence.
 	GrammarAnalyzer grammarAnalyzer(sentence);
 	for (unsigned int i=0;i<segmented.size();++i)
 	{
@@ -65,6 +67,7 @@ void SentenceAnalyzer::Analyze()
 		Cout_GrammardSentence(sentence);
 #endif // _DEBUG
 
+	//Compute the relationship between words in the sentence.
 	StructureAnalyzer structureAnalyzer(sentence);
 	structureAnalyzer.Analyze();
 	LOG("StructureAnalyzer");
@@ -74,7 +77,7 @@ void SentenceAnalyzer::Analyze()
 		Cout_WordConnectionIntensity(sentence);
 #endif
 
-	//统计不认识的词语
+	//Count unknown words.
 	_unknownWords=CountUnknownWords(sentence);
 
 	_analyzedSentences=sentence;

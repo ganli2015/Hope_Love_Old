@@ -47,8 +47,12 @@ private:
 
 	///Get all combinations considering the different combination of U_A words.
 	void SegmentMannersAccordingToUandA(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& segmented);
+	vector<vector<int>> ComputeUandAIndexes(const vector<shared_ptr<DataCollection::Word>>& words);
 	void GetAllPossibleSequentialCombine(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& combinations);
 
+	///Connect the <newword> with all <sub_combinations>
+	///and return new connected sentences.
+	vector<vector<shared_ptr<DataCollection::Word>>> ConnectCurrentWordWithSubCombinations(const DataCollection::Word& newword, const vector<vector<shared_ptr<DataCollection::Word>>>& sub_combinations);
 	///Search all possible combinations of unknown and ambiguous words in <words> and output them <combinations>.
 	///<seqs_UandA> are indexes of unknown and ambiguous words in words.
 	///When U_A words in <words> are continuous , there will be several combinations of them.
