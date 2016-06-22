@@ -20,7 +20,7 @@ using namespace DataCollection;
 using namespace CommonTool;
 
 
-
+///Contain several possible POS of a word.
 class WordRep
 {
 	std::vector<shared_ptr<DataCollection::Word>> _rep;
@@ -61,6 +61,7 @@ WordRep GrammarAnalyzer::GetWordRep(shared_ptr<Word> word)
 	vector<shared_ptr<Word>> rep=brain->GetAllKindsofWord(word);
 	if(rep.size()==0)
 	{
+		//If the word is unknows, we still append it to the result for following convenience.
 		wordrep.Add(word);
 		return wordrep;
 	}
@@ -95,7 +96,8 @@ int GrammarAnalyzer::CheckAmbiguousWords(const vector<WordRep>& words)
 	int count(0);
 	for (unsigned int i=0;i<words.size();++i)
 	{
-		if(words[i].Size()!=1) continue;//Contain only one ambiguous word.
+		///If it is an ambiguous word , its WordRep must contain only one element.
+		if(words[i].Size()!=1) continue;
 
 		if(words[i].GetAllRep().at(0)->Type()==Ambiguous)
 		{
@@ -128,9 +130,11 @@ void GrammarAnalyzer::GetAllPossibleCombine(const int index, const vector<WordRe
 
 	vector<shared_ptr<Word>> rep=wordRepSet[index].GetAllRep();
 	vector<vector<shared_ptr<Word>>> newout;
+	//Go through each POS of the current word.
+	//For each POS, connect the word with the old combination.
 	for (unsigned int i=0;i<rep.size();++i)
 	{
-		if(index!=wordRepSet.size()-1)//把rep[i]弹入<out>里每一句的结尾
+		if(index!=wordRepSet.size()-1)
 		{
 			vector<vector<shared_ptr<Word>>> tmpCombine(out.size());
 			transform(out.begin(),out.end(),tmpCombine.begin(),pushfrontval(rep[i]));
@@ -156,6 +160,7 @@ void GrammarAnalyzer::GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word
 	PartOfSpeech pos=words[index]->Type();
 	if(pos==Unknown || pos==Ambiguous)
 	{
+		//For U_A word, span the word from Noun to Interjection and generate all combinations with other words.
 		vector<vector<shared_ptr<Word>>> newout;
 		for (unsigned int i=0;i<DataCollection::NUM_PARTOFSPEECH;++i)
 		{
@@ -177,6 +182,7 @@ void GrammarAnalyzer::GetAllUnknownAmbiguousCombine(const vector<shared_ptr<Word
 	}
 	else
 	{
+		//For non U_A word, simply connect it to combinations.
 		if(!out.empty())
 		{
 			vector<vector<shared_ptr<Word>>> newout(out.size());
@@ -206,6 +212,7 @@ vector<vector<shared_ptr<Word>>> GrammarAnalyzer::SpanUnknownAndAmbiguousToEvery
 		}
 	}
 
+	//If there is no U_A word, we do not need to span.
 	vector<vector<shared_ptr<Word>>> res;
 	if(unknown_ambiguous_vec.empty()) 
 	{
@@ -213,6 +220,8 @@ vector<vector<shared_ptr<Word>>> GrammarAnalyzer::SpanUnknownAndAmbiguousToEvery
 		return res;
 	}
 
+	//The action of span starts from the end of the sentence.
+	//The U_A word will span to every POS and other words simply connect.
 	GetAllUnknownAmbiguousCombine(words,words.size()-1,res);
 	return res;
 }
@@ -222,7 +231,9 @@ void GrammarAnalyzer::SelectOptimalGrammarPattern(const vector<vector<shared_ptr
 {
 	Mind::iCerebrum *brain=Mind::iCerebrum::Instance();
 
-	//目标值，等于GrammarPattern的总频率乘以其局域的概率值.
+	//The object value to select the most optimal combination.
+	//The value equals to sum of frequencies of incorporated grammar patterns as well as local grammar confidence.
+	//It means that the optimal combinatin must satisfy grammar statistic information.
 	double maxValueFun(-1);
 	for (unsigned int i=0;i<combination.size();++i)
 	{
@@ -230,6 +241,7 @@ void GrammarAnalyzer::SelectOptimalGrammarPattern(const vector<vector<shared_ptr
 		vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
 		if(matchedPattern.empty()) continue;;
 
+		//Sum frequencies of incorporated grammar patterns.
 		int freq_sum(0);
 		for (unsigned int j=0;j<matchedPattern.size();++j)
 		{
@@ -360,6 +372,9 @@ void GrammarAnalyzer::BuildGrammarAssociationOfWords()
 		return;
 	}
 
+	//Build grammar association according to grammar patterns the sentence contains.
+	//Grammar patterns reflect the internal structure of the sentence and
+	//They provide informatin about which words are related.
 	GrammarPattern pattern=LanguageFunc::ConvertToPattern(grammard);
 	vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
 	_raw_sen->BuildGrammarAssociation(matchedPattern);
