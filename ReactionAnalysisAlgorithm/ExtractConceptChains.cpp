@@ -9,8 +9,6 @@
 
 using namespace Mind;
 
-// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::iConceptChain>>> ExtractConceptChains::_forwardTable;
-// map<shared_ptr<Mind::iConcept>,vector<shared_ptr<Mind::iConceptChain>>> ExtractConceptChains::_backwardTable;
 
 int ExtractConceptChains::_recursiveCount=0;
 const int ExtractConceptChains::_recursiveMaxCount=100;
@@ -18,28 +16,39 @@ const int ExtractConceptChains::_recursiveMaxCount=100;
 vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vector<ConceptPair>& pairs )
 {
 	vector<ConceptPair> pairs_copy=pairs;
+	//Remove bad concept pairs as they will cause the following iteration divergent.
 	RemoveBadPairs(pairs_copy);
 
 	vector<shared_ptr<iConceptChain>> res;
 
 	for (unsigned int i=0;i<pairs_copy.size();++i)
 	{
+		//For each pair containing two concepts , From and To,
+		//search backward of From and get a chain whose tail is From.
+		//Then search forward of To and get a chain whose head is To.
+		//Lastly, merge back chains and forward chains considering all combinations.
+
+		//Search backward.
+		//Record the count of iterations to avoid endless loop.
 		_recursiveCount=0;
 		shared_ptr<iConceptChain> relatedChain_Back=iMindElementCreator::CreateConceptChain();
 		relatedChain_Back->Push_Back(pairs_copy[i].first);
 		vector<shared_ptr<iConceptChain>> backChains;
 		Recursive_Search(Backward,pairs_copy[i].first,pairs_copy,relatedChain_Back,backChains);
 
-		_recursiveCount=0;
+		//Search forward.
+		_recursiveCount = 0;
 		shared_ptr<iConceptChain> relatedChain_Forward=iMindElementCreator::CreateConceptChain();
 		relatedChain_Forward->Push_Back(pairs_copy[i].second);
 		vector<shared_ptr<iConceptChain>> forwardChains;
 		Recursive_Search(Forward,pairs_copy[i].second,pairs_copy,relatedChain_Forward,forwardChains);
 
+		//Collect closed chains which will be appended to results 
 		vector<shared_ptr<iConceptChain>> closedChain_back=CollectAndRemoveClosedChains(backChains);
 		vector<shared_ptr<iConceptChain>> closedChain_for=CollectAndRemoveClosedChains(forwardChains);
 
-		//合并，遍历所有组合方式。
+		//Merge back chains and forward chains considering all combinations.
+		//Each combination is a chain in <pairs>.
 		vector<shared_ptr<iConceptChain>> curChains=Merge(backChains,forwardChains);
 		res.insert(res.end(),curChains.begin(),curChains.end());
 		res.insert(res.end(),closedChain_back.begin(),closedChain_back.end());
@@ -52,13 +61,9 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vec
 void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	const shared_ptr<Mind::iConcept> curConcept,
 	const vector<ConceptPair>& pairs,
-	const shared_ptr<Mind::iConceptChain>& relatedChain,//记录遍历相邻节点前的包含 curConcept的Chain，便于相邻的iConcept能添加上去。
-	vector<shared_ptr<Mind::iConceptChain>>& chains )//所有Chains
+	const shared_ptr<Mind::iConceptChain>& relatedChain,
+	vector<shared_ptr<Mind::iConceptChain>>& chains )
 {
-	// 	if(HasSearched(curConcept,dir,chains))//如果已经递归搜索过curConcept，那么直接从表格里读取。
-	// 	{
-	// 		return;
-	// 	}
 	_recursiveCount++;
 	Check(_recursiveCount<=_recursiveMaxCount);
 
@@ -67,7 +72,8 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 		throw runtime_error("Error in Recursive_Search");
 	}
 
-	//获得相邻的iConcept
+	//Get adjacent concepts.
+	//They will extend <relatedChain>.
 	vector<shared_ptr<iConcept>> adjConcepts;
 	if (dir==Forward)
 	{
@@ -78,34 +84,32 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 		adjConcepts=GetBackwordAdjConcepts(curConcept,pairs);
 	}
 
-	if(adjConcepts.empty())//如果没有相邻的iConcept，那么把和curConcept相关的Chain都存到<chain>里，并停止递归。
+	//If there is no adjacent concepts, then it indicates I search the end of the chain.
+	//Recursion is end.
+	if(adjConcepts.empty())
 	{
 		chains.push_back(relatedChain);
 		return;
 	}
 
-	vector<shared_ptr<Mind::iConceptChain>> curChains;//存储遍历相邻节点之后包含curConcept的所有的chain
+	//<curChains> store chains containing <curConcept>.
+	//They will be computed in the recursion of <curConcept>'s adjacent concepts, i.e,<adjConcepts>.
+	//All <curChains> of <adjConcepts> construct <curChains> of <curConcept>.
+	vector<shared_ptr<Mind::iConceptChain>> curChains;
 	for (unsigned int i=0;i<adjConcepts.size();++i)
 	{
-		//对<relatedChains>补充，建立包含forwardConcepts[i]的Chains。
+		//Extend <relatedChain> with <adjConcepts[i]>.
+		//<newRelatedChains> contributes to the NEW recursion in terms of <adjConcepts[i]>.
 		shared_ptr<iConceptChain> newRelatedChains=AppendToChains(adjConcepts[i],relatedChain,dir);
-		if(relatedChain->Contain(adjConcepts[i]))//如果这是个闭环，那么就无需递归下去，但是这个闭环会被保留下来。
+		//If <relatedChain> is a closed chain, recursion is end.
+		//Otherwise , it will become endless loop.
+		if(relatedChain->Contain(adjConcepts[i]))
 		{
 			curChains.push_back(newRelatedChains);
 		}
 		else
 			Recursive_Search(dir,adjConcepts[i],pairs,newRelatedChains,curChains);
 	}
-
-	//记录curConcept所对应的chains，便于以后使用。
-	// 	if (dir==Forward)
-	// 	{
-	// 		_forwardTable[curConcept]=curChains;
-	// 	}
-	// 	else
-	// 	{
-	// 		_backwardTable[curConcept]=curChains;
-	// 	}
 
 	chains.insert(chains.end(),curChains.begin(),curChains.end());
 }
@@ -153,37 +157,11 @@ shared_ptr<Mind::iConceptChain> ExtractConceptChains::AppendToChains( const shar
 	return res;
 }
 
-// bool ExtractConceptChains::HasSearched( const shared_ptr<Mind::iConcept> concept,const SearchDir dir,vector<shared_ptr<Mind::iConceptChain>>& chains )
-// {
-// 	if(dir==Forward)
-// 	{
-// 		if(_forwardTable.find(concept)!=_forwardTable.end())
-// 		{
-// 			chains=_forwardTable[concept];
-// 			return true;
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if(_backwardTable.find(concept)!=_backwardTable.end())
-// 		{
-// 			chains=_backwardTable[concept];
-// 			return true;
-// 		}
-// 		else
-// 		{
-// 			return false;
-// 		}
-// 	}
-// }
 
 vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Merge( const vector<shared_ptr<Mind::iConceptChain>>& backChains,
 	const vector<shared_ptr<Mind::iConceptChain>>& forwardChains )
 {
+	//Merge all combination of <backChains> and <forwardChains>.
 	vector<shared_ptr<Mind::iConceptChain>> res;
 	res.reserve(backChains.size()*forwardChains.size());
 	for (unsigned int i=0;i<backChains.size();++i)
@@ -202,7 +180,7 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Merge( const vecto
 
 void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 {
-	//去掉含有相同iConcept的pair
+	//Remove pairs whose first and second concepts are the same.
 	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
 	{
 		if(it->first->Same(it->second))
@@ -238,7 +216,7 @@ void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 		}
 	};
 
-	//去掉相同的pair
+	//Remove duplicated pairs .
 	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
 	{
 		vector<ConceptPair>::iterator findIt=find_if(it+1,pairs.end(),SameConceptPair(*it));
@@ -288,10 +266,3 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::CollectAndRemoveCl
 
 	return res;
 }
-
-// void ExtractConceptChains::ClearTable()
-// {
-// 	_backwardTable.clear();
-// 	_forwardTable.clear();
-// }
-

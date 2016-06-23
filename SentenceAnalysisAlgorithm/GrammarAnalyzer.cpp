@@ -61,7 +61,7 @@ WordRep GrammarAnalyzer::GetWordRep(shared_ptr<Word> word)
 	vector<shared_ptr<Word>> rep=brain->GetAllKindsofWord(word);
 	if(rep.size()==0)
 	{
-		//If the word is unknows, we still append it to the result for following convenience.
+		//If the word is unknows, I still append it to the result for following convenience.
 		wordrep.Add(word);
 		return wordrep;
 	}
@@ -226,7 +226,7 @@ vector<vector<shared_ptr<Word>>> GrammarAnalyzer::SpanUnknownAndAmbiguousToEvery
 		}
 	}
 
-	//If there is no U_A word, we do not need to span.
+	//If there is no U_A word, I do not need to span.
 	vector<vector<shared_ptr<Word>>> res;
 	if(unknown_ambiguous_vec.empty()) 
 	{
@@ -298,7 +298,7 @@ void GrammarAnalyzer::OptimizePOSofWords()
 	}
 	
 	//After go through segmented sentences, there are several candidates for final sentence.
-	//And now we continue to select one of them for convenience of following computation.
+	//And now I continue to select one of them for convenience of following computation.
 	vector<shared_ptr<Word>> mostOptimal;
 	SelectOptimalGrammarPattern(candidates,mostOptimal);
 	_raw_sen->SetGrammard(mostOptimal);
@@ -358,7 +358,7 @@ GrammarAnalyzer::AnalyzeResult GrammarAnalyzer::AnalyzeEachSegmented(const vecto
 	//Compute the count of pattern match of each combination.
 	if (containUnknownWord || containAmbiguousWord)
 	{
-		//For each U_A word, we consider its POS arbitrary and go through every POS.
+		//For each U_A word, I consider its POS arbitrary and go through every POS.
 		for (unsigned int j = 0; j < possi_Combine.size(); ++j)
 		{
 			vector<vector<shared_ptr<Word>>> spannedCombination = SpanUnknownAndAmbiguousToEveryPOS(possi_Combine[j]);//Let the unknown word span over every POS.

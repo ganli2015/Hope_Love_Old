@@ -138,7 +138,7 @@ vector<vector<shared_ptr<Word>>> WordSegmentator::GenerateNewCombinations(const 
 		//If <index> is zero, <combinations> is empty.
 		//Then connect  <forwardWords> and current U_A words for the first combination.
 		//Otherwise, there are several combinations between <forwardWords> and 
-		//we should connect <forwardWords> with each of combinations before it as well as current U_A words.
+		//I should connect <forwardWords> with each of combinations before it as well as current U_A words.
 		if (combinations.empty())
 		{
 			vector<shared_ptr<Word>> aCombination;
@@ -312,7 +312,7 @@ WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(co
 
 	//Determine the longest candidate of <character>.
 	//We do not need to search to the end of the sentence, but only to search to the max possible length of candidates.
-	unsigned int maxLength_Word=brain->MaxLength_WordWithHead(shared_ptr<Character>(new Character(chara)));//Get the max length of the forward adjacent word, to determine how further we should search in the raw sentence.
+	unsigned int maxLength_Word=brain->MaxLength_WordWithHead(shared_ptr<Character>(new Character(chara)));//Get the max length of the forward adjacent word, to determine how further I should search in the raw sentence.
 	Word possibleWord(chara.GetString());//find the possible word related with the character
 	for (unsigned int j=1;j<=maxLength_Word;++j)
 	{

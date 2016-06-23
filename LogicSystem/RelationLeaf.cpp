@@ -101,20 +101,6 @@ namespace LogicSystem
 
 			return true;
 		}
-
-// 		for (unsigned int i=0;i<matchedPairSeq.size();++i)
-// 		{
-// 			if(SatifyConstraint(matchedPairSeq[i],_constraints))//Any of them satisfies ,then we consider <expre> satisfying.
-// 			{
-// 				_satisfiedSequence=matchedPairSeq[i];
-// 
-// 				return true;
-// 			}
-// 		}
-// 
-// 		_satisfiedSequence.clear();
-// 
-// 		return false;
 	}
 
 	vector<iRelation::PairSequence> RelationLeaf::FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const

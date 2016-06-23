@@ -13,6 +13,8 @@ std::vector<shared_ptr<DataCollection::Word>> SentenceTypeDetermination::_linkVe
 
 SentenceTypeDetermination::SentenceTypeDetermination()
 {
+	//Initialize interrogative pronouns and link verbs.
+	//They are essential for determination of interrogative sentences.
 	if(_interrogativePronouns.empty() || _linkVerb.empty())
 	{
 		_interrogativePronouns.clear();
@@ -84,6 +86,7 @@ bool SentenceTypeDetermination::IsInterrogative(const shared_ptr<DataCollection:
 shared_ptr<DataCollection::Sentence> SentenceTypeDetermination::ExtractQuetionPart(const shared_ptr<DataCollection::Sentence> sen, const int linkVerbIndex)
 {
 	//Collect the words in the front of the link verb.
+	//Currently I consider the words in front of the link verb are all question part.
 	string questionPartStr = "";
 	vector<shared_ptr<Word>> questionPartWords;
 	questionPartWords.reserve(linkVerbIndex);

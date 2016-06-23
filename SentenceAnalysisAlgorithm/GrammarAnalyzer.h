@@ -33,7 +33,7 @@ public:
 
 	///Analyze input segmented sentences and mark each word of sentence with the most optimal POS.
 	///And build association among words according to their internal grammar pattern.
-	///Currently we can only copy with sentences with only one puntuation of end side.
+	///Currently I can only copy with sentences with only one puntuation of end side.
 	bool Analyze();
 	///Add segmented manner of the input sentence.
 	///Each segmented sentence will contribute to grammar analysis of the input sentence.
@@ -63,7 +63,7 @@ private:
 	///Then connect them with previous calculated combinations <latterCombinations>.
 	vector<vector<shared_ptr<DataCollection::Word>>> SpanUandAWords(const vector<shared_ptr<DataCollection::Word>>& words, const int index, const vector<vector<shared_ptr<DataCollection::Word>>>& latterCombinations);
 	void SpanNonUandAWords(const vector<shared_ptr<DataCollection::Word>> words, const int index, vector<vector<shared_ptr<DataCollection::Word>>>& out);
-	///If there are U_A words in <words>, we consider each U_A word's POS range from Noun to Interjection.
+	///If there are U_A words in <words>, I consider each U_A word's POS range from Noun to Interjection.
 	///And get all possible combinations according to U_A words.
 	vector<vector<shared_ptr<DataCollection::Word>>> SpanUnknownAndAmbiguousToEveryPOS(const vector<shared_ptr<DataCollection::Word>> words);
 	///Select the most optimal combination according to grammar patterns.

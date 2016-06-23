@@ -74,6 +74,8 @@ vector<ConceptChainProperty> ChainGenerator::ChainReact( const vector<shared_ptr
 {
 	vector<ConceptChainProperty> res;
 
+	//Compute react chains based on the data from Cerebrum.
+	//Chains are experimental and each of them have some confidence which stores in <ConceptChainProperty>.
 	ofstream out("DebugInfo//ChainReact.txt");
 	for (unsigned int i=0;i<chains.size();++i)
 	{
@@ -81,7 +83,6 @@ vector<ConceptChainProperty> ChainGenerator::ChainReact( const vector<shared_ptr
 		if(properties.empty()) continue;
 		OutputChainProperty(chains[i],properties,out);
 
-		//vector<shared_ptr<iConceptChain>> selected=RandomSelectChains(properties);
 		res.insert(res.end(),properties.begin(),properties.end());
 	}
 

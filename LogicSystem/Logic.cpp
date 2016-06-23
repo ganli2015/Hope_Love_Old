@@ -417,7 +417,7 @@ namespace LogicSystem
 		{
 			vector<shared_ptr<iDeduceResult>> deduceRes=Deduce(*table);
 			TableList deduceTable=ToConceptTable(deduceRes);
-			//If we can deduce something from <noChangedTables>, the current table will be kicked out from <noChangedTables>.
+			//If I can deduce something from <noChangedTables>, the current table will be kicked out from <noChangedTables>.
 			//Otherwise, the current table will stay in <noChangedTables>.
 			if(!deduceTable.empty())
 			{

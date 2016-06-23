@@ -32,11 +32,17 @@ void ChainAnalyzer::Analyze(const vector<Mind::ConceptChainProperty>& baseChains
 	ofstream out("DebugInfo//HyperChains.txt");
 	for (unsigned int i=0;i<baseChains.size();++i)
 	{
+		//Base chains constitute of base concepts which hardly construct a sentence.
+		//Then I search concepts over base concepts, which are hyper concepts.
+		//Hyper concepts can construct a sentence more likely.
 		ConceptChainProperty property=baseChains[i];
 		vector<shared_ptr<iConceptChain>> hyperChains;
 		ComputeHyperChains(property.chain,hyperChains);
 		if(hyperChains.empty()) continue;
 
+		//Currently I select hyper chains of the max level.
+		//I think the chain level reflect the language level.
+		//But it need more consideration.
 		vector<double> levels;
 		ComputeHyperChainLevels(hyperChains,baseChains[i].chain,levels);
 		vector<HyperChainInfo> hyperInfos=AssembleHyperChainInfo(hyperChains,levels,property.confidence);
@@ -58,19 +64,26 @@ void ChainAnalyzer::ComputeHyperChains( const shared_ptr<iConceptChain> baseChai
 {
 	vector<shared_ptr<iConcept>> conceptSequence=baseChain->GetConceptVec();
 
-	vector<vector<shared_ptr<iConcept>>> backwardConceptSequence;//存放所有backward concept的容器，第i个元素表示conceptSequence的第i个concept的所有backward concept。
+	//Hyper concept vector.
+	//Each element of <backwardConceptSequence> is collection of hyper concepts of a base concept in <baseChain>.
+	vector<vector<shared_ptr<iConcept>>> backwardConceptSequence;
 	backwardConceptSequence.reserve(conceptSequence.size());
 	for (unsigned int i=0;i<conceptSequence.size();++i)
 	{
+		//Hyper concepts are actually backward concepts.
 		vector<shared_ptr<iConcept>> backConcepts=_brain->SearchBackwardConcepts(conceptSequence[i]);
 		backConcepts.push_back(conceptSequence[i]);
 		backwardConceptSequence.push_back(backConcepts);
 	}
 
-	//所有backward concept的可能组合序列
+	//Transform hyper chain collection to all possible combinations of concept chains.
+	//Each element of <combinations> is concepts in one hyper chain.
 	vector<vector<shared_ptr<iConcept>>> combinations=Math::GetAllCombinations<shared_ptr<iConcept>>::Get(backwardConceptSequence);
 	for (unsigned int i=0;i<combinations.size();++i)
 	{
+		//Compute chains that cover base concepts in <baseChain>.
+		//The result <properCombi> may be not as long as <combinations> and it is perhaps a sub chain of <combinations>.
+		//If a chain can cover <baseChain>, it will be accepted as one of <properCombi>.
 		vector<shared_ptr<iConceptChain>> properCombi=ComputeProperCombination(combinations[i],baseChain);
 		hyperChains.insert(hyperChains.end(),properCombi.begin(),properCombi.end());
 	}
@@ -96,7 +109,8 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,con
 {
 	typedef pair<shared_ptr<Mind::iConcept>,shared_ptr<Mind::iConcept>> ConceptPair;
 
-	//计算两两Concept之间的相互作用，得到所有相互作用对。
+	//Compute interactions of adjacent concepts in <hyperChain>.
+	//Derive all concepts pairs which are base concepts.
 	vector<ConceptPair> allPairs;
 	for (unsigned int i=0;i<hyperChain.size()-1;++i)
 	{
@@ -105,7 +119,7 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,con
 		allPairs.insert(allPairs.end(),basePairs.begin(),basePairs.end());
 	}
 
-	//对allPairs提取所有的Concept Chain。
+	//Extract concept chains in <allPairs>.
 	vector<shared_ptr<iConceptChain>> chains;
 	try
 	{
@@ -115,6 +129,8 @@ bool ChainAnalyzer::CoverBase(const vector<shared_ptr<iConcept>>& hyperChain,con
 	{
 		throw;
 	}
+	//Check all chains until <baseChain> is a sub sequence of one chain.
+	//It means <baseChains> is incorporated in <hyperChain> and its order is consistent with order of <hyperChain>.
 	for (unsigned int i=0;i<chains.size();++i)
 	{
 		if(baseChain->IsSubSequenceOf(chains[i]))
