@@ -42,7 +42,7 @@ vector<shared_ptr<Mind::iConceptChain>> LogicReactor::ConvertToSubChains( const 
 		return res;
 	}
 	
-	//Contain puncture
+	//<grammaWords> contains punctuation which should be removed for analysis.
 	vector<shared_ptr<Word>> grammaWords=sen->GetGrammard();
 	vector<shared_ptr<Word>> grammaWords_NoPunc=LanguageFunc::RemovePuncs(grammaWords);
 	CREATE_FUNCTOR_R(ToConcept,shared_ptr<Word>,shared_ptr<iConcept>,
@@ -51,6 +51,7 @@ vector<shared_ptr<Mind::iConceptChain>> LogicReactor::ConvertToSubChains( const 
 		return con;
 	);
 	//Transform words to concepts.
+	//Concepts are derived from Cerebrum.
 	vector<shared_ptr<iConcept>> concepts(grammaWords_NoPunc.size());
 	try
 	{
@@ -61,6 +62,7 @@ vector<shared_ptr<Mind::iConceptChain>> LogicReactor::ConvertToSubChains( const 
 		return res;
 	}
 
+	//Get all sub sequences.
 	vector<vector<shared_ptr<iConcept>>> subConceptsSequence=Math::GetAllSubSequence<shared_ptr<iConcept>>::Get(concepts);
 	//Transform concepts to concept chains.
 	CREATE_FUNCTOR_R(ToConceptChain,vector<shared_ptr<iConcept>>,shared_ptr<iConceptChain>,
@@ -73,8 +75,10 @@ vector<shared_ptr<Mind::iConceptChain>> LogicReactor::ConvertToSubChains( const 
 
 shared_ptr<Sentence> LogicReactor::Analyze( const shared_ptr<DataCollection::Sentence> sen ) const
 {
+	//Transfrom sen to iExpression as iExpression is the interface of logic analysis.
 	shared_ptr<iExpression> expre = iLogicElementCreator::CreateExpression(sen);
 
+	//Get results of deduction.
 	shared_ptr<iLogic> logic=iLogicElementCreator::CreateLogic();
 	vector<shared_ptr<iDeduceResult>> deduceRes=logic->FinalDeduce(expre);
 	if(deduceRes.empty())
@@ -83,8 +87,10 @@ shared_ptr<Sentence> LogicReactor::Analyze( const shared_ptr<DataCollection::Sen
 	}
 
 	//Currently only consider the first result.
+	//Because I have no idea how to select one of them.
 	shared_ptr<iDeduceResult> firstRes=deduceRes.front();
 	//Currently only consider the concept result.
+	//Because I have no idea how to transform concept table to a sentence.
 	shared_ptr<iConcept> conRes=firstRes->GetSingleConcept();
 	if(conRes!=NULL)
 	{
