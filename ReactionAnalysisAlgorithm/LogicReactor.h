@@ -26,6 +26,8 @@ public:
 	LogicReactor(void);
 	~LogicReactor(void);
 
+	//Analyze <sen> and analyze its logical part if it has.
+	//Return the deduction of its logical part.
 	shared_ptr<DataCollection::Sentence> Analyze(const shared_ptr<DataCollection::Sentence> sen) const;
 
 private:
