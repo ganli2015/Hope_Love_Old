@@ -16,6 +16,7 @@ namespace DataCollection
 class SentenceGenerator
 {
 private:
+	///SentenceInfo contains information of a hyper chain and the frequency of grammar patterns it contains.
 	struct SentenceInfo
 	{
 		shared_ptr<Mind::iConceptChain> hyperChain;
@@ -30,6 +31,7 @@ public:
 	SentenceGenerator(void);
 	~SentenceGenerator(void);
 
+	///Generate a sentence from the input hyperchains.
 	void Generate(const vector<shared_ptr<Mind::iConceptChain>>& hyperChains);
 	shared_ptr<DataCollection::Sentence> GetSentence() const {return _sentence;}
 private:
