@@ -33,6 +33,10 @@ void SentenceGenerator::Generate( const vector<shared_ptr<Mind::iConceptChain>>&
 	sentenceInfo.reserve(hyperChains.size());
 	for (unsigned int i=0;i<hyperChains.size();++i)
 	{
+		//Select a hyper chain, get grammar patterns it contains and compute their total frequency.
+		//The higher frequency is desired.
+		//I simply transform the concept chain to a sentence according to concepts the chain contains.
+		//Currently I have no idea how to transform a concept chain to a sentence with a more complicated trick. 
 		GrammarPattern pattern=ChainToPattern(hyperChains[i]);
 		vector<GrammarPattern> subPatterns=_brain->ContainSubsequence(pattern);
 		SentenceInfo info;
@@ -48,12 +52,14 @@ void SentenceGenerator::Generate( const vector<shared_ptr<Mind::iConceptChain>>&
 	{
 		return;
 	}
+	//Random select a sentence with equal possibility. 
 	int selectedIndex=Rand::GetRandInt(0,selectedInfos.size()-1);
 	_sentence=ChainToSentence(selectedInfos[selectedIndex].hyperChain);
 }
 
 DataCollection::GrammarPattern SentenceGenerator::ChainToPattern( const shared_ptr<Mind::iConceptChain> chain ) const
 {
+	//Get each POS of concepts in <chain> and convert them to grammar pattern.
 	vector<shared_ptr<iConcept>> conceptVec=chain->GetConceptVec();
 	vector<PartOfSpeech> pos;
 	pos.reserve(conceptVec.size());
@@ -101,6 +107,8 @@ vector<SentenceGenerator::SentenceInfo> SentenceGenerator::SelectHyperChainsOfMa
 
 	if(hyperChainInfos.empty()) return vector<SentenceGenerator::SentenceInfo>();
 
+	//Compute the max frequency of grammar patterns of different chains.
+	//Higher the frequency is , more possible the chain is.
 	double maxFreq=max_element(hyperChainInfos.begin(),hyperChainInfos.end(),Compare_Info())->patternFreq;
 
 	class FindHyperChainInfos
@@ -120,6 +128,7 @@ vector<SentenceGenerator::SentenceInfo> SentenceGenerator::SelectHyperChainsOfMa
 		vector<SentenceGenerator::SentenceInfo> GetResult()const {return _infos;}
 	};
 
+	//Find chains whose frequency of grammar patterns equal to the max one.
 	FindHyperChainInfos findInfos(maxFreq);
 	findInfos=for_each(hyperChainInfos.begin(),hyperChainInfos.end(),findInfos);
 
