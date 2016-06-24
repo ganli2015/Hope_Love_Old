@@ -93,6 +93,8 @@ vector<shared_ptr<iConceptChain>> ChainAnalyzer::ComputeProperCombination( const
 {
 	vector<shared_ptr<iConceptChain>> res;
 
+	//All sub sequences of combinations are taken into consideration
+	//as sub sequences may be enough and proper to express a complete sentence if they cover the base chain. 
 	vector<vector<shared_ptr<iConcept>>> subSequences=GetAllSubSequence<shared_ptr<iConcept>>::Get(combination);
 	for (unsigned int i=0;i<subSequences.size();++i)
 	{
@@ -146,7 +148,7 @@ int ChainAnalyzer::OverlappedCount( const int startIndex,const vector<shared_ptr
 	int count=0;
 	for (unsigned int i=startIndex;i<checkChain.size();++i)
 	{
-		if(CommonFunction::IndexOf(testChain,checkChain[i])>=0)//checkChain[i]ÊÇtestChainµÄÒ»¸öÔªËØ¡£
+		if(CommonFunction::IndexOf(testChain,checkChain[i])>=0)//checkChain[i]æ˜¯testChainçš„ä¸€ä¸ªå…ƒç´ ã€‚
 		{
 			count++;
 		}
@@ -203,7 +205,8 @@ double ChainAnalyzer::ComputeHyperChainMeanLevel( const shared_ptr<Mind::iConcep
 	{
 		shared_ptr<iConceptLevelTable> levelTable=hyperConcepts[i]->GetLevelTable();
 		int minLevel=BigInt;
-		//Ñ¡ÔñÓëbaseConceptsµÄ×îÐ¡level×÷ÎªhyperConcepts[i]µÄlevel¡£
+		//Select the minimum level in <levelTable>.
+		//Why minimun? It actually needs more consideration. 
 		for (unsigned int j=0;j<baseConcepts.size();++j)
 		{
 			int level=levelTable->LevelTo(baseConcepts[j]);
@@ -249,6 +252,7 @@ vector<ChainAnalyzer::HyperChainInfo> ChainAnalyzer::SelectHyperChainsOfMaxLevel
 		}
 	};
 	
+	//Compute the max level among computed hyper chains.
 	double maxLevel=max_element(hyperChainInfos.begin(),hyperChainInfos.end(),Compare_Info())->meanLevel;
 
 	class FindHyperChainInfos
@@ -268,6 +272,8 @@ vector<ChainAnalyzer::HyperChainInfo> ChainAnalyzer::SelectHyperChainsOfMaxLevel
 		vector<ChainAnalyzer::HyperChainInfo> GetResult()const {return _infos;}
 	};
 
+	//Find all hyper chains whose levels equal to <maxLevel>.
+	//There are several chains satifying the condition which are plausible.
 	FindHyperChainInfos findInfos(maxLevel);
 	findInfos=for_each(hyperChainInfos.begin(),hyperChainInfos.end(),findInfos);
 
