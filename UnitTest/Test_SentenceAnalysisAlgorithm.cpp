@@ -150,7 +150,7 @@ TEST_F(Test_Grammar,Analyze)
 	expect.push_back(Pronoun);
 	expect.push_back(Verb);
 	expect.push_back(Pronoun);
-	expect.push_back(Puncture);
+	expect.push_back(Punctuation);
 	vector<shared_ptr<Word>> graWords=sen->GetGrammard();
 	ASSERT_TRUE(SameGrammar(expect,graWords));
 }

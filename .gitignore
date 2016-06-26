@@ -69,6 +69,9 @@ Temporary Items
 HopeLove/obj/
 HopeLove/bin/
 HopeLove/bin/
+Debug/
+Release/
+obj/
 UnitTest/Objects.txt
 UnitTest/Debug/*.*
 GlobalInterface/obj/*.*

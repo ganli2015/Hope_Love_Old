@@ -58,6 +58,22 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Extract( const vec
 	return res;
 }
 
+vector<shared_ptr<iConcept>> ExtractConceptChains::GetAdjacentConcepts(const SearchDir dir,
+	const shared_ptr<iConcept> concept, const vector<ConceptPair>& pairs)
+{
+	vector<shared_ptr<iConcept>> adjConcepts;
+	if (dir == Forward)
+	{
+		adjConcepts = GetForwardAdjConcepts(concept, pairs);
+	}
+	else
+	{
+		adjConcepts = GetBackwordAdjConcepts(concept, pairs);
+	}
+
+	return adjConcepts;
+}
+
 void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 	const shared_ptr<Mind::iConcept> curConcept,
 	const vector<ConceptPair>& pairs,
@@ -74,15 +90,7 @@ void ExtractConceptChains::Recursive_Search(const SearchDir dir,
 
 	//Get adjacent concepts.
 	//They will extend <relatedChain>.
-	vector<shared_ptr<iConcept>> adjConcepts;
-	if (dir==Forward)
-	{
-		adjConcepts=GetForwardAdjConcepts(curConcept,pairs);
-	}
-	else
-	{
-		adjConcepts=GetBackwordAdjConcepts(curConcept,pairs);
-	}
+	vector<shared_ptr<iConcept>> adjConcepts = GetAdjacentConcepts(dir, curConcept, pairs);
 
 	//If there is no adjacent concepts, then it indicates I search the end of the chain.
 	//Recursion is end.
@@ -180,12 +188,18 @@ vector<shared_ptr<Mind::iConceptChain>> ExtractConceptChains::Merge( const vecto
 
 void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 {
+	RemovePairsWithSameConcepts(pairs);
+	RemoveDuplicatedPairs(pairs);
+}
+
+void ExtractConceptChains::RemovePairsWithSameConcepts(vector<ConceptPair>& pairs)
+{
 	//Remove pairs whose first and second concepts are the same.
-	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
+	for (vector<ConceptPair>::iterator it = pairs.begin(); it != pairs.end();)
 	{
-		if(it->first->Same(it->second))
+		if (it->first->Same(it->second))
 		{
-			it=pairs.erase(it);
+			it = pairs.erase(it);
 		}
 		else
 		{
@@ -194,20 +208,24 @@ void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 	}
 
 
+}
+
+void ExtractConceptChains::RemoveDuplicatedPairs(vector<ConceptPair>& pairs)
+{
 	class SameConceptPair
 	{
 		const ConceptPair _val;
 	public:
-		SameConceptPair(const ConceptPair& val):_val(val){}
-		~SameConceptPair(){}
+		SameConceptPair(const ConceptPair& val) :_val(val) {}
+		~SameConceptPair() {}
 
 		bool operator()(const ConceptPair& right)
 		{
-			if(!_val.first->Same(right.first))
+			if (!_val.first->Same(right.first))
 			{
 				return false;
 			}
-			if(!_val.second->Same(right.second))
+			if (!_val.second->Same(right.second))
 			{
 				return false;
 			}
@@ -217,12 +235,12 @@ void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 	};
 
 	//Remove duplicated pairs .
-	for (vector<ConceptPair>::iterator it=pairs.begin();it!=pairs.end();)
+	for (vector<ConceptPair>::iterator it = pairs.begin(); it != pairs.end();)
 	{
-		vector<ConceptPair>::iterator findIt=find_if(it+1,pairs.end(),SameConceptPair(*it));
-		if(findIt!=pairs.end())
+		vector<ConceptPair>::iterator findIt = find_if(it + 1, pairs.end(), SameConceptPair(*it));
+		if (findIt != pairs.end())
 		{
-			it=pairs.erase(it);
+			it = pairs.erase(it);
 		}
 		else
 		{
@@ -231,7 +249,7 @@ void ExtractConceptChains::RemoveBadPairs( vector<ConceptPair>& pairs )
 	}
 }
 
-bool ExtractConceptChains::IsClosedChain( const shared_ptr<iConceptChain> chain )
+bool ExtractConceptChains::IsClosedChain(const shared_ptr<iConceptChain> chain)
 {
 	if(chain->Size()==0 || chain->Size()==1)
 	{

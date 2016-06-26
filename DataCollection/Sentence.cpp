@@ -41,6 +41,7 @@ namespace DataCollection
 
 	void Sentence::SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec )
 	{
+		//StructuredSentence use the same words as well as GrammardSentence.
 		_grammard=shared_ptr<GrammardSentence>(new GrammardSentence(vec));
 		_structured=shared_ptr<StructuredSentence>(new StructuredSentence(vec));
 	}

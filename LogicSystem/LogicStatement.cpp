@@ -39,6 +39,10 @@ namespace LogicSystem
 		//Search a sub pair sequence that satisfied the relation.
 		for (unsigned int i=0;i<subConceptPairs.size();++i)
 		{
+			//Divide the raw concept pairs into two part one of which for deduction.
+			//If satisfy, then connect with the other part.
+			//In this way, sub part of <condition> is deduced and lose no information of the other part.
+
 			shared_ptr<iConceptInteractTable> subTable=iMindElementCreator::CreateConceptInteractTable(subConceptPairs[i]);
 
 			if(_relationPair.first->Satisfy(subTable))

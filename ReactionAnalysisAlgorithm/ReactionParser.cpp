@@ -64,6 +64,14 @@ void ReactionParser::Execute()
 		assert(questionPart != NULL);
 		_sentence_output = GenerateByLogicAnalysis(questionPart);
 		LOG("GenerateByLogicAnalysis");
+
+		//If AI don't know the result, then she said "不知道".
+		//The sentence does not need to be analyzed by <GenerateByConceptChainAnalysis>
+		//as it is an interrogative sentence.If you don't know you say I don't know.
+		if (_sentence_output.empty())
+		{
+			_sentence_output.push_back(shared_ptr<Sentence>(new Sentence("不知道")));
+		}
 	}
 
 	//If there is null result of Logic Analysis or the sentence is declarative, 
@@ -128,7 +136,7 @@ vector<shared_ptr<DataCollection::Word>> ReactionParser::CountUnknownWords( cons
 		vector<shared_ptr<Word>> words=sentences[i]->GetGrammard();
 		for (unsigned int j=0;j<words.size();++j)
 		{
-			if(words[j]->Type()==Puncture)
+			if(words[j]->Type()==Punctuation)
 			{
 				continue;
 			}

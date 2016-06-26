@@ -232,5 +232,31 @@ namespace LogicSystem
 		return res;
 	}
 
+	shared_ptr<Mind::iConcept> RelationNode::GenerateSingleConcept() const
+	{
+		//Get all single concepts.
+		//Only if there is one single concept, then return it.
+		//Otherwise return Null.
+
+		vector<shared_ptr<iConcept>> concepts;
+		for (unsigned int i=0;i<_subRelations.size();++i)
+		{
+			shared_ptr<iConcept> con = _subRelations[i]->GenerateSingleConcept();
+			if (con != NULL)
+			{
+				concepts.push_back(con);
+			}
+		}
+
+		if (concepts.size() == 1)
+		{
+			return concepts.front();
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
 }
 

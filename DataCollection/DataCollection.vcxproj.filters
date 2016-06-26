@@ -23,9 +23,6 @@
     <ClInclude Include="Word.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Punctures.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Sentence.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -41,6 +38,9 @@
     <ClInclude Include="LanguageFunc.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Punctuations.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -50,9 +50,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Word.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Punctures.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Sentence.cpp">
@@ -68,6 +65,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LanguageFunc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Punctuations.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

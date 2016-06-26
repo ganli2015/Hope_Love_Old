@@ -46,6 +46,9 @@ namespace Mind
 		void Initialize();
 		void InitNetworkFromFile();
 		void BasicTrainNetwork();
+		///Check whether <baseConceptCount> is the same as the input dimension of network in file <in>.
+		///Only consider the input dimension of the first neuron.
+		bool SameInputDimension(const int baseConceptCount, ifstream& in);
 
 		shared_ptr<ConceptChain> ParseChain(const string str) const;
 

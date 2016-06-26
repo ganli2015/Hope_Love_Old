@@ -67,7 +67,9 @@ namespace LogicSystem
 	{
 		shared_ptr<iConceptInteractTable> interTable=expre->GetProtoInteractTable();
 		
-		if(exact && _relations.size()!=interTable->GetAllRelations().size())
+		//If <expre> should exactly satisfy the relations,
+		//The number of symbol pairs must equal to concept pairs in <interTable>.
+		if(exact && _relations.size()!=interTable->GetPairCount())
 		{
 			return false;
 		}
@@ -77,7 +79,9 @@ namespace LogicSystem
 
 	bool RelationLeaf::Satisfy( const shared_ptr<Mind::iConceptInteractTable> conceptTable ,const bool exact)
 	{
-		if(exact && _relations.size()!=conceptTable->GetAllRelations().size())
+		//If <expre> should exactly satisfy the relations,
+		//The number of symbol pairs must equal to concept pairs in <conceptTable>.
+		if(exact && _relations.size()!=conceptTable->GetPairCount())
 		{
 			return false;
 		}
@@ -204,16 +208,8 @@ namespace LogicSystem
 
 		for (unsigned int i=0;i<_relations.size();++i)
 		{
-// 			shared_ptr<iConcept> firstObj=_relations[i].First()->GetReferredObject();
-// 			shared_ptr<iConcept> secondObj=_relations[i].Second()->GetReferredObject();
-// 			if(firstObj==NULL || secondObj==NULL)
-// 			{
-// 				return NULL;
-// 			}
-// 			
-// 			shared_ptr<ConSymbol> fromSymbol(new Symbol<iConcept>(firstObj));
-// 			shared_ptr<ConSymbol> toSymbol(new Symbol<iConcept>(secondObj));
-// 			res->AddRelation(fromSymbol,toSymbol);
+			//Generate a symbol pair or symbol pairs according to the repetition number.
+			//After using method <Satisfy>, each symbol has binded to a concrete concept.
 
 			vector<SymbolPair> specialSymbolPairs=GeneratePairSequence(_relations[i]);
 			if(specialSymbolPairs.empty())

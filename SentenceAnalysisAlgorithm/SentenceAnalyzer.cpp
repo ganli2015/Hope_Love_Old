@@ -122,7 +122,7 @@ vector<shared_ptr<DataCollection::Word>> SentenceAnalyzer::CountUnknownWords( co
 	vector<shared_ptr<Word>> words=sentences->GetGrammard();
 	for (unsigned int j=0;j<words.size();++j)
 	{
-		if(words[j]->Type()==Puncture)
+		if(words[j]->Type()==Punctuation)
 		{
 			continue;
 		}

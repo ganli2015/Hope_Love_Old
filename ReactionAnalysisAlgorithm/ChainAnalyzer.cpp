@@ -148,7 +148,7 @@ int ChainAnalyzer::OverlappedCount( const int startIndex,const vector<shared_ptr
 	int count=0;
 	for (unsigned int i=startIndex;i<checkChain.size();++i)
 	{
-		if(CommonFunction::IndexOf(testChain,checkChain[i])>=0)//checkChain[i]æ˜¯testChainçš„ä¸€ä¸ªå…ƒç´ ã€‚
+		if(CommonFunction::IndexOf(testChain,checkChain[i])>=0)//checkChain[i]ÊÇtestChainµÄÒ»¸öÔªËØ¡£
 		{
 			count++;
 		}

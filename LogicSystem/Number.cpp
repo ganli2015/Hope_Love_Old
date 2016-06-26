@@ -27,6 +27,8 @@ namespace LogicSystem
 	template<>
 	bool LogicSystem::Number<Mind::iConcept>::ToInt( int& out ) const
 	{
+		//Compute the direction between one and <me>.
+		//Choose one for reference.
 		out=1;
 		string oneStr="һ";
 
@@ -36,10 +38,12 @@ namespace LogicSystem
 			return false;
 		}
 		string conStr=integerCon->GetString();
-		//Iterate until reach zero
+		//Iterate until reach one
 		while(conStr!=oneStr)
 		{
 			//Find an integer concept that <integerCon> depends on.
+			//Each positive integer except one and zero depends on another integer.
+			//For example, six depends one five.
 			vector<shared_ptr<iConcept>> forward=integerCon->GetForwardConcepts();
 			integerCon=CommonFunction::FindIntegerConcept(forward);
 			if(integerCon==NULL)

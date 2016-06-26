@@ -3,13 +3,13 @@
 #include "Character.h"
 #include "Word.h"
 #include "GrammaPattern.h"
-#include "Punctures.h"
+#include "Punctuations.h"
 
 using namespace std;
 
 namespace DataCollection
 {
-	shared_ptr<Punctures> LanguageFunc::_punctures(new Punctures());
+	shared_ptr<Punctuations> LanguageFunc::_punctures(new Punctuations());
 
 	DataCollection::LanguageFunc::LanguageFunc(void)
 	{
@@ -32,6 +32,8 @@ namespace DataCollection
 
 	std::vector<shared_ptr<Character>> DataCollection::LanguageFunc::ConvertStringToCharacter( std::string str)
 	{
+		//Assume the input <str> are all Chinese characters.
+		//Then convert two by two.
 		assert(str.size()%2==0);
 		vector<shared_ptr<Character>> charas;
 		for (string::iterator it=str.begin();it!=str.end();it+=2)
@@ -199,7 +201,7 @@ namespace DataCollection
 			return shared_ptr<Word>(new onomatopoeia(str));
 		case Interjection:
 			return shared_ptr<Word>(new interjection(str));
-		case Puncture:
+		case Punctuation:
 			return shared_ptr<Word>(new puncture(str));
 		case Unknown:
 			return NULL;
@@ -251,7 +253,7 @@ namespace DataCollection
 
 	bool LanguageFunc::IsPuncture( const shared_ptr<Word> word )
 	{
-		if(word->Type()==Puncture)
+		if(word->Type()==Punctuation)
 		{
 			return true;
 		}

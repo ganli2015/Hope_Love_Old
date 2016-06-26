@@ -36,6 +36,8 @@ namespace DataCollection
 		{
 			throw out_of_range("i or j is out of the range!!");
 		}
+		//I consider the intensity between words is bidirectional.
+		//So the matrix is symmetric.
 		_intensityMatrix[i][j]=intensity;
 		_intensityMatrix[j][i]=intensity;
 

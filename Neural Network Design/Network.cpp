@@ -113,6 +113,7 @@ namespace NeuralNetwork
 	{
 		ifstream in(filename);
 
+		//Read configure parameter of network.
 		in>>hasTrained;
 		in>>_maxiter;
 		in>>_tol;
@@ -121,10 +122,12 @@ namespace NeuralNetwork
 		in>>neuCount;
 		for (int i=0;i<neuCount;++i)
 		{
+			//Read transfer function.
 			int funType;
 			in>>funType;
 			shared_ptr<fun> transferFun=CreateTransferFunction(fun_type(funType));
 
+			//Read matrix and bias.
 			pair<int,Math::Matrix> pair=InputMatrix(in);
 			Math::Vector bias=InputVec(pair.second.Columns(),in);
 			shared_ptr<iNeuron> neu(new Neuron(pair.second));

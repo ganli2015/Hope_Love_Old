@@ -44,24 +44,60 @@ namespace Mind
 
 	void ConceptReactSystem::Initialize()
 	{
+		//Train network or initialize network from file according to the configure file.
 		CFG_IF(Train_Initial_React_Network,
 			BasicTrainNetwork();,
 			InitNetworkFromFile();
 		)
-
-// #ifdef _Train_Initial_React_Network
-// 		BasicTrainNetwork();
-// #else
-// 		InitNetworkFromFile();
-// #endif // _ReadFile
 	}
 
 	void ConceptReactSystem::InitNetworkFromFile()
 	{
-		int dimension=_conceptSet->BaseConceptCount();
+		int dimension = _conceptSet->BaseConceptCount();
+
+		//Check whether the file exists.
+		//If not retrain network, otherwise read data from file.
+		//Check whether the count of base concepts equals to the input dimension.
+		//If not, network cannot be initialized as lack of neuron data.
+		ifstream in(GetHopeLoveMindPath() + ConceptReactorNetworkFilename);
+		if (!in || !SameInputDimension(dimension, in))
+		{
+			BasicTrainNetwork();
+			return;
+		}
+		else
+		{
+			in.close();
+		}
+
+		//The dimension of network should be designated first.
 		shared_ptr<MultilayerNetwork> multiNetwork(new MultilayerNetwork(dimension,dimension));
 		_network=multiNetwork;
 		_network->Read(GetHopeLoveMindPath()+ConceptReactorNetworkFilename);
+	}
+
+	bool ConceptReactSystem::SameInputDimension(const int baseConceptCount,ifstream& in)
+	{
+		//The input dimension in the file is the seventh element.
+		//Read from beginning of the file and skip previous parameters.
+		int inputDimIndex = 7;
+		int curIndex = 0;
+		//The type of input parameter is double 
+		//as there is a parameter of 1e-6 to read.
+		double para;
+		while(++curIndex<=7)
+		{
+			in >> para;
+		}
+
+		if (baseConceptCount == round(para))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	void ConceptReactSystem::BasicTrainNetwork()

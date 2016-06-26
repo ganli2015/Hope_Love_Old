@@ -71,6 +71,9 @@
     <ClInclude Include="LogicKnowledgeInitializer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="RelationSingleNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -119,6 +122,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LogicKnowledgeInitializer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationSingleNode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

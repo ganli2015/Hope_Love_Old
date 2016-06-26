@@ -27,6 +27,7 @@ namespace HopeLove
         const string ConstraintnNode = "Constraint";
         const string ResultNode = "Result";
         const string SymbolPairNode = "SymbolPair";
+        const string SingleNode = "SingleSymbol";
         const string FromNode = "From";
         const string ToNode = "To";
         const string SymbolNode = "Symbol";
@@ -42,7 +43,7 @@ namespace HopeLove
         const string EqualSymbol = "==";
         const string InequalSymbol = "!=";
 
-        const string LogicStatementsFilename = "LogicStatements.txt";
+        const string LogicStatementsFilename = "LogicStatements_UTF8.txt";
 
         XmlDocument _document;
         List<TextBox> _conditionBox;
@@ -146,22 +147,34 @@ namespace HopeLove
             foreach (string pair in pairs)
             {
                 List<string> fromTo = SplitAndRemoveBlank(pair,"->");
-                if (fromTo.Count != 2)
+                if (fromTo.Count == 1)
                 {
-                    throw new ArgumentOutOfRangeException("fromTo.Length != 2");
+                    //It is a single symbol.
+                    //Directly append single symbol to Result node.
+                    XmlElement singleNode = CreateFromToNode(fromTo[0], SingleNode);
+                    node.AppendChild(singleNode);
                 }
+                else if (fromTo.Count==2)
+                {
+                    //It is a symbol pair.
 
-                //Write from symbol
-                XmlElement fromNode = CreateFromToNode(fromTo[0],FromNode);
+                    //Write from symbol
+                    XmlElement fromNode = CreateFromToNode(fromTo[0], FromNode);
 
-                //Write to symbol
-                XmlElement toNode = CreateFromToNode(fromTo[1],ToNode);
+                    //Write to symbol
+                    XmlElement toNode = CreateFromToNode(fromTo[1], ToNode);
 
-                XmlElement symbolPairNode = document.CreateElement(SymbolPairNode);           
-                symbolPairNode.AppendChild(fromNode);
-                symbolPairNode.AppendChild(toNode);
+                    XmlElement symbolPairNode = document.CreateElement(SymbolPairNode);
+                    symbolPairNode.AppendChild(fromNode);
+                    symbolPairNode.AppendChild(toNode);
 
-                node.AppendChild(symbolPairNode);
+                    node.AppendChild(symbolPairNode);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("");
+                }
+                
             }
         }
 

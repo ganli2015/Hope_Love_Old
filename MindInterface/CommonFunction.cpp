@@ -158,7 +158,7 @@ namespace Mind
 			//È¥³ý±êµã
 			for (vector<PartOfSpeech>::iterator it=poses.begin();it!=poses.end();)
 			{
-				if(*it==Puncture)
+				if(*it==Punctuation)
 				{
 					it=poses.erase(it);
 				}

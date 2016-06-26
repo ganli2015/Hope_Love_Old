@@ -65,38 +65,59 @@ namespace LogicSystem
 
 		virtual string GetString() const =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Add Constraints to symbols.
+		//////////////////////////////////////////////////////////////////////////
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Check whether <expre> satisfy the relation <me>.
+		///After using <Satisfy> , information about symbol pairs and concrete concept pairs are stored in <me>.
 		///If <exact> is false , then even part of <expre> satisfying the relation will return true.
 		///If <exact> is true , then only full part of <expre> satisfying the relation will return true.
+		//////////////////////////////////////////////////////////////////////////
 		virtual bool Satisfy(const shared_ptr<iExpression> expre,const bool exact=true) =0;
 		virtual bool Satisfy(const shared_ptr<Mind::iConceptInteractTable> expre,const bool exact=true) =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Find match symbol and concept pairs in <conceptPairs>.
+		///There may be several combinations of concept pairs matched.
+		//////////////////////////////////////////////////////////////////////////
 		virtual vector<PairSequence> FindMatchedPairSequence(const vector<ConceptPair>& conceptPairs) const =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Generate iRelation in which all of symbols refer to a definite object according to symbols of <me>.
 		///If one of symbols refers to null object, then iRelation will be null.
+		//////////////////////////////////////////////////////////////////////////
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Use <Satisfy> before!
 		///After <Satisfy>, symbols of <me> will refer to concepts and then generate a special relation of <relation> and return it.
 		///Each symbol in the result relation will refer to a definite object.
 		///Same symbols in <relation> and <me> will refer to the same objects.
+		//////////////////////////////////////////////////////////////////////////
 		shared_ptr<iRelation> SymbolResonance(const shared_ptr<iRelation> relation) const ;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Generate the corresponding iConceptInteractTable according to symbol pairs of <me>.
-		///If one symbol pair both refer to certain concepts, then the pair will appear in iConceptInteractTable.
+		///Note!!Only if one symbol pair both refer to certain concepts, then the pair will appear in iConceptInteractTable.
+		//////////////////////////////////////////////////////////////////////////
 		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const =0;
+
+		//////////////////////////////////////////////////////////////////////////
+		///Get the concept in <me> only if <me> is iRelationSingleNode.
+		//////////////////////////////////////////////////////////////////////////
+		virtual shared_ptr<Mind::iConcept> GenerateSingleConcept() const = 0;
 	protected:
 		bool SatifyConstraint(const vector<PairInfo>& pairInfos,const vector<shared_ptr<iRelationConstraint>>& constraints) const;
 		void RemoveSequencesUnsatifyConstraints(const vector<shared_ptr<iRelationConstraint>>& constraints,vector<iRelation::PairSequence>& sequences) const;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Symbols in <pairInfos> will be bind to concepts and you can do anything after using class <doSth>.
 		///<doSth> should have a member function of <Do> to execute your computation.
-		///Before leave the function ,the bind objects will be released. 
+		///Before leaving the function ,the bind objects will be released. 
+		//////////////////////////////////////////////////////////////////////////
 		template<class DoSth>
 		void SymbolBindAndRelease(const PairSequence& pairInfos,DoSth& doSth) const
 		{
@@ -109,6 +130,7 @@ namespace LogicSystem
 		void BindObjects(const PairSequence& pairInfos) const;
 		void ReleaseObjects(const PairSequence& pairInfos) const;
 	};
+
 
 	///iRelationNode contains the several sub relations and their relationship is And or Or.
 	class _MINDINTERFACEINOUT iRelationNode : public iRelation
@@ -133,30 +155,61 @@ namespace LogicSystem
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 
 		virtual string GetString() const =0;
-
-	protected:
 	};
 
 	///An iRelationLeaf contains the relationship between several logic symbols.
+	///It only contains symbol pairs instead of a single symbol.
 	class _MINDINTERFACEINOUT iRelationLeaf : public iRelation
 	{
 	public:
 		iRelationLeaf(void);
 		virtual ~iRelationLeaf();
 
+		//////////////////////////////////////////////////////////////////////////
 		///Add the relation of the two symbols to <me>.
 		///<from> acts on <to>.
 		///Note!!If two special symbol are the same in different pairs, they are not treated the same when using <Satisfy>.
 		///Instead, use different special symbols in different pairs, then add the constraint <Equality> between them to make them equal.
+		//////////////////////////////////////////////////////////////////////////
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to) =0;
+		
+		//////////////////////////////////////////////////////////////////////////
 		///Add the relation of the two symbols to <me>.
 		///<num> represents the repetition of <from> <to>.<num>  is a symbol and the concrete value will be determined after binding to a definite object.
+		//////////////////////////////////////////////////////////////////////////
 		virtual void AddRelation(const shared_ptr<ConSymbol> from,const shared_ptr<ConSymbol> to, const shared_ptr<Num> num)=0 ;
+		
+		//////////////////////////////////////////////////////////////////////////
 		///Add Constraints to symbols.
+		//////////////////////////////////////////////////////////////////////////
 		virtual void AddConstraint(const shared_ptr<iRelationConstraint> constraint) =0;
 		virtual string GetString() const =0;
+
+		//////////////////////////////////////////////////////////////////////////
+		///Always return null.
+		//////////////////////////////////////////////////////////////////////////
+		virtual shared_ptr<Mind::iConcept> GenerateSingleConcept() const { return NULL; };
 	};
 
 
+	///iRelationSingleNode only contains one symbol instead of symbol pairs in iRelationLeaf and iRelationNode.
+	class iRelationSingleNode : public iRelation
+	{
+	public:
+		iRelationSingleNode()
+		{
+		}
+
+		~iRelationSingleNode()
+		{
+		}
+		
+		//////////////////////////////////////////////////////////////////////////
+		///Set the symbol in <me>.
+		///If there is already a symbol in <me>, it will be covered.
+		//////////////////////////////////////////////////////////////////////////
+		virtual void SetSymbol(const shared_ptr<ConSymbol> symbol) = 0;
+
+	};
 }
 

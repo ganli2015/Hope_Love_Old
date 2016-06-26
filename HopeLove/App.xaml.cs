@@ -7,7 +7,6 @@ using System.Windows;
 
 namespace HopeLove
 {
-
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
@@ -24,7 +23,7 @@ namespace HopeLove
 
         public App()
         {
-            formType = FormType.Main;
+            formType = FormType.AppendLogicStatement;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

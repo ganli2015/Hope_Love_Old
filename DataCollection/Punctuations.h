@@ -7,7 +7,7 @@ namespace DataCollection
 
 	///Punctures is a collection of punctures.
 	///It only supports for Chinese punctures.
-	class _DATACOLLECTIONINOUT Punctures : public Obj<Punctures>
+	class _DATACOLLECTIONINOUT Punctuations : public Obj<Punctuations>
 	{
 		std::vector<shared_ptr<Character>> _punctures;
 		std::vector<shared_ptr<Character>> _puncEndofSentence;
@@ -15,8 +15,8 @@ namespace DataCollection
 
 		void Initialize();
 	public:
-		Punctures(void);
-		~Punctures(void);
+		Punctuations(void);
+		~Punctuations(void);
 
 		///A puncture of end of the sentence is some puncture that separate two sentences or two sub sentences.
 		///For example, '¡£' '£¬'.

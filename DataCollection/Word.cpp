@@ -24,6 +24,8 @@ namespace DataCollection
 
 	Word::Word(string word ):_known(false)
 	{
+		//TO Chinese characters, each character contains two chars
+		//and convert string to characters two by two.
 		for (unsigned int i=0;i<word.size();i+=2)
 		{
 			string aword;
@@ -50,6 +52,8 @@ namespace DataCollection
 
 	long long Word::ToInt()const
 	{
+		//Convert each character to a integer.
+		//Then make left character in high position and right character in low position.
 		vector<int>  indexset;
 		for (vector<shared_ptr<Character>>::const_iterator it=_word.begin();it!=_word.end();++it)
 		{

@@ -34,6 +34,7 @@ namespace LogicSystem
 	const string LogicKnowledgeInitializer::ResultCollectionNode = "ResultCollection";
 	const string LogicKnowledgeInitializer::ResultNode = "Result";
 	const string LogicKnowledgeInitializer::SymbolPairNode = "SymbolPair";
+	const string LogicKnowledgeInitializer::SingleNode = "SingleSymbol";
 	const string LogicKnowledgeInitializer::FromNode = "From";
 	const string LogicKnowledgeInitializer::ToNode = "To";
 	const string LogicKnowledgeInitializer::RepNumNode= "RepNum";
@@ -192,8 +193,6 @@ namespace LogicSystem
 		return leaf;
 	}
 
-
-
 	LogicType::SymbolPair LogicKnowledgeInitializer::ParseSymbolPair( const TiXmlNode * node ,shared_ptr<Num>& repNum)
 	{
 		//Parse from
@@ -242,12 +241,14 @@ namespace LogicSystem
 
 	shared_ptr<LogicType::ConSymbol> LogicKnowledgeInitializer::ParseConSymbol( const TiXmlElement * element ) const
 	{
+		//Read identity of the concept.
 		int id=StrToInt(element->Attribute("ID"));
 		string word=element->Attribute("Word");
 		Identity w_i;
 		w_i.id=id;
 		w_i.str=word;
 
+		//Get concept from Cerebrum as logic statement needs knowledgh about the concept.
 		shared_ptr<iConcept> concept=iCerebrum::Instance()->GetConcept(w_i);
 		shared_ptr<LogicType::ConSymbol> sym(iLogicElementCreator::CreateConceptSymbol(concept));
 		return sym;

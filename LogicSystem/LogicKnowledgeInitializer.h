@@ -36,6 +36,7 @@ namespace LogicSystem
 		const static string ResultCollectionNode;
 		const static string ResultNode;
 		const static string SymbolPairNode;
+		const static string SingleNode;
 		const static string FromNode ;
 		const static string ToNode ;
 		const static string RepNumNode ;

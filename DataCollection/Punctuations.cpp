@@ -1,25 +1,27 @@
 #include "StdAfx.h"
 #include "Character.h"
-#include "Punctures.h"
+#include "Punctuations.h"
 #include "../CommonTools/CommonCompareFunction.h"
 
 using namespace std;
 
 namespace DataCollection
 {
-	Punctures::Punctures(void)
+	Punctuations::Punctuations(void)
 	{
 		Initialize();
 	}
 
 
-	Punctures::~Punctures(void)
+	Punctuations::~Punctuations(void)
 	{
 
 	}
 
-	void Punctures::Initialize()
+	void Punctuations::Initialize()
 	{
+		//Prepare two kind of punctuations and both of them append to <_punctures>.
+		//They are not complete.
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string("¡±"))));
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string("¡¯"))));
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string(")"))));
@@ -38,7 +40,7 @@ namespace DataCollection
 
 
 
-	bool DataCollection::Punctures::IsPuncEndofSentence( shared_ptr<Character> val ) const
+	bool DataCollection::Punctuations::IsPuncEndofSentence( shared_ptr<Character> val ) const
 	{
 		vector<shared_ptr<Character>>::const_iterator find_it=find_if(_puncEndofSentence.begin(),_puncEndofSentence.end(),CommonTool::comp_ptr<Character>(val));
 		if(find_it!=_puncEndofSentence.end())
@@ -46,7 +48,7 @@ namespace DataCollection
 		else return false;
 	}
 
-	bool DataCollection::Punctures::IsPuncRightside( shared_ptr<Character> val ) const
+	bool DataCollection::Punctuations::IsPuncRightside( shared_ptr<Character> val ) const
 	{
 		vector<shared_ptr<Character>>::const_iterator find_it=find_if(_puncRightside.begin(),_puncRightside.end(),CommonTool::comp_ptr<Character>(val));
 		if(find_it!=_puncRightside.end())

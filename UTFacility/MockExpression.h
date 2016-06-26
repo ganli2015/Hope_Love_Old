@@ -19,6 +19,10 @@ public:
 	///Create a MockExpression which returns ProtoInteractTable of <table> and BaseInteractTable of null.
 	static shared_ptr<MockExpression> Create(const string table);
 	static shared_ptr<MockExpression> SimpleCreate(const string table);
+
+	///Create a MockExpression which returns ProtoConcept of <conceptStr>.
+	static shared_ptr<MockExpression> Create_SingleConcept(const string conceptStr);
+
 	static shared_ptr<MockExpression> Create();
 
 	void AddExpectCall_GetProtoConcept(const string concept);

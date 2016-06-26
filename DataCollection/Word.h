@@ -22,12 +22,15 @@ namespace DataCollection
 		Interjection,
 		Ambiguous,//Ambiguous indicates a word is known by AI but has no definite POS temporarily.
 		Unknown,//Unknown indicates a word is unknown.
-		Puncture
+		Punctuation
 	};
 
+	///The total number of POS referring to Encyclopedia.
 	const int NUM_PARTOFSPEECH=12;
 
 	///A Word constitutes of one or more characters.
+	///It indicates the superficial meaning of a short string in a sentence.
+	///Each word has no connection to other words.
 	class _DATACOLLECTIONINOUT Word : public Obj<Word>
 	{
 		std::vector<shared_ptr<Character>> _word;
@@ -37,28 +40,35 @@ namespace DataCollection
 		Word(void);
 		~Word(void);
 		Word(std::vector<shared_ptr<Character>> word);
+		///Only Chinese string is welcome.
 		Word(std::string word);
+		///Copy <word>.
 		Word(const Word& word);
 		Word(const Character chara);
 
+		///Number of character in the word.
 		int NumOfChara() const {return _word.size();}
 		bool IsSame(const shared_ptr<Word> word) const;
 		std::string GetString() const ;
 
+		///Append a character <right> to <me>.
 		Word& operator+=(const Character right);
 		Word& operator=(const Word right);
 
+		///Get type of <me>.
+		///There are twelve types.
 		virtual PartOfSpeech Type() const ;
 
+		///Each word has a state of whether Cerebrum knows it.
+		///It is designed for convenient use for sentence analysis.
 	    void KnowIt(){_known=true;};
-        //void UnknowIt(){_known=false;};
-        //bool DoWeKnow() const {return _known;}
 		long long ToInt() const;
 
 	private:
 
 	};
 
+	///Construct word by simply addition like arithmetic.
 	_DATACOLLECTIONINOUT Word operator+(const Character left,const Character right);
 	_DATACOLLECTIONINOUT Word operator+(const Word left,const Character right);
 	_DATACOLLECTIONINOUT Word operator+(const Character left,const Word right);
@@ -152,7 +162,7 @@ namespace DataCollection
 	{
 	public:
 		puncture(std::string word):Word(word){KnowIt();};
-		virtual PartOfSpeech Type() const {return Puncture;}
+		virtual PartOfSpeech Type() const {return Punctuation;}
 	};
 
 

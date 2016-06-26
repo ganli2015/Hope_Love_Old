@@ -79,6 +79,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>tinyxml.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(SolutionDir)HopeLove\bin\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -101,6 +104,7 @@
     <ClInclude Include="ReduceResult.h" />
     <ClInclude Include="RelationLeaf.h" />
     <ClInclude Include="RelationNode.h" />
+    <ClInclude Include="RelationSingleNode.h" />
     <ClInclude Include="SingleExpression.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Symbol.h" />
@@ -120,6 +124,7 @@
     <ClCompile Include="ReduceResult.cpp" />
     <ClCompile Include="RelationLeaf.cpp" />
     <ClCompile Include="RelationNode.cpp" />
+    <ClCompile Include="RelationSingleNode.cpp" />
     <ClCompile Include="SingleExpression.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -150,6 +150,7 @@
     <ClInclude Include="InOut.h" />
     <ClInclude Include="IOFunction.h" />
     <ClInclude Include="LogWriter.h" />
+    <ClInclude Include="MyException.h" />
     <ClInclude Include="MyObject.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClCompile Include="ConfigureInfoManager.cpp" />
     <ClCompile Include="IOFunction.cpp" />
     <ClCompile Include="LogWriter.cpp" />
+    <ClCompile Include="MyException.cpp" />
     <ClCompile Include="MyObject.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

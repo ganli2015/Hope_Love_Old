@@ -9,29 +9,42 @@ namespace DataCollection
 	class Word;
 
 	///GrammardSentence contains information of POS of words and their association of them.
+	///Words in GrammardSentence have definite POS instead of unknown or ambiguous.
 	class _DATACOLLECTIONINOUT GrammardSentence : public Obj<GrammardSentence>
 	{
 	public:
+		///GraAssoInfo contains information about grammar pattern and its relation with GrammardSentence.
+		///<indexes> is indexes of words in <me> which form a grammar pattern <pattern>.
 		struct GraAssoInfo
 		{
-			vector<int> indexes;//表示该GrammarPattern所对应的可能的序列，用每个word的序号来表示
+			vector<int> indexes;
 			GrammarPattern pattern;
 		};
 
 	private:
 		std::vector<shared_ptr<DataCollection::Word>> _gra;
-		multimap<int,GraAssoInfo> _graInfoSet; //int表示word在_gra里的序号，GraAssoInfo储存了包含该word的GrammarPattern，以及该GrammarPattern所对应的可能序列。
+		///Key is the index of one word in GrammardSentence.
+		///Value is grammar association information of the word..
+		multimap<int,GraAssoInfo> _graInfoSet;
 	public:
 		GrammardSentence();
 		~GrammardSentence();
 		GrammardSentence(const std::vector<shared_ptr<DataCollection::Word>> vec);
 
+		///Get all words of <me>.
 		std::vector<shared_ptr<Word>> Get() const ; 
+		///Get the size of sentence of <me>.
 		int WordCount() const {return _gra.size();}
 
+		///Build grammar association of <me>.
+		///<grammarPatterns> are grammar patterns for reference.
+		///When <me> contains grammar patterns incorporated in <grammarPatterns>,
+		///association related to these grammar patterns will be built.
 		bool BuildGrammarAssociation(const vector<GrammarPattern>& grammarPatterns);
 
-		//获得序号i的word的语法匹配信息，associatedIndexes是语法模式匹配的序号集合，associatedPatterns是相应的模式，两者vector一一对应。
+		///Get grammar association of the word of the index <i>.
+		///Each of <associatedIndexes> is indexes of words with corresponding grammar pattern in <associatedPatterns>.
+		///<associatedIndexes> and <associatedPatterns> are one-to-one.
 		void GetAssociationInfo(const unsigned int i,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns);
 	private:
 		bool GetIndexOfMatchedPattern(const GrammarPattern& patternRaw,const GrammarPattern& patternMatch,vector<vector<int>>& indexes);

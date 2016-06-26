@@ -67,8 +67,13 @@
       <AdditionalDependencies>gtest_maind.lib;gtestd.lib;tinyxml.lib;gmock_main.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"</Command>
+      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"
+copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>If NOT exist "HopeLoveData" mkdir "HopeLoveData" 
+If NOT exist "Log" mkdir "Log" </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -89,8 +94,13 @@
       <AdditionalDependencies>gtest_main.lib;gtest.lib;tinyxml.lib;gmock_mainr.lib;gmockr.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"</Command>
+      <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"
+copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>If NOT exist "HopeLoveData" mkdir "HopeLoveData" 
+If NOT exist "Log" mkdir "Log" </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FuncForTest.h" />

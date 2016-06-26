@@ -15,6 +15,7 @@
 #include "../DataCollection/LanguageFunc.h"
 
 #include "../CommonTools/GeneralFunctor.h"
+#include "../CommonTools/MyException.h"
 
 #include "../Mathmatic/FindSequence.h"
 
@@ -80,7 +81,16 @@ shared_ptr<Sentence> LogicReactor::Analyze( const shared_ptr<DataCollection::Sen
 
 	//Get results of deduction.
 	shared_ptr<iLogic> logic=iLogicElementCreator::CreateLogic();
-	vector<shared_ptr<iDeduceResult>> deduceRes=logic->FinalDeduce(expre);
+	vector<shared_ptr<iDeduceResult>> deduceRes;
+	try
+	{
+		deduceRes = logic->FinalDeduce(expre);
+	}
+	catch (const CommonTool::IterationDiverge&)
+	{
+		//AI cannot deduce!
+		return NULL;
+	}
 	if(deduceRes.empty())
 	{
 		return NULL;

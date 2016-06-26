@@ -12,11 +12,15 @@ namespace DataCollection
 
 namespace Mind
 {
+	///Identity is a unique identity of iConcept.
 	struct Identity
 	{
+		///The string of the word of the concept.
 		string str;
 		
 		///<id> represents different concept with the same <str>.
+		///So concepts of different words may have the same id 
+		///and concepts of the same word have different ids.
 		///However , currently I assume one concept for one POS of the word.
 		///That is to say, id behaves same with POS.
 		int id;
@@ -29,6 +33,8 @@ namespace Mind
 			return left.id==right.id && left.str==right.str;
 		}
 
+		///If <str> of <left> is smaller than one of <right>, then return true.
+		///If the same, then compare id .
 		friend bool operator<(const Identity& left, const Identity& right)
 		{
 			if(left.str<right.str)
@@ -51,25 +57,36 @@ namespace Mind
 	class iConceptChain;
 	namespace CommonFunction
 	{
-		//把<from>和<to>的所有相互作用都添加到table
+		///Append all combinations of interactions between <from> and <me> to <table>.
 		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<iConceptInteractTable> table);
 
-		//如果没有找到，则返回-1.
+		///Find the same concept with <concept> in <concepts>
+		///and return the index.
+		///If not find, return -1.
 		int _MINDINTERFACEINOUT IndexOf(const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
-
+		///Find the same concept with <concept> in <concepts>
+		///and return the index.
+		///If not find, return -1.
 		int _MINDINTERFACEINOUT IndexOf(const map<int,shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
-
+		///Find the same concept with <concept> in <concepts>
+		///and return the index.
+		///If not find, return -1.
 		int _MINDINTERFACEINOUT IndexOf(const map<int,weak_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
 
+		///Check whether <left> and <right> are the same.
 		bool _MINDINTERFACEINOUT IsSameConcept(const shared_ptr<iConcept> left,const shared_ptr<iConcept> right);
 
+		///Convert <vec> to string and write to <out>.
 		void _MINDINTERFACEINOUT WriteConcepts(const vector<shared_ptr<iConcept>>& vec,ofstream& out);
 
+		///Remove duplicated concept chains in <chains>.
 		void _MINDINTERFACEINOUT RemoveSameChain( vector<shared_ptr<iConceptChain>>& chains ) ;
 
+		///Compute confidence of <pattern> considering confidence of each POS with local grammar analysis.
 		double _MINDINTERFACEINOUT ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern);
 
-		//计算<curPos>的置信度，假设其相邻两个词性是<forwardPos>和<backwardPos>.
+		///Compute confidence of <curPOS> when its previous POS is <forwardPos> and its next POS is <backwardPos>.
+		///The returned value is 0 to 1.
 		double _MINDINTERFACEINOUT ComputeP_GrammarLocal(const DataCollection::PartOfSpeech& curPos,const DataCollection::PartOfSpeech& forwardPos,const DataCollection::PartOfSpeech& backwardPos);
 
 		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
@@ -80,6 +97,7 @@ namespace Mind
 		///Filter <total> with <partial> and return the remaining.
 		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs(const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial);
 
+		///Remove duplicated concept tables in <tables>.
 		void _MINDINTERFACEINOUT RemoveDuplicated(list<shared_ptr<iConceptInteractTable>>& tables);
 
 		class _MINDINTERFACEINOUT SameConcept

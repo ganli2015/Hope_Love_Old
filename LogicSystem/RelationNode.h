@@ -33,6 +33,7 @@ namespace LogicSystem
 		virtual shared_ptr<iRelation> GenerateSpecialRelation() const ;
 		virtual shared_ptr<Mind::iConceptInteractTable> GenerateConceptTable() const ;
 
+		virtual shared_ptr<Mind::iConcept> GenerateSingleConcept() const ;
 	private:
 		//If state is And, then any relation not satisfied will make its respective PairSequence vanish in result.
 		//If state is Or, then only when all relations failing to satisfy will make its respective PairSequence vanish in result.

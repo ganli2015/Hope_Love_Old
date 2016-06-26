@@ -15,6 +15,7 @@
 #include "../Mathmatic/FindSequence.h"
 
 #include "../CommonTools/LogWriter.h"
+#include "../CommonTools/MyException.h"
 
 #include <set>
 
@@ -104,6 +105,8 @@ namespace LogicSystem
 
 		ConceptList conceptResults;
 		TableList finalDeduceTables;
+		int interationCount=0;
+		int maxIterationCount = 20;
 		do 
 		{
 			//<reducedTables> contains the tables reduced from <curDeduceTables>.
@@ -133,6 +136,13 @@ namespace LogicSystem
 			}
 
 			CommonFunction::RemoveDuplicated(curDeduceTables);
+
+			//Check whether running too long time.
+			++interationCount;
+			if (interationCount >= maxIterationCount)
+			{
+				throw CommonTool::IterationDiverge();
+			}
 
 		} while (!curDeduceTables.empty());
 

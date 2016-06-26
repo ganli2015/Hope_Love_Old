@@ -33,12 +33,14 @@ namespace DataCollection
 	{
 		assert(index>=-1 && index<=(int)(_pattern.size()-1));
 
+		//Get the former reversed pattern.
 		vector<int> former;
 		for (int i=0;i<=index;++i)
 		{
 			former.push_back(_pattern[i]);
 		}
 		reverse(former.begin(),former.end());
+		//Get the latter pattern.
 		vector<int> latter;
 		for (unsigned int i=index+1;i<_pattern.size();++i)
 		{
@@ -47,6 +49,7 @@ namespace DataCollection
 
 		GrammarPattern formerPattern(former);
 		GrammarPattern latterPattern(latter);
+		//Set the same ID with <me> for convenience search of the divided patterns.
 		formerPattern.SetID(_id);
 		latterPattern.SetID(_id);
 		return make_pair(formerPattern,latterPattern);
@@ -71,30 +74,6 @@ namespace DataCollection
 	bool GrammarPattern::ContainSubsequence( const GrammarPattern& sub ) const
 	{
 		return Math::IsSubsequence<PartOfSpeech>(sub.GetPattern(),GetPattern());
-	}
-
-	int GrammarPattern::CountSubsequence( const GrammarPattern& pattern ) const
-	{
-// 		vector<PartOfSpeech> p=pattern.GetPattern();
-// 		typedef vector<PartOfSpeech>::iterator IterPattern;
-// 
-// 		PartOfSpeech lastElem=*p.rbegin();
-// 		vector<IterPattern> lastElemLocation;
-// 		IterPattern p_it=p.begin();
-// 		while(p_it!=p.end())
-// 		{
-// 			p_it=find(p_it,p.end(),lastElem);
-// 			lastElemLocation.push_back(p_it);
-// 		}
-// 
-// 		int count(0);
-// 		for (unsigned int i=0;i<lastElemLocation.size();++i)
-// 		{
-// 			vector<PartOfSpeech> newP;
-// 			newP.insert(newP.end(),p.begin(),lastElemLocation[i]);
-// 		}
-
-		return -1;
 	}
 
 	bool GrammarPattern::IsSameWith( const GrammarPattern& pattern ) const

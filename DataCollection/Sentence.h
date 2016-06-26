@@ -70,19 +70,31 @@ namespace DataCollection
 		string GetString() const;
 		std::vector<shared_ptr<Character>> GetRawSentence() const;
 		
+		///Add a sub sentence which constitute of characters <vec>.
 		void AddSubSentence(const std::vector<shared_ptr<DataCollection::Character>> vec);
+		///Add a sub sentence which constitute of string <str>.
 		void AddSubSentence(const string str);
+		///Return the number sub sentences.
 		size_t Count_SubSentence() const;
+		///Get the ith sub sentences.
 		string GetSubSentence(const unsigned int i) const;
 
+		///Set grammar sentence whose words are <vec>.
+		///Each word of <vec> should have definite POS.
+		///There is only one grammar sentence in <me>.So when calling <SetGrammard>,the previous grammar sentence is covered.
 		void SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec);
+
+		///Get words of grammar sentence.
 		std::vector<shared_ptr<Word>> GetGrammard() const;
 		shared_ptr<Word> GetGrammardWord(const unsigned int i) const;
+
 		///Build grammar association of <me> according to <patterns>.
 		void BuildGrammarAssociation(const std::vector<GrammarPattern>& patterns);
+
 		///Get the association info of the <i_thWord>th word, including the associated indexes <associatedIndexes> and patterns related to them.
 		///<associatedIndexes> and <associatedPatterns> are one-to-one mapping.
 		void GetAssociationInfo(const int i_thWord,vector<vector<int>>& associatedIndexes,vector<GrammarPattern>& associatedPatterns);
+		
 		unsigned int GrammarWordCount() const;
 		bool StructureAnalyzed() const {return _structured->Analyzed();}
 

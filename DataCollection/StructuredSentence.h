@@ -20,8 +20,11 @@ namespace DataCollection
 		void SetIntensity(const unsigned int i,const unsigned int j,double intensity);
 		double GetIntensity(const unsigned int i,const unsigned int j);
 
+		///Check whether this sentence is analyzed.
+		///Once <SetIntensity> is called , <Analyzed> will be true.
 		bool Analyzed() const {return _analyzed;}
 	private: 
+		///Set all element of the matrix zero.
 		void InitializeMatrix();
 	};
 }
