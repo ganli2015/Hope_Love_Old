@@ -60,6 +60,11 @@ namespace Mind
 		///Append all combinations of interactions between <from> and <me> to <table>.
 		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<iConceptInteractTable> table);
 
+		//////////////////////////////////////////////////////////////////////////
+		///Append concept pairs <pairs> to <table>.
+		//////////////////////////////////////////////////////////////////////////
+		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<MindType::ConceptPair>& pairs, shared_ptr<iConceptInteractTable> table);
+
 		///Find the same concept with <concept> in <concepts>
 		///and return the index.
 		///If not find, return -1.

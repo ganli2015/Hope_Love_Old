@@ -163,6 +163,14 @@ namespace LogicSystem
 
 	bool RelationLeaf::ConPairSymPairMatch(const ConceptPair& cPair, const SymbolPair& sPair) const
 	{
+		//If base concepts of <cPair> match <sPair>, then return true.
+		//For example, "加"is base of "加上" and "X加上X" matches the relation of "X加X".
+		//Besides of above situation, when <cPair> exactly matches <sPair>, then also return true.
+		if (sPair.First()->Match(cPair.first) && sPair.Second()->Match(cPair.second))
+		{
+			return true;
+		}
+
 		CREATE_FUNCTOR_IR(BaseMatchSymbol,shared_ptr<ConSymbol>,shared_ptr<iConcept>,bool,
 			if(_init->Match(input))
 			{

@@ -33,7 +33,15 @@ namespace Mind
 			}
 		}
 
-		int IndexOf( const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept )
+		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<MindType::ConceptPair>& pairs, shared_ptr<iConceptInteractTable> table)
+		{
+			for (unsigned int j = 0; j < pairs.size(); ++j)
+			{
+				table->Add(pairs[j].first, pairs[j].second);
+			}
+		}
+
+		int IndexOf(const vector<shared_ptr<iConcept>>& concepts, const shared_ptr<iConcept> concept)
 		{
 			class IsSameWith
 			{

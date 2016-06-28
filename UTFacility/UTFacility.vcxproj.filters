@@ -44,6 +44,9 @@
     <ClInclude Include="PerformanceTester.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MockNumber.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp">
@@ -71,6 +74,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PerformanceTester.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MockNumber.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

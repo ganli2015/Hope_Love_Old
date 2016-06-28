@@ -47,6 +47,11 @@ namespace LogicSystem
 		return _imp->CreateRelationNode();
 	}
 
+	shared_ptr<LogicSystem::iRelationSingleNode> iLogicElementCreator::CreateRelationSingleNode()
+	{
+		return _imp->CreateRelationSingleNode();
+	}
+
 	shared_ptr<iLogic> iLogicElementCreator::CreateLogic()
 	{
 		return _imp->CreateLogic();

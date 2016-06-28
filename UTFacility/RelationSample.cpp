@@ -6,6 +6,7 @@
 
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
+#include "../LogicSystem/RelationSingleNode.h"
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Number.h"
 #include "../LogicSystem/Verb.h"
@@ -16,8 +17,12 @@
 #include "../MindElement/ConceptInteractTable.h"
 #include "../MindElement/Concept.h"
 
+#include "../UTFacility/MockNumber.h"
+
 using namespace LogicSystem;
 using namespace Mind;
+using testing::Return;
+using testing::_;
 
 typedef Arbitrariness<iConcept> Arb;
 typedef Number<iConcept> Num;
@@ -174,4 +179,24 @@ void iRelationSample::RelationPair3( shared_ptr<LogicSystem::RelationLeaf>& cond
 	//Result:Verb0->Arb0 X Num0
 	result=shared_ptr<RelationLeaf>(new RelationLeaf());
 	result->AddRelation(verb0,arb0,num0);
+}
+
+void iRelationSample::RelationPair4(shared_ptr<LogicSystem::RelationLeaf>& condition, shared_ptr<LogicSystem::RelationSingleNode>& result)
+{
+// 	shared_ptr<CerebrumConceptCreator> cerebrumConceptCreator(new CerebrumConceptCreator());
+// 	shared_ptr<SymbolCreator> symCreator(new SymbolCreator(cerebrumConceptCreator));
+
+	//As bases of ¡„ are needed in satisfying the condition, so use a concept derived from cerebrum.
+	condition = shared_ptr<RelationLeaf>(new RelationLeaf());
+	shared_ptr<Sym> ling(_symbolCreator->Create("¡„"));
+	shared_ptr<Sym> jia(_symbolCreator->Create("º”"));
+// 	shared_ptr<MockNumber> num0 (new MockNumber());
+// 	EXPECT_CALL(*num0,Match(_)).WillRepeatedly(testing::Return(true));
+	shared_ptr<Num> num0 = Num::Create();
+
+	condition->AddRelation(ling,jia);
+	condition->AddRelation(jia, num0);
+
+	result = shared_ptr<RelationSingleNode>(new RelationSingleNode());
+	result->SetSymbol(num0);
 }

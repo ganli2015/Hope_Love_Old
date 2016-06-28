@@ -105,6 +105,12 @@ namespace LogicSystem
 
 		ConceptList conceptResults;
 		TableList finalDeduceTables;
+
+		//If there are single concepts from initial deduction, then append them to final concept results.
+		//Assume they cannot be reduced or deduced further.
+		list<shared_ptr<iConcept>> initSingleConcepts = ToConcepts(initDeduceResults);
+		conceptResults.insert(conceptResults.end(), initSingleConcepts.begin(), initSingleConcepts.end());
+
 		int interationCount=0;
 		int maxIterationCount = 20;
 		do 
@@ -130,7 +136,7 @@ namespace LogicSystem
 				finalDeduceTables.insert(finalDeduceTables.end(), noChangedTables.begin(), noChangedTables.end());
 			}		
 
-			if(!finalDeduceTables.empty() || !conceptResults.empty())
+			if(/*!finalDeduceTables.empty() ||*/ !conceptResults.empty())
 			{
 				break;
 			}
@@ -254,7 +260,7 @@ namespace LogicSystem
 		return res;
 	}
 
-	vector<Logic::ConceptPair> Logic::FilterPartialConceptPairs( const vector<ConceptPair>& total, const vector<ConceptPair>& partial ) const
+	vector<Logic::ConceptPair> Logic::FilterPartialConceptPairs(const vector<ConceptPair>& total, const vector<ConceptPair>& partial) const
 	{
 		return CommonFunction::FilterPartialConceptPairs(total,partial);
 	}
@@ -328,6 +334,23 @@ namespace LogicSystem
 		}
 	}
 
+	std::list<shared_ptr<Mind::iConcept>> Logic::ToConcepts(const vector<shared_ptr<iDeduceResult>>& deduceResults) const
+	{
+		list<shared_ptr<Mind::iConcept>> res;
+
+		for (unsigned int i = 0; i < deduceResults.size(); ++i)
+		{
+			shared_ptr<iConcept> table = deduceResults[i]->GetSingleConcept();
+
+			if (table != NULL)
+			{
+				res.push_back(table);
+			}
+		}
+
+		return res;
+	}
+
 	list<shared_ptr<Mind::iConceptInteractTable>> Logic::ToConceptTable( const vector<shared_ptr<iDeduceResult>>& deduceResults )const
 	{
 		list<shared_ptr<Mind::iConceptInteractTable>> res;
@@ -335,9 +358,11 @@ namespace LogicSystem
 		for (unsigned int i=0;i<deduceResults.size();++i)
 		{
 			shared_ptr<iConceptInteractTable> table=deduceResults[i]->GetConceptTable();
-			assert(table!=NULL);
 
-			res.push_back(table);
+			if(table!=NULL)		
+			{
+				res.push_back(table);
+			}
 		}
 
 		return res;

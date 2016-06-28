@@ -69,7 +69,16 @@ namespace LogicSystem
 		//I make an assumption that the condition depth is 1, i.e.,there is no tag "ConditionCollection" under "ConditionCollection" in the xml file.
 		shared_ptr<LogicSystem::iLogicStatement> ParseLogicStatement(const TiXmlNode * node);
 		shared_ptr<LogicSystem::iRelation> ParseRelation(const TiXmlNode * node);
-		LogicType::SymbolPair ParseSymbolPair(const TiXmlNode * node ,shared_ptr<Num>& repNum);
+
+		//////////////////////////////////////////////////////////////////////////
+		///Parse symbol pair in <node>.
+		///The tag of <node> should be <SymbolPairNode>.
+		///Output the repetition number.
+		//////////////////////////////////////////////////////////////////////////
+		LogicType::SymbolPair ParseSymbolPair(const TiXmlNode * node, shared_ptr<Num>& repNum);
+		shared_ptr<iRelationLeaf> ParseRelationLeaf(const TiXmlNode * symbolPairNode);
+		shared_ptr<iRelationSingleNode> ParseRelationSingleNode(const TiXmlNode * node);
+
 		shared_ptr<LogicType::ConSymbol> ParseFromToSymbol(const TiXmlElement *node);
 		shared_ptr<LogicType::ConSymbol> ParseConSymbol(const TiXmlElement * element) const;
 		shared_ptr<LogicType::ConSymbol> ParseSpecialSymbol(const TiXmlElement * element,const iLogicElementCreator::SymbolType type);

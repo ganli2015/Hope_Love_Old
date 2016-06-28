@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GlobalInterface;
 using DataWrapper = GlobalInterface.DataWrapper;
 using System.IO;
+using ManageWrapper;
 
 namespace HopeLove
 {

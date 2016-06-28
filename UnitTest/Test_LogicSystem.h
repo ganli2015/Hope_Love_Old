@@ -30,9 +30,13 @@ namespace LogicSystem
 	{
 
 	public:
-
+		///Test the deduction result if the result is a concept table.
 		static void TestLogicStatementDeduce(const shared_ptr<LogicSystem::iLogicStatement> logicStatment,
 			const string conditionStr,const string expectResultStr);
+
+		///Test the deduction result if the result is a single concept.
+		static void TestLogicStatementDeduce_Concept(const shared_ptr<LogicSystem::iLogicStatement> logicStatment,
+			const string conditionStr, const string expectResultStr);
 
 		static shared_ptr<iReduceResult> ReduceFromMatchedConcept(const Logic& logic,
 			const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs);

@@ -5,6 +5,7 @@ namespace LogicSystem
 {
 	class RelationNode;
 	class RelationLeaf;
+	class RelationSingleNode;
 	class iLogicElementCreator;
 }
 
@@ -35,5 +36,7 @@ public:
 	static void RelationPair2(shared_ptr<LogicSystem::RelationLeaf> condition,shared_ptr<LogicSystem::RelationLeaf> result );
 	///condition: Num0->次,次->Verb0,Verb1->Arb0. result: Verb0->Arb0 X Num0 
 	static void RelationPair3(shared_ptr<LogicSystem::RelationLeaf>& condition,shared_ptr<LogicSystem::RelationLeaf>& result );
- 
+	///condition: 零->加,加->Num0. result: Num0 
+	///Note! Num0 Always matches any symbol.
+	static void RelationPair4(shared_ptr<LogicSystem::RelationLeaf>& condition, shared_ptr<LogicSystem::RelationSingleNode>& result);
 };

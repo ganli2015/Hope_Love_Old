@@ -46,7 +46,10 @@ namespace LogicSystem
 		vector<shared_ptr<iReduceResult>> ReduceConceptPairSequence(const vector<ConceptPair>& subPairs,const vector<ConceptPair>& totalPairs,const Mind::iCerebrum* brain) const;
 		shared_ptr<iReduceResult> ReduceFromMatchedConcept(const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs) const;
 	
-	
+		//////////////////////////////////////////////////////////////////////////
+		///Extract single concepts in <deduceResults>.
+		//////////////////////////////////////////////////////////////////////////
+		list<shared_ptr<Mind::iConcept>> ToConcepts(const vector<shared_ptr<iDeduceResult>>& deduceResults) const;
 		list<shared_ptr<Mind::iConceptInteractTable>> ToConceptTable(const vector<shared_ptr<iDeduceResult>>& deduceResults) const;
 		list<shared_ptr<Mind::iConceptInteractTable>> ToConceptTable(const vector<shared_ptr<iReduceResult>>& reduceResults) const;
 		list<shared_ptr<Mind::iConcept>> ToConceptList(const vector<shared_ptr<iReduceResult>>& reduceResults) const;

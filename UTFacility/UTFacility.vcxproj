@@ -90,6 +90,7 @@
     <ClInclude Include="Matchers.h" />
     <ClInclude Include="MockExpression.h" />
     <ClInclude Include="MockiCerebrum.h" />
+    <ClInclude Include="MockNumber.h" />
     <ClInclude Include="PerformanceTester.h" />
     <ClInclude Include="PublicHeader.h" />
     <ClInclude Include="RelationSample.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="LeafCreator.cpp" />
     <ClCompile Include="MockExpression.cpp" />
     <ClCompile Include="MockiCerebrum.cpp" />
+    <ClCompile Include="MockNumber.cpp" />
     <ClCompile Include="PerformanceTester.cpp" />
     <ClCompile Include="RelationSample.cpp" />
     <ClCompile Include="Stdafx.cpp">

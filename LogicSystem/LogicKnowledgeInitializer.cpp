@@ -177,17 +177,49 @@ namespace LogicSystem
 
 	shared_ptr<iRelation> LogicKnowledgeInitializer::ParseRelation(const TiXmlNode * node)
 	{
+		shared_ptr<iRelation> res;
+
+		//The node of relation is either a single node or many symbol pairs.
+		//So once there is a single node ,then it must be iRelationSingleNode.
+		const TiXmlNode *singleNode = node->FirstChild(SingleNode.c_str());
+		if (singleNode != NULL)
+		{
+			res = ParseRelationSingleNode(singleNode);
+		}
+		else
+		{
+			const TiXmlNode *symbolPairNode = node->FirstChild(SymbolPairNode.c_str());
+
+			res = ParseRelationLeaf(symbolPairNode);
+		}
+
+		return res;
+	}
+
+	shared_ptr<iRelationSingleNode> LogicKnowledgeInitializer::ParseRelationSingleNode(const TiXmlNode * node)
+	{
+		shared_ptr<iRelationSingleNode> singleNode(iLogicElementCreator::CreateRelationSingleNode());
+
+		//There is only one node here.
+		shared_ptr<LogicType::ConSymbol> sym = ParseFromToSymbol(node->ToElement());
+		singleNode->SetSymbol(sym);
+
+		return singleNode;
+	}
+
+	shared_ptr<iRelationLeaf> LogicKnowledgeInitializer::ParseRelationLeaf(const TiXmlNode * symbolPairNode)
+	{
 		shared_ptr<iRelationLeaf> leaf(iLogicElementCreator::CreateRelationLeaf());
 
-		const TiXmlNode *symbolPairNode=node->FirstChild(SymbolPairNode.c_str());
-		for (;symbolPairNode!=0;symbolPairNode=symbolPairNode->NextSibling())
+		//Parse each symbol pair.
+		for (; symbolPairNode != 0; symbolPairNode = symbolPairNode->NextSibling())
 		{
 			shared_ptr<Num> repNum;
-			LogicType::SymbolPair pair=ParseSymbolPair(symbolPairNode,repNum);
-			if(repNum==NULL)
-				leaf->AddRelation(pair.first,pair.second);	
+			LogicType::SymbolPair pair = ParseSymbolPair(symbolPairNode, repNum);
+			if (repNum == NULL)
+				leaf->AddRelation(pair.first, pair.second);
 			else
-				leaf->AddRelation(pair.first,pair.second,repNum);	
+				leaf->AddRelation(pair.first, pair.second, repNum);
 		}
 
 		return leaf;

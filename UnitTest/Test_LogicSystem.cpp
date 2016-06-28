@@ -6,6 +6,7 @@
 #include "../LogicSystem/Logic.h"
 #include "../LogicSystem/RelationLeaf.h"
 #include "../LogicSystem/RelationNode.h"
+#include "../LogicSystem/RelationSingleNode.h"
 #include "../LogicSystem/Arbitrariness.h"
 #include "../LogicSystem/Symbol.h"
 #include "../LogicSystem/LogicStatement.h"
@@ -218,6 +219,40 @@ namespace LogicSystem
 		Test_LogicSystem::TestLogicStatementDeduce(logicStatment,condition,expect);
 	}
 
+	TEST_F(Test_LogicStatement, Deduce_SingleResult_NoRemainingPart)
+	{
+		///Test the situation that the deduction result of logic statement is a single concept instead of a concept table.
+		///There is no remaining part.
+		///Input: "零-加,加-三",
+		///Output: "三".
+		shared_ptr<RelationLeaf> conditionRel(new RelationLeaf());
+		shared_ptr<RelationSingleNode> resultRel(new RelationSingleNode());
+		iRelationSample::RelationPair4(conditionRel, resultRel);
+
+		shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel, resultRel));
+
+		string condition = "零-加,加-三";
+		string expect = "三";
+		Test_LogicSystem::TestLogicStatementDeduce_Concept(logicStatment, condition, expect);
+	}
+
+	TEST_F(Test_LogicStatement, Deduce_SingleResult_RemainingPart)
+	{
+		///Test the situation that the deduction result of logic statement is a single concept instead of a concept table.
+		///There is remaining part.
+		///Input: "零-加,加-三,加-一",
+		///Output: "三-加,加-一".
+		shared_ptr<RelationLeaf> conditionRel(new RelationLeaf());
+		shared_ptr<RelationSingleNode> resultRel(new RelationSingleNode());
+		iRelationSample::RelationPair4(conditionRel, resultRel);
+
+		shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel, resultRel));
+
+		string condition = "零-加,加-三,加-一";
+		string expect = "三-加,加-一";
+		Test_LogicSystem::TestLogicStatementDeduce(logicStatment, condition, expect);
+	}
+
 	INSTANTIATE_TEST_CASE_P(Test_Logic, Test_FinalDeduce, testing::ValuesIn(Test_FinalDeduce::GenerateSamples()));
 
 	TEST_P(Test_FinalDeduce,FinalDeduce)
@@ -306,7 +341,21 @@ namespace LogicSystem
 			+"result: \n"+resultTable->GetString();
 	}
 
-	shared_ptr<iReduceResult> Test_LogicSystem::ReduceFromMatchedConcept( const Logic& logic, const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs,const vector<ConceptPair>& remainingPairs )
+	void Test_LogicSystem::TestLogicStatementDeduce_Concept(const shared_ptr<LogicSystem::iLogicStatement> logicStatment, const string conditionStr, const string expectResultStr)
+	{
+		//Create mock expression of condition.
+		shared_ptr<MockExpression> expre = MockExpression::Create(conditionStr);
+
+		shared_ptr<iDeduceResult> result = logicStatment->Deduce(expre);
+
+		//Create mock expression of result.
+		shared_ptr<iConcept> resultConcept = result->GetSingleConcept();
+		ASSERT_TRUE(resultConcept->GetString()==expectResultStr)
+			<< "expect: \n" + resultConcept->GetString()
+			+ "result: \n" + expectResultStr;
+	}
+
+	shared_ptr<iReduceResult> Test_LogicSystem::ReduceFromMatchedConcept(const Logic& logic, const Mind::DescMatchedConceptInfo& matchedConceptInfo, const vector<ConceptPair>& subPairs, const vector<ConceptPair>& remainingPairs)
 	{
 		return logic.ReduceFromMatchedConcept(matchedConceptInfo,subPairs,remainingPairs);
 	}

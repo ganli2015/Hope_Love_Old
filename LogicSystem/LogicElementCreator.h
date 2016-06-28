@@ -29,6 +29,7 @@ namespace LogicSystem
 
 		virtual shared_ptr<iRelationLeaf> CreateRelationLeaf() const ;
 		virtual shared_ptr<iRelationNode> CreateRelationNode() const ;
+		virtual shared_ptr<iRelationSingleNode> CreateRelationSingleNode() const;
 
 		virtual shared_ptr<iRelationConstraint> CreateBinaryConstraint(const ConstraintType type,const shared_ptr<LogicType::ConSymbol> s1,const shared_ptr<LogicType::ConSymbol> s2) const ;
 

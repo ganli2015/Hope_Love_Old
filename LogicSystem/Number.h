@@ -13,8 +13,6 @@ namespace LogicSystem
 		static int NumNum;
 		static string _integerStr;
 
-		int _id;
-
 	public:
 		Number(void){ ++NumNum; };
 		~Number(void){};
@@ -69,7 +67,7 @@ namespace LogicSystem
 	template<class T>
 	string LogicSystem::Number<T>::GetString() const
 	{
-		return "Num"+CommonTool::ToString(_id);
+		return "Num"+CommonTool::ToString(NumNum);
 	}
 
 }

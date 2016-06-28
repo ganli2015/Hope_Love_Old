@@ -19,6 +19,7 @@ namespace LogicSystem
 	class iRelation;
 	class iRelationNode;
 	class iRelationLeaf;
+	class iRelationSingleNode;
 	class iRelationConstraint;
 	template<class T>
 	class iSymbol;
@@ -60,6 +61,7 @@ namespace LogicSystem
 
 		static shared_ptr<iRelationLeaf> CreateRelationLeaf() ;
 		static shared_ptr<iRelationNode> CreateRelationNode() ;
+		static shared_ptr<iRelationSingleNode> CreateRelationSingleNode();
 
 		static shared_ptr<iLogic> CreateLogic() ;
 
@@ -89,6 +91,7 @@ namespace LogicSystem
 
 		virtual shared_ptr<iRelationLeaf> CreateRelationLeaf() const =0;
 		virtual shared_ptr<iRelationNode> CreateRelationNode() const =0;
+		virtual shared_ptr<iRelationSingleNode> CreateRelationSingleNode() const = 0;
 
  		virtual shared_ptr<iRelationConstraint> CreateBinaryConstraint(const ConstraintType type,const shared_ptr<LogicType::ConSymbol> s1,const shared_ptr<LogicType::ConSymbol> s2) const =0;
  

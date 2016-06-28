@@ -5,6 +5,7 @@
 #include "LogicStatement.h"
 #include "RelationLeaf.h"
 #include "RelationNode.h"
+#include "RelationSingleNode.h"
 #include "Logic.h"
 #include "Symbol.h"
 #include "Arbitrariness.h"
@@ -72,6 +73,11 @@ namespace LogicSystem
 	shared_ptr<iRelationNode> LogicElementCreator::CreateRelationNode() const
 	{
 		return shared_ptr<RelationNode>(new RelationNode());
+	}
+
+	shared_ptr<LogicSystem::iRelationSingleNode> LogicElementCreator::CreateRelationSingleNode() const
+	{
+		return shared_ptr<RelationSingleNode>(new RelationSingleNode());
 	}
 
 	shared_ptr<iLogic> LogicElementCreator::CreateLogic() const

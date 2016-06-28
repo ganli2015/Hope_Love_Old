@@ -110,8 +110,57 @@
       <SymbolPair>
         <From>Verb0</From>
         <To>Arb0</To>
-	<RepNum>Num0</RepNum>
+        <RepNum>Num0</RepNum>
       </SymbolPair>
+    </Result>
+  </LogicStatement>
+  <LogicStatement>
+    <ConditionCollection Relation="And">
+      <Condition>
+        <SymbolPair>
+          <From>Num0</From>
+          <To ID="0" Word="乘" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="乘" />
+          <To>Num1</To>
+        </SymbolPair>
+      </Condition>
+    </ConditionCollection>
+    <Result>
+      <SymbolPair>
+        <From ID="0" Word="零" />
+        <To ID="0" Word="加" />
+      </SymbolPair>
+      <SymbolPair>
+        <From ID="0" Word="加" />
+        <To>Num0</To>
+      </SymbolPair>
+      <SymbolPair>
+        <From>Num1</From>
+        <To ID="0" Word="次" />
+      </SymbolPair>
+      <SymbolPair>
+        <From ID="0" Word="次" />
+        <To ID="0" Word="加" />
+      </SymbolPair>
+    </Result>
+  </LogicStatement>
+  <LogicStatement>
+    <ConditionCollection Relation="And">
+      <Condition>
+        <SymbolPair>
+          <From ID="0" Word="零" />
+          <To ID="0" Word="加" />
+        </SymbolPair>
+        <SymbolPair>
+          <From ID="0" Word="加" />
+          <To>Num0</To>
+        </SymbolPair>
+      </Condition>
+    </ConditionCollection>
+    <Result>
+      <SingleSymbol>Num0</SingleSymbol>
     </Result>
   </LogicStatement>
 </Root>
