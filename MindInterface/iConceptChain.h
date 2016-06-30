@@ -5,6 +5,10 @@ namespace Mind
 {
 	class iConcept;
 
+	//////////////////////////////////////////////////////////////////////////
+	///iConceptChain contains a sequence of concepts.
+	///It behaves like vector<shared_ptr<iConcept>>.
+	//////////////////////////////////////////////////////////////////////////	
 	class _MINDINTERFACEINOUT iConceptChain : public Obj<iConceptChain>
 	{
 	public:
@@ -24,8 +28,14 @@ namespace Mind
 		virtual bool Contain(const shared_ptr<iConcept> concept) const =0;
 		virtual unsigned int Size() const =0;
 
-		//判断<me>是否是parentChain的连续子序列。
+		//////////////////////////////////////////////////////////////////////////
+		///Check whether <me> is a Continuous sub sequence of <parentChain>.
+		//////////////////////////////////////////////////////////////////////////
 		virtual bool IsPartChainOf(const shared_ptr<iConceptChain> parentChain) const =0;
+		
+		//////////////////////////////////////////////////////////////////////////
+		///Check whether <me> is a sub sequence (not necessary continuous) of <parentChain>.
+		//////////////////////////////////////////////////////////////////////////
 		virtual bool IsSubSequenceOf(const shared_ptr<iConceptChain> parentChain) const =0;
 	};
 
