@@ -11,6 +11,7 @@ using namespace std;
 #include "FuncForTest.h"
 #include "TestPerformance.h"
 #include "UTInitializer.h"
+#include "IntegrationTest.h"
 
 class MyGlobal: public testing::Environment
 {
@@ -35,21 +36,16 @@ void MyGlobal::TearDown()
 
 void RunFilter(const string filterStr);
 
-// void Init()
-// {
-// 	LeafCreator::Init();
-// 	shared_ptr<Mind::MindElementCreator> mindCreator(new Mind::MindElementCreator());
-// 	Mind::iMindElementCreator::SetImp(mindCreator);
-// 
-// 	shared_ptr<LogicSystem::LogicElementCreator> logicCreator(new LogicSystem::LogicElementCreator());
-// 	LogicSystem::iLogicElementCreator::SetImp(logicCreator);
-// }
-
-
 
 void RunUnitTest(int argc, _TCHAR* argv[])
 {
 	//RunFilter("Test_LogicStatement*");
+
+#ifdef _RUN_INTEGRATION_TEST
+
+	RunFilter("Integration*");
+
+#endif // !_RUN_INTEGRATION_TEST
 
 	testing::InitGoogleTest(&argc, argv);
 	MEMOCHECK;
@@ -68,6 +64,7 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 	RunPerformance::Run();
 
 #else
+
 	RunUnitTest(argc, argv);
 
 #endif // _RUN_PERFORMANCE
@@ -81,7 +78,5 @@ int _cdecl _tmain(int argc, _TCHAR* argv[])
 void RunFilter(const string filterStr)
 {
 	::testing::GTEST_FLAG(filter) = filterStr;
-
-	
 }
 

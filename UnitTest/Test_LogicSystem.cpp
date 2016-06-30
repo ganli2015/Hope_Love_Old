@@ -249,7 +249,7 @@ namespace LogicSystem
 		shared_ptr<iLogicStatement> logicStatment(new LogicStatement(conditionRel, resultRel));
 
 		string condition = "零-加,加-三,加-一";
-		string expect = "三-加,加-一";
+		string expect = "一-加,加-三";
 		Test_LogicSystem::TestLogicStatementDeduce(logicStatment, condition, expect);
 	}
 

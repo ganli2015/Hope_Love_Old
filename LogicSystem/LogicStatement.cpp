@@ -35,9 +35,13 @@ namespace LogicSystem
 
 	shared_ptr<iDeduceResult> LogicStatement::Deduce( const shared_ptr<Mind::iConceptInteractTable> condition ) const
 	{
+		shared_ptr<iDeduceResult> res;
+
 		vector<MindType::ConceptPair> totalPairs=condition->GetAllRelations();
 		//Get all sub pairs of condition.
 		vector<vector<MindType::ConceptPair>> subConceptPairs=Math::GetAllSubSequence<MindType::ConceptPair>::Get(totalPairs);
+		//The max length of sub concept pairs that satisfy the condition.
+		unsigned int maxSatisfiedSubLength = 0;
 		//Search a sub pair sequence that satisfied the relation.
 		for (unsigned int i=0;i<subConceptPairs.size();++i)
 		{
@@ -45,30 +49,36 @@ namespace LogicSystem
 			//If satisfy, then connect with the other part.
 			//In this way, sub part of <condition> is deduced and lose no information of the other part.
 
-			shared_ptr<iConceptInteractTable> subTable=iMindElementCreator::CreateConceptInteractTable(subConceptPairs[i]);
+			vector<MindType::ConceptPair> currentSubPairs = subConceptPairs[i];
+			shared_ptr<iConceptInteractTable> subTable=iMindElementCreator::CreateConceptInteractTable(currentSubPairs);
 
 			if(_relationPair.first->Satisfy(subTable))
 			{
 				//Compute the other part of pairs to the result.
-				vector<MindType::ConceptPair> remainPairs=CommonFunction::FilterPartialConceptPairs(totalPairs,subConceptPairs[i]);
+				vector<MindType::ConceptPair> remainPairs=CommonFunction::FilterPartialConceptPairs(totalPairs, currentSubPairs);
 				shared_ptr<iRelation> result=_relationPair.first->SymbolResonance(_relationPair.second);
 				
 				//Generate result according to concept table or single concept in iDeduceResult.
 				//Only one of them can be valid and may generate a result.
-				//If either of iDeduceResult is not null, return it.
 				shared_ptr<iDeduceResult> deduceResult = GenerateConceptTableResult(result, remainPairs);
 				if(deduceResult ==NULL)
 				{
-					deduceResult = GenerateSingleConceptResult(result, subConceptPairs[i], remainPairs);				
+					deduceResult = GenerateSingleConceptResult(result, currentSubPairs, remainPairs);
 				}
-				if (deduceResult != NULL)
+				
+				//As there are many sub pairs that satisfy the condition, choose the longest one.
+				//If not, there may be bugs
+				//For example, "零-加,加-一，加-一".
+				//If the sub pairs happen to be "零-加,加-一", then the result is "一".
+				//However, "一-加,加-一" is expected.
+				if (deduceResult != NULL && currentSubPairs.size() > maxSatisfiedSubLength)
 				{
-					return deduceResult;
+					res = deduceResult;
 				}
 			}
 		}
 
-		return NULL;
+		return res;
 	}
 
 	shared_ptr<iDeduceResult> LogicStatement::GenerateConceptTableResult(const shared_ptr<iRelation> resultRelation,const vector<MindType::ConceptPair>& remainPairs) const

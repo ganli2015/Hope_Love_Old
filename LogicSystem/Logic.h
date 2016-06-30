@@ -31,7 +31,7 @@ namespace LogicSystem
 
 		virtual vector<shared_ptr<iDeduceResult>> FinalDeduce(const shared_ptr<iExpression> condition)  const;
 
-		virtual vector<shared_ptr<iReduceResult>> Reduce(const shared_ptr<Mind::iConceptInteractTable> conceptTable) const ;
+		virtual vector<shared_ptr<iReduceResult>> Reduce(const shared_ptr<Mind::iConceptInteractTable> conceptTable) const;
 
 
 	private:
@@ -57,6 +57,17 @@ namespace LogicSystem
 			TableList& reducedTables,TableList& noChangedTables,ConceptList& conceptResults) const;
 		void DeduceTableList(const TableList& reducedTables,TableList& noChangedTables,
 			TableList& tableForIter) const;
+
+		//////////////////////////////////////////////////////////////////////////
+		///Reduce and deduce the <input>  in a finite iteration.
+		///<conceptResults> and <finalDeduceTables> are convergent results in the iteration.
+		///<intermediateTables> are non-convergent tables when the iteration reaches the end.
+		//////////////////////////////////////////////////////////////////////////
+		void ReduceAndDeduce(const shared_ptr<Mind::iConceptInteractTable> input, 
+			TableList& intermediateTables,
+			ConceptList& conceptResults, 
+			TableList& finalDeduceTables) const;
+
 		vector<shared_ptr<iDeduceResult>> AssembleDeduceResults(const ConceptList& conceptResults,
 			const TableList& finalDeduceTables) const;
 

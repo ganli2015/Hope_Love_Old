@@ -13,6 +13,7 @@ namespace LogicSystem
 	class iDeduceResult;
 	class iExpression;
 
+	
 	///Contain logic statements.
 	class _MINDINTERFACEINOUT iLogicKnowledge : public Obj<iLogicKnowledge>
 	{

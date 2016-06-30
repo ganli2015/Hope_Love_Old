@@ -17,7 +17,9 @@ namespace LogicSystem
 	template<class T>
 	class Number;
 
+	//////////////////////////////////////////////////////////////////////////
 	///iRelation indicates the logic relationship between logic symbols.
+	//////////////////////////////////////////////////////////////////////////
 	class _MINDINTERFACEINOUT iRelation: public Obj<iRelation>
 	{
 	protected:
@@ -28,7 +30,9 @@ namespace LogicSystem
 
 		typedef Number<Mind::iConcept> Num;
 
-		//Redefine SymbolPair
+		//////////////////////////////////////////////////////////////////////////
+		///SymbolPair contains two concept pairs as well as their repetition number.
+		//////////////////////////////////////////////////////////////////////////
 		class SymbolPair
 		{
 			shared_ptr<ConSymbol> _from;

@@ -6,6 +6,7 @@
 
 #include "../UTFacility/MockiCerebrum.h"
 
+
 namespace Mind
 {
 	struct DescMatchedConceptInfo;

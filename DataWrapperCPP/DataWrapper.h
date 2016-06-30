@@ -8,8 +8,6 @@ namespace DataCollection
 
 namespace DataWrapperCPP
 {
-	template class _DATAWRAPPERINOUT std::allocator<std::string>;
-	template class _DATAWRAPPERINOUT std::vector<std::string,std::allocator<char*> >;
 	class  _DATAWRAPPERINOUT DataWrapper_Sentence
 	{
 	private:

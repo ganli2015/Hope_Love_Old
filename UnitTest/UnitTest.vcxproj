@@ -104,6 +104,7 @@ If NOT exist "Log" mkdir "Log" </Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FuncForTest.h" />
+    <ClInclude Include="IntegrationTest.h" />
     <ClInclude Include="MemoryChecker.h" />
     <ClInclude Include="MyTest.h" />
     <ClInclude Include="PublicHeader.h" />
@@ -125,6 +126,7 @@ If NOT exist "Log" mkdir "Log" </Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FuncForTest.cpp" />
+    <ClCompile Include="IntegrationTest.cpp" />
     <ClCompile Include="MemoryChecker.cpp" />
     <ClCompile Include="MyTest.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -147,11 +149,17 @@ If NOT exist "Log" mkdir "Log" </Command>
     <ClCompile Include="UTInitializer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommandList\CommandList.vcxproj">
+      <Project>{72e7ebc3-898d-4368-9583-8a94fff92572}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\CommonTools\CommonTools.vcxproj">
       <Project>{e3ce7562-e989-4069-ad9f-fd7d45b1dc46}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DataCollection\DataCollection.vcxproj">
       <Project>{3535f6fa-da4d-4a49-8587-3be2dc8c4278}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DataWrapperCPP\DataWrapperCPP.vcxproj">
+      <Project>{4afe5efc-1e7a-474c-98dc-3cb7e49e8030}</Project>
     </ProjectReference>
     <ProjectReference Include="..\LogicSystem\LogicSystem.vcxproj">
       <Project>{9f99884f-7129-4bf4-af3f-98daeab5224c}</Project>

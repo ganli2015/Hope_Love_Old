@@ -16,6 +16,7 @@
 
 #include "../CommonTools/LogWriter.h"
 #include "../CommonTools/MyException.h"
+#include "../CommonTools/CommonStringFunction.h"
 
 #include <set>
 
@@ -111,48 +112,99 @@ namespace LogicSystem
 		list<shared_ptr<iConcept>> initSingleConcepts = ToConcepts(initDeduceResults);
 		conceptResults.insert(conceptResults.end(), initSingleConcepts.begin(), initSingleConcepts.end());
 
-		int interationCount=0;
-		int maxIterationCount = 20;
+		int iterationCount = 0;
+		int maxIterationCount = 5;
 		do 
 		{
+			//Reduce and deduce each table in <curDeduceTables>.
+			//In this way , each table goes deeply in reduction and deduction
+			//and then collect convergent results and non convergent results are sent to next iteration.
+			//It looks like Deep First Search.
+
+			LOG("Main Iteration. Iteration Count: " + CommonTool::ToString(iterationCount));
+
+			bool hasResult = false;
+			TableList intermediateTables;
+			for (TableIterConst it=curDeduceTables.begin();it!=curDeduceTables.end();++it)
+			{
+				LOG_DESC("Sub Iteration :", *it);
+
+				ReduceAndDeduce(*it, intermediateTables, conceptResults, finalDeduceTables);
+				//Once there is a single concept result, then regard it as final result.
+				if (!conceptResults.empty())
+				{
+					hasResult=true;
+					break;
+				}
+			}
+
+			if (hasResult)
+			{
+				break;
+			}
+
+			curDeduceTables = intermediateTables;
+
+		} while (++iterationCount<maxIterationCount);
+
+		//When divergent, then copy with this situation in the other way outside this function.
+		if (iterationCount == maxIterationCount)
+		{
+			throw CommonTool::IterationDiverge();
+		}
+
+		return AssembleDeduceResults(conceptResults,finalDeduceTables);
+	}
+
+	void Logic::ReduceAndDeduce(const shared_ptr<iConceptInteractTable> input,
+		TableList& intermediateTables,
+		ConceptList& conceptResults,
+		TableList& finalDeduceTables) const
+	{
+		//The table to be reduced and deduced in the iteration. 
+		TableList curDeduceTables;
+		curDeduceTables.push_back(input);
+
+		int iterationCount = 0;
+		int maxIterationCount = 5;
+		do
+		{
+			LOG("Sub Iteration Count: " + CommonTool::ToString(iterationCount));
+
 			//<reducedTables> contains the tables reduced from <curDeduceTables>.
 			//If one table reduces to nothing, it will not appear in <reducedTables>.
 			TableList reducedTables;
 			TableList noChangedTables;
-			ReduceTableList(curDeduceTables,reducedTables,noChangedTables,conceptResults);
-			LOG_DESC("Reduced Tables after reduction: ",reducedTables);
+			ReduceTableList(curDeduceTables, reducedTables, noChangedTables, conceptResults);
+			LOG_DESC("Reduced Tables after reduction: ", reducedTables);
 
+			//Remove duplicated tables to speed up iteration.
 			CommonFunction::RemoveDuplicated(reducedTables);
 			CommonFunction::RemoveDuplicated(noChangedTables);
 
-			curDeduceTables.clear();		
+			curDeduceTables.clear();
 			DeduceTableList(reducedTables, noChangedTables, curDeduceTables);
-			LOG_DESC("Deduced Tables after deduction: ", curDeduceTables);
 
 			if (!noChangedTables.empty())
 			{
 				//<noChangedTables> contains table with no reduction and deduction during current iteration,
 				//and they will be kicked out from iteration and become the final results.
 				finalDeduceTables.insert(finalDeduceTables.end(), noChangedTables.begin(), noChangedTables.end());
-			}		
+			}
 
-			if(/*!finalDeduceTables.empty() ||*/ !conceptResults.empty())
+			CommonFunction::RemoveDuplicated(curDeduceTables);
+			LOG_DESC("Deduced Tables after deduction: ", curDeduceTables);
+
+			//If there is a concept result , then do not iterate for high efficiency.
+			if (!conceptResults.empty())
 			{
 				break;
 			}
 
-			CommonFunction::RemoveDuplicated(curDeduceTables);
+		} while (!curDeduceTables.empty() && ++iterationCount<maxIterationCount);
 
-			//Check whether running too long time.
-			++interationCount;
-			if (interationCount >= maxIterationCount)
-			{
-				throw CommonTool::IterationDiverge();
-			}
-
-		} while (!curDeduceTables.empty());
-
-		return AssembleDeduceResults(conceptResults,finalDeduceTables);
+		//<curDeduceTables> are non-convergent tables.
+		intermediateTables .insert(intermediateTables.end(), curDeduceTables.begin(),curDeduceTables.end());
 	}
 
 	vector<shared_ptr<iReduceResult>> Logic::Reduce( const shared_ptr<Mind::iConceptInteractTable> conceptTable ) const
