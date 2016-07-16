@@ -45,8 +45,12 @@ namespace DataCollection
 		static string ConvertWordsToString(const vector<shared_ptr<Word>> words);
 
 	//grammar pattern
+		//////////////////////////////////////////////////////////////////////////
 		///Get POS of <words> and connect them into a grammar pattern.
+		//////////////////////////////////////////////////////////////////////////
 		static GrammarPattern ConvertToPattern(const vector<shared_ptr<DataCollection::Word>> words);
+		static GrammarPattern ConvertToPattern(const vector<int> posInt);
+
 		static bool SameGrammarPattern(const GrammarPattern& left,const GrammarPattern& right);
 	};
 }

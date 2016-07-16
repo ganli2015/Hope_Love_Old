@@ -79,7 +79,7 @@ namespace Mind
 		MOCK_METHOD1(IncreasePatternFreqency,void(const DataCollection::GrammarPattern&));
 		MOCK_CONST_METHOD2(GetP_Forward,double(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& forward));
 		MOCK_CONST_METHOD2(GetP_Backward,double(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward));
-
+		MOCK_CONST_METHOD1(ComputePossibility, double(const DataCollection::GrammarPattern& pattern));
 
 		MOCK_METHOD1(React,vector<ConceptChainProperty>(const shared_ptr<iConceptChain> chain));
 

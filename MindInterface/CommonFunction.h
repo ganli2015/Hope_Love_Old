@@ -57,7 +57,9 @@ namespace Mind
 	class iConceptChain;
 	namespace CommonFunction
 	{
+		//////////////////////////////////////////////////////////////////////////
 		///Append all combinations of interactions between <from> and <me> to <table>.
+		//////////////////////////////////////////////////////////////////////////
 		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<shared_ptr<iConcept>>& from,const vector<shared_ptr<iConcept>>& to,shared_ptr<iConceptInteractTable> table);
 
 		//////////////////////////////////////////////////////////////////////////
@@ -65,44 +67,55 @@ namespace Mind
 		//////////////////////////////////////////////////////////////////////////
 		void _MINDINTERFACEINOUT AppendToInteractTable(const vector<MindType::ConceptPair>& pairs, shared_ptr<iConceptInteractTable> table);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Find the same concept with <concept> in <concepts>
 		///and return the index.
 		///If not find, return -1.
+		//////////////////////////////////////////////////////////////////////////
 		int _MINDINTERFACEINOUT IndexOf(const vector<shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
+		//////////////////////////////////////////////////////////////////////////
 		///Find the same concept with <concept> in <concepts>
 		///and return the index.
 		///If not find, return -1.
+		//////////////////////////////////////////////////////////////////////////
 		int _MINDINTERFACEINOUT IndexOf(const map<int,shared_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
+		//////////////////////////////////////////////////////////////////////////
 		///Find the same concept with <concept> in <concepts>
 		///and return the index.
 		///If not find, return -1.
+		//////////////////////////////////////////////////////////////////////////
 		int _MINDINTERFACEINOUT IndexOf(const map<int,weak_ptr<iConcept>>& concepts,const shared_ptr<iConcept> concept);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Check whether <left> and <right> are the same.
+		//////////////////////////////////////////////////////////////////////////
 		bool _MINDINTERFACEINOUT IsSameConcept(const shared_ptr<iConcept> left,const shared_ptr<iConcept> right);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Convert <vec> to string and write to <out>.
+		//////////////////////////////////////////////////////////////////////////
 		void _MINDINTERFACEINOUT WriteConcepts(const vector<shared_ptr<iConcept>>& vec,ofstream& out);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Remove duplicated concept chains in <chains>.
+		//////////////////////////////////////////////////////////////////////////
 		void _MINDINTERFACEINOUT RemoveSameChain( vector<shared_ptr<iConceptChain>>& chains ) ;
-
-		///Compute confidence of <pattern> considering confidence of each POS with local grammar analysis.
-		double _MINDINTERFACEINOUT ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern);
-
-		///Compute confidence of <curPOS> when its previous POS is <forwardPos> and its next POS is <backwardPos>.
-		///The returned value is 0 to 1.
-		double _MINDINTERFACEINOUT ComputeP_GrammarLocal(const DataCollection::PartOfSpeech& curPos,const DataCollection::PartOfSpeech& forwardPos,const DataCollection::PartOfSpeech& backwardPos);
 
 		void _MINDINTERFACEINOUT OutputConceptPairs(const vector<MindType::ConceptPair>& pairs,ostream& out);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Get the concept that represents an integer from <conceptVec>.
+		//////////////////////////////////////////////////////////////////////////
 		shared_ptr<Mind::iConcept> _MINDINTERFACEINOUT FindIntegerConcept(const vector<shared_ptr<Mind::iConcept>>& conceptVec);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Filter <total> with <partial> and return the remaining.
+		//////////////////////////////////////////////////////////////////////////
 		vector<MindType::ConceptPair> _MINDINTERFACEINOUT FilterPartialConceptPairs(const vector<MindType::ConceptPair>& total, const vector<MindType::ConceptPair>& partial);
 
+		//////////////////////////////////////////////////////////////////////////
 		///Remove duplicated concept tables in <tables>.
+		//////////////////////////////////////////////////////////////////////////
 		void _MINDINTERFACEINOUT RemoveDuplicated(list<shared_ptr<iConceptInteractTable>>& tables);
 
 		class _MINDINTERFACEINOUT SameConcept

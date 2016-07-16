@@ -252,17 +252,8 @@ void GrammarAnalyzer::SelectOptimalGrammarPattern(const vector<vector<shared_ptr
 	for (unsigned int i=0;i<combination.size();++i)
 	{
 		GrammarPattern pattern=LanguageFunc::ConvertToPattern(combination[i]);
-		vector<GrammarPattern> matchedPattern=brain->ContainSubsequence(pattern);
-		if(matchedPattern.empty()) continue;;
 
-		//Sum frequencies of incorporated grammar patterns.
-		int freq_sum(0);
-		for (unsigned int j=0;j<matchedPattern.size();++j)
-		{
-			freq_sum+=brain->GetFreqencyofPattern(matchedPattern[j]);
-		}
-
-		double value=freq_sum*Mind::CommonFunction::ComputeP_GrammarLocalAnalysis(pattern);
+		double value = brain->ComputePossibility(pattern);
 
 		if(value>maxValueFun)
 		{

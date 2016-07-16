@@ -5,6 +5,8 @@
 #include "GrammaPattern.h"
 #include "Punctuations.h"
 
+#include "../CommonTools/GeneralFunctor.h"
+
 using namespace std;
 
 namespace DataCollection
@@ -173,7 +175,19 @@ namespace DataCollection
 		return GrammarPattern(ps);
 	}
 
-	shared_ptr<DataCollection::Word> LanguageFunc::GetParticularWord( const std::string str, const DataCollection::PartOfSpeech partofspeech )
+	DataCollection::GrammarPattern LanguageFunc::ConvertToPattern(const vector<int> posInt)
+	{
+		CREATE_FUNCTOR_R(ToPOS, int, PartOfSpeech,
+			return (PartOfSpeech)input;
+		);
+
+		vector<PartOfSpeech> pos(posInt.size());
+		transform(posInt.begin(), posInt.end(), pos.begin(), ToPOS());
+
+		return GrammarPattern(pos);
+	}
+
+	shared_ptr<DataCollection::Word> LanguageFunc::GetParticularWord(const std::string str, const DataCollection::PartOfSpeech partofspeech)
 	{
 		switch(partofspeech)
 		{

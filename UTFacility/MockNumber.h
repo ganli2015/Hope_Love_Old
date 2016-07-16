@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable:4373)
 #include "PublicHeader.h"
 #include "../LogicSystem/Number.h"
 

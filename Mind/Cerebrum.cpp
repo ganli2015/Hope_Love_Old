@@ -220,7 +220,12 @@ namespace Mind
 		return _grammaset->GetP_Backward(me,backward);
 	}
 
-	vector<shared_ptr<LogicSystem::iDeduceResult>> Cerebrum::Deduce( const shared_ptr<LogicSystem::iExpression> expre ) const
+	double Cerebrum::ComputePossibility(const DataCollection::GrammarPattern& pattern) const
+	{
+		return _grammaset->ComputePossibility(pattern);
+	}
+
+	vector<shared_ptr<LogicSystem::iDeduceResult>> Cerebrum::Deduce(const shared_ptr<LogicSystem::iExpression> expre) const
 	{
 		return _logicKnowledge->Deduce(expre);
 	}

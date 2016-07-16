@@ -97,10 +97,7 @@ namespace Mind
 		//获得me的前一个词性是backward的概率.
 		virtual double GetP_Backward(const DataCollection::PartOfSpeech& me,const DataCollection::PartOfSpeech& backward) const;
 
-		//Concept Interact Table Related Functions
-// 		void BuildConceptInteractTable(const shared_ptr<Concept> fromConcept,const shared_ptr<Concept> toConcept);
-// 		std::vector<pair<shared_ptr<Concept>,shared_ptr<Concept>>> GetAllInteractPairs() const;
-// 		void ClearConceptInteractTable();
+		virtual double ComputePossibility(const DataCollection::GrammarPattern& pattern) const ;
 
 		//Concept React System Functions
 		virtual vector<ConceptChainProperty> React(const shared_ptr<iConceptChain> chain);

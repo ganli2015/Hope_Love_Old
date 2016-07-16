@@ -24,7 +24,9 @@ namespace LogicSystem
 		virtual bool Match(const shared_ptr<T> con) const =0;
 		virtual string GetString() const =0;
 
+		//////////////////////////////////////////////////////////////////////////
 		///Bind <me> with <obj> that <me> is referring to.
+		//////////////////////////////////////////////////////////////////////////
 		virtual void BindReferredObject(const shared_ptr<T> obj) 
 		{
 			_referredObj=obj;
@@ -34,7 +36,10 @@ namespace LogicSystem
 		{
 			return _referredObj;
 		}
+
+		//////////////////////////////////////////////////////////////////////////
 		///Check whether <me> and <other> refer to the same thing.
+		//////////////////////////////////////////////////////////////////////////
 		virtual bool SameReferring(const shared_ptr<iSymbol<T>> other)
 		{
 			if(GetReferredObject()==NULL || other->GetReferredObject()==NULL)

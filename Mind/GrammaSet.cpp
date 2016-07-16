@@ -7,10 +7,14 @@
 #include "../DataCollection/LanguageFunc.h"
 #include "../DataCollection/Word.h"
 
+#include "../CommonTools/ConfigureInfoManager.h"
+#include "../CommonTools/GeneralFunctor.h"
+
 #include "../Mathmatic/FindSequence.h"
 
 #include <fstream>
 #include <functional>
+#include <numeric>
 
 using namespace DataCollection;
 using namespace std;
@@ -37,8 +41,10 @@ namespace Mind
 
 		ExtractGrammarLocalDistribution();
 
+		//Input the grammar patterns from the file.
 		vector<GrammarAttribute> patterns=InputGrammaPatterns(GetHopeLoveMindPath()+GrammaPatterns_InitialFilename);
 
+		//Build the grammar trees.
 		for (int i=0;i<DataCollection::NUM_PARTOFSPEECH;++i)
 		{
 			GrammaTree for_tree(i);
@@ -47,12 +53,19 @@ namespace Mind
 			_backwardtree.insert(make_pair(i,back_tree));
 		}
 
+		//Add patterns to <me>.
 		for (unsigned int i=0;i<patterns.size();++i)
 		{
 			GrammarPattern pattern=patterns[i].pattern;
 			_patterns.push_back(patterns[i]);
 
 			//AddPatternToTree(pattern);
+		}
+
+
+		//CFG_SECTION(TEST_GRAMMAR_LOCAL)
+		{
+			InitializeWeights();
 		}
 
 	}
@@ -297,6 +310,17 @@ namespace Mind
 		}
 	}
 
+	Math::MyInt GrammarSet::GetTotalFrequency() const
+	{
+		Math::MyInt res(0);
+		for (vector<GrammarAttribute>::const_iterator it=_patterns.begin();it!=_patterns.end();++it)
+		{
+			res += it->frequency;
+		}
+
+		return res;
+	}
+
 	vector<GrammarPattern> GrammarSet::GrammarPatternSortByFrequency() const
 	{
 		class SortAttribute
@@ -451,11 +475,14 @@ namespace Mind
 	{
 		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
 
+		//Initialize each POS with GrammarLocal.
 		map<PartOfSpeech,GrammarLocal> grammarLocalTable;
 		for (int i=0;i<NUM_PARTOFSPEECH;++i)
 		{
 			_grammarLocalTable[PartOfSpeech(i)]=shared_ptr<GrammarLocal>(new GrammarLocal(PartOfSpeech(i)));
 		}
+
+		//Statistic the distribution of frequencies of POS from <samples>.
 		for (unsigned int i=0;i<samples.size();++i)
 		{
 			vector<int> gra=samples[i].gra;
@@ -490,7 +517,164 @@ namespace Mind
 	}
 
 
-	
+	double GrammarSet::ComputePossibility(const DataCollection::GrammarPattern& pattern) const
+	{
+		//The final possibility takes local grammar and grammar patterns of <pattern> into consideration.
+		//And the above two components has weights respectively.
+		MyInt totalFreq = GetTotalFrequency();
+		double localP = ComputeP_GrammarLocalAnalysis(pattern);
+		double patternP = ComputePossibilityGrammarPattern(pattern, totalFreq);
+		double res = _wPattern*patternP + _wLocal*localP;
+		
+		//Adjust the possibility such that it is in the interval of 0 to 1.
+		res = min(1., res);
+		res = max(0., res);
+
+		return res;
+	}
+
+	double GrammarSet::ComputeP_GrammarLocalAnalysis(const DataCollection::GrammarPattern& pattern) const
+	{
+		vector<PartOfSpeech> poses = pattern.GetPattern();
+		//Remove punctuations as they may interfere computation.
+		for (vector<PartOfSpeech>::iterator it = poses.begin(); it != poses.end();)
+		{
+			if (*it == Punctuation)
+			{
+				it = poses.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+
+		if (poses.size() <= 1) return 0.;
+
+		double res = 0.;
+		for (unsigned int i = 0; i<poses.size(); ++i)
+		{
+			PartOfSpeech curPos = poses[i];
+			if (i == 0)//第一个词性只考虑与第二个词性之间的置信度.
+			{
+				double p_cur_for = GetP_Forward(curPos, poses[i + 1]);
+				double p_for_cur = GetP_Backward(poses[i + 1], curPos);
+				res += p_for_cur*p_cur_for;
+			}
+			else if (i == poses.size() - 1)//最后一个词性只考虑与倒数第二个之间的置信度.
+			{
+				double p_cur_back = GetP_Backward(curPos, poses[i - 1]);
+				double p_back_cur = GetP_Forward(poses[i - 1], curPos);
+				res += p_back_cur*p_cur_back;
+			}
+			else
+			{
+				res += ComputeP_GrammarLocal(curPos, poses[i + 1], poses[i - 1]);
+			}
+		}
+
+		return res / poses.size();
+	}
+
+	void GrammarSet::InitializeWeights()
+	{
+		vector<Sen_Gra> samples = InputGraSamples(GetHopeLoveMindPath() + StringGrammar_InitialFilename);
+
+		//Compute possibilities of grammar patterns and local grammar of each pattern.
+		MyInt totalFreq = GetTotalFrequency();
+		vector<double> localPVec;
+		vector<double> patternPVec;
+		for (unsigned int i = 0; i < samples.size(); ++i)
+		{
+			//Compute the possibility of local grammar.
+			GrammarPattern pattern=LanguageFunc::ConvertToPattern(samples[i].gra);
+			double localP = ComputeP_GrammarLocalAnalysis(pattern);
+			localPVec.push_back(localP);
+
+			//Compute the possibility of matched patterns.
+			double patternP = ComputePossibilityGrammarPattern(pattern, totalFreq);
+			patternPVec.push_back(patternP);
+		}
+
+		//Optimize <_wPattern> and <_wLocal> until possibility of each sample is close to 1.
+		_wPattern = 0.5, _wLocal = 0.5;
+		ComputeWeights(patternPVec, localPVec, _wPattern, _wLocal);
+	}
+
+	void GrammarSet::ComputeWeights(const vector<double>& patternP, const vector<double>& localP, 
+		double& wPattern, double& wLocal) const
+	{
+		double gradPattern, gradLocal;
+		double deltaStep = 1e-4;
+		double divergeTol = 1e-5;
+		int iterCount = 0;
+		int maxIterCount = 10000;
+		do 
+		{
+			double dev = ComputeDeviation(patternP, localP, wPattern, wLocal);
+			//Numerically compute the gradient of each weight.
+			double deltaPattern= ComputeDeviation(patternP, localP, wPattern+ deltaStep, wLocal)-dev;
+			double deltaLocal = ComputeDeviation(patternP, localP, wPattern , wLocal + deltaStep) - dev;
+			gradPattern = deltaPattern / deltaStep;
+			gradLocal = deltaLocal / deltaStep;
+
+			//Adjust each weight simply by gradient.
+			wPattern -= gradPattern;
+			wLocal -= gradLocal;
+
+			if (++iterCount > maxIterCount)
+			{
+				break;
+			};
+
+			//Iterate until both weights are not changed within tolerance.
+		} while (Math::DoubleCompare(gradPattern,0,divergeTol)!=0 && Math::DoubleCompare(gradLocal, 0, divergeTol) != 0);
+
+	}
+
+	double GrammarSet::ComputeDeviation(const vector<double>& patternP, const vector<double>& localP,
+		const double wPattern, const double wLocal) const
+	{
+		assert(patternP.size() == localP.size());
+
+		double res = 0;
+		for (unsigned int i=0;i<patternP.size();++i)
+		{
+			//Each element of <patternP> and the element in <localP> of the same index correspond to one grammar pattern.
+			//Sum possibilities of each grammar patterns and compute the deviation from one.
+			res += pow(patternP[i] * wPattern + localP[i] * wLocal-1,2);
+		}
+
+		//Normalize deviation.
+		return res/patternP.size();
+	}
+
+	double GrammarSet::ComputePossibilityGrammarPattern(const GrammarPattern& pattern, const MyInt totalFreq) const
+	{
+		//Possibility equals the sum of ratio of each grammar pattern.
+		//Therefore, possibility must be in the interval of 0 to 1.
+
+		double sumFreq = 0.;
+		vector<GrammarPattern> matchedPattern = ContainSubsequence(pattern);
+		for (unsigned int j = 0; j < matchedPattern.size(); ++j)
+		{
+			MyInt curFreq = GetFreqencyofPattern(matchedPattern[j]);
+			sumFreq += curFreq / totalFreq;
+		}
+
+		return sumFreq;
+	}
+
+	double GrammarSet::ComputeP_GrammarLocal(const PartOfSpeech& curPos, const PartOfSpeech& forwardPos, const PartOfSpeech& backwardPos) const
+	{
+		double p_cur_for = GetP_Forward(curPos, forwardPos);
+		double p_cur_back = GetP_Backward(curPos, backwardPos);
+		double p_for_cur = GetP_Backward(forwardPos, curPos);
+		double p_back_cur = GetP_Forward(backwardPos, curPos);
+
+
+		return (p_cur_for*p_for_cur + p_cur_back*p_back_cur) / 2;
+	}
 
 	
 

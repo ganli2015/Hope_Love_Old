@@ -1,7 +1,7 @@
 #pragma once
 #include "PublicHeader.h"
 
-//#define _RUN_INTEGRATION_TEST
+#define _RUN_INTEGRATION_TEST
 
 struct ParamIntegration
 {
