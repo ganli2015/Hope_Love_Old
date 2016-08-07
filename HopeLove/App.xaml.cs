@@ -16,14 +16,15 @@ namespace HopeLove
         {
             Main,
             AppendConcept,
-            AppendLogicStatement
+            AppendLogicStatement,
+            ExtractChattingInText
         }
 
         FormType formType;
 
         public App()
         {
-            formType = FormType.Main;
+            formType = FormType.ExtractChattingInText;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -44,6 +45,11 @@ namespace HopeLove
                 case FormType.AppendLogicStatement:
                     {
                         myApp = new AppendLogicStatementForm();
+                        break;
+                    }
+                case FormType.ExtractChattingInText:
+                    {
+                        myApp = new ExtractChatting();
                         break;
                     }
                 default:
