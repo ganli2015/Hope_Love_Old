@@ -15,15 +15,15 @@
 		OutType GetResult() const {return _output;}	\
 	};	
 
-///A functor with init data.
-#define CREATE_FUNCTOR_I(funName,InputType,InitType,body)\
+///A functor with initial data.
+#define CREATE_FUNCTOR_I(funName,InitType,InputType,body)\
 class funName	\
 	{	\
 	InitType _init;	\
 	public:	\
 	funName(const InitType& val):_init(val){}	\
 	~funName(){}	\
-	void operator()(const InputType& input)	\
+	void operator()(InputType& input)	\
 		{	\
 		body	\
 		}	\

@@ -24,7 +24,7 @@ namespace HopeLove
 
         public App()
         {
-            formType = FormType.ExtractChattingInText;
+            formType = FormType.Main;
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

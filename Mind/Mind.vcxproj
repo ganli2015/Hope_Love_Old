@@ -161,6 +161,7 @@
     <ClInclude Include="GrammaSet.h" />
     <ClInclude Include="GrammaTree.h" />
     <ClInclude Include="InOut.h" />
+    <ClInclude Include="ReactionValueEvaluation.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClCompile Include="FilePath.cpp" />
     <ClCompile Include="GrammaSet.cpp" />
     <ClCompile Include="GrammaTree.cpp" />
+    <ClCompile Include="ReactionValueEvaluation.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -207,6 +209,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Neural Network Design\Neural Network Design.vcxproj">
       <Project>{0f9d9851-7103-4ca2-977f-266020313baf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SentenceAnalysisAlgorithm\SentenceAnalysisAlgorithm.vcxproj">
+      <Project>{347b0dc1-09b3-43e1-8ed4-43a85a3dcc7f}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

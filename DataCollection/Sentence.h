@@ -22,6 +22,7 @@ namespace DataCollection
 		std::vector<shared_ptr<Character>> GetRawSentence() const;
 		std::string GetString() const;
 
+		bool InSentence(const shared_ptr<Word> word) const;
 	};
 
 	///SegmentedSentence indicates the segmentation structure of a certain sentence.
@@ -70,6 +71,12 @@ namespace DataCollection
 		string GetString() const;
 		std::vector<shared_ptr<Character>> GetRawSentence() const;
 		
+		//////////////////////////////////////////////////////////////////////////
+		///Check whether <word> is in <me>.
+		//////////////////////////////////////////////////////////////////////////
+		bool InSentence(const shared_ptr<Word> word) const;
+
+
 		///Add a sub sentence which constitute of characters <vec>.
 		void AddSubSentence(const std::vector<shared_ptr<DataCollection::Character>> vec);
 		///Add a sub sentence which constitute of string <str>.

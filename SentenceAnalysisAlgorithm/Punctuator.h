@@ -19,6 +19,8 @@ public:
 	///The input sentence will be separated according to end-of-sentence punctuations. 
 	bool Punctuate(shared_ptr<DataCollection::Sentence>& punctuated);
 
+
+private:
 	///Compute sub sentence from <unpun>.
 	///<sen_it> denotes the start of the sub sentence and <chara_it> the end of the sub sentence.
 	///After getting sub sentence, <sen_it> and <chara_it> will refresh.

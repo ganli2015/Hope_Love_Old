@@ -6,6 +6,7 @@
 #include "Punctuations.h"
 
 #include "../CommonTools/GeneralFunctor.h"
+#include "../CommonTools/assertions.h"
 
 using namespace std;
 
@@ -36,7 +37,9 @@ namespace DataCollection
 	{
 		//Assume the input <str> are all Chinese characters.
 		//Then convert two by two.
-		assert(str.size()%2==0);
+		//assert(str.size()%2==0);
+		Check(str.size() % 2 == 0);
+
 		vector<shared_ptr<Character>> charas;
 		for (string::iterator it=str.begin();it!=str.end();it+=2)
 		{

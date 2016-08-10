@@ -39,7 +39,18 @@ namespace DataCollection
 		return _raw;
 	}
 
-	void Sentence::SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec )
+	bool Sentence::InSentence(const shared_ptr<Word> word) const
+	{
+		//There must be sub sentences and <me> constitutes of Words instead of a string.
+		if (_subInfos.empty()) return false;
+
+		for (unsigned int i=0;i<_subInfos.size();++i)
+		{
+
+		}
+	}
+
+	void Sentence::SetGrammard(const std::vector<shared_ptr<DataCollection::Word>> vec)
 	{
 		//StructuredSentence use the same words as well as GrammardSentence.
 		_grammard=shared_ptr<GrammardSentence>(new GrammardSentence(vec));
@@ -208,7 +219,6 @@ namespace DataCollection
 	{
 		return LanguageFunc::ConvertCharacterToString(_raw);
 	}
-
 
 
 

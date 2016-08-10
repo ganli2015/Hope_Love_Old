@@ -67,6 +67,7 @@ Temporary Items
 *.lastbuildstate
 *.cache
 *.opendb
+*.txt
 HopeLove/obj/
 HopeLove/bin/
 HopeLove/bin/

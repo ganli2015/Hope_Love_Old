@@ -97,6 +97,9 @@
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(SolutionDir)HopeLove\bin\$(Configuration)\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,8 +130,7 @@
       </AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>Copy "$(TargetPath)" "$(SolutionDir)HopeLove\bin\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -42,7 +42,7 @@ namespace HopeLove
 
         private void Init_CommonWord()
         {
-            StreamReader sr = new StreamReader(WordTablePath + CommonWordTableFilename);
+            StreamReader sr = new StreamReader(WordTablePath + CommonWordTableFilename,Encoding.Default);
             string all = sr.ReadToEnd();
             string[] each = all.Split('\t');
             foreach (string word in each)
@@ -59,7 +59,7 @@ namespace HopeLove
 
         private void Init_TotalWord()
         {
-            StreamReader sr = new StreamReader(WordTablePath + TotalWordTableFilename);
+            StreamReader sr = new StreamReader(WordTablePath + TotalWordTableFilename, Encoding.Default);
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();

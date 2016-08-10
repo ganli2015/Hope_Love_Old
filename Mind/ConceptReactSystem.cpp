@@ -1,14 +1,13 @@
 #include "StdAfx.h"
 #include "ConceptReactSystem.h"
-#include "../MindElement/BaseConcept.h"
 #include "ConceptSet.h"
-#include "../MindElement/ConceptChain.h"
 #include "FilePath.h"
 #include "Cerebrum.h"
 #include "CommonFunction.h"
 #include "ConceptReactImp.h"
 #include "ConceptReactImp_1234.h"
 #include "ConceptReactImp_1212.h"
+#include "ReactionValueEvaluation.h"
 
 #include "../CommonTools/CommonStringFunction.h"
 #include "../CommonTools/ConfigureInfoManager.h"
@@ -25,6 +24,9 @@
 #include "../Neural Network Design/Errors.h"
 
 #include "../MindInterface/iConcept.h"
+
+#include "../MindElement/ConceptChain.h"
+#include "../MindElement/BaseConcept.h"
 
 #include <numeric>
 
@@ -44,11 +46,13 @@ namespace Mind
 
 	void ConceptReactSystem::Initialize()
 	{
+		ReactionValueEvaluation valueEval;
+
 		//Train network or initialize network from file according to the configure file.
 		CFG_IF(Train_Initial_React_Network,
 			BasicTrainNetwork();,
 			InitNetworkFromFile();
-		)
+		);
 	}
 
 	void ConceptReactSystem::InitNetworkFromFile()

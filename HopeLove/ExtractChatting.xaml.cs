@@ -44,6 +44,7 @@ namespace HopeLove
         /// File name of the chatting dialog.
         /// </summary>
         const string _filename = @"E:\Artificial Intelligence\Document\DataBase\莫莫.txt";
+        const string HopeLoveMindPath = "..\\..\\..\\Mind\\HopeLoveData\\";
 
         /// <summary>
         /// Roles in the chatting.
@@ -56,20 +57,35 @@ namespace HopeLove
         {
             InitializeComponent();
 
-            Extract();
-
-
+            List<ChattingPair> chattingPairs=Extract();
         }
 
-        private void Extract()
+        private List<ChattingPair> Extract()
         {
-            if (!File.Exists(_filename)) return;
+            if (!File.Exists(_filename)) return null;
 
             List<ChattingElement> elements = ExtractElement();
+            //Output sentences in conversation.
+            OutputConversation(elements);
+
             //Remove picture or expression in conversation.
             RemovePictureContent(elements);
             //Extract elements and their responses.
             List<ChattingPair> chattingPairs = ExtractChattingPairs(elements);
+
+            return chattingPairs;
+        }
+
+        private void OutputConversation(List<ChattingElement> chattingElem)
+        {
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath+"Conversation Sample.txt");
+            foreach (ChattingElement elem in chattingElem)
+            {
+                sw.Write(elem.Sentence + "\r\n");
+            }
+
+            sw.Flush();
+            sw.Close();
         }
 
         private List<ChattingElement> ExtractElement()
