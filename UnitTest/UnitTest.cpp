@@ -13,6 +13,7 @@ using namespace std;
 #include "UTInitializer.h"
 #include "IntegrationTest.h"
 
+
 class MyGlobal: public testing::Environment
 {
 	int _startObjCount;
@@ -39,7 +40,7 @@ void RunFilter(const string filterStr);
 
 void RunUnitTest(int argc, _TCHAR* argv[])
 {
-	//RunFilter("Test_LogicStatement*");
+//	RunFilter("Test_SubSequence*");
 
 #ifdef _RUN_INTEGRATION_TEST
 

@@ -36,11 +36,7 @@ namespace Mind
 			vector<int> gra;
 		};
 
-		struct Pattern_Distribution
-		{
-			vector<int> pattern;
-			int count;
-		};
+
 
 		std::map<int,GrammaTree> _forwardtree;
 		std::map<int,GrammaTree> _backwardtree;
@@ -108,11 +104,7 @@ namespace Mind
 		//////////////////////////////////////////////////////////////////////////
 		void InitializeWeights();
 
-		void ExtractGrammarPatternFromInitialFile() const;
-		vector<GrammarSet::Sen_Gra> InputGraSamples(string file) const; 
-		std::vector<std::vector<int>> FindAllCommonSequences( const vector<Sen_Gra>& samples) const;
-		vector<GrammarSet::Pattern_Distribution> ComputePatternDistribution(const std::vector<std::vector<int>>& allcommon_seqs) const;
-		void OutputPatternDistribution(const vector<Pattern_Distribution>& p_d) const;
+		vector<GrammarSet::Sen_Gra> InputGraSamples(string file) const;
 
 		void ExtractGrammarLocalDistribution();
 

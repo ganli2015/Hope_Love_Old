@@ -13,6 +13,12 @@ namespace Math
 		ConstructSequenceTable(seq1,seq2,b);
 		common_seq.clear();
 		PrintLCS(b,seq1,0,0,m,n,common_seq);
+
+		for (unsigned int i=0;i<m+1;++i)
+		{
+			delete[] b[i];
+		}
+		delete[] b;
 	}
 
 	void ConstructSequenceTable( const std::vector<int>& seq1, const std::vector<int>& seq2,state_sequence **b )
@@ -59,6 +65,12 @@ namespace Math
 				}
 			}
 		}
+
+		for (unsigned int i=0;i<m+1;++i)
+		{
+			delete[] c[i];
+		}
+		delete[] c;
 	}
 
 	void PrintLCS( state_sequence **b,const std::vector<int>& seq, const int i_start, const int j_start, const int i_end,const int j_end, std::vector<int>& out )
@@ -102,6 +114,12 @@ namespace Math
 				}
 			}
 		}
+
+		for (unsigned int i = 0; i < m + 1; ++i)
+		{
+			delete[] b[i];
+		}
+		delete[] b;
 	}
 
 	_MATHMATICINOUT bool IsMatch( string P,string T )

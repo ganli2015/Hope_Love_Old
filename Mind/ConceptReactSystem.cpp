@@ -46,7 +46,7 @@ namespace Mind
 
 	void ConceptReactSystem::Initialize()
 	{
-		ReactionValueEvaluation valueEval;
+		//ReactionValueEvaluation valueEval;
 
 		//Train network or initialize network from file according to the configure file.
 		CFG_IF(Train_Initial_React_Network,
@@ -107,6 +107,7 @@ namespace Mind
 	void ConceptReactSystem::BasicTrainNetwork()
 	{
 		ifstream in(GetHopeLoveMindPath()+ConceptReactor_InitialFilename);
+		if (!in) return;
 
 		vector<DataInfo> dataInfos;
 		string str;

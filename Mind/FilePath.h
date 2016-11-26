@@ -1,4 +1,5 @@
 #pragma  once
+#include "InOut.h"
 #include <string>
 
 namespace Mind
@@ -13,5 +14,7 @@ namespace Mind
 	const static std::string ConceptReactor_InitialFilename="ReactorIO_Initial.txt";
 	const static std::string ConceptReactorNetworkFilename="network.txt";
 
-	std::string GetHopeLoveMindPath();
+	static std::string DataDir = "HopeLoveData\\";
+	_declspec(dllexport) std::string GetHopeLoveMindPath();
+	_declspec(dllexport) void SetHopeLoveMindPath(const std::string str);
 }

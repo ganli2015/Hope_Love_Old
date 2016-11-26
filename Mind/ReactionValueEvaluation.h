@@ -26,28 +26,51 @@ namespace Mind
 			double IDF;
 		};
 
+		//////////////////////////////////////////////////////////////////////////
+		///Sentence pair in conversation.
+		//////////////////////////////////////////////////////////////////////////
+		struct ConversationPair
+		{
+			string first;
+			string second;
+		};
+
 	private:
 		const string _commonWordsFilepath;
 		const string _commonCharaFilepath;
 		const string _conversationFilepath;
 		const string _commonWordDistriFilepath;
+		const string _commonWordIDFFilepath;
+		const string _conversationPairsFilepath;
 
 		//////////////////////////////////////////////////////////////////////////
 		///Include words and characters.
 		//////////////////////////////////////////////////////////////////////////
 		vector<CommonWordInfo> _commonWords;
 		vector<string> _conversation;
+
+		vector<ConversationPair> _conversationPairs;
 	public:
 		ReactionValueEvaluation();
 		~ReactionValueEvaluation();
 
 	private:
+		//////////////////////////////////////////////////////////////////////////
+		///Compute IDF of common words from text of common words and text from conversation samples.
+		///Then output IDF data to a new text for convenience use.
+		//////////////////////////////////////////////////////////////////////////
+		void GenerateIDFOfCommonWords();
+
+		void ReadIDFOfCommonWords();
 
 		//////////////////////////////////////////////////////////////////////////
 		///Extract common words from file.
 		//////////////////////////////////////////////////////////////////////////
 		void ReadCommonWords();
 		void ReadConversation();
+		void ReadConversationPairs();
+
+		void RemoveInvalidConversationPairs(vector<ConversationPair>& conversationPairs) const;
 
 		//////////////////////////////////////////////////////////////////////////
 		///Compute frequencies of common words after smoothing process.
@@ -66,6 +89,14 @@ namespace Mind
 		///Compute IDF of words in <wordsInfo>.
 		//////////////////////////////////////////////////////////////////////////
 		void ComputeIDF(vector<CommonWordInfo>& wordsInfo) const;
+
+		void OutputIDFOfCommonWords(const vector<CommonWordInfo>& commonWords) const;
+
+		//////////////////////////////////////////////////////////////////////////
+		///Check whether <line> is a valid sentence for analysis.
+		///If <line> contains not only Chinese, then it is invalid.
+		//////////////////////////////////////////////////////////////////////////
+		bool IsValidSentence(const string line) const;
 	};
 }
 

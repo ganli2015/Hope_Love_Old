@@ -270,7 +270,14 @@ namespace DataCollection
 
 	bool LanguageFunc::IsPuncture( const shared_ptr<Word> word )
 	{
-		if(word->Type()==Punctuation)
+		if (word->NumOfChara() != 1)
+		{
+			return false;
+		}
+
+		shared_ptr<Character> chara(new Character(word->GetString()));
+
+		if(word->Type()==Punctuation || _punctures->IsPuncEndofSentence(chara) || _punctures->IsPuncRightside(chara))
 		{
 			return true;
 		}

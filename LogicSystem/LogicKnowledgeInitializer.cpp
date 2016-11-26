@@ -66,6 +66,9 @@ namespace LogicSystem
 
 	void LogicKnowledgeInitializer::Initialize( const string filename,LogicKnowledge* logicKnowledge )
 	{
+		ifstream in(filename);
+		if (!in) return;
+
 		TiXmlDocument *myDocument = new TiXmlDocument(filename.c_str());
 		myDocument->LoadFile();
 		TiXmlNode *root=myDocument->FirstChild("Root");

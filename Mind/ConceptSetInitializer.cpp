@@ -141,11 +141,13 @@ namespace Mind
 			in>>id;
 			in>>str;
 			in>>POS;
+
+			if(str=="" || str==" ") break;
+
 			Word_ID word_id;
 			word_id.id=id;
 			word_id.word=LanguageFunc::GetParticularWord(str,PartOfSpeech(POS));
 			words_id.push_back(word_id);
-
 		}
 
 		return words_id;

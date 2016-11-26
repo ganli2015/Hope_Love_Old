@@ -58,6 +58,7 @@ namespace HopeLove
             InitializeComponent();
 
             List<ChattingPair> chattingPairs=Extract();
+            OutputChattingPairs(chattingPairs);
         }
 
         private List<ChattingPair> Extract()
@@ -82,6 +83,25 @@ namespace HopeLove
             foreach (ChattingElement elem in chattingElem)
             {
                 sw.Write(elem.Sentence + "\r\n");
+            }
+
+            sw.Flush();
+            sw.Close();
+        }
+
+        private void OutputChattingPairs(List<ChattingPair> chattingPairs)
+        {
+            StreamWriter sw = new StreamWriter(HopeLoveMindPath + "Conversation Pairs Sample.txt");
+
+            for (int i=0;i<chattingPairs.Count;++i)
+            {
+                sw.Write(chattingPairs[i].First.Sentence + "\r\n");
+                sw.Write(chattingPairs[i].Second.Sentence);
+
+                if(i!=chattingPairs.Count-1)
+                {
+                    sw.Write("\r\n");
+                }
             }
 
             sw.Flush();

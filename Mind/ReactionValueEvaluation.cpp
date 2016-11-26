@@ -16,7 +16,28 @@ namespace Mind
 	ReactionValueEvaluation::ReactionValueEvaluation():_commonWordsFilepath ( GetHopeLoveMindPath() + "现代汉语常用词汇表.txt"),
 		_commonCharaFilepath(GetHopeLoveMindPath() + "常用汉字表.txt"),
 		_conversationFilepath(GetHopeLoveMindPath() + "Conversation Sample.txt"),
-		_commonWordDistriFilepath(GetHopeLoveMindPath() + "Distribution of Common Words.txt")
+		_commonWordDistriFilepath(GetHopeLoveMindPath() + "Distribution of Common Words.txt"),
+		_commonWordIDFFilepath(GetHopeLoveMindPath()+"IDF of Common Words.txt"),
+		_conversationPairsFilepath(GetHopeLoveMindPath() + "Conversation Pairs Sample.txt")
+	{
+		CFG_SECTION(GENERATE_IDF_OF_COMMON_WORDS)
+		{
+			GenerateIDFOfCommonWords();
+		}
+
+		//Read IDF from txt file.
+		ReadIDFOfCommonWords();
+
+		ReadConversationPairs();
+		RemoveInvalidConversationPairs(_conversationPairs);
+	}
+
+
+	ReactionValueEvaluation::~ReactionValueEvaluation()
+	{
+	}
+
+	void ReactionValueEvaluation::GenerateIDFOfCommonWords()
 	{
 		ReadConversation();
 
@@ -27,13 +48,34 @@ namespace Mind
 			OutputSmoothedDistributionOfCommonWords();
 		};
 
+		//Read distribution of common words from txt.
 		_commonWords = ReadCommonWordInfo();
 		ComputeIDF(_commonWords);
+		OutputIDFOfCommonWords(_commonWords);
 	}
 
-
-	ReactionValueEvaluation::~ReactionValueEvaluation()
+	void ReactionValueEvaluation::ReadIDFOfCommonWords()
 	{
+		_commonWords.clear();
+
+		ifstream in(_commonWordIDFFilepath);
+		while (!in.eof())
+		{
+			string word;
+			double IDF;
+			int count;
+
+			in >> word;
+			in >> IDF;
+			in >> count;
+
+			CommonWordInfo wordInfo;
+			wordInfo.word = word;
+			wordInfo.IDF = IDF;
+			wordInfo.count = count;
+			_commonWords.push_back(wordInfo);
+		}
+		in.close();
 	}
 
 	void ReactionValueEvaluation::ReadCommonWords()
@@ -78,13 +120,47 @@ namespace Mind
 			//Drop sentences that has Odd size as Chinese characters and punctuations are of Even size.
 			//Odd-size sentences will cause difficulty in following operations.
 			//Besides, drop sentences that contain positive chars as Chinese characters are of negtive chars.
-			if (line.size() % 2 == 0 && all_of(line.begin(), line.end(), bind2nd(less<int>(), 0)))
+			if (IsValidSentence(line))
 			{
 				_conversation.push_back(line);
 			}
 
 		}
 		in.close();
+	}
+
+	void ReactionValueEvaluation::ReadConversationPairs()
+	{
+		_conversationPairs.clear();
+
+		ifstream in(_conversationPairsFilepath);
+		
+		string first, second;
+		while (getline(in, first) && getline(in, second))
+		{
+			ConversationPair pair;
+			pair.first = first;
+			pair.second = second;
+
+			_conversationPairs.push_back(pair);
+		}
+
+		in.close();
+	}
+
+	void ReactionValueEvaluation::RemoveInvalidConversationPairs(vector<ConversationPair>& conversationPairs) const
+	{
+		for (vector<ConversationPair>::iterator it=conversationPairs.begin();it!=conversationPairs.end();)
+		{
+			if((!IsValidSentence(it->first)) || (!IsValidSentence(it->second)))
+			{
+				it = conversationPairs.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
 	}
 
 	void ReactionValueEvaluation::OutputSmoothedDistributionOfCommonWords() const
@@ -183,6 +259,29 @@ namespace Mind
 
 		int conversationLineCount = _conversation.size();
 		for_each(wordsInfo.begin(), wordsInfo.end(), IDF(conversationLineCount));
+	}
+
+	void ReactionValueEvaluation::OutputIDFOfCommonWords(const vector<CommonWordInfo>& commonWords) const
+	{
+		ofstream out(_commonWordIDFFilepath);
+		out.precision(10);
+
+		for (unsigned int i=0;i<commonWords.size();++i)
+		{
+			out << commonWords[i].word << " " << commonWords[i].IDF<<" "<<commonWords[i].count;
+
+			if(i!=commonWords.size()-1)
+			{
+				out << endl;
+			}
+		}
+
+		out.close();
+	}
+
+	bool ReactionValueEvaluation::IsValidSentence(const string line) const
+	{
+		return line.size() % 2 == 0 && all_of(line.begin(), line.end(), bind2nd(less<int>(), 0));
 	}
 
 }

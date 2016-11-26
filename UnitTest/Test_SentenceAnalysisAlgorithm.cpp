@@ -14,6 +14,7 @@
 
 #include "../MindInterface/iCerebrum.h"
 #include "../Mind/Cerebrum.h"
+#include "../../HopeLoveAPI/HopeLoveAPI/HopeLoveAPI.h"
 
 using namespace Mind;
 using namespace DataCollection;
@@ -25,6 +26,19 @@ typedef InitCerebrum Test_WordRelationTableBuilder;
 
 bool SameSentence( const vector<string> expect,const shared_ptr<SegmentedSentence> res );
 bool SameGrammar( const vector<PartOfSpeech>& expect,const vector<shared_ptr<Word>>& words );
+
+
+// TEST(HopeLoveAPI, Test)
+// {
+// 
+// 	HopeLove::InitializeBrain("E:\\Artificial Intelligence\\Project\\Hope_Love\\DataProcessor\\Data\\");
+// 
+// 	auto tt = HopeLove::GetPartOfSpeech("£¬");
+// 
+// 	string input = "ÄãÏ²»¶ÄÐµÄ";
+// 	vector<string> result = HopeLove::WordSegment(input.c_str());
+// 
+// }
 
 TEST(Test_Punctuation,Punctuate1)
 {

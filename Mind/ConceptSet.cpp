@@ -234,10 +234,13 @@ namespace Mind
 	void ConceptSet::Initialize()
 	{
 		ConceptSetInitializer::InitializeBaseConcept(this,GetHopeLoveMindPath()+BaseConceptsStringFilename);
+//		cout << "Base concepts initialized." << endl;
 
 		ConceptSetInitializer::InitializeNonBaseConcept(this,GetHopeLoveMindPath()+NonBaseConceptString_InitialFilename);
+//		cout << "Non-Base concepts initialized." << endl;
 
 		ConceptSetInitializer::InitializeConceptConnection(this,GetHopeLoveMindPath()+ConceptConnections_InitialFilename);
+//		cout << "Concept connection initialized." << endl;
 
 
 #ifdef _CheckInitialConceptData
@@ -255,6 +258,13 @@ namespace Mind
 
 	std::vector<shared_ptr<DataCollection::Word>> ConceptSet::GetAllKindsofWord(const shared_ptr<DataCollection::Word> word) const
 	{
+		if (LanguageFunc::IsPuncture(word))//Check if it is a punctuation.
+		{
+			vector<shared_ptr<DataCollection::Word>> res;
+			res.push_back(LanguageFunc::GetParticularWord(word->GetString(), Punctuation));
+			return res;
+		}
+
 		string str=word->GetString();
 		const_conceptIter it=_conceptset.find(str);
 		
@@ -533,7 +543,7 @@ namespace Mind
 		{
 			if(word->Type()==beg->second->GetPartOfSpeech())
 			{
-				throw runtime_error("Error in AddConcept:One POS of the word can only have one concept!");
+				throw runtime_error("Error in AddConcept:One POS of the word can only have one concept! Error word: "+word->GetString());
 			}
 
 			int id_exist=beg->second->GetId();

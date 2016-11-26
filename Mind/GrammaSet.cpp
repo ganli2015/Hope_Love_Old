@@ -9,6 +9,7 @@
 
 #include "../CommonTools/ConfigureInfoManager.h"
 #include "../CommonTools/GeneralFunctor.h"
+#include "../CommonTools/CommonStringFunction.h"
 
 #include "../Mathmatic/FindSequence.h"
 
@@ -75,33 +76,60 @@ namespace Mind
 		vector<GrammarAttribute> patterns;
 
 		ifstream in(filename);
+		if (!in) return patterns;
 
 		int id(0);
-		while(!in.eof())
+		string line = "";
+		while(getline(in, line))
 		{
-			int count;
-			in>>count;
+			if(line=="") continue;
 
-			vector<int> pattern_int;
-			pattern_int.reserve(count);
-			for (int i=1;i<=count;++i)
+// 			int count;
+// 			in>>count;
+// 
+// 			vector<int> pattern_int;
+// 			pattern_int.reserve(count);
+// 			for (int i=1;i<=count;++i)
+// 			{
+// 				int elem;
+// 				in>>elem;
+// 				pattern_int.push_back(elem);
+// 			}
+// 
+// 
+// 			vector<PartOfSpeech> pattern_enum;
+// 			pattern_enum.reserve(pattern_int.size());
+// 			for (unsigned int i=0;i<pattern_int.size();++i)
+// 			{
+// 				pattern_enum.push_back((PartOfSpeech)pattern_int[i]);
+// 			}
+// 
+// 			GrammarPattern pattern(pattern_enum);
+// 			pattern.SetID(id++);
+// 			int frequency;
+// 			in>>frequency;
+
+
+			vector<string> splits_withBlanks = CommonTool::SplitString(line, ' ');
+			//Erase null strings
+			vector<string> splits;
+			for (unsigned int i=0;i<splits_withBlanks.size();++i)
 			{
-				int elem;
-				in>>elem;
-				pattern_int.push_back(elem);
+				if (splits_withBlanks[i] != "")
+				{
+					splits.push_back(splits_withBlanks[i]);
+				}
 			}
 
 			vector<PartOfSpeech> pattern_enum;
-			pattern_enum.reserve(pattern_int.size());
-			for (unsigned int i=0;i<pattern_int.size();++i)
+			for (unsigned int i = 0; i < splits.size() - 1; ++i)
 			{
-				pattern_enum.push_back((PartOfSpeech)pattern_int[i]);
+				pattern_enum.push_back((PartOfSpeech)atoi(splits[i].c_str()));
 			}
+			int frequency = atoi(splits.back().c_str());
 
 			GrammarPattern pattern(pattern_enum);
 			pattern.SetID(id++);
-			int frequency;
-			in>>frequency;
 
 			GrammarAttribute ga;
 			ga.pattern=pattern;
@@ -370,6 +398,7 @@ namespace Mind
 		vector<Sen_Gra> samples;
 
 		ifstream in(file);
+		if (!in) return samples;
 
 		while(!in.eof())
 		{
@@ -396,84 +425,12 @@ namespace Mind
 		return samples;
 	}
 
-	std::vector<std::vector<int>> GrammarSet::FindAllCommonSequences( const vector<Sen_Gra>& samples) const
-	{
-		std::vector<std::vector<int>> allcommon_seqs;
-		for (unsigned int i=0;i<samples.size();++i)
-		{
-			vector<int> gra1=samples[i].gra;
-			for (unsigned int j=i+1;j<samples.size();++j)
-			{
-				vector<int> gra2=samples[j].gra;
-				std::vector<std::vector<int>> common_seqs;
-				Math::FindAllCommonSubsequence(gra1,gra2,common_seqs);
-				allcommon_seqs.insert(allcommon_seqs.end(),common_seqs.begin(),common_seqs.end());
-			}
-		}
-
-		return allcommon_seqs;
-	}
-
-	vector<GrammarSet::Pattern_Distribution> GrammarSet::ComputePatternDistribution(const std::vector<std::vector<int>>& allcommon_seqs) const
-	{
-		vector<Pattern_Distribution> p_d;
-		for (unsigned int i=0;i<allcommon_seqs.size();++i)
-		{
-			vector<int> pattern=allcommon_seqs[i];
-			bool existed(false);
-			for (unsigned int j=0;j<p_d.size();++j)
-			{
-				vector<int> pattern2=p_d[j].pattern;
-				if(pattern==pattern2)
-				{
-					p_d[j].count++;
-					existed=true;
-					break;
-				}
-			}
-			if(existed==false)
-			{
-				Pattern_Distribution pd;
-				pd.pattern=pattern;
-				pd.count=1;
-				p_d.push_back(pd);
-			}
-		}
-
-		return p_d;
-	}
-
-	void GrammarSet::OutputPatternDistribution(const vector<Pattern_Distribution>& p_d) const
-	{
-		ofstream out(GetHopeLoveMindPath()+GrammaPatterns_InitialFilename);
-		out.clear();
-		for (unsigned int i=0;i<p_d.size();++i)
-		{
-			vector<int> seq=p_d[i].pattern;
-			out<<seq.size()<<" ";
-			for (unsigned int j=0;j<seq.size();++j)
-			{
-				out<<seq[j]<<" ";
-			}
-			out<<p_d[i].count<<" ";
-			out<<endl;
-		}
-	}
-
-	void GrammarSet::ExtractGrammarPatternFromInitialFile() const
-	{
-		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
-
-		std::vector<std::vector<int>> allcommon_seqs=FindAllCommonSequences(samples);
-
-		vector<Pattern_Distribution> p_d=ComputePatternDistribution(allcommon_seqs);
-
-		OutputPatternDistribution(p_d);
-	}
+	
 
 	void GrammarSet::ExtractGrammarLocalDistribution()
 	{
 		vector<Sen_Gra> samples=InputGraSamples(GetHopeLoveMindPath()+StringGrammar_InitialFilename);
+		if (samples.empty()) return;
 
 		//Initialize each POS with GrammarLocal.
 		map<PartOfSpeech,GrammarLocal> grammarLocalTable;

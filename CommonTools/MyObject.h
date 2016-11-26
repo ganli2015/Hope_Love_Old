@@ -6,6 +6,10 @@
 #include <stdlib.h>  
 #include <fstream>
 
+#ifdef _DEBUG
+//#define _RECORD_OBJECTS
+#endif // _DEBUG
+
 ///MyObject contains information of total objects.
 class _COMMONTOOLSINOUT MyObject
 {
@@ -61,7 +65,7 @@ public:
 template<class T>
 void Obj<T>::operator delete( void* p )
 {
-#ifdef _DEBUG
+#ifdef _RECORD_OBJECTS
 
 	vector<MyObjectInfo>::iterator it=find_if(objectsVec.begin(),objectsVec.end(),SamePointer(p));
 	objectsVec.erase(it);
@@ -78,7 +82,7 @@ void* Obj<T>::operator new( size_t size )
 {
 	void* p = malloc(size);  
 
-#ifdef _DEBUG
+#ifdef _RECORD_OBJECTS
 	MyObject::count++;
 	MyObjectInfo info;
 	info.pointer=reinterpret_cast<MyObject*>(p);

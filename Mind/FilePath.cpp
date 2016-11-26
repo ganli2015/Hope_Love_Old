@@ -8,7 +8,13 @@ namespace Mind
 // #ifdef _Unit_Test
 // 		return "E:\\Artificial Intelligence\\Project\\Hope_Love\\Mind\\HopeLove\\";
 // #endif
-		return "HopeLoveData\\";
+		return DataDir;
 	}
+
+	void SetHopeLoveMindPath(const std::string str)
+	{
+		DataDir = str;
+	}
+
 }
 

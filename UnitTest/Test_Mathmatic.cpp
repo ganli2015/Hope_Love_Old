@@ -133,6 +133,32 @@ TEST(Test_SubSequence,FindLongestCommonSubsequence2)
 	ASSERT_TRUE(SameVec(lcs,expect));
 }
 
+TEST(Test_SubSequence, FindAllCommonSubsequence)
+{
+	int a[3] = { 1,2,3 };
+	int b[2] = { 6,8 };
+	vector<int> avec = Tovector(a, 3);
+	vector<int> bvec = Tovector(b, 2);
+	vector<std::vector<int>> common_seqs;
+
+	FindAllCommonSubsequence(avec, bvec, common_seqs);
+
+	ASSERT_TRUE(common_seqs.empty());
+}
+
+TEST(Test_SubSequence, FindAllCommonSubsequence2)
+{
+	int a[6] = { 6,5,6,1,6,1 };
+	int b[10] = { 8,6,1,1,0,14,3,6,6,1 };
+	vector<int> avec = Tovector(a, 6);
+	vector<int> bvec = Tovector(b, 10);
+	vector<std::vector<int>> common_seqs;
+
+	FindAllCommonSubsequence(avec, bvec, common_seqs);
+
+	ASSERT_TRUE(!common_seqs.empty());
+}
+
 TEST(Test_IsSubsequence,IsSubsequence)
 {
 	int a[9]={1,2,6,3,7,8,9,3,2};
