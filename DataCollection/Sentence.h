@@ -37,6 +37,7 @@ namespace DataCollection
 
 		std::vector<shared_ptr<Word>> Get() const ; 
 
+		string GetString() const;
 	};
 
 

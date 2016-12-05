@@ -80,7 +80,7 @@ namespace LogicSystem
 			logicKnowledge->Add(statement);
 		}
 
-		delete root;
+		delete myDocument;
 	}
 
 	shared_ptr<iLogicStatement> LogicKnowledgeInitializer::ParseLogicStatement(const TiXmlNode * node)

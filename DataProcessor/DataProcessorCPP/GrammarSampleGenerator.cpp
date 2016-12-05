@@ -87,7 +87,7 @@ std::vector<std::vector<std::string>> GrammarSampleGenerator::SegmentSentences(c
 #include <time.h> 
 void GrammarSampleGenerator::OutputGrammarData(const std::vector<std::vector<std::string>>& sentences) const
 {
-	ofstream out("sen_gra2.txt");
+	ofstream out("str_sample2.txt");
 	srand((unsigned)time(NULL));
 
 	for (size_t i = 0; i < sentences.size(); i++)

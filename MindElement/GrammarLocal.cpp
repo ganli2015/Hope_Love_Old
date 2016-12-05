@@ -61,4 +61,25 @@ namespace Mind
 		return _backward.at(pos)/TotalCount(_backward);
 	}
 
+	void GrammarLocal::Read(ifstream& in)
+	{
+		int POSInt;
+		in >> POSInt;
+		_pos = (PartOfSpeech)POSInt;
+
+		for (int i=0;i<NUM_PARTOFSPEECH+3;++i)
+		{
+			long tmpInt;
+			in >> tmpInt;
+			_forward[(PartOfSpeech)i] = MyInt(tmpInt);
+		}
+
+		for (int i = 0; i < NUM_PARTOFSPEECH + 3; ++i)
+		{
+			long tmpInt;
+			in >> tmpInt;
+			_backward[(PartOfSpeech)i] = MyInt(tmpInt);
+		}
+	}
+
 }

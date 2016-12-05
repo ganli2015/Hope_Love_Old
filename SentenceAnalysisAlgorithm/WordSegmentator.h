@@ -12,10 +12,24 @@ namespace DataCollection
 
 class _SENTENCEANALYSISALGORITHMINOUT WordSegmentator
 {
+public:
+	enum SegmentMethod
+	{
+		Forward,
+		Backward
+	};
+
+
+private:
+
     shared_ptr<DataCollection::Sentence> _unsegmented;
 
 	///Sentences after segmented.Key is strings of sentences and value is sentences.
 	multimap<string,shared_ptr<DataCollection::SegmentedSentence>> _segmented;
+
+	SegmentMethod _segMethod;
+
+
 public:
 	///<sentence> must be punctuated before.
 	WordSegmentator(shared_ptr<DataCollection::Sentence> sentence);
@@ -27,12 +41,14 @@ public:
 
 	vector<shared_ptr<DataCollection::SegmentedSentence>> GetAllSegementedSentence() const;
 
+	void SetSegmentMethod(const SegmentMethod method) { _segMethod = method; }
+
 private:
 	
 	struct CharacterProperty
 	{
 		DataCollection::Character character;
-		///All words in Cerebrum whose first character is <character>.
+		///The candidates of words related with <character>.
 		vector<DataCollection::Word> candidate;
 		///the index of <character> in a sentence.
 		int index;
@@ -41,9 +57,12 @@ private:
 	///Segment each subsentence.
 	void SegmentSubsentence(const string subsentence);
 
-	std::vector<DataCollection::Character> GetRawSentence(shared_ptr<DataCollection::Sentence> sentence) const ;
+	vector<shared_ptr<DataCollection::Word>> ForwardSegment(const vector<DataCollection::Character>& raw_noPunc) const;
+	vector<shared_ptr<DataCollection::Word>> BackwardSegment(const vector<DataCollection::Character>& raw_noPunc) const;
+
+	std::vector<DataCollection::Character> GetRawSentence(shared_ptr<DataCollection::Sentence> sentence) const;
 	std::vector<DataCollection::Character> ConvertStringToCharacter(const string str) const ;
-	WordSegmentator::CharacterProperty GenerateCharacterProperty(const DataCollection::Character& chara,const int myIndex,const vector<DataCollection::Character>& raw_noPunc);
+	WordSegmentator::CharacterProperty GenerateCharacterProperty(const DataCollection::Character& chara,const int myIndex,const vector<DataCollection::Character>& raw_noPunc) const;
 
 	///Get all combinations considering the different combination of U_A words.
 	void SegmentMannersAccordingToUandA(const vector<shared_ptr<DataCollection::Word>>& words, vector<vector<shared_ptr<DataCollection::Word>>>& segmented);

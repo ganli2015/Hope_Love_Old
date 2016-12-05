@@ -104,6 +104,14 @@ namespace Mind
 		//////////////////////////////////////////////////////////////////////////
 		void InitializeWeights();
 
+		void WriteWeights(const double wPattern, const double wLocal);
+		//////////////////////////////////////////////////////////////////////////
+		///Read weights from file.
+		//////////////////////////////////////////////////////////////////////////
+		void ReadWeights();
+
+		void ReadGrammarLocal();
+
 		vector<GrammarSet::Sen_Gra> InputGraSamples(string file) const;
 
 		void ExtractGrammarLocalDistribution();

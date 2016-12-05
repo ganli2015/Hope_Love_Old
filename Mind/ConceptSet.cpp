@@ -45,6 +45,10 @@ namespace Mind
 	{
 		if(_conceptset.find(str)!=_conceptset.end())
 			return true;
+		else if(LanguageFunc::IsPuncture(shared_ptr<Word>(new Word(str))))
+		{
+			return true;
+		}
 		else return false;
 	}
 

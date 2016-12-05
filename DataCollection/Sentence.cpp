@@ -242,6 +242,20 @@ namespace DataCollection
 		return _seg;
 	}
 
+	std::string SegmentedSentence::GetString() const
+	{
+		string res = "";
+		if (_seg.empty()) return res;
+
+		res += _seg.front()->GetString();
+		for (unsigned int i=1;i<_seg.size();++i)
+		{
+			res += "/" + _seg[i]->GetString();
+		}
+
+		return res;
+	}
+
 }
 
 

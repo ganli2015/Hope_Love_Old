@@ -11,12 +11,13 @@ namespace DataProcessor
     {
         static void Main(string[] args)
         {
-            
-
-            POSAssignment posAssign = new POSAssignment();
-            posAssign.AssignPOSofCommonWords();
 
 
+            //             POSAssignment posAssign = new POSAssignment();
+            //             posAssign.AssignPOSofCommonWords();
+
+            SegmentationCorpusExtractor sce = new SegmentationCorpusExtractor();
+            sce.Run();
         }
     }
 }

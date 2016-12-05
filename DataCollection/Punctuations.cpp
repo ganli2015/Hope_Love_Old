@@ -23,8 +23,10 @@ namespace DataCollection
 		//Prepare two kind of punctuations and both of them append to <_punctures>.
 		//They are not complete.
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string("¡±"))));
+		_puncRightside.push_back(shared_ptr<Character>(new Character(string("¡°"))));
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string("¡¯"))));
 		_puncRightside.push_back(shared_ptr<Character>(new Character(string(")"))));
+		_puncRightside.push_back(shared_ptr<Character>(new Character(string("£¯"))));
 
 		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("¡£"))));
 		_puncEndofSentence.push_back(shared_ptr<Character>(new Character(string("£¡"))));

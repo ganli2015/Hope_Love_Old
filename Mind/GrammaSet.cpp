@@ -2,6 +2,8 @@
 #include "GrammaSet.h"
 #include "FilePath.h"
 
+#include "../CommonTools/LogWriter.h"
+
 #include "../MindElement/GrammarLocal.h"
 
 #include "../DataCollection/LanguageFunc.h"
@@ -12,6 +14,8 @@
 #include "../CommonTools/CommonStringFunction.h"
 
 #include "../Mathmatic/FindSequence.h"
+
+#include <tinyxml.h>
 
 #include <fstream>
 #include <functional>
@@ -40,7 +44,8 @@ namespace Mind
 		ExtractGrammarPatternFromInitialFile();
 #endif // _Extract_Initial_Grammar_Pattern
 
-		ExtractGrammarLocalDistribution();
+		//ExtractGrammarLocalDistribution();
+		ReadGrammarLocal();
 
 		//Input the grammar patterns from the file.
 		vector<GrammarAttribute> patterns=InputGrammaPatterns(GetHopeLoveMindPath()+GrammaPatterns_InitialFilename);
@@ -63,12 +68,12 @@ namespace Mind
 			//AddPatternToTree(pattern);
 		}
 
+		ReadWeights();
 
-		//CFG_SECTION(TEST_GRAMMAR_LOCAL)
+		CFG_SECTION(COMPUTE_GRAMMAR_WEIGHTS)
 		{
 			InitializeWeights();
 		}
-
 	}
 
 	vector<GrammarAttribute> GrammarSet::InputGrammaPatterns( std::string filename )
@@ -80,10 +85,8 @@ namespace Mind
 
 		int id(0);
 		string line = "";
-		while(getline(in, line))
+		while(getline(in,line))
 		{
-			if(line=="") continue;
-
 // 			int count;
 // 			in>>count;
 // 
@@ -93,6 +96,7 @@ namespace Mind
 // 			{
 // 				int elem;
 // 				in>>elem;
+// 				out << elem<<" ";
 // 				pattern_int.push_back(elem);
 // 			}
 // 
@@ -108,7 +112,8 @@ namespace Mind
 // 			pattern.SetID(id++);
 // 			int frequency;
 // 			in>>frequency;
-
+// 
+// 			out << frequency<<endl;
 
 			vector<string> splits_withBlanks = CommonTool::SplitString(line, ' ');
 			//Erase null strings
@@ -406,19 +411,19 @@ namespace Mind
 
 			int count;
 			in>>count;
-			Vector array(NUM_PARTOFSPEECH);
+//			Vector array(NUM_PARTOFSPEECH);
 			vector<int> gra;
 			gra.reserve(count);
 			for (int i=1;i<=count;++i)
 			{
 				int elem;
 				in>>elem;
-				++array[elem];
+//				++array[elem];
 				gra.push_back(elem);
 			}
 
 			sample.gra=gra;
-			array.Normalize();
+//			array.Normalize();
 			samples.push_back(sample);
 		}
 
@@ -556,9 +561,86 @@ namespace Mind
 		//Optimize <_wPattern> and <_wLocal> until possibility of each sample is close to 1.
 		_wPattern = 0.5, _wLocal = 0.5;
 		ComputeWeights(patternPVec, localPVec, _wPattern, _wLocal);
+
+		WriteWeights(_wPattern, _wLocal);
 	}
 
-	void GrammarSet::ComputeWeights(const vector<double>& patternP, const vector<double>& localP, 
+	void GrammarSet::WriteWeights(const double wPattern, const double wLocal)
+	{
+		string paramFile = GetHopeLoveMindPath() + "MindParam.txt";
+		TiXmlDocument *myDocument = new TiXmlDocument(paramFile.c_str());
+		myDocument->LoadFile();
+		TiXmlNode *root = myDocument->FirstChild("Root");
+
+		TiXmlNode *doubleParamNode = root->FirstChild("DoubleParam");
+		TiXmlElement *wPatternNode = doubleParamNode->FirstChildElement("wPattern");
+		TiXmlElement *wLocalNode = doubleParamNode->FirstChildElement("wLocal");
+
+		if (wPatternNode == nullptr || wLocalNode == nullptr)
+		{
+			throw runtime_error("Error in ReadWeights: cannot write weights to file.");
+		}
+
+		wPatternNode->SetAttribute("value", to_string(wPattern).c_str() );
+		wLocalNode->SetAttribute("value", to_string(wLocal).c_str());
+
+		delete myDocument;
+	}
+
+	void GrammarSet::ReadWeights()
+	{
+		string paramFile = GetHopeLoveMindPath()+"MindParam.txt";
+		TiXmlDocument *myDocument = new TiXmlDocument(paramFile.c_str());
+		if (!myDocument->LoadFile())
+		{
+			cout << "Cannot read weights in GrammarSet" << endl;
+			return;
+		}
+		TiXmlNode *root = myDocument->FirstChild("Root");
+
+		TiXmlNode *doubleParamNode=root->FirstChild("DoubleParam");
+		TiXmlElement *wPatternNode=doubleParamNode->FirstChildElement("wPattern");
+		TiXmlElement *wLocalNode = doubleParamNode->FirstChildElement("wLocal");
+
+		if (wPatternNode == nullptr || wLocalNode == nullptr)
+		{
+			throw runtime_error("Error in ReadWeights: cannot read weights from file.");
+		}
+
+		const char* wpatternStr=wPatternNode->Attribute("value");
+		const char* wlocalStr = wLocalNode->Attribute("value");
+
+		_wPattern= strtod(wpatternStr, NULL);
+		_wLocal = strtod(wlocalStr, NULL);
+
+		delete myDocument;
+	}
+
+	void GrammarSet::ReadGrammarLocal()
+	{
+		ifstream in(GetHopeLoveMindPath()+GrammarLocal_InitialFilename);
+		if (!in)
+		{
+			LOG("Cannot find file: " + GrammarLocal_InitialFilename);
+			return;
+		}
+
+		//The total POS for local grammar analysis is 15, including punctuations.
+		int NUM_POS_FOR_LOCAL = NUM_PARTOFSPEECH+3;
+
+		//Initialize each POS with GrammarLocal.
+		map<PartOfSpeech, GrammarLocal> grammarLocalTable;
+		for (int i = 0; i < NUM_POS_FOR_LOCAL; ++i)
+		{
+			shared_ptr<GrammarLocal> grammarLocal ( new GrammarLocal(PartOfSpeech(i)));
+			grammarLocal->Read(in);
+			_grammarLocalTable[PartOfSpeech(i)] = grammarLocal;
+		}
+
+
+	}
+
+	void GrammarSet::ComputeWeights(const vector<double>& patternP, const vector<double>& localP,
 		double& wPattern, double& wLocal) const
 	{
 		double gradPattern, gradLocal;
@@ -615,7 +697,7 @@ namespace Mind
 		vector<GrammarPattern> matchedPattern = ContainSubsequence(pattern);
 		for (unsigned int j = 0; j < matchedPattern.size(); ++j)
 		{
-			MyInt curFreq = GetFreqencyofPattern(matchedPattern[j]);
+			MyInt curFreq ( GetFreqencyofPattern(matchedPattern[j]));
 			sumFreq += curFreq / totalFreq;
 		}
 

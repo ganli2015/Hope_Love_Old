@@ -185,7 +185,7 @@ vector<string> GrammarPatternExtractor::ConvertToStrings(const vector<vector<int
 	return res;
 }
 
-vector<GrammarPatternExtractor::Sen_Gra> GrammarPatternExtractor::InputGraSamples(string file) const
+vector<GrammarPatternExtractor::Sen_Gra> GrammarPatternExtractor::InputGraSamples(string file)
 {
 	vector<Sen_Gra> samples;
 

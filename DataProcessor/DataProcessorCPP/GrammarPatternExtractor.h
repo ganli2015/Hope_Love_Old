@@ -13,6 +13,7 @@ class GrammarPatternExtractor
 		int count;
 	};
 
+public:
 	struct Sen_Gra
 	{
 		//////////////////////////////////////////////////////////////////////////
@@ -28,10 +29,10 @@ public:
 
 	void Run();
 
+	static vector<Sen_Gra> InputGraSamples(string file) ;
 
 private:
 
-	vector<Sen_Gra> InputGraSamples(string file) const;
 
 	void ExtractGrammarPatternFromInitialFile() const;
 

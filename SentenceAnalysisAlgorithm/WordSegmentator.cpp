@@ -14,7 +14,7 @@ using namespace DataCollection;
 
 
 
-WordSegmentator::WordSegmentator(shared_ptr<DataCollection::Sentence> sentence):_unsegmented(sentence)
+WordSegmentator::WordSegmentator(shared_ptr<DataCollection::Sentence> sentence):_unsegmented(sentence),_segMethod(Forward)
 {
 }
 
@@ -198,6 +198,25 @@ void WordSegmentator::SegmentMannersAccordingToUandA(const vector<shared_ptr<Wor
 	//There are many combinations in each continuous U_A sequence.
 	vector<vector<int>> seqs_UandA=ComputeUandAIndexes(words); 
 
+	//If the number of continuous U&A words is too larger, then do not find all combination of it yet.
+	unsigned int largestUandAWords = 5;
+	if (seqs_UandA.size() > largestUandAWords)
+	{
+		segmented.push_back(words);
+		return;
+	}
+	for (vector<vector<int>>::iterator it=seqs_UandA.begin();it!=seqs_UandA.end();)
+	{
+		if (it->size() > largestUandAWords)
+		{
+			it = seqs_UandA.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
 	//If there is no U_A words, then there is only one combination.
 	//Otherwise, go through all U_A words and find all combinations.
 	if(seqs_UandA.empty())
@@ -250,32 +269,19 @@ bool WordSegmentator::Segment(  )
 void WordSegmentator::SegmentSubsentence( const string subsentence )
 {
 	//Separate words with punctuations as only words need to be segmented.
-	vector<Character> raw=ConvertStringToCharacter(subsentence);
-	pair<vector<Character>,vector<Character>> sen_punc =LanguageFunc::TrimEndPunctures(raw);
-	vector<Character> raw_noPunc=sen_punc.first;
-	vector<Character> punc=sen_punc.second;
+	vector<Character> raw = ConvertStringToCharacter(subsentence);
+	pair<vector<Character>, vector<Character>> sen_punc = LanguageFunc::TrimEndPunctures(raw);
+	vector<Character> raw_noPunc = sen_punc.first;
+	vector<Character> punc = sen_punc.second;
 
-	vector<CharacterProperty> vec_characterProperty;
-	//Find the candidate word of each character.
-	//The first character of each word is <chara>.
-	for (unsigned int i=0;i<raw_noPunc.size();++i)
+	vector<shared_ptr<Word>> initial_segmented ;
+	if (_segMethod == Forward)
 	{
-		Character chara=raw_noPunc[i];
-		CharacterProperty characterProperty=GenerateCharacterProperty(chara,i,raw_noPunc);
-
-		vec_characterProperty.push_back(characterProperty);
+		initial_segmented = ForwardSegment(raw_noPunc);
 	}
-
-	//Pick the longest candidate word of each character to compose the sentence.
-	//It is experiential.We assume the sentence made with fewest words as possible.
-	unsigned int index(0);
-	vector<shared_ptr<Word>> initial_segmented;
-	while(index<raw_noPunc.size())
+	else if (_segMethod == Backward)
 	{
-		Word candidate=*(vec_characterProperty[index].candidate.rbegin());
-		int step=candidate.NumOfChara();
-		initial_segmented.push_back(shared_ptr<Word>(new Word(candidate)));
-		index+=step;
+		initial_segmented = BackwardSegment(raw_noPunc);
 	}
 
 	//Collect all combinations according to U_A words.
@@ -294,7 +300,78 @@ void WordSegmentator::SegmentSubsentence( const string subsentence )
 	}
 }
 
-WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(const Character& chara,const int myIndex,const vector<Character>& raw_noPunc)
+vector<shared_ptr<Word>> WordSegmentator::ForwardSegment(const vector<Character>& raw_noPunc) const
+{
+	vector<CharacterProperty> vec_characterProperty;
+	//Find the candidate word of each character.
+	//The first character of each word is <chara>.
+	for (unsigned int i = 0; i < raw_noPunc.size(); ++i)
+	{
+		Character chara = raw_noPunc[i];
+		CharacterProperty characterProperty = GenerateCharacterProperty(chara, i, raw_noPunc);
+
+		vec_characterProperty.push_back(characterProperty);
+	}
+
+	//Pick the longest candidate word of each character to compose the sentence.
+	//It is experiential.We assume the sentence made with fewest words as possible.
+	unsigned int index(0);
+	vector<shared_ptr<Word>> initial_segmented;
+	while (index < raw_noPunc.size())
+	{
+		Word candidate = *(vec_characterProperty[index].candidate.rbegin());
+		int step = candidate.NumOfChara();
+		initial_segmented.push_back(shared_ptr<Word>(new Word(candidate)));
+		index += step;
+	}
+
+	return initial_segmented;
+}
+
+vector<shared_ptr<DataCollection::Word>> WordSegmentator::BackwardSegment(const vector<DataCollection::Character>& raw_noPunc) const
+{
+	Mind::iCerebrum* brain = Mind::iCerebrum::Instance();
+
+	vector<shared_ptr<DataCollection::Word>> res;
+	if (raw_noPunc.empty()) return res;
+
+	//Max length of a word.
+	int maxLength = 4;
+	//Find words from end of sentence.
+	for (int i=(int)raw_noPunc.size()-1;i>=0;)
+	{
+		Word curWord;
+		shared_ptr<Word> longestWord=NULL;
+		//Check four words end with current character.
+		for (int j = i; j >=i-maxLength+1 && j >= 0; --j)
+		{
+			curWord = raw_noPunc[j]+curWord;
+			if (brain->IsInMind(curWord.GetString()))
+			{
+				longestWord = shared_ptr<Word>(new Word(curWord));
+			}
+		}
+
+		if (longestWord == NULL)
+		{
+			//Current character is an unknown word.
+			res.push_back(shared_ptr<Word>(new Word(raw_noPunc[i].GetString())));
+			--i;
+		}
+		else
+		{
+			//Forward index i
+			i -= longestWord->NumOfChara();
+			res.push_back(longestWord);
+		}
+	}
+
+	reverse(res.begin(), res.end());
+
+	return res;
+}
+
+WordSegmentator::CharacterProperty WordSegmentator::GenerateCharacterProperty(const Character& chara, const int myIndex, const vector<Character>& raw_noPunc) const
 {
 	Mind::iCerebrum* brain=Mind::iCerebrum::Instance();
 

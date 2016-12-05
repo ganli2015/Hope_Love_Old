@@ -103,8 +103,9 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Release\HopeLoveAPI.dll" "$(TargetDir)"
-copy "E:\Artificial Intelligence\Project\Hope_Love\Release\*.dll" "$(TargetDir)"</Command>
+      <Command>
+copy "E:\Artificial Intelligence\Project\Hope_Love\Debug\*.dll" "$(TargetDir)"
+copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Debug\HopeLoveAPI.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -165,13 +166,18 @@ copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Release\HopeLoveAPI.dll" "$
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonTools.h" />
+    <ClInclude Include="GrammarLocalDistributionExtractor.h" />
     <ClInclude Include="GrammarPatternExtractor.h" />
     <ClInclude Include="GrammarSampleGenerator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestSegmentation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommonTools.cpp" />
     <ClCompile Include="DataProcessorCPP.cpp" />
+    <ClCompile Include="GrammarLocalDistributionExtractor.cpp" />
     <ClCompile Include="GrammarPatternExtractor.cpp" />
     <ClCompile Include="GrammarSampleGenerator.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -180,6 +186,7 @@ copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Release\HopeLoveAPI.dll" "$
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestSegmentation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

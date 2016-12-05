@@ -74,7 +74,7 @@ TEST(Test_Punctuation,Punctuate3)
 	ASSERT_EQ(result3->GetSubSentence(1),sample3_o2);
 }
 
-TEST_F(Test_Segmentation,Segment1)
+TEST_F(Test_Segmentation,ForwardSegment1)
 {
 	string sample_i="莫莫我爱你！";
 	vector<string> expect;
@@ -91,7 +91,7 @@ TEST_F(Test_Segmentation,Segment1)
 	ASSERT_TRUE(res.size()==1 && SameSentence(expect,res.front()));
 }
 
-TEST_F(Test_Segmentation,Segment2)
+TEST_F(Test_Segmentation, ForwardSegment2)
 {
 	string sample_i="今天去哪里？";
 	vector<string> expect1;
@@ -115,7 +115,7 @@ TEST_F(Test_Segmentation,Segment2)
 	ASSERT_TRUE(res.size()==2 && SameSentence(expect2,res[1]));
 }
 
-TEST_F(Test_Segmentation,Segment3)
+TEST_F(Test_Segmentation, ForwardSegment3)
 {
 	string sample_i="动物园";
 	vector<string> expect1;
@@ -140,6 +140,104 @@ TEST_F(Test_Segmentation,Segment3)
 	ASSERT_TRUE(res.size()==4 && SameSentence(expect3,res[1]));
 	ASSERT_TRUE(res.size()==4 && SameSentence(expect2,res[2]));
 	ASSERT_TRUE(res.size()==4 && SameSentence(expect4,res[3]));
+}
+
+TEST_F(Test_Segmentation, BackwardSegment1)
+{
+	string sample_i = "莫莫我爱你！";
+	vector<string> expect;
+	expect.push_back("莫莫");
+	expect.push_back("我");
+	expect.push_back("爱");
+	expect.push_back("你");
+	expect.push_back("！");
+	shared_ptr<Sentence> sen(new Sentence(sample_i));
+	sen->AddSubSentence(sample_i);
+	WordSegmentator wordSegmentator(sen);
+	wordSegmentator.SetSegmentMethod(WordSegmentator::Backward);
+	wordSegmentator.Segment();
+	vector<shared_ptr<SegmentedSentence>> res = wordSegmentator.GetAllSegementedSentence();
+	ASSERT_TRUE(res.size() == 1 && SameSentence(expect, res.front()));
+}
+
+TEST_F(Test_Segmentation, BackwardSegment2)
+{
+	string sample_i = "今天去哪里？";
+	vector<string> expect1;
+	expect1.push_back("今天");
+	expect1.push_back("去");
+	expect1.push_back("哪");
+	expect1.push_back("里");
+	expect1.push_back("？");
+	vector<string> expect2;
+	expect2.push_back("今天");
+	expect2.push_back("去");
+	expect2.push_back("哪里");
+	expect2.push_back("？");
+
+	shared_ptr<Sentence> sen(new Sentence(sample_i));
+	sen->AddSubSentence(sample_i);
+	WordSegmentator wordSegmentator(sen);
+	wordSegmentator.SetSegmentMethod(WordSegmentator::Backward);
+	wordSegmentator.Segment();
+	vector<shared_ptr<SegmentedSentence>> res = wordSegmentator.GetAllSegementedSentence();
+	ASSERT_TRUE(res.size() == 2 && SameSentence(expect1, res.front()));
+	ASSERT_TRUE(res.size() == 2 && SameSentence(expect2, res[1]));
+}
+
+TEST_F(Test_Segmentation, BackwardSegment3)
+{
+	string sample_i = "动物园";
+	vector<string> expect1;
+	expect1.push_back("动");
+	expect1.push_back("物");
+	expect1.push_back("园");
+	vector<string> expect2;
+	expect2.push_back("动物");
+	expect2.push_back("园");
+	vector<string> expect3;
+	expect3.push_back("动");
+	expect3.push_back("物园");
+	vector<string> expect4;
+	expect4.push_back("动物园");
+
+	shared_ptr<Sentence> sen(new Sentence(sample_i));
+	sen->AddSubSentence(sample_i);
+	WordSegmentator wordSegmentator(sen);
+	wordSegmentator.SetSegmentMethod(WordSegmentator::Backward);
+	wordSegmentator.Segment();
+	vector<shared_ptr<SegmentedSentence>> res = wordSegmentator.GetAllSegementedSentence();
+	ASSERT_TRUE(res.size() == 4 && SameSentence(expect1, res.front()));
+	ASSERT_TRUE(res.size() == 4 && SameSentence(expect3, res[1]));
+	ASSERT_TRUE(res.size() == 4 && SameSentence(expect2, res[2]));
+	ASSERT_TRUE(res.size() == 4 && SameSentence(expect4, res[3]));
+}
+
+TEST_F(Test_Segmentation, WithPunctuation)
+{
+	string sample_i = "她说“莫莫”";
+
+	shared_ptr<Sentence> sen(new Sentence(sample_i));
+	sen->AddSubSentence(sample_i);
+	WordSegmentator wordSegmentator(sen);
+	wordSegmentator.SetSegmentMethod(WordSegmentator::Backward);
+	wordSegmentator.Segment();
+	vector<shared_ptr<SegmentedSentence>> res = wordSegmentator.GetAllSegementedSentence();
+
+	string expect = "她/说/“/莫莫/”";
+ 	ASSERT_TRUE(res.size() == 1);
+	ASSERT_EQ(expect,res.front()->GetString());
+
+}
+
+TEST_F(Test_Segmentation, LongSentence)
+{
+	string sample_i = "射击场上，将由安徽许海峰、辽宁王义夫、河南李金豹和苏之勃等争夺男子自选手枪慢射的冠军；宁夏祁春霞、湖南文芝芳、天津常丽娟等争夺女子小口径手枪６０发的金牌；浙江吴小璇、北京李丹、湖南张秋萍等角逐女子气步枪。";
+
+	auto segmented=HopeLove::WordSegment(sample_i.c_str());
+
+	//Reach here safely.
+	ASSERT_TRUE(true);
 }
 
 TEST_F(Test_Grammar,Analyze)

@@ -89,4 +89,4 @@ HopeLove/bin/Release/HopeLove.vshost.exe.config
 Hope_Love.suo
 *.asm
 Release/UnitTest.ipdb
-
+*.VC.db

@@ -15,7 +15,8 @@ namespace Math
 	public:
 		MyInt(void);
 		~MyInt(void);
-		MyInt(const int val);
+		explicit MyInt(const int val);
+		explicit MyInt(const long val);
 
 		MyInt& operator++();
 		MyInt operator++(int);
@@ -46,6 +47,9 @@ namespace Math
 		
 		void CarryOver();
 		void GoBack();
+
+		void CarryOver_Long(const long val);
+		void GoBack_Long(const long val);
 	};
 }
 

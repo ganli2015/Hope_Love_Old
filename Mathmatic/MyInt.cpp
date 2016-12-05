@@ -13,9 +13,23 @@ namespace Math
 
 	MyInt::MyInt( const int val ):_low(val),_high(0)
 	{
-
+		CarryOver();
 	}
 
+
+	MyInt::MyInt(const long val)
+	{
+		_low = val;
+		_high = 0;
+		if (val >= 0)
+		{
+			CarryOver_Long(val);
+		}
+		else
+		{
+			GoBack_Long(val);
+		}
+	}
 
 	MyInt::~MyInt(void)
 	{
@@ -49,7 +63,7 @@ namespace Math
 	void MyInt::CheckMe(const MyInt& me)
 	{
 		Check(me._low<=_maxLowHigh && me._high<=_maxLowHigh);
-		Check(me._low>=0 && me._high>=0);
+		Check(me._low>=0 );
 	}
 
 	MyInt& MyInt::operator--()
@@ -86,8 +100,6 @@ namespace Math
 			_low-=_maxLowHigh+1;
 			++_high;
 		}
-
-		CheckMe(*this);
 	}
 
 	void MyInt::GoBack()
@@ -103,7 +115,41 @@ namespace Math
 		CheckMe(*this);
 	}
 
-	void MyInt::operator+=( const MyInt& right )
+	void MyInt::CarryOver_Long(const long val)
+	{
+		if (val <= _maxLowHigh) return;
+
+		long low = val;
+		int high = _high;
+		if (low <= _maxLowHigh) return;
+
+		while (low > _maxLowHigh)
+		{
+			low -= _maxLowHigh + 1;
+			++high;
+		}
+
+		_low = low;
+		_high = high;
+	}
+
+	void MyInt::GoBack_Long(const long val)
+	{
+		if (val >= 0) return;
+
+		long low = val;
+		int high = _high;
+		while (low < 0)
+		{
+			low += _maxLowHigh + 1;
+			--high;
+		}
+
+		_low = low;
+		_high = high;
+	}
+
+	void MyInt::operator+=(const MyInt& right)
 	{
 		_low+=right._low;
 		_high+=right._high;

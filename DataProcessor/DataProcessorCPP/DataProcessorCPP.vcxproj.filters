@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="TestCorpus">
+      <UniqueIdentifier>{349a11bf-e00a-4c81-b4cf-fbf977d5c3de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,6 +33,15 @@
     <ClInclude Include="GrammarPatternExtractor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GrammarLocalDistributionExtractor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSegmentation.h">
+      <Filter>TestCorpus</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonTools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +54,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GrammarPatternExtractor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GrammarLocalDistributionExtractor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSegmentation.cpp">
+      <Filter>TestCorpus</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonTools.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

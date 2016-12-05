@@ -43,10 +43,25 @@ using namespace NeuralNetwork;
 using namespace DataCollection;
 using namespace LogicSystem;
 
+typedef InitCerebrum Test_Cerebrum;
 
 namespace Mind
 {
 	const string logicFilename="HopeLoveData//LogicStatements.txt";
+
+	TEST_F(Test_Cerebrum, IsInMind_Punctuation)
+	{
+		ASSERT_TRUE(iCerebrum::Instance()->IsInMind("“"));
+		ASSERT_TRUE(iCerebrum::Instance()->IsInMind("，"));
+	}
+
+	TEST_F(Test_Cerebrum, GetAllKindsofWord_Punctuation)
+	{
+		shared_ptr<DataCollection::Word> word(new Word("”"));
+		auto words=iCerebrum::Instance()->GetAllKindsofWord(word);
+		ASSERT_TRUE(!words.empty());
+		ASSERT_TRUE(words.front()->GetString()== "”");
+	}
 
 	TEST(Test_ConceptSetInitializer,ParseStrToConnectionInfo)
 	{
@@ -143,21 +158,17 @@ namespace Mind
 		iCerebrum::KillInstance();
 	}
 
-	TEST(Test_Cerebrum,FindConceptWithMatchedDisc)
+	TEST_F(Test_Cerebrum,FindConceptWithMatchedDisc)
 	{
-		Cerebrum* brain=Cerebrum::Instance();
-		iCerebrum::SetInstance(brain);
 		shared_ptr<ConceptTableCreator> tableCreator(new ConceptTableCreator());
 
 		shared_ptr<iConceptInteractTable> inputTable=tableCreator->SimpleCreate("二-加,加-一");
 
 		vector<DescMatchedConceptInfo> matchedInfo;
-		brain->FindConceptWithMatchedDisc(inputTable,matchedInfo);
+		iCerebrum::Instance()->FindConceptWithMatchedDisc(inputTable,matchedInfo);
 
 		ASSERT_EQ(matchedInfo.size(),1);
 		ASSERT_EQ(matchedInfo.front().matchedConcept->GetString(),"三");
-
-		iCerebrum::KillInstance();
 	}
 
 	Mind::Connection_Info Test_Mind::ParseStrToConnectionInfo( const string line,const Mind::ConceptSet* conceptSet )

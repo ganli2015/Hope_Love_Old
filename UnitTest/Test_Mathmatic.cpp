@@ -356,3 +356,34 @@ TEST(Test_MyInt,MyInt)
 		ASSERT_EQ(newIntInt,300+999999999);
 	}
 }
+
+TEST(Test_MyInt, MinusNumber)
+{
+	{
+		MyInt init(-80);
+		ASSERT_EQ(init.GetInt(), -80);
+	}
+
+	{
+		MyInt init(-999999999);
+		init -= 300;
+		int newIntInt = init.GetInt();
+		ASSERT_EQ(init.GetInt(), -300 - 999999999);
+	}
+}
+
+TEST(Test_MyInt, LongNumber)
+{
+	{
+		long number(80);
+		MyInt init(number);
+		ASSERT_EQ(init.GetInt(), number);
+	}
+
+	{
+		//The number exceeds the max number of low digit.
+		long number(9999999999);
+		MyInt init(number);
+		ASSERT_EQ(init.GetInt(), number);
+	}
+}

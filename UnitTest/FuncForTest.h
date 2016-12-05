@@ -55,6 +55,7 @@ namespace FuncForTest
 
 	shared_ptr<Mind::iConcept> GetConcept(const string str,const int id);
 
+	///Check whether there are the same elements in v1 and v2, regardless with order.
 	template<class T>
 	bool ContainSameElements(const vector<vector<T>>& v1,const vector<vector<T>>& v2)
 	{
@@ -88,6 +89,7 @@ namespace FuncForTest
 		return true;
 	}
 
+	///Check whether v1 and v2 are the same, taking the order into account.
 	template<class T>
 	bool ContainSameElements(const vector<T>& v1,const vector<T>& v2)
 	{
