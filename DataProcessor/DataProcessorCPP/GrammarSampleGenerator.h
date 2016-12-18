@@ -23,7 +23,11 @@ private:
 	vector<string> ReadValidSentence() const;
 	bool IsValid(const string sen) const;
 
+	void POSTaggingAndOutput(const vector<string>& sentences)  const;
+
 	vector<vector<string>> SegmentSentences(const vector<string>& sentences) const;
 	void OutputGrammarData(const std::vector<std::vector<std::string>>& sentences) const;
+
+
 };
 

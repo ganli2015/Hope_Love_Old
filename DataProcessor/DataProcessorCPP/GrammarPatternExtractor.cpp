@@ -14,86 +14,9 @@ GrammarPatternExtractor::~GrammarPatternExtractor()
 }
 
 
-void GrammarPatternExtractor::Run()
+void GrammarPatternExtractor::Run(const string file)
 {
-	ExtractGrammarPatternFromInitialFile();
-}
-
-std::vector<std::vector<int>> GrammarPatternExtractor::FindAllCommonSequences(const vector<Sen_Gra>& samples) const
-{
-	std::vector<std::vector<int>> allcommon_seqs;
-	for (unsigned int i = 0; i < samples.size(); ++i)
-	{
-		vector<int> gra1 = samples[i].gra;
-		for (unsigned int j = i + 1; j < samples.size(); ++j)
-		{
-			try
-			{
-				vector<int> gra2 = samples[j].gra;
-				std::vector<std::vector<int>> common_seqs;
-				Math::FindAllCommonSubsequence(gra1, gra2, common_seqs);
-				allcommon_seqs.insert(allcommon_seqs.end(), common_seqs.begin(), common_seqs.end());
-			}
-			catch (const std::exception& e)
-			{
-				cout << e.what() << endl;
-				logfile << "Error in FindAllCommonSubsequence. List index1: " << i << ". List index2: " << j << endl;
-			}
-			
-		}
-
-		cout << i << endl;
-	}
-
-	return std::vector<std::vector<int>>();
-}
-
-vector<GrammarPatternExtractor::Pattern_Distribution> GrammarPatternExtractor::ComputePatternDistribution(const std::vector<std::vector<int>>& allcommon_seqs) const
-{
-	vector<Pattern_Distribution> p_d;
-	for (unsigned int i = 0; i < allcommon_seqs.size(); ++i)
-	{
-		vector<int> pattern = allcommon_seqs[i];
-		bool existed(false);
-		for (unsigned int j = 0; j < p_d.size(); ++j)
-		{
-			vector<int> pattern2 = p_d[j].pattern;
-			if (pattern == pattern2)
-			{
-				p_d[j].count++;
-				existed = true;
-				break;
-			}
-		}
-		if (existed == false)
-		{
-			Pattern_Distribution pd;
-			pd.pattern = pattern;
-			pd.count = 1;
-			p_d.push_back(pd);
-		}
-	}
-
-	return p_d;
-}
-
-void GrammarPatternExtractor::OutputPatternDistribution(const vector<Pattern_Distribution>& p_d) const
-{
-	ofstream out("GrammaPatterns_Initial2.txt");
-	out.clear();
-	for (unsigned int i = 0; i < p_d.size(); ++i)
-	{
-		vector<int> seq = p_d[i].pattern;
-		out << seq.size() << " ";
-		for (unsigned int j = 0; j < seq.size(); ++j)
-		{
-			out << seq[j] << " ";
-		}
-		out << p_d[i].count << " ";
-		out << endl;
-	}
-
-	out.close();
+	ExtractGrammarPatternFromInitialFile(file);
 }
 
 void GrammarPatternExtractor::OutputPatternDistribution(const unordered_map<string, int>& p_d) const
@@ -109,9 +32,9 @@ void GrammarPatternExtractor::OutputPatternDistribution(const unordered_map<stri
 
 }
 
-void GrammarPatternExtractor::ExtractGrammarPatternFromInitialFile() const
+void GrammarPatternExtractor::ExtractGrammarPatternFromInitialFile(const string file) const
 {
-	vector<Sen_Gra> samples = InputGraSamples("sen_gra2.txt");
+	vector<Sen_Gra> samples = InputGraSamples(file);
 
 // 	std::vector<std::vector<int>> allcommon_seqs = FindAllCommonSequences(samples);
 // 
@@ -126,6 +49,11 @@ void GrammarPatternExtractor::ExtractGrammarPatternFromInitialFile() const
 
 unordered_map<string, int> GrammarPatternExtractor::FindAllCommonSequencesAndDistribution(const vector<Sen_Gra>& samples) const
 {
+	//Each sequence only interact with those whose length is not much longer or shorter then its length.
+	//And the region is determined by <lengthOffset>.
+	//It is in consideration of dealing with large samples.
+	int lengthOffset = 0;
+
 	unordered_map<string, int> res;
 
 	for (unsigned int i = 0; i < samples.size(); ++i)
@@ -133,6 +61,8 @@ unordered_map<string, int> GrammarPatternExtractor::FindAllCommonSequencesAndDis
 		vector<int> gra1 = samples[i].gra;
 		for (unsigned int j = i + 1; j < samples.size(); ++j)
 		{
+			if(abs((int)samples[j].gra.size()- (int)samples[i].gra.size())>lengthOffset) continue;
+
 			try
 			{
 				vector<int> gra2 = samples[j].gra;
@@ -185,7 +115,7 @@ vector<string> GrammarPatternExtractor::ConvertToStrings(const vector<vector<int
 	return res;
 }
 
-vector<GrammarPatternExtractor::Sen_Gra> GrammarPatternExtractor::InputGraSamples(string file)
+vector<GrammarPatternExtractor::Sen_Gra> GrammarPatternExtractor::InputGraSamples(const string file)
 {
 	vector<Sen_Gra> samples;
 

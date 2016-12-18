@@ -20,21 +20,22 @@ void GrammarSampleGenerator::Run()
 {
 	vector<std::string> sentences = ReadValidSentence();
 
-	std::vector<std::vector<std::string>> segSentences = SegmentSentences(sentences);
+	POSTaggingAndOutput(sentences);
 
-	OutputGrammarData(segSentences);
+// 	std::vector<std::vector<std::string>> segSentences = SegmentSentences(sentences);
+// 
+// 	OutputGrammarData(segSentences);
 }
 
 std::vector<std::string> GrammarSampleGenerator::ReadValidSentence() const
 {
 	vector<std::string> res;
 
-	string filename = appDataDir+"Conversation Sample.txt";
+	string filename = "Conversation Sample.txt";
 	ifstream in(filename);
 	string line = "";
 	while (getline(in,line))
 	{
-
 		if (line!="" && IsValid(line))
 		{
 			res.push_back(line);
@@ -50,6 +51,32 @@ bool GrammarSampleGenerator::IsValid(const string line) const
 }
 
 
+void GrammarSampleGenerator::POSTaggingAndOutput(const vector<string>& sentences) const
+{
+	try
+	{
+		HopeLove::InitializeBrain("..\\Data\\");
+
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what() << endl;
+	}
+
+	for (unsigned int i = 0; i < sentences.size(); ++i)
+	{
+		if (sentences[i] == "") continue;
+		try
+		{
+			auto grammard = HopeLove::POSTagging(sentences[i]);
+		}
+		catch (const std::exception& e)
+		{
+			logfile << "Error sentence in word segment: " + sentences[i] << " Error is " << e.what() << endl;
+		}
+	}
+}
+
 std::vector<std::vector<std::string>> GrammarSampleGenerator::SegmentSentences(const vector<string>& sentences) const
 {
 	try
@@ -61,9 +88,6 @@ std::vector<std::vector<std::string>> GrammarSampleGenerator::SegmentSentences(c
  	{
  		cout << e.what() << endl;
  	}
-
-
-	auto tt = HopeLove::GetPartOfSpeech("£¬");
 
 
 	std::vector<std::vector<std::string>> res;

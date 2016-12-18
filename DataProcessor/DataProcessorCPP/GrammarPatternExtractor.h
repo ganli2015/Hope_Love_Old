@@ -27,21 +27,17 @@ public:
 	GrammarPatternExtractor();
 	~GrammarPatternExtractor();
 
-	void Run();
+	void Run(const string file);
 
-	static vector<Sen_Gra> InputGraSamples(string file) ;
+	static vector<Sen_Gra> InputGraSamples(const string file) ;
 
 private:
 
 
-	void ExtractGrammarPatternFromInitialFile() const;
+	void ExtractGrammarPatternFromInitialFile(const string file) const;
 
 	unordered_map<string,int> FindAllCommonSequencesAndDistribution(const vector<Sen_Gra>& samples) const;
 	vector<string> ConvertToStrings(const vector<vector<int>>& commonSeq) const;
 	void OutputPatternDistribution(const unordered_map<string, int>& p_d) const;
-
-	std::vector<std::vector<int>> FindAllCommonSequences(const vector<Sen_Gra>& samples) const;
-	vector<Pattern_Distribution> ComputePatternDistribution(const std::vector<std::vector<int>>& allcommon_seqs) const;
-	void OutputPatternDistribution(const vector<Pattern_Distribution>& p_d) const;
 };
 

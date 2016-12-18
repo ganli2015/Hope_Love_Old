@@ -9,8 +9,9 @@
 #include "TestSegmentation.h"
 
 //#define GENERATE_GRAMMA_SAMPLES
-//#define GENERATE_GRAMMA_DISTRIBUTION
+#define GENERATE_GRAMMA_DISTRIBUTION
 //#define EXTRACT_GRAMMARLOCAL_DISTRIBUTION
+//#define TEST_SEGMENTATION
 
 int main()
 {
@@ -21,20 +22,19 @@ int main()
 	
 #ifdef GENERATE_GRAMMA_DISTRIBUTION
 	GrammarPatternExtractor gpe;
-	gpe.Run();
+	gpe.Run("../OutData/str_sample_corpus_de.txt");
 #endif // GENERATE_GRAMMA_DISTRIBUTION
 
 #ifdef EXTRACT_GRAMMARLOCAL_DISTRIBUTION
 	GrammarLocalDistributionExtractor glde;
-	glde.Run();
+	glde.Run("../OutData/str_sample_corpus_de.txt");
 
 #endif // EXTRACT_GRAMMARLOCAL_DISTRIBUTION
 
-
-
+#ifdef TEST_SEGMENTATION
 	TestSegmentation ts;
 	ts.Run();
-
+#endif
 	logfile.close();
 
 	system("pause");

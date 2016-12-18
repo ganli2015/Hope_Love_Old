@@ -15,21 +15,7 @@ namespace DataProcessor
         const string appDataDir = @"..\..\..\..\HopeLove\bin\Debug\HopeLoveData\";
         const string mindDataDir = @"..\..\..\..\Mind\HopeLoveData\";
 
-        enum PartOfSpeech
-        {
-            Noun,
-            Verb,
-            Adjective,
-            Numeral,
-            Quantifier,
-            Pronoun,
-            Adverb,
-            Preposition,
-            Conjunction,
-            Auxiliary,
-            Onomatopoeia,
-            Interjection,
-        };
+        
 
         /// <summary>
         /// Mapping from some string letters to POS. Used for reading "ChineseDict.txt"

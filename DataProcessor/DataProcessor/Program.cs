@@ -7,6 +7,26 @@ using HopeLove;
 
 namespace DataProcessor
 {
+    public enum PartOfSpeech
+    {
+        Noun,
+        Verb,
+        Adjective,
+        Numeral,
+        Quantifier,
+        Pronoun,
+        Adverb,
+        Preposition,
+        Conjunction,
+        Auxiliary,
+        Onomatopoeia,
+        Interjection,
+        Ambiguous,//Ambiguous indicates a word is known by AI but has no definite POS temporarily.
+        Unknown,//Unknown indicates a word is unknown.
+        Punctuation,
+        Other
+    };
+
     class Program
     {
         static void Main(string[] args)

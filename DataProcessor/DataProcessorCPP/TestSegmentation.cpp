@@ -58,7 +58,7 @@ void TestSegmentation::Run()
 	{
 		try
 		{
-			vector<vector<string>> result = HopeLove::WordSegmentAll(samples[i].raw.c_str(), HopeLove::ForwardSegment);
+			vector<vector<string>> result = HopeLove::WordSegmentAll(samples[i].raw.c_str(), HopeLove::BackwardSegment);
 			if (IsCorrect(samples[i].segmented, result))
 			{
 				correctNum++;
@@ -199,7 +199,7 @@ void TestSegmentation::OutputResult(const string expect, const vector<vector<str
 		for (unsigned int j = 0; j < result.size(); ++j)
 		{
 			out << result[j] ;
-			if (j != results.size() - 1)
+			if (j != result.size() - 1)
 			{
 				out << "/";
 			}

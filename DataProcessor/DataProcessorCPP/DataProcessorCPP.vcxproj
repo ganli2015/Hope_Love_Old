@@ -71,14 +71,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI;E:\Artificial Intelligence\Project\Hope_Love;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\HopeLoveAPI;E:\Artificial Intelligence\Project\Hope_Love;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI;E:\Artificial Intelligence\Project\Hope_Love;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\HopeLoveAPI;E:\Artificial Intelligence\Project\Hope_Love;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,7 +95,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\Debug;E:\Artificial Intelligence\Project\Hope_Love\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\Debug;E:\Artificial Intelligence\Project\Hope_Love\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>HopeLoveAPI.lib;Mathmatic.lib</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
@@ -105,7 +105,7 @@
     <PostBuildEvent>
       <Command>
 copy "E:\Artificial Intelligence\Project\Hope_Love\Debug\*.dll" "$(TargetDir)"
-copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Debug\HopeLoveAPI.dll" "$(TargetDir)"</Command>
+copy "E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\Debug\HopeLoveAPI.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,11 +138,11 @@ copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Debug\HopeLoveAPI.dll" "$(T
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>HopeLoveAPI.lib;Mathmatic.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\Release;E:\Artificial Intelligence\Project\Hope_Love\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\Release;E:\Artificial Intelligence\Project\Hope_Love\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy "E:\Artificial Intelligence\Project\Hope_Love\Release\*.dll" "$(TargetDir)"
-copy "E:\Artificial Intelligence\Project\HopeLoveAPI\Release\HopeLoveAPI.dll" "$(TargetDir)"</Command>
+copy "E:\Artificial Intelligence\Project\HopeLoveAPI\HopeLoveAPI\Release\HopeLoveAPI.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

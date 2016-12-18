@@ -11,16 +11,16 @@ GrammarLocalDistributionExtractor::~GrammarLocalDistributionExtractor()
 {
 }
 
-void GrammarLocalDistributionExtractor::Run()
+void GrammarLocalDistributionExtractor::Run(const string filename)
 {
-	BuildLocalTable();
+	BuildLocalTable(filename);
 
 	OutputLocalTable();
 }
 
-void GrammarLocalDistributionExtractor::BuildLocalTable()
+void GrammarLocalDistributionExtractor::BuildLocalTable(const string filename)
 {
-	vector<GrammarPatternExtractor::Sen_Gra> samples = GrammarPatternExtractor::InputGraSamples("str_sample2.txt");
+	vector<GrammarPatternExtractor::Sen_Gra> samples = GrammarPatternExtractor::InputGraSamples(filename);
 	if (samples.empty()) return;
 
 	//Initialize each POS with GrammarLocal.
@@ -36,6 +36,8 @@ void GrammarLocalDistributionExtractor::BuildLocalTable()
 		vector<int> gra = samples[i].gra;
 		for (unsigned int j = 0; j < gra.size(); ++j)
 		{
+			if(gra.size()==1) continue;
+
 			HopeLove::PartOfSpeech curPos = HopeLove::PartOfSpeech(gra[j]);
 			if (j == 0)
 			{

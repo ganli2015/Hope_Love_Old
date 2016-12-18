@@ -59,11 +59,12 @@ public:
 	GrammarLocalDistributionExtractor();
 	~GrammarLocalDistributionExtractor();
 
-	void Run();
+	//<filename> is the path of "str_sample.txt".
+	void Run(const string filename);
 
 private:
 
-	void BuildLocalTable();
+	void BuildLocalTable(const string filename);
 
 	void OutputLocalTable() const;
 };
