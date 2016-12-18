@@ -2,17 +2,19 @@
 //
 
 #include "stdafx.h"
+#include "CommonTools.h"
 #include "GrammarSampleGenerator.h"
 #include "GrammarPatternExtractor.h"
 #include "GrammarLocalDistributionExtractor.h"
 
 #include "TestSegmentation.h"
+#include "TestPOSTagging.h"
 
-//#define GENERATE_GRAMMA_SAMPLES
-#define GENERATE_GRAMMA_DISTRIBUTION
+#define GENERATE_GRAMMA_SAMPLES
+//#define GENERATE_GRAMMA_DISTRIBUTION
 //#define EXTRACT_GRAMMARLOCAL_DISTRIBUTION
 //#define TEST_SEGMENTATION
-
+//#define TEST_POSTAGGING
 int main()
 {
 #ifdef GENERATE_GRAMMA_SAMPLES
@@ -35,6 +37,12 @@ int main()
 	TestSegmentation ts;
 	ts.Run();
 #endif
+
+#ifdef TEST_POSTAGGING
+	TestPOSTagging tpt;
+	tpt.Run(newdir + "corpus_de_pos.txt");
+#endif // TEST_POSTAGGING
+
 	logfile.close();
 
 	system("pause");

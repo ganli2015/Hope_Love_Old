@@ -64,14 +64,13 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>gtest_maind.lib;gtestd.lib;tinyxml.lib;gmock_main.lib;gmock.lib;HopeLoveAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtest_maind.lib;gtestd.lib;tinyxml.lib;gmock_main.lib;gmock.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy  "$(SolutionDir)Mind\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData\"
 copy  "$(SolutionDir)LogicSystem\HopeLoveData\*.txt" "$(ProjectDir)HopeLoveData"
-copy  "$(SolutionDir)HopeLove\bin\Debug\HopeLoveData\IDF of Common Words.txt" "$(ProjectDir)HopeLoveData"
-copy  "E:\Artificial Intelligence\Project\HopeLoveAPI\Debug\HopeLoveAPI.dll" "$(TargetDir)"</Command>
+copy  "$(SolutionDir)HopeLove\bin\Debug\HopeLoveData\IDF of Common Words.txt" "$(ProjectDir)HopeLoveData"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>If NOT exist "HopeLoveData" mkdir "HopeLoveData" 
@@ -94,7 +93,7 @@ If NOT exist "Log" mkdir "Log" </Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>gtest_main.lib;gtest.lib;tinyxml.lib;gmock_mainr.lib;gmockr.lib;HopeLoveAPI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtest_main.lib;gtest.lib;tinyxml.lib;gmock_mainr.lib;gmockr.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>E:\Artificial Intelligence\Project\HopeLoveAPI\Release</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

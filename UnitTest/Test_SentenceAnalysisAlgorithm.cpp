@@ -12,15 +12,15 @@
 
 #include "../DataCollection/Sentence.h"
 
+#include "../CommonTools/CommonStringFunction.h"
+
 #include "../MindInterface/iCerebrum.h"
 #include "../Mind/Cerebrum.h"
-#include "../../HopeLoveAPI/HopeLoveAPI/HopeLoveAPI.h"
 
 using namespace Mind;
 using namespace DataCollection;
 
 typedef InitCerebrum Test_Segmentation;
-typedef InitCerebrum Test_Grammar;
 typedef InitCerebrum Test_StructureAnalyzer;
 typedef InitCerebrum Test_WordRelationTableBuilder;
 
@@ -232,39 +232,94 @@ TEST_F(Test_Segmentation, WithPunctuation)
 
 TEST_F(Test_Segmentation, LongSentence)
 {
-	string sample_i = "射击场上，将由安徽许海峰、辽宁王义夫、河南李金豹和苏之勃等争夺男子自选手枪慢射的冠军；宁夏祁春霞、湖南文芝芳、天津常丽娟等争夺女子小口径手枪６０发的金牌；浙江吴小璇、北京李丹、湖南张秋萍等角逐女子气步枪。";
+	string sample_i = "射击场上，将由安徽许海峰、辽宁王义夫、河南李金豹和苏之勃等争夺男子自选手枪慢射的冠军；宁夏祁春霞、湖南文芝芳、天津常丽娟等争夺女子小口径手枪６０发的金牌；宁夏祁春霞、湖南文芝芳、天津常丽娟等争夺女子小口径手枪６０发的金牌；浙江吴小璇、北京李丹、湖南张秋萍等角逐女子气步枪。";
 
-	auto segmented=HopeLove::WordSegment(sample_i.c_str());
+	shared_ptr<Sentence> sen(new Sentence(sample_i));
+	sen->AddSubSentence("射击场上，");
+	sen->AddSubSentence("将由安徽许海峰、辽宁王义夫、河南李金豹和苏之勃等争夺男子自选手枪慢射的冠军；");
+	sen->AddSubSentence("宁夏祁春霞、湖南文芝芳、天津常丽娟等争夺女子小口径手枪６０发的金牌；");
+	sen->AddSubSentence("浙江吴小璇、北京李丹、湖南张秋萍等角逐女子气步枪。");
+	WordSegmentator wordSegmentator(sen);
+	wordSegmentator.SetSegmentMethod(WordSegmentator::Backward);
+	wordSegmentator.Segment();
 
 	//Reach here safely.
 	ASSERT_TRUE(true);
 }
 
-TEST_F(Test_Grammar,Analyze)
+INSTANTIATE_TEST_CASE_P(Test_SentenceAnalysisAlgorithm, Test_Grammar, testing::ValuesIn(Test_Grammar::GenerateSamples()));
+
+TEST_P(Test_Grammar,Analyze)
 {
-	string sample_i="莫莫我爱你！";
+	Cerebrum* brain = Cerebrum::Instance();
+	iCerebrum::SetInstance(brain);
+
+	Param_Grammar param= GetParam();
+
+	string sample_i= param.raw;
 	shared_ptr<Sentence> sen(new Sentence(sample_i));
 	sen->AddSubSentence(sample_i);
 
+	vector<string> split = CommonTool::SplitString(param.segSentence, '/');
 	vector<shared_ptr<Word>> segWords;
-	segWords.push_back(shared_ptr<Word>(new Word("莫莫")));
-	segWords.push_back(shared_ptr<Word>(new Word("我")));
-	segWords.push_back(shared_ptr<Word>(new Word("爱")));
-	segWords.push_back(shared_ptr<Word>(new Word("你")));
-	segWords.push_back(shared_ptr<Word>(new puncture("！")));
+	for (unsigned int i=0;i<split.size();++i)
+	{
+		segWords.push_back(shared_ptr<Word>(new Word(split[i])));
+	}
 
 	GrammarAnalyzer grammarAnalyzer(sen);
 	grammarAnalyzer.AddSegment(shared_ptr<SegmentedSentence>(new SegmentedSentence(segWords)));
 	grammarAnalyzer.Analyze();
 
-	vector<PartOfSpeech> expect;
-	expect.push_back(Pronoun);
-	expect.push_back(Pronoun);
-	expect.push_back(Verb);
-	expect.push_back(Pronoun);
-	expect.push_back(Punctuation);
 	vector<shared_ptr<Word>> graWords=sen->GetGrammard();
-	ASSERT_TRUE(SameGrammar(expect,graWords));
+	ASSERT_TRUE(SameGrammar(param.expectedPOS, graWords));
+
+	iCerebrum::KillInstance();
+}
+
+vector<Param_Grammar> Test_Grammar::GenerateSamples()
+{
+	vector<Param_Grammar> res;
+
+	{
+		Param_Grammar param;
+		param.raw = "莫莫我爱你！";
+		param.segSentence = "莫莫/我/爱/你/！";
+		vector<PartOfSpeech> expect;
+		expect.push_back(Pronoun);
+		expect.push_back(Pronoun);
+		expect.push_back(Verb);
+		expect.push_back(Pronoun);
+		expect.push_back(Punctuation);
+		
+		param.expectedPOS = expect;
+
+		res.push_back(param);
+	}
+
+	{
+		Param_Grammar param;
+		param.raw = "今天要回家";
+		param.segSentence = "今天/要/回/家";
+		vector<PartOfSpeech> expect{Adverb,Verb,Verb,Noun};
+
+		param.expectedPOS = expect;
+
+		res.push_back(param);
+	}
+
+	{
+		Param_Grammar param;
+		param.raw = "三加二等于多少";
+		param.segSentence = "三/加/二/等于/多少";
+		vector<PartOfSpeech> expect{ Numeral,Verb,Numeral,Verb,Pronoun };
+
+		param.expectedPOS = expect;
+
+		res.push_back(param);
+	}
+
+	return res;
 }
 
 TEST_F(Test_WordRelationTableBuilder,Analyze)
@@ -350,4 +405,5 @@ bool SameGrammar( const vector<PartOfSpeech>& expect,const vector<shared_ptr<Wor
 
 	return true;
 }
+
 

@@ -20,6 +20,7 @@ namespace DataCollection
 	//puncture
 		static bool IsPuncEndofSentence(shared_ptr<Character> val);
 		static bool IsPuncRightside(shared_ptr<Character> val); 
+		static bool IsPuncLeftside(shared_ptr<Character> val);
 		///Cutter sentence to two part:sentence with no punctures and punctures.
 		///(Only support for sentence with punctures in the end)
 		static pair<vector<shared_ptr<Character>>,vector<shared_ptr<Character>>> TrimEndPunctures(const vector<shared_ptr<Character>>& raw);

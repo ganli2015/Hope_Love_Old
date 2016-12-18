@@ -51,7 +51,12 @@ namespace DataCollection
 		return charas;
 	}
 
-	pair<vector<shared_ptr<Character>>,vector<shared_ptr<Character>>> LanguageFunc::TrimEndPunctures( const vector<shared_ptr<Character>>& raw )
+	bool LanguageFunc::IsPuncLeftside(shared_ptr<Character> val)
+	{
+		return _punctures->IsPuncLeftside(val);
+	}
+
+	pair<vector<shared_ptr<Character>>, vector<shared_ptr<Character>>> LanguageFunc::TrimEndPunctures(const vector<shared_ptr<Character>>& raw)
 	{
 		vector<shared_ptr<Character>>::const_iterator chara_it=find_if(raw.begin(),raw.end(),IsPuncEndofSentence);
 		int index=distance(raw.begin(),chara_it);
@@ -100,7 +105,7 @@ namespace DataCollection
 		{
 			string puncStr=puncs[i].GetString();
 			shared_ptr<Character> chara(new Character(puncStr));
-			assert(IsPuncEndofSentence(chara) || IsPuncRightside(chara));
+			assert(IsPuncEndofSentence(chara) || IsPuncRightside(chara) || IsPuncLeftside(chara));
 			res.push_back(shared_ptr<puncture>(new puncture(puncs[i].GetString())));
 		}
 
@@ -277,7 +282,7 @@ namespace DataCollection
 
 		shared_ptr<Character> chara(new Character(word->GetString()));
 
-		if(word->Type()==Punctuation || _punctures->IsPuncEndofSentence(chara) || _punctures->IsPuncRightside(chara))
+		if(word->Type()==Punctuation || _punctures->IsPuncEndofSentence(chara) || _punctures->IsPuncRightside(chara) || _punctures->IsPuncLeftside(chara))
 		{
 			return true;
 		}

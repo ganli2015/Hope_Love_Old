@@ -36,8 +36,11 @@ namespace DataProcessor
             //             POSAssignment posAssign = new POSAssignment();
             //             posAssign.AssignPOSofCommonWords();
 
-            SegmentationCorpusExtractor sce = new SegmentationCorpusExtractor();
-            sce.Run();
+            //             SegmentationCorpusExtractor sce = new SegmentationCorpusExtractor();
+            //             sce.Run();
+
+            ReduceGrammarPatternDistribution rgpd = new ReduceGrammarPatternDistribution();
+            rgpd.Run(Dir.outdir+"GrammaPatterns_Initial_corpus_de.txt", Dir.outdir + "GrammaPatterns_Initial_corpus_de_reduced.txt");
         }
     }
 }

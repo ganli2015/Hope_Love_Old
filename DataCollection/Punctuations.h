@@ -12,6 +12,7 @@ namespace DataCollection
 		std::vector<shared_ptr<Character>> _punctures;
 		std::vector<shared_ptr<Character>> _puncEndofSentence;
 		std::vector<shared_ptr<Character>> _puncRightside;
+		std::vector<shared_ptr<Character>> _puncLeftside;
 
 		void Initialize();
 	public:
@@ -24,6 +25,7 @@ namespace DataCollection
 		///A puncture of right side is some puncture that appears in the middle of the sentences.
 		///For example, '£©'
 		bool IsPuncRightside(shared_ptr<Character> val) const;
+		bool IsPuncLeftside(shared_ptr<Character> val) const;
 	};
 }
 

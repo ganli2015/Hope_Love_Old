@@ -63,12 +63,15 @@ void GrammarSampleGenerator::POSTaggingAndOutput(const vector<string>& sentences
 		cout << e.what() << endl;
 	}
 
+//	auto tt=HopeLove::POSTagging(sentences[5]);
+	ofstream out("POSTagging.txt");
 	for (unsigned int i = 0; i < sentences.size(); ++i)
 	{
 		if (sentences[i] == "") continue;
 		try
 		{
 			auto grammard = HopeLove::POSTagging(sentences[i]);
+			WritePOSTagging(grammard, out);
 		}
 		catch (const std::exception& e)
 		{
@@ -158,4 +161,12 @@ void GrammarSampleGenerator::OutputGrammarData(const std::vector<std::vector<std
 
 }
 
+void GrammarSampleGenerator::WritePOSTagging(const std::vector<std::pair<std::string, HopeLove::PartOfSpeech>>& grammard, ofstream& out) const
+{
+	for (unsigned int i = 0; i < grammard.size(); ++i)
+	{
+		out << grammard[i].first << "/" << grammard[i].second << " ";
+	}
+	out << endl;
+}
 

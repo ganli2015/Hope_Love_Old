@@ -315,14 +315,14 @@ GrammarAnalyzer::AnalyzeResult GrammarAnalyzer::AnalyzeEachSegmented(const vecto
 	bool containAmbiguousWord(false);
 
 	//Separate words with punctures as punctures will interfere grammar analysis.
-	pair<vector<shared_ptr<Word>>, vector<shared_ptr<Word>>> sen_punc = LanguageFunc::TrimEndPunctures(segmented);
-	vector<shared_ptr<Word>> segmented_withNoPunc = sen_punc.first;
-	vector<shared_ptr<Word>> punc = sen_punc.second;
+// 	pair<vector<shared_ptr<Word>>, vector<shared_ptr<Word>>> sen_punc = LanguageFunc::TrimEndPunctures(segmented);
+// 	vector<shared_ptr<Word>> segmented_withNoPunc = sen_punc.first;
+// 	vector<shared_ptr<Word>> punc = sen_punc.second;
 
-	vector<WordRep> segmente_allRep = SearchAllWordRep(segmented_withNoPunc);
+	vector<WordRep> segmente_allRep = SearchAllWordRep(segmented);
 
 	//If the number of unknown and ambiguous words exceed the limit, then it is hard and inaccurate to analyze.
-	int count_unknown = CheckUnknownWords(segmented_withNoPunc);
+	int count_unknown = CheckUnknownWords(segmented);
 	if (count_unknown > 0)
 	{
 		containUnknownWord = true;
@@ -349,19 +349,28 @@ GrammarAnalyzer::AnalyzeResult GrammarAnalyzer::AnalyzeEachSegmented(const vecto
 	//Compute the count of pattern match of each combination.
 	if (containUnknownWord || containAmbiguousWord)
 	{
+		vector<vector<shared_ptr<Word>>> allCombinations;
+
 		//For each U_A word, I consider its POS arbitrary and go through every POS.
 		for (unsigned int j = 0; j < possi_Combine.size(); ++j)
 		{
 			vector<vector<shared_ptr<Word>>> spannedCombination = SpanUnknownAndAmbiguousToEveryPOS(possi_Combine[j]);//Let the unknown word span over every POS.
-			SelectOptimalGrammarPattern(spannedCombination, optimal);
+			allCombinations.insert(allCombinations.end(), spannedCombination.begin(), spannedCombination.end());
 		}
+
+		SelectOptimalGrammarPattern(allCombinations, optimal);
 	}
 	else
 	{
 		SelectOptimalGrammarPattern(possi_Combine, optimal);
 	}
 
-	optimal.insert(optimal.end(), punc.begin(), punc.end());
+	//Convert punctuations from Type word to Type punctuation.
+// 	for (unsigned int i=0;i<punc.size();++i)
+// 	{
+// 		punc[i] = shared_ptr<puncture>(new puncture(punc[i]->GetString()));
+// 	}
+// 	optimal.insert(optimal.end(), punc.begin(), punc.end());
 
 	return Fine;
 }

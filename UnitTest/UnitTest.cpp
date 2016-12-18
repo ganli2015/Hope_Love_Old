@@ -40,7 +40,7 @@ void RunFilter(const string filterStr);
 
 void RunUnitTest(int argc, _TCHAR* argv[])
 {
-	RunFilter("Test_Segmentation*");
+//	RunFilter("Test_SentenceAnalysisAlgorithm*");
 
 #ifdef _RUN_INTEGRATION_TEST
 

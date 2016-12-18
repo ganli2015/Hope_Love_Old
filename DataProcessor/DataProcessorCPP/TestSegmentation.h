@@ -22,7 +22,6 @@ public:
 private:
 
 	vector<SentenceSample> ReadSentences(const string filename);
-	string Getline(ifstream& fin, size_t& index);
 	bool IsCorrect(const string expect, const vector<string>& result);
 	//As long as one of the <result> matches <expect>, return true.
 	bool IsCorrect(const string expect, const vector<vector<string>>& result);
